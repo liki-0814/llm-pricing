@@ -36,6 +36,22 @@
     ],
     "last_updated": "2026-10-10",
     "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "minimal",
+      "can_disable": null,
+      "status": "verified",
+      "note": "thinking_level 取 minimal/low/medium/high，默认开启且为 minimal；官方文档未提供完全关闭选项。",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/thinking"
+      ]
+    },
     "unverified_fields": [],
     "links": {
       "self": "models/gemini-3.5-flash-lite.json",

@@ -66,6 +66,7 @@
             <option value="cached_input:1">缓存读取 低→高</option>
             <option value="cache_write:1">缓存写入 低→高</option>
             <option value="context_tokens:-1">上下文 长→短</option>
+            <option value="re_sort:-1">推理档位 多→少</option>
             <option value="model:1">模型名 A→Z</option>
           </select>
         </div>
@@ -78,6 +79,7 @@
         <span><span class="tbd">待核实</span>未能从官方来源核实，未做推测</span>
         <span><span class="na">未列出</span>官方定价页没有该项</span>
         <span><span class="best-tag" style="margin:0">最低</span>当前结果中该列最低价</span>
+        <span><span class="lv lv-def">high</span>推理强度中的默认档</span>
       </div>
       <div class="count" id="count" aria-live="polite"></div>
     </div>
@@ -95,12 +97,13 @@
           <th class="num" data-key="cached_input"><button type="button" class="th">缓存读取<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
           <th class="num" data-key="cache_write"><button type="button" class="th">缓存写入<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
           <th class="num" data-key="context_tokens"><button type="button" class="th">上下文<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th data-key="re_sort"><button type="button" class="th">推理强度<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
           <th data-key="peak_note"><button type="button" class="th">高峰 / 闲时<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
           <th data-key="last_updated"><button type="button" class="th">来源 / 更新<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
             </tr>
           </thead>
           <tbody id="tbody">
-            <tr class="skeleton"><td colspan="9"></td></tr><tr class="skeleton"><td colspan="9"></td></tr><tr class="skeleton"><td colspan="9"></td></tr>
+            <tr class="skeleton"><td colspan="10"></td></tr><tr class="skeleton"><td colspan="10"></td></tr><tr class="skeleton"><td colspan="10"></td></tr>
           </tbody>
         </table>
       </div>

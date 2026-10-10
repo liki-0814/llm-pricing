@@ -54,6 +54,21 @@
       ],
       "last_updated": "2026-10-10",
       "notes": "Standard 付费档。缓存存储费 $0.50/百万 token/小时（2027 起 $1.00）。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。 注意：该价格仅到 2026-12-31；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "medium",
+        "can_disable": null,
+        "status": "verified",
+        "note": "thinking_level 取 low/medium/high，默认开启且为 medium；官方文档未提供关闭选项。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/thinking"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/gemini-3.8-flash.json",
@@ -90,6 +105,22 @@
       ],
       "last_updated": "2026-10-10",
       "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "minimal",
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "minimal",
+        "can_disable": null,
+        "status": "verified",
+        "note": "thinking_level 取 minimal/low/medium/high，默认开启且为 minimal；官方文档未提供完全关闭选项。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/thinking"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/gemini-3.5-flash-lite.json",
@@ -126,6 +157,21 @@
       ],
       "last_updated": "2026-10-10",
       "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "high",
+        "can_disable": null,
+        "status": "verified",
+        "note": "thinking_level 取 low/medium/high，默认开启且为 high；官方文档未提供关闭选项。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/thinking"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/gemini-3.1-pro-preview.json",

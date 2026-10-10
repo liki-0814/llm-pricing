@@ -62,6 +62,24 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": false,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-fable-5.1.json",
@@ -96,6 +114,24 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": false,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-mythos-5.1.json",
@@ -130,6 +166,24 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": false,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-fable-5.json",
@@ -164,6 +218,24 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": false,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-mythos-5.json",
@@ -198,6 +270,24 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（研究预览）输入 $8 / 输出 $40。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": false,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。默认 medium（其余多数模型默认 high）；自适应思考恒开，thinking:disabled 在所有档位都会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-opus-5.5.json",
@@ -232,6 +322,24 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。thinking 默认开启；thinking:{type:disabled} 仅在 effort 为 high 及以下可用，xhigh/max 下会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-opus-5.json",
@@ -266,6 +374,24 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。仅自适应思考（不支持 budget_tokens）；思考默认关闭，需显式设置 thinking:{type:adaptive} 开启。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-opus-4.8.json",
@@ -300,6 +426,24 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。新分词器，同样文本约多 30% token。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。仅自适应思考（不支持 budget_tokens）；思考默认关闭，需显式设置 thinking:{type:adaptive} 开启。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-opus-4.7.json",
@@ -334,6 +478,23 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "status": "verified",
+        "note": "output_config.effort 官方文档列出 max 可用、xhigh 不在支持名单；默认 high。思考默认关闭，支持自适应思考，旧的 budget_tokens（extended thinking）已弃用但仍可用。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-opus-4.6.json",
@@ -368,6 +529,24 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。思考默认开启；无 disabled，改用 thinking:{type:between_tools} 关闭前置思考（仅 low/medium/high 档可用，xhigh/max 下 400）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-sonnet-5.5.json",
@@ -402,6 +581,24 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。$2/$10 已确认为标准价（原定 9 月 1 日涨价取消）。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。思考默认开启；可传 thinking:{type:disabled} 关闭。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-sonnet-5.json",
@@ -436,6 +633,23 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $6。Batch API 5 折。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "status": "verified",
+        "note": "output_config.effort 官方文档列出 max 可用、xhigh 不在支持名单；默认 high。思考默认关闭，支持自适应思考，旧的 budget_tokens（extended thinking）已弃用但仍可用。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-sonnet-4.6.json",
@@ -472,6 +686,24 @@
       ],
       "last_updated": "2026-10-10",
       "notes": "按提示长度分档：表中为 ≤100K 提示价；>100K 提示：输入 $0.50、输出 $2.50、缓存读取 $0.05、缓存写入(5m) $0.625。1 小时 TTL 写入 $0.20（≤100K）/ $1（>100K）。Batch 5 折。 上下文窗口 1M tokens、最大输出 128K（Anthropic 模型总览页）。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "status": "verified",
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。默认 medium；思考默认开启，thinking:{type:disabled} 仅在 high 及以下可用，xhigh/max 下会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/claude-haiku-5.5.json",

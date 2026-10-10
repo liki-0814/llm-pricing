@@ -19,6 +19,7 @@
 | `extra_sources` | 其他官方来源（如上下文长度来源） |
 | `last_updated` | 该模型最后核实日期 `YYYY-MM-DD` |
 | `notes` | 阶梯价、促销、长上下文价等备注 |
+| `reasoning_effort` | **必填**对象，推理强度（取自官方 API 文档，非定价页）：`supported`（`true` 有可调强度/思考开关或预算 · `false` 无可调项 · `null` 待核实）、`levels`（由低到高的档位数组，不适用/待核实为 `null`）、`default`（默认档，未明确为 `null`）、`can_disable`（能否关闭推理，未说明为 `null`）、`note`（参数名、映射、限制，必填）、`sources`（官方文档 URL，必填）。**官方没写就写 `null`，不要推测**；`supported` 为 `null`，或 `true` 但 `levels` 为 `null` 时，须把 `"reasoning_effort"` 加入 `unverified_fields`（validate 会检查）。接口里额外派生 `status`：verified / partial / unverified |
 | `unverified_fields` | 记录哪些字段待核实（供 validate 输出清单） |
 
 ## 更新流程
@@ -30,6 +31,16 @@
 5. 运行校验：`python3 scripts/validate.py`（同时会打印所有待核实字段，并检查 `api/v1/` 是否与数据同步，不同步会报错）。
 6. 本地预览：`python3 -m http.server 8000`，打开 http://localhost:8000 。
 7. 提交并推送（包括 `api/` 目录），GitHub Pages 会自动更新。
+
+## 推理强度的官方来源
+
+- OpenAI: 各模型页 `https://developers.openai.com/api/docs/models/<model_id>`（`reasoning.effort`）
+- Anthropic: https://platform.claude.com/docs/en/build-with-claude/effort 与 .../thinking-troubleshooting
+- Google Gemini: https://ai.google.dev/gemini-api/docs/thinking
+- DeepSeek: https://api-docs.deepseek.com/guides/thinking_mode
+- 智谱: https://docs.z.ai/guides/capabilities/thinking 、https://docs.z.ai/guides/llm/glm-5.3
+- Moonshot Kimi: https://platform.kimi.ai/docs/guide/use-thinking-models 、.../use-reasoning-effort
+- 阿里云 Qwen: https://docs.qwencloud.com/api-reference/chat/openai-chat 、https://www.alibabacloud.com/help/en/model-studio/deep-thinking
 
 ## 本次数据的官方来源
 

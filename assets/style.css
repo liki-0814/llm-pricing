@@ -38,7 +38,7 @@ body{margin:0;background:var(--bg);background-image:var(--bg-grad);background-re
 a{color:var(--brand);text-decoration:none}
 a:hover{text-decoration:underline;text-underline-offset:3px}
 :focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:6px}
-.wrap{max-width:1320px;margin:0 auto;padding:0 24px}
+.wrap{max-width:1440px;margin:0 auto;padding:0 24px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 code,kbd,pre{font-family:var(--mono)}
 
@@ -164,6 +164,17 @@ details.note p{margin:6px 0 0;line-height:1.6;white-space:normal}
 .peak{font-size:12.5px;color:var(--ink-2);max-width:300px;line-height:1.55}
 .offpeak{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px}
 .offpeak .op{display:inline-flex;gap:4px;font-size:12px;padding:1px 7px;border-radius:6px;background:var(--brand-soft);color:var(--brand-ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+.re{font-size:12.5px;color:var(--ink-2);line-height:1.5;min-width:150px}
+.lvs{display:flex;flex-wrap:wrap;gap:4px}
+.lv{display:inline-block;font-family:var(--mono);font-size:11.5px;line-height:1.5;padding:1px 7px;border-radius:999px;white-space:nowrap;
+  color:var(--ink-2);background:var(--surface-3);border:1px solid var(--line)}
+.lv-def{color:var(--brand-ink);background:var(--brand-soft);border-color:var(--brand);font-weight:700}
+.lv-none{border-style:dashed}
+.lv-off{font-family:var(--font);color:var(--muted)}
+.re-meta{margin-top:5px;font-size:12px;color:var(--muted)}
+.re-meta b{color:var(--ink);font-family:var(--mono);font-weight:600}
+.re details.note{max-width:260px;font-size:12.5px}
+.re .rsrc{display:block;margin-top:4px;font-size:11.5px;color:var(--brand);word-break:break-all}
 .ctx{font-variant-numeric:tabular-nums;font-weight:500}
 .src{display:flex;flex-direction:column;gap:3px;font-size:13px;white-space:nowrap}
 .src .date{color:var(--faint);font-size:12px;font-variant-numeric:tabular-nums}
@@ -225,10 +236,10 @@ details.note p{margin:6px 0 0;line-height:1.6;white-space:normal}
 .try-status .err{color:var(--warn);font-weight:600}
 
 /* ---------- responsive ---------- */
-@media (max-width:1279px) and (min-width:761px){
+@media (max-width:1399px) and (min-width:761px){
   .table-scroll{overflow:auto;max-height:calc(100vh - var(--header-h) - 24px);border-radius:var(--radius)}
   thead th{top:0}
-  table{min-width:1180px}
+  table{min-width:1420px}
 }
 @media (max-width:960px){
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -260,7 +271,8 @@ details.note p{margin:6px 0 0;line-height:1.6;white-space:normal}
   #priceTable tbody tr:hover td:first-child{box-shadow:none}
   #priceTable td{display:block;border:0;padding:8px 14px}
   #priceTable td::before{content:attr(data-label);display:block;font-size:11.5px;color:var(--muted);margin-bottom:1px}
-  #priceTable td.c-vendor,#priceTable td.c-model,#priceTable td.c-peak,#priceTable td.c-src{grid-column:1/-1}
+  #priceTable td.c-vendor,#priceTable td.c-model,#priceTable td.c-peak,#priceTable td.c-src,#priceTable td.c-re{grid-column:1/-1}
+  .re details.note{max-width:none}
   #priceTable td.c-vendor{padding-top:14px;padding-bottom:0}
   #priceTable td.c-vendor::before,#priceTable td.c-model::before{display:none}
   #priceTable td.c-model{padding-top:6px;padding-bottom:6px}
@@ -295,7 +307,8 @@ tbody tr:last-child td:last-child{border-bottom-right-radius:var(--radius)}
   th,td{padding-left:12px;padding-right:12px}
   thead th .th{padding-left:12px;padding-right:12px}
   td.c-model{min-width:190px}
-  td.c-peak{min-width:0;width:230px}
+  td.c-peak{min-width:0;width:210px}
+  td.c-re{width:200px}
   td.c-ctx{white-space:normal;max-width:120px}
   td.c-vendor{width:1%}
 }

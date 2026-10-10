@@ -36,6 +36,22 @@
     ],
     "last_updated": "2026-10-10",
     "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default": "xhigh",
+      "can_disable": true,
+      "status": "verified",
+      "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
+      "sources": [
+        "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+        "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
+      ]
+    },
     "unverified_fields": [],
     "links": {
       "self": "models/qwen3.8-27b.json",

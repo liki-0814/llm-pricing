@@ -32,6 +32,27 @@ for m in d["models"]:
     if off is not None:
         for k, v in off.items():
             if k not in build_api.OFFPEAK_FIELDS or not num_ok(v): print("BAD OFFPEAK", m["model"], k, v); bad += 1
+    re_ = m.get("reasoning_effort")
+    if not isinstance(re_, dict): print("MISSING reasoning_effort", m["model"]); bad += 1
+    else:
+        extra = set(re_) - {"supported","levels","default","can_disable","note","sources"}
+        if extra: print("UNKNOWN reasoning_effort keys", m["model"], sorted(extra)); bad += 1
+        sup, lv, df = re_.get("supported"), re_.get("levels"), re_.get("default")
+        if sup is not None and not isinstance(sup, bool): print("BAD reasoning_effort.supported", m["model"], sup); bad += 1
+        if lv is not None and not (isinstance(lv, list) and lv and all(isinstance(x, str) and x for x in lv) and len(set(lv)) == len(lv)):
+            print("BAD reasoning_effort.levels", m["model"], lv); bad += 1
+        if df is not None and not isinstance(df, str): print("BAD reasoning_effort.default", m["model"], df); bad += 1
+        if isinstance(lv, list) and isinstance(df, str) and df not in lv: print("reasoning_effort.default not in levels", m["model"], df); bad += 1
+        if sup is None and (lv is not None or df is not None): print("reasoning_effort: supported=null (待核实) but levels/default set", m["model"]); bad += 1
+        if sup is False and lv is not None: print("reasoning_effort: supported=false but levels set", m["model"]); bad += 1
+        cd = re_.get("can_disable")
+        if cd is not None and not isinstance(cd, bool): print("BAD reasoning_effort.can_disable", m["model"], cd); bad += 1
+        if not isinstance(re_.get("note"), str) or not re_["note"].strip(): print("reasoning_effort.note required", m["model"]); bad += 1
+        srcs = re_.get("sources")
+        if not (isinstance(srcs, list) and srcs and all(str(x).startswith("http") for x in srcs)): print("reasoning_effort.sources must be a non-empty list of URLs", m["model"]); bad += 1
+        partial = sup is None or (sup is True and lv is None)
+        if partial != ("reasoning_effort" in m.get("unverified_fields", [])):
+            print("unverified_fields must list reasoning_effort iff it is 待核实/partial", m["model"]); bad += 1
     ct = m.get("context_tokens")
     if ct is not None and not isinstance(ct, int): print("BAD context_tokens", m["model"], ct); bad += 1
     if m["vendor"] not in d["vendors"]: print("UNKNOWN VENDOR", m["vendor"]); bad += 1

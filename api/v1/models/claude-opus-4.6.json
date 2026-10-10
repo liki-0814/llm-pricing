@@ -34,6 +34,23 @@
     "extra_sources": [],
     "last_updated": "2026-10-10",
     "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high",
+        "max"
+      ],
+      "default": "high",
+      "can_disable": true,
+      "status": "verified",
+      "note": "output_config.effort 官方文档列出 max 可用、xhigh 不在支持名单；默认 high。思考默认关闭，支持自适应思考，旧的 budget_tokens（extended thinking）已弃用但仍可用。",
+      "sources": [
+        "https://platform.claude.com/docs/en/build-with-claude/effort",
+        "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+      ]
+    },
     "unverified_fields": [],
     "links": {
       "self": "models/claude-opus-4.6.json",

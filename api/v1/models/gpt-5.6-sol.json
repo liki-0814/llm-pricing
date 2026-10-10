@@ -36,6 +36,24 @@
     ],
     "last_updated": "2026-10-10",
     "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价至少持续到 2026-11-21。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default": "medium",
+      "can_disable": true,
+      "status": "verified",
+      "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+      "sources": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+      ]
+    },
     "unverified_fields": [],
     "links": {
       "self": "models/gpt-5.6-sol.json",

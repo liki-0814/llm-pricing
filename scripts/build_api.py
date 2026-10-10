@@ -49,6 +49,29 @@ def price_value(v):
     return v, "verified"
 
 
+def reasoning_obj(m):
+    """data reasoning_effort -> API object. null = 待核实 (never guessed)."""
+    r = m.get("reasoning_effort")
+    if r is None:
+        r = {}
+    sup, levels = r.get("supported"), r.get("levels")
+    if sup is None:
+        status = "unverified"
+    elif sup is True and levels is None:
+        status = "partial"
+    else:
+        status = "verified"
+    return {
+        "supported": sup,
+        "levels": list(levels) if levels is not None else None,
+        "default": r.get("default"),
+        "can_disable": r.get("can_disable"),
+        "status": status,
+        "note": r.get("note"),
+        "sources": list(r.get("sources") or []),
+    }
+
+
 def model_obj(m):
     pricing, status = {}, {}
     for k in PRICE_FIELDS:
@@ -75,6 +98,7 @@ def model_obj(m):
         "extra_sources": list(m.get("extra_sources") or []),
         "last_updated": m.get("last_updated"),
         "notes": m.get("notes"),
+        "reasoning_effort": reasoning_obj(m),
         "unverified_fields": list(m.get("unverified_fields") or []),
         "links": {"self": "models/%s.json" % m["model_id"],
                   "vendor": "vendors/%s.json" % VENDOR_SLUGS[m["vendor"]]},
@@ -132,7 +156,7 @@ def openapi(d, vendor_slugs, model_ids):
         "required": ["id", "name", "vendor", "vendor_name", "currency", "unit", "pricing",
                      "pricing_status", "has_off_peak", "off_peak_pricing", "peak_note",
                      "context_length", "context_length_label", "source_url", "extra_sources",
-                     "last_updated", "notes", "unverified_fields", "links"],
+                     "last_updated", "notes", "reasoning_effort", "unverified_fields", "links"],
         "properties": {
             "id": {"type": "string", "description": "Model id as used in the vendor API; also the file name of /models/{model_id}.json"},
             "name": {"type": "string", "description": "Display name"},
@@ -159,6 +183,20 @@ def openapi(d, vendor_slugs, model_ids):
             "extra_sources": {"type": "array", "items": {"type": "string", "format": "uri"}},
             "last_updated": {"type": "string", "format": "date"},
             "notes": {"type": ["string", "null"]},
+            "reasoning_effort": {
+                "type": "object",
+                "description": "Reasoning-effort / thinking-intensity support from official vendor docs. null = 待核实 (not verified, never guessed).",
+                "required": ["supported", "levels", "default", "can_disable", "status", "note", "sources"],
+                "properties": {
+                    "supported": {"type": ["boolean", "null"], "description": "true = the API exposes an adjustable reasoning effort / thinking switch or budget; false = no adjustable control (e.g. always-on thinking with no effort parameter); null = 待核实"},
+                    "levels": {"type": ["array", "null"], "items": {"type": "string"}, "description": "Accepted effort levels in ascending order (e.g. low, medium, high); null when not applicable or 待核实"},
+                    "default": {"type": ["string", "null"], "description": "Default level when the parameter is omitted; null when not stated / 待核实"},
+                    "can_disable": {"type": ["boolean", "null"], "description": "Whether reasoning can be turned off via the API; null = not stated in official docs"},
+                    "status": {"type": "string", "enum": ["verified", "partial", "unverified"], "description": "verified = documented; partial = some facts documented but levels/default 待核实; unverified = 待核实"},
+                    "note": {"type": ["string", "null"], "description": "Parameter names, level mappings and caveats"},
+                    "sources": {"type": "array", "items": {"type": "string", "format": "uri"}, "description": "Official documentation pages used"},
+                },
+            },
             "unverified_fields": {"type": "array", "items": {"type": "string"}},
             "links": {"type": "object", "properties": {"self": {"type": "string"}, "vendor": {"type": "string"}}},
         },

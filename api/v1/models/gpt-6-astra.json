@@ -36,6 +36,23 @@
     ],
     "last_updated": "2026-10-10",
     "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $20.0、缓存读取 $2.0、缓存写入 $25.0、输出 $75.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default": null,
+      "can_disable": null,
+      "status": "verified",
+      "note": "官方模型页列出 reasoning.effort 支持 low/medium/high/xhigh/max；未标注默认档，且未列 none（是否可关闭推理待核实）。",
+      "sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-astra"
+      ]
+    },
     "unverified_fields": [],
     "links": {
       "self": "models/gpt-6-astra.json",

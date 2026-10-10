@@ -242,6 +242,7 @@
           "extra_sources",
           "last_updated",
           "notes",
+          "reasoning_effort",
           "unverified_fields",
           "links"
         ],
@@ -450,6 +451,76 @@
               "string",
               "null"
             ]
+          },
+          "reasoning_effort": {
+            "type": "object",
+            "description": "Reasoning-effort / thinking-intensity support from official vendor docs. null = 待核实 (not verified, never guessed).",
+            "required": [
+              "supported",
+              "levels",
+              "default",
+              "can_disable",
+              "status",
+              "note",
+              "sources"
+            ],
+            "properties": {
+              "supported": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "true = the API exposes an adjustable reasoning effort / thinking switch or budget; false = no adjustable control (e.g. always-on thinking with no effort parameter); null = 待核实"
+              },
+              "levels": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "description": "Accepted effort levels in ascending order (e.g. low, medium, high); null when not applicable or 待核实"
+              },
+              "default": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Default level when the parameter is omitted; null when not stated / 待核实"
+              },
+              "can_disable": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "Whether reasoning can be turned off via the API; null = not stated in official docs"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "verified",
+                  "partial",
+                  "unverified"
+                ],
+                "description": "verified = documented; partial = some facts documented but levels/default 待核实; unverified = 待核实"
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Parameter names, level mappings and caveats"
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "description": "Official documentation pages used"
+              }
+            }
           },
           "unverified_fields": {
             "type": "array",

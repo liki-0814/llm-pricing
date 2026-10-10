@@ -1,7 +1,7 @@
 {
   "meta": {
     "last_updated": "2026-10-10",
-    "description": "价格均为每 100 万 token，币种统一为美元（USD），取自各厂商国际站官方定价页。null / 待核实 = 未能从官方来源核实，未做推测。",
+    "description": "价格均为每 100 万 token，币种统一为美元（USD），取自各厂商国际站官方定价页。null / 待核实 = 未能从官方来源核实，未做推测。 推理强度（reasoning_effort）：supported/levels/default 为 null 表示官方文档未明确，待核实，不做推测。",
     "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3 系列最新。"
   },
   "vendors": [
@@ -36,7 +36,21 @@
       "last_updated": "2026-10-10",
       "notes": "表中价格为高峰价。最大输出 384K；支持视觉。旧名 deepseek-v4-flash 已并入此模型计费。官方页未列缓存写入价。",
       "unverified_fields": [],
-      "id": "m01"
+      "id": "m01",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "note": "reasoning_effort（OpenAI 格式）/ output_config.effort（Anthropic 格式）取 low/high/max；medium、xhigh 映射到 high，minimal 映射到 low，ultra 映射到 max。thinking 默认开启，可用 thinking.type=disabled（或 Responses API 的 reasoning.effort=none）关闭。",
+        "sources": [
+          "https://api-docs.deepseek.com/guides/thinking_mode"
+        ]
+      }
     },
     {
       "vendor": "DeepSeek",
@@ -60,7 +74,22 @@
       "last_updated": "2026-10-10",
       "notes": "表中价格为高峰价。最大输出 384K；不支持视觉。官方页未列缓存写入价。",
       "unverified_fields": [],
-      "id": "m02"
+      "id": "m02",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "note": "同 DeepSeek 官方思考模式文档（文档统称“DeepSeek model”，未单列 Pro）；阿里云文档列出 deepseek-v4-pro-0813 取 low/high/max、默认 high，medium/xhigh 映射 high。thinking 默认开启，可用 thinking.type=disabled 关闭。",
+        "sources": [
+          "https://api-docs.deepseek.com/guides/thinking_mode",
+          "https://docs.qwencloud.com/api-reference/chat/openai-chat"
+        ]
+      }
     },
     {
       "vendor": "OpenAI",
@@ -82,7 +111,24 @@
       "last_updated": "2026-10-10",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价至少持续到 2026-11-21。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
       "unverified_fields": [],
-      "id": "m03"
+      "id": "m03",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+        ]
+      }
     },
     {
       "vendor": "OpenAI",
@@ -104,7 +150,24 @@
       "last_updated": "2026-10-10",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $18.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
       "unverified_fields": [],
-      "id": "m04"
+      "id": "m04",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
+        ]
+      }
     },
     {
       "vendor": "OpenAI",
@@ -126,7 +189,24 @@
       "last_updated": "2026-10-10",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.4、缓存读取 $0.04、缓存写入 $0.5、输出 $1.8。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
       "unverified_fields": [],
-      "id": "m05"
+      "id": "m05",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+        ]
+      }
     },
     {
       "vendor": "OpenAI",
@@ -148,7 +228,23 @@
       "last_updated": "2026-10-10",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $20.0、缓存读取 $2.0、缓存写入 $25.0、输出 $75.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
       "unverified_fields": [],
-      "id": "m06"
+      "id": "m06",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": null,
+        "can_disable": null,
+        "note": "官方模型页列出 reasoning.effort 支持 low/medium/high/xhigh/max；未标注默认档，且未列 none（是否可关闭推理待核实）。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6-astra"
+        ]
+      }
     },
     {
       "vendor": "OpenAI",
@@ -170,7 +266,24 @@
       "last_updated": "2026-10-10",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
       "unverified_fields": [],
-      "id": "m07"
+      "id": "m07",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6-sol"
+        ]
+      }
     },
     {
       "vendor": "OpenAI",
@@ -192,7 +305,24 @@
       "last_updated": "2026-10-10",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.2、缓存读取 $0.02、缓存写入 $0.25、输出 $0.75。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
       "unverified_fields": [],
-      "id": "m08"
+      "id": "m08",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6-luna"
+        ]
+      }
     },
     {
       "vendor": "OpenAI",
@@ -214,7 +344,23 @@
       "last_updated": "2026-10-10",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.2、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
       "unverified_fields": [],
-      "id": "m09"
+      "id": "m09",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": false,
+        "note": "reasoning.effort 支持 low/medium(默认)/high/xhigh/max；官方明确不支持 none 与 minimal，推理无法关闭。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -234,7 +380,24 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
       "unverified_fields": [],
-      "id": "m10"
+      "id": "m10",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": false,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -254,7 +417,24 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
       "unverified_fields": [],
-      "id": "m11"
+      "id": "m11",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": false,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -274,7 +454,24 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
       "unverified_fields": [],
-      "id": "m12"
+      "id": "m12",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": false,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -294,7 +491,24 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
       "unverified_fields": [],
-      "id": "m13"
+      "id": "m13",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": false,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -314,7 +528,24 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（研究预览）输入 $8 / 输出 $40。",
       "unverified_fields": [],
-      "id": "m14"
+      "id": "m14",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": false,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。默认 medium（其余多数模型默认 high）；自适应思考恒开，thinking:disabled 在所有档位都会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -334,7 +565,24 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
       "unverified_fields": [],
-      "id": "m15"
+      "id": "m15",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。thinking 默认开启；thinking:{type:disabled} 仅在 effort 为 high 及以下可用，xhigh/max 下会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -354,7 +602,24 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
       "unverified_fields": [],
-      "id": "m16"
+      "id": "m16",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。仅自适应思考（不支持 budget_tokens）；思考默认关闭，需显式设置 thinking:{type:adaptive} 开启。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -374,7 +639,24 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。新分词器，同样文本约多 30% token。",
       "unverified_fields": [],
-      "id": "m17"
+      "id": "m17",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。仅自适应思考（不支持 budget_tokens）；思考默认关闭，需显式设置 thinking:{type:adaptive} 开启。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -394,7 +676,23 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。",
       "unverified_fields": [],
-      "id": "m18"
+      "id": "m18",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "note": "output_config.effort 官方文档列出 max 可用、xhigh 不在支持名单；默认 high。思考默认关闭，支持自适应思考，旧的 budget_tokens（extended thinking）已弃用但仍可用。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -414,7 +712,24 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。",
       "unverified_fields": [],
-      "id": "m19"
+      "id": "m19",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。思考默认开启；无 disabled，改用 thinking:{type:between_tools} 关闭前置思考（仅 low/medium/high 档可用，xhigh/max 下 400）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -434,7 +749,24 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。$2/$10 已确认为标准价（原定 9 月 1 日涨价取消）。",
       "unverified_fields": [],
-      "id": "m20"
+      "id": "m20",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。思考默认开启；可传 thinking:{type:disabled} 关闭。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -454,7 +786,23 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $6。Batch API 5 折。",
       "unverified_fields": [],
-      "id": "m21"
+      "id": "m21",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "note": "output_config.effort 官方文档列出 max 可用、xhigh 不在支持名单；默认 high。思考默认关闭，支持自适应思考，旧的 budget_tokens（extended thinking）已弃用但仍可用。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "Anthropic",
@@ -476,7 +824,24 @@
       "last_updated": "2026-10-10",
       "notes": "按提示长度分档：表中为 ≤100K 提示价；>100K 提示：输入 $0.50、输出 $2.50、缓存读取 $0.05、缓存写入(5m) $0.625。1 小时 TTL 写入 $0.20（≤100K）/ $1（>100K）。Batch 5 折。 上下文窗口 1M tokens、最大输出 128K（Anthropic 模型总览页）。",
       "unverified_fields": [],
-      "id": "m22"
+      "id": "m22",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "note": "output_config.effort 支持 low/medium/high/xhigh/max。默认 medium；思考默认开启，thinking:{type:disabled} 仅在 high 及以下可用，xhigh/max 下会 400。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/effort",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+        ]
+      }
     },
     {
       "vendor": "智谱 Z.ai",
@@ -498,7 +863,22 @@
       "last_updated": "2026-10-10",
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "unverified_fields": [],
-      "id": "m23"
+      "id": "m23",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": false,
+        "note": "reasoning_effort 仅支持 low/high/max（其他值报错）；thinking.type 只能为 enabled，传 disabled 会报错，推理无法关闭。",
+        "sources": [
+          "https://docs.z.ai/guides/capabilities/thinking",
+          "https://docs.z.ai/guides/llm/glm-5.3"
+        ]
+      }
     },
     {
       "vendor": "智谱 Z.ai",
@@ -520,7 +900,22 @@
       "last_updated": "2026-10-10",
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "unverified_fields": [],
-      "id": "m24"
+      "id": "m24",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": false,
+        "note": "reasoning_effort 仅支持 low/high/max（其他值报错）；thinking.type 只能为 enabled，传 disabled 会报错，推理无法关闭。",
+        "sources": [
+          "https://docs.z.ai/guides/capabilities/thinking",
+          "https://docs.z.ai/guides/llm/glm-5.3-flash"
+        ]
+      }
     },
     {
       "vendor": "智谱 Z.ai",
@@ -541,8 +936,21 @@
       ],
       "last_updated": "2026-10-10",
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
-      "unverified_fields": [],
-      "id": "m25"
+      "unverified_fields": [
+        "reasoning_effort"
+      ],
+      "id": "m25",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": null,
+        "default": null,
+        "can_disable": false,
+        "note": "官方文档把 GLM-5.3-Flash/FlashX 合并为一页：thinking.type 仅支持 enabled、推理无法关闭，推荐 reasoning_effort=max；但 reasoning_effort 的档位清单与默认值只明确写给 GLM-5.3 / GLM-5.3-Flash，FlashX 的档位待核实。",
+        "sources": [
+          "https://docs.z.ai/guides/llm/glm-5.3-flash",
+          "https://docs.z.ai/guides/capabilities/thinking"
+        ]
+      }
     },
     {
       "vendor": "智谱 Z.ai",
@@ -564,7 +972,25 @@
       "last_updated": "2026-10-10",
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "unverified_fields": [],
-      "id": "m26"
+      "id": "m26",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "minimal",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": true,
+        "note": "reasoning_effort 接受 max(默认)/xhigh/high/medium/low/minimal/none；none、minimal 表示不思考，low/medium 映射到 high，xhigh 映射到 max（实际为 high / max 两档）。thinking.type 可设 disabled 关闭；默认由模型自动判断是否思考。",
+        "sources": [
+          "https://docs.z.ai/guides/capabilities/thinking"
+        ]
+      }
     },
     {
       "vendor": "Moonshot Kimi",
@@ -584,7 +1010,22 @@
       "last_updated": "2026-10-10",
       "notes": "缓存写入按 TTL 计价：5 分钟 $3.00，1 小时 $6.00（表中为 5 分钟）。缓存命中自动续期、无额外写入费。",
       "unverified_fields": [],
-      "id": "m27"
+      "id": "m27",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": false,
+        "note": "顶层 reasoning_effort 支持 low/high/max，默认 max；K3 恒开思考，不支持 thinking 参数，无法关闭。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/use-thinking-models",
+          "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+        ]
+      }
     },
     {
       "vendor": "Moonshot Kimi",
@@ -604,7 +1045,17 @@
       "last_updated": "2026-10-10",
       "notes": "官方页未列缓存写入价。",
       "unverified_fields": [],
-      "id": "m28"
+      "id": "m28",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": false,
+        "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/use-thinking-models"
+        ]
+      }
     },
     {
       "vendor": "Moonshot Kimi",
@@ -624,7 +1075,17 @@
       "last_updated": "2026-10-10",
       "notes": "高速版；官方页未列缓存写入价。",
       "unverified_fields": [],
-      "id": "m29"
+      "id": "m29",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": false,
+        "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/use-thinking-models"
+        ]
+      }
     },
     {
       "vendor": "阿里云 Qwen",
@@ -647,7 +1108,22 @@
       "last_updated": "2026-10-10",
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
       "unverified_fields": [],
-      "id": "m30"
+      "id": "m30",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "default": "xhigh",
+        "can_disable": true,
+        "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
+        "sources": [
+          "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+          "https://docs.qwencloud.com/developer-guides/text-generation/thinking"
+        ]
+      }
     },
     {
       "vendor": "阿里云 Qwen",
@@ -668,8 +1144,21 @@
       ],
       "last_updated": "2026-10-10",
       "notes": "阿里云百炼国际站（新加坡）美元价；别名当前指向 qwen3.7-max-2026-05-20。单档 0–1M。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。",
-      "unverified_fields": [],
-      "id": "m31"
+      "unverified_fields": [
+        "reasoning_effort"
+      ],
+      "id": "m31",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": null,
+        "default": null,
+        "can_disable": true,
+        "note": "可用 enable_thinking 开关思考，并用 thinking_budget 限制思考 token 数（1–32768，缺省 4000；控制台）。官方文档仅为 Qwen3.8 系列列出 reasoning_effort 档位，Qwen3.7 的档位待核实。默认是否开启待核实。",
+        "sources": [
+          "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
+        ]
+      }
     },
     {
       "vendor": "阿里云 Qwen",
@@ -690,8 +1179,21 @@
       ],
       "last_updated": "2026-10-10",
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤256K 输入档（非思考/思考输出价相同）；256K–1M 档：输入 $1.2、输出 $4.8。官方标注限时 8 折（表中为标价）。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。 缓存价基于表中档位（≤256K）输入价；其他档位按同比例。",
-      "unverified_fields": [],
-      "id": "m32"
+      "unverified_fields": [
+        "reasoning_effort"
+      ],
+      "id": "m32",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": null,
+        "default": null,
+        "can_disable": true,
+        "note": "可用 enable_thinking 开关思考，并用 thinking_budget 限制思考 token 数（1–32768，缺省 4000；控制台）。官方文档仅为 Qwen3.8 系列列出 reasoning_effort 档位，Qwen3.7 的档位待核实。官方 FAQ 确认 qwen3.7-plus 默认开启思考。",
+        "sources": [
+          "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
+        ]
+      }
     },
     {
       "vendor": "阿里云 Qwen",
@@ -714,7 +1216,22 @@
       "last_updated": "2026-10-10",
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.016）；显式缓存创建（cache_write）$0.2；显式缓存命中价 $0.016。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
       "unverified_fields": [],
-      "id": "m33"
+      "id": "m33",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "default": "xhigh",
+        "can_disable": true,
+        "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
+        "sources": [
+          "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
+        ]
+      }
     },
     {
       "vendor": "阿里云 Qwen",
@@ -735,8 +1252,21 @@
       ],
       "last_updated": "2026-10-10",
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤32K 输入档；32K–256K：输入 $0.10、输出 $0.40；256K–1M：输入 $0.20、输出 $0.80。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。 缓存价基于表中档位（≤32K）输入价；其他档位按同比例。",
-      "unverified_fields": [],
-      "id": "m34"
+      "unverified_fields": [
+        "reasoning_effort"
+      ],
+      "id": "m34",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": null,
+        "default": null,
+        "can_disable": true,
+        "note": "可用 enable_thinking 开关思考，并用 thinking_budget 限制思考 token 数（1–32768，缺省 4000；控制台）。官方文档仅为 Qwen3.8 系列列出 reasoning_effort 档位，Qwen3.7 的档位待核实。默认是否开启待核实。",
+        "sources": [
+          "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
+        ]
+      }
     },
     {
       "vendor": "阿里云 Qwen",
@@ -759,7 +1289,22 @@
       "last_updated": "2026-10-10",
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input (Cache Hit) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
       "unverified_fields": [],
-      "id": "m35"
+      "id": "m35",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "default": "xhigh",
+        "can_disable": false,
+        "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。仅思考模型，无法关闭。",
+        "sources": [
+          "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
+        ]
+      }
     },
     {
       "vendor": "阿里云 Qwen",
@@ -781,7 +1326,22 @@
       "last_updated": "2026-10-10",
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。",
       "unverified_fields": [],
-      "id": "m36"
+      "id": "m36",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "default": "xhigh",
+        "can_disable": true,
+        "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
+        "sources": [
+          "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
+        ]
+      }
     },
     {
       "vendor": "阿里云 Qwen",
@@ -805,7 +1365,22 @@
       "unverified_fields": [
         "cache_write"
       ],
-      "id": "m37"
+      "id": "m37",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "default": "xhigh",
+        "can_disable": true,
+        "note": "默认开启思考，reasoning_effort 默认 xhigh，可选 low/medium/xhigh（minimal→low，high/max→xhigh，none 关闭思考）；不可与 thinking_budget 同设。",
+        "sources": [
+          "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+          "https://docs.qwencloud.com/developer-guides/text-generation/thinking"
+        ]
+      }
     },
     {
       "vendor": "Google Gemini",
@@ -827,7 +1402,21 @@
       "last_updated": "2026-10-10",
       "notes": "Standard 付费档。缓存存储费 $0.50/百万 token/小时（2027 起 $1.00）。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。 注意：该价格仅到 2026-12-31；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
       "unverified_fields": [],
-      "id": "m38"
+      "id": "m38",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "medium",
+        "can_disable": null,
+        "note": "thinking_level 取 low/medium/high，默认开启且为 medium；官方文档未提供关闭选项。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/thinking"
+        ]
+      }
     },
     {
       "vendor": "Google Gemini",
@@ -849,7 +1438,22 @@
       "last_updated": "2026-10-10",
       "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
       "unverified_fields": [],
-      "id": "m39"
+      "id": "m39",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "minimal",
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "minimal",
+        "can_disable": null,
+        "note": "thinking_level 取 minimal/low/medium/high，默认开启且为 minimal；官方文档未提供完全关闭选项。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/thinking"
+        ]
+      }
     },
     {
       "vendor": "Google Gemini",
@@ -871,7 +1475,21 @@
       "last_updated": "2026-10-10",
       "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
       "unverified_fields": [],
-      "id": "m40"
+      "id": "m40",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "default": "high",
+        "can_disable": null,
+        "note": "thinking_level 取 low/medium/high，默认开启且为 high；官方文档未提供关闭选项。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/thinking"
+        ]
+      }
     }
   ]
 }

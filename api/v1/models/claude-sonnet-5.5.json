@@ -34,6 +34,24 @@
     "extra_sources": [],
     "last_updated": "2026-10-10",
     "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default": "high",
+      "can_disable": true,
+      "status": "verified",
+      "note": "output_config.effort 支持 low/medium/high/xhigh/max。思考默认开启；无 disabled，改用 thinking:{type:between_tools} 关闭前置思考（仅 low/medium/high 档可用，xhigh/max 下 400）。",
+      "sources": [
+        "https://platform.claude.com/docs/en/build-with-claude/effort",
+        "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+      ]
+    },
     "unverified_fields": [],
     "links": {
       "self": "models/claude-sonnet-5.5.json",

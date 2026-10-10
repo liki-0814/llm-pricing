@@ -37,6 +37,32 @@
   function ctxCell(m) {
     return m.context_length ? '<span class="ctx">' + esc(m.context_length) + "</span>" : '<span class="tbd">待核实</span>';
   }
+  function effortCell(m) {
+    var r = m.reasoning_effort;
+    if (!r || r.supported === null || r.supported === undefined)
+      return '<span class="tbd" title="官方文档未明确，未做推测">待核实</span>';
+    var out = "";
+    if (r.supported === false) {
+      out = '<span class="lv lv-off" title="官方文档：无可调推理强度">不可调</span>';
+    } else if (!r.levels) {
+      out = '<span class="tbd" title="档位待核实">档位待核实</span>';
+    } else {
+      out = '<div class="lvs">' + r.levels.map(function (l) {
+        var d = l === r.default;
+        return '<span class="lv' + (d ? " lv-def" : "") + (l === "none" ? " lv-none" : "") + '"' + (d ? ' title="默认档"' : "") + ">" + esc(l) + "</span>";
+      }).join("") + "</div>";
+    }
+    var meta = [];
+    if (r.default) meta.push("默认 <b>" + esc(r.default) + "</b>");
+    else if (r.supported && r.levels) meta.push('默认 <span class="tbd">待核实</span>');
+    if (r.can_disable === true) meta.push("可关闭");
+    else if (r.can_disable === false) meta.push("不可关闭");
+    else if (r.supported !== false) meta.push("关闭方式未说明");
+    if (r.supported === false && r.can_disable === false) meta = ["思考恒开，不可关闭"];
+    var note = r.note ? '<details class="note"><summary>说明</summary><p>' + esc(r.note) + "</p>" +
+      (r.sources || []).map(function (u) { return '<a class="rsrc" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(u.replace(/^https?:\/\//, "")) + "</a>"; }).join("") + "</details>" : "";
+    return '<div class="re">' + out + (meta.length ? '<div class="re-meta">' + meta.join(" · ") + "</div>" : "") + note + "</div>";
+  }
   function row(m, best) {
     var slug = LP.slug(m.vendor);
     var notes = m.notes ? '<details class="note"><summary>备注</summary><p>' + esc(m.notes) + "</p></details>" : "";
@@ -50,6 +76,7 @@
       ["num c-cr", "缓存读取", priceCell(m.cached_input, best.cached_input === m.cached_input)],
       ["num c-cw", "缓存写入", priceCell(m.cache_write, best.cache_write === m.cache_write)],
       ["num c-ctx", "上下文", ctxCell(m)],
+      ["c-re", "推理强度", effortCell(m)],
       ["c-peak" + (m.peak_note || m.offpeak ? "" : " empty-peak"), "高峰 / 闲时", peakCell(m)],
       ["c-src", "来源 / 更新", '<div class="src"><span class="links"><a href="' + esc(m.source_url) +
         '" target="_blank" rel="noopener noreferrer">官方页面 ↗</a>' + json + '</span><span class="date">' + esc(m.last_updated || "") + "</span></div>"]
@@ -59,7 +86,8 @@
     }).join("") + "</tr>";
   }
   function haystack(m) {
-    return [m.vendor, m.model, m.model_id, m.notes, m.peak_note, m.context_length].join(" ").toLowerCase();
+    return [m.vendor, m.model, m.model_id, m.notes, m.peak_note, m.context_length,
+      m.reasoning_effort ? [(m.reasoning_effort.levels || []).join(" "), m.reasoning_effort.default, m.reasoning_effort.note].join(" ") : "推理强度 待核实"].join(" ").toLowerCase();
   }
   function cmp(a, b) {
     var k = state.sortKey, x = a[k], y = b[k];
@@ -121,7 +149,12 @@
 
   function init(data) {
     var models = data.models;
-    state.models = models.map(function (m, i) { m._i = i; m._h = haystack(m); return m; });
+    state.models = models.map(function (m, i) {
+      m._i = i; m._h = haystack(m);
+      var r = m.reasoning_effort;   // sortable: number of levels (0 = not adjustable); 待核实 sorts last
+      m.re_sort = (r && r.supported === false) ? 0 : (r && r.levels ? r.levels.length : null);
+      return m;
+    });
     state.vendors = data.vendors;
     $("statUpdated").textContent = data.meta.last_updated;
     $("footUpdated").textContent = data.meta.last_updated;

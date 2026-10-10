@@ -37,6 +37,22 @@
     ],
     "last_updated": "2026-10-10",
     "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default": "xhigh",
+      "can_disable": true,
+      "status": "verified",
+      "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
+      "sources": [
+        "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+        "https://docs.qwencloud.com/developer-guides/text-generation/thinking"
+      ]
+    },
     "unverified_fields": [],
     "links": {
       "self": "models/qwen3.8-max.json",

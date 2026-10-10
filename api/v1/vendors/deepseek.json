@@ -55,6 +55,21 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "表中价格为高峰价。最大输出 384K；支持视觉。旧名 deepseek-v4-flash 已并入此模型计费。官方页未列缓存写入价。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "status": "verified",
+        "note": "reasoning_effort（OpenAI 格式）/ output_config.effort（Anthropic 格式）取 low/high/max；medium、xhigh 映射到 high，minimal 映射到 low，ultra 映射到 max。thinking 默认开启，可用 thinking.type=disabled（或 Responses API 的 reasoning.effort=none）关闭。",
+        "sources": [
+          "https://api-docs.deepseek.com/guides/thinking_mode"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/deepseek-flash.json",
@@ -93,6 +108,22 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "表中价格为高峰价。最大输出 384K；不支持视觉。官方页未列缓存写入价。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "status": "verified",
+        "note": "同 DeepSeek 官方思考模式文档（文档统称“DeepSeek model”，未单列 Pro）；阿里云文档列出 deepseek-v4-pro-0813 取 low/high/max、默认 high，medium/xhigh 映射 high。thinking 默认开启，可用 thinking.type=disabled 关闭。",
+        "sources": [
+          "https://api-docs.deepseek.com/guides/thinking_mode",
+          "https://docs.qwencloud.com/api-reference/chat/openai-chat"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/deepseek-v4-pro.json",

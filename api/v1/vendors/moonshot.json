@@ -52,6 +52,22 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "缓存写入按 TTL 计价：5 分钟 $3.00，1 小时 $6.00（表中为 5 分钟）。缓存命中自动续期、无额外写入费。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": false,
+        "status": "verified",
+        "note": "顶层 reasoning_effort 支持 low/high/max，默认 max；K3 恒开思考，不支持 thinking 参数，无法关闭。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/use-thinking-models",
+          "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/kimi-k3.json",
@@ -86,6 +102,17 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "官方页未列缓存写入价。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": false,
+        "status": "verified",
+        "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/use-thinking-models"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/kimi-k2.7-code.json",
@@ -120,6 +147,17 @@
       "extra_sources": [],
       "last_updated": "2026-10-10",
       "notes": "高速版；官方页未列缓存写入价。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": false,
+        "status": "verified",
+        "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/use-thinking-models"
+        ]
+      },
       "unverified_fields": [],
       "links": {
         "self": "models/kimi-k2.7-code-highspeed.json",

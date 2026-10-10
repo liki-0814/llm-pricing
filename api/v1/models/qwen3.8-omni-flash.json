@@ -36,6 +36,22 @@
     ],
     "last_updated": "2026-10-10",
     "notes": "阿里云百炼国际站（新加坡）美元价；多模态模型，表中为文本价，音频等其他模态价格见官方页。 缓存命中价 $0.016 来自官方价格页；缓存写入价官方未列且该模型不在显式缓存支持列表，保持待核实。 2026-10-10 复核：官方 Context Cache 文档仅说明该模型隐式缓存命中按固定单价，显式缓存支持列表（Singapore）不含 qwen3.8-omni-flash，官方模型页未列缓存创建价，cache_write 仍待核实。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default": "xhigh",
+      "can_disable": true,
+      "status": "verified",
+      "note": "默认开启思考，reasoning_effort 默认 xhigh，可选 low/medium/xhigh（minimal→low，high/max→xhigh，none 关闭思考）；不可与 thinking_budget 同设。",
+      "sources": [
+        "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+        "https://docs.qwencloud.com/developer-guides/text-generation/thinking"
+      ]
+    },
     "unverified_fields": [
       "cache_write"
     ],

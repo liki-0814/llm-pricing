@@ -36,6 +36,22 @@
     ],
     "last_updated": "2026-10-10",
     "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "high",
+        "max"
+      ],
+      "default": "max",
+      "can_disable": false,
+      "status": "verified",
+      "note": "reasoning_effort 仅支持 low/high/max（其他值报错）；thinking.type 只能为 enabled，传 disabled 会报错，推理无法关闭。",
+      "sources": [
+        "https://docs.z.ai/guides/capabilities/thinking",
+        "https://docs.z.ai/guides/llm/glm-5.3-flash"
+      ]
+    },
     "unverified_fields": [],
     "links": {
       "self": "models/glm-5.3-flash.json",

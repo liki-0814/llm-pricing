@@ -49,7 +49,7 @@ GitHub Pages 无法运行服务端，所以接口是预生成的静态文件，�
 | `api/v1/vendors/<vendor>.json` | 单个厂商及其模型；vendor 为 `deepseek` `openai` `anthropic` `zhipu` `moonshot` `qwen` `google` |
 | `api/v1/openapi.json` | OpenAPI 3.1 描述 |
 
-每个模型的字段固定：`id`、`name`、`vendor`、`vendor_name`、`currency`、`unit`、`pricing{input, output, cached_input, cache_write}`、`pricing_status{…: verified | unverified | not_listed}`、`has_off_peak`、`off_peak_pricing{input, output, cached_input} | null`、`peak_note`、`context_length`（token 数）、`context_length_label`、`source_url`、`extra_sources`、`last_updated`、`notes`、`unverified_fields`、`links`。价格为 `null` 时用 `pricing_status` 区分“待核实”和“官方未列出”。
+每个模型的字段固定：`id`、`name`、`vendor`、`vendor_name`、`currency`、`unit`、`pricing{input, output, cached_input, cache_write}`、`pricing_status{…: verified | unverified | not_listed}`、`has_off_peak`、`off_peak_pricing{input, output, cached_input} | null`、`peak_note`、`context_length`（token 数）、`context_length_label`、`source_url`、`extra_sources`、`last_updated`、`notes`、`reasoning_effort{supported, levels, default, can_disable, status, note, sources}`、`unverified_fields`、`links`。`reasoning_effort` 为各厂商官方文档中的推理强度 / 思考档位（如 OpenAI `reasoning.effort`、Claude `output_config.effort`、Gemini `thinking_level`、Kimi/GLM/DeepSeek `reasoning_effort`、Qwen `reasoning_effort` / `enable_thinking`），其中 `null` 表示待核实，不做推测。价格为 `null` 时用 `pricing_status` 区分“待核实”和“官方未列出”。
 
 ```bash
 curl -s https://<用户名>.github.io/llm-pricing/api/v1/models.json | jq '.data[] | {id, input: .pricing.input}'
