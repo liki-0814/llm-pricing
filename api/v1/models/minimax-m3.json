@@ -1,0 +1,58 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens"
+  },
+  "data": {
+    "id": "minimax-m3",
+    "name": "MiniMax-M3",
+    "vendor": "minimax",
+    "vendor_name": "MiniMax",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 0.3,
+      "output": 1.2,
+      "cached_input": 0.06,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    },
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1000000,
+    "context_length_label": "1,000,000 tokens",
+    "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
+    "extra_sources": [
+      "https://platform.minimax.io/docs/guides/text-generation",
+      "https://platform.minimax.io/docs/api-reference/text-chat-openai"
+    ],
+    "last_updated": "2026-10-10",
+    "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方标注“永久 5 折”，划线原价 $0.60 / $2.40 / 缓存读取 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12（折后）。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09）。官方页未列缓存写入价。多模态（文本/图像/视频输入）；最大输出建议 128K、上限 512K。",
+    "reasoning_effort": {
+      "supported": false,
+      "levels": null,
+      "default": null,
+      "can_disable": true,
+      "status": "verified",
+      "note": "官方 OpenAI 兼容 API 文档：reasoning_effort 仅 MiniMax-M3.1-Flash-Preview 支持真实的思考深度调节，其他模型忽略该字段。MiniMax-M3 默认自适应思考（thinking.type=adaptive），可传 thinking.type=disabled 跳过思考直接作答。",
+      "sources": [
+        "https://platform.minimax.io/docs/api-reference/text-chat-openai",
+        "https://platform.minimax.io/docs/guides/text-generation"
+      ]
+    },
+    "unverified_fields": [],
+    "links": {
+      "self": "models/minimax-m3.json",
+      "vendor": "vendors/minimax.json"
+    }
+  }
+}

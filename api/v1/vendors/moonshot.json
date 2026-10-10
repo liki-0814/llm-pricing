@@ -5,19 +5,21 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "count": 3
+    "count": 4
   },
   "vendor": {
     "slug": "moonshot",
     "name": "Moonshot Kimi",
-    "model_count": 3,
+    "model_count": 4,
     "model_ids": [
       "kimi-k3",
       "kimi-k2.7-code",
-      "kimi-k2.7-code-highspeed"
+      "kimi-k2.7-code-highspeed",
+      "kimi-for-coding"
     ],
     "source_urls": [
-      "https://platform.kimi.ai/docs/pricing/chat"
+      "https://platform.kimi.ai/docs/pricing/chat",
+      "https://www.kimi.com/code/docs/en/kimi-code/models"
     ],
     "links": {
       "self": "vendors/moonshot.json"
@@ -161,6 +163,63 @@
       "unverified_fields": [],
       "links": {
         "self": "models/kimi-k2.7-code-highspeed.json",
+        "vendor": "vendors/moonshot.json"
+      }
+    },
+    {
+      "id": "kimi-for-coding",
+      "name": "Kimi K2.8 Preview",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "unverified",
+        "output": "unverified",
+        "cached_input": "unverified",
+        "cache_write": "unverified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1,048,576 tokens",
+      "source_url": "https://www.kimi.com/code/docs/en/kimi-code/models",
+      "extra_sources": [
+        "https://www.kimi.com/code/docs/en/",
+        "https://platform.kimi.ai/docs/models"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无 token 单价，待核实，未做推测。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": true,
+        "status": "verified",
+        "note": "Kimi Code 文档：K3 与 K2.8 Preview 支持 low/high/max 思考强度，K2.8 Preview 默认 max；关闭思考时请求由 K2.8 Preview（无思考）处理。",
+        "sources": [
+          "https://www.kimi.com/code/docs/en/kimi-code/models"
+        ]
+      },
+      "unverified_fields": [
+        "input",
+        "output",
+        "cached_input",
+        "cache_write"
+      ],
+      "links": {
+        "self": "models/kimi-for-coding.json",
         "vendor": "vendors/moonshot.json"
       }
     }

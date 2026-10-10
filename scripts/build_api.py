@@ -33,6 +33,7 @@ VENDOR_SLUGS = {
     "Moonshot Kimi": "moonshot",
     "阿里云 Qwen": "qwen",
     "Google Gemini": "google",
+    "MiniMax": "minimax",
 }
 
 

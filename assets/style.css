@@ -116,8 +116,8 @@ kbd{font-size:11px;padding:1px 6px;border:1px solid var(--line);border-bottom-wi
 
 /* ---------- vendor badges ---------- */
 .v-deepseek{--vc:#4d6bfe}.v-openai{--vc:#10a37f}.v-anthropic{--vc:#d97757}.v-zhipu{--vc:#0891b2}
-.v-moonshot{--vc:#7c3aed}.v-qwen{--vc:#f97316}.v-google{--vc:#3b82f6}
-html[data-theme="dark"] .v-zhipu{--vc:#22d3ee}html[data-theme="dark"] .v-moonshot{--vc:#a78bfa}html[data-theme="dark"] .v-google{--vc:#60a5fa}html[data-theme="dark"] .v-deepseek{--vc:#7d93ff}
+.v-moonshot{--vc:#7c3aed}.v-qwen{--vc:#f97316}.v-google{--vc:#3b82f6}.v-minimax{--vc:#e11d48}
+html[data-theme="dark"] .v-zhipu{--vc:#22d3ee}html[data-theme="dark"] .v-moonshot{--vc:#a78bfa}html[data-theme="dark"] .v-google{--vc:#60a5fa}html[data-theme="dark"] .v-deepseek{--vc:#7d93ff}html[data-theme="dark"] .v-minimax{--vc:#fb7185}
 .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:7px;white-space:nowrap;
   color:color-mix(in srgb,var(--vc) 78%,var(--ink));background:color-mix(in srgb,var(--vc) 12%,transparent);border:1px solid color-mix(in srgb,var(--vc) 26%,transparent)}
 

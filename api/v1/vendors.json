@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "count": 7
+    "count": 8
   },
   "data": [
     {
@@ -89,14 +89,16 @@
     {
       "slug": "moonshot",
       "name": "Moonshot Kimi",
-      "model_count": 3,
+      "model_count": 4,
       "model_ids": [
         "kimi-k3",
         "kimi-k2.7-code",
-        "kimi-k2.7-code-highspeed"
+        "kimi-k2.7-code-highspeed",
+        "kimi-for-coding"
       ],
       "source_urls": [
-        "https://platform.kimi.ai/docs/pricing/chat"
+        "https://platform.kimi.ai/docs/pricing/chat",
+        "https://www.kimi.com/code/docs/en/kimi-code/models"
       ],
       "links": {
         "self": "vendors/moonshot.json"
@@ -137,6 +139,22 @@
       ],
       "links": {
         "self": "vendors/google.json"
+      }
+    },
+    {
+      "slug": "minimax",
+      "name": "MiniMax",
+      "model_count": 2,
+      "model_ids": [
+        "minimax-m3",
+        "minimax-m3.1-flash-preview"
+      ],
+      "source_urls": [
+        "https://platform.minimax.io/docs/guides/pricing-paygo",
+        "https://platform.minimax.io/docs/guides/text-generation"
+      ],
+      "links": {
+        "self": "vendors/minimax.json"
       }
     }
   ]

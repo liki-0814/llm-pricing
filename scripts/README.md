@@ -37,6 +37,7 @@
 - OpenAI: 各模型页 `https://developers.openai.com/api/docs/models/<model_id>`（`reasoning.effort`）
 - Anthropic: https://platform.claude.com/docs/en/build-with-claude/effort 与 .../thinking-troubleshooting
 - Google Gemini: https://ai.google.dev/gemini-api/docs/thinking
+- MiniMax: https://platform.minimax.io/docs/api-reference/text-chat-openai 、.../guides/text-generation
 - DeepSeek: https://api-docs.deepseek.com/guides/thinking_mode
 - 智谱: https://docs.z.ai/guides/capabilities/thinking 、https://docs.z.ai/guides/llm/glm-5.3
 - Moonshot Kimi: https://platform.kimi.ai/docs/guide/use-thinking-models 、.../use-reasoning-effort
@@ -48,6 +49,7 @@
 - OpenAI: https://developers.openai.com/api/docs/pricing
 - Anthropic: https://platform.claude.com/docs/en/about-claude/pricing
 - 智谱: https://docs.z.ai/guides/overview/pricing ；上下文：https://docs.bigmodel.cn/cn/guide/start/model-overview
-- Moonshot Kimi: https://platform.kimi.ai/docs/pricing/chat
+- Moonshot Kimi: https://platform.kimi.ai/docs/pricing/chat （K2.8 Preview 仅 Kimi Code 订阅：https://www.kimi.com/code/docs/en/kimi-code/models ）
 - 阿里云 Qwen: https://www.alibabacloud.com/help/en/model-studio/model-pricing
 - Google Gemini: https://ai.google.dev/gemini-api/docs/pricing
+- MiniMax: https://platform.minimax.io/docs/guides/pricing-paygo
