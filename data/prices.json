@@ -1583,20 +1583,15 @@
       "vendor": "Moonshot Kimi",
       "model": "Kimi K2.8 Preview",
       "model_id": "kimi-for-coding",
-      "input": null,
-      "output": null,
-      "cached_input": null,
-      "cache_write": null,
+      "input": 0.95,
+      "output": 4.0,
+      "cached_input": 0.19,
+      "cache_write": "n/a",
       "context_length": "1,048,576 tokens",
       "context_tokens": 1048576,
       "source_url": "https://www.kimi.com/code/docs/en/kimi-code/models",
-      "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无 token 单价，待核实，未做推测。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。",
-      "unverified_fields": [
-        "input",
-        "output",
-        "cached_input",
-        "cache_write"
-      ],
+      "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无官方 token 单价。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。 价格暂按 Kimi K2.7 Code 计价(用户确认,Kimi 官方暂未单独标价)",
+      "unverified_fields": [],
       "reasoning_effort": {
         "supported": true,
         "levels": [

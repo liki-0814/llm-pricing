@@ -14,16 +14,16 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
-      "input": null,
-      "output": null,
-      "cached_input": null,
+      "input": 0.95,
+      "output": 4.0,
+      "cached_input": 0.19,
       "cache_write": null
     },
     "pricing_status": {
-      "input": "unverified",
-      "output": "unverified",
-      "cached_input": "unverified",
-      "cache_write": "unverified"
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
     },
     "has_off_peak": false,
     "off_peak_pricing": null,
@@ -36,7 +36,7 @@
       "https://platform.kimi.ai/docs/models"
     ],
     "last_updated": "2026-10-10",
-    "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无 token 单价，待核实，未做推测。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。",
+    "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无官方 token 单价。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。 价格暂按 Kimi K2.7 Code 计价(用户确认,Kimi 官方暂未单独标价)",
     "reasoning_effort": {
       "supported": true,
       "levels": [
@@ -52,12 +52,7 @@
         "https://www.kimi.com/code/docs/en/kimi-code/models"
       ]
     },
-    "unverified_fields": [
-      "input",
-      "output",
-      "cached_input",
-      "cache_write"
-    ],
+    "unverified_fields": [],
     "links": {
       "self": "models/kimi-for-coding.json",
       "vendor": "vendors/moonshot.json"
