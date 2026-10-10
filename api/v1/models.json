@@ -2144,16 +2144,16 @@
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
-        "input": null,
-        "output": null,
-        "cached_input": null,
+        "input": 0.3,
+        "output": 1.2,
+        "cached_input": 0.06,
         "cache_write": null
       },
       "pricing_status": {
-        "input": "unverified",
-        "output": "unverified",
-        "cached_input": "unverified",
-        "cache_write": "unverified"
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
       },
       "has_off_peak": false,
       "off_peak_pricing": null,
@@ -2166,7 +2166,7 @@
         "https://platform.minimax.io/docs/guides/pricing-paygo"
       ],
       "last_updated": "2026-10-10",
-      "notes": "官方文档：该预览模型目前仅通过 M Plan 订阅与 MiniMax Code 提供（Subscription Key），按量付费（pay-as-you-go）定价页未列出其 token 单价，故价格待核实，未做推测。多模态（文本/图像/视频输入）；max_completion_tokens 建议 128K、上限 512K。",
+      "notes": "官方文档:该预览模型目前仅通过 M Plan 订阅与 MiniMax Code 提供(Subscription Key),按量付费(pay-as-you-go)定价页未单独列出其 token 单价。价格暂按 MiniMax-M3 计价(用户确认,官方暂未单独标价;该模型目前仅在 M Plan / MiniMax Code 提供)。表中为标准档、输入 ≤512K tokens 的价格;输入 >512K tokens 时同 M3:输入 $0.60、输出 $2.40、缓存读取 $0.12。官方页未列缓存写入价。多模态(文本/图像/视频输入);max_completion_tokens 建议 128K、上限 512K。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -2185,12 +2185,7 @@
           "https://platform.minimax.io/docs/api-reference/text-chat-openai"
         ]
       },
-      "unverified_fields": [
-        "input",
-        "output",
-        "cached_input",
-        "cache_write"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/minimax-m3.1-flash-preview.json",
         "vendor": "vendors/minimax.json"
