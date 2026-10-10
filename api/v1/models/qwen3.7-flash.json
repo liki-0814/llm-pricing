@@ -42,10 +42,12 @@
       "default": null,
       "can_disable": true,
       "status": "partial",
-      "note": "可用 enable_thinking 开关思考，并用 thinking_budget 限制思考 token 数（1–32768，缺省 4000；控制台）。官方文档仅为 Qwen3.8 系列列出 reasoning_effort 档位，Qwen3.7 的档位待核实。默认是否开启待核实。",
+      "note": "Qwen3.7 Flash 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Flash series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。",
       "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
         "https://docs.qwencloud.com/api-reference/chat/openai-chat",
-        "https://www.alibabacloud.com/help/en/model-studio/deep-thinking"
+        "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-responses",
+        "https://docs.qwencloud.com/developer-guides/text-generation/thinking"
       ]
     },
     "unverified_fields": [
