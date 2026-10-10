@@ -1,0 +1,2 @@
+/* Runs in <head> before paint to avoid a light/dark flash. ?theme=dark|light overrides (not saved). */
+(function(){var d=document.documentElement,t;try{t=new URLSearchParams(location.search).get("theme");if(t!=="dark"&&t!=="light")t=localStorage.getItem("theme");if(t!=="dark"&&t!=="light")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}catch(e){t="light"}d.setAttribute("data-theme",t)})();

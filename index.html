@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-Hans" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大模型 API 价格速查 · 官方定价对比（USD / 每百万 token）</title>
+<meta name="description" content="最新大模型 API 官方价格对比：DeepSeek、OpenAI、Anthropic、智谱、Kimi、Qwen、Gemini。统一美元计价，每 100 万 token，附官方来源与静态 JSON 接口。">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0c11" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f46e5'/%3E%3Cstop offset='1' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'%3E价%3C/text%3E%3C/svg%3E">
+<link rel="alternate" type="application/json" href="api/v1/models.json" title="JSON API">
+<script src="assets/theme-init.js"></script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="大模型 API 价格速查 首页"><span class="logo" aria-hidden="true">价</span><span class="full">大模型 API 价格速查</span></a>
+    <nav class="nav" aria-label="主导航">
+      <a href="./" aria-current="page">价格表</a>
+      <a href="api.html">接口文档</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="api/v1/models.json" title="JSON 数据" aria-label="JSON 数据"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1"/></svg></a>
+      <button class="icon-btn theme-toggle" type="button" aria-label="切换深浅色模式" title="切换深浅色模式">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot" aria-hidden="true"></span>官方定价页逐项核实 · 无推测</span>
+      <h1>大模型 API <span class="grad">价格速查</span></h1>
+      <p class="sub">仅收录各厂商最新模型，统一<strong>美元（USD）</strong>计价、单位<strong>每 100 万 token</strong>。点击表头排序，<span class="best-tag" style="margin:0">最低</span> 标记当前筛选结果中每列的最低价。</p>
+      <div class="stats">
+        <div class="stat"><div class="k">数据更新</div><div class="v" id="statUpdated">—</div></div>
+        <div class="stat"><div class="k">收录模型</div><div class="v" id="statModels">—</div></div>
+        <div class="stat"><div class="k">覆盖厂商</div><div class="v" id="statVendors">—</div></div>
+        <div class="stat"><div class="k">最低输入价</div><div class="v" id="statCheapest">—</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-label="价格表">
+    <div class="toolbar" role="search">
+      <div class="toolbar-row">
+        <label class="search">
+          <span class="sr-only">搜索</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="searchBox" class="input" type="search" placeholder="搜索模型名、模型 ID、厂商、备注…" autocomplete="off" spellcheck="false">
+          <kbd>/</kbd>
+        </label>
+        <button id="resetBtn" type="button" class="btn">重置</button>
+        <div class="mobile-sort">
+          <select id="sortSelect" class="input" aria-label="排序方式">
+            <option value="_i:1">默认排序</option>
+            <option value="input:1">输入价 低→高</option>
+            <option value="input:-1">输入价 高→低</option>
+            <option value="output:1">输出价 低→高</option>
+            <option value="output:-1">输出价 高→低</option>
+            <option value="cached_input:1">缓存读取 低→高</option>
+            <option value="cache_write:1">缓存写入 低→高</option>
+            <option value="context_tokens:-1">上下文 长→短</option>
+            <option value="model:1">模型名 A→Z</option>
+          </select>
+        </div>
+      </div>
+      <div class="chips" id="vendorChips" role="group" aria-label="按厂商筛选"></div>
+    </div>
+
+    <div class="meta-row">
+      <div class="legend">
+        <span><span class="tbd">待核实</span>未能从官方来源核实，未做推测</span>
+        <span><span class="na">未列出</span>官方定价页没有该项</span>
+        <span><span class="best-tag" style="margin:0">最低</span>当前结果中该列最低价</span>
+      </div>
+      <div class="count" id="count" aria-live="polite"></div>
+    </div>
+
+    <div class="table-card prices">
+      <div class="table-scroll">
+        <table id="priceTable">
+          <caption class="sr-only">大模型 API 价格（USD / 每 100 万 token）</caption>
+          <thead>
+            <tr>
+          <th data-key="vendor"><button type="button" class="th">厂商<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th data-key="model"><button type="button" class="th">模型<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th class="num" data-key="input"><button type="button" class="th">输入<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th class="num" data-key="output"><button type="button" class="th">输出<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th class="num" data-key="cached_input"><button type="button" class="th">缓存读取<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th class="num" data-key="cache_write"><button type="button" class="th">缓存写入<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th class="num" data-key="context_tokens"><button type="button" class="th">上下文<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th data-key="peak_note"><button type="button" class="th">高峰 / 闲时<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th data-key="last_updated"><button type="button" class="th">来源 / 更新<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr class="skeleton"><td colspan="9"></td></tr><tr class="skeleton"><td colspan="9"></td></tr><tr class="skeleton"><td colspan="9"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="empty" class="empty" hidden><b>没有匹配的模型</b>换个关键词，或 <a href="#" id="emptyReset">清除筛选</a></div>
+      <div id="error" class="empty error" hidden></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h3>关于数据</h3>
+      <p>所有价格均取自各厂商官方定价页，统一为美元（USD）/ 每 100 万 token；表中主价格为标准价（有闲时价时为高峰价）。阶梯价、长上下文价、促销与 Batch 折扣见每行“备注”。</p>
+      <p>价格可能随时调整，下单前请以官方页面为准。数据更新：<span id="footUpdated">—</span>。</p>
+      <p>原始数据 <a href="data/prices.json">data/prices.json</a> · JSON 接口 <a href="api.html">接口文档</a> · <a href="api/v1/openapi.json">OpenAPI</a></p>
+    </div>
+    <div>
+      <h3>数据来源（官方定价页）</h3>
+      <ul class="sources" id="sources"></ul>
+    </div>
+  </div>
+</footer>
+<script src="assets/common.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

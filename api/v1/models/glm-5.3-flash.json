@@ -1,0 +1,45 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens"
+  },
+  "data": {
+    "id": "glm-5.3-flash",
+    "name": "GLM-5.3-Flash",
+    "vendor": "zhipu",
+    "vendor_name": "智谱 Z.ai",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 0.15,
+      "output": 0.5,
+      "cached_input": 0.03,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    },
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1000000,
+    "context_length_label": "1M",
+    "source_url": "https://docs.z.ai/guides/overview/pricing",
+    "extra_sources": [
+      "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+    ],
+    "last_updated": "2026-10-10",
+    "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
+    "unverified_fields": [],
+    "links": {
+      "self": "models/glm-5.3-flash.json",
+      "vendor": "vendors/zhipu.json"
+    }
+  }
+}

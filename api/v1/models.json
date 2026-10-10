@@ -1,0 +1,1433 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "count": 40,
+    "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3 系列最新。",
+    "description": "价格均为每 100 万 token，币种统一为美元（USD），取自各厂商国际站官方定价页。null / 待核实 = 未能从官方来源核实，未做推测。"
+  },
+  "data": [
+    {
+      "id": "deepseek-flash",
+      "name": "DeepSeek-V4.1-Flash",
+      "vendor": "deepseek",
+      "vendor_name": "DeepSeek",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.3,
+        "output": 1.2,
+        "cached_input": 0.006,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": true,
+      "off_peak_pricing": {
+        "input": 0.15,
+        "output": 0.6,
+        "cached_input": 0.003
+      },
+      "peak_note": "高峰（周一至周五 UTC 01:00-04:00、06:00-10:00，即北京时间 09:00-12:00、14:00-18:00，中国法定节假日除外）按表中价格；其余时间（含周末、节假日全天）闲时价为高峰价的一半。",
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "表中价格为高峰价。最大输出 384K；支持视觉。旧名 deepseek-v4-flash 已并入此模型计费。官方页未列缓存写入价。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/deepseek-flash.json",
+        "vendor": "vendors/deepseek.json"
+      }
+    },
+    {
+      "id": "deepseek-v4-pro",
+      "name": "DeepSeek-V4-Pro-0813",
+      "vendor": "deepseek",
+      "vendor_name": "DeepSeek",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 1.32,
+        "output": 3.96,
+        "cached_input": 0.044,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": true,
+      "off_peak_pricing": {
+        "input": 0.66,
+        "output": 1.98,
+        "cached_input": 0.022
+      },
+      "peak_note": "高峰时段同上；闲时价为高峰价的一半。",
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "表中价格为高峰价。最大输出 384K；不支持视觉。官方页未列缓存写入价。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/deepseek-v4-pro.json",
+        "vendor": "vendors/deepseek.json"
+      }
+    },
+    {
+      "id": "gpt-5.6-sol",
+      "name": "GPT-5.6 Sol",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 4.0,
+        "output": 20.0,
+        "cached_input": 0.4,
+        "cache_write": 5.0
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价至少持续到 2026-11-21。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-5.6-sol.json",
+        "vendor": "vendors/openai.json"
+      }
+    },
+    {
+      "id": "gpt-5.6-terra",
+      "name": "GPT-5.6 Terra",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 12.0,
+        "cached_input": 0.2,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $18.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-5.6-terra.json",
+        "vendor": "vendors/openai.json"
+      }
+    },
+    {
+      "id": "gpt-5.6-luna",
+      "name": "GPT-5.6 Luna",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.2,
+        "output": 1.2,
+        "cached_input": 0.02,
+        "cache_write": 0.25
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.4、缓存读取 $0.04、缓存写入 $0.5、输出 $1.8。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-5.6-luna.json",
+        "vendor": "vendors/openai.json"
+      }
+    },
+    {
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 10.0,
+        "output": 50.0,
+        "cached_input": 1.0,
+        "cache_write": 12.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-astra"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $20.0、缓存读取 $2.0、缓存写入 $25.0、输出 $75.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-6-astra.json",
+        "vendor": "vendors/openai.json"
+      }
+    },
+    {
+      "id": "gpt-6-sol",
+      "name": "GPT-6 Sol",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cached_input": 0.2,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-sol"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-6-sol.json",
+        "vendor": "vendors/openai.json"
+      }
+    },
+    {
+      "id": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.1,
+        "output": 0.5,
+        "cached_input": 0.01,
+        "cache_write": 0.125
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-luna"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.2、缓存读取 $0.02、缓存写入 $0.25、输出 $0.75。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-6-luna.json",
+        "vendor": "vendors/openai.json"
+      }
+    },
+    {
+      "id": "gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cached_input": 0.1,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.2、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-6.1-sol.json",
+        "vendor": "vendors/openai.json"
+      }
+    },
+    {
+      "id": "claude-fable-5.1",
+      "name": "Claude Fable 5.1",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 10,
+        "output": 50,
+        "cached_input": 0.25,
+        "cache_write": 12.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-fable-5.1.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-mythos-5.1",
+      "name": "Claude Mythos 5.1",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 10,
+        "output": 50,
+        "cached_input": 0.25,
+        "cache_write": 12.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-mythos-5.1.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-fable-5",
+      "name": "Claude Fable 5",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 10,
+        "output": 50,
+        "cached_input": 1,
+        "cache_write": 12.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-fable-5.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-mythos-5",
+      "name": "Claude Mythos 5",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 10,
+        "output": 50,
+        "cached_input": 1,
+        "cache_write": 12.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-mythos-5.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-opus-5.5",
+      "name": "Claude Opus 5.5",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 4,
+        "output": 20,
+        "cached_input": 0.2,
+        "cache_write": 5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（研究预览）输入 $8 / 输出 $40。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-opus-5.5.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-opus-5",
+      "name": "Claude Opus 5",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 5,
+        "output": 25,
+        "cached_input": 0.5,
+        "cache_write": 6.25
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-opus-5.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-opus-4.8",
+      "name": "Claude Opus 4.8",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 5,
+        "output": 25,
+        "cached_input": 0.5,
+        "cache_write": 6.25
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-opus-4.8.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-opus-4.7",
+      "name": "Claude Opus 4.7",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 5,
+        "output": 25,
+        "cached_input": 0.5,
+        "cache_write": 6.25
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。新分词器，同样文本约多 30% token。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-opus-4.7.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-opus-4.6",
+      "name": "Claude Opus 4.6",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 5,
+        "output": 25,
+        "cached_input": 0.5,
+        "cache_write": 6.25
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-opus-4.6.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-sonnet-5.5",
+      "name": "Claude Sonnet 5.5",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2,
+        "output": 10,
+        "cached_input": 0.1,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-sonnet-5.5.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2,
+        "output": 10,
+        "cached_input": 0.2,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。$2/$10 已确认为标准价（原定 9 月 1 日涨价取消）。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-sonnet-5.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-sonnet-4.6",
+      "name": "Claude Sonnet 4.6",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 3,
+        "output": 15,
+        "cached_input": 0.3,
+        "cache_write": 3.75
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $6。Batch API 5 折。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-sonnet-4.6.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "claude-haiku-5.5",
+      "name": "Claude Haiku 5.5",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.1,
+        "output": 0.5,
+        "cached_input": 0.01,
+        "cache_write": 0.125
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [
+        "https://platform.claude.com/docs/en/about-claude/models/overview"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "按提示长度分档：表中为 ≤100K 提示价；>100K 提示：输入 $0.50、输出 $2.50、缓存读取 $0.05、缓存写入(5m) $0.625。1 小时 TTL 写入 $0.20（≤100K）/ $1（>100K）。Batch 5 折。 上下文窗口 1M tokens、最大输出 128K（Anthropic 模型总览页）。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/claude-haiku-5.5.json",
+        "vendor": "vendors/anthropic.json"
+      }
+    },
+    {
+      "id": "glm-5.3",
+      "name": "GLM-5.3",
+      "vendor": "zhipu",
+      "vendor_name": "智谱 Z.ai",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4,
+        "cached_input": 0.26,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://docs.z.ai/guides/overview/pricing",
+      "extra_sources": [
+        "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/glm-5.3.json",
+        "vendor": "vendors/zhipu.json"
+      }
+    },
+    {
+      "id": "glm-5.3-flash",
+      "name": "GLM-5.3-Flash",
+      "vendor": "zhipu",
+      "vendor_name": "智谱 Z.ai",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.15,
+        "output": 0.5,
+        "cached_input": 0.03,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://docs.z.ai/guides/overview/pricing",
+      "extra_sources": [
+        "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/glm-5.3-flash.json",
+        "vendor": "vendors/zhipu.json"
+      }
+    },
+    {
+      "id": "glm-5.3-flashx",
+      "name": "GLM-5.3-FlashX",
+      "vendor": "zhipu",
+      "vendor_name": "智谱 Z.ai",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.37,
+        "output": 1.25,
+        "cached_input": 0.075,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://docs.z.ai/guides/overview/pricing",
+      "extra_sources": [
+        "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/glm-5.3-flashx.json",
+        "vendor": "vendors/zhipu.json"
+      }
+    },
+    {
+      "id": "glm-5.2",
+      "name": "GLM-5.2",
+      "vendor": "zhipu",
+      "vendor_name": "智谱 Z.ai",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 1.4,
+        "output": 4.4,
+        "cached_input": 0.26,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://docs.z.ai/guides/overview/pricing",
+      "extra_sources": [
+        "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/glm-5.2.json",
+        "vendor": "vendors/zhipu.json"
+      }
+    },
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 3.0,
+        "output": 15.0,
+        "cached_input": 0.3,
+        "cache_write": 3.0
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1,048,576 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入按 TTL 计价：5 分钟 $3.00，1 小时 $6.00（表中为 5 分钟）。缓存命中自动续期、无额外写入费。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/kimi-k3.json",
+        "vendor": "vendors/moonshot.json"
+      }
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.95,
+        "output": 4.0,
+        "cached_input": 0.19,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 262144,
+      "context_length_label": "262,144 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "官方页未列缓存写入价。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/kimi-k2.7-code.json",
+        "vendor": "vendors/moonshot.json"
+      }
+    },
+    {
+      "id": "kimi-k2.7-code-highspeed",
+      "name": "Kimi K2.7 Code Highspeed",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 1.9,
+        "output": 8.0,
+        "cached_input": 0.38,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 262144,
+      "context_length_label": "262,144 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "高速版；官方页未列缓存写入价。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/kimi-k2.7-code-highspeed.json",
+        "vendor": "vendors/moonshot.json"
+      }
+    },
+    {
+      "id": "qwen3.8-max",
+      "name": "Qwen3.8-Max",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2,
+        "output": 6,
+        "cached_input": 0.25,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "≤1M 输入（计费档位上限）",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/context-cache",
+        "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/qwen3.8-max.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "qwen3.7-max",
+      "name": "Qwen3.7-Max",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.5,
+        "output": 7.5,
+        "cached_input": 0.25,
+        "cache_write": 3.125
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "≤1M 输入（计费档位上限）",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/context-cache"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "阿里云百炼国际站（新加坡）美元价；别名当前指向 qwen3.7-max-2026-05-20。单档 0–1M。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/qwen3.7-max.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "qwen3.7-plus",
+      "name": "Qwen3.7-Plus",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.4,
+        "output": 1.6,
+        "cached_input": 0.04,
+        "cache_write": 0.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "≤1M 输入（计费档位上限）",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/context-cache"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤256K 输入档（非思考/思考输出价相同）；256K–1M 档：输入 $1.2、输出 $4.8。官方标注限时 8 折（表中为标价）。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。 缓存价基于表中档位（≤256K）输入价；其他档位按同比例。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/qwen3.7-plus.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "qwen3.8-flash",
+      "name": "Qwen3.8-Flash",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.15,
+        "output": 0.47,
+        "cached_input": 0.016,
+        "cache_write": 0.2
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "≤1M 输入（计费档位上限）",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/context-cache",
+        "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.016）；显式缓存创建（cache_write）$0.2；显式缓存命中价 $0.016。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/qwen3.8-flash.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "qwen3.7-flash",
+      "name": "Qwen3.7-Flash",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.03,
+        "output": 0.13,
+        "cached_input": 0.003,
+        "cache_write": 0.0375
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "≤1M 输入（计费档位上限）",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/context-cache"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤32K 输入档；32K–256K：输入 $0.10、输出 $0.40；256K–1M：输入 $0.20、输出 $0.80。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。 缓存价基于表中档位（≤32K）输入价；其他档位按同比例。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/qwen3.7-flash.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "qwen3.8-2.4t-a95b",
+      "name": "Qwen3.8-2.4T-A95B",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2,
+        "output": 6,
+        "cached_input": 0.25,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "≤1M 输入（计费档位上限）",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/context-cache",
+        "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input (Cache Hit) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/qwen3.8-2.4t-a95b.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "qwen3.8-27b",
+      "name": "Qwen3.8-27B",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.5,
+        "output": 3,
+        "cached_input": 0.05,
+        "cache_write": 0.625
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "≤1M 输入（计费档位上限）",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/context-cache"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/qwen3.8-27b.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "qwen3.8-omni-flash",
+      "name": "Qwen3.8-Omni-Flash",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.15,
+        "output": 0.47,
+        "cached_input": 0.016,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "unverified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "≤1M 输入（计费档位上限）",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/context-cache"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "阿里云百炼国际站（新加坡）美元价；多模态模型，表中为文本价，音频等其他模态价格见官方页。 缓存命中价 $0.016 来自官方价格页；缓存写入价官方未列且该模型不在显式缓存支持列表，保持待核实。 2026-10-10 复核：官方 Context Cache 文档仅说明该模型隐式缓存命中按固定单价，显式缓存支持列表（Singapore）不含 qwen3.8-omni-flash，官方模型页未列缓存创建价，cache_write 仍待核实。",
+      "unverified_fields": [
+        "cache_write"
+      ],
+      "links": {
+        "self": "models/qwen3.8-omni-flash.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "gemini-3.8-flash",
+      "name": "Gemini 3.8 Flash",
+      "vendor": "google",
+      "vendor_name": "Google Gemini",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.75,
+        "output": 3.75,
+        "cached_input": 0.075,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": "官方为 2026-12-31 前的限时价；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
+      "context_length": 1048576,
+      "context_length_label": "1M",
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "extra_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "Standard 付费档。缓存存储费 $0.50/百万 token/小时（2027 起 $1.00）。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。 注意：该价格仅到 2026-12-31；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gemini-3.8-flash.json",
+        "vendor": "vendors/google.json"
+      }
+    },
+    {
+      "id": "gemini-3.5-flash-lite",
+      "name": "Gemini 3.5 Flash-Lite",
+      "vendor": "google",
+      "vendor_name": "Google Gemini",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.3,
+        "output": 2.5,
+        "cached_input": 0.03,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1M",
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "extra_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gemini-3.5-flash-lite.json",
+        "vendor": "vendors/google.json"
+      }
+    },
+    {
+      "id": "gemini-3.1-pro-preview",
+      "name": "Gemini 3.1 Pro Preview",
+      "vendor": "google",
+      "vendor_name": "Google Gemini",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 12.0,
+        "cached_input": 0.2,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1M",
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "extra_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
+      ],
+      "last_updated": "2026-10-10",
+      "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gemini-3.1-pro-preview.json",
+        "vendor": "vendors/google.json"
+      }
+    }
+  ]
+}

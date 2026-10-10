@@ -1,0 +1,628 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "LLM API Pricing (static JSON API)",
+    "version": "1.0.0",
+    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD per 1M tokens. Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-10-10."
+  },
+  "servers": [
+    {
+      "url": ".",
+      "description": "Relative to this openapi.json (…/api/v1/)"
+    },
+    {
+      "url": "https://{user}.github.io/{repo}/api/v1",
+      "variables": {
+        "user": {
+          "default": "your-user"
+        },
+        "repo": {
+          "default": "llm-pricing"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/models.json": {
+      "get": {
+        "operationId": "listModels",
+        "summary": "All models",
+        "responses": {
+          "200": {
+            "description": "All models",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelList"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    },
+    "/models/{model_id}.json": {
+      "get": {
+        "operationId": "getModel",
+        "summary": "One model by id",
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "deepseek-flash",
+                "deepseek-v4-pro",
+                "gpt-5.6-sol",
+                "gpt-5.6-terra",
+                "gpt-5.6-luna",
+                "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
+                "gpt-6.1-sol",
+                "claude-fable-5.1",
+                "claude-mythos-5.1",
+                "claude-fable-5",
+                "claude-mythos-5",
+                "claude-opus-5.5",
+                "claude-opus-5",
+                "claude-opus-4.8",
+                "claude-opus-4.7",
+                "claude-opus-4.6",
+                "claude-sonnet-5.5",
+                "claude-sonnet-5",
+                "claude-sonnet-4.6",
+                "claude-haiku-5.5",
+                "glm-5.3",
+                "glm-5.3-flash",
+                "glm-5.3-flashx",
+                "glm-5.2",
+                "kimi-k3",
+                "kimi-k2.7-code",
+                "kimi-k2.7-code-highspeed",
+                "qwen3.8-max",
+                "qwen3.7-max",
+                "qwen3.7-plus",
+                "qwen3.8-flash",
+                "qwen3.7-flash",
+                "qwen3.8-2.4t-a95b",
+                "qwen3.8-27b",
+                "qwen3.8-omni-flash",
+                "gemini-3.8-flash",
+                "gemini-3.5-flash-lite",
+                "gemini-3.1-pro-preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One model",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelItem"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    },
+    "/vendors.json": {
+      "get": {
+        "operationId": "listVendors",
+        "summary": "All vendors",
+        "responses": {
+          "200": {
+            "description": "All vendors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VendorList"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    },
+    "/vendors/{vendor}.json": {
+      "get": {
+        "operationId": "getVendor",
+        "summary": "One vendor and its models",
+        "parameters": [
+          {
+            "name": "vendor",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "deepseek",
+                "openai",
+                "anthropic",
+                "zhipu",
+                "moonshot",
+                "qwen",
+                "google"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vendor with its models",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VendorModels"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Meta": {
+        "type": "object",
+        "required": [
+          "updated_at",
+          "currency",
+          "unit",
+          "unit_label"
+        ],
+        "properties": {
+          "updated_at": {
+            "type": "string",
+            "format": "date",
+            "description": "Dataset last-verified date"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD"
+            ]
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "per_1M_tokens"
+            ]
+          },
+          "unit_label": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of items in data"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Model": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "vendor",
+          "vendor_name",
+          "currency",
+          "unit",
+          "pricing",
+          "pricing_status",
+          "has_off_peak",
+          "off_peak_pricing",
+          "peak_note",
+          "context_length",
+          "context_length_label",
+          "source_url",
+          "extra_sources",
+          "last_updated",
+          "notes",
+          "unverified_fields",
+          "links"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Model id as used in the vendor API; also the file name of /models/{model_id}.json"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name"
+          },
+          "vendor": {
+            "type": "string",
+            "description": "Vendor slug",
+            "enum": [
+              "deepseek",
+              "openai",
+              "anthropic",
+              "zhipu",
+              "moonshot",
+              "qwen",
+              "google"
+            ]
+          },
+          "vendor_name": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD"
+            ]
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "per_1M_tokens"
+            ]
+          },
+          "pricing": {
+            "type": "object",
+            "description": "Standard price (peak price when off-peak pricing exists)",
+            "required": [
+              "input",
+              "output",
+              "cached_input",
+              "cache_write"
+            ],
+            "properties": {
+              "input": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+              },
+              "output": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+              },
+              "cached_input": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "description": "Cache hit / cache read price"
+              },
+              "cache_write": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "description": "Cache write (creation) price"
+              }
+            }
+          },
+          "pricing_status": {
+            "type": "object",
+            "required": [
+              "input",
+              "output",
+              "cached_input",
+              "cache_write"
+            ],
+            "properties": {
+              "input": {
+                "type": "string",
+                "enum": [
+                  "verified",
+                  "unverified",
+                  "not_listed"
+                ],
+                "description": "verified = from official page; unverified = 待核实 (could not be verified); not_listed = official page has no such item (未列出)"
+              },
+              "output": {
+                "type": "string",
+                "enum": [
+                  "verified",
+                  "unverified",
+                  "not_listed"
+                ],
+                "description": "verified = from official page; unverified = 待核实 (could not be verified); not_listed = official page has no such item (未列出)"
+              },
+              "cached_input": {
+                "type": "string",
+                "enum": [
+                  "verified",
+                  "unverified",
+                  "not_listed"
+                ],
+                "description": "verified = from official page; unverified = 待核实 (could not be verified); not_listed = official page has no such item (未列出)"
+              },
+              "cache_write": {
+                "type": "string",
+                "enum": [
+                  "verified",
+                  "unverified",
+                  "not_listed"
+                ],
+                "description": "verified = from official page; unverified = 待核实 (could not be verified); not_listed = official page has no such item (未列出)"
+              }
+            }
+          },
+          "has_off_peak": {
+            "type": "boolean"
+          },
+          "off_peak_pricing": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Off-peak (闲时) price, null if none",
+            "properties": {
+              "input": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+              },
+              "output": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+              },
+              "cached_input": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+              }
+            }
+          },
+          "peak_note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Peak / off-peak schedule or time-limited price note"
+          },
+          "context_length": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Context window in tokens"
+          },
+          "context_length_label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Official pricing page"
+          },
+          "extra_sources": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "last_updated": {
+            "type": "string",
+            "format": "date"
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unverified_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              },
+              "vendor": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Vendor": {
+        "type": "object",
+        "required": [
+          "slug",
+          "name",
+          "model_count",
+          "model_ids",
+          "source_urls",
+          "links"
+        ],
+        "properties": {
+          "slug": {
+            "type": "string",
+            "enum": [
+              "deepseek",
+              "openai",
+              "anthropic",
+              "zhipu",
+              "moonshot",
+              "qwen",
+              "google"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "model_count": {
+            "type": "integer"
+          },
+          "model_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ModelList": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Model"
+            }
+          }
+        }
+      },
+      "ModelItem": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Model"
+          }
+        }
+      },
+      "VendorList": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Vendor"
+            }
+          }
+        }
+      },
+      "VendorModels": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data",
+          "vendor"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Model"
+            }
+          },
+          "vendor": {
+            "$ref": "#/components/schemas/Vendor"
+          }
+        }
+      }
+    }
+  }
+}

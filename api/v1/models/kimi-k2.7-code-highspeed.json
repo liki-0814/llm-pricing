@@ -1,0 +1,43 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens"
+  },
+  "data": {
+    "id": "kimi-k2.7-code-highspeed",
+    "name": "Kimi K2.7 Code Highspeed",
+    "vendor": "moonshot",
+    "vendor_name": "Moonshot Kimi",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 1.9,
+      "output": 8.0,
+      "cached_input": 0.38,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    },
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 262144,
+    "context_length_label": "262,144 tokens",
+    "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+    "extra_sources": [],
+    "last_updated": "2026-10-10",
+    "notes": "高速版；官方页未列缓存写入价。",
+    "unverified_fields": [],
+    "links": {
+      "self": "models/kimi-k2.7-code-highspeed.json",
+      "vendor": "vendors/moonshot.json"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens"
+  },
+  "data": {
+    "id": "claude-opus-4.6",
+    "name": "Claude Opus 4.6",
+    "vendor": "anthropic",
+    "vendor_name": "Anthropic",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 5,
+      "output": 25,
+      "cached_input": 0.5,
+      "cache_write": 6.25
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    },
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1000000,
+    "context_length_label": "1M",
+    "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "extra_sources": [],
+    "last_updated": "2026-10-10",
+    "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。",
+    "unverified_fields": [],
+    "links": {
+      "self": "models/claude-opus-4.6.json",
+      "vendor": "vendors/anthropic.json"
+    }
+  }
+}

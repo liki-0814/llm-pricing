@@ -1,0 +1,46 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens"
+  },
+  "data": {
+    "id": "qwen3.8-2.4t-a95b",
+    "name": "Qwen3.8-2.4T-A95B",
+    "vendor": "qwen",
+    "vendor_name": "阿里云 Qwen",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 2,
+      "output": 6,
+      "cached_input": 0.25,
+      "cache_write": 2.5
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    },
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1000000,
+    "context_length_label": "≤1M 输入（计费档位上限）",
+    "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+    "extra_sources": [
+      "https://www.alibabacloud.com/help/en/model-studio/context-cache",
+      "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
+    ],
+    "last_updated": "2026-10-10",
+    "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input (Cache Hit) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
+    "unverified_fields": [],
+    "links": {
+      "self": "models/qwen3.8-2.4t-a95b.json",
+      "vendor": "vendors/qwen.json"
+    }
+  }
+}

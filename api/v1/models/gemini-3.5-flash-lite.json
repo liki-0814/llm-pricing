@@ -1,0 +1,45 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens"
+  },
+  "data": {
+    "id": "gemini-3.5-flash-lite",
+    "name": "Gemini 3.5 Flash-Lite",
+    "vendor": "google",
+    "vendor_name": "Google Gemini",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 0.3,
+      "output": 2.5,
+      "cached_input": 0.03,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    },
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1048576,
+    "context_length_label": "1M",
+    "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+    "extra_sources": [
+      "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
+    ],
+    "last_updated": "2026-10-10",
+    "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
+    "unverified_fields": [],
+    "links": {
+      "self": "models/gemini-3.5-flash-lite.json",
+      "vendor": "vendors/google.json"
+    }
+  }
+}

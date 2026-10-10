@@ -1,0 +1,47 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens"
+  },
+  "data": {
+    "id": "qwen3.8-omni-flash",
+    "name": "Qwen3.8-Omni-Flash",
+    "vendor": "qwen",
+    "vendor_name": "阿里云 Qwen",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 0.15,
+      "output": 0.47,
+      "cached_input": 0.016,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "unverified"
+    },
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1000000,
+    "context_length_label": "≤1M 输入（计费档位上限）",
+    "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+    "extra_sources": [
+      "https://www.alibabacloud.com/help/en/model-studio/context-cache"
+    ],
+    "last_updated": "2026-10-10",
+    "notes": "阿里云百炼国际站（新加坡）美元价；多模态模型，表中为文本价，音频等其他模态价格见官方页。 缓存命中价 $0.016 来自官方价格页；缓存写入价官方未列且该模型不在显式缓存支持列表，保持待核实。 2026-10-10 复核：官方 Context Cache 文档仅说明该模型隐式缓存命中按固定单价，显式缓存支持列表（Singapore）不含 qwen3.8-omni-flash，官方模型页未列缓存创建价，cache_write 仍待核实。",
+    "unverified_fields": [
+      "cache_write"
+    ],
+    "links": {
+      "self": "models/qwen3.8-omni-flash.json",
+      "vendor": "vendors/qwen.json"
+    }
+  }
+}

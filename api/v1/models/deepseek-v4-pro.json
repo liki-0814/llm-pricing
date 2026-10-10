@@ -1,0 +1,47 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens"
+  },
+  "data": {
+    "id": "deepseek-v4-pro",
+    "name": "DeepSeek-V4-Pro-0813",
+    "vendor": "deepseek",
+    "vendor_name": "DeepSeek",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 1.32,
+      "output": 3.96,
+      "cached_input": 0.044,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    },
+    "has_off_peak": true,
+    "off_peak_pricing": {
+      "input": 0.66,
+      "output": 1.98,
+      "cached_input": 0.022
+    },
+    "peak_note": "高峰时段同上；闲时价为高峰价的一半。",
+    "context_length": 1000000,
+    "context_length_label": "1M",
+    "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
+    "extra_sources": [],
+    "last_updated": "2026-10-10",
+    "notes": "表中价格为高峰价。最大输出 384K；不支持视觉。官方页未列缓存写入价。",
+    "unverified_fields": [],
+    "links": {
+      "self": "models/deepseek-v4-pro.json",
+      "vendor": "vendors/deepseek.json"
+    }
+  }
+}

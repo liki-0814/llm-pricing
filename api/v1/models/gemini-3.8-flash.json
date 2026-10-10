@@ -1,0 +1,45 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens"
+  },
+  "data": {
+    "id": "gemini-3.8-flash",
+    "name": "Gemini 3.8 Flash",
+    "vendor": "google",
+    "vendor_name": "Google Gemini",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 0.75,
+      "output": 3.75,
+      "cached_input": 0.075,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    },
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": "官方为 2026-12-31 前的限时价；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
+    "context_length": 1048576,
+    "context_length_label": "1M",
+    "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+    "extra_sources": [
+      "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+    ],
+    "last_updated": "2026-10-10",
+    "notes": "Standard 付费档。缓存存储费 $0.50/百万 token/小时（2027 起 $1.00）。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。 注意：该价格仅到 2026-12-31；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
+    "unverified_fields": [],
+    "links": {
+      "self": "models/gemini-3.8-flash.json",
+      "vendor": "vendors/google.json"
+    }
+  }
+}

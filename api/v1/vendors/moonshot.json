@@ -1,0 +1,130 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "count": 3
+  },
+  "vendor": {
+    "slug": "moonshot",
+    "name": "Moonshot Kimi",
+    "model_count": 3,
+    "model_ids": [
+      "kimi-k3",
+      "kimi-k2.7-code",
+      "kimi-k2.7-code-highspeed"
+    ],
+    "source_urls": [
+      "https://platform.kimi.ai/docs/pricing/chat"
+    ],
+    "links": {
+      "self": "vendors/moonshot.json"
+    }
+  },
+  "data": [
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 3.0,
+        "output": 15.0,
+        "cached_input": 0.3,
+        "cache_write": 3.0
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1,048,576 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "缓存写入按 TTL 计价：5 分钟 $3.00，1 小时 $6.00（表中为 5 分钟）。缓存命中自动续期、无额外写入费。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/kimi-k3.json",
+        "vendor": "vendors/moonshot.json"
+      }
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.95,
+        "output": 4.0,
+        "cached_input": 0.19,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 262144,
+      "context_length_label": "262,144 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "官方页未列缓存写入价。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/kimi-k2.7-code.json",
+        "vendor": "vendors/moonshot.json"
+      }
+    },
+    {
+      "id": "kimi-k2.7-code-highspeed",
+      "name": "Kimi K2.7 Code Highspeed",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 1.9,
+        "output": 8.0,
+        "cached_input": 0.38,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 262144,
+      "context_length_label": "262,144 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [],
+      "last_updated": "2026-10-10",
+      "notes": "高速版；官方页未列缓存写入价。",
+      "unverified_fields": [],
+      "links": {
+        "self": "models/kimi-k2.7-code-highspeed.json",
+        "vendor": "vendors/moonshot.json"
+      }
+    }
+  ]
+}

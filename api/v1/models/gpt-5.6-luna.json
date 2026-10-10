@@ -1,0 +1,45 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-10",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens"
+  },
+  "data": {
+    "id": "gpt-5.6-luna",
+    "name": "GPT-5.6 Luna",
+    "vendor": "openai",
+    "vendor_name": "OpenAI",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 0.2,
+      "output": 1.2,
+      "cached_input": 0.02,
+      "cache_write": 0.25
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    },
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1050000,
+    "context_length_label": "1.05M",
+    "source_url": "https://developers.openai.com/api/docs/pricing",
+    "extra_sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+    ],
+    "last_updated": "2026-10-10",
+    "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.4、缓存读取 $0.04、缓存写入 $0.5、输出 $1.8。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+    "unverified_fields": [],
+    "links": {
+      "self": "models/gpt-5.6-luna.json",
+      "vendor": "vendors/openai.json"
+    }
+  }
+}
