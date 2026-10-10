@@ -77,16 +77,10 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
+        "max_output_tokens": 128000,
         "status": "verified",
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
         ]
@@ -134,65 +128,6 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-02-16",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [
         {
           "kind": "promotion",
@@ -205,11 +140,7 @@
           "note": "GPT-5.6 Sol 促销价（输入 $4 / 输出 $20，较此前降 20% / 33%）官方称“至少持续到 2026-11-21”；到期后价格官方未公布（待核实）。"
         }
       ],
-      "snapshot": null,
-      "aliases": [],
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/gpt-5.6-sol.json",
         "vendor": "vendors/openai.json"
@@ -264,16 +195,10 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
+        "max_output_tokens": 128000,
         "status": "verified",
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
         ]
@@ -321,71 +246,8 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-02-16",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [],
-      "snapshot": null,
-      "aliases": [],
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/gpt-5.6-terra.json",
         "vendor": "vendors/openai.json"
@@ -440,16 +302,10 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
+        "max_output_tokens": 128000,
         "status": "verified",
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
         ]
@@ -497,71 +353,8 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-02-16",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [],
-      "snapshot": null,
-      "aliases": [],
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/gpt-5.6-luna.json",
         "vendor": "vendors/openai.json"
@@ -615,16 +408,10 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
+        "max_output_tokens": 128000,
         "status": "verified",
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-astra"
         ]
@@ -677,71 +464,8 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-astra"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-astra"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-04-30",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [],
-      "snapshot": null,
-      "aliases": [],
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/gpt-6-astra.json",
         "vendor": "vendors/openai.json"
@@ -796,16 +520,10 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
+        "max_output_tokens": 128000,
         "status": "verified",
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-sol"
         ]
@@ -853,71 +571,8 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-sol"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-sol"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-04-20",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [],
-      "snapshot": null,
-      "aliases": [],
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/gpt-6-sol.json",
         "vendor": "vendors/openai.json"
@@ -972,16 +627,10 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
+        "max_output_tokens": 128000,
         "status": "verified",
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-luna"
         ]
@@ -1029,71 +678,8 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-luna"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-luna"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-05-18",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [],
-      "snapshot": null,
-      "aliases": [],
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/gpt-6-luna.json",
         "vendor": "vendors/openai.json"
@@ -1147,16 +733,10 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
+        "max_output_tokens": 128000,
         "status": "verified",
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
         ]
@@ -1209,77 +789,8 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": [
-          "audio",
-          "video"
-        ],
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": [
-          "fine_tuning",
-          "predicted_outputs"
-        ],
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-04-30",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": "支持美国/欧盟数据驻留（含 Fast 与 Ultrafast）。"
-      },
       "price_schedule": [],
-      "snapshot": null,
-      "aliases": [],
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/gpt-6.1-sol.json",
         "vendor": "vendors/openai.json"

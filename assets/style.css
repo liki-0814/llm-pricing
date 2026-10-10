@@ -271,14 +271,13 @@ details.note p{margin:6px 0 0;line-height:1.6;white-space:normal}
   #priceTable tbody tr:hover td:first-child{box-shadow:none}
   #priceTable td{display:block;border:0;padding:8px 14px}
   #priceTable td::before{content:attr(data-label);display:block;font-size:11.5px;color:var(--muted);margin-bottom:1px}
-  #priceTable td.c-vendor,#priceTable td.c-model,#priceTable td.c-peak,#priceTable td.c-src,#priceTable td.c-re{grid-column:1/-1}
+  #priceTable td.c-model,#priceTable td.c-peak,#priceTable td.c-re{grid-column:1/-1}
   .re details.note{max-width:none}
   #priceTable td.c-vendor{padding-top:14px;padding-bottom:0}
   #priceTable td.c-vendor::before,#priceTable td.c-model::before{display:none}
-  #priceTable td.c-model{padding-top:6px;padding-bottom:6px}
+  #priceTable td.c-model{padding-top:14px;padding-bottom:6px}
   #priceTable td.c-model .model-name{font-size:16px}
   #priceTable td.num{text-align:left}
-  #priceTable td.c-ctx{grid-column:1/-1}
   #priceTable td.c-peak.empty-peak{display:none}
   #priceTable td.c-peak{background:var(--surface-2);border-top:1px solid var(--line-2)}
   #priceTable td.c-src{border-top:1px solid var(--line-2);padding-bottom:12px}
@@ -359,9 +358,8 @@ table.mini .price{font-size:13px}
 @media (min-width:761px){
   td.c-lim{width:1%;white-space:nowrap}
 }
-@media (max-width:1499px) and (min-width:761px){ #priceTable{min-width:1640px} }
+@media (max-width:1499px) and (min-width:761px){ #priceTable{min-width:1380px} }
 @media (max-width:760px){
-  #priceTable td.c-lim{grid-column:1/-1}
   #priceTable tbody tr.has-detail{border-bottom-left-radius:0;border-bottom-right-radius:0;margin-bottom:0;border-bottom:0}
   #priceTable tbody tr.detail-row{display:block;margin-top:0;border-top:0;border-top-left-radius:0;border-top-right-radius:0;background:var(--surface-2)}
   #priceTable tbody tr.detail-row::before{display:none}
@@ -370,5 +368,10 @@ table.mini .price{font-size:13px}
   .detail{width:auto;position:static;grid-template-columns:minmax(0,1fr);box-shadow:none;border-top:1px solid var(--line-2)}
   .dblock.wide{grid-column:auto}
   .lim{flex-direction:row;flex-wrap:wrap;gap:4px 14px}
-  .detail-btn{margin-top:0;margin-left:auto}
+  .detail-btn{margin-top:0}
 }
+
+/* merged vendor/model cell */
+.c-model .badge{margin-bottom:5px}
+.model-act{margin-top:4px}
+td.c-lim,td.c-ctx{white-space:nowrap}

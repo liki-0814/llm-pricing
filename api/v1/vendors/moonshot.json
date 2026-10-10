@@ -71,16 +71,10 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 1048576,
         "context_length": 1048576,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": 131072,
-        "status": "partial",
-        "note": "官方 K3 文档：max_completion_tokens 默认 131072，最大可设 1048576（等于上下文窗口；输入+输出总和不得超过窗口）；最大输入 token 数官方未单独列出（待核实）。",
+        "max_output_tokens": 1048576,
+        "status": "verified",
+        "note": "官方 K3 文档：max_completion_tokens 默认 131072，最大可设 1048576（等于上下文窗口；输入+输出总和不得超过窗口）。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
           "https://platform.kimi.ai/docs/api/chat",
@@ -97,62 +91,8 @@
         "storage_per_1M_tokens_hour": null,
         "note": "Kimi API 自动缓存重复前缀；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h；命中自动续期、无额外写入费。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_always_on",
-          "vision_input",
-          "video_input",
-          "structured_output_json_schema",
-          "tool_calls",
-          "context_caching",
-          "web_search_builtin"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "官方 K3 文档：思考恒开；视觉输入不支持公开图片 URL（需 base64 或 ms://file-id）；json_schema strict 结构化输出。非穷举。",
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/pricing/chat"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": "旗舰模型：累计充值（最低 $1）后解锁。"
-      },
       "price_schedule": [],
-      "snapshot": null,
-      "aliases": [],
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/kimi-k3.json",
         "vendor": "vendors/moonshot.json"
@@ -198,19 +138,14 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": null,
         "context_length": 262144,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": 32768,
-        "status": "partial",
-        "note": "官方：上下文窗口 262,144 tokens；max_tokens 默认 32768（32k）；最大输出上限与最大输入 token 数官方未给出（待核实）。",
+        "max_output_tokens": 262144,
+        "status": "verified",
+        "note": "官方：上下文窗口 262,144 tokens（256K）；官方故障排查 FAQ：kimi-k2.7-code 最大输出长度为 256*1024 − prompt_tokens，即以 262,144 计（与输入共享窗口）；max_tokens 默认 32768（32k）。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
-          "https://platform.kimi.ai/docs/pricing/chat"
+          "https://platform.kimi.ai/docs/pricing/chat",
+          "https://platform.kimi.ai/docs/guide/troubleshooting"
         ]
       },
       "pricing_tiers": [],
@@ -229,63 +164,8 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存命中价即 pricing.cached_input；官方页未列缓存写入价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_always_on",
-          "vision_input",
-          "video_input",
-          "tool_calls",
-          "context_caching"
-        ],
-        "unsupported": [
-          "non_thinking_mode"
-        ],
-        "tools": null,
-        "status": "partial",
-        "note": "官方：K2.7 Code 不支持非思考模式；temperature/top_p/n 等参数固定。非穷举。",
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/pricing/chat"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [],
-      "snapshot": null,
-      "aliases": [],
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "limits.max_output_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/kimi-k2.7-code.json",
         "vendor": "vendors/moonshot.json"
@@ -331,19 +211,14 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": null,
         "context_length": 262144,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": 32768,
-        "status": "partial",
-        "note": "官方：上下文窗口 262,144 tokens；max_tokens 默认 32768（32k）；最大输出上限与最大输入 token 数官方未给出（待核实）。",
+        "max_output_tokens": 262144,
+        "status": "verified",
+        "note": "官方：上下文窗口 262,144 tokens（256K）；官方故障排查 FAQ：kimi-k2.7-code 最大输出长度为 256*1024 − prompt_tokens，即以 262,144 计（与输入共享窗口）；max_tokens 默认 32768（32k）。highspeed 为同一模型的高速版（官方快速入门），沿用同一上限。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
-          "https://platform.kimi.ai/docs/pricing/chat"
+          "https://platform.kimi.ai/docs/pricing/chat",
+          "https://platform.kimi.ai/docs/guide/troubleshooting"
         ]
       },
       "pricing_tiers": [],
@@ -356,63 +231,8 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存命中价即 pricing.cached_input；官方页未列缓存写入价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_always_on",
-          "vision_input",
-          "video_input",
-          "tool_calls",
-          "context_caching"
-        ],
-        "unsupported": [
-          "non_thinking_mode"
-        ],
-        "tools": null,
-        "status": "partial",
-        "note": "官方：K2.7 Code 不支持非思考模式；temperature/top_p/n 等参数固定。非穷举。 官方：HighSpeed 输出速度约 180 tokens/s（短上下文最高约 260），资源有限；Batch API 不支持该型号。",
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/pricing/chat"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [],
-      "snapshot": null,
-      "aliases": [],
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "limits.max_output_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/kimi-k2.7-code-highspeed.json",
         "vendor": "vendors/moonshot.json"
@@ -465,16 +285,10 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": null,
         "context_length": 1048576,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
+        "max_output_tokens": null,
         "status": "partial",
-        "note": "Kimi Code 官方模型配置页：kimi-for-coding（K2.8 Preview）上下文窗口 1048576；最大输入/输出官方未列出（待核实）。",
+        "note": "Kimi Code 官方模型配置页：kimi-for-coding（K2.8 Preview）上下文窗口 1048576；最大输出官方未列出（待核实）。",
         "sources": [
           "https://www.kimi.com/code/docs/en/kimi-code/models"
         ]
@@ -489,53 +303,9 @@
         "storage_per_1M_tokens_hour": null,
         "note": null
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://www.kimi.com/code/docs/en/kimi-code/models"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_effort_low_high_max"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "官方：reasoning_effort low/high/max（默认 max）。能力列表非穷举。",
-        "sources": [
-          "https://www.kimi.com/code/docs/en/kimi-code/models"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "subscription_only",
-        "note": "仅 Kimi Code 订阅 API（Plus 及以上等），按会员订阅计费；开放平台按量付费无此模型，价格暂按 K2.7 Code（用户确认）。"
-      },
       "price_schedule": [],
-      "snapshot": null,
-      "aliases": [],
       "unverified_fields": [
-        "limits.max_input_tokens",
-        "limits.max_output_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
+        "limits.max_output_tokens"
       ],
       "links": {
         "self": "models/kimi-for-coding.json",

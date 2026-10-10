@@ -120,32 +120,20 @@
 <tr><td>reasoning_effort.note</td><td>string | null</td><td>参数名（如 <code>reasoning.effort</code> / <code>output_config.effort</code> / <code>thinking_level</code>）、档位映射与限制说明</td></tr>
 <tr><td>reasoning_effort.sources</td><td>string[]</td><td>所依据的官方文档 URL</td></tr>
 <tr><td>limits.context_length</td><td>integer | null</td><td>上下文窗口（token），与顶层 <code>context_length</code> 一致</td></tr>
-<tr><td>limits.max_input_tokens</td><td>integer | null</td><td>最大输入 token；<code>null</code> = 官方未给出 / 待核实</td></tr>
-<tr><td>limits.max_output_tokens</td><td>integer | null</td><td>最大输出 token（含思维链时以官方口径为准，见 <code>limits.note</code>）；<code>null</code> = 待核实</td></tr>
-<tr><td>limits.max_input_tokens_thinking / max_output_tokens_thinking</td><td>integer | null</td><td>思考模式下的最大输入 / 输出（如 Qwen）；无区分则 null</td></tr>
-<tr><td>limits.max_reasoning_tokens</td><td>integer | null</td><td>最大思维链长度（如 Qwen 262144）</td></tr>
-<tr><td>limits.max_output_tokens_batch_beta / default_output_tokens</td><td>integer | null</td><td>Batch beta 最大输出（如 Claude）/ 默认输出上限，官方列出才有值</td></tr>
-<tr><td>limits.status</td><td>enum</td><td><code>verified</code> 三项均已核实 · <code>partial</code> 部分核实 · <code>unverified</code> 全部待核实</td></tr>
+<tr><td>limits.max_output_tokens</td><td>integer | null</td><td>最大输出 token（以官方口径为准，见 <code>limits.note</code>）；<code>null</code> = 待核实</td></tr>
+<tr><td>limits.status</td><td>enum</td><td><code>verified</code> 上下文与最大输出均已核实 · <code>partial</code> 其一已核实 · <code>unverified</code> 均待核实</td></tr>
 <tr><td>limits.note / limits.sources</td><td>string | null / string[]</td><td>口径说明与官方来源 URL</td></tr>
 <tr><td>pricing_tiers[]</td><td>array</td><td>长上下文 / 分档价，空数组 = 无分档或官方未列出。元素：<code>condition</code>（如 <code>input_tokens&gt;272000</code>）、<code>input_tokens_gt</code>、<code>input_tokens_lte</code>、<code>input</code>、<code>output</code>、<code>cached_input</code>、<code>cache_write</code>、<code>cache_pricing</code>（Qwen 档内三档缓存价）、<code>note</code>；价格单位同 <code>pricing</code>，整请求按所在档单价计费以 <code>note</code> 为准</td></tr>
 <tr><td>service_tiers[]</td><td>array</td><td>服务档倍率 <code>{name, multiplier, note}</code>：<code>name</code> ∈ batch / flex / fast / priority / ultrafast / data_residency 等；<code>multiplier</code> 为相对标准价的倍数（0.5 = 五折，1.1 = 加收 10%）；官方未列出则为空数组</td></tr>
 <tr><td>cache_pricing.implicit_read / explicit_read / explicit_write</td><td>number | null</td><td>缓存细分价（主要用于 Qwen）：隐式命中 / 显式命中 / 显式创建。<code>pricing.cached_input</code> 与 <code>pricing.cache_write</code> 含义不变：<code>cached_input</code> 等于 implicit_read 或 explicit_read 之一（见 <code>cache_pricing.note</code> 的逐模型说明），<code>cache_write</code> = explicit_write</td></tr>
 <tr><td>cache_pricing.explicit_write_1h / storage_per_1M_tokens_hour</td><td>number | null</td><td>1 小时 TTL 缓存写入价（如 Claude）/ 缓存存储费（每百万 token·小时，如 Gemini），官方列出才有值</td></tr>
-<tr><td>modalities.input / output</td><td>string[] | null</td><td>输入 / 输出模态：<code>text</code> <code>image</code> <code>audio</code> <code>video</code> <code>pdf</code> 等；<code>null</code> = 待核实</td></tr>
-<tr><td>modalities.unsupported / sources</td><td>string[] | null / string[]</td><td>官方明确不支持的模态；来源 URL</td></tr>
-<tr><td>features.supported / unsupported / tools</td><td>string[] | null</td><td>官方模型页列出的支持 / 不支持功能（function_calling、structured_outputs、web_search、prompt_caching 等）与内置工具</td></tr>
-<tr><td>features.status / note / sources</td><td>enum / string | null / string[]</td><td><code>verified</code> · <code>partial</code> · <code>unverified</code>；说明与来源</td></tr>
-<tr><td>knowledge_cutoff.date / training_data_date / note</td><td>string | null</td><td>知识截止日期（官方口径，YYYY-MM 或 YYYY-MM-DD）；整个对象为 <code>null</code> 表示官方未给出（待核实）</td></tr>
-<tr><td>thinking_budget.supported / min / max / default</td><td>boolean / integer | null</td><td>思考预算 token 范围（如 Claude <code>budget_tokens</code>、Gemini <code>thinkingBudget</code>、Qwen <code>thinking_budget</code>）；<code>note</code> 说明与 reasoning_effort 的互斥关系，<code>sources</code> 为来源</td></tr>
-<tr><td>availability.status / note</td><td>enum / string | null</td><td><code>general</code> 正式可用 · <code>limited</code> 限量 / 受限 · <code>subscription_only</code> 仅订阅可用；非 general 时 <code>note</code> 必填</td></tr>
 <tr><td>price_schedule[]</td><td>array</td><td>已公布的价格变更 <code>{kind, effective_from, effective_until, input, output, cached_input, cache_write, note}</code>，<code>kind</code> ∈ promotion / scheduled_increase / scheduled_decrease，空数组 = 无</td></tr>
-<tr><td>snapshot / aliases</td><td>string | null / string[]</td><td>当前指向的快照 ID（如 <code>qwen3.7-flash-2026-07-15</code>）与别名 ID</td></tr>
 <tr><td>unverified_fields</td><td>string[]</td><td>待核实字段列表</td></tr>
 <tr><td>links.self / links.vendor</td><td>string</td><td>相对于 <code>api/v1/</code> 的文件路径</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="callout">稳定性约定：<code>v1</code> 内只会新增字段，不会删除或改名已有字段；价格为 <code>null</code> 时请看 <code>pricing_status</code> 区分“待核实”与“官方未列出”；<code>reasoning_effort</code>、<code>limits</code>、<code>modalities</code>、<code>knowledge_cutoff</code> 等字段中的 <code>null</code> 一律表示待核实 / 官方未说明，不做推测；<code>pricing_tiers</code>、<code>service_tiers</code>、<code>price_schedule</code> 为空数组表示无或官方未列出。网站上展示的每一项数据（含“详情”展开行）均可在对应模型 JSON 中查询。</div>
+        <div class="callout">稳定性约定：<code>v1</code> 已于 2026-10-11 精简：移除 <code>max_input_tokens</code>、思考模式最大输入/输出等子上限、<code>modalities</code>、<code>features</code>、<code>knowledge_cutoff</code>、<code>thinking_budget</code>、<code>availability</code>、<code>snapshot</code>、<code>aliases</code>；之后 <code>v1</code> 内只会新增字段，不会删除或改名已有字段；价格为 <code>null</code> 时请看 <code>pricing_status</code> 区分“待核实”与“官方未列出”；<code>reasoning_effort</code>、<code>limits</code> 等字段中的 <code>null</code> 一律表示待核实 / 官方未说明，不做推测；<code>pricing_tiers</code>、<code>service_tiers</code>、<code>price_schedule</code> 为空数组表示无或官方未列出。网站上展示的每一项数据（含“详情”展开行）均可在对应模型 JSON 中查询。</div>
       </section>
 
       <section id="examples">

@@ -35,7 +35,7 @@
       "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
     ],
     "last_updated": "2026-10-11",
-    "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
+    "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。价格已对照官方定价页复核无变化。",
     "reasoning_effort": {
       "supported": true,
       "levels": [
@@ -52,16 +52,10 @@
       ]
     },
     "limits": {
-      "max_input_tokens": 1048576,
-      "max_output_tokens": 65536,
       "context_length": 1048576,
-      "max_input_tokens_thinking": null,
-      "max_output_tokens_thinking": null,
-      "max_reasoning_tokens": null,
-      "max_output_tokens_batch_beta": null,
-      "default_output_tokens": null,
+      "max_output_tokens": 65536,
       "status": "verified",
-      "note": "官方 Gemini 模型页：Input token limit 1,048,576 / Output token limit 65,536。",
+      "note": "官方 Gemini 模型页：上下文窗口按 Input token limit 1,048,576 记录；Output token limit 65,536。",
       "sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
       ]
@@ -111,66 +105,8 @@
       "storage_per_1M_tokens_hour": 4.5,
       "note": "缓存命中价即 pricing.cached_input（>200K 提示 $0.40，见 pricing_tiers）；官方另收缓存存储费 $4.50 / 百万 token / 小时。"
     },
-    "modalities": {
-      "input": [
-        "text",
-        "image",
-        "video",
-        "audio",
-        "pdf"
-      ],
-      "output": [
-        "text"
-      ],
-      "unsupported": null,
-      "sources": [
-        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
-      ]
-    },
-    "features": {
-      "supported": [
-        "caching",
-        "code_execution",
-        "file_search_ai_studio_only",
-        "function_calling",
-        "grounding_google_maps",
-        "search_grounding",
-        "structured_outputs",
-        "thinking",
-        "url_context"
-      ],
-      "unsupported": [
-        "audio_generation",
-        "image_generation",
-        "live_api"
-      ],
-      "tools": null,
-      "status": "verified",
-      "note": "来自 Gemini 模型页 Capabilities 表；computer_use 为 Preview，file_search 在 3.1 Pro Preview 仅 AI Studio。",
-      "sources": [
-        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
-      ]
-    },
-    "knowledge_cutoff": null,
-    "thinking_budget": {
-      "supported": null,
-      "min": null,
-      "max": null,
-      "default": null,
-      "note": "官方文档未给出 token 思考预算范围（待核实）。",
-      "sources": []
-    },
-    "availability": {
-      "status": "general",
-      "note": null
-    },
     "price_schedule": [],
-    "snapshot": null,
-    "aliases": [],
-    "unverified_fields": [
-      "knowledge_cutoff",
-      "thinking_budget"
-    ],
+    "unverified_fields": [],
     "links": {
       "self": "models/gemini-3.1-pro-preview.json",
       "vendor": "vendors/google.json"

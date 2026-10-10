@@ -36,7 +36,7 @@
       "https://platform.minimax.io/docs/api-reference/text-chat-openai"
     ],
     "last_updated": "2026-10-11",
-    "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方标注“永久 5 折”，划线原价 $0.60 / $2.40 / 缓存读取 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12（折后）。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09）。官方页未列缓存写入价。多模态（文本/图像/视频输入）；最大输出建议 128K、上限 512K。",
+    "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方标注“永久 5 折”，划线原价 $0.60 / $2.40 / 缓存读取 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12（折后）。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09）。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
     "reasoning_effort": {
       "supported": false,
       "levels": null,
@@ -50,16 +50,10 @@
       ]
     },
     "limits": {
-      "max_input_tokens": null,
-      "max_output_tokens": 524288,
       "context_length": 1000000,
-      "max_input_tokens_thinking": null,
-      "max_output_tokens_thinking": null,
-      "max_reasoning_tokens": null,
-      "max_output_tokens_batch_beta": null,
-      "default_output_tokens": null,
-      "status": "partial",
-      "note": "官方：Context Window 1,000,000；max_completion_tokens 推荐 131072（128K）、最大 524288（512K）；最大输入 token 数官方未单独列出（待核实）。",
+      "max_output_tokens": 524288,
+      "status": "verified",
+      "note": "官方：Context Window 1,000,000；max_completion_tokens 推荐 131072（128K）、最大 524288（512K），最大输出按 524288 记录。",
       "sources": [
         "https://platform.minimax.io/docs/guides/text-generation",
         "https://platform.minimax.io/docs/api-reference/text-chat-openai"
@@ -100,55 +94,8 @@
       "storage_per_1M_tokens_hour": null,
       "note": "缓存读取价即 pricing.cached_input；官方页未列缓存写入价（M2.x 系列才列写入价）。"
     },
-    "modalities": {
-      "input": [
-        "text",
-        "image",
-        "video"
-      ],
-      "output": [
-        "text"
-      ],
-      "unsupported": null,
-      "sources": [
-        "https://platform.minimax.io/docs/guides/text-generation"
-      ]
-    },
-    "features": {
-      "supported": [
-        "prompt_caching",
-        "priority_service_tier"
-      ],
-      "unsupported": null,
-      "tools": null,
-      "status": "partial",
-      "note": "官方定价页列出缓存读取价与 Priority 档；其余能力官方 M3 页面未逐项列出（待核实）。",
-      "sources": [
-        "https://platform.minimax.io/docs/guides/pricing-paygo",
-        "https://platform.minimax.io/docs/guides/text-generation"
-      ]
-    },
-    "knowledge_cutoff": null,
-    "thinking_budget": {
-      "supported": null,
-      "min": null,
-      "max": null,
-      "default": null,
-      "note": "官方文档未给出 token 思考预算范围（待核实）。",
-      "sources": []
-    },
-    "availability": {
-      "status": "general",
-      "note": null
-    },
     "price_schedule": [],
-    "snapshot": null,
-    "aliases": [],
-    "unverified_fields": [
-      "limits.max_input_tokens",
-      "knowledge_cutoff",
-      "thinking_budget"
-    ],
+    "unverified_fields": [],
     "links": {
       "self": "models/minimax-m3.json",
       "vendor": "vendors/minimax.json"

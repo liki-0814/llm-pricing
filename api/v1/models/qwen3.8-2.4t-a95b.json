@@ -54,16 +54,10 @@
       ]
     },
     "limits": {
-      "max_input_tokens": 991808,
-      "max_output_tokens": 131072,
       "context_length": 1000000,
-      "max_input_tokens_thinking": 983616,
-      "max_output_tokens_thinking": 131072,
-      "max_reasoning_tokens": 131072,
-      "max_output_tokens_batch_beta": null,
-      "default_output_tokens": null,
+      "max_output_tokens": 131072,
       "status": "verified",
-      "note": "官方 Alibaba Cloud Model Studio 模型页 Context limits：Max Input 991808（思考模式 983616）、Max Output 131072（思考模式同）、Context Window 1000000、Max Chain-of-Thought Length 131072；qwencloud 模型页以 991K / 131K / 983K / 1M 标注。",
+      "note": "官方 Alibaba Cloud Model Studio 模型页：Context Window 1,000,000、Max Output 131,072（qwencloud 模型页标 1M / 131K）。",
       "sources": [
         "https://www.qwencloud.com/models/qwen3.8-2.4t-a95b",
         "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
@@ -79,59 +73,8 @@
       "storage_per_1M_tokens_hour": null,
       "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
     },
-    "modalities": {
-      "input": [
-        "text"
-      ],
-      "output": [
-        "text"
-      ],
-      "unsupported": null,
-      "sources": [
-        "https://www.qwencloud.com/models/qwen3.8-2.4t-a95b",
-        "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
-      ]
-    },
-    "features": {
-      "supported": [
-        "function_calling",
-        "structured_outputs",
-        "web_search",
-        "prefix_completion",
-        "context_cache"
-      ],
-      "unsupported": [
-        "fine_tuning"
-      ],
-      "tools": null,
-      "status": "verified",
-      "note": "来自 Alibaba Cloud Model Studio 模型页 Model capabilities 表（China 区列表；Singapore 区列表含 function calling / structured outputs / web search / prefix completion）；同表还标注 Batch Inference：3.8-max/3.7-max/3.7-plus/3.7-flash/3.8-flash 支持，3.8-27b 与 3.8-2.4t 不支持（国际站 Batch 折扣见 service_tiers）。",
-      "sources": [
-        "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
-      ]
-    },
-    "knowledge_cutoff": null,
-    "thinking_budget": {
-      "supported": true,
-      "min": 1,
-      "max": 131072,
-      "default": 131072,
-      "note": "thinking_budget 限制思维链最大 token 数；官方：默认值为模型最大思维链长度（131072），适用于 Qwen3.8/3.7 系列。百炼控制台调试面板的取值范围为 1~32768（缺省 4000）。reasoning_effort 与 thinking_budget 不可同时设置（见 reasoning_effort.note）。",
-      "sources": [
-        "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
-        "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
-      ]
-    },
-    "availability": {
-      "status": "general",
-      "note": null
-    },
     "price_schedule": [],
-    "snapshot": null,
-    "aliases": [],
-    "unverified_fields": [
-      "knowledge_cutoff"
-    ],
+    "unverified_fields": [],
     "links": {
       "self": "models/qwen3.8-2.4t-a95b.json",
       "vendor": "vendors/qwen.json"

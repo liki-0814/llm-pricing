@@ -53,16 +53,10 @@
       ]
     },
     "limits": {
-      "max_input_tokens": null,
-      "max_output_tokens": 128000,
       "context_length": 1000000,
-      "max_input_tokens_thinking": null,
-      "max_output_tokens_thinking": null,
-      "max_reasoning_tokens": null,
-      "max_output_tokens_batch_beta": null,
-      "default_output_tokens": null,
-      "status": "partial",
-      "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录；最大输入 token 数官方未单独列出（待核实）。",
+      "max_output_tokens": 128000,
+      "status": "verified",
+      "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录。",
       "sources": [
         "https://docs.z.ai/guides/llm/glm-5.3",
         "https://docs.bigmodel.cn/cn/guide/start/model-overview"
@@ -78,55 +72,8 @@
       "storage_per_1M_tokens_hour": 0.0,
       "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
     },
-    "modalities": {
-      "input": [
-        "text"
-      ],
-      "output": [
-        "text"
-      ],
-      "unsupported": null,
-      "sources": [
-        "https://docs.z.ai/guides/llm/glm-5.3"
-      ]
-    },
-    "features": {
-      "supported": [
-        "thinking_mode",
-        "streaming",
-        "function_calling",
-        "context_caching",
-        "structured_output"
-      ],
-      "unsupported": null,
-      "tools": null,
-      "status": "verified",
-      "note": "官方模型页能力列表；glm-5.3 / glm-5.3-flash(x) 思考恒开不可关闭。",
-      "sources": [
-        "https://docs.z.ai/guides/llm/glm-5.3"
-      ]
-    },
-    "knowledge_cutoff": null,
-    "thinking_budget": {
-      "supported": null,
-      "min": null,
-      "max": null,
-      "default": null,
-      "note": "官方文档未给出 token 思考预算范围（待核实）。",
-      "sources": []
-    },
-    "availability": {
-      "status": "general",
-      "note": "GLM Coding Plan 订阅用户另可通过 coding 端点使用；按量 API 价见 pricing。"
-    },
     "price_schedule": [],
-    "snapshot": null,
-    "aliases": [],
-    "unverified_fields": [
-      "limits.max_input_tokens",
-      "knowledge_cutoff",
-      "thinking_budget"
-    ],
+    "unverified_fields": [],
     "links": {
       "self": "models/glm-5.3.json",
       "vendor": "vendors/zhipu.json"

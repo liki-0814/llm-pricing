@@ -37,7 +37,7 @@
     "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
     "extra_sources": [],
     "last_updated": "2026-10-11",
-    "notes": "表中价格为高峰价。最大输出 384K；不支持视觉。官方页未列缓存写入价。",
+    "notes": "表中价格为高峰价。最大输出 384K；不官方页未列缓存写入价。",
     "reasoning_effort": {
       "supported": true,
       "levels": [
@@ -55,16 +55,10 @@
       ]
     },
     "limits": {
-      "max_input_tokens": null,
-      "max_output_tokens": 384000,
       "context_length": 1000000,
-      "max_input_tokens_thinking": null,
-      "max_output_tokens_thinking": null,
-      "max_reasoning_tokens": null,
-      "max_output_tokens_batch_beta": null,
-      "default_output_tokens": null,
-      "status": "partial",
-      "note": "官方页仅给出 “CONTEXT LENGTH 1M / MAX OUTPUT MAXIMUM: 384K”，按 1M=1,000,000、1K=1,000 记录（官方未给精确 token 数）；最大输入 token 数官方未单独列出，待核实。",
+      "max_output_tokens": 384000,
+      "status": "verified",
+      "note": "官方页仅给出 “CONTEXT LENGTH 1M / MAX OUTPUT MAXIMUM: 384K”，按 1M=1,000,000、1K=1,000 记录（官方未给精确 token 数）。",
       "sources": [
         "https://api-docs.deepseek.com/quick_start/pricing"
       ]
@@ -79,59 +73,8 @@
       "storage_per_1M_tokens_hour": null,
       "note": "缓存命中价即 pricing.cached_input（高峰/闲时各有一档，见 off_peak_pricing）；官方页未列缓存写入价。"
     },
-    "modalities": {
-      "input": [
-        "text"
-      ],
-      "output": [
-        "text"
-      ],
-      "unsupported": [
-        "image"
-      ],
-      "sources": [
-        "https://api-docs.deepseek.com/quick_start/pricing"
-      ]
-    },
-    "features": {
-      "supported": [
-        "json_output",
-        "tool_calls",
-        "responses_api",
-        "anthropic_api",
-        "chat_prefix_completion_beta"
-      ],
-      "unsupported": [
-        "vision"
-      ],
-      "tools": null,
-      "status": "verified",
-      "note": "FIM Completion（Beta）仅非思考模式；Chat Prefix Completion 为 Beta。",
-      "sources": [
-        "https://api-docs.deepseek.com/quick_start/pricing"
-      ]
-    },
-    "knowledge_cutoff": null,
-    "thinking_budget": {
-      "supported": null,
-      "min": null,
-      "max": null,
-      "default": null,
-      "note": "官方文档未给出 token 思考预算范围（待核实）。",
-      "sources": []
-    },
-    "availability": {
-      "status": "general",
-      "note": null
-    },
     "price_schedule": [],
-    "snapshot": "DeepSeek-V4-Pro-0813",
-    "aliases": [],
-    "unverified_fields": [
-      "limits.max_input_tokens",
-      "knowledge_cutoff",
-      "thinking_budget"
-    ],
+    "unverified_fields": [],
     "links": {
       "self": "models/deepseek-v4-pro.json",
       "vendor": "vendors/deepseek.json"

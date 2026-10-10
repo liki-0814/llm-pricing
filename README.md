@@ -8,6 +8,7 @@
 - 筛选/搜索/排序状态同步到 URL，可直接分享（如 `?vendor=anthropic&sort=-output`）
 - 手机端为卡片布局，提供“排序方式”下拉框
 - “待核实”（未能从官方核实）与“未列出”（官方页没有该项）区分显示
+- 表格列：厂商/模型、输入、输出、缓存输入、缓存写入、高峰/闲时、最大上下文、最大输出、推理强度；“详情”展开分档价、服务档倍率、缓存细分与来源
 - 公开查询接口：静态 JSON（`api/v1/`），文档见 `api.html`
 
 所有价格统一为 **美元（USD）/ 每 100 万 token**。
@@ -49,7 +50,7 @@ GitHub Pages 无法运行服务端，所以接口是预生成的静态文件，�
 | `api/v1/vendors/<vendor>.json` | 单个厂商及其模型；vendor 为 `deepseek` `openai` `anthropic` `zhipu` `moonshot` `qwen` `google` `minimax` |
 | `api/v1/openapi.json` | OpenAPI 3.1 描述 |
 
-每个模型的字段固定：`id`、`name`、`vendor`、`vendor_name`、`currency`、`unit`、`pricing{input, output, cached_input, cache_write}`、`pricing_status{…: verified | unverified | not_listed}`、`has_off_peak`、`off_peak_pricing{input, output, cached_input} | null`、`peak_note`、`context_length`（token 数）、`context_length_label`、`source_url`、`extra_sources`、`last_updated`、`notes`、`reasoning_effort{supported, levels, default, can_disable, status, note, sources}`、`limits{context_length, max_input_tokens, max_output_tokens, max_*_thinking, max_reasoning_tokens, …, status, note, sources}`、`pricing_tiers[{condition, input_tokens_gt, input_tokens_lte, input, output, cached_input, cache_write, cache_pricing, note}]`、`service_tiers[{name, multiplier, note}]`（batch / flex / fast / priority / ultrafast / data_residency）、`cache_pricing{implicit_read, explicit_read, explicit_write, explicit_write_1h, storage_per_1M_tokens_hour, note}`、`modalities{input, output, unsupported, sources}`、`features{supported, unsupported, tools, status, note, sources}`、`knowledge_cutoff`、`thinking_budget{supported, min, max, default, note, sources}`、`availability{status, note}`、`price_schedule[]`、`snapshot`、`aliases`、`unverified_fields`、`links`。其中 `limits` 等字段的 `null` 表示官方未给出（待核实），从不推测；`pricing.cached_input` / `pricing.cache_write` 含义不变，Qwen 的隐式 / 显式缓存细分见 `cache_pricing`。网页“详情”展开行展示的全部内容都可在 API 中查询。`reasoning_effort` 为各厂商官方文档中的推理强度 / 思考档位（如 OpenAI `reasoning.effort`、Claude `output_config.effort`、Gemini `thinking_level`、Kimi/GLM/DeepSeek `reasoning_effort`、Qwen `reasoning_effort` / `enable_thinking`），其中 `null` 表示待核实，不做推测。价格为 `null` 时用 `pricing_status` 区分“待核实”和“官方未列出”。
+每个模型的字段固定：`id`、`name`、`vendor`、`vendor_name`、`currency`、`unit`、`pricing{input, output, cached_input, cache_write}`、`pricing_status{…: verified | unverified | not_listed}`、`has_off_peak`、`off_peak_pricing{input, output, cached_input} | null`、`peak_note`、`context_length`（token 数）、`context_length_label`、`source_url`、`extra_sources`、`last_updated`、`notes`、`reasoning_effort{supported, levels, default, can_disable, status, note, sources}`、`limits{context_length, max_output_tokens, status, note, sources}`、`pricing_tiers[{condition, input_tokens_gt, input_tokens_lte, input, output, cached_input, cache_write, cache_pricing, note}]`、`service_tiers[{name, multiplier, note}]`（batch / flex / fast / priority / ultrafast / data_residency）、`cache_pricing{implicit_read, explicit_read, explicit_write, explicit_write_1h, storage_per_1M_tokens_hour, note}`、`price_schedule[]`、`unverified_fields`、`links`。数据集已精简（2026-10-11）：不再包含最大输入、思考模式输入/输出子上限、模态、功能、知识截止、思考预算、可用性、快照与别名。`limits` 等字段的 `null` 表示官方未给出（待核实），从不推测；`pricing.cached_input` / `pricing.cache_write` 含义不变，Qwen 的隐式 / 显式缓存细分见 `cache_pricing`。网页“详情”展开行（分档价、服务档倍率、缓存细分、来源）展示的内容都可在 API 中查询。`reasoning_effort` 为各厂商官方文档中的推理强度 / 思考档位，其中 `null` 表示待核实，不做推测。价格为 `null` 时用 `pricing_status` 区分“待核实”和“官方未列出”。
 
 ```bash
 curl -s https://<用户名>.github.io/llm-pricing/api/v1/models.json | jq '.data[] | {id, input: .pricing.input}'
@@ -78,6 +79,6 @@ python3 scripts/validate.py    # 校验数据，并逐文件检查 api/v1/ 是�
 
 ## 数据说明
 
-- 数据核实日期：2026-10-10；每条记录带官方来源 URL 与核实日期。
+- 数据核实日期：2026-10-11；每条记录带官方来源 URL 与核实日期。
 - 只收录最新模型，范围见 `data/prices.json` 的 `meta.scope`。
 - 价格可能随时调整，请以官方页面为准。更新方法见 `scripts/README.md`。

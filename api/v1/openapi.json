@@ -251,14 +251,7 @@
           "pricing_tiers",
           "service_tiers",
           "cache_pricing",
-          "modalities",
-          "features",
-          "knowledge_cutoff",
-          "thinking_budget",
-          "availability",
           "price_schedule",
-          "snapshot",
-          "aliases",
           "unverified_fields",
           "links"
         ],
@@ -541,76 +534,28 @@
           },
           "limits": {
             "type": "object",
-            "description": "Token limits from official pages. null = 待核实 (not verified, never guessed). Official K/M labels are recorded as 1K=1,000 / 1M=1,000,000 unless the page gives exact numbers (see note).",
+            "description": "Context window and max output from official pages. null = 待核实 (not verified, never guessed). Official K/M labels are recorded as 1K=1,000 / 1M=1,000,000 unless the page gives exact numbers (see note).",
             "required": [
-              "max_input_tokens",
-              "max_output_tokens",
               "context_length",
-              "max_input_tokens_thinking",
-              "max_output_tokens_thinking",
-              "max_reasoning_tokens",
-              "max_output_tokens_batch_beta",
-              "default_output_tokens",
+              "max_output_tokens",
               "status",
               "note",
               "sources"
             ],
             "properties": {
-              "max_input_tokens": {
+              "context_length": {
                 "type": [
                   "integer",
                   "null"
                 ],
-                "description": "Maximum input tokens per request (non-thinking mode where the vendor distinguishes)"
+                "description": "Maximum context window in tokens (same value as top-level context_length)"
               },
               "max_output_tokens": {
                 "type": [
                   "integer",
                   "null"
                 ],
-                "description": "Maximum output tokens per request"
-              },
-              "context_length": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "description": "Context window in tokens (same value as top-level context_length)"
-              },
-              "max_input_tokens_thinking": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "description": "Maximum input tokens in thinking mode, when documented separately"
-              },
-              "max_output_tokens_thinking": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "description": "Maximum output tokens in thinking mode, when documented separately"
-              },
-              "max_reasoning_tokens": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "description": "Maximum chain-of-thought / reasoning tokens (Qwen: Max Chain-of-Thought Length)"
-              },
-              "max_output_tokens_batch_beta": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "description": "Higher output limit on the batch API behind a beta header (Anthropic: 300K)"
-              },
-              "default_output_tokens": {
-                "type": [
-                  "integer",
-                  "null"
-                ],
-                "description": "Default max output tokens when the request omits it, if documented"
+                "description": "Maximum output tokens per request; null = 待核实"
               },
               "status": {
                 "type": "string",
@@ -619,7 +564,7 @@
                   "partial",
                   "unverified"
                 ],
-                "description": "verified = max_input_tokens, max_output_tokens and context_length all known; partial = some; unverified = none"
+                "description": "verified = context_length and max_output_tokens both known; partial = one; unverified = none"
               },
               "note": {
                 "type": [
@@ -762,225 +707,6 @@
           "cache_pricing": {
             "$ref": "#/components/schemas/CachePricing"
           },
-          "modalities": {
-            "type": "object",
-            "required": [
-              "input",
-              "output",
-              "unsupported",
-              "sources"
-            ],
-            "description": "Input / output modalities documented on official pages. null = 待核实.",
-            "properties": {
-              "input": {
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": "string"
-                }
-              },
-              "output": {
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": "string"
-                }
-              },
-              "unsupported": {
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": "string"
-                },
-                "description": "Modalities the official page explicitly lists as unsupported"
-              },
-              "sources": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
-            }
-          },
-          "features": {
-            "type": "object",
-            "required": [
-              "supported",
-              "unsupported",
-              "tools",
-              "status",
-              "note",
-              "sources"
-            ],
-            "description": "Capabilities documented on official model pages (snake_case names as in the vendor docs). supported/unsupported are only what the official page states; a feature missing from both lists is 待核实, not unsupported.",
-            "properties": {
-              "supported": {
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": "string"
-                }
-              },
-              "unsupported": {
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": "string"
-                }
-              },
-              "tools": {
-                "type": [
-                  "array",
-                  "null"
-                ],
-                "items": {
-                  "type": "string"
-                },
-                "description": "Built-in tools supported (OpenAI Responses API)"
-              },
-              "status": {
-                "type": "string",
-                "enum": [
-                  "verified",
-                  "partial",
-                  "unverified"
-                ],
-                "description": "verified = the vendor page lists capabilities completely; partial = list not exhaustive; unverified = 待核实"
-              },
-              "note": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "sources": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
-            }
-          },
-          "knowledge_cutoff": {
-            "type": [
-              "object",
-              "null"
-            ],
-            "description": "Knowledge cutoff from official pages; null = not stated / 待核实",
-            "required": [
-              "date",
-              "training_data_date",
-              "note"
-            ],
-            "properties": {
-              "date": {
-                "type": [
-                  "string",
-                  "null"
-                ],
-                "description": "YYYY-MM-DD or YYYY-MM"
-              },
-              "training_data_date": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "note": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              }
-            }
-          },
-          "thinking_budget": {
-            "type": "object",
-            "required": [
-              "supported",
-              "min",
-              "max",
-              "default",
-              "note",
-              "sources"
-            ],
-            "description": "Token budget for thinking / chain-of-thought (budget_tokens / thinking_budget). supported: true = parameter exists, false = documented as not accepted, null = 待核实. Distinct from reasoning_effort levels.",
-            "properties": {
-              "supported": {
-                "type": [
-                  "boolean",
-                  "null"
-                ]
-              },
-              "min": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
-              },
-              "max": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
-              },
-              "default": {
-                "type": [
-                  "integer",
-                  "null"
-                ]
-              },
-              "note": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "sources": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "format": "uri"
-                }
-              }
-            }
-          },
-          "availability": {
-            "type": "object",
-            "required": [
-              "status",
-              "note"
-            ],
-            "properties": {
-              "status": {
-                "type": "string",
-                "enum": [
-                  "general",
-                  "limited",
-                  "subscription_only"
-                ],
-                "description": "general = pay-as-you-go API; limited = restricted access (verification program); subscription_only = only via a subscription product, no pay-as-you-go price"
-              },
-              "note": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              }
-            }
-          },
           "price_schedule": {
             "type": "array",
             "description": "Time-limited promotions and scheduled price changes announced on official pages (price fields are the announced prices; null = not announced)",
@@ -1059,20 +785,6 @@
                 }
               }
             }
-          },
-          "snapshot": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "description": "Dated snapshot / version this model id currently resolves to, if documented"
-          },
-          "aliases": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Other model names still accepted by the vendor API"
           },
           "unverified_fields": {
             "type": "array",

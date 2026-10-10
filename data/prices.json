@@ -1,7 +1,7 @@
 {
   "meta": {
     "last_updated": "2026-10-11",
-    "description": "价格均为每 100 万 token，币种统一为美元（USD），取自各厂商国际站官方定价页。null / 待核实 = 未能从官方来源核实，未做推测。 推理强度（reasoning_effort）：supported/levels/default 为 null 表示官方文档未明确，待核实，不做推测。 结构化上限/限制（limits）、长上下文分档价（pricing_tiers）、服务档倍率（service_tiers）、缓存细分价（cache_pricing）、模态（modalities）、功能（features）、知识截止（knowledge_cutoff）、思考预算（thinking_budget）等字段中 null 同样表示官方未明确、待核实，不做推测。",
+    "description": "价格均为每 100 万 token，币种统一为美元（USD），取自各厂商国际站官方定价页。null / 待核实 = 未能从官方来源核实，未做推测。推理强度（reasoning_effort）、最大输出（limits.max_output_tokens）、分档价（pricing_tiers）、服务档倍率（service_tiers）、缓存细分价（cache_pricing）中 null 同样表示官方未明确、待核实，不做推测。",
     "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3 系列最新；MiniMax 3 系列。"
   },
   "vendors": [
@@ -35,12 +35,8 @@
       "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
-      "notes": "表中价格为高峰价。最大输出 384K；支持视觉。旧名 deepseek-v4-flash 已并入此模型计费。官方页未列缓存写入价。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "notes": "表中价格为高峰价。最大输出 384K；旧名 deepseek-v4-flash 已并入此模型计费。官方页未列缓存写入价。",
+      "unverified_fields": [],
       "id": "m01",
       "reasoning_effort": {
         "supported": true,
@@ -57,15 +53,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 384000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方页仅给出 “CONTEXT LENGTH 1M / MAX OUTPUT MAXIMUM: 384K”，按 1M=1,000,000、1K=1,000 记录（官方未给精确 token 数）；最大输入 token 数官方未单独列出，待核实。",
+        "max_output_tokens": 384000,
+        "note": "官方页仅给出 “CONTEXT LENGTH 1M / MAX OUTPUT MAXIMUM: 384K”，按 1M=1,000,000、1K=1,000 记录（官方未给精确 token 数）。",
         "sources": [
           "https://api-docs.deepseek.com/quick_start/pricing"
         ]
@@ -80,55 +70,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存命中价即 pricing.cached_input（高峰/闲时各有一档，见 off_peak_pricing）；官方页未列缓存写入价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://api-docs.deepseek.com/quick_start/pricing"
-        ]
-      },
-      "features": {
-        "supported": [
-          "json_output",
-          "tool_calls",
-          "responses_api",
-          "anthropic_api",
-          "chat_prefix_completion_beta",
-          "vision"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "verified",
-        "note": "FIM Completion（Beta）仅非思考模式；Chat Prefix Completion 为 Beta。",
-        "sources": [
-          "https://api-docs.deepseek.com/quick_start/pricing"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": "DeepSeek-V4.1-Flash",
-      "aliases": [
-        "deepseek-v4-flash",
-        "deepseek-v4-flash-vision-exp"
-      ]
+      "price_schedule": []
     },
     {
       "vendor": "DeepSeek",
@@ -150,12 +92,8 @@
       "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
-      "notes": "表中价格为高峰价。最大输出 384K；不支持视觉。官方页未列缓存写入价。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "notes": "表中价格为高峰价。最大输出 384K；不官方页未列缓存写入价。",
+      "unverified_fields": [],
       "id": "m02",
       "reasoning_effort": {
         "supported": true,
@@ -173,15 +111,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 384000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方页仅给出 “CONTEXT LENGTH 1M / MAX OUTPUT MAXIMUM: 384K”，按 1M=1,000,000、1K=1,000 记录（官方未给精确 token 数）；最大输入 token 数官方未单独列出，待核实。",
+        "max_output_tokens": 384000,
+        "note": "官方页仅给出 “CONTEXT LENGTH 1M / MAX OUTPUT MAXIMUM: 384K”，按 1M=1,000,000、1K=1,000 记录（官方未给精确 token 数）。",
         "sources": [
           "https://api-docs.deepseek.com/quick_start/pricing"
         ]
@@ -196,54 +128,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存命中价即 pricing.cached_input（高峰/闲时各有一档，见 off_peak_pricing）；官方页未列缓存写入价。"
       },
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": [
-          "image"
-        ],
-        "sources": [
-          "https://api-docs.deepseek.com/quick_start/pricing"
-        ]
-      },
-      "features": {
-        "supported": [
-          "json_output",
-          "tool_calls",
-          "responses_api",
-          "anthropic_api",
-          "chat_prefix_completion_beta"
-        ],
-        "unsupported": [
-          "vision"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "FIM Completion（Beta）仅非思考模式；Chat Prefix Completion 为 Beta。",
-        "sources": [
-          "https://api-docs.deepseek.com/quick_start/pricing"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": "DeepSeek-V4-Pro-0813",
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "OpenAI",
@@ -264,9 +149,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价至少持续到 2026-11-21。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m03",
       "reasoning_effort": {
         "supported": true,
@@ -286,15 +169,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "max_output_tokens": 128000,
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
         ]
@@ -342,65 +219,6 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-02-16",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [
         {
           "kind": "promotion",
@@ -412,9 +230,7 @@
           "cache_write": 5.0,
           "note": "GPT-5.6 Sol 促销价（输入 $4 / 输出 $20，较此前降 20% / 33%）官方称“至少持续到 2026-11-21”；到期后价格官方未公布（待核实）。"
         }
-      ],
-      "snapshot": null,
-      "aliases": []
+      ]
     },
     {
       "vendor": "OpenAI",
@@ -435,9 +251,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $18.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m04",
       "reasoning_effort": {
         "supported": true,
@@ -457,15 +271,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "max_output_tokens": 128000,
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
         ]
@@ -513,68 +321,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-02-16",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "OpenAI",
@@ -595,9 +342,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.4、缓存读取 $0.04、缓存写入 $0.5、输出 $1.8。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m05",
       "reasoning_effort": {
         "supported": true,
@@ -617,15 +362,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "max_output_tokens": 128000,
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
         ]
@@ -673,68 +412,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-02-16",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "OpenAI",
@@ -755,9 +433,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $20.0、缓存读取 $2.0、缓存写入 $25.0、输出 $75.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m06",
       "reasoning_effort": {
         "supported": true,
@@ -776,15 +452,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "max_output_tokens": 128000,
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-astra"
         ]
@@ -837,68 +507,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-astra"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-astra"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-04-30",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "OpenAI",
@@ -919,9 +528,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m07",
       "reasoning_effort": {
         "supported": true,
@@ -941,15 +548,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "max_output_tokens": 128000,
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-sol"
         ]
@@ -997,68 +598,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-sol"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-sol"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-04-20",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "OpenAI",
@@ -1079,9 +619,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.2、缓存读取 $0.02、缓存写入 $0.25、输出 $0.75。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m08",
       "reasoning_effort": {
         "supported": true,
@@ -1101,15 +639,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "max_output_tokens": 128000,
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-luna"
         ]
@@ -1157,68 +689,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-luna"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": null,
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6-luna"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-05-18",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "OpenAI",
@@ -1239,9 +710,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.2、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
-      "unverified_fields": [
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m09",
       "reasoning_effort": {
         "supported": true,
@@ -1260,15 +729,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 922000,
-        "max_output_tokens": 128000,
         "context_length": 1050000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+        "max_output_tokens": 128000,
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
         ]
@@ -1321,74 +784,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": [
-          "audio",
-          "video"
-        ],
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
-        ]
-      },
-      "features": {
-        "supported": [
-          "streaming",
-          "structured_outputs",
-          "function_calling",
-          "file_search",
-          "image_input",
-          "web_search",
-          "prompt_caching"
-        ],
-        "unsupported": [
-          "fine_tuning",
-          "predicted_outputs"
-        ],
-        "tools": [
-          "web_search",
-          "file_search",
-          "image_generation",
-          "code_interpreter",
-          "hosted_shell",
-          "apply_patch",
-          "skills",
-          "computer_use",
-          "mcp",
-          "tool_search"
-        ],
-        "status": "verified",
-        "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
-        "sources": [
-          "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-04-30",
-        "training_data_date": null,
-        "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
-      },
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": "支持美国/欧盟数据驻留（含 Fast 与 Ultrafast）。"
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -1407,9 +803,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m10",
       "reasoning_effort": {
         "supported": true,
@@ -1429,15 +823,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/fable-5-1/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -1464,59 +852,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/fable-5-1/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking",
-          "tool_use"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/fable-5-1/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-06",
-        "training_data_date": "2026-06",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -1535,9 +871,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m11",
       "reasoning_effort": {
         "supported": true,
@@ -1557,15 +891,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -1592,59 +920,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/mythos-5-1/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking",
-          "tool_use"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-06",
-        "training_data_date": "2026-06",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "limited",
-        "note": "限量开放：仅限通过 Anthropic 验证计划（如 Cyber Verification Program）的组织。"
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -1663,9 +939,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m12",
       "reasoning_effort": {
         "supported": true,
@@ -1685,15 +959,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/fable-5/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -1720,58 +988,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/fable-5/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/fable-5/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-01",
-        "training_data_date": "2026-01",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -1790,9 +1007,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m13",
       "reasoning_effort": {
         "supported": true,
@@ -1812,15 +1027,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/mythos-5/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -1847,58 +1056,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/mythos-5/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/mythos-5/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-01",
-        "training_data_date": "2026-01",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "limited",
-        "note": "限量开放：仅限通过 Anthropic 验证计划（如 Cyber Verification Program）的组织。"
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -1917,9 +1075,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（研究预览）输入 $8 / 输出 $40。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m14",
       "reasoning_effort": {
         "supported": true,
@@ -1939,15 +1095,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/opus-5-5/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -1979,60 +1129,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/opus-5-5/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking",
-          "tool_use",
-          "fast_mode_research_preview"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/opus-5-5/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-06",
-        "training_data_date": "2026-06",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -2051,9 +1148,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m15",
       "reasoning_effort": {
         "supported": true,
@@ -2073,15 +1168,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/opus-5/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -2113,59 +1202,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/opus-5/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking",
-          "fast_mode_research_preview"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/opus-5/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-05",
-        "training_data_date": "2026-05",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -2184,9 +1221,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m16",
       "reasoning_effort": {
         "supported": true,
@@ -2206,15 +1241,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/opus-4-8/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -2246,59 +1275,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/opus-4-8/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking",
-          "fast_mode_research_preview"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/opus-4-8/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-01",
-        "training_data_date": "2026-01",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -2317,9 +1294,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。新分词器，同样文本约多 30% token。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m17",
       "reasoning_effort": {
         "supported": true,
@@ -2339,15 +1314,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/opus-4-7/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -2374,58 +1343,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/opus-4-7/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。 新分词器：同样文本约多 30% token（官方，见 notes）。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/opus-4-7/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-01",
-        "training_data_date": "2026-01",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -2444,9 +1362,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m18",
       "reasoning_effort": {
         "supported": true,
@@ -2465,15 +1381,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/opus-4-6/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -2500,60 +1410,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/opus-4-6/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking",
-          "extended_thinking_deprecated"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/opus-4-6/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2025-05",
-        "training_data_date": "2025-08",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": true,
-        "min": 1024,
-        "max": null,
-        "default": null,
-        "note": "手动 extended thinking（thinking.type=\"enabled\" + budget_tokens）在该模型上已弃用但仍可用：budget_tokens 最小 1,024 且须小于 max_tokens（交错思考除外）；上限官方未给固定数值，待核实。官方推荐改用 adaptive thinking + effort。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -2572,9 +1429,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m19",
       "reasoning_effort": {
         "supported": true,
@@ -2594,15 +1449,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -2629,59 +1478,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking",
-          "tool_use"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-06",
-        "training_data_date": "2026-06",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -2700,9 +1497,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。$2/$10 已确认为标准价（原定 9 月 1 日涨价取消）。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m20",
       "reasoning_effort": {
         "supported": true,
@@ -2722,15 +1517,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/sonnet-5/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -2757,58 +1546,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/sonnet-5/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/sonnet-5/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-01",
-        "training_data_date": "2026-01",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -2827,9 +1565,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $6。Batch API 5 折。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m21",
       "reasoning_effort": {
         "supported": true,
@@ -2848,15 +1584,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/sonnet-4-6/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -2883,60 +1613,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/sonnet-4-6/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking",
-          "extended_thinking_deprecated"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/sonnet-4-6/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2025-08",
-        "training_data_date": "2026-01",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": true,
-        "min": 1024,
-        "max": null,
-        "default": null,
-        "note": "手动 extended thinking（thinking.type=\"enabled\" + budget_tokens）在该模型上已弃用但仍可用：budget_tokens 最小 1,024 且须小于 max_tokens（交错思考除外）；上限官方未给固定数值，待核实。官方推荐改用 adaptive thinking + effort。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Anthropic",
@@ -2957,9 +1634,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "按提示长度分档：表中为 ≤100K 提示价；>100K 提示：输入 $0.50、输出 $2.50、缓存读取 $0.05、缓存写入(5m) $0.625。1 小时 TTL 写入 $0.20（≤100K）/ $1（>100K）。Batch 5 折。 上下文窗口 1M tokens、最大输出 128K（Anthropic 模型总览页）。",
-      "unverified_fields": [
-        "limits.max_input_tokens"
-      ],
+      "unverified_fields": [],
       "id": "m22",
       "reasoning_effort": {
         "supported": true,
@@ -2979,15 +1654,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
           "https://platform.claude.com/docs/en/about-claude/models/overview"
@@ -3033,59 +1702,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "vision_input",
-          "prompt_caching",
-          "batch_api",
-          "adaptive_thinking",
-          "tool_use"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
-        "sources": [
-          "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
-          "https://platform.claude.com/docs/en/about-claude/models/overview",
-          "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
-      },
-      "knowledge_cutoff": {
-        "date": "2026-06",
-        "training_data_date": "2026-06",
-        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
-      },
-      "thinking_budget": {
-        "supported": false,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
-        "sources": [
-          "https://platform.claude.com/docs/en/build-with-claude/thinking"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "智谱 Z.ai",
@@ -3106,11 +1723,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m23",
       "reasoning_effort": {
         "supported": true,
@@ -3128,15 +1741,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录；最大输入 token 数官方未单独列出（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://docs.z.ai/guides/llm/glm-5.3",
           "https://docs.bigmodel.cn/cn/guide/start/model-overview"
@@ -3152,50 +1759,7 @@
         "storage_per_1M_tokens_hour": 0.0,
         "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
       },
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://docs.z.ai/guides/llm/glm-5.3"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_mode",
-          "streaming",
-          "function_calling",
-          "context_caching",
-          "structured_output"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "verified",
-        "note": "官方模型页能力列表；glm-5.3 / glm-5.3-flash(x) 思考恒开不可关闭。",
-        "sources": [
-          "https://docs.z.ai/guides/llm/glm-5.3"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": "GLM Coding Plan 订阅用户另可通过 coding 端点使用；按量 API 价见 pricing。"
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "智谱 Z.ai",
@@ -3216,11 +1780,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m24",
       "reasoning_effort": {
         "supported": true,
@@ -3238,15 +1798,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录；最大输入 token 数官方未单独列出（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://docs.z.ai/guides/vlm/glm-5.3-flash",
           "https://docs.bigmodel.cn/cn/guide/start/model-overview"
@@ -3262,54 +1816,7 @@
         "storage_per_1M_tokens_hour": 0.0,
         "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "file"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://docs.z.ai/guides/vlm/glm-5.3-flash"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_mode",
-          "streaming",
-          "function_calling",
-          "context_caching",
-          "structured_output",
-          "visual_understanding"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "verified",
-        "note": "官方模型页能力列表；glm-5.3 / glm-5.3-flash(x) 思考恒开不可关闭。",
-        "sources": [
-          "https://docs.z.ai/guides/vlm/glm-5.3-flash"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "智谱 Z.ai",
@@ -3330,11 +1837,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m25",
       "reasoning_effort": {
         "supported": true,
@@ -3354,15 +1857,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录；最大输入 token 数官方未单独列出（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://docs.z.ai/guides/vlm/glm-5.3-flash",
           "https://docs.bigmodel.cn/cn/guide/start/model-overview"
@@ -3378,54 +1875,7 @@
         "storage_per_1M_tokens_hour": 0.0,
         "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "file"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://docs.z.ai/guides/vlm/glm-5.3-flash"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_mode",
-          "streaming",
-          "function_calling",
-          "context_caching",
-          "structured_output",
-          "visual_understanding"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "verified",
-        "note": "官方模型页能力列表；glm-5.3 / glm-5.3-flash(x) 思考恒开不可关闭。",
-        "sources": [
-          "https://docs.z.ai/guides/vlm/glm-5.3-flash"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "智谱 Z.ai",
@@ -3446,11 +1896,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m26",
       "reasoning_effort": {
         "supported": true,
@@ -3471,15 +1917,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 128000,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录；最大输入 token 数官方未单独列出（待核实）。",
+        "max_output_tokens": 128000,
+        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录。",
         "sources": [
           "https://docs.z.ai/guides/llm/glm-5.2",
           "https://docs.bigmodel.cn/cn/guide/start/model-overview"
@@ -3495,51 +1935,7 @@
         "storage_per_1M_tokens_hour": 0.0,
         "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
       },
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://docs.z.ai/guides/llm/glm-5.2"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_mode",
-          "streaming",
-          "function_calling",
-          "context_caching",
-          "structured_output",
-          "mcp"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "verified",
-        "note": "官方模型页能力列表；glm-5.3 / glm-5.3-flash(x) 思考恒开不可关闭。",
-        "sources": [
-          "https://docs.z.ai/guides/llm/glm-5.2"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Moonshot Kimi",
@@ -3558,11 +1954,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "缓存写入按 TTL 计价：5 分钟 $3.00，1 小时 $6.00（表中为 5 分钟）。缓存命中自动续期、无额外写入费。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m27",
       "reasoning_effort": {
         "supported": true,
@@ -3580,15 +1972,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 1048576,
         "context_length": 1048576,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": 131072,
-        "note": "官方 K3 文档：max_completion_tokens 默认 131072，最大可设 1048576（等于上下文窗口；输入+输出总和不得超过窗口）；最大输入 token 数官方未单独列出（待核实）。",
+        "max_output_tokens": 1048576,
+        "note": "官方 K3 文档：max_completion_tokens 默认 131072，最大可设 1048576（等于上下文窗口；输入+输出总和不得超过窗口）。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
           "https://platform.kimi.ai/docs/api/chat",
@@ -3605,57 +1991,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "Kimi API 自动缓存重复前缀；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h；命中自动续期、无额外写入费。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_always_on",
-          "vision_input",
-          "video_input",
-          "structured_output_json_schema",
-          "tool_calls",
-          "context_caching",
-          "web_search_builtin"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "官方 K3 文档：思考恒开；视觉输入不支持公开图片 URL（需 base64 或 ms://file-id）；json_schema strict 结构化输出。非穷举。",
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/pricing/chat"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": "旗舰模型：累计充值（最低 $1）后解锁。"
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Moonshot Kimi",
@@ -3674,12 +2010,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "官方页未列缓存写入价。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "limits.max_output_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m28",
       "reasoning_effort": {
         "supported": false,
@@ -3692,18 +2023,13 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": null,
         "context_length": 262144,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": 32768,
-        "note": "官方：上下文窗口 262,144 tokens；max_tokens 默认 32768（32k）；最大输出上限与最大输入 token 数官方未给出（待核实）。",
+        "max_output_tokens": 262144,
+        "note": "官方：上下文窗口 262,144 tokens（256K）；官方故障排查 FAQ：kimi-k2.7-code 最大输出长度为 256*1024 − prompt_tokens，即以 262,144 计（与输入共享窗口）；max_tokens 默认 32768（32k）。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
-          "https://platform.kimi.ai/docs/pricing/chat"
+          "https://platform.kimi.ai/docs/pricing/chat",
+          "https://platform.kimi.ai/docs/guide/troubleshooting"
         ]
       },
       "pricing_tiers": [],
@@ -3722,57 +2048,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存命中价即 pricing.cached_input；官方页未列缓存写入价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_always_on",
-          "vision_input",
-          "video_input",
-          "tool_calls",
-          "context_caching"
-        ],
-        "unsupported": [
-          "non_thinking_mode"
-        ],
-        "tools": null,
-        "status": "partial",
-        "note": "官方：K2.7 Code 不支持非思考模式；temperature/top_p/n 等参数固定。非穷举。",
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/pricing/chat"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Moonshot Kimi",
@@ -3791,12 +2067,7 @@
       "extra_sources": [],
       "last_updated": "2026-10-11",
       "notes": "高速版；官方页未列缓存写入价。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "limits.max_output_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "unverified_fields": [],
       "id": "m29",
       "reasoning_effort": {
         "supported": false,
@@ -3809,18 +2080,13 @@
         ]
       },
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": null,
         "context_length": 262144,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": 32768,
-        "note": "官方：上下文窗口 262,144 tokens；max_tokens 默认 32768（32k）；最大输出上限与最大输入 token 数官方未给出（待核实）。",
+        "max_output_tokens": 262144,
+        "note": "官方：上下文窗口 262,144 tokens（256K）；官方故障排查 FAQ：kimi-k2.7-code 最大输出长度为 256*1024 − prompt_tokens，即以 262,144 计（与输入共享窗口）；max_tokens 默认 32768（32k）。highspeed 为同一模型的高速版（官方快速入门），沿用同一上限。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
-          "https://platform.kimi.ai/docs/pricing/chat"
+          "https://platform.kimi.ai/docs/pricing/chat",
+          "https://platform.kimi.ai/docs/guide/troubleshooting"
         ]
       },
       "pricing_tiers": [],
@@ -3833,57 +2099,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存命中价即 pricing.cached_input；官方页未列缓存写入价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_always_on",
-          "vision_input",
-          "video_input",
-          "tool_calls",
-          "context_caching"
-        ],
-        "unsupported": [
-          "non_thinking_mode"
-        ],
-        "tools": null,
-        "status": "partial",
-        "note": "官方：K2.7 Code 不支持非思考模式；temperature/top_p/n 等参数固定。非穷举。 官方：HighSpeed 输出速度约 180 tokens/s（短上下文最高约 260），资源有限；Batch API 不支持该型号。",
-        "sources": [
-          "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
-          "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
-          "https://platform.kimi.ai/docs/pricing/chat"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "阿里云 Qwen",
@@ -3905,9 +2121,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
-      "unverified_fields": [
-        "knowledge_cutoff"
-      ],
+      "unverified_fields": [],
       "id": "m30",
       "reasoning_effort": {
         "supported": true,
@@ -3925,15 +2139,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 991808,
-        "max_output_tokens": 131072,
         "context_length": 1000000,
-        "max_input_tokens_thinking": 983616,
-        "max_output_tokens_thinking": 131072,
-        "max_reasoning_tokens": 262144,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方 Alibaba Cloud Model Studio 模型页 Context limits：Max Input 991808（思考模式 983616）、Max Output 131072（思考模式同）、Context Window 1000000、Max Chain-of-Thought Length 262144；qwencloud 模型页以 991K / 131K / 983K / 1M 标注。",
+        "max_output_tokens": 131072,
+        "note": "官方 Alibaba Cloud Model Studio 模型页：Context Window 1,000,000、Max Output 131,072（qwencloud 模型页标 1M / 131K）。",
         "sources": [
           "https://www.qwencloud.com/models/qwen3.8-max",
           "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max"
@@ -3949,58 +2157,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://www.qwencloud.com/models/qwen3.8-max",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max"
-        ]
-      },
-      "features": {
-        "supported": [
-          "function_calling",
-          "structured_outputs",
-          "web_search",
-          "prefix_completion",
-          "context_cache"
-        ],
-        "unsupported": [
-          "fine_tuning"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "来自 Alibaba Cloud Model Studio 模型页 Model capabilities 表（China 区列表；Singapore 区列表含 function calling / structured outputs / web search / prefix completion）；同表还标注 Batch Inference：3.8-max/3.7-max/3.7-plus/3.7-flash/3.8-flash 支持，3.8-27b 与 3.8-2.4t 不支持（国际站 Batch 折扣见 service_tiers）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": true,
-        "min": 1,
-        "max": 262144,
-        "default": 262144,
-        "note": "thinking_budget 限制思维链最大 token 数；官方：默认值为模型最大思维链长度（262144），适用于 Qwen3.8/3.7 系列。百炼控制台调试面板的取值范围为 1~32768（缺省 4000）。reasoning_effort 与 thinking_budget 不可同时设置（见 reasoning_effort.note）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "阿里云 Qwen",
@@ -4021,9 +2178,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "阿里云百炼国际站（新加坡）美元价；别名当前指向 qwen3.7-max-2026-05-20。单档 0–1M。 缓存价取自官方模型页（https://www.qwencloud.com/models/qwen3.7-max，International，美元）：隐式缓存 Input(Implicit Cache) $0.5、显式缓存创建 $3.125、显式缓存命中 $0.25；cached_input=显式缓存命中价，cache_write=显式缓存创建价；三项均见结构化字段 cache_pricing。",
-      "unverified_fields": [
-        "knowledge_cutoff"
-      ],
+      "unverified_fields": [],
       "id": "m31",
       "reasoning_effort": {
         "supported": true,
@@ -4043,15 +2198,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 991808,
-        "max_output_tokens": 131072,
         "context_length": 1000000,
-        "max_input_tokens_thinking": 983616,
-        "max_output_tokens_thinking": 131072,
-        "max_reasoning_tokens": 262144,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方 Alibaba Cloud Model Studio 模型页 Context limits：Max Input 991808（思考模式 983616）、Max Output 131072（思考模式同）、Context Window 1000000、Max Chain-of-Thought Length 262144；qwencloud 模型页以 991K / 131K / 983K / 1M 标注。",
+        "max_output_tokens": 131072,
+        "note": "官方 Alibaba Cloud Model Studio 模型页：Context Window 1,000,000、Max Output 131,072（qwencloud 模型页标 1M / 131K）。",
         "sources": [
           "https://www.qwencloud.com/models/qwen3.7-max",
           "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-max"
@@ -4067,56 +2216,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://www.qwencloud.com/models/qwen3.7-max",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-max"
-        ]
-      },
-      "features": {
-        "supported": [
-          "function_calling",
-          "structured_outputs",
-          "web_search",
-          "prefix_completion",
-          "context_cache"
-        ],
-        "unsupported": [
-          "fine_tuning"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "来自 Alibaba Cloud Model Studio 模型页 Model capabilities 表（China 区列表；Singapore 区列表含 function calling / structured outputs / web search / prefix completion）；同表还标注 Batch Inference：3.8-max/3.7-max/3.7-plus/3.7-flash/3.8-flash 支持，3.8-27b 与 3.8-2.4t 不支持（国际站 Batch 折扣见 service_tiers）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-max"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": true,
-        "min": 1,
-        "max": 262144,
-        "default": 262144,
-        "note": "thinking_budget 限制思维链最大 token 数；官方：默认值为模型最大思维链长度（262144），适用于 Qwen3.8/3.7 系列。百炼控制台调试面板的取值范围为 1~32768（缺省 4000）。reasoning_effort 与 thinking_budget 不可同时设置（见 reasoning_effort.note）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-max"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": "qwen3.7-max-2026-05-20",
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "阿里云 Qwen",
@@ -4137,9 +2237,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤256K 输入档（非思考/思考输出价相同）；256K–1M 档：输入 $1.2、输出 $4.8。官方标注限时 8 折（表中为标价）。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-plus，Singapore，美元，标价口径，不含限时 8 折）：≤256K 档隐式 $0.08、显式创建 $0.5、显式命中 $0.04；>256K 档隐式 $0.24、显式创建 $1.5、显式命中 $0.12；cached_input=显式缓存命中价，cache_write=显式缓存创建价。结构化字段见 cache_pricing / pricing_tiers。",
-      "unverified_fields": [
-        "knowledge_cutoff"
-      ],
+      "unverified_fields": [],
       "id": "m32",
       "reasoning_effort": {
         "supported": true,
@@ -4159,15 +2257,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 991808,
-        "max_output_tokens": 131072,
         "context_length": 1000000,
-        "max_input_tokens_thinking": 983616,
-        "max_output_tokens_thinking": 131072,
-        "max_reasoning_tokens": 262144,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方 Alibaba Cloud Model Studio 模型页 Context limits：Max Input 991808（思考模式 983616）、Max Output 131072（思考模式同）、Context Window 1000000、Max Chain-of-Thought Length 262144；qwencloud 模型页以 991K / 131K / 983K / 1M 标注。",
+        "max_output_tokens": 131072,
+        "note": "官方 Alibaba Cloud Model Studio 模型页：Context Window 1,000,000、Max Output 131,072（qwencloud 模型页标 1M / 131K）。",
         "sources": [
           "https://www.qwencloud.com/models/qwen3.7-plus",
           "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-plus"
@@ -4208,55 +2300,6 @@
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://www.qwencloud.com/models/qwen3.7-plus",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-plus"
-        ]
-      },
-      "features": {
-        "supported": [
-          "function_calling",
-          "structured_outputs",
-          "web_search",
-          "prefix_completion",
-          "context_cache"
-        ],
-        "unsupported": [
-          "fine_tuning"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "来自 Alibaba Cloud Model Studio 模型页 Model capabilities 表（China 区列表；Singapore 区列表含 function calling / structured outputs / web search / prefix completion）；同表还标注 Batch Inference：3.8-max/3.7-max/3.7-plus/3.7-flash/3.8-flash 支持，3.8-27b 与 3.8-2.4t 不支持（国际站 Batch 折扣见 service_tiers）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-plus"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": true,
-        "min": 1,
-        "max": 262144,
-        "default": 262144,
-        "note": "thinking_budget 限制思维链最大 token 数；官方：默认值为模型最大思维链长度（262144），适用于 Qwen3.8/3.7 系列。百炼控制台调试面板的取值范围为 1~32768（缺省 4000）。reasoning_effort 与 thinking_budget 不可同时设置（见 reasoning_effort.note）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-plus"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [
         {
           "kind": "promotion",
@@ -4268,9 +2311,7 @@
           "cache_write": 0.4,
           "note": "官方标注“限时 8 折”（≤256K 档：输入 $0.32 / 输出 $1.28 / 隐式缓存 $0.064 / 显式命中 $0.032 / 显式创建 $0.40）；截止日期官方未公布；表中为标价。"
         }
-      ],
-      "snapshot": "qwen3.7-plus-2026-05-26",
-      "aliases": []
+      ]
     },
     {
       "vendor": "阿里云 Qwen",
@@ -4292,9 +2333,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.016）；显式缓存创建（cache_write）$0.2；显式缓存命中价 $0.016。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
-      "unverified_fields": [
-        "knowledge_cutoff"
-      ],
+      "unverified_fields": [],
       "id": "m33",
       "reasoning_effort": {
         "supported": true,
@@ -4312,15 +2351,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 991808,
-        "max_output_tokens": 131072,
         "context_length": 1000000,
-        "max_input_tokens_thinking": 983616,
-        "max_output_tokens_thinking": 131072,
-        "max_reasoning_tokens": 262144,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方 Alibaba Cloud Model Studio 模型页 Context limits：Max Input 991808（思考模式 983616）、Max Output 131072（思考模式同）、Context Window 1000000、Max Chain-of-Thought Length 262144；qwencloud 模型页以 991K / 131K / 983K / 1M 标注。",
+        "max_output_tokens": 131072,
+        "note": "官方 Alibaba Cloud Model Studio 模型页：Context Window 1,000,000、Max Output 131,072（qwencloud 模型页标 1M / 131K）。",
         "sources": [
           "https://www.qwencloud.com/models/qwen3.8-flash",
           "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash"
@@ -4336,58 +2369,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://www.qwencloud.com/models/qwen3.8-flash",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash"
-        ]
-      },
-      "features": {
-        "supported": [
-          "function_calling",
-          "structured_outputs",
-          "web_search",
-          "partial_mode",
-          "context_cache"
-        ],
-        "unsupported": [
-          "fine_tuning"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "来自 Alibaba Cloud Model Studio 模型页 Model capabilities 表（China 区列表；Singapore 区列表含 function calling / structured outputs / web search / prefix completion）；同表还标注 Batch Inference：3.8-max/3.7-max/3.7-plus/3.7-flash/3.8-flash 支持，3.8-27b 与 3.8-2.4t 不支持（国际站 Batch 折扣见 service_tiers）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": true,
-        "min": 1,
-        "max": 262144,
-        "default": 262144,
-        "note": "thinking_budget 限制思维链最大 token 数；官方：默认值为模型最大思维链长度（262144），适用于 Qwen3.8/3.7 系列。百炼控制台调试面板的取值范围为 1~32768（缺省 4000）。reasoning_effort 与 thinking_budget 不可同时设置（见 reasoning_effort.note）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "阿里云 Qwen",
@@ -4408,9 +2390,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤32K 输入档；32K–256K：输入 $0.10、输出 $0.40；256K–1M：输入 $0.20、输出 $0.80。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-flash，Singapore，美元）：≤32K 档隐式 $0.006、显式创建 $0.038、显式命中 $0.003；32K–256K 与 >256K 档缓存价见 pricing_tiers；cached_input=显式缓存命中价，cache_write=显式缓存创建价（官方页四舍五入标 $0.038）。",
-      "unverified_fields": [
-        "knowledge_cutoff"
-      ],
+      "unverified_fields": [],
       "id": "m34",
       "reasoning_effort": {
         "supported": true,
@@ -4430,15 +2410,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 991808,
-        "max_output_tokens": 131072,
         "context_length": 1000000,
-        "max_input_tokens_thinking": 983616,
-        "max_output_tokens_thinking": 131072,
-        "max_reasoning_tokens": 262144,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方 Alibaba Cloud Model Studio 模型页 Context limits：Max Input 991808（思考模式 983616）、Max Output 131072（思考模式同）、Context Window 1000000、Max Chain-of-Thought Length 262144；qwencloud 模型页以 991K / 131K / 983K / 1M 标注。",
+        "max_output_tokens": 131072,
+        "note": "官方 Alibaba Cloud Model Studio 模型页：Context Window 1,000,000、Max Output 131,072（qwencloud 模型页标 1M / 131K）。",
         "sources": [
           "https://www.qwencloud.com/models/qwen3.7-flash",
           "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-flash"
@@ -4497,58 +2471,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://www.qwencloud.com/models/qwen3.7-flash",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-flash"
-        ]
-      },
-      "features": {
-        "supported": [
-          "function_calling",
-          "structured_outputs",
-          "web_search",
-          "prefix_completion",
-          "context_cache"
-        ],
-        "unsupported": [
-          "fine_tuning"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "来自 Alibaba Cloud Model Studio 模型页 Model capabilities 表（China 区列表；Singapore 区列表含 function calling / structured outputs / web search / prefix completion）；同表还标注 Batch Inference：3.8-max/3.7-max/3.7-plus/3.7-flash/3.8-flash 支持，3.8-27b 与 3.8-2.4t 不支持（国际站 Batch 折扣见 service_tiers）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-flash"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": true,
-        "min": 1,
-        "max": 262144,
-        "default": 262144,
-        "note": "thinking_budget 限制思维链最大 token 数；官方：默认值为模型最大思维链长度（262144），适用于 Qwen3.8/3.7 系列。百炼控制台调试面板的取值范围为 1~32768（缺省 4000）。reasoning_effort 与 thinking_budget 不可同时设置（见 reasoning_effort.note）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-flash"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": "qwen3.7-flash-2026-07-15",
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "阿里云 Qwen",
@@ -4570,9 +2493,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input (Cache Hit) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
-      "unverified_fields": [
-        "knowledge_cutoff"
-      ],
+      "unverified_fields": [],
       "id": "m35",
       "reasoning_effort": {
         "supported": true,
@@ -4590,15 +2511,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 991808,
-        "max_output_tokens": 131072,
         "context_length": 1000000,
-        "max_input_tokens_thinking": 983616,
-        "max_output_tokens_thinking": 131072,
-        "max_reasoning_tokens": 131072,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方 Alibaba Cloud Model Studio 模型页 Context limits：Max Input 991808（思考模式 983616）、Max Output 131072（思考模式同）、Context Window 1000000、Max Chain-of-Thought Length 131072；qwencloud 模型页以 991K / 131K / 983K / 1M 标注。",
+        "max_output_tokens": 131072,
+        "note": "官方 Alibaba Cloud Model Studio 模型页：Context Window 1,000,000、Max Output 131,072（qwencloud 模型页标 1M / 131K）。",
         "sources": [
           "https://www.qwencloud.com/models/qwen3.8-2.4t-a95b",
           "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
@@ -4614,56 +2529,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
-      "modalities": {
-        "input": [
-          "text"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://www.qwencloud.com/models/qwen3.8-2.4t-a95b",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
-        ]
-      },
-      "features": {
-        "supported": [
-          "function_calling",
-          "structured_outputs",
-          "web_search",
-          "prefix_completion",
-          "context_cache"
-        ],
-        "unsupported": [
-          "fine_tuning"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "来自 Alibaba Cloud Model Studio 模型页 Model capabilities 表（China 区列表；Singapore 区列表含 function calling / structured outputs / web search / prefix completion）；同表还标注 Batch Inference：3.8-max/3.7-max/3.7-plus/3.7-flash/3.8-flash 支持，3.8-27b 与 3.8-2.4t 不支持（国际站 Batch 折扣见 service_tiers）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": true,
-        "min": 1,
-        "max": 131072,
-        "default": 131072,
-        "note": "thinking_budget 限制思维链最大 token 数；官方：默认值为模型最大思维链长度（131072），适用于 Qwen3.8/3.7 系列。百炼控制台调试面板的取值范围为 1~32768（缺省 4000）。reasoning_effort 与 thinking_budget 不可同时设置（见 reasoning_effort.note）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "阿里云 Qwen",
@@ -4684,9 +2550,7 @@
       ],
       "last_updated": "2026-10-11",
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价取自官方模型页（https://www.qwencloud.com/models/qwen3.8-27b，International，美元）：隐式缓存 $0.1、显式缓存创建 $0.625、显式缓存命中 $0.05；cached_input=显式缓存命中价，cache_write=显式缓存创建价；三项均见结构化字段 cache_pricing。",
-      "unverified_fields": [
-        "knowledge_cutoff"
-      ],
+      "unverified_fields": [],
       "id": "m36",
       "reasoning_effort": {
         "supported": true,
@@ -4704,15 +2568,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 991808,
-        "max_output_tokens": 131072,
         "context_length": 1000000,
-        "max_input_tokens_thinking": 983616,
-        "max_output_tokens_thinking": 131072,
-        "max_reasoning_tokens": 262144,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方 Alibaba Cloud Model Studio 模型页 Context limits：Max Input 991808（思考模式 983616）、Max Output 131072（思考模式同）、Context Window 1000000、Max Chain-of-Thought Length 262144；qwencloud 模型页以 991K / 131K / 983K / 1M 标注。",
+        "max_output_tokens": 131072,
+        "note": "官方 Alibaba Cloud Model Studio 模型页：Context Window 1,000,000、Max Output 131,072（qwencloud 模型页标 1M / 131K）。",
         "sources": [
           "https://www.qwencloud.com/models/qwen3.8-27b",
           "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-27b"
@@ -4728,58 +2586,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://www.qwencloud.com/models/qwen3.8-27b",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-27b"
-        ]
-      },
-      "features": {
-        "supported": [
-          "function_calling",
-          "structured_outputs",
-          "web_search",
-          "prefix_completion",
-          "context_cache"
-        ],
-        "unsupported": [
-          "fine_tuning"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "来自 Alibaba Cloud Model Studio 模型页 Model capabilities 表（China 区列表；Singapore 区列表含 function calling / structured outputs / web search / prefix completion）；同表还标注 Batch Inference：3.8-max/3.7-max/3.7-plus/3.7-flash/3.8-flash 支持，3.8-27b 与 3.8-2.4t 不支持（国际站 Batch 折扣见 service_tiers）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-27b"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": true,
-        "min": 1,
-        "max": 262144,
-        "default": 262144,
-        "note": "thinking_budget 限制思维链最大 token 数；官方：默认值为模型最大思维链长度（262144），适用于 Qwen3.8/3.7 系列。百炼控制台调试面板的取值范围为 1~32768（缺省 4000）。reasoning_effort 与 thinking_budget 不可同时设置（见 reasoning_effort.note）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-27b"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "阿里云 Qwen",
@@ -4799,10 +2606,9 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-11",
-      "notes": "阿里云百炼国际站（新加坡）美元价；多模态模型，表中为文本价，音频等其他模态价格见官方页。 缓存命中价 $0.016 来自官方价格页；缓存写入价官方未列且该模型不在显式缓存支持列表，保持待核实。 2026-10-10 复核：官方 Context Cache 文档仅说明该模型隐式缓存命中按固定单价，显式缓存支持列表（Singapore）不含 qwen3.8-omni-flash，官方模型页未列缓存创建价，cache_write 仍待核实。",
+      "notes": "阿里云百炼国际站（新加坡）美元价；表中为文本价，音频等其他模态价格见官方页。 缓存命中价 $0.016 来自官方价格页；缓存写入价官方未列且该模型不在显式缓存支持列表，保持待核实。 2026-10-10 复核：官方 Context Cache 文档仅说明该模型隐式缓存命中按固定单价，显式缓存支持列表（Singapore）不含 qwen3.8-omni-flash，官方模型页未列缓存创建价，cache_write 仍待核实。",
       "unverified_fields": [
-        "cache_write",
-        "knowledge_cutoff"
+        "cache_write"
       ],
       "id": "m37",
       "reasoning_effort": {
@@ -4821,15 +2627,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 991808,
-        "max_output_tokens": 131072,
         "context_length": 1000000,
-        "max_input_tokens_thinking": 983616,
-        "max_output_tokens_thinking": 131072,
-        "max_reasoning_tokens": 262144,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context window 1M tokens；最大输入 991808（思考模式 983616）；最大输出 131072。最大思维链长度：官方 Alibaba 文档未列，qwencloud 模型页标 Max Reasoning 262K（按 262,144 记录）。",
+        "max_output_tokens": 131072,
+        "note": "官方 Alibaba Cloud Model Studio 模型页：Context Window 1,000,000、Max Output 131,072（qwencloud 模型页标 1M / 131K）。",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-omni-flash",
           "https://www.qwencloud.com/models/qwen3.8-omni-flash"
@@ -4845,58 +2645,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。 本模型官方未列显式缓存价（不在显式缓存支持列表），explicit_* 待核实。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "audio",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://www.qwencloud.com/models/qwen3.8-omni-flash",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-omni-flash"
-        ]
-      },
-      "features": {
-        "supported": [
-          "function_calling",
-          "web_search",
-          "context_caching_implicit",
-          "thinking_reasoning_effort",
-          "audio_input_113_languages",
-          "multichannel_audio_input"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "来自 Alibaba Cloud 模型页 Model capabilities：支持自定义工具调用、Responses 内置 web_search、隐式缓存与 Responses Session 缓存；仅文本输出（modalities=[\"text\"]）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-omni-flash"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": true,
-        "min": 1,
-        "max": 262144,
-        "default": 262144,
-        "note": "thinking_budget 限制思维链最大 token 数；官方：默认值为模型最大思维链长度（262144），适用于 Qwen3.8/3.7 系列。百炼控制台调试面板的取值范围为 1~32768（缺省 4000）。reasoning_effort 与 thinking_budget 不可同时设置（见 reasoning_effort.note）。",
-        "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
-          "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-omni-flash"
-        ]
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Google Gemini",
@@ -4916,11 +2665,8 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
       ],
       "last_updated": "2026-10-11",
-      "notes": "Standard 付费档。缓存存储费 $0.50/百万 token/小时（2027 起 $1.00）。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。 注意：该价格仅到 2026-12-31；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
-      "unverified_fields": [
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "notes": "Standard 付费档。缓存存储费 $0.50/百万 token/小时（2027 起 $1.00）。价格已对照官方定价页复核无变化。 注意：该价格仅到 2026-12-31；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
+      "unverified_fields": [],
       "id": "m38",
       "reasoning_effort": {
         "supported": true,
@@ -4937,15 +2683,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 65536,
         "context_length": 1048576,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方 Gemini 模型页：Input token limit 1,048,576 / Output token limit 65,536。",
+        "max_output_tokens": 65536,
+        "note": "官方 Gemini 模型页：上下文窗口按 Input token limit 1,048,576 记录；Output token limit 65,536。",
         "sources": [
           "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
         ]
@@ -4976,60 +2716,6 @@
         "storage_per_1M_tokens_hour": 0.5,
         "note": "缓存命中价即 pricing.cached_input；官方另收缓存存储费 $0.50 / 百万 token / 小时（2027-01-01 起 $1.00）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
-        ]
-      },
-      "features": {
-        "supported": [
-          "caching",
-          "code_execution",
-          "computer_use_preview",
-          "file_search",
-          "function_calling",
-          "grounding_google_maps",
-          "search_grounding",
-          "structured_outputs",
-          "thinking",
-          "url_context"
-        ],
-        "unsupported": [
-          "audio_generation",
-          "image_generation",
-          "live_api"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "来自 Gemini 模型页 Capabilities 表；computer_use 为 Preview，file_search 在 3.1 Pro Preview 仅 AI Studio。",
-        "sources": [
-          "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
       "price_schedule": [
         {
           "kind": "scheduled_increase",
@@ -5041,9 +2727,7 @@
           "cache_write": null,
           "note": "官方：当前价格仅到 2026-12-31；2027-01-01 起 Standard 输入 $1.50、输出 $7.50、缓存 $0.15，缓存存储费 $1.00/百万 token/小时；Batch/Flex/Priority 价同比例上调。"
         }
-      ],
-      "snapshot": null,
-      "aliases": []
+      ]
     },
     {
       "vendor": "Google Gemini",
@@ -5063,11 +2747,8 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
       ],
       "last_updated": "2026-10-11",
-      "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
-      "unverified_fields": [
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。价格已对照官方定价页复核无变化。",
+      "unverified_fields": [],
       "id": "m39",
       "reasoning_effort": {
         "supported": true,
@@ -5085,15 +2766,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 65536,
         "context_length": 1048576,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方 Gemini 模型页：Input token limit 1,048,576 / Output token limit 65,536。",
+        "max_output_tokens": 65536,
+        "note": "官方 Gemini 模型页：上下文窗口按 Input token limit 1,048,576 记录；Output token limit 65,536。",
         "sources": [
           "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
         ]
@@ -5124,63 +2799,7 @@
         "storage_per_1M_tokens_hour": 1.0,
         "note": "缓存命中价即 pricing.cached_input；官方另收缓存存储费 $1.00 / 百万 token / 小时。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
-        ]
-      },
-      "features": {
-        "supported": [
-          "caching",
-          "code_execution",
-          "computer_use_preview",
-          "file_search",
-          "function_calling",
-          "grounding_google_maps",
-          "search_grounding",
-          "structured_outputs",
-          "thinking",
-          "url_context"
-        ],
-        "unsupported": [
-          "audio_generation",
-          "image_generation",
-          "live_api"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "来自 Gemini 模型页 Capabilities 表；computer_use 为 Preview，file_search 在 3.1 Pro Preview 仅 AI Studio。",
-        "sources": [
-          "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "vendor": "Google Gemini",
@@ -5200,11 +2819,8 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
       ],
       "last_updated": "2026-10-11",
-      "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。",
-      "unverified_fields": [
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。价格已对照官方定价页复核无变化。",
+      "unverified_fields": [],
       "id": "m40",
       "reasoning_effort": {
         "supported": true,
@@ -5221,15 +2837,9 @@
         ]
       },
       "limits": {
-        "max_input_tokens": 1048576,
-        "max_output_tokens": 65536,
         "context_length": 1048576,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方 Gemini 模型页：Input token limit 1,048,576 / Output token limit 65,536。",
+        "max_output_tokens": 65536,
+        "note": "官方 Gemini 模型页：上下文窗口按 Input token limit 1,048,576 记录；Output token limit 65,536。",
         "sources": [
           "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
         ]
@@ -5279,62 +2889,7 @@
         "storage_per_1M_tokens_hour": 4.5,
         "note": "缓存命中价即 pricing.cached_input（>200K 提示 $0.40，见 pricing_tiers）；官方另收缓存存储费 $4.50 / 百万 token / 小时。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video",
-          "audio",
-          "pdf"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
-        ]
-      },
-      "features": {
-        "supported": [
-          "caching",
-          "code_execution",
-          "file_search_ai_studio_only",
-          "function_calling",
-          "grounding_google_maps",
-          "search_grounding",
-          "structured_outputs",
-          "thinking",
-          "url_context"
-        ],
-        "unsupported": [
-          "audio_generation",
-          "image_generation",
-          "live_api"
-        ],
-        "tools": null,
-        "status": "verified",
-        "note": "来自 Gemini 模型页 Capabilities 表；computer_use 为 Preview，file_search 在 3.1 Pro Preview 仅 AI Studio。",
-        "sources": [
-          "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "currency": "USD",
@@ -5355,12 +2910,8 @@
       "context_length": "1,000,000 tokens",
       "context_tokens": 1000000,
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
-      "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方标注“永久 5 折”，划线原价 $0.60 / $2.40 / 缓存读取 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12（折后）。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09）。官方页未列缓存写入价。多模态（文本/图像/视频输入）；最大输出建议 128K、上限 512K。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方标注“永久 5 折”，划线原价 $0.60 / $2.40 / 缓存读取 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12（折后）。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09）。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
+      "unverified_fields": [],
       "reasoning_effort": {
         "supported": false,
         "levels": null,
@@ -5374,15 +2925,9 @@
       },
       "id": "m41",
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 524288,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context Window 1,000,000；max_completion_tokens 推荐 131072（128K）、最大 524288（512K）；最大输入 token 数官方未单独列出（待核实）。",
+        "max_output_tokens": 524288,
+        "note": "官方：Context Window 1,000,000；max_completion_tokens 推荐 131072（128K）、最大 524288（512K），最大输出按 524288 记录。",
         "sources": [
           "https://platform.minimax.io/docs/guides/text-generation",
           "https://platform.minimax.io/docs/api-reference/text-chat-openai"
@@ -5423,50 +2968,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价即 pricing.cached_input；官方页未列缓存写入价（M2.x 系列才列写入价）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.minimax.io/docs/guides/text-generation"
-        ]
-      },
-      "features": {
-        "supported": [
-          "prompt_caching",
-          "priority_service_tier"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "官方定价页列出缓存读取价与 Priority 档；其余能力官方 M3 页面未逐项列出（待核实）。",
-        "sources": [
-          "https://platform.minimax.io/docs/guides/pricing-paygo",
-          "https://platform.minimax.io/docs/guides/text-generation"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "general",
-        "note": null
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "currency": "USD",
@@ -5487,12 +2989,8 @@
       "context_length": "1,000,000 tokens",
       "context_tokens": 1000000,
       "source_url": "https://platform.minimax.io/docs/guides/text-generation",
-      "notes": "官方文档:该预览模型目前仅通过 M Plan 订阅与 MiniMax Code 提供(Subscription Key),按量付费(pay-as-you-go)定价页未单独列出其 token 单价。价格暂按 MiniMax-M3 计价(用户确认,官方暂未单独标价;该模型目前仅在 M Plan / MiniMax Code 提供)。表中为标准档、输入 ≤512K tokens 的价格;输入 >512K tokens 时同 M3:输入 $0.60、输出 $2.40、缓存读取 $0.12。官方页未列缓存写入价。多模态(文本/图像/视频输入);max_completion_tokens 建议 128K、上限 512K。",
-      "unverified_fields": [
-        "limits.max_input_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
-      ],
+      "notes": "官方文档:该预览模型目前仅通过 M Plan 订阅与 MiniMax Code 提供(Subscription Key),按量付费(pay-as-you-go)定价页未单独列出其 token 单价。价格暂按 MiniMax-M3 计价(用户确认,官方暂未单独标价;该模型目前仅在 M Plan / MiniMax Code 提供)。表中为标准档、输入 ≤512K tokens 的价格;输入 >512K tokens 时同 M3:输入 $0.60、输出 $2.40、缓存读取 $0.12。官方页未列缓存写入价。max_completion_tokens 建议 128K、上限 512K。",
+      "unverified_fields": [],
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -5512,15 +3010,9 @@
       },
       "id": "m42",
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": 524288,
         "context_length": 1000000,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "官方：Context Window 1,000,000；max_completion_tokens 推荐 131072（128K）、最大 524288（512K）；最大输入 token 数官方未单独列出（待核实）。",
+        "max_output_tokens": 524288,
+        "note": "官方：Context Window 1,000,000；max_completion_tokens 推荐 131072（128K）、最大 524288（512K），最大输出按 524288 记录。",
         "sources": [
           "https://platform.minimax.io/docs/guides/text-generation",
           "https://platform.minimax.io/docs/api-reference/text-chat-openai"
@@ -5555,51 +3047,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": "缓存读取价即 pricing.cached_input；官方页未列缓存写入价（M2.x 系列才列写入价）。"
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://platform.minimax.io/docs/guides/text-generation"
-        ]
-      },
-      "features": {
-        "supported": [
-          "tool_use",
-          "thinking_effort",
-          "multimodal_input",
-          "long_context_1m"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "官方文档：面向智能体推理、工具调用、编码与结构化任务；effort 取 low/medium/high/xhigh/max（默认 max）。",
-        "sources": [
-          "https://platform.minimax.io/docs/guides/text-generation"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "subscription_only",
-        "note": "目前仅通过 M Plan 订阅与 MiniMax Code 提供；按量付费定价页未单独列出（价格暂按 M3，用户确认）。"
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     },
     {
       "currency": "USD",
@@ -5622,10 +3070,7 @@
       "source_url": "https://www.kimi.com/code/docs/en/kimi-code/models",
       "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无官方 token 单价。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。 价格暂按 Kimi K2.7 Code 计价(用户确认,Kimi 官方暂未单独标价)",
       "unverified_fields": [
-        "limits.max_input_tokens",
-        "limits.max_output_tokens",
-        "knowledge_cutoff",
-        "thinking_budget"
+        "limits.max_output_tokens"
       ],
       "reasoning_effort": {
         "supported": true,
@@ -5643,15 +3088,9 @@
       },
       "id": "m43",
       "limits": {
-        "max_input_tokens": null,
-        "max_output_tokens": null,
         "context_length": 1048576,
-        "max_input_tokens_thinking": null,
-        "max_output_tokens_thinking": null,
-        "max_reasoning_tokens": null,
-        "max_output_tokens_batch_beta": null,
-        "default_output_tokens": null,
-        "note": "Kimi Code 官方模型配置页：kimi-for-coding（K2.8 Preview）上下文窗口 1048576；最大输入/输出官方未列出（待核实）。",
+        "max_output_tokens": null,
+        "note": "Kimi Code 官方模型配置页：kimi-for-coding（K2.8 Preview）上下文窗口 1048576；最大输出官方未列出（待核实）。",
         "sources": [
           "https://www.kimi.com/code/docs/en/kimi-code/models"
         ]
@@ -5666,48 +3105,7 @@
         "storage_per_1M_tokens_hour": null,
         "note": null
       },
-      "modalities": {
-        "input": [
-          "text",
-          "image",
-          "video"
-        ],
-        "output": [
-          "text"
-        ],
-        "unsupported": null,
-        "sources": [
-          "https://www.kimi.com/code/docs/en/kimi-code/models"
-        ]
-      },
-      "features": {
-        "supported": [
-          "thinking_effort_low_high_max"
-        ],
-        "unsupported": null,
-        "tools": null,
-        "status": "partial",
-        "note": "官方：reasoning_effort low/high/max（默认 max）。能力列表非穷举。",
-        "sources": [
-          "https://www.kimi.com/code/docs/en/kimi-code/models"
-        ]
-      },
-      "knowledge_cutoff": null,
-      "thinking_budget": {
-        "supported": null,
-        "min": null,
-        "max": null,
-        "default": null,
-        "note": "官方文档未给出 token 思考预算范围（待核实）。",
-        "sources": []
-      },
-      "availability": {
-        "status": "subscription_only",
-        "note": "仅 Kimi Code 订阅 API（Plus 及以上等），按会员订阅计费；开放平台按量付费无此模型，价格暂按 K2.7 Code（用户确认）。"
-      },
-      "price_schedule": [],
-      "snapshot": null,
-      "aliases": []
+      "price_schedule": []
     }
   ]
 }
