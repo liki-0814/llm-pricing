@@ -114,11 +114,15 @@
       "notes": "阿里云百炼国际站（新加坡）美元价；别名当前指向 qwen3.7-max-2026-05-20。单档 0–1M。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。",
       "reasoning_effort": {
         "supported": true,
-        "levels": null,
-        "default": null,
+        "levels": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "default": "xhigh",
         "can_disable": true,
-        "status": "partial",
-        "note": "Qwen3.7 Max 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Max series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。",
+        "status": "verified",
+        "note": "Qwen3.7 Max 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Max series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。 档位和默认值暂参照 Qwen3.8(用户确认,官方文档暂未单独列出 Qwen3.7 的 reasoning_effort 档位)",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -126,9 +130,7 @@
           "https://docs.qwencloud.com/developer-guides/text-generation/thinking"
         ]
       },
-      "unverified_fields": [
-        "reasoning_effort"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/qwen3.7-max.json",
         "vendor": "vendors/qwen.json"
@@ -166,11 +168,15 @@
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤256K 输入档（非思考/思考输出价相同）；256K–1M 档：输入 $1.2、输出 $4.8。官方标注限时 8 折（表中为标价）。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。 缓存价基于表中档位（≤256K）输入价；其他档位按同比例。",
       "reasoning_effort": {
         "supported": true,
-        "levels": null,
-        "default": null,
+        "levels": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "default": "xhigh",
         "can_disable": true,
-        "status": "partial",
-        "note": "Qwen3.7 Plus 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Plus series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。",
+        "status": "verified",
+        "note": "Qwen3.7 Plus 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Plus series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。 档位和默认值暂参照 Qwen3.8(用户确认,官方文档暂未单独列出 Qwen3.7 的 reasoning_effort 档位)",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -178,9 +184,7 @@
           "https://docs.qwencloud.com/developer-guides/text-generation/thinking"
         ]
       },
-      "unverified_fields": [
-        "reasoning_effort"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/qwen3.7-plus.json",
         "vendor": "vendors/qwen.json"
@@ -271,11 +275,15 @@
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤32K 输入档；32K–256K：输入 $0.10、输出 $0.40；256K–1M：输入 $0.20、输出 $0.80。 缓存价按阿里规则推算：显式缓存命中=标准输入价×10%，显式缓存创建=×125%（官方 Context Cache 文档，5 分钟 TTL）；隐式缓存命中为 20%。按阿里规则推算，非官方逐模型列价。 缓存价基于表中档位（≤32K）输入价；其他档位按同比例。",
       "reasoning_effort": {
         "supported": true,
-        "levels": null,
-        "default": null,
+        "levels": [
+          "low",
+          "medium",
+          "xhigh"
+        ],
+        "default": "xhigh",
         "can_disable": true,
-        "status": "partial",
-        "note": "Qwen3.7 Flash 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Flash series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。",
+        "status": "verified",
+        "note": "Qwen3.7 Flash 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Flash series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。 档位和默认值暂参照 Qwen3.8(用户确认,官方文档暂未单独列出 Qwen3.7 的 reasoning_effort 档位)",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -283,9 +291,7 @@
           "https://docs.qwencloud.com/developer-guides/text-generation/thinking"
         ]
       },
-      "unverified_fields": [
-        "reasoning_effort"
-      ],
+      "unverified_fields": [],
       "links": {
         "self": "models/qwen3.7-flash.json",
         "vendor": "vendors/qwen.json"
