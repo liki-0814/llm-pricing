@@ -3,7 +3,7 @@
   "info": {
     "title": "LLM API Pricing (static JSON API)",
     "version": "1.0.0",
-    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD per 1M tokens. Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-10-10."
+    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD per 1M tokens. Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-10-11."
   },
   "servers": [
     {
@@ -247,6 +247,18 @@
           "last_updated",
           "notes",
           "reasoning_effort",
+          "limits",
+          "pricing_tiers",
+          "service_tiers",
+          "cache_pricing",
+          "modalities",
+          "features",
+          "knowledge_cutoff",
+          "thinking_budget",
+          "availability",
+          "price_schedule",
+          "snapshot",
+          "aliases",
           "unverified_fields",
           "links"
         ],
@@ -527,6 +539,541 @@
               }
             }
           },
+          "limits": {
+            "type": "object",
+            "description": "Token limits from official pages. null = 待核实 (not verified, never guessed). Official K/M labels are recorded as 1K=1,000 / 1M=1,000,000 unless the page gives exact numbers (see note).",
+            "required": [
+              "max_input_tokens",
+              "max_output_tokens",
+              "context_length",
+              "max_input_tokens_thinking",
+              "max_output_tokens_thinking",
+              "max_reasoning_tokens",
+              "max_output_tokens_batch_beta",
+              "default_output_tokens",
+              "status",
+              "note",
+              "sources"
+            ],
+            "properties": {
+              "max_input_tokens": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Maximum input tokens per request (non-thinking mode where the vendor distinguishes)"
+              },
+              "max_output_tokens": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Maximum output tokens per request"
+              },
+              "context_length": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Context window in tokens (same value as top-level context_length)"
+              },
+              "max_input_tokens_thinking": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Maximum input tokens in thinking mode, when documented separately"
+              },
+              "max_output_tokens_thinking": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Maximum output tokens in thinking mode, when documented separately"
+              },
+              "max_reasoning_tokens": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Maximum chain-of-thought / reasoning tokens (Qwen: Max Chain-of-Thought Length)"
+              },
+              "max_output_tokens_batch_beta": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Higher output limit on the batch API behind a beta header (Anthropic: 300K)"
+              },
+              "default_output_tokens": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "Default max output tokens when the request omits it, if documented"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "verified",
+                  "partial",
+                  "unverified"
+                ],
+                "description": "verified = max_input_tokens, max_output_tokens and context_length all known; partial = some; unverified = none"
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          },
+          "pricing_tiers": {
+            "type": "array",
+            "description": "Long-context / prompt-length price tiers where documented, in addition to the base price in pricing (which is the lowest tier). Empty array = single tier (or tiers not documented). A request whose input falls in a tier is billed entirely at that tier's prices. A null price inside a tier = not documented for that tier.",
+            "items": {
+              "type": "object",
+              "required": [
+                "condition",
+                "input_tokens_gt",
+                "input_tokens_lte",
+                "input",
+                "output",
+                "cached_input",
+                "cache_write",
+                "cache_pricing",
+                "note"
+              ],
+              "properties": {
+                "condition": {
+                  "type": "string",
+                  "description": "Machine-readable condition, e.g. input_tokens>272000"
+                },
+                "input_tokens_gt": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "description": "Tier applies when input tokens > this value"
+                },
+                "input_tokens_lte": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "description": "…and <= this value (null = no upper bound)"
+                },
+                "input": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                },
+                "output": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                },
+                "cached_input": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "Same meaning as pricing.cached_input, at this tier"
+                },
+                "cache_write": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "Same meaning as pricing.cache_write, at this tier"
+                },
+                "cache_pricing": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/CachePricing"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "note": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "service_tiers": {
+            "type": "array",
+            "description": "Documented service-tier price multipliers applied to the standard price (all of input, output and cache prices). Only tiers documented for this model are listed.",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "multiplier",
+                "note"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "enum": [
+                    "batch",
+                    "flex",
+                    "fast",
+                    "priority",
+                    "ultrafast",
+                    "data_residency"
+                  ],
+                  "description": "batch / flex / fast (OpenAI Fast = formerly Priority; Anthropic fast mode) / priority / ultrafast; data_residency = regional / US-only processing surcharge"
+                },
+                "multiplier": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "Price multiplier vs standard, e.g. 0.5 or 2"
+                },
+                "note": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "cache_pricing": {
+            "$ref": "#/components/schemas/CachePricing"
+          },
+          "modalities": {
+            "type": "object",
+            "required": [
+              "input",
+              "output",
+              "unsupported",
+              "sources"
+            ],
+            "description": "Input / output modalities documented on official pages. null = 待核实.",
+            "properties": {
+              "input": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "output": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "unsupported": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "description": "Modalities the official page explicitly lists as unsupported"
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          },
+          "features": {
+            "type": "object",
+            "required": [
+              "supported",
+              "unsupported",
+              "tools",
+              "status",
+              "note",
+              "sources"
+            ],
+            "description": "Capabilities documented on official model pages (snake_case names as in the vendor docs). supported/unsupported are only what the official page states; a feature missing from both lists is 待核实, not unsupported.",
+            "properties": {
+              "supported": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "unsupported": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "tools": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                },
+                "description": "Built-in tools supported (OpenAI Responses API)"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "verified",
+                  "partial",
+                  "unverified"
+                ],
+                "description": "verified = the vendor page lists capabilities completely; partial = list not exhaustive; unverified = 待核实"
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          },
+          "knowledge_cutoff": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Knowledge cutoff from official pages; null = not stated / 待核实",
+            "required": [
+              "date",
+              "training_data_date",
+              "note"
+            ],
+            "properties": {
+              "date": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "YYYY-MM-DD or YYYY-MM"
+              },
+              "training_data_date": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "thinking_budget": {
+            "type": "object",
+            "required": [
+              "supported",
+              "min",
+              "max",
+              "default",
+              "note",
+              "sources"
+            ],
+            "description": "Token budget for thinking / chain-of-thought (budget_tokens / thinking_budget). supported: true = parameter exists, false = documented as not accepted, null = 待核实. Distinct from reasoning_effort levels.",
+            "properties": {
+              "supported": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "min": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "max": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "default": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          },
+          "availability": {
+            "type": "object",
+            "required": [
+              "status",
+              "note"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "general",
+                  "limited",
+                  "subscription_only"
+                ],
+                "description": "general = pay-as-you-go API; limited = restricted access (verification program); subscription_only = only via a subscription product, no pay-as-you-go price"
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "price_schedule": {
+            "type": "array",
+            "description": "Time-limited promotions and scheduled price changes announced on official pages (price fields are the announced prices; null = not announced)",
+            "items": {
+              "type": "object",
+              "required": [
+                "kind",
+                "effective_from",
+                "effective_until",
+                "input",
+                "output",
+                "cached_input",
+                "cache_write",
+                "note"
+              ],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "promotion",
+                    "scheduled_increase",
+                    "scheduled_decrease"
+                  ]
+                },
+                "effective_from": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date"
+                },
+                "effective_until": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date"
+                },
+                "input": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                },
+                "output": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                },
+                "cached_input": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                },
+                "cache_write": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                },
+                "note": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "snapshot": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Dated snapshot / version this model id currently resolves to, if documented"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Other model names still accepted by the vendor API"
+          },
           "unverified_fields": {
             "type": "array",
             "items": {
@@ -596,6 +1143,66 @@
                 "type": "string"
               }
             }
+          }
+        }
+      },
+      "CachePricing": {
+        "type": "object",
+        "required": [
+          "implicit_read",
+          "explicit_read",
+          "explicit_write",
+          "explicit_write_1h",
+          "storage_per_1M_tokens_hour",
+          "note"
+        ],
+        "description": "Cache price breakdown where documented (USD per 1M tokens; null = not documented / 待核实). pricing.cached_input and pricing.cache_write keep their meaning; this object adds the finer split. Qwen: implicit_read / explicit_read / explicit_write are the three official cache prices.",
+        "properties": {
+          "implicit_read": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Implicit (automatic) cache hit price"
+          },
+          "explicit_read": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Explicit cache hit (read) price"
+          },
+          "explicit_write": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Cache creation / write price (5-minute TTL where TTLs exist)"
+          },
+          "explicit_write_1h": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "1-hour TTL cache write price (Anthropic, Kimi K3)"
+          },
+          "storage_per_1M_tokens_hour": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Cache storage fee per 1M tokens per hour (USD, not per 1M tokens; 0 = currently free)"
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },

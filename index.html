@@ -66,6 +66,7 @@
             <option value="cached_input:1">缓存读取 低→高</option>
             <option value="cache_write:1">缓存写入 低→高</option>
             <option value="context_tokens:-1">上下文 长→短</option>
+            <option value="lim_out:-1">最大输出 大→小</option>
             <option value="re_sort:-1">推理档位 多→少</option>
             <option value="model:1">模型名 A→Z</option>
           </select>
@@ -80,6 +81,7 @@
         <span><span class="na">未列出</span>官方定价页没有该项</span>
         <span><span class="best-tag" style="margin:0">最低</span>当前结果中该列最低价</span>
         <span><span class="lv lv-def">high</span>推理强度中的默认档</span>
+        <span><span class="detail-btn static">详情<span class="chev" aria-hidden="true"></span></span>展开：分档价、服务档倍率、缓存细分、模态、功能等</span>
       </div>
       <div class="count" id="count" aria-live="polite"></div>
     </div>
@@ -97,13 +99,14 @@
           <th class="num" data-key="cached_input"><button type="button" class="th">缓存读取<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
           <th class="num" data-key="cache_write"><button type="button" class="th">缓存写入<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
           <th class="num" data-key="context_tokens"><button type="button" class="th">上下文<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th data-key="lim_out"><button type="button" class="th">上限 / 限制<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
           <th data-key="re_sort"><button type="button" class="th">推理强度<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
           <th data-key="peak_note"><button type="button" class="th">高峰 / 闲时<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
           <th data-key="last_updated"><button type="button" class="th">来源 / 更新<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
             </tr>
           </thead>
           <tbody id="tbody">
-            <tr class="skeleton"><td colspan="10"></td></tr><tr class="skeleton"><td colspan="10"></td></tr><tr class="skeleton"><td colspan="10"></td></tr>
+            <tr class="skeleton"><td colspan="11"></td></tr><tr class="skeleton"><td colspan="11"></td></tr><tr class="skeleton"><td colspan="11"></td></tr>
           </tbody>
         </table>
       </div>
@@ -117,7 +120,7 @@
   <div class="wrap">
     <div>
       <h3>关于数据</h3>
-      <p>所有价格均取自各厂商官方定价页，统一为美元（USD）/ 每 100 万 token；表中主价格为标准价（有闲时价时为高峰价）。阶梯价、长上下文价、促销与 Batch 折扣见每行“备注”。</p>
+      <p>所有价格均取自各厂商官方定价页，统一为美元（USD）/ 每 100 万 token；表中主价格为标准价（有闲时价时为高峰价）。阶梯价、服务档倍率（Batch / Fast 等）、缓存细分价、上限、模态与功能请点每行“详情”展开，促销等见“备注”；以上数据均同步提供于 JSON 接口。</p>
       <p>价格可能随时调整，下单前请以官方页面为准。数据更新：<span id="footUpdated">—</span>。</p>
       <p>原始数据 <a href="data/prices.json">data/prices.json</a> · JSON 接口 <a href="api.html">接口文档</a> · <a href="api/v1/openapi.json">OpenAPI</a></p>
     </div>

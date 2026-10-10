@@ -1,7 +1,7 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-10",
+    "updated_at": "2026-10-11",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
@@ -60,7 +60,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
       "reasoning_effort": {
         "supported": true,
@@ -80,7 +80,99 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.25,
+        "explicit_write": 12.5,
+        "explicit_write_1h": 20,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/fable-5-1/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking",
+          "tool_use"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-06",
+        "training_data_date": "2026-06",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-fable-5.1.json",
         "vendor": "vendors/anthropic.json"
@@ -112,7 +204,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
       "reasoning_effort": {
         "supported": true,
@@ -132,7 +224,99 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.25,
+        "explicit_write": 12.5,
+        "explicit_write_1h": 20,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/mythos-5-1/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking",
+          "tool_use"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-06",
+        "training_data_date": "2026-06",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "limited",
+        "note": "限量开放：仅限通过 Anthropic 验证计划（如 Cyber Verification Program）的组织。"
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-mythos-5.1.json",
         "vendor": "vendors/anthropic.json"
@@ -164,7 +348,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
       "reasoning_effort": {
         "supported": true,
@@ -184,7 +368,98 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/fable-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 1,
+        "explicit_write": 12.5,
+        "explicit_write_1h": 20,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/fable-5/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/fable-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-01",
+        "training_data_date": "2026-01",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-fable-5.json",
         "vendor": "vendors/anthropic.json"
@@ -216,7 +491,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
       "reasoning_effort": {
         "supported": true,
@@ -236,7 +511,98 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/mythos-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 1,
+        "explicit_write": 12.5,
+        "explicit_write_1h": 20,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/mythos-5/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/mythos-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-01",
+        "training_data_date": "2026-01",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "limited",
+        "note": "限量开放：仅限通过 Anthropic 验证计划（如 Cyber Verification Program）的组织。"
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-mythos-5.json",
         "vendor": "vendors/anthropic.json"
@@ -268,7 +634,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（研究预览）输入 $8 / 输出 $40。",
       "reasoning_effort": {
         "supported": true,
@@ -288,7 +654,105 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $8 / 输出 $40，约 2×；全上下文窗口适用，不可与 Batch 同用。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.2,
+        "explicit_write": 5,
+        "explicit_write_1h": 8,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking",
+          "tool_use",
+          "fast_mode_research_preview"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-06",
+        "training_data_date": "2026-06",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-opus-5.5.json",
         "vendor": "vendors/anthropic.json"
@@ -320,7 +784,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
       "reasoning_effort": {
         "supported": true,
@@ -340,7 +804,104 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.5,
+        "explicit_write": 6.25,
+        "explicit_write_1h": 10,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-5/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking",
+          "fast_mode_research_preview"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-05",
+        "training_data_date": "2026-05",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-opus-5.json",
         "vendor": "vendors/anthropic.json"
@@ -372,7 +933,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
       "reasoning_effort": {
         "supported": true,
@@ -392,7 +953,104 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-4-8/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.5,
+        "explicit_write": 6.25,
+        "explicit_write_1h": 10,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-4-8/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking",
+          "fast_mode_research_preview"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-4-8/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-01",
+        "training_data_date": "2026-01",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-opus-4.8.json",
         "vendor": "vendors/anthropic.json"
@@ -424,7 +1082,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。新分词器，同样文本约多 30% token。",
       "reasoning_effort": {
         "supported": true,
@@ -444,7 +1102,98 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-4-7/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.5,
+        "explicit_write": 6.25,
+        "explicit_write_1h": 10,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-4-7/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。 新分词器：同样文本约多 30% token（官方，见 notes）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-4-7/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-01",
+        "training_data_date": "2026-01",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-opus-4.7.json",
         "vendor": "vendors/anthropic.json"
@@ -476,7 +1225,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。",
       "reasoning_effort": {
         "supported": true,
@@ -495,7 +1244,100 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-4-6/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.5,
+        "explicit_write": 6.25,
+        "explicit_write_1h": 10,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-4-6/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking",
+          "extended_thinking_deprecated"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/opus-4-6/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2025-05",
+        "training_data_date": "2025-08",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": true,
+        "min": 1024,
+        "max": null,
+        "default": null,
+        "note": "手动 extended thinking（thinking.type=\"enabled\" + budget_tokens）在该模型上已弃用但仍可用：budget_tokens 最小 1,024 且须小于 max_tokens（交错思考除外）；上限官方未给固定数值，待核实。官方推荐改用 adaptive thinking + effort。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-opus-4.6.json",
         "vendor": "vendors/anthropic.json"
@@ -527,7 +1369,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。",
       "reasoning_effort": {
         "supported": true,
@@ -547,7 +1389,99 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.1,
+        "explicit_write": 2.5,
+        "explicit_write_1h": 4,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking",
+          "tool_use"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-06",
+        "training_data_date": "2026-06",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-sonnet-5.5.json",
         "vendor": "vendors/anthropic.json"
@@ -579,7 +1513,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。$2/$10 已确认为标准价（原定 9 月 1 日涨价取消）。",
       "reasoning_effort": {
         "supported": true,
@@ -599,7 +1533,98 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.2,
+        "explicit_write": 2.5,
+        "explicit_write_1h": 4,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/sonnet-5/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-01",
+        "training_data_date": "2026-01",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-sonnet-5.json",
         "vendor": "vendors/anthropic.json"
@@ -631,7 +1656,7 @@
       "context_length_label": "1M",
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $6。Batch API 5 折。",
       "reasoning_effort": {
         "supported": true,
@@ -650,7 +1675,100 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/sonnet-4-6/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.3,
+        "explicit_write": 3.75,
+        "explicit_write_1h": 6,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/sonnet-4-6/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking",
+          "extended_thinking_deprecated"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/sonnet-4-6/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2025-08",
+        "training_data_date": "2026-01",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": true,
+        "min": 1024,
+        "max": null,
+        "default": null,
+        "note": "手动 extended thinking（thinking.type=\"enabled\" + budget_tokens）在该模型上已弃用但仍可用：budget_tokens 最小 1,024 且须小于 max_tokens（交错思考除外）；上限官方未给固定数值，待核实。官方推荐改用 adaptive thinking + effort。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-sonnet-4.6.json",
         "vendor": "vendors/anthropic.json"
@@ -684,7 +1802,7 @@
       "extra_sources": [
         "https://platform.claude.com/docs/en/about-claude/models/overview"
       ],
-      "last_updated": "2026-10-10",
+      "last_updated": "2026-10-11",
       "notes": "按提示长度分档：表中为 ≤100K 提示价；>100K 提示：输入 $0.50、输出 $2.50、缓存读取 $0.05、缓存写入(5m) $0.625。1 小时 TTL 写入 $0.20（≤100K）/ $1（>100K）。Batch 5 折。 上下文窗口 1M tokens、最大输出 128K（Anthropic 模型总览页）。",
       "reasoning_effort": {
         "supported": true,
@@ -704,7 +1822,118 @@
           "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
         ]
       },
-      "unverified_fields": [],
+      "limits": {
+        "max_input_tokens": null,
+        "max_output_tokens": 128000,
+        "context_length": 1000000,
+        "max_input_tokens_thinking": null,
+        "max_output_tokens_thinking": null,
+        "max_reasoning_tokens": null,
+        "max_output_tokens_batch_beta": null,
+        "default_output_tokens": null,
+        "status": "partial",
+        "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录；官方未单独给出最大输入 token 数（待核实）。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>100000",
+          "input_tokens_gt": 100000,
+          "input_tokens_lte": null,
+          "input": 0.5,
+          "output": 2.5,
+          "cached_input": 0.05,
+          "cache_write": 0.625,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": 0.05,
+            "explicit_write": 0.625,
+            "explicit_write_1h": 1.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": null
+          },
+          "note": "Haiku 5.5 按提示长度分档：提示（含缓存读写 token）超过 100K 的请求按此高价计费；1 小时 TTL 缓存写入 $1。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（≤100K 提示：$0.05 / $0.25；>100K 提示：$0.25 / $1.25）。"
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。对 Haiku 5.5 的 >100K 高价同样适用。"
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.01,
+        "explicit_write": 0.125,
+        "explicit_write_1h": 0.2,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+      },
+      "modalities": {
+        "input": [
+          "text",
+          "image"
+        ],
+        "output": [
+          "text"
+        ],
+        "unsupported": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/models/haiku-5-5/overview"
+        ]
+      },
+      "features": {
+        "supported": [
+          "vision_input",
+          "prompt_caching",
+          "batch_api",
+          "adaptive_thinking",
+          "tool_use"
+        ],
+        "unsupported": null,
+        "tools": null,
+        "status": "partial",
+        "note": "列出的是官方模型页/总览/定价页明确提到的能力，并非穷举；tool_use 仅在模型总览页“所有当前模型支持工具使用”的范围内标注。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview",
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      "knowledge_cutoff": {
+        "date": "2026-06",
+        "training_data_date": "2026-06",
+        "note": "date=官方“Reliable knowledge cutoff”（知识最广泛可靠的截止月份）；training_data_date=官方“Training data cutoff”。"
+      },
+      "thinking_budget": {
+        "supported": false,
+        "min": null,
+        "max": null,
+        "default": null,
+        "note": "不接受 budget_tokens（thinking.type=\"enabled\" 返回 400），仅支持 adaptive thinking，用 effort 控制思考深度。",
+        "sources": [
+          "https://platform.claude.com/docs/en/build-with-claude/thinking"
+        ]
+      },
+      "availability": {
+        "status": "general",
+        "note": null
+      },
+      "price_schedule": [],
+      "snapshot": null,
+      "aliases": [],
+      "unverified_fields": [
+        "limits.max_input_tokens"
+      ],
       "links": {
         "self": "models/claude-haiku-5.5.json",
         "vendor": "vendors/anthropic.json"

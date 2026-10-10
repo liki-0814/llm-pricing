@@ -1,7 +1,7 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-10",
+    "updated_at": "2026-10-11",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens"
@@ -34,7 +34,7 @@
     "extra_sources": [
       "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
     ],
-    "last_updated": "2026-10-10",
+    "last_updated": "2026-10-11",
     "notes": "Standard 付费档。缓存存储费 $0.50/百万 token/小时（2027 起 $1.00）。输入上限 1,048,576 tokens、输出上限 65,536（Gemini 模型页）；价格已对照官方定价页复核无变化。 注意：该价格仅到 2026-12-31；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
     "reasoning_effort": {
       "supported": true,
@@ -51,7 +51,119 @@
         "https://ai.google.dev/gemini-api/docs/thinking"
       ]
     },
-    "unverified_fields": [],
+    "limits": {
+      "max_input_tokens": 1048576,
+      "max_output_tokens": 65536,
+      "context_length": 1048576,
+      "max_input_tokens_thinking": null,
+      "max_output_tokens_thinking": null,
+      "max_reasoning_tokens": null,
+      "max_output_tokens_batch_beta": null,
+      "default_output_tokens": null,
+      "status": "verified",
+      "note": "官方 Gemini 模型页：Input token limit 1,048,576 / Output token limit 65,536。",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "note": "Batch API：官方定价页逐项列出，价格为标准价 50%。"
+      },
+      {
+        "name": "flex",
+        "multiplier": 0.5,
+        "note": "Flex 推理：官方定价页逐项列出，价格为标准价 50%。"
+      },
+      {
+        "name": "priority",
+        "multiplier": 1.8,
+        "note": "Priority 推理：官方定价页逐项列出，输入/输出/缓存价均为标准价 1.8×。"
+      }
+    ],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": 0.5,
+      "note": "缓存命中价即 pricing.cached_input；官方另收缓存存储费 $0.50 / 百万 token / 小时（2027-01-01 起 $1.00）。"
+    },
+    "modalities": {
+      "input": [
+        "text",
+        "image",
+        "video",
+        "audio",
+        "pdf"
+      ],
+      "output": [
+        "text"
+      ],
+      "unsupported": null,
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+      ]
+    },
+    "features": {
+      "supported": [
+        "caching",
+        "code_execution",
+        "computer_use_preview",
+        "file_search",
+        "function_calling",
+        "grounding_google_maps",
+        "search_grounding",
+        "structured_outputs",
+        "thinking",
+        "url_context"
+      ],
+      "unsupported": [
+        "audio_generation",
+        "image_generation",
+        "live_api"
+      ],
+      "tools": null,
+      "status": "verified",
+      "note": "来自 Gemini 模型页 Capabilities 表；computer_use 为 Preview，file_search 在 3.1 Pro Preview 仅 AI Studio。",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+      ]
+    },
+    "knowledge_cutoff": null,
+    "thinking_budget": {
+      "supported": null,
+      "min": null,
+      "max": null,
+      "default": null,
+      "note": "官方文档未给出 token 思考预算范围（待核实）。",
+      "sources": []
+    },
+    "availability": {
+      "status": "general",
+      "note": null
+    },
+    "price_schedule": [
+      {
+        "kind": "scheduled_increase",
+        "effective_from": "2027-01-01",
+        "effective_until": null,
+        "input": 1.5,
+        "output": 7.5,
+        "cached_input": 0.15,
+        "cache_write": null,
+        "note": "官方：当前价格仅到 2026-12-31；2027-01-01 起 Standard 输入 $1.50、输出 $7.50、缓存 $0.15，缓存存储费 $1.00/百万 token/小时；Batch/Flex/Priority 价同比例上调。"
+      }
+    ],
+    "snapshot": null,
+    "aliases": [],
+    "unverified_fields": [
+      "knowledge_cutoff",
+      "thinking_budget"
+    ],
     "links": {
       "self": "models/gemini-3.8-flash.json",
       "vendor": "vendors/google.json"

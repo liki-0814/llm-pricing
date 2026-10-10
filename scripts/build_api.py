@@ -50,6 +50,77 @@ def price_value(v):
     return v, "verified"
 
 
+
+LIMIT_FIELDS = ("max_input_tokens", "max_output_tokens", "context_length",
+                "max_input_tokens_thinking", "max_output_tokens_thinking", "max_reasoning_tokens",
+                "max_output_tokens_batch_beta", "default_output_tokens")
+TIER_FIELDS = ("condition", "input_tokens_gt", "input_tokens_lte", "input", "output", "cached_input",
+               "cache_write", "cache_pricing", "note")
+CACHE_FIELDS = ("implicit_read", "explicit_read", "explicit_write", "explicit_write_1h",
+                "storage_per_1M_tokens_hour", "note")
+SERVICE_TIER_NAMES = ("batch", "flex", "fast", "priority", "ultrafast", "data_residency")
+AVAILABILITY = ("general", "limited", "subscription_only")
+SCHEDULE_KINDS = ("promotion", "scheduled_increase", "scheduled_decrease")
+
+
+def limits_obj(m):
+    """data limits -> API object. null = 待核实 (never guessed)."""
+    L = m.get("limits") or {}
+    o = {k: L.get(k) for k in LIMIT_FIELDS}
+    core = [o["max_input_tokens"], o["max_output_tokens"], o["context_length"]]
+    o["status"] = ("verified" if all(x is not None for x in core)
+                   else "partial" if any(x is not None for x in core) else "unverified")
+    o["note"] = L.get("note")
+    o["sources"] = list(L.get("sources") or [])
+    return o
+
+
+def cache_obj(c):
+    c = c or {}
+    return {k: c.get(k) for k in CACHE_FIELDS}
+
+
+def tier_obj(t):
+    o = {k: t.get(k) for k in TIER_FIELDS}
+    o["cache_pricing"] = cache_obj(t["cache_pricing"]) if t.get("cache_pricing") else None
+    return o
+
+
+def modalities_obj(m):
+    x = m.get("modalities") or {}
+    return {"input": list(x["input"]) if x.get("input") is not None else None,
+            "output": list(x["output"]) if x.get("output") is not None else None,
+            "unsupported": list(x["unsupported"]) if x.get("unsupported") else None,
+            "sources": list(x.get("sources") or [])}
+
+
+def features_obj(m):
+    x = m.get("features") or {}
+    lst = lambda k: list(x[k]) if x.get(k) is not None else None
+    return {"supported": lst("supported"), "unsupported": lst("unsupported"), "tools": lst("tools"),
+            "status": x.get("status") or "unverified", "note": x.get("note"),
+            "sources": list(x.get("sources") or [])}
+
+
+def cutoff_obj(m):
+    c = m.get("knowledge_cutoff")
+    if not c:
+        return None
+    return {"date": c.get("date"), "training_data_date": c.get("training_data_date"), "note": c.get("note")}
+
+
+def budget_obj(m):
+    b = m.get("thinking_budget") or {}
+    return {"supported": b.get("supported"), "min": b.get("min"), "max": b.get("max"),
+            "default": b.get("default"), "note": b.get("note"), "sources": list(b.get("sources") or [])}
+
+
+def schedule_obj(e):
+    return {"kind": e.get("kind"), "effective_from": e.get("effective_from"),
+            "effective_until": e.get("effective_until"), "input": e.get("input"), "output": e.get("output"),
+            "cached_input": e.get("cached_input"), "cache_write": e.get("cache_write"), "note": e.get("note")}
+
+
 def reasoning_obj(m):
     """data reasoning_effort -> API object. null = 待核实 (never guessed)."""
     r = m.get("reasoning_effort")
@@ -100,6 +171,20 @@ def model_obj(m):
         "last_updated": m.get("last_updated"),
         "notes": m.get("notes"),
         "reasoning_effort": reasoning_obj(m),
+        "limits": limits_obj(m),
+        "pricing_tiers": [tier_obj(t) for t in m.get("pricing_tiers") or []],
+        "service_tiers": [{"name": t["name"], "multiplier": t["multiplier"], "note": t.get("note")}
+                          for t in m.get("service_tiers") or []],
+        "cache_pricing": cache_obj(m.get("cache_pricing")),
+        "modalities": modalities_obj(m),
+        "features": features_obj(m),
+        "knowledge_cutoff": cutoff_obj(m),
+        "thinking_budget": budget_obj(m),
+        "availability": {"status": (m.get("availability") or {}).get("status", "general"),
+                         "note": (m.get("availability") or {}).get("note")},
+        "price_schedule": [schedule_obj(e) for e in m.get("price_schedule") or []],
+        "snapshot": m.get("snapshot"),
+        "aliases": list(m.get("aliases") or []),
         "unverified_fields": list(m.get("unverified_fields") or []),
         "links": {"self": "models/%s.json" % m["model_id"],
                   "vendor": "vendors/%s.json" % VENDOR_SLUGS[m["vendor"]]},
@@ -157,7 +242,9 @@ def openapi(d, vendor_slugs, model_ids):
         "required": ["id", "name", "vendor", "vendor_name", "currency", "unit", "pricing",
                      "pricing_status", "has_off_peak", "off_peak_pricing", "peak_note",
                      "context_length", "context_length_label", "source_url", "extra_sources",
-                     "last_updated", "notes", "reasoning_effort", "unverified_fields", "links"],
+                     "last_updated", "notes", "reasoning_effort", "limits", "pricing_tiers", "service_tiers",
+                     "cache_pricing", "modalities", "features", "knowledge_cutoff", "thinking_budget",
+                     "availability", "price_schedule", "snapshot", "aliases", "unverified_fields", "links"],
         "properties": {
             "id": {"type": "string", "description": "Model id as used in the vendor API; also the file name of /models/{model_id}.json"},
             "name": {"type": "string", "description": "Display name"},
@@ -198,9 +285,114 @@ def openapi(d, vendor_slugs, model_ids):
                     "sources": {"type": "array", "items": {"type": "string", "format": "uri"}, "description": "Official documentation pages used"},
                 },
             },
+            "limits": {
+                "type": "object",
+                "description": "Token limits from official pages. null = 待核实 (not verified, never guessed). Official K/M labels are recorded as 1K=1,000 / 1M=1,000,000 unless the page gives exact numbers (see note).",
+                "required": list(LIMIT_FIELDS) + ["status", "note", "sources"],
+                "properties": {
+                    "max_input_tokens": {"type": ["integer", "null"], "description": "Maximum input tokens per request (non-thinking mode where the vendor distinguishes)"},
+                    "max_output_tokens": {"type": ["integer", "null"], "description": "Maximum output tokens per request"},
+                    "context_length": {"type": ["integer", "null"], "description": "Context window in tokens (same value as top-level context_length)"},
+                    "max_input_tokens_thinking": {"type": ["integer", "null"], "description": "Maximum input tokens in thinking mode, when documented separately"},
+                    "max_output_tokens_thinking": {"type": ["integer", "null"], "description": "Maximum output tokens in thinking mode, when documented separately"},
+                    "max_reasoning_tokens": {"type": ["integer", "null"], "description": "Maximum chain-of-thought / reasoning tokens (Qwen: Max Chain-of-Thought Length)"},
+                    "max_output_tokens_batch_beta": {"type": ["integer", "null"], "description": "Higher output limit on the batch API behind a beta header (Anthropic: 300K)"},
+                    "default_output_tokens": {"type": ["integer", "null"], "description": "Default max output tokens when the request omits it, if documented"},
+                    "status": {"type": "string", "enum": ["verified", "partial", "unverified"], "description": "verified = max_input_tokens, max_output_tokens and context_length all known; partial = some; unverified = none"},
+                    "note": {"type": ["string", "null"]},
+                    "sources": {"type": "array", "items": {"type": "string", "format": "uri"}},
+                },
+            },
+            "pricing_tiers": {
+                "type": "array",
+                "description": "Long-context / prompt-length price tiers where documented, in addition to the base price in pricing (which is the lowest tier). Empty array = single tier (or tiers not documented). A request whose input falls in a tier is billed entirely at that tier's prices. A null price inside a tier = not documented for that tier.",
+                "items": {"type": "object", "required": list(TIER_FIELDS),
+                          "properties": {
+                              "condition": {"type": "string", "description": "Machine-readable condition, e.g. input_tokens>272000"},
+                              "input_tokens_gt": {"type": ["integer", "null"], "description": "Tier applies when input tokens > this value"},
+                              "input_tokens_lte": {"type": ["integer", "null"], "description": "…and <= this value (null = no upper bound)"},
+                              "input": price, "output": price,
+                              "cached_input": dict(price, description="Same meaning as pricing.cached_input, at this tier"),
+                              "cache_write": dict(price, description="Same meaning as pricing.cache_write, at this tier"),
+                              "cache_pricing": {"anyOf": [{"$ref": "#/components/schemas/CachePricing"}, {"type": "null"}]},
+                              "note": {"type": ["string", "null"]}}},
+            },
+            "service_tiers": {
+                "type": "array",
+                "description": "Documented service-tier price multipliers applied to the standard price (all of input, output and cache prices). Only tiers documented for this model are listed.",
+                "items": {"type": "object", "required": ["name", "multiplier", "note"],
+                          "properties": {
+                              "name": {"type": "string", "enum": list(SERVICE_TIER_NAMES), "description": "batch / flex / fast (OpenAI Fast = formerly Priority; Anthropic fast mode) / priority / ultrafast; data_residency = regional / US-only processing surcharge"},
+                              "multiplier": {"type": "number", "minimum": 0, "description": "Price multiplier vs standard, e.g. 0.5 or 2"},
+                              "note": {"type": ["string", "null"]}}},
+            },
+            "cache_pricing": {"$ref": "#/components/schemas/CachePricing"},
+            "modalities": {
+                "type": "object", "required": ["input", "output", "unsupported", "sources"],
+                "description": "Input / output modalities documented on official pages. null = 待核实.",
+                "properties": {
+                    "input": {"type": ["array", "null"], "items": {"type": "string"}},
+                    "output": {"type": ["array", "null"], "items": {"type": "string"}},
+                    "unsupported": {"type": ["array", "null"], "items": {"type": "string"}, "description": "Modalities the official page explicitly lists as unsupported"},
+                    "sources": {"type": "array", "items": {"type": "string", "format": "uri"}}},
+            },
+            "features": {
+                "type": "object", "required": ["supported", "unsupported", "tools", "status", "note", "sources"],
+                "description": "Capabilities documented on official model pages (snake_case names as in the vendor docs). supported/unsupported are only what the official page states; a feature missing from both lists is 待核实, not unsupported.",
+                "properties": {
+                    "supported": {"type": ["array", "null"], "items": {"type": "string"}},
+                    "unsupported": {"type": ["array", "null"], "items": {"type": "string"}},
+                    "tools": {"type": ["array", "null"], "items": {"type": "string"}, "description": "Built-in tools supported (OpenAI Responses API)"},
+                    "status": {"type": "string", "enum": ["verified", "partial", "unverified"], "description": "verified = the vendor page lists capabilities completely; partial = list not exhaustive; unverified = 待核实"},
+                    "note": {"type": ["string", "null"]},
+                    "sources": {"type": "array", "items": {"type": "string", "format": "uri"}}},
+            },
+            "knowledge_cutoff": {
+                "type": ["object", "null"], "description": "Knowledge cutoff from official pages; null = not stated / 待核实",
+                "required": ["date", "training_data_date", "note"],
+                "properties": {"date": {"type": ["string", "null"], "description": "YYYY-MM-DD or YYYY-MM"},
+                               "training_data_date": {"type": ["string", "null"]},
+                               "note": {"type": ["string", "null"]}},
+            },
+            "thinking_budget": {
+                "type": "object", "required": ["supported", "min", "max", "default", "note", "sources"],
+                "description": "Token budget for thinking / chain-of-thought (budget_tokens / thinking_budget). supported: true = parameter exists, false = documented as not accepted, null = 待核实. Distinct from reasoning_effort levels.",
+                "properties": {"supported": {"type": ["boolean", "null"]},
+                               "min": {"type": ["integer", "null"]}, "max": {"type": ["integer", "null"]},
+                               "default": {"type": ["integer", "null"]},
+                               "note": {"type": ["string", "null"]},
+                               "sources": {"type": "array", "items": {"type": "string", "format": "uri"}}},
+            },
+            "availability": {
+                "type": "object", "required": ["status", "note"],
+                "properties": {"status": {"type": "string", "enum": list(AVAILABILITY), "description": "general = pay-as-you-go API; limited = restricted access (verification program); subscription_only = only via a subscription product, no pay-as-you-go price"},
+                               "note": {"type": ["string", "null"]}},
+            },
+            "price_schedule": {
+                "type": "array", "description": "Time-limited promotions and scheduled price changes announced on official pages (price fields are the announced prices; null = not announced)",
+                "items": {"type": "object", "required": ["kind", "effective_from", "effective_until", "input", "output", "cached_input", "cache_write", "note"],
+                          "properties": {"kind": {"type": "string", "enum": list(SCHEDULE_KINDS)},
+                                         "effective_from": {"type": ["string", "null"], "format": "date"},
+                                         "effective_until": {"type": ["string", "null"], "format": "date"},
+                                         "input": price, "output": price, "cached_input": price, "cache_write": price,
+                                         "note": {"type": ["string", "null"]}}},
+            },
+            "snapshot": {"type": ["string", "null"], "description": "Dated snapshot / version this model id currently resolves to, if documented"},
+            "aliases": {"type": "array", "items": {"type": "string"}, "description": "Other model names still accepted by the vendor API"},
             "unverified_fields": {"type": "array", "items": {"type": "string"}},
             "links": {"type": "object", "properties": {"self": {"type": "string"}, "vendor": {"type": "string"}}},
         },
+    }
+    cache_pricing = {
+        "type": "object", "required": list(CACHE_FIELDS),
+        "description": "Cache price breakdown where documented (USD per 1M tokens; null = not documented / 待核实). pricing.cached_input and pricing.cache_write keep their meaning; this object adds the finer split. Qwen: implicit_read / explicit_read / explicit_write are the three official cache prices.",
+        "properties": {
+            "implicit_read": dict(price, description="Implicit (automatic) cache hit price"),
+            "explicit_read": dict(price, description="Explicit cache hit (read) price"),
+            "explicit_write": dict(price, description="Cache creation / write price (5-minute TTL where TTLs exist)"),
+            "explicit_write_1h": dict(price, description="1-hour TTL cache write price (Anthropic, Kimi K3)"),
+            "storage_per_1M_tokens_hour": dict(price, description="Cache storage fee per 1M tokens per hour (USD, not per 1M tokens; 0 = currently free)"),
+            "note": {"type": ["string", "null"]}},
     }
     vendor = {
         "type": "object",
@@ -255,7 +447,7 @@ def openapi(d, vendor_slugs, model_ids):
                 "responses": ok("Vendor with its models", "#/components/schemas/VendorModels")}},
         },
         "components": {"schemas": {
-            "Meta": meta, "Model": model, "Vendor": vendor,
+            "Meta": meta, "Model": model, "Vendor": vendor, "CachePricing": cache_pricing,
             "ModelList": env({"type": "array", "items": {"$ref": "#/components/schemas/Model"}}),
             "ModelItem": env({"$ref": "#/components/schemas/Model"}),
             "VendorList": env({"type": "array", "items": {"$ref": "#/components/schemas/Vendor"}}),

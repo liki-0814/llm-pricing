@@ -1,7 +1,7 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-10",
+    "updated_at": "2026-10-11",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens"
@@ -35,7 +35,7 @@
       "https://www.kimi.com/code/docs/en/",
       "https://platform.kimi.ai/docs/models"
     ],
-    "last_updated": "2026-10-10",
+    "last_updated": "2026-10-11",
     "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无官方 token 单价。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。 价格暂按 Kimi K2.7 Code 计价(用户确认,Kimi 官方暂未单独标价)",
     "reasoning_effort": {
       "supported": true,
@@ -52,7 +52,79 @@
         "https://www.kimi.com/code/docs/en/kimi-code/models"
       ]
     },
-    "unverified_fields": [],
+    "limits": {
+      "max_input_tokens": null,
+      "max_output_tokens": null,
+      "context_length": 1048576,
+      "max_input_tokens_thinking": null,
+      "max_output_tokens_thinking": null,
+      "max_reasoning_tokens": null,
+      "max_output_tokens_batch_beta": null,
+      "default_output_tokens": null,
+      "status": "partial",
+      "note": "Kimi Code 官方模型配置页：kimi-for-coding（K2.8 Preview）上下文窗口 1048576；最大输入/输出官方未列出（待核实）。",
+      "sources": [
+        "https://www.kimi.com/code/docs/en/kimi-code/models"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": null
+    },
+    "modalities": {
+      "input": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output": [
+        "text"
+      ],
+      "unsupported": null,
+      "sources": [
+        "https://www.kimi.com/code/docs/en/kimi-code/models"
+      ]
+    },
+    "features": {
+      "supported": [
+        "thinking_effort_low_high_max"
+      ],
+      "unsupported": null,
+      "tools": null,
+      "status": "partial",
+      "note": "官方：reasoning_effort low/high/max（默认 max）。能力列表非穷举。",
+      "sources": [
+        "https://www.kimi.com/code/docs/en/kimi-code/models"
+      ]
+    },
+    "knowledge_cutoff": null,
+    "thinking_budget": {
+      "supported": null,
+      "min": null,
+      "max": null,
+      "default": null,
+      "note": "官方文档未给出 token 思考预算范围（待核实）。",
+      "sources": []
+    },
+    "availability": {
+      "status": "subscription_only",
+      "note": "仅 Kimi Code 订阅 API（Plus 及以上等），按会员订阅计费；开放平台按量付费无此模型，价格暂按 K2.7 Code（用户确认）。"
+    },
+    "price_schedule": [],
+    "snapshot": null,
+    "aliases": [],
+    "unverified_fields": [
+      "limits.max_input_tokens",
+      "limits.max_output_tokens",
+      "knowledge_cutoff",
+      "thinking_budget"
+    ],
     "links": {
       "self": "models/kimi-for-coding.json",
       "vendor": "vendors/moonshot.json"

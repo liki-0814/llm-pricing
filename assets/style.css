@@ -236,7 +236,7 @@ details.note p{margin:6px 0 0;line-height:1.6;white-space:normal}
 .try-status .err{color:var(--warn);font-weight:600}
 
 /* ---------- responsive ---------- */
-@media (max-width:1399px) and (min-width:761px){
+@media (max-width:1499px) and (min-width:761px){
   .table-scroll{overflow:auto;max-height:calc(100vh - var(--header-h) - 24px);border-radius:var(--radius)}
   thead th{top:0}
   table{min-width:1420px}
@@ -323,4 +323,52 @@ code,pre,kbd,.model-id{font-variant-ligatures:none;font-feature-settings:"liga" 
   .endpoints td{display:block;border:0;padding:2px 14px}
   .fields td:first-child,.fields td:nth-child(2){display:inline-block;padding-right:4px}
   .path{word-break:break-all}
+}
+
+/* ---------- limits column + expandable detail row ---------- */
+.lim{display:flex;flex-direction:column;gap:3px;font-size:13px;min-width:120px}
+.lim-row{display:flex;gap:6px;align-items:baseline;white-space:nowrap}
+.lim .k,.kv .k{color:var(--muted);font-size:12px}
+.tokv{font-variant-numeric:tabular-nums;font-weight:600;color:var(--ink);cursor:help}
+.detail-btn{display:inline-flex;align-items:center;gap:4px;margin-top:3px;font:inherit;font-size:12.5px;color:var(--brand);background:none;border:0;padding:0;cursor:pointer;align-self:flex-start}
+.detail-btn .chev{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);transition:transform .15s;margin-left:2px}
+.detail-btn[aria-expanded="true"] .chev{transform:rotate(45deg)}
+.detail-btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:4px}
+.detail-btn.static{margin:0 6px 0 0;cursor:default}
+tbody tr.has-detail td{border-bottom-color:transparent}
+tr.detail-row:hover{background:transparent}
+tr.detail-row>td{padding:0 !important;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.detail{position:sticky;left:0;width:var(--tw,100%);box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line-2);border-top:1px solid var(--line-2);box-shadow:inset 3px 0 0 var(--vc,var(--brand))}
+.dblock{overflow-x:auto;background:var(--surface-2);padding:12px 16px;font-size:13px;color:var(--ink-2);min-width:0}
+.dblock.wide{grid-column:span 2}
+.dblock h4{margin:0 0 8px;font-size:12px;letter-spacing:.02em;color:var(--muted);font-weight:700}
+.kv{display:flex;gap:8px;align-items:baseline;justify-content:space-between;padding:2px 0;line-height:1.5}
+.kv .v{text-align:right;font-variant-numeric:tabular-nums;min-width:0}
+.kv .v .lvs{justify-content:flex-end}
+.dnote{margin:6px 0 0;font-size:12px;line-height:1.55;color:var(--muted);white-space:normal}
+.dnote b{color:var(--ink-2)}
+.dblock .rsrc{display:block;margin-top:3px;font-size:11.5px;color:var(--brand);word-break:break-all}
+.dblock code{font-family:var(--mono);font-size:12px;background:var(--surface-3);padding:0 5px;border-radius:4px}
+table.mini{min-width:0 !important;width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
+table.mini th{position:static;background:none;text-align:right;font-size:11.5px;font-weight:600;color:var(--muted);padding:2px 6px;border:0;white-space:nowrap}
+table.mini th:first-child,table.mini td:first-child{text-align:left}
+table.mini td{padding:3px 6px;text-align:right;border-top:1px solid var(--line-2);white-space:nowrap}
+table.mini .price{font-size:13px}
+.svc{display:inline-flex;gap:6px;align-items:center;margin:0 8px 4px 0;font-size:13px}
+.svc b{font-variant-numeric:tabular-nums;color:var(--ink)}
+@media (min-width:761px){
+  td.c-lim{width:1%;white-space:nowrap}
+}
+@media (max-width:1499px) and (min-width:761px){ #priceTable{min-width:1640px} }
+@media (max-width:760px){
+  #priceTable td.c-lim{grid-column:1/-1}
+  #priceTable tbody tr.has-detail{border-bottom-left-radius:0;border-bottom-right-radius:0;margin-bottom:0;border-bottom:0}
+  #priceTable tbody tr.detail-row{display:block;margin-top:0;border-top:0;border-top-left-radius:0;border-top-right-radius:0;background:var(--surface-2)}
+  #priceTable tbody tr.detail-row::before{display:none}
+  #priceTable tr.detail-row>td{display:block;padding:0 !important}
+  #priceTable tr.detail-row>td::before{display:none}
+  .detail{width:auto;position:static;grid-template-columns:minmax(0,1fr);box-shadow:none;border-top:1px solid var(--line-2)}
+  .dblock.wide{grid-column:auto}
+  .lim{flex-direction:row;flex-wrap:wrap;gap:4px 14px}
+  .detail-btn{margin-top:0;margin-left:auto}
 }

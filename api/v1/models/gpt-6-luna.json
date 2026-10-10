@@ -1,7 +1,7 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-10",
+    "updated_at": "2026-10-11",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens"
@@ -34,7 +34,7 @@
     "extra_sources": [
       "https://developers.openai.com/api/docs/models/gpt-6-luna"
     ],
-    "last_updated": "2026-10-10",
+    "last_updated": "2026-10-11",
     "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.2、缓存读取 $0.02、缓存写入 $0.25、输出 $0.75。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
     "reasoning_effort": {
       "supported": true,
@@ -54,7 +54,129 @@
         "https://developers.openai.com/api/docs/models/gpt-6-luna"
       ]
     },
-    "unverified_fields": [],
+    "limits": {
+      "max_input_tokens": 922000,
+      "max_output_tokens": 128000,
+      "context_length": 1050000,
+      "max_input_tokens_thinking": null,
+      "max_output_tokens_thinking": null,
+      "max_reasoning_tokens": null,
+      "max_output_tokens_batch_beta": null,
+      "default_output_tokens": null,
+      "status": "verified",
+      "note": "来自 OpenAI 模型页：1,050,000 context window / Maximum input tokens 922,000 / 128,000 max output tokens。",
+      "sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-luna"
+      ]
+    },
+    "pricing_tiers": [
+      {
+        "condition": "input_tokens>272000",
+        "input_tokens_gt": 272000,
+        "input_tokens_lte": null,
+        "input": 0.2,
+        "output": 0.75,
+        "cached_input": 0.02,
+        "cache_write": 0.25,
+        "cache_pricing": null,
+        "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+      }
+    ],
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+      },
+      {
+        "name": "flex",
+        "multiplier": 0.5,
+        "note": "Flex 处理档，官方定价页逐项列出。"
+      },
+      {
+        "name": "fast",
+        "multiplier": 2.0,
+        "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+      },
+      {
+        "name": "data_residency",
+        "multiplier": 1.1,
+        "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+      }
+    ],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": 0.125,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
+    },
+    "modalities": {
+      "input": [
+        "text",
+        "image"
+      ],
+      "output": [
+        "text"
+      ],
+      "unsupported": null,
+      "sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-luna"
+      ]
+    },
+    "features": {
+      "supported": [
+        "streaming",
+        "structured_outputs",
+        "function_calling",
+        "file_search",
+        "image_input",
+        "web_search",
+        "prompt_caching"
+      ],
+      "unsupported": null,
+      "tools": [
+        "web_search",
+        "file_search",
+        "image_generation",
+        "code_interpreter",
+        "hosted_shell",
+        "apply_patch",
+        "skills",
+        "computer_use",
+        "mcp",
+        "tool_search"
+      ],
+      "status": "verified",
+      "note": "tools 为使用 Responses API 时模型支持的内置工具；Chat Completions 对工具调用有限制，见 reasoning_effort.note / 官方模型页。",
+      "sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-luna"
+      ]
+    },
+    "knowledge_cutoff": {
+      "date": "2026-05-18",
+      "training_data_date": null,
+      "note": "OpenAI 模型页 “knowledge cutoff”（未区分可靠/训练数据截止）。"
+    },
+    "thinking_budget": {
+      "supported": null,
+      "min": null,
+      "max": null,
+      "default": null,
+      "note": "官方文档未给出 token 思考预算范围（待核实）。",
+      "sources": []
+    },
+    "availability": {
+      "status": "general",
+      "note": null
+    },
+    "price_schedule": [],
+    "snapshot": null,
+    "aliases": [],
+    "unverified_fields": [
+      "thinking_budget"
+    ],
     "links": {
       "self": "models/gpt-6-luna.json",
       "vendor": "vendors/openai.json"

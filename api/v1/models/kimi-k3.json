@@ -1,7 +1,7 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-10",
+    "updated_at": "2026-10-11",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens"
@@ -32,7 +32,7 @@
     "context_length_label": "1,048,576 tokens",
     "source_url": "https://platform.kimi.ai/docs/pricing/chat",
     "extra_sources": [],
-    "last_updated": "2026-10-10",
+    "last_updated": "2026-10-11",
     "notes": "缓存写入按 TTL 计价：5 分钟 $3.00，1 小时 $6.00（表中为 5 分钟）。缓存命中自动续期、无额外写入费。",
     "reasoning_effort": {
       "supported": true,
@@ -50,7 +50,89 @@
         "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
       ]
     },
-    "unverified_fields": [],
+    "limits": {
+      "max_input_tokens": null,
+      "max_output_tokens": 1048576,
+      "context_length": 1048576,
+      "max_input_tokens_thinking": null,
+      "max_output_tokens_thinking": null,
+      "max_reasoning_tokens": null,
+      "max_output_tokens_batch_beta": null,
+      "default_output_tokens": 131072,
+      "status": "partial",
+      "note": "官方 K3 文档：max_completion_tokens 默认 131072，最大可设 1048576（等于上下文窗口；输入+输出总和不得超过窗口）；最大输入 token 数官方未单独列出（待核实）。",
+      "sources": [
+        "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
+        "https://platform.kimi.ai/docs/api/chat",
+        "https://platform.kimi.ai/docs/pricing/chat"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": 3.0,
+      "explicit_write_1h": 6.0,
+      "storage_per_1M_tokens_hour": null,
+      "note": "Kimi API 自动缓存重复前缀；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h；命中自动续期、无额外写入费。"
+    },
+    "modalities": {
+      "input": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output": [
+        "text"
+      ],
+      "unsupported": null,
+      "sources": [
+        "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
+        "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart"
+      ]
+    },
+    "features": {
+      "supported": [
+        "thinking_always_on",
+        "vision_input",
+        "video_input",
+        "structured_output_json_schema",
+        "tool_calls",
+        "context_caching",
+        "web_search_builtin"
+      ],
+      "unsupported": null,
+      "tools": null,
+      "status": "partial",
+      "note": "官方 K3 文档：思考恒开；视觉输入不支持公开图片 URL（需 base64 或 ms://file-id）；json_schema strict 结构化输出。非穷举。",
+      "sources": [
+        "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
+        "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
+        "https://platform.kimi.ai/docs/pricing/chat"
+      ]
+    },
+    "knowledge_cutoff": null,
+    "thinking_budget": {
+      "supported": null,
+      "min": null,
+      "max": null,
+      "default": null,
+      "note": "官方文档未给出 token 思考预算范围（待核实）。",
+      "sources": []
+    },
+    "availability": {
+      "status": "general",
+      "note": "旗舰模型：累计充值（最低 $1）后解锁。"
+    },
+    "price_schedule": [],
+    "snapshot": null,
+    "aliases": [],
+    "unverified_fields": [
+      "limits.max_input_tokens",
+      "knowledge_cutoff",
+      "thinking_budget"
+    ],
     "links": {
       "self": "models/kimi-k3.json",
       "vendor": "vendors/moonshot.json"

@@ -1,7 +1,7 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-10",
+    "updated_at": "2026-10-11",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens"
@@ -32,7 +32,7 @@
     "context_length_label": "262,144 tokens",
     "source_url": "https://platform.kimi.ai/docs/pricing/chat",
     "extra_sources": [],
-    "last_updated": "2026-10-10",
+    "last_updated": "2026-10-11",
     "notes": "官方页未列缓存写入价。",
     "reasoning_effort": {
       "supported": false,
@@ -45,7 +45,95 @@
         "https://platform.kimi.ai/docs/guide/use-thinking-models"
       ]
     },
-    "unverified_fields": [],
+    "limits": {
+      "max_input_tokens": null,
+      "max_output_tokens": null,
+      "context_length": 262144,
+      "max_input_tokens_thinking": null,
+      "max_output_tokens_thinking": null,
+      "max_reasoning_tokens": null,
+      "max_output_tokens_batch_beta": null,
+      "default_output_tokens": 32768,
+      "status": "partial",
+      "note": "官方：上下文窗口 262,144 tokens；max_tokens 默认 32768（32k）；最大输出上限与最大输入 token 数官方未给出（待核实）。",
+      "sources": [
+        "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
+        "https://platform.kimi.ai/docs/pricing/chat"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.6,
+        "note": "Batch API 价为标准价的 60%（官方 BatchJob 定价：K2.7 Code 输入 $0.57 / 缓存命中 $0.114 / 输出 $2.40）。"
+      }
+    ],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "缓存命中价即 pricing.cached_input；官方页未列缓存写入价。"
+    },
+    "modalities": {
+      "input": [
+        "text",
+        "image",
+        "video"
+      ],
+      "output": [
+        "text"
+      ],
+      "unsupported": null,
+      "sources": [
+        "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
+        "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart"
+      ]
+    },
+    "features": {
+      "supported": [
+        "thinking_always_on",
+        "vision_input",
+        "video_input",
+        "tool_calls",
+        "context_caching"
+      ],
+      "unsupported": [
+        "non_thinking_mode"
+      ],
+      "tools": null,
+      "status": "partial",
+      "note": "官方：K2.7 Code 不支持非思考模式；temperature/top_p/n 等参数固定。非穷举。",
+      "sources": [
+        "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
+        "https://platform.kimi.ai/docs/guide/use-kimi-vision-model",
+        "https://platform.kimi.ai/docs/pricing/chat"
+      ]
+    },
+    "knowledge_cutoff": null,
+    "thinking_budget": {
+      "supported": null,
+      "min": null,
+      "max": null,
+      "default": null,
+      "note": "官方文档未给出 token 思考预算范围（待核实）。",
+      "sources": []
+    },
+    "availability": {
+      "status": "general",
+      "note": null
+    },
+    "price_schedule": [],
+    "snapshot": null,
+    "aliases": [],
+    "unverified_fields": [
+      "limits.max_input_tokens",
+      "limits.max_output_tokens",
+      "knowledge_cutoff",
+      "thinking_budget"
+    ],
     "links": {
       "self": "models/kimi-k2.7-code.json",
       "vendor": "vendors/moonshot.json"
