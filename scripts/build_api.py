@@ -12,6 +12,8 @@ import json
 import pathlib
 import re
 import sys
+import copy
+import hashlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "prices.json"
@@ -38,7 +40,7 @@ VENDOR_SLUGS = {
 
 
 def load():
-    return json.load(open(DATA, encoding="utf-8"))
+    return json.loads(DATA.read_text(encoding="utf-8"))
 
 
 def price_value(v):
@@ -86,7 +88,9 @@ def tier_obj(t):
 def schedule_obj(e):
     return {"kind": e.get("kind"), "effective_from": e.get("effective_from"),
             "effective_until": e.get("effective_until"), "input": e.get("input"), "output": e.get("output"),
-            "cached_input": e.get("cached_input"), "cache_write": e.get("cache_write"), "note": e.get("note")}
+            "cached_input": e.get("cached_input"), "cache_write": e.get("cache_write"), "note": e.get("note"),
+            "multiplier": e.get("multiplier"), "cache_pricing": e.get("cache_pricing", {}),
+            "sources": e.get("sources", [])}
 
 
 def reasoning_obj(m):
@@ -95,18 +99,17 @@ def reasoning_obj(m):
     if r is None:
         r = {}
     sup, levels = r.get("supported"), r.get("levels")
-    if sup is None:
-        status = "unverified"
-    elif sup is True and levels is None:
-        status = "partial"
-    else:
-        status = "verified"
+    field_status = {k: ("not_applicable" if sup is False and k in ("levels", "default")
+                        else "unverified" if r.get(k) is None else "verified")
+                    for k in ("supported", "levels", "default", "can_disable")}
+    status = "unverified" if sup is None else "partial" if "unverified" in field_status.values() else "verified"
     return {
         "supported": sup,
         "levels": list(levels) if levels is not None else None,
         "default": r.get("default"),
         "can_disable": r.get("can_disable"),
         "status": status,
+        "field_status": field_status,
         "note": r.get("note"),
         "sources": list(r.get("sources") or []),
     }
@@ -116,6 +119,8 @@ def model_obj(m):
     pricing, status = {}, {}
     for k in PRICE_FIELDS:
         pricing[k], status[k] = price_value(m.get(k))
+        if status[k] == "verified" and m["price_basis"]["type"] == "reference":
+            status[k] = "reference"
     off = m.get("offpeak")
     off_pricing = None
     if off:
@@ -129,6 +134,9 @@ def model_obj(m):
         "unit": UNIT,
         "pricing": pricing,
         "pricing_status": status,
+        "price_basis": copy.deepcopy(m["price_basis"]),
+        "billing": copy.deepcopy(m["billing"]),
+        "off_peak_schedule": copy.deepcopy(m.get("off_peak_schedule")),
         "has_off_peak": off_pricing is not None,
         "off_peak_pricing": off_pricing,
         "peak_note": m.get("peak_note"),
@@ -141,8 +149,7 @@ def model_obj(m):
         "reasoning_effort": reasoning_obj(m),
         "limits": limits_obj(m),
         "pricing_tiers": [tier_obj(t) for t in m.get("pricing_tiers") or []],
-        "service_tiers": [{"name": t["name"], "multiplier": t["multiplier"], "note": t.get("note")}
-                          for t in m.get("service_tiers") or []],
+        "service_tiers": copy.deepcopy(m.get("service_tiers") or []),
         "cache_pricing": cache_obj(m.get("cache_pricing")),
         "price_schedule": [schedule_obj(e) for e in m.get("price_schedule") or []],
         "unverified_fields": list(m.get("unverified_fields") or []),
@@ -157,6 +164,8 @@ def base_meta(d, count=None):
         "currency": "USD",
         "unit": UNIT,
         "unit_label": UNIT_LABEL,
+        "data_version": hashlib.sha256(json.dumps(d, sort_keys=True, ensure_ascii=False,
+                                                  separators=(",", ":")).encode()).hexdigest(),
     }
     if count is not None:
         meta["count"] = count
@@ -179,20 +188,80 @@ def vendor_obj(d, name, models):
     }
 
 
+def extend_schemas(model, cache_pricing, price):
+    """Only pricing metadata; deliberately do not restore removed model capabilities."""
+    def obj(properties, required=None):
+        return {"type": "object", "properties": properties,
+                "required": list(properties) if required is None else required,
+                "additionalProperties": False}
+    urls = {"type": "array", "minItems": 1, "uniqueItems": True,
+            "items": {"type": "string", "format": "uri", "pattern": "^https?://"}}
+    note = {"type": "string", "minLength": 1}
+    nullable = {"type": ["string", "null"]}
+    model["properties"]["price_basis"] = obj({
+        "type": {"enum": ["official", "reference"]}, "reference_model_id": nullable,
+        "sources": urls, "note": note})
+    model["properties"]["billing"] = obj({
+        "channel": {"enum": ["pay_as_you_go", "subscription"]},
+        "price_type": {"enum": ["current", "list", "reference"]}, "region": nullable,
+        "cached_input_type": {"enum": ["implicit", "explicit", "unspecified"]}, "note": note})
+    model["properties"]["off_peak_schedule"] = {"anyOf": [{"type": "null"}, obj({
+        "timezone": {"enum": ["UTC"]},
+        "weekdays": {"type": "array", "minItems": 1, "uniqueItems": True,
+                     "items": {"type": "integer", "minimum": 1, "maximum": 7}},
+        "peak_windows": {"type": "array", "minItems": 1, "items": obj({
+            "start": {"type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"},
+            "end": {"type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"}})},
+        "holiday_region": {"enum": ["CN"]}, "sources": urls, "note": note})]}
+    model["required"] += ["price_basis", "billing", "off_peak_schedule"]
+    model["properties"]["source_url"]["pattern"] = "^https?://"
+    reasoning = model["properties"]["reasoning_effort"]
+    reasoning["properties"]["field_status"] = obj({k: {"enum": ["verified", "unverified", "not_applicable"]}
+                                                   for k in ("supported", "levels", "default", "can_disable")})
+    reasoning["required"].append("field_status")
+    reasoning["properties"]["sources"] = urls
+    reasoning["properties"]["note"] = note
+    model["properties"]["limits"]["sources"] = urls
+    model["properties"]["limits"]["note"] = note
+    component_fields = list(PRICE_FIELDS) + [k for k in CACHE_FIELDS if k != "note"]
+    svc = model["properties"]["service_tiers"]["items"]
+    svc["properties"].update({
+        "multipliers": obj({k: {"type": ["number", "null"], "exclusiveMinimum": 0} for k in component_fields}),
+        "pricing": obj({k: price for k in PRICE_FIELDS}, []), "sources": urls})
+    svc["required"] += ["multipliers", "pricing", "sources"]
+    event = model["properties"]["price_schedule"]["items"]
+    event["properties"].update({
+        "multiplier": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "cache_pricing": obj({k: price for k in CACHE_FIELDS if k != "note"}, []), "sources": urls})
+    event["required"] += ["multiplier", "cache_pricing", "sources"]
+    def strict(schema):
+        if isinstance(schema, dict):
+            if "properties" in schema:
+                schema["additionalProperties"] = False
+            for value in schema.values():
+                strict(value)
+        elif isinstance(schema, list):
+            for value in schema:
+                strict(value)
+    strict(model)
+    strict(cache_pricing)
+
+
 def openapi(d, vendor_slugs, model_ids):
     price = {"type": ["number", "null"], "minimum": 0,
              "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"}
-    status = {"type": "string", "enum": ["verified", "unverified", "not_listed"],
-              "description": "verified = from official page; unverified = 待核实 (could not be verified); not_listed = official page has no such item (未列出)"}
+    status = {"type": "string", "enum": ["verified", "reference", "unverified", "not_listed"],
+              "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"}
     meta = {
         "type": "object",
-        "required": ["updated_at", "currency", "unit", "unit_label"],
+        "required": ["updated_at", "currency", "unit", "unit_label", "data_version"],
         "properties": {
             "updated_at": {"type": "string", "format": "date", "description": "Dataset last-verified date"},
             "currency": {"type": "string", "enum": ["USD"]},
             "unit": {"type": "string", "enum": [UNIT]},
             "unit_label": {"type": "string"},
             "count": {"type": "integer", "description": "Number of items in data"},
+            "data_version": {"type": "string", "pattern": "^[a-f0-9]{64}$", "description": "SHA-256 of canonical source data, shared by all endpoints"},
             "scope": {"type": "string"},
             "description": {"type": "string"},
         },
@@ -205,7 +274,7 @@ def openapi(d, vendor_slugs, model_ids):
                      "last_updated", "notes", "reasoning_effort", "limits", "pricing_tiers", "service_tiers",
                      "cache_pricing", "price_schedule", "unverified_fields", "links"],
         "properties": {
-            "id": {"type": "string", "description": "Model id as used in the vendor API; also the file name of /models/{model_id}.json"},
+            "id": {"type": "string", "description": "Query ID for this dataset and /models/{model_id}.json; use vendor docs for the actual vendor API name and case"},
             "name": {"type": "string", "description": "Display name"},
             "vendor": {"type": "string", "description": "Vendor slug", "enum": vendor_slugs},
             "vendor_name": {"type": "string"},
@@ -226,7 +295,7 @@ def openapi(d, vendor_slugs, model_ids):
             "peak_note": {"type": ["string", "null"], "description": "Peak / off-peak schedule or time-limited price note"},
             "context_length": {"type": ["integer", "null"], "description": "Context window in tokens"},
             "context_length_label": {"type": ["string", "null"]},
-            "source_url": {"type": "string", "format": "uri", "description": "Official pricing page"},
+            "source_url": {"type": "string", "format": "uri", "description": "Primary official source; see price_basis for full pricing and reference provenance"},
             "extra_sources": {"type": "array", "items": {"type": "string", "format": "uri"}},
             "last_updated": {"type": "string", "format": "date"},
             "notes": {"type": ["string", "null"]},
@@ -239,7 +308,7 @@ def openapi(d, vendor_slugs, model_ids):
                     "levels": {"type": ["array", "null"], "items": {"type": "string"}, "description": "Accepted effort levels in ascending order (e.g. low, medium, high); null when not applicable or 待核实"},
                     "default": {"type": ["string", "null"], "description": "Default level when the parameter is omitted; null when not stated / 待核实"},
                     "can_disable": {"type": ["boolean", "null"], "description": "Whether reasoning can be turned off via the API; null = not stated in official docs"},
-                    "status": {"type": "string", "enum": ["verified", "partial", "unverified"], "description": "verified = documented; partial = some facts documented but levels/default 待核实; unverified = 待核实"},
+                    "status": {"type": "string", "enum": ["verified", "partial", "unverified"], "description": "verified = all applicable facts documented; partial = some fields 待核实; unverified = support 待核实; see field_status"},
                     "note": {"type": ["string", "null"], "description": "Parameter names, level mappings and caveats"},
                     "sources": {"type": "array", "items": {"type": "string", "format": "uri"}, "description": "Official documentation pages used"},
                 },
@@ -272,7 +341,7 @@ def openapi(d, vendor_slugs, model_ids):
             },
             "service_tiers": {
                 "type": "array",
-                "description": "Documented service-tier price multipliers applied to the standard price (all of input, output and cache prices). Only tiers documented for this model are listed.",
+                "description": "multiplier is an input/output display hint. Billing uses per-component multipliers, then explicit pricing overrides. Null multiplier means unknown, never zero. Storage has its own multiplier.",
                 "items": {"type": "object", "required": ["name", "multiplier", "note"],
                           "properties": {
                               "name": {"type": "string", "enum": list(SERVICE_TIER_NAMES), "description": "batch / flex / fast (OpenAI Fast = formerly Priority; Anthropic fast mode) / priority / ultrafast; data_residency = regional / US-only processing surcharge"},
@@ -304,6 +373,7 @@ def openapi(d, vendor_slugs, model_ids):
             "storage_per_1M_tokens_hour": dict(price, description="Cache storage fee per 1M tokens per hour (USD, not per 1M tokens; 0 = currently free)"),
             "note": {"type": ["string", "null"]}},
     }
+    extend_schemas(model, cache_pricing, price)
     vendor = {
         "type": "object",
         "required": ["slug", "name", "model_count", "model_ids", "source_urls", "links"],
@@ -326,11 +396,21 @@ def openapi(d, vendor_slugs, model_ids):
     vendor_env = env({"type": "array", "items": {"$ref": "#/components/schemas/Model"}})
     vendor_env["required"].append("vendor")
     vendor_env["properties"]["vendor"] = {"$ref": "#/components/schemas/Vendor"}
+    index_schema = {"type": "object", "required": ["endpoints", "models", "vendors"], "additionalProperties": False,
+                    "properties": {
+                        "endpoints": {"type": "object", "required": ["models", "vendors", "openapi"], "additionalProperties": False,
+                                      "properties": {k: {"const": k + ".json"} for k in ("models", "vendors", "openapi")}},
+                        "models": {"type": "array", "items": {"type": "object", "required": ["id", "name", "vendor", "links"],
+                            "additionalProperties": False,
+                            "properties": {k: model["properties"][k] for k in ("id", "name", "vendor", "links")}}},
+                        "vendors": {"type": "array", "items": {"type": "object", "required": ["slug", "name", "links"],
+                            "additionalProperties": False,
+                            "properties": {k: vendor["properties"][k] for k in ("slug", "name", "links")}}}}}
     return {
         "openapi": "3.1.0",
         "info": {
             "title": "LLM API Pricing (static JSON API)",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "description": ("Read-only static JSON files generated from data/prices.json by scripts/build_api.py "
                             "and served by GitHub Pages. All prices are USD per 1M tokens. Only GET is supported; "
                             "there is no server-side filtering or query parameters, filter on the client. "
@@ -341,6 +421,8 @@ def openapi(d, vendor_slugs, model_ids):
                     {"url": "https://{user}.github.io/{repo}/api/v1",
                      "variables": {"user": {"default": "your-user"}, "repo": {"default": "llm-pricing"}}}],
         "paths": {
+            "/index.json": {"get": {"operationId": "getIndex", "summary": "Discover endpoint paths and model IDs",
+                                     "responses": ok("API index", "#/components/schemas/Index")}},
             "/models.json": {"get": {"operationId": "listModels", "summary": "All models",
                                      "responses": ok("All models", "#/components/schemas/ModelList")}},
             "/models/{model_id}.json": {"get": {
@@ -362,6 +444,7 @@ def openapi(d, vendor_slugs, model_ids):
             "ModelItem": env({"$ref": "#/components/schemas/Model"}),
             "VendorList": env({"type": "array", "items": {"$ref": "#/components/schemas/Vendor"}}),
             "VendorModels": vendor_env,
+            "Index": env(index_schema),
         }},
     }
 
@@ -390,6 +473,10 @@ def build(d):
             "api_version": API_VERSION, "meta": base_meta(d, len(vm)), "vendor": v,
             "data": [o for o in objs if o["vendor"] == v["slug"]]}
     out["vendors.json"] = {"api_version": API_VERSION, "meta": base_meta(d, len(vendors)), "data": vendors}
+    out["index.json"] = {"api_version": API_VERSION, "meta": base_meta(d, len(objs)), "data": {
+        "endpoints": {"models": "models.json", "vendors": "vendors.json", "openapi": "openapi.json"},
+        "models": [{k: o[k] for k in ("id", "name", "vendor", "links")} for o in objs],
+        "vendors": [{k: v[k] for k in ("slug", "name", "links")} for v in vendors]}}
     for o in objs:
         out["models/%s.json" % o["id"]] = {"api_version": API_VERSION, "meta": base_meta(d), "data": o}
     out["openapi.json"] = openapi(d, [v["slug"] for v in vendors], [o["id"] for o in objs])

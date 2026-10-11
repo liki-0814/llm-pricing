@@ -5,6 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e",
     "count": 8
   },
   "vendor": {
@@ -48,6 +49,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -70,6 +87,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
         "sources": [
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -122,6 +145,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -143,6 +182,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "Qwen3.7 Max 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Max series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。 档位和默认值暂参照 Qwen3.8(用户确认,官方文档暂未单独列出 Qwen3.7 的 reasoning_effort 档位)",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
@@ -197,6 +242,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": "Singapore",
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -218,6 +279,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "Qwen3.7 Plus 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Plus series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。 档位和默认值暂参照 Qwen3.8(用户确认,官方文档暂未单独列出 Qwen3.7 的 reasoning_effort 档位)",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
@@ -238,7 +305,7 @@
       },
       "pricing_tiers": [
         {
-          "condition": "input_tokens>256000",
+          "condition": "input_tokens>256000 and input_tokens<=1000000",
           "input_tokens_gt": 256000,
           "input_tokens_lte": 1000000,
           "input": 1.2,
@@ -260,7 +327,22 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "官方 qwencloud 模型页：Batch File 输入 $0.2 / 输出 $0.8（为标价 50%，标价口径 ≤256K 档）。"
+          "note": "官方 qwencloud 模型页：Batch File 输入 $0.2 / 输出 $0.8（为标价 50%，标价口径 ≤256K 档）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -280,7 +362,16 @@
           "output": 1.28,
           "cached_input": 0.032,
           "cache_write": 0.4,
-          "note": "官方标注“限时 8 折”（≤256K 档：输入 $0.32 / 输出 $1.28 / 隐式缓存 $0.064 / 显式命中 $0.032 / 显式创建 $0.40）；截止日期官方未公布；表中为标价。"
+          "note": "官方标注“限时 8 折”（≤256K 档：输入 $0.32 / 输出 $1.28 / 隐式缓存 $0.064 / 显式命中 $0.032 / 显式创建 $0.40）；截止日期官方未公布；表中为标价。",
+          "multiplier": 0.8,
+          "cache_pricing": {
+            "implicit_read": 0.064,
+            "explicit_read": 0.032,
+            "explicit_write": 0.4
+          },
+          "sources": [
+            "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+          ]
         }
       ],
       "unverified_fields": [],
@@ -308,6 +399,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -330,6 +437,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
         "sources": [
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -382,6 +495,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -403,6 +532,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "Qwen3.7 Flash 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Flash series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。 档位和默认值暂参照 Qwen3.8(用户确认,官方文档暂未单独列出 Qwen3.7 的 reasoning_effort 档位)",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
@@ -441,7 +576,7 @@
           "note": "官方（Singapore/International）：32K<输入≤256K 档。"
         },
         {
-          "condition": "input_tokens>256000",
+          "condition": "input_tokens>256000 and input_tokens<=1000000",
           "input_tokens_gt": 256000,
           "input_tokens_lte": 1000000,
           "input": 0.2,
@@ -463,7 +598,22 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "官方定价页：50% batch inference discount（输入、输出均 5 折）。"
+          "note": "官方定价页：50% batch inference discount（输入、输出均 5 折）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -500,6 +650,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -522,6 +688,12 @@
         "default": "xhigh",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。仅思考模型，无法关闭。",
         "sources": [
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -574,6 +746,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -595,6 +783,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
         "sources": [
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -647,6 +841,22 @@
         "cached_input": "verified",
         "cache_write": "unverified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -668,6 +878,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "默认开启思考，reasoning_effort 默认 xhigh，可选 low/medium/xhigh（minimal→low，high/max→xhigh，none 关闭思考）；不可与 thinking_budget 同设。",
         "sources": [
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",

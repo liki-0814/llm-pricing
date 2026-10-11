@@ -33,7 +33,7 @@
     <div class="wrap">
       <span class="eyebrow"><span class="dot" aria-hidden="true"></span>只读 · 静态 JSON · 支持跨域 · 无需密钥</span>
       <h1>公开查询 <span class="grad">接口文档</span></h1>
-      <p class="sub">GitHub Pages 无法运行服务端，因此接口以<strong>预生成的静态 JSON 文件</strong>提供：直接 <code>GET</code> 对应 URL 即可。所有价格为<strong>美元 / 每 100 万 token</strong>。</p>
+      <p class="sub">GitHub Pages 无法运行服务端，因此接口以<strong>预生成的静态 JSON 文件</strong>提供：直接 <code>GET</code> 对应 URL 即可。token 价格为<strong>美元 / 每 100 万 token</strong>；缓存存储单独按百万 token·小时计价。</p>
       <div class="hero-cta">
         <a class="btn primary" href="#try">在线试用</a>
         <a class="btn" href="api/v1/openapi.json">OpenAPI 3.1 描述</a>
@@ -49,6 +49,7 @@
       <a href="#schema">数据结构</a>
       <a href="#examples">调用示例</a>
       <a href="#try">在线试用</a>
+      <a href="#cost">费用试算</a>
       <a href="#cors">跨域与缓存</a>
       <a href="#update">数据更新</a>
     </nav>
@@ -66,6 +67,7 @@
           <table class="endpoints">
             <thead><tr><th>路径</th><th>说明</th></tr></thead>
             <tbody>
+              <tr><td><span class="method">GET</span><a class="path" href="api/v1/index.json">/index.json</a></td><td>轻量索引：接口路径、模型 ID 和厂商 slug；路径均相对于 api/v1/</td></tr>
               <tr><td><span class="method">GET</span><a class="path" href="api/v1/models.json">/models.json</a></td><td>全部模型；<code>meta</code> 含 <code>updated_at</code>、<code>currency</code>、<code>unit</code>、<code>count</code></td></tr>
               <tr><td><span class="method">GET</span><span class="path">/models/<b>{model_id}</b>.json</span></td><td>单个模型，如 <a href="api/v1/models/deepseek-flash.json"><code>models/deepseek-flash.json</code></a></td></tr>
               <tr><td><span class="method">GET</span><a class="path" href="api/v1/vendors.json">/vendors.json</a></td><td>全部厂商，含模型数、模型 ID 列表、官方来源</td></tr>
@@ -75,7 +77,7 @@
           </table>
         </div>
         <p id="slugList" style="font-size:13.5px"></p>
-        <div class="callout">静态文件不支持查询参数（如 <code>?vendor=</code>）——服务器会忽略它们。请取回 <code>models.json</code> 后在客户端筛选、排序。不存在的模型或厂商返回 GitHub Pages 的 404 页面（HTML，而非 JSON）。</div>
+        <div class="callout">静态文件不支持服务端查询参数（如 <code>?vendor=</code>）。可直接 GET 单模型/单厂商，也可用 <code>LLMPrice.createClient</code> 在客户端筛选、排序；先查 <code>index.json</code> 可发现全部 ID。不存在的模型或厂商返回 GitHub Pages 的 404 页面（HTML，而非 JSON）。</div>
       </section>
 
       <section id="schema">
@@ -83,7 +85,7 @@
         <p>每个响应都是同一个外层结构：</p>
         <div class="code"><pre>{
   <span class="tok-k">"api_version"</span>: <span class="tok-s">"v1"</span>,
-  <span class="tok-k">"meta"</span>: { <span class="tok-k">"updated_at"</span>: <span class="tok-s">"YYYY-MM-DD"</span>, <span class="tok-k">"currency"</span>: <span class="tok-s">"USD"</span>, <span class="tok-k">"unit"</span>: <span class="tok-s">"per_1M_tokens"</span>, <span class="tok-k">"unit_label"</span>: <span class="tok-s">"USD per 1M tokens"</span>, <span class="tok-k">"count"</span>: <span class="tok-n">40</span> },
+  <span class="tok-k">"meta"</span>: { <span class="tok-k">"updated_at"</span>: <span class="tok-s">"YYYY-MM-DD"</span>, <span class="tok-k">"data_version"</span>: <span class="tok-s">"源数据 SHA-256"</span>, <span class="tok-k">"currency"</span>: <span class="tok-s">"USD"</span>, <span class="tok-k">"unit"</span>: <span class="tok-s">"per_1M_tokens"</span>, <span class="tok-k">"unit_label"</span>: <span class="tok-s">"USD per 1M tokens"</span>, <span class="tok-k">"count"</span>: <span class="tok-n">43</span> },
   <span class="tok-k">"data"</span>: [ <span class="tok-c">/* Model[] | Vendor[] | Model */</span> ]
 }</pre></div>
         <p><code>vendors/{vendor}.json</code> 额外包含 <code>vendor</code> 对象；<code>models/{id}.json</code> 的 <code>data</code> 是单个对象，<code>meta</code> 无 <code>count</code>。</p>
@@ -92,7 +94,7 @@
           <table class="endpoints fields">
             <thead><tr><th>字段</th><th>类型</th><th>说明</th></tr></thead>
             <tbody>
-<tr><td>id</td><td>string</td><td>模型 ID（与厂商 API 中使用的 model 名一致），也是 <code>models/{id}.json</code> 的文件名</td></tr>
+<tr><td>id</td><td>string</td><td>本站查询 ID，也是 <code>models/{id}.json</code> 的文件名；调用厂商模型时，请以官方文档中的名称及大小写为准</td></tr>
 <tr><td>name</td><td>string</td><td>展示名称</td></tr>
 <tr><td>vendor</td><td>string</td><td>厂商 slug：deepseek / openai / anthropic / zhipu / moonshot / qwen / google / minimax</td></tr>
 <tr><td>vendor_name</td><td>string</td><td>厂商展示名（中文）</td></tr>
@@ -102,13 +104,13 @@
 <tr><td>pricing.output</td><td>number | null</td><td>输出价</td></tr>
 <tr><td>pricing.cached_input</td><td>number | null</td><td>缓存命中 / 缓存读取价</td></tr>
 <tr><td>pricing.cache_write</td><td>number | null</td><td>缓存写入（创建）价</td></tr>
-<tr><td>pricing_status.*</td><td>enum</td><td>每个价格字段的状态：<code>verified</code> 已核实 · <code>unverified</code> 待核实（值为 null）· <code>not_listed</code> 官方未列出（值为 null）</td></tr>
+<tr><td>pricing_status.*</td><td>enum</td><td>每个价格字段的状态：<code>verified</code> 官方已核实 · <code>reference</code> 用户确认参照价 · <code>unverified</code> 待核实（值为 null）· <code>not_listed</code> 官方未列出（值为 null）</td></tr>
 <tr><td>has_off_peak</td><td>boolean</td><td>是否有闲时价</td></tr>
 <tr><td>off_peak_pricing</td><td>object | null</td><td>闲时价 <code>{input, output, cached_input}</code>，无则为 null</td></tr>
 <tr><td>peak_note</td><td>string | null</td><td>高峰 / 闲时时段说明，或限时价说明</td></tr>
 <tr><td>context_length</td><td>integer | null</td><td>上下文长度（token 数）</td></tr>
 <tr><td>context_length_label</td><td>string | null</td><td>上下文长度展示文本（如 “1M”）</td></tr>
-<tr><td>source_url</td><td>string</td><td>官方定价页 URL</td></tr>
+<tr><td>source_url</td><td>string</td><td>主要官方来源 URL；完整价格依据及参照来源见 <code>price_basis</code></td></tr>
 <tr><td>extra_sources</td><td>string[]</td><td>其他官方来源（如上下文长度来源）</td></tr>
 <tr><td>last_updated</td><td>string (date)</td><td>该条记录最后核实日期 YYYY-MM-DD</td></tr>
 <tr><td>notes</td><td>string | null</td><td>阶梯价、促销、长上下文价、Batch 折扣等备注</td></tr>
@@ -116,7 +118,7 @@
 <tr><td>reasoning_effort.levels</td><td>string[] | null</td><td>官方支持的档位（由低到高，如 <code>["low","medium","high"]</code>）；<code>null</code> 表示不适用或待核实</td></tr>
 <tr><td>reasoning_effort.default</td><td>string | null</td><td>不传参数时的默认档位；官方未明确则为 <code>null</code>（待核实）</td></tr>
 <tr><td>reasoning_effort.can_disable</td><td>boolean | null</td><td>是否可通过 API 关闭推理；<code>null</code> = 官方文档未说明</td></tr>
-<tr><td>reasoning_effort.status</td><td>enum</td><td><code>verified</code> 已核实 · <code>partial</code> 部分核实（档位 / 默认值待核实）· <code>unverified</code> 待核实</td></tr>
+<tr><td>reasoning_effort.status</td><td>enum</td><td><code>verified</code> 已核实 · <code>partial</code> 部分字段待核实 · <code>unverified</code> 推理支持待核实；各字段状态见 <code>field_status</code></td></tr>
 <tr><td>reasoning_effort.note</td><td>string | null</td><td>参数名（如 <code>reasoning.effort</code> / <code>output_config.effort</code> / <code>thinking_level</code>）、档位映射与限制说明</td></tr>
 <tr><td>reasoning_effort.sources</td><td>string[]</td><td>所依据的官方文档 URL</td></tr>
 <tr><td>limits.context_length</td><td>integer | null</td><td>上下文窗口（token），与顶层 <code>context_length</code> 一致</td></tr>
@@ -124,16 +126,21 @@
 <tr><td>limits.status</td><td>enum</td><td><code>verified</code> 上下文与最大输出均已核实 · <code>partial</code> 其一已核实 · <code>unverified</code> 均待核实</td></tr>
 <tr><td>limits.note / limits.sources</td><td>string | null / string[]</td><td>口径说明与官方来源 URL</td></tr>
 <tr><td>pricing_tiers[]</td><td>array</td><td>长上下文 / 分档价，空数组 = 无分档或官方未列出。元素：<code>condition</code>（如 <code>input_tokens&gt;272000</code>）、<code>input_tokens_gt</code>、<code>input_tokens_lte</code>、<code>input</code>、<code>output</code>、<code>cached_input</code>、<code>cache_write</code>、<code>cache_pricing</code>（Qwen 档内三档缓存价）、<code>note</code>；价格单位同 <code>pricing</code>，整请求按所在档单价计费以 <code>note</code> 为准</td></tr>
-<tr><td>service_tiers[]</td><td>array</td><td>服务档倍率 <code>{name, multiplier, note}</code>：<code>name</code> ∈ batch / flex / fast / priority / ultrafast / data_residency 等；<code>multiplier</code> 为相对标准价的倍数（0.5 = 五折，1.1 = 加收 10%）；官方未列出则为空数组</td></tr>
+<tr><td>service_tiers[]</td><td>array</td><td>服务档费用规则 <code>{name, multiplier, multipliers, pricing, sources, note}</code>：<code>name</code> ∈ batch / flex / fast / priority / ultrafast / data_residency 等；<code>multiplier</code> 仅用于输入/输出展示；实际计费用 <code>multipliers</code> 的各项倍率，再应用 <code>pricing</code> 的例外单价；存储费用独立计价；官方未列出则为空数组</td></tr>
 <tr><td>cache_pricing.implicit_read / explicit_read / explicit_write</td><td>number | null</td><td>缓存细分价（主要用于 Qwen）：隐式命中 / 显式命中 / 显式创建。<code>pricing.cached_input</code> 与 <code>pricing.cache_write</code> 含义不变：<code>cached_input</code> 等于 implicit_read 或 explicit_read 之一（见 <code>cache_pricing.note</code> 的逐模型说明），<code>cache_write</code> = explicit_write</td></tr>
 <tr><td>cache_pricing.explicit_write_1h / storage_per_1M_tokens_hour</td><td>number | null</td><td>1 小时 TTL 缓存写入价（如 Claude）/ 缓存存储费（每百万 token·小时，如 Gemini），官方列出才有值</td></tr>
-<tr><td>price_schedule[]</td><td>array</td><td>已公布的价格变更 <code>{kind, effective_from, effective_until, input, output, cached_input, cache_write, note}</code>，<code>kind</code> ∈ promotion / scheduled_increase / scheduled_decrease，空数组 = 无</td></tr>
+<tr><td>price_schedule[]</td><td>array</td><td>已公布的价格变更 <code>{kind, effective_from, effective_until, input, output, cached_input, cache_write, multiplier, cache_pricing, sources, note}</code>，<code>kind</code> ∈ promotion / scheduled_increase / scheduled_decrease，空数组 = 无</td></tr>
+<tr><td>price_basis</td><td>object</td><td>价格依据：<code>type</code> 为 official/reference；<code>reference_model_id</code> 为参照模型；<code>sources</code> 与 <code>note</code> 说明来源。参照价不代表订阅模型的实际账单</td></tr>
+<tr><td>billing</td><td>object</td><td><code>channel</code> 区分按量/订阅；<code>price_type</code> 区分 current/list/reference；<code>region</code> 为已记录地区；<code>cached_input_type</code> 明确隐式/显式/未分类缓存</td></tr>
+<tr><td>off_peak_schedule</td><td>object | null</td><td>UTC 时区、工作日、起点包含终点不包含的高峰窗口、中国法定节假日规则及来源。每个模型独立包含完整规则</td></tr>
+<tr><td>reasoning_effort.field_status</td><td>object</td><td>supported/levels/default/can_disable 的字段级状态：verified/unverified/not_applicable。整体存在未核实项时为 partial</td></tr>
+<tr><td>meta.data_version</td><td>string</td><td>源数据内容的 SHA-256；同一快照所有接口一致，可用于识别数据变更</td></tr>
 <tr><td>unverified_fields</td><td>string[]</td><td>待核实字段列表</td></tr>
 <tr><td>links.self / links.vendor</td><td>string</td><td>相对于 <code>api/v1/</code> 的文件路径</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="callout">稳定性约定：<code>v1</code> 已于 2026-10-11 精简：移除 <code>max_input_tokens</code>、思考模式最大输入/输出等子上限、<code>modalities</code>、<code>features</code>、<code>knowledge_cutoff</code>、<code>thinking_budget</code>、<code>availability</code>、<code>snapshot</code>、<code>aliases</code>；之后 <code>v1</code> 内只会新增字段，不会删除或改名已有字段；价格为 <code>null</code> 时请看 <code>pricing_status</code> 区分“待核实”与“官方未列出”；<code>reasoning_effort</code>、<code>limits</code> 等字段中的 <code>null</code> 一律表示待核实 / 官方未说明，不做推测；<code>pricing_tiers</code>、<code>service_tiers</code>、<code>price_schedule</code> 为空数组表示无或官方未列出。网站上展示的每一项数据（含“详情”展开行）均可在对应模型 JSON 中查询。</div>
+        <div class="callout">稳定性约定：<code>v1</code> 已于 2026-10-11 精简：移除 <code>max_input_tokens</code>、思考模式最大输入/输出等子上限、<code>modalities</code>、<code>features</code>、<code>knowledge_cutoff</code>、<code>thinking_budget</code>、<code>availability</code>、<code>snapshot</code>、<code>aliases</code>；之后 <code>v1</code> 内只会新增字段，不会删除或改名已有字段；价格为 <code>null</code> 时请看 <code>pricing_status</code> 区分“待核实”与“官方未列出”；推理字段的 <code>null</code> 可能为不适用或待核实，以 <code>field_status</code> 为准；<code>limits</code> 的 <code>null</code> 表示待核实；<code>pricing_tiers</code>、<code>service_tiers</code>、<code>price_schedule</code> 为空数组表示无或官方未列出。参照价格新增 <code>reference</code> 状态；不要将 <code>null</code> 当作零。网站上展示的每一项数据（含“详情”展开行）均可在对应模型 JSON 中查询。</div>
       </section>
 
       <section id="examples">
@@ -154,11 +161,12 @@
         <div class="card">
           <div class="try-row">
             <select id="tryPreset" class="input" aria-label="选择接口">
+              <option value="index.json">GET /index.json</option>
               <option value="models.json">GET /models.json</option>
               <option value="vendors.json">GET /vendors.json</option>
               <option value="vendor">GET /vendors/{vendor}.json</option>
               <option value="model">GET /models/{model_id}.json</option>
-              <option value="snippet:cheapest">示例：输入价最低的 5 个模型</option>
+              <option value="snippet:cheapest">示例：官方输入价最低的 5 个模型</option>
               <option value="snippet:offpeak">示例：有闲时价的模型</option>
               <option value="openapi.json">GET /openapi.json</option>
             </select>
@@ -174,17 +182,42 @@
         </div>
       </section>
 
+      <section id="cost">
+        <h2>费用试算</h2>
+        <p>按总输入选择分档，再处理缓存、高峰/闲时、日期和服务档。输出 token 应包含供应商计费的思考 token；不包含工具费用、税费、未收录的多模态单价或订阅额度结算。未知单价会报错，不会按免费处理。</p>
+        <form id="costForm" class="card">
+          <div class="cost-grid">
+            <label>模型<select id="costModel" class="input"></select></label>
+            <label>服务档<select id="costService" class="input"><option value="standard">Standard</option></select></label>
+            <label>数据驻留加价<select id="costResidency" class="input" disabled><option value="false">不使用</option><option value="true">使用模型已列出的驻留规则</option></select></label>
+            <label>总输入 token<input id="inputTokens" class="input" type="number" min="0" step="1" value="300000" required></label>
+            <label>输出 token<input id="outputTokens" class="input" type="number" min="0" step="1" value="10000" required></label>
+            <label>缓存读取 token<input id="cachedInputTokens" class="input" type="number" min="0" step="1" value="0" required></label>
+            <label>缓存创建 token<input id="cacheWriteTokens" class="input" type="number" min="0" step="1" value="0" required></label>
+            <label>1 小时 TTL 创建 token<input id="cacheWrite1hTokens" class="input" type="number" min="0" step="1" value="0" required></label>
+            <label>缓存存储 token·小时<input id="storageTokenHours" class="input" type="number" min="0" step="any" value="0" required></label>
+            <label>计费时间（含时区）<input id="costAt" class="input" type="text" required placeholder="2026-10-11T12:00:00+08:00"></label>
+            <label>缓存读取类型<select id="costCacheType" class="input"><option value="">使用该模型主缓存价</option><option value="implicit">隐式缓存</option><option value="explicit">显式缓存</option></select></label>
+            <label>是否为中国法定节假日<select id="costHoliday" class="input"><option value="">未确认</option><option value="false">否</option><option value="true">是</option></select></label>
+          </div>
+          <button id="costSend" class="btn primary" type="submit" disabled>计算费用</button>
+          <p id="costStatus" role="status" aria-live="polite">加载模型列表…</p>
+          <div class="code"><pre id="costOut">填写用量后查看费用明细。</pre></div>
+        </form>
+        <p>JavaScript：加载 <a href="assets/client.js">assets/client.js</a> 后使用 <code>LLMPrice.createClient(baseUrl)</code>；Node.js 18+ 可直接 <code>require("./assets/client.js")</code>。错误带稳定的 <code>code</code>，包括 NOT_FOUND、TIMEOUT、PRICE_UNAVAILABLE、PRICE_EXPIRED、HOLIDAY_REQUIRED 等。</p>
+      </section>
+
       <section id="cors">
         <h2>跨域与缓存</h2>
         <div class="callout ok">GitHub Pages 默认为所有文件返回 <code>Access-Control-Allow-Origin: *</code>，因此任意网页都可以直接 <code>fetch</code> 这些 JSON，无需代理、无需 <code>_headers</code> 配置（GitHub Pages 也不支持自定义响应头）。</div>
-        <p>GitHub Pages 会对文件设置约 10 分钟的 CDN 缓存（<code>Cache-Control: max-age=600</code>），数据更新后可能需要稍等片刻。数据每次核实后才更新，客户端可按 <code>meta.updated_at</code> 判断是否需要刷新。</p>
+        <p>GitHub Pages 会对文件设置约 10 分钟的 CDN 缓存（<code>Cache-Control: max-age=600</code>），数据更新后可能需要稍等片刻。客户端可核对 <code>meta.updated_at</code> 和 <code>meta.data_version</code> 判断数据日期和快照是否一致。</p>
       </section>
 
       <section id="update">
         <h2>数据更新（维护者）</h2>
         <p>接口文件由 <code>scripts/build_api.py</code> 从 <code>data/prices.json</code> 生成，<strong>修改数据后务必重新生成</strong>：</p>
-        <div class="code"><pre>python3 scripts/build_api.py      <span class="tok-c"># 重新生成 api/v1/</span>
-python3 scripts/validate.py       <span class="tok-c"># 校验数据，并检查 api/v1/ 与数据是否同步</span></pre></div>
+        <div class="code"><pre>.venv/bin/python scripts/build_api.py      <span class="tok-c"># 重新生成 api/v1/</span>
+.venv/bin/python scripts/validate.py       <span class="tok-c"># 校验数据，并检查 api/v1/ 与数据是否同步</span></pre></div>
         <p>生成结果是确定性的（不含生成时间戳），<code>validate.py</code> 会逐个比对文件，发现缺失、过期或多余文件即报错。</p>
       </section>
     </div>
@@ -195,7 +228,7 @@ python3 scripts/validate.py       <span class="tok-c"># 校验数据，并检查
   <div class="wrap">
     <div>
       <h3>关于数据</h3>
-      <p>价格取自各厂商官方定价页，统一为美元 / 每 100 万 token。价格可能随时调整，请以官方页面为准。</p>
+      <p>官方报价和用户确认参照价分别标注来源，统一为美元 / 每 100 万 token。价格可能随时调整，请以官方页面为准。</p>
       <p>数据更新：<span id="footUpdated">—</span> · <a href="./">返回价格表</a></p>
     </div>
     <div>
@@ -206,6 +239,7 @@ python3 scripts/validate.py       <span class="tok-c"># 校验数据，并检查
   </div>
 </footer>
 <script src="assets/common.js"></script>
+<script src="assets/client.js"></script>
 <script src="assets/api.js"></script>
 </body>
 </html>

@@ -1,84 +1,136 @@
 # 大模型 API 价格速查
 
-纯静态站点（HTML/CSS/JS，无构建步骤、无外部依赖），可直接部署到 GitHub Pages。中文界面（zh-Hans）：
+中文静态站点，直接部署到 GitHub Pages；运行时只有 HTML、CSS 和 JavaScript，无后端、数据库或第三方运行依赖。
 
-- 深色 / 浅色主题切换（默认跟随系统，选择会记住；也可用 `?theme=dark` 强制）
-- 吸顶导航与吸顶表头，厂商彩色标签，每列最低价自动标记“最低”（随筛选结果变化）
-- 厂商筛选、搜索（支持空格分隔多关键词，`/` 聚焦、`Esc` 清空）、点击表头排序（升序 → 降序 → 默认），缺失值始终排最后
-- 筛选/搜索/排序状态同步到 URL，可直接分享（如 `?vendor=anthropic&sort=-output`）
-- 手机端为卡片布局，提供“排序方式”下拉框
-- “待核实”（未能从官方核实）与“未列出”（官方页没有该项）区分显示
-- 表格列：厂商/模型、输入、输出、缓存输入、缓存写入、高峰/闲时、最大上下文、最大输出、推理强度；“详情”展开分档价、服务档倍率、缓存细分与来源
-- 公开查询接口：静态 JSON（`api/v1/`），文档见 `api.html`
-
-所有价格统一为 **美元（USD）/ 每 100 万 token**。
-
-```
-index.html               价格表页面
-api.html                 接口文档（含 curl / JS / Python 示例与在线试用）
-assets/style.css         样式（浅色 + 深色，响应式）
-assets/theme-init.js     <head> 中预先设置主题，避免闪烁
-assets/common.js         主题切换、厂商 slug、复制、提示
-assets/app.js            价格表：渲染 / 排序 / 筛选 / 最低价标记
-assets/api.js            接口文档页：示例与在线试用
-data/prices.json         全部价格数据（唯一数据源）
-api/v1/                  由 scripts/build_api.py 生成的静态 JSON 接口（勿手改）
-scripts/build_api.py     生成 api/v1/
-scripts/validate.py      数据校验 + 检查 api/v1/ 是否与数据同步
-scripts/README.md        如何更新数据
-.nojekyll
-```
+覆盖 8 个厂商、43 个模型，统一美元 / 每百万 token；缓存存储另按百万 token·小时计价。价格表支持主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
 
 ## 本地预览
 
 ```bash
-cd llm-pricing
 python3 -m http.server 8000
-# 浏览器打开 http://localhost:8000 ，接口文档 http://localhost:8000/api.html
 ```
-（必须用 HTTP 服务器，直接打开 file:// 会因 fetch 限制无法加载 JSON。）
 
-## 公开查询接口（静态 JSON）
+打开 `http://localhost:8000/`；接口文档和费用试算在 `http://localhost:8000/api.html`。请通过 HTTP 访问，不能直接打开 `file://`。
 
-GitHub Pages 无法运行服务端，所以接口是预生成的静态文件，直接 `GET` 即可：
+## 直接查询
 
-| 路径（相对 `https://<用户名>.github.io/<仓库名>/`） | 内容 |
+基础地址：`https://liki-0814.github.io/llm-pricing/api/v1/`。本地可替换成 `http://localhost:8000/api/v1/`。
+
+| GET 路径 | 返回数据 |
 | --- | --- |
-| `api/v1/models.json` | 全部模型，`meta` 含 `updated_at`、`currency`（USD）、`unit`（per_1M_tokens）、`count` |
-| `api/v1/models/<model_id>.json` | 单个模型，如 `api/v1/models/deepseek-flash.json` |
-| `api/v1/vendors.json` | 全部厂商（slug、名称、模型数、模型 ID、官方来源） |
-| `api/v1/vendors/<vendor>.json` | 单个厂商及其模型；vendor 为 `deepseek` `openai` `anthropic` `zhipu` `moonshot` `qwen` `google` `minimax` |
-| `api/v1/openapi.json` | OpenAPI 3.1 描述 |
+| `index.json` | 轻量索引：模型 ID、厂商 slug 和接口路径 |
+| `models.json` | 全部模型 |
+| `models/<model_id>.json` | 单模型，完整价格、来源和规则 |
+| `vendors.json` | 全部厂商和模型目录 |
+| `vendors/<vendor>.json` | 单厂商及其所有模型 |
+| `openapi.json` | OpenAPI 3.1 合约 |
 
-每个模型的字段固定：`id`、`name`、`vendor`、`vendor_name`、`currency`、`unit`、`pricing{input, output, cached_input, cache_write}`、`pricing_status{…: verified | unverified | not_listed}`、`has_off_peak`、`off_peak_pricing{input, output, cached_input} | null`、`peak_note`、`context_length`（token 数）、`context_length_label`、`source_url`、`extra_sources`、`last_updated`、`notes`、`reasoning_effort{supported, levels, default, can_disable, status, note, sources}`、`limits{context_length, max_output_tokens, status, note, sources}`、`pricing_tiers[{condition, input_tokens_gt, input_tokens_lte, input, output, cached_input, cache_write, cache_pricing, note}]`、`service_tiers[{name, multiplier, note}]`（batch / flex / fast / priority / ultrafast / data_residency）、`cache_pricing{implicit_read, explicit_read, explicit_write, explicit_write_1h, storage_per_1M_tokens_hour, note}`、`price_schedule[]`、`unverified_fields`、`links`。数据集已精简（2026-10-11）：不再包含最大输入、思考模式输入/输出子上限、模态、功能、知识截止、思考预算、可用性、快照与别名。`limits` 等字段的 `null` 表示官方未给出（待核实），从不推测；`pricing.cached_input` / `pricing.cache_write` 含义不变，Qwen 的隐式 / 显式缓存细分见 `cache_pricing`。网页“详情”展开行（分档价、服务档倍率、缓存细分、来源）展示的内容都可在 API 中查询。`reasoning_effort` 为各厂商官方文档中的推理强度 / 思考档位，其中 `null` 表示待核实，不做推测。价格为 `null` 时用 `pricing_status` 区分“待核实”和“官方未列出”。
+数据接口统一返回 `{api_version, meta, data}`；`data` 在列表接口为数组，单模型为对象，索引为对象。厂商详情另含 `vendor`。`links` 和索引的路径均相对于基础地址 `api/v1/`，用 `new URL(path, BASE)` 拼接，不以单模型文件所在目录为基准。
 
-```bash
-curl -s https://<用户名>.github.io/llm-pricing/api/v1/models.json | jq '.data[] | {id, input: .pricing.input}'
-```
-
-- **跨域**：GitHub Pages 默认对所有文件返回 `Access-Control-Allow-Origin: *`，任意网页都能直接 `fetch`，无需 `_headers` 文件（GitHub Pages 也不支持自定义响应头）。
-- **缓存**：GitHub Pages CDN 约缓存 10 分钟。
-- **不支持查询参数**（`?vendor=` 会被忽略），请取回 `models.json` 后在客户端筛选。
-
-### 修改数据后必须重新生成接口
+`meta.updated_at` 是数据核实日期，`meta.data_version` 是源数据内容的 SHA-256，同一数据快照的所有接口一致。不存在的路径返回部署平台的 404（GitHub Pages 通常为 HTML），调用方先检查 HTTP 状态再解析 JSON。静态服务器不会处理 `?vendor=` 等筛选参数。
 
 ```bash
-python3 scripts/build_api.py   # 根据 data/prices.json 重新生成 api/v1/（会删除多余的旧文件）
-python3 scripts/validate.py    # 校验数据，并逐文件检查 api/v1/ 是否同步；不同步则退出码为 1
+BASE='http://localhost:8000/api/v1'
+curl --fail --silent --show-error "$BASE/index.json"
+curl --fail --silent --show-error "$BASE/models/gemini-3.1-pro-preview.json"
+curl --fail --silent --show-error "$BASE/vendors/openai.json"
+curl --fail --silent --show-error "$BASE/models.json" \
+  | jq '.data | map(select(.vendor == "openai" and .price_basis.type == "official")) | sort_by(.pricing.input) | .[:5]'
 ```
-`build_api.py --check` 也可单独检查同步状态。生成结果是确定性的（不含时间戳），只有数据变化才会改动文件。新增厂商时需在 `scripts/build_api.py` 的 `VENDOR_SLUGS` 中添加 slug（`assets/common.js` 中有同样的映射，用于页面配色和链接）。
+
+GitHub Pages 当前返回 `Access-Control-Allow-Origin: *`，支持跨域 fetch。CDN 缓存可能延迟数据更新，核对版本时应同时查看日期和 `data_version`。
+
+## 自然调用：轻量 JavaScript 客户端
+
+HTML 加载 `assets/client.js`，全局对象为 `LLMPrice`。Node.js 18+ 可通过 `require` 使用同一文件，无 npm 安装步骤。
+
+```js
+const { createClient, estimate } = require('./assets/client.js');
+const api = createClient('http://localhost:8000/api/v1/');
+
+async function main() {
+  const { data: model } = await api.getModel('gemini-3.1-pro-preview');
+  const { data: openai } = await api.getVendor('openai');
+  const { data: cheapest } = await api.listModels({
+    vendor: 'openai', sort: 'input', limit: 5, priceBasis: 'official'
+  });
+  const { data: matches } = await api.listModels({ q: 'gemini pro' });
+  const result = estimate(model, { inputTokens: 300000, outputTokens: 10000 }, {
+    at: '2026-10-11'
+  });
+  console.log(result.total, result.breakdown, result.warnings); // 1.38 USD
+}
+main().catch(console.error);
+```
+
+`getIndex()` 和 `listVendors()` 返回目录；`getOpenAPI()` 直接返回 OpenAPI 描述对象；`api.estimate(id, usage, options)` 可以一次取模型并计算。筛选和排序在客户端执行，HTTP 请求仍然是普通 GET 静态文件。`sort` 支持 input/output/cached_input/cache_write/context_length/max_output_tokens/name，前缀 `-` 表示降序；未知价格始终排最后。`meta.count` 是返回数，`matched_count` 是筛选匹配数，`total_count` 是全量数。
+
+客户端默认 15 秒超时，可用 `{timeoutMs: 5000}` 调整。错误具有稳定 `code`：`NOT_FOUND`、`HTTP_ERROR`、`TIMEOUT`、`NETWORK_ERROR`、`INVALID_RESPONSE`、`INVALID_ARGUMENT`、`PRICE_UNAVAILABLE`、`PRICE_EXPIRED`、`HISTORICAL_PRICE_UNAVAILABLE`、`UNSUPPORTED_SERVICE_TIER`、`LIMIT_EXCEEDED`、`TIME_REQUIRED`、`HOLIDAY_REQUIRED`。
+
+## 费用计算口径
+
+`inputTokens` 为总输入，包含缓存读取、缓存创建和 1 小时 TTL 创建的 token；这些部分会从普通输入中扣除，不能重复计费。`outputTokens` 包含供应商计费的思考 token。可选用量：`cachedInputTokens`、`cacheWriteTokens`、`cacheWrite1hTokens`、`storageTokenHours`（token 数乘存储小时数）。
+
+计算按总输入选择分档 → 高峰/闲时 → 价格生效日期 → 服务档各费用项倍率 → 服务档例外单价 → 数据驻留倍率 → 各项用量费用。`cacheType` 可选 implicit/explicit；默认使用该模型 `pricing.cached_input` 的已标注类型。`serviceTier` 默认 standard；`dataResidency: true` 可叠加已列出的驻留费用。
+
+```js
+const r = await api.estimate('gemini-3.5-flash-lite', {
+  inputTokens: 1000000, outputTokens: 0, cachedInputTokens: 1000000,
+  storageTokenHours: 1000000
+}, { at: '2026-10-11', serviceTier: 'batch' });
+// 缓存读取 0.02 + 存储 1.00 = 1.02 USD；不能统一乘 0.5。
+```
+
+- `at` 为 `YYYY-MM-DD` 或带时区的 ISO 时间；省略时用当前时间。日期规则按 UTC 日匹配，官方仅给日期时没有更精确的切换时刻。
+- DeepSeek 需完整时间；工作日高峰窗口还需明确 `isChineseHoliday: true/false`。不内置猜测的节假日日历。
+- 已公布的未来价格自动生效；超出已确认的促销期限会要求复核。截止日期未知的促销会附带警告。
+- 更早日期的历史价不在该快照中，计算会拒绝；晚于核实日的估算会说明快照可能未涵盖后续未公布调整。
+- 缺失且实际使用的价格报错，不当作零；未使用的未知费用项不影响计算。未提供最大输出时不猜上限。
+- 参照价返回 `price_basis` 和订阅提示，仅作成本参考，不代表会员额度或实际账单。
+- 返回 `total`、`breakdown`、`unit_prices`、分档、时段、依据和 warnings。范围为记录内的 token 与缓存费用，排除工具、税费、未收录的多模态费率和订阅额度结算。
+
+## 数据范围与状态
+
+`data/prices.json` 为唯一数据源；`api/v1/` 由脚本生成，勿手改。
+
+模型字段仍限于价格、推理强度、上下文与最大输出、分档、服务档、缓存、生效日期及来源。未恢复最大输入、思考子上限、模态、功能、知识截止、思考预算、可用性、快照和别名。新增的 `price_basis`、`billing`、`off_peak_schedule` 只表达价格依据和计费口径。
+
+- `pricing_status`：verified 官方价；reference 用户确认参照价；unverified 待核实；not_listed 官方未列。
+- `price_basis`：official/reference，参照模型 ID、来源 URL 与说明。原参照数值保留。
+- `billing`：按量/订阅渠道、current/list/reference 主价格类型、已记录地区、主缓存读取类型。
+- `reasoning_effort.field_status`：verified/unverified/not_applicable；不可调模型的档位与默认值为不适用，未说明的关闭选项为待核实，整体状态据此派生。
+- `service_tiers[].multiplier` 仅为输入输出展示倍率；实际计算使用 `multipliers` 各费用项倍率和 `pricing` 例外单价。存储费单独处理。
+- `price_schedule` 支持各 token 价格、缓存细分与存储费；`multiplier` 非空时对该输入档的 token/缓存价格应用倍率，存储费按独立字段处理。
+
+完整字段定义见 `api.html` 和 `api/v1/openapi.json`。本站仅收录 `meta.scope` 规定的模型，不是全部在售模型目录。
+
+## 更新、验证和 CI
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python scripts/build_api.py
+.venv/bin/python scripts/validate.py
+.venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
+node --test tests/client.test.cjs
+```
+
+只有开发校验使用 jsonschema；部署站点和客户端无第三方运行依赖。校验检查真实日期、非负有限价格、唯一标识、缺失标记、缓存口径、参照关系、分档范围、时段、价格生效日期及所有响应的 OpenAPI Schema，并逐文件核对生成结果。
+
+GitHub Actions 在 push、pull request 和手动运行时执行同样的校验、回归测试、全部静态数据接口的 HTTP 查询及 JavaScript 语法检查。CI 只验证，不自动部署或改写数据。
 
 ## 部署到 GitHub Pages
 
-1. 在 GitHub 新建仓库（如 `llm-pricing`，Public）。
-2. 把本目录**内容**上传到仓库根目录（`index.html` 须在根目录，`api/` 目录要一起提交）：
-   - 命令行：`git init && git add . && git commit -m "init" && git branch -M main && git remote add origin git@github.com:<你的用户名>/llm-pricing.git && git push -u origin main`
-   - 或在网页端 “Add file → Upload files” 拖入全部文件。
-3. 仓库 **Settings → Pages**：Source 选 “Deploy from a branch”，Branch 选 `main` / `/ (root)`，保存。
-4. 等待 1–2 分钟，访问 `https://<你的用户名>.github.io/llm-pricing/`，接口在 `…/llm-pricing/api/v1/models.json`。
+将网站文件、`data/` 和生成的 `api/` 一起提交到仓库根目录。在仓库 Settings → Pages 中选择 Deploy from a branch，分支为 `main`、目录为 `/ (root)`。发布后使用站点地址访问页面和 `api/v1/`；更新数据时先完成上述校验，再按现有发布流程推送。`.nojekyll` 保留在根目录。
 
-## 数据说明
+## 数据来源与本次修复
 
-- 数据核实日期：2026-10-11；每条记录带官方来源 URL 与核实日期。
-- 只收录最新模型，范围见 `data/prices.json` 的 `meta.scope`。
-- 价格可能随时调整，请以官方页面为准。更新方法见 `scripts/README.md`。
+按现有官方来源逐项核对需要修正的规则：
+
+- [Gemini 官方定价](https://ai.google.dev/gemini-api/docs/pricing)：Flash-Lite 的缓存例外单价、Pro 的 Batch/Flex 缓存原价与 Priority 存储倍率、Flash 2027 年存储涨价。
+- [DeepSeek 定价](https://api-docs.deepseek.com/quick_start/pricing/)：UTC 高峰时段、中国节假日与闲时价。
+- [Claude 定价](https://platform.claude.com/docs/en/about-claude/pricing)：缓存 TTL、Batch 和数据驻留倍率。
+- [MiniMax 模型调用](https://platform.minimax.io/docs/guides/text-generation)和[按量定价](https://platform.minimax.io/docs/guides/pricing-paygo)：订阅 Preview 模型及 M3 参照价格。
+- [Kimi Code 模型配置](https://www.kimi.com/code/docs/en/kimi-code/models)：订阅模型、推理档位和上下文来源。
+
+本次针对已发现问题核实相关规则，没有声称重新核实所有 43 个模型的全部价格。每个模型的 `source_url`、`extra_sources` 和结构化 `sources` 可追溯具体依据。未知数值保留未知，不用其他模型的值冒充官方确认。

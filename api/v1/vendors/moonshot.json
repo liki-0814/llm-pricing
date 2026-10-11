@@ -5,6 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e",
     "count": 4
   },
   "vendor": {
@@ -45,6 +46,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -64,6 +81,12 @@
         "default": "max",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "顶层 reasoning_effort 支持 low/high/max，默认 max；K3 恒开思考，不支持 thinking 参数，无法关闭。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/use-thinking-models",
@@ -117,6 +140,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -132,6 +171,12 @@
         "default": null,
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "verified"
+        },
         "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/use-thinking-models"
@@ -153,7 +198,22 @@
         {
           "name": "batch",
           "multiplier": 0.6,
-          "note": "Batch API 价为标准价的 60%（官方 BatchJob 定价：K2.7 Code 输入 $0.57 / 缓存命中 $0.114 / 输出 $2.40）。"
+          "note": "Batch API 价为标准价的 60%（官方 BatchJob 定价：K2.7 Code 输入 $0.57 / 缓存命中 $0.114 / 输出 $2.40）。",
+          "multipliers": {
+            "input": 0.6,
+            "output": 0.6,
+            "cached_input": 0.6,
+            "cache_write": 0.6,
+            "implicit_read": 0.6,
+            "explicit_read": 0.6,
+            "explicit_write": 0.6,
+            "explicit_write_1h": 0.6,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.kimi.ai/docs/pricing/chat"
+          ]
         }
       ],
       "cache_pricing": {
@@ -190,6 +250,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -205,6 +281,12 @@
         "default": null,
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "verified"
+        },
         "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/use-thinking-models"
@@ -252,11 +334,28 @@
         "cache_write": null
       },
       "pricing_status": {
-        "input": "verified",
-        "output": "verified",
-        "cached_input": "verified",
+        "input": "reference",
+        "output": "reference",
+        "cached_input": "reference",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "reference",
+        "reference_model_id": "kimi-k2.7-code",
+        "sources": [
+          "https://www.kimi.com/code/docs/en/kimi-code/models",
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "用户确认保留参照价；参照 kimi-k2.7-code 的 token 单价，并非本订阅模型的官方按量报价。"
+      },
+      "billing": {
+        "channel": "subscription",
+        "price_type": "reference",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -279,6 +378,12 @@
         "default": "max",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "Kimi Code 文档：K3 与 K2.8 Preview 支持 low/high/max 思考强度，K2.8 Preview 默认 max；关闭思考时请求由 K2.8 Preview（无思考）处理。",
         "sources": [
           "https://www.kimi.com/code/docs/en/kimi-code/models"

@@ -5,9 +5,10 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e",
     "count": 43,
     "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3 系列最新；MiniMax 3 系列。",
-    "description": "价格均为每 100 万 token，币种统一为美元（USD），取自各厂商国际站官方定价页。null / 待核实 = 未能从官方来源核实，未做推测。推理强度（reasoning_effort）、最大输出（limits.max_output_tokens）、分档价（pricing_tiers）、服务档倍率（service_tiers）、缓存细分价（cache_pricing）中 null 同样表示官方未明确、待核实，不做推测。"
+    "description": "美元 / 每百万 token；官方价格与用户确认参照价明确区分，参照依据见 price_basis。null 不代表零；状态与计费规则见各结构化字段。"
   },
   "data": [
     {
@@ -28,6 +29,46 @@
         "output": "verified",
         "cached_input": "verified",
         "cache_write": "not_listed"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://api-docs.deepseek.com/quick_start/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": {
+        "timezone": "UTC",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "peak_windows": [
+          {
+            "start": "01:00",
+            "end": "04:00"
+          },
+          {
+            "start": "06:00",
+            "end": "10:00"
+          }
+        ],
+        "holiday_region": "CN",
+        "sources": [
+          "https://api-docs.deepseek.com/quick_start/pricing"
+        ],
+        "note": "起点包含、终点不包含；中国法定节假日全天闲时。计算时需调用方确认是否为中国法定节假日，不内置推测日历。"
       },
       "has_off_peak": true,
       "off_peak_pricing": {
@@ -52,6 +93,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort（OpenAI 格式）/ output_config.effort（Anthropic 格式）取 low/high/max；medium、xhigh 映射到 high，minimal 映射到 low，ultra 映射到 max。thinking 默认开启，可用 thinking.type=disabled（或 Responses API 的 reasoning.effort=none）关闭。",
         "sources": [
           "https://api-docs.deepseek.com/guides/thinking_mode"
@@ -102,19 +149,59 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://api-docs.deepseek.com/quick_start/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": {
+        "timezone": "UTC",
+        "weekdays": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "peak_windows": [
+          {
+            "start": "01:00",
+            "end": "04:00"
+          },
+          {
+            "start": "06:00",
+            "end": "10:00"
+          }
+        ],
+        "holiday_region": "CN",
+        "sources": [
+          "https://api-docs.deepseek.com/quick_start/pricing"
+        ],
+        "note": "起点包含、终点不包含；中国法定节假日全天闲时。计算时需调用方确认是否为中国法定节假日，不内置推测日历。"
+      },
       "has_off_peak": true,
       "off_peak_pricing": {
         "input": 0.66,
         "output": 1.98,
         "cached_input": 0.022
       },
-      "peak_note": "高峰时段同上；闲时价为高峰价的一半。",
+      "peak_note": "高峰（周一至周五 UTC 01:00-04:00、06:00-10:00，即北京时间 09:00-12:00、14:00-18:00，中国法定节假日除外）按表中价格；其余时间（含周末、节假日全天）闲时价为高峰价的一半。",
       "context_length": 1000000,
       "context_length_label": "1M",
       "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
-      "notes": "表中价格为高峰价。最大输出 384K；不官方页未列缓存写入价。",
+      "notes": "表中价格为高峰价。最大输出 384K；官方页未列缓存写入价。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -125,6 +212,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "同 DeepSeek 官方思考模式文档（文档统称“DeepSeek model”，未单列 Pro）；阿里云文档列出 deepseek-v4-pro-0813 取 low/high/max、默认 high，medium/xhigh 映射 high。thinking 默认开启，可用 thinking.type=disabled 关闭。",
         "sources": [
           "https://api-docs.deepseek.com/guides/thinking_mode",
@@ -176,6 +269,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -200,6 +309,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
@@ -231,22 +346,82 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -266,7 +441,12 @@
           "output": 20.0,
           "cached_input": 0.4,
           "cache_write": 5.0,
-          "note": "GPT-5.6 Sol 促销价（输入 $4 / 输出 $20，较此前降 20% / 33%）官方称“至少持续到 2026-11-21”；到期后价格官方未公布（待核实）。"
+          "note": "GPT-5.6 Sol 促销价（输入 $4 / 输出 $20，较此前降 20% / 33%）官方称“至少持续到 2026-11-21”；到期后价格官方未公布（待核实）。",
+          "multiplier": null,
+          "cache_pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "unverified_fields": [],
@@ -294,6 +474,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -318,6 +514,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
@@ -349,22 +551,82 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -401,6 +663,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -425,6 +703,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
@@ -456,22 +740,82 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -508,6 +852,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -530,7 +890,13 @@
         ],
         "default": null,
         "can_disable": null,
-        "status": "verified",
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
         "note": "官方模型页列出 reasoning.effort 支持 low/medium/high/xhigh/max；未标注默认档，且未列 none（是否可关闭推理待核实）。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-astra"
@@ -562,27 +928,102 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "ultrafast",
           "multiplier": 6.0,
-          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。"
+          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。",
+          "multipliers": {
+            "input": 6.0,
+            "output": 6.0,
+            "cached_input": 6.0,
+            "cache_write": 6.0,
+            "implicit_read": 6.0,
+            "explicit_read": 6.0,
+            "explicit_write": 6.0,
+            "explicit_write_1h": 6.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -594,7 +1035,10 @@
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
       "price_schedule": [],
-      "unverified_fields": [],
+      "unverified_fields": [
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
       "links": {
         "self": "models/gpt-6-astra.json",
         "vendor": "vendors/openai.json"
@@ -619,6 +1063,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -643,6 +1103,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-sol"
@@ -674,22 +1140,82 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -726,6 +1252,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -750,6 +1292,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-luna"
@@ -781,22 +1329,82 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -833,6 +1441,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -856,6 +1480,12 @@
         "default": "medium",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 low/medium(默认)/high/xhigh/max；官方明确不支持 none 与 minimal，推理无法关闭。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
@@ -887,27 +1517,102 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "ultrafast",
           "multiplier": 6.0,
-          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。"
+          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。",
+          "multipliers": {
+            "input": 6.0,
+            "output": 6.0,
+            "cached_input": 6.0,
+            "cache_write": 6.0,
+            "implicit_read": 6.0,
+            "explicit_read": 6.0,
+            "explicit_write": 6.0,
+            "explicit_write_1h": 6.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -944,6 +1649,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -965,6 +1686,12 @@
         "default": "high",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -986,12 +1713,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1028,6 +1785,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1049,6 +1822,12 @@
         "default": "high",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1070,12 +1849,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1112,6 +1921,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1133,6 +1958,12 @@
         "default": "high",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1154,12 +1985,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1196,6 +2057,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1217,6 +2094,12 @@
         "default": "high",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1238,12 +2121,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1280,6 +2193,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1301,6 +2230,12 @@
         "default": "medium",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。默认 medium（其余多数模型默认 high）；自适应思考恒开，thinking:disabled 在所有档位都会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1322,17 +2257,62 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $8 / 输出 $40，约 2×；全上下文窗口适用，不可与 Batch 同用。"
+          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $8 / 输出 $40，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1369,6 +2349,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1390,6 +2386,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。thinking 默认开启；thinking:{type:disabled} 仅在 effort 为 high 及以下可用，xhigh/max 下会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1411,17 +2413,62 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。"
+          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1458,6 +2505,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1479,6 +2542,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。仅自适应思考（不支持 budget_tokens）；思考默认关闭，需显式设置 thinking:{type:adaptive} 开启。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1500,17 +2569,62 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。"
+          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1547,6 +2661,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1568,6 +2698,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。仅自适应思考（不支持 budget_tokens）；思考默认关闭，需显式设置 thinking:{type:adaptive} 开启。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1589,12 +2725,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1631,6 +2797,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1651,6 +2833,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 官方文档列出 max 可用、xhigh 不在支持名单；默认 high。思考默认关闭，支持自适应思考，旧的 budget_tokens（extended thinking）已弃用但仍可用。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1672,12 +2860,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1714,6 +2932,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1735,6 +2969,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。思考默认开启；无 disabled，改用 thinking:{type:between_tools} 关闭前置思考（仅 low/medium/high 档可用，xhigh/max 下 400）。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1756,12 +2996,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1798,6 +3068,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1819,6 +3105,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。思考默认开启；可传 thinking:{type:disabled} 关闭。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1840,12 +3132,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1882,6 +3204,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1902,6 +3240,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 官方文档列出 max 可用、xhigh 不在支持名单；默认 high。思考默认关闭，支持自适应思考，旧的 budget_tokens（extended thinking）已弃用但仍可用。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1923,12 +3267,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1965,6 +3339,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1988,6 +3378,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。默认 medium；思考默认开启，thinking:{type:disabled} 仅在 high 及以下可用，xhigh/max 下会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -2028,12 +3424,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（≤100K 提示：$0.05 / $0.25；>100K 提示：$0.25 / $1.25）。"
+          "note": "Message Batches API：输入、输出均 5 折（≤100K 提示：$0.05 / $0.25；>100K 提示：$0.25 / $1.25）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。对 Haiku 5.5 的 >100K 高价同样适用。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。对 Haiku 5.5 的 >100K 高价同样适用。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -2070,6 +3496,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2091,6 +3533,12 @@
         "default": "max",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 仅支持 low/high/max（其他值报错）；thinking.type 只能为 enabled，传 disabled 会报错，推理无法关闭。",
         "sources": [
           "https://docs.z.ai/guides/capabilities/thinking",
@@ -2117,7 +3565,25 @@
         "storage_per_1M_tokens_hour": 0.0,
         "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
       },
-      "price_schedule": [],
+      "price_schedule": [
+        {
+          "kind": "promotion",
+          "effective_from": null,
+          "effective_until": null,
+          "input": null,
+          "output": null,
+          "cached_input": null,
+          "cache_write": null,
+          "note": "缓存存储限时免费，官方未公布截止日期或到期后价格，后续费用需复核。",
+          "multiplier": null,
+          "cache_pricing": {
+            "storage_per_1M_tokens_hour": 0
+          },
+          "sources": [
+            "https://docs.z.ai/guides/overview/pricing"
+          ]
+        }
+      ],
       "unverified_fields": [],
       "links": {
         "self": "models/glm-5.3.json",
@@ -2143,6 +3609,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2164,6 +3646,12 @@
         "default": "max",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 仅支持 low/high/max（其他值报错）；thinking.type 只能为 enabled，传 disabled 会报错，推理无法关闭。",
         "sources": [
           "https://docs.z.ai/guides/capabilities/thinking",
@@ -2190,7 +3678,25 @@
         "storage_per_1M_tokens_hour": 0.0,
         "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
       },
-      "price_schedule": [],
+      "price_schedule": [
+        {
+          "kind": "promotion",
+          "effective_from": null,
+          "effective_until": null,
+          "input": null,
+          "output": null,
+          "cached_input": null,
+          "cache_write": null,
+          "note": "缓存存储限时免费，官方未公布截止日期或到期后价格，后续费用需复核。",
+          "multiplier": null,
+          "cache_pricing": {
+            "storage_per_1M_tokens_hour": 0
+          },
+          "sources": [
+            "https://docs.z.ai/guides/overview/pricing"
+          ]
+        }
+      ],
       "unverified_fields": [],
       "links": {
         "self": "models/glm-5.3-flash.json",
@@ -2216,6 +3722,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2237,6 +3759,12 @@
         "default": "max",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "官方明确 GLM-5.3-FlashX 适用：①智谱开放平台「核心参数」写明“GLM-5.3、GLM-5.3-FLASH、GLM-5.3-FLASHX 模型仅支持 max、high、low”，max 为默认；thinking 对三者“强制需开启”；②阿里云百炼 GLM 页：“ZHIPU/GLM-5.3-FlashX 始终以思考模式运行，不支持关闭思考……reasoning_effort 未传入时默认为 max”，支持 max/high/low；③Z.ai GLM-5.3-Flash/FlashX 页：“文本参数与 GLM-5.3 保持一致”，thinking.type 仅支持 enabled，推荐 reasoning_effort=max。传 disabled 会报错，无法关闭推理。",
         "sources": [
           "https://docs.bigmodel.cn/cn/guide/start/concept-param",
@@ -2265,7 +3793,25 @@
         "storage_per_1M_tokens_hour": 0.0,
         "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
       },
-      "price_schedule": [],
+      "price_schedule": [
+        {
+          "kind": "promotion",
+          "effective_from": null,
+          "effective_until": null,
+          "input": null,
+          "output": null,
+          "cached_input": null,
+          "cache_write": null,
+          "note": "缓存存储限时免费，官方未公布截止日期或到期后价格，后续费用需复核。",
+          "multiplier": null,
+          "cache_pricing": {
+            "storage_per_1M_tokens_hour": 0
+          },
+          "sources": [
+            "https://docs.z.ai/guides/overview/pricing"
+          ]
+        }
+      ],
       "unverified_fields": [],
       "links": {
         "self": "models/glm-5.3-flashx.json",
@@ -2291,6 +3837,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2316,6 +3878,12 @@
         "default": "max",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 接受 max(默认)/xhigh/high/medium/low/minimal/none；none、minimal 表示不思考，low/medium 映射到 high，xhigh 映射到 max（实际为 high / max 两档）。thinking.type 可设 disabled 关闭；默认由模型自动判断是否思考。",
         "sources": [
           "https://docs.z.ai/guides/capabilities/thinking"
@@ -2341,7 +3909,25 @@
         "storage_per_1M_tokens_hour": 0.0,
         "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
       },
-      "price_schedule": [],
+      "price_schedule": [
+        {
+          "kind": "promotion",
+          "effective_from": null,
+          "effective_until": null,
+          "input": null,
+          "output": null,
+          "cached_input": null,
+          "cache_write": null,
+          "note": "缓存存储限时免费，官方未公布截止日期或到期后价格，后续费用需复核。",
+          "multiplier": null,
+          "cache_pricing": {
+            "storage_per_1M_tokens_hour": 0
+          },
+          "sources": [
+            "https://docs.z.ai/guides/overview/pricing"
+          ]
+        }
+      ],
       "unverified_fields": [],
       "links": {
         "self": "models/glm-5.2.json",
@@ -2367,6 +3953,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2386,6 +3988,12 @@
         "default": "max",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "顶层 reasoning_effort 支持 low/high/max，默认 max；K3 恒开思考，不支持 thinking 参数，无法关闭。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/use-thinking-models",
@@ -2439,6 +4047,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2454,6 +4078,12 @@
         "default": null,
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "verified"
+        },
         "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/use-thinking-models"
@@ -2475,7 +4105,22 @@
         {
           "name": "batch",
           "multiplier": 0.6,
-          "note": "Batch API 价为标准价的 60%（官方 BatchJob 定价：K2.7 Code 输入 $0.57 / 缓存命中 $0.114 / 输出 $2.40）。"
+          "note": "Batch API 价为标准价的 60%（官方 BatchJob 定价：K2.7 Code 输入 $0.57 / 缓存命中 $0.114 / 输出 $2.40）。",
+          "multipliers": {
+            "input": 0.6,
+            "output": 0.6,
+            "cached_input": 0.6,
+            "cache_write": 0.6,
+            "implicit_read": 0.6,
+            "explicit_read": 0.6,
+            "explicit_write": 0.6,
+            "explicit_write_1h": 0.6,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.kimi.ai/docs/pricing/chat"
+          ]
         }
       ],
       "cache_pricing": {
@@ -2512,6 +4157,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2527,6 +4188,12 @@
         "default": null,
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "verified"
+        },
         "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
         "sources": [
           "https://platform.kimi.ai/docs/guide/use-thinking-models"
@@ -2579,6 +4246,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2601,6 +4284,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
         "sources": [
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -2653,6 +4342,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2674,6 +4379,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "Qwen3.7 Max 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Max series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。 档位和默认值暂参照 Qwen3.8(用户确认,官方文档暂未单独列出 Qwen3.7 的 reasoning_effort 档位)",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
@@ -2728,6 +4439,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": "Singapore",
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2749,6 +4476,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "Qwen3.7 Plus 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Plus series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。 档位和默认值暂参照 Qwen3.8(用户确认,官方文档暂未单独列出 Qwen3.7 的 reasoning_effort 档位)",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
@@ -2769,7 +4502,7 @@
       },
       "pricing_tiers": [
         {
-          "condition": "input_tokens>256000",
+          "condition": "input_tokens>256000 and input_tokens<=1000000",
           "input_tokens_gt": 256000,
           "input_tokens_lte": 1000000,
           "input": 1.2,
@@ -2791,7 +4524,22 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "官方 qwencloud 模型页：Batch File 输入 $0.2 / 输出 $0.8（为标价 50%，标价口径 ≤256K 档）。"
+          "note": "官方 qwencloud 模型页：Batch File 输入 $0.2 / 输出 $0.8（为标价 50%，标价口径 ≤256K 档）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -2811,7 +4559,16 @@
           "output": 1.28,
           "cached_input": 0.032,
           "cache_write": 0.4,
-          "note": "官方标注“限时 8 折”（≤256K 档：输入 $0.32 / 输出 $1.28 / 隐式缓存 $0.064 / 显式命中 $0.032 / 显式创建 $0.40）；截止日期官方未公布；表中为标价。"
+          "note": "官方标注“限时 8 折”（≤256K 档：输入 $0.32 / 输出 $1.28 / 隐式缓存 $0.064 / 显式命中 $0.032 / 显式创建 $0.40）；截止日期官方未公布；表中为标价。",
+          "multiplier": 0.8,
+          "cache_pricing": {
+            "implicit_read": 0.064,
+            "explicit_read": 0.032,
+            "explicit_write": 0.4
+          },
+          "sources": [
+            "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+          ]
         }
       ],
       "unverified_fields": [],
@@ -2839,6 +4596,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2861,6 +4634,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
         "sources": [
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -2913,6 +4692,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -2934,6 +4729,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "Qwen3.7 Flash 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Flash series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。 档位和默认值暂参照 Qwen3.8(用户确认,官方文档暂未单独列出 Qwen3.7 的 reasoning_effort 档位)",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
@@ -2972,7 +4773,7 @@
           "note": "官方（Singapore/International）：32K<输入≤256K 档。"
         },
         {
-          "condition": "input_tokens>256000",
+          "condition": "input_tokens>256000 and input_tokens<=1000000",
           "input_tokens_gt": 256000,
           "input_tokens_lte": 1000000,
           "input": 0.2,
@@ -2994,7 +4795,22 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "官方定价页：50% batch inference discount（输入、输出均 5 折）。"
+          "note": "官方定价页：50% batch inference discount（输入、输出均 5 折）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -3031,6 +4847,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -3053,6 +4885,12 @@
         "default": "xhigh",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。仅思考模型，无法关闭。",
         "sources": [
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -3105,6 +4943,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -3126,6 +4980,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。混合思考模型，默认开启，enable_thinking=false 可关闭。",
         "sources": [
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -3178,6 +5038,22 @@
         "cached_input": "verified",
         "cache_write": "unverified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -3199,6 +5075,12 @@
         "default": "xhigh",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "默认开启思考，reasoning_effort 默认 xhigh，可选 low/medium/xhigh（minimal→low，high/max→xhigh，none 关闭思考）；不可与 thinking_budget 同设。",
         "sources": [
           "https://docs.qwencloud.com/api-reference/chat/openai-chat",
@@ -3253,6 +5135,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": "官方为 2026-12-31 前的限时价；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
@@ -3273,7 +5171,13 @@
         ],
         "default": "medium",
         "can_disable": null,
-        "status": "verified",
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "unverified"
+        },
         "note": "thinking_level 取 low/medium/high，默认开启且为 medium；官方文档未提供关闭选项。",
         "sources": [
           "https://ai.google.dev/gemini-api/docs/thinking"
@@ -3293,17 +5197,62 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "Batch API：官方定价页逐项列出，价格为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 推理：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "Flex 推理：官方定价页逐项列出，价格为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "priority",
           "multiplier": 1.8,
-          "note": "Priority 推理：官方定价页逐项列出，输入/输出/缓存价均为标准价 1.8×。"
+          "note": "Priority 推理：官方定价页逐项列出，输入/输出/缓存价均为标准价 1.8×。",
+          "multipliers": {
+            "input": 1.8,
+            "output": 1.8,
+            "cached_input": 1.8,
+            "cache_write": 1.8,
+            "implicit_read": 1.8,
+            "explicit_read": 1.8,
+            "explicit_write": 1.8,
+            "explicit_write_1h": 1.8,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -3323,10 +5272,19 @@
           "output": 7.5,
           "cached_input": 0.15,
           "cache_write": null,
-          "note": "官方：当前价格仅到 2026-12-31；2027-01-01 起 Standard 输入 $1.50、输出 $7.50、缓存 $0.15，缓存存储费 $1.00/百万 token/小时；Batch/Flex/Priority 价同比例上调。"
+          "note": "官方：当前价格仅到 2026-12-31；2027-01-01 起 Standard 输入 $1.50、输出 $7.50、缓存 $0.15，缓存存储费 $1.00/百万 token/小时；Batch/Flex/Priority 价同比例上调。",
+          "multiplier": null,
+          "cache_pricing": {
+            "storage_per_1M_tokens_hour": 1.0
+          },
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         }
       ],
-      "unverified_fields": [],
+      "unverified_fields": [
+        "reasoning_effort.can_disable"
+      ],
       "links": {
         "self": "models/gemini-3.8-flash.json",
         "vendor": "vendors/google.json"
@@ -3351,6 +5309,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -3372,7 +5346,13 @@
         ],
         "default": "minimal",
         "can_disable": null,
-        "status": "verified",
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "unverified"
+        },
         "note": "thinking_level 取 minimal/low/medium/high，默认开启且为 minimal；官方文档未提供完全关闭选项。",
         "sources": [
           "https://ai.google.dev/gemini-api/docs/thinking"
@@ -3392,17 +5372,68 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "输入/输出倍率见 multiplier；缓存读取采用 pricing.cached_input 明确单价，缓存存储费保持标准价。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {
+            "cached_input": 0.02
+          },
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 推理：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "输入/输出倍率见 multiplier；缓存读取采用 pricing.cached_input 明确单价，缓存存储费保持标准价。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {
+            "cached_input": 0.02
+          },
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "priority",
           "multiplier": 1.8,
-          "note": "Priority 推理：官方定价页逐项列出，输入/输出/缓存价均为标准价 1.8×。"
+          "note": "输入/输出倍率见 multiplier；缓存读取采用 pricing.cached_input 明确单价，缓存存储费保持标准价。",
+          "multipliers": {
+            "input": 1.8,
+            "output": 1.8,
+            "cached_input": 1.8,
+            "cache_write": 1.8,
+            "implicit_read": 1.8,
+            "explicit_read": 1.8,
+            "explicit_write": 1.8,
+            "explicit_write_1h": 1.8,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {
+            "cached_input": 0.05
+          },
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -3414,7 +5445,9 @@
         "note": "缓存命中价即 pricing.cached_input；官方另收缓存存储费 $1.00 / 百万 token / 小时。"
       },
       "price_schedule": [],
-      "unverified_fields": [],
+      "unverified_fields": [
+        "reasoning_effort.can_disable"
+      ],
       "links": {
         "self": "models/gemini-3.5-flash-lite.json",
         "vendor": "vendors/google.json"
@@ -3439,6 +5472,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -3459,7 +5508,13 @@
         ],
         "default": "high",
         "can_disable": null,
-        "status": "verified",
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "unverified"
+        },
         "note": "thinking_level 取 low/medium/high，默认开启且为 high；官方文档未提供关闭选项。",
         "sources": [
           "https://ai.google.dev/gemini-api/docs/thinking"
@@ -3498,17 +5553,62 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "Batch/Flex：输入输出五折，缓存读取和存储费保持标准价；Priority：输入输出、缓存读取和存储费均为 1.8 倍。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 1,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 推理：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "Batch/Flex：输入输出五折，缓存读取和存储费保持标准价；Priority：输入输出、缓存读取和存储费均为 1.8 倍。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 1,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "priority",
           "multiplier": 1.8,
-          "note": "Priority 推理：官方定价页逐项列出，输入/输出/缓存价均为标准价 1.8×。"
+          "note": "Batch/Flex：输入输出五折，缓存读取和存储费保持标准价；Priority：输入输出、缓存读取和存储费均为 1.8 倍。",
+          "multipliers": {
+            "input": 1.8,
+            "output": 1.8,
+            "cached_input": 1.8,
+            "cache_write": 1.8,
+            "implicit_read": 1.8,
+            "explicit_read": 1.8,
+            "explicit_write": 1.8,
+            "explicit_write_1h": 1.8,
+            "storage_per_1M_tokens_hour": 1.8
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -3520,7 +5620,9 @@
         "note": "缓存命中价即 pricing.cached_input（>200K 提示 $0.40，见 pricing_tiers）；官方另收缓存存储费 $4.50 / 百万 token / 小时。"
       },
       "price_schedule": [],
-      "unverified_fields": [],
+      "unverified_fields": [
+        "reasoning_effort.can_disable"
+      ],
       "links": {
         "self": "models/gemini-3.1-pro-preview.json",
         "vendor": "vendors/google.json"
@@ -3545,6 +5647,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.minimax.io/docs/guides/pricing-paygo"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -3563,6 +5681,12 @@
         "default": null,
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "verified"
+        },
         "note": "官方 OpenAI 兼容 API 文档：reasoning_effort 仅 MiniMax-M3.1-Flash-Preview 支持真实的思考深度调节，其他模型忽略该字段。MiniMax-M3 默认自适应思考（thinking.type=adaptive），可传 thinking.type=disabled 跳过思考直接作答。",
         "sources": [
           "https://platform.minimax.io/docs/api-reference/text-chat-openai",
@@ -3603,7 +5727,22 @@
         {
           "name": "priority",
           "multiplier": 1.5,
-          "note": "Priority 档（service_tier: priority）：标准价 1.5×；≤512K：$0.45 / $1.80 / 缓存 $0.09；>512K：$0.90 / $3.60 / $0.18（折后价）。"
+          "note": "Priority 档（service_tier: priority）：标准价 1.5×；≤512K：$0.45 / $1.80 / 缓存 $0.09；>512K：$0.90 / $3.60 / $0.18（折后价）。",
+          "multipliers": {
+            "input": 1.5,
+            "output": 1.5,
+            "cached_input": 1.5,
+            "cache_write": 1.5,
+            "implicit_read": 1.5,
+            "explicit_read": 1.5,
+            "explicit_write": 1.5,
+            "explicit_write_1h": 1.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.minimax.io/docs/guides/pricing-paygo"
+          ]
         }
       ],
       "cache_pricing": {
@@ -3635,11 +5774,28 @@
         "cache_write": null
       },
       "pricing_status": {
-        "input": "verified",
-        "output": "verified",
-        "cached_input": "verified",
+        "input": "reference",
+        "output": "reference",
+        "cached_input": "reference",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "reference",
+        "reference_model_id": "minimax-m3",
+        "sources": [
+          "https://platform.minimax.io/docs/guides/text-generation",
+          "https://platform.minimax.io/docs/guides/pricing-paygo"
+        ],
+        "note": "用户确认保留参照价；参照 minimax-m3 的 token 单价，并非本订阅模型的官方按量报价。"
+      },
+      "billing": {
+        "channel": "subscription",
+        "price_type": "reference",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -3664,6 +5820,12 @@
         "default": "max",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "OpenAI 格式 reasoning_effort / Anthropic 格式 output_config.effort / Responses 格式 reasoning.effort，取 low/medium/high/xhigh/max，缺省为 max。恒开思考：thinking.type=disabled 或 effort=none 返回 400，需降低 effort 以减少思考。",
         "sources": [
           "https://platform.minimax.io/docs/guides/text-generation",
@@ -3730,11 +5892,28 @@
         "cache_write": null
       },
       "pricing_status": {
-        "input": "verified",
-        "output": "verified",
-        "cached_input": "verified",
+        "input": "reference",
+        "output": "reference",
+        "cached_input": "reference",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "reference",
+        "reference_model_id": "kimi-k2.7-code",
+        "sources": [
+          "https://www.kimi.com/code/docs/en/kimi-code/models",
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "用户确认保留参照价；参照 kimi-k2.7-code 的 token 单价，并非本订阅模型的官方按量报价。"
+      },
+      "billing": {
+        "channel": "subscription",
+        "price_type": "reference",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -3757,6 +5936,12 @@
         "default": "max",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "Kimi Code 文档：K3 与 K2.8 Preview 支持 low/high/max 思考强度，K2.8 Preview 默认 max；关闭思考时请求由 K2.8 Preview（无思考）处理。",
         "sources": [
           "https://www.kimi.com/code/docs/en/kimi-code/models"

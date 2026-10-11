@@ -2,25 +2,32 @@
   "use strict";
   var esc = LP.esc, $ = function (id) { return document.getElementById(id); };
   var BASE = new URL("api/v1/", location.href).href;
+  var client = LLMPrice.createClient(BASE);
   $("baseUrl").textContent = BASE;
 
   // ---------- examples (base URL filled in) ----------
   var EX = {
     curl:
-      "# 全部模型\ncurl -s " + BASE + "models.json\n\n" +
-      "# 单个模型 / 单个厂商\ncurl -s " + BASE + "models/deepseek-flash.json\ncurl -s " + BASE + "vendors/anthropic.json\n\n" +
-      "# 配合 jq：输入价最低的 5 个模型\ncurl -s " + BASE + "models.json \\\n  | jq -r '.data | map(select(.pricing.input != null)) | sort_by(.pricing.input) | .[:5][] | \"\\(.id)\\t$\\(.pricing.input)\"'",
+      "# 全部模型\ncurl --fail --silent --show-error " + BASE + "models.json\n\n" +
+      "# 单个模型 / 单个厂商\ncurl --fail --silent --show-error " + BASE + "models/deepseek-flash.json\ncurl --fail --silent --show-error " + BASE + "vendors/anthropic.json\n\n" +
+      "# 配合 jq：官方输入价最低的 5 个模型\ncurl --fail --silent --show-error " + BASE + "models.json \\\n  | jq -r '.data | map(select(.pricing.input != null and .price_basis.type == \"official\")) | sort_by(.pricing.input) | .[:5][] | \"\\(.id)\\t$\\(.pricing.input)\"'",
     js:
-      'const BASE = "' + BASE + '";\n\n' +
-      "const res = await fetch(BASE + \"models.json\");\nconst { meta, data } = await res.json();\n" +
-      "console.log(`更新于 ${meta.updated_at}，共 ${meta.count} 个模型（${meta.unit_label}）`);\n\n" +
-      "// 客户端筛选：OpenAI 模型按输出价升序\nconst openai = data\n  .filter(m => m.vendor === \"openai\" && m.pricing.output != null)\n  .sort((a, b) => a.pricing.output - b.pricing.output);\nconsole.table(openai.map(m => ({ id: m.id, input: m.pricing.input, output: m.pricing.output })));\n\n" +
-      "// 估算一次调用费用（USD）\nconst cost = (m, inTok, outTok) => (inTok * m.pricing.input + outTok * m.pricing.output) / 1e6;",
+      '// 在 HTML 中加载站点的 assets/client.js（暴露 LLMPrice）\n' +
+      'const api = LLMPrice.createClient("' + BASE + '");\n\n' +
+      'const { data: index } = await api.getIndex();\n' +
+      'const { data: vendors } = await api.listVendors();\n' +
+      'const openapi = await api.getOpenAPI();\n' +
+      'const { data: model } = await api.getModel("gemini-3.1-pro-preview");\n' +
+      'const { data: vendorModels } = await api.getVendor("openai");\n' +
+      'const { data: cheapest } = await api.listModels({ vendor: "openai", sort: "input", limit: 5, priceBasis: "official" });\n\n' +
+      '// inputTokens 为总输入，包含缓存读写；outputTokens 包含计费思考 token\n' +
+      'const result = LLMPrice.estimate(model, { inputTokens: 300000, outputTokens: 10000 }, { at: "2026-10-11" });\n' +
+      'console.log(result.total, result.breakdown, result.warnings); // 1.38 USD\n',
     py:
       "import json, urllib.request\n\nBASE = \"" + BASE + "\"\n\n" +
       "def get(path):\n    with urllib.request.urlopen(BASE + path) as r:\n        return json.load(r)\n\n" +
       "models = get(\"models.json\")\nprint(models[\"meta\"][\"updated_at\"], models[\"meta\"][\"count\"])\n\n" +
-      "# 输入价最低的 5 个模型（跳过 null = 待核实 / 未列出）\npriced = [m for m in models[\"data\"] if m[\"pricing\"][\"input\"] is not None]\n" +
+      "# 官方输入价最低的 5 个模型（跳过 null 和参照价）\npriced = [m for m in models[\"data\"] if m[\"pricing\"][\"input\"] is not None and m[\"price_basis\"][\"type\"] == \"official\"]\n" +
       "for m in sorted(priced, key=lambda m: m[\"pricing\"][\"input\"])[:5]:\n    print(f'{m[\"id\"]:<28} in ${m[\"pricing\"][\"input\"]}  out ${m[\"pricing\"][\"output\"]}')\n\n" +
       "claude = get(\"models/claude-opus-5.json\")[\"data\"]\nprint(claude[\"pricing\"], claude[\"pricing_status\"])"
   };
@@ -45,7 +52,7 @@
   // ---------- JSON highlighter ----------
   function hlJson(obj) {
     var s = JSON.stringify(obj, null, 2);
-    if (s.length > 120000) s = s.slice(0, 120000) + "\n… (已截断显示)";
+    // Preserve the complete response so copied JSON remains valid.
     return esc(s).replace(/(&quot;(?:\\.|[^&\\]|&(?!quot;))*?&quot;)(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g,
       function (m, str, colon, kw) {
         if (str) return colon ? '<span class="tok-k">' + str + "</span>" + colon : '<span class="tok-s">' + str + "</span>";
@@ -58,9 +65,9 @@
   var SNIPPETS = {
     cheapest: {
       path: "models.json",
-      code: 'const { data } = await (await fetch(BASE + "models.json")).json();\nreturn data\n  .filter(m => m.pricing.input != null)\n  .sort((a, b) => a.pricing.input - b.pricing.input)\n  .slice(0, 5)\n  .map(m => ({ id: m.id, vendor: m.vendor, input: m.pricing.input, output: m.pricing.output }));',
+      code: 'const { data } = await (await fetch(BASE + "models.json")).json();\nreturn data\n  .filter(m => m.pricing.input != null && m.price_basis.type === "official")\n  .sort((a, b) => a.pricing.input - b.pricing.input)\n  .slice(0, 5)\n  .map(m => ({ id: m.id, vendor: m.vendor, input: m.pricing.input, output: m.pricing.output }));',
       run: function (d) {
-        return d.data.filter(function (m) { return m.pricing.input != null; })
+        return d.data.filter(function (m) { return m.pricing.input != null && m.price_basis.type === "official"; })
           .sort(function (a, b) { return a.pricing.input - b.pricing.input; }).slice(0, 5)
           .map(function (m) { return { id: m.id, vendor: m.vendor, input: m.pricing.input, output: m.pricing.output }; });
       }
@@ -122,13 +129,64 @@
   $("tryUrl").addEventListener("keydown", function (e) { if (e.key === "Enter") send(); });
   updateUrl();
 
-  fetch(BASE + "vendors.json").then(function (r) { return r.json(); }).then(function (d) {
+  var costRevision = 0;
+  var costData = null;
+  async function updateService() {
+    var revision = ++costRevision, id = $("costModel").value;
+    costData = null; $("costSend").disabled = true;
+    $("costStatus").textContent = "加载模型计费规则…";
+    $("costOut").textContent = "填写用量后查看费用明细。";
+    try {
+      var result = await client.getModel(id);
+      if (revision !== costRevision) return;
+      costData = result.data;
+      $("costResidency").value = "false";
+      $("costResidency").disabled = !costData.service_tiers.some(function (s) { return s.name === "data_residency"; });
+      $("costService").innerHTML = '<option value="standard">Standard</option>' + costData.service_tiers.filter(function (s) { return s.name !== "data_residency"; }).map(function (s) {
+        return '<option value="' + esc(s.name) + '">' + esc(s.name) + '</option>';
+      }).join("");
+      $("costStatus").textContent = costData.price_basis.type === "reference" ? "参照价：" + costData.price_basis.reference_model_id + "，不代表订阅实际账单。" : "输入总量包含缓存读取与创建；估算范围为 token 与缓存费用。";
+      $("costSend").disabled = false;
+    } catch (e) {
+      if (revision === costRevision) $("costStatus").textContent = "模型加载失败：" + e.message;
+    }
+  }
+  $("costModel").addEventListener("change", updateService);
+  $("costForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!costData) return;
+    try {
+      var usage = {};
+      ["inputTokens", "outputTokens", "cachedInputTokens", "cacheWriteTokens", "cacheWrite1hTokens", "storageTokenHours"].forEach(function (key) {
+        var value = $(key).value.trim();
+        if (!value) throw new Error("请填写 " + key + "，不用时填 0。");
+        usage[key] = Number(value);
+      });
+      var options = { at: $("costAt").value.trim(), serviceTier: $("costService").value };
+      if (!$("costResidency").disabled) options.dataResidency = $("costResidency").value === "true";
+      if ($("costHoliday").value) options.isChineseHoliday = $("costHoliday").value === "true";
+      if ($("costCacheType").value) options.cacheType = $("costCacheType").value;
+      var estimate = LLMPrice.estimate(costData, usage, options);
+      $("costStatus").textContent = "估算 " + estimate.total.toFixed(6) + " USD · " + estimate.pricing_tier + " · " + estimate.period;
+      $("costOut").textContent = JSON.stringify(estimate, null, 2);
+    } catch (e) {
+      var messages = {PRICE_UNAVAILABLE:"所用费用项没有可核实的价格",HOLIDAY_REQUIRED:"高峰时段需确认是否为中国法定节假日",TIME_REQUIRED:"请填写带时区的完整时间",PRICE_EXPIRED:"促销已超出已确认期限，需复核",HISTORICAL_PRICE_UNAVAILABLE:"本快照不含更早的历史价格",LIMIT_EXCEEDED:"输入或输出超过已记录的上限",INVALID_ARGUMENT:"输入参数不正确"};
+      $("costStatus").textContent = (messages[e.code] || "无法估算") + "：" + e.message;
+      $("costOut").textContent = "";
+    }
+  });
+
+  client.listVendors().then(function (d) {
     $("footUpdated").textContent = d.meta.updated_at;
+    $("costAt").value = d.meta.updated_at + "T12:00:00+08:00";
     vendors = d.data.map(function (v) { return v.slug; });
     d.data.forEach(function (v) { modelIds = modelIds.concat(v.model_ids); });
     $("slugList").innerHTML = "可用 <code>vendor</code>：" + d.data.map(function (v) {
       return '<a href="api/v1/vendors/' + esc(v.slug) + '.json"><code>' + esc(v.slug) + "</code></a>（" + esc(v.name) + "，" + v.model_count + "）";
     }).join("、") + "。全部 <code>model_id</code> 见 <a href=\"api/v1/vendors.json\">vendors.json</a> 的 <code>model_ids</code>。";
     fillParam();
-  }).catch(function () {});
+    $("costModel").innerHTML = modelIds.map(function (id) { return '<option value="' + esc(id) + '">' + esc(id) + '</option>'; }).join("");
+    $("costModel").value = "gemini-3.1-pro-preview";
+    updateService();
+  }).catch(function (e) { $("tryStatus").textContent = "接口列表加载失败：" + e.message; $("costStatus").textContent = "接口列表加载失败，请刷新重试。"; });
 })();

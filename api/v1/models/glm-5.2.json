@@ -4,7 +4,8 @@
     "updated_at": "2026-10-11",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens"
+    "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e"
   },
   "data": {
     "id": "glm-5.2",
@@ -25,6 +26,22 @@
       "cached_input": "verified",
       "cache_write": "not_listed"
     },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://docs.z.ai/guides/overview/pricing"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
     "has_off_peak": false,
     "off_peak_pricing": null,
     "peak_note": null,
@@ -50,6 +67,12 @@
       "default": "max",
       "can_disable": true,
       "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      },
       "note": "reasoning_effort 接受 max(默认)/xhigh/high/medium/low/minimal/none；none、minimal 表示不思考，low/medium 映射到 high，xhigh 映射到 max（实际为 high / max 两档）。thinking.type 可设 disabled 关闭；默认由模型自动判断是否思考。",
       "sources": [
         "https://docs.z.ai/guides/capabilities/thinking"
@@ -75,7 +98,25 @@
       "storage_per_1M_tokens_hour": 0.0,
       "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
     },
-    "price_schedule": [],
+    "price_schedule": [
+      {
+        "kind": "promotion",
+        "effective_from": null,
+        "effective_until": null,
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null,
+        "note": "缓存存储限时免费，官方未公布截止日期或到期后价格，后续费用需复核。",
+        "multiplier": null,
+        "cache_pricing": {
+          "storage_per_1M_tokens_hour": 0
+        },
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ]
+      }
+    ],
     "unverified_fields": [],
     "links": {
       "self": "models/glm-5.2.json",

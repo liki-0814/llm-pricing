@@ -1,0 +1,2 @@
+# Validation/CI only; the deployed site and client have no dependencies.
+jsonschema>=4.23,<5

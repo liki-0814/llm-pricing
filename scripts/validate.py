@@ -1,132 +1,241 @@
 #!/usr/bin/env python3
-"""Sanity-check data/prices.json and verify api/v1/ is in sync.
-Usage: python3 scripts/validate.py"""
-import json, sys, pathlib, re
+"""Validate source semantics, generated OpenAPI contracts and committed API files."""
+import copy
+import datetime as dt
+import math
+import pathlib
+import sys
+
 sys.dont_write_bytecode = True
-HERE = pathlib.Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE))
-import build_api  # noqa: E402
+import build_api
+try:
+    from jsonschema import Draft202012Validator, FormatChecker
+except ImportError:
+    raise SystemExit('Install validation dependencies: python3 -m pip install -r requirements-dev.txt')
 
-p = HERE.parent / "data" / "prices.json"
-d = json.load(open(p, encoding="utf-8"))
-req = ["id","vendor","model","model_id","currency","input","output","cached_input","cache_write","source_url","last_updated"]
-bad = 0
-ids, mids = set(), set()
-DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
-def num_ok(v): return v is None or v == "n/a" or (isinstance(v,(int,float)) and not isinstance(v,bool) and v >= 0)
-if not DATE.match(str(d["meta"].get("last_updated"))): print("BAD meta.last_updated"); bad += 1
-for m in d["models"]:
-    for k in req:
-        if k not in m: print("MISSING KEY", m.get("model"), k); bad += 1
-    if m["id"] in ids: print("DUP ID", m["id"]); bad += 1
-    ids.add(m["id"])
-    if m.get("model_id") in mids: print("DUP MODEL_ID", m.get("model_id")); bad += 1
-    mids.add(m.get("model_id"))
-    if not build_api.SLUG_RE.match(str(m.get("model_id"))): print("MODEL_ID NOT URL-SAFE", m.get("model_id")); bad += 1
-    if m["currency"] != "USD": print("BAD CURRENCY (USD only)", m["model"]); bad += 1
-    if not str(m["source_url"]).startswith("http"): print("BAD SOURCE", m["model"]); bad += 1
-    if not DATE.match(str(m.get("last_updated"))): print("BAD DATE", m["model"]); bad += 1
-    for k in ("input","output","cached_input","cache_write"):
-        if not num_ok(m[k]): print("BAD VALUE", m["model"], k, m[k]); bad += 1
-    off = m.get("offpeak")
-    if off is not None:
-        for k, v in off.items():
-            if k not in build_api.OFFPEAK_FIELDS or not num_ok(v): print("BAD OFFPEAK", m["model"], k, v); bad += 1
-    re_ = m.get("reasoning_effort")
-    if not isinstance(re_, dict): print("MISSING reasoning_effort", m["model"]); bad += 1
-    else:
-        extra = set(re_) - {"supported","levels","default","can_disable","note","sources"}
-        if extra: print("UNKNOWN reasoning_effort keys", m["model"], sorted(extra)); bad += 1
-        sup, lv, df = re_.get("supported"), re_.get("levels"), re_.get("default")
-        if sup is not None and not isinstance(sup, bool): print("BAD reasoning_effort.supported", m["model"], sup); bad += 1
-        if lv is not None and not (isinstance(lv, list) and lv and all(isinstance(x, str) and x for x in lv) and len(set(lv)) == len(lv)):
-            print("BAD reasoning_effort.levels", m["model"], lv); bad += 1
-        if df is not None and not isinstance(df, str): print("BAD reasoning_effort.default", m["model"], df); bad += 1
-        if isinstance(lv, list) and isinstance(df, str) and df not in lv: print("reasoning_effort.default not in levels", m["model"], df); bad += 1
-        if sup is None and (lv is not None or df is not None): print("reasoning_effort: supported=null (待核实) but levels/default set", m["model"]); bad += 1
-        if sup is False and lv is not None: print("reasoning_effort: supported=false but levels set", m["model"]); bad += 1
-        cd = re_.get("can_disable")
-        if cd is not None and not isinstance(cd, bool): print("BAD reasoning_effort.can_disable", m["model"], cd); bad += 1
-        if not isinstance(re_.get("note"), str) or not re_["note"].strip(): print("reasoning_effort.note required", m["model"]); bad += 1
-        srcs = re_.get("sources")
-        if not (isinstance(srcs, list) and srcs and all(str(x).startswith("http") for x in srcs)): print("reasoning_effort.sources must be a non-empty list of URLs", m["model"]); bad += 1
-        partial = sup is None or (sup is True and lv is None)
-        if partial != ("reasoning_effort" in m.get("unverified_fields", [])):
-            print("unverified_fields must list reasoning_effort iff it is 待核实/partial", m["model"]); bad += 1
-    ct = m.get("context_tokens")
-    if ct is not None and not isinstance(ct, int): print("BAD context_tokens", m["model"], ct); bad += 1
-    if m["vendor"] not in d["vendors"]: print("UNKNOWN VENDOR", m["vendor"]); bad += 1
+PRICE_FIELDS = build_api.PRICE_FIELDS
+REMOVED = {'modalities', 'features', 'knowledge_cutoff', 'thinking_budget', 'availability', 'snapshot', 'aliases'}
 
-    # ---- structured spec fields (limits / tiers / cache / modalities / ...) ----
-    def isint(v): return isinstance(v, int) and not isinstance(v, bool) and v >= 0
-    def isnum(v): return isinstance(v, (int, float)) and not isinstance(v, bool) and v >= 0
-    def urls_ok(v): return isinstance(v, list) and all(str(x).startswith("http") for x in v)
-    def strlist(v): return isinstance(v, list) and all(isinstance(x, str) and x for x in v) and len(set(v)) == len(v)
-    for k in ("limits","pricing_tiers","service_tiers","cache_pricing","price_schedule"):
-        if k not in m: print("MISSING KEY", m["model"], k); bad += 1
-    for k in ("modalities","features","knowledge_cutoff","thinking_budget","availability","snapshot","aliases"):
-        if k in m: print("REMOVED FIELD still present", m["model"], k); bad += 1
-    L = m.get("limits")
-    if not isinstance(L, dict): print("BAD limits", m["model"]); bad += 1
-    else:
-        extra = set(L) - set(build_api.LIMIT_FIELDS) - {"note", "sources"}
-        if extra: print("UNKNOWN limits keys", m["model"], sorted(extra)); bad += 1
-        for k in build_api.LIMIT_FIELDS:
-            if k not in L or not (L[k] is None or isint(L[k])): print("BAD limits.%s" % k, m["model"], L.get(k)); bad += 1
-        if L.get("context_length") != m.get("context_tokens"): print("limits.context_length != context_tokens", m["model"]); bad += 1
-        if L.get("max_output_tokens") is not None and L.get("context_length") is not None and L["max_output_tokens"] > L["context_length"]: print("limits.max_output_tokens > context_length", m["model"]); bad += 1
-        if not isinstance(L.get("note"), str) or not L["note"].strip(): print("limits.note required (say where the numbers come from / what is 待核实)", m["model"]); bad += 1
-        if not (urls_ok(L.get("sources")) and L["sources"]): print("limits.sources must be a non-empty URL list", m["model"]); bad += 1
-        for k in ("max_output_tokens", "context_length"):
-            if (L.get(k) is None) != (("limits." + k) in m.get("unverified_fields", [])): print("unverified_fields must list limits.%s iff null" % k, m["model"]); bad += 1
-    base = {k: m.get(k) for k in ("input", "output", "cached_input", "cache_write")}
-    seen_cond = set()
-    for t in m.get("pricing_tiers") or []:
-        if set(t) != set(build_api.TIER_FIELDS): print("BAD pricing_tiers keys", m["model"], sorted(set(t) ^ set(build_api.TIER_FIELDS))); bad += 1; continue
-        if not re.match(r"^input_tokens(>|<=)\d+( and input_tokens(>|<=)\d+)?$", str(t["condition"])): print("BAD tier condition", m["model"], t["condition"]); bad += 1
-        if t["condition"] in seen_cond: print("DUP tier condition", m["model"], t["condition"]); bad += 1
-        seen_cond.add(t["condition"])
-        if not (isint(t["input_tokens_gt"]) and (t["input_tokens_lte"] is None or (isint(t["input_tokens_lte"]) and t["input_tokens_lte"] > t["input_tokens_gt"]))): print("BAD tier bounds", m["model"], t["condition"]); bad += 1
-        if ("input_tokens>%s" % t["input_tokens_gt"]) not in t["condition"]: print("tier condition/bounds mismatch", m["model"], t["condition"]); bad += 1
-        for k in ("input", "output", "cached_input", "cache_write"):
-            if not (t[k] is None or isnum(t[k])): print("BAD tier price", m["model"], t["condition"], k, t[k]); bad += 1
-        if t["input"] is None or t["output"] is None: print("tier needs input and output", m["model"], t["condition"]); bad += 1
-        if isnum(t["input"]) and isnum(base["input"]) and t["input"] < base["input"]: print("tier input below base price", m["model"], t["condition"]); bad += 1
-        if t["cache_pricing"] is not None and set(t["cache_pricing"]) != set(build_api.CACHE_FIELDS): print("BAD tier cache_pricing keys", m["model"]); bad += 1
-    names = set()
-    for t in m.get("service_tiers") or []:
-        if set(t) != {"name", "multiplier", "note"}: print("BAD service_tiers keys", m["model"], sorted(t)); bad += 1; continue
-        if t["name"] not in build_api.SERVICE_TIER_NAMES: print("BAD service tier name", m["model"], t["name"]); bad += 1
-        if t["name"] in names: print("DUP service tier", m["model"], t["name"]); bad += 1
-        names.add(t["name"])
-        if not (isnum(t["multiplier"]) and t["multiplier"] > 0): print("BAD service tier multiplier", m["model"], t["name"], t["multiplier"]); bad += 1
-    C = m.get("cache_pricing")
-    if not isinstance(C, dict) or set(C) != set(build_api.CACHE_FIELDS): print("BAD cache_pricing keys", m["model"]); bad += 1
-    else:
-        for k in build_api.CACHE_FIELDS[:-1]:
-            if not (C[k] is None or isnum(C[k])): print("BAD cache_pricing.%s" % k, m["model"], C[k]); bad += 1
-        if isnum(C["explicit_write"]) and isnum(m["cache_write"]) and C["explicit_write"] != m["cache_write"]: print("cache_pricing.explicit_write != cache_write", m["model"]); bad += 1
-        if isnum(m["cached_input"]) and (C["implicit_read"] is not None or C["explicit_read"] is not None) and m["cached_input"] not in (C["implicit_read"], C["explicit_read"]):
-            print("cached_input must equal cache_pricing.implicit_read or explicit_read", m["model"]); bad += 1
-        if C["implicit_read"] is not None and C["explicit_read"] is not None and not str(C.get("note") or "").strip(): print("cache_pricing.note must say which one pricing.cached_input is", m["model"]); bad += 1
-    for e in m.get("price_schedule") or []:
-        if e.get("kind") not in build_api.SCHEDULE_KINDS or not set(e) >= {"kind", "effective_from", "effective_until", "note"}: print("BAD price_schedule", m["model"]); bad += 1; continue
-        for k in ("effective_from", "effective_until"):
-            if e[k] is not None and not DATE.match(str(e[k])): print("BAD price_schedule date", m["model"], k, e[k]); bad += 1
-        for k in ("input", "output", "cached_input", "cache_write"):
-            if e.get(k) is not None and not isnum(e[k]): print("BAD price_schedule price", m["model"], k); bad += 1
-    # principle: a fact stated only in notes must also be structured -> long-context price tiers
-    if re.search(r"[>＞]\s*\d+\s*[KkMm]\b", m.get("notes") or "") and not m.get("pricing_tiers"):
-        print("notes mention a '>NNK' tier but pricing_tiers is empty (promote it to a structured field)", m["model"]); bad += 1
-for v in d["vendors"]:
-    if v not in build_api.VENDOR_SLUGS: print("NO API SLUG FOR VENDOR (scripts/build_api.py VENDOR_SLUGS)", v); bad += 1
-print(f'{len(d["models"])} models, {bad} data problem(s)')
-tbd = [(m["model"], f) for m in d["models"] for f in m.get("unverified_fields", [])]
-print("unverified (待核实):", len(tbd))
-for n,f in tbd: print("  -", n, f)
 
-api_probs = build_api.check(d) if not bad else ["(skipped api check: fix data problems first)"]
-for x in api_probs[:20]: print("API", x)
-if len(api_probs) > 20: print("API ... and", len(api_probs) - 20, "more")
-print("api/v1: in sync" if not api_probs else "api/v1: OUT OF SYNC -> run python3 scripts/build_api.py")
-sys.exit(1 if bad or api_probs else 0)
+def source_schema(d):
+    """Reuse the generated response contract without letting conversion hide missing keys."""
+    spec = build_api.openapi(d, list(build_api.VENDOR_SLUGS.values()), [])
+    schema = copy.deepcopy(spec['components']['schemas']['Model'])
+    props = schema['properties']
+    for field in ('api_version', 'unit', 'vendor_name', 'pricing', 'pricing_status', 'has_off_peak',
+                  'off_peak_pricing', 'links', 'context_length_label'):
+        props.pop(field, None)
+    props['model_id'] = props.pop('id')
+    props['model_id']['pattern'] = build_api.SLUG_RE.pattern
+    props['id'] = {'type': 'string', 'minLength': 1}
+    props['model'] = props.pop('name')
+    props['vendor'] = {'enum': d.get('vendors', [])}
+    props['context_length'] = {'type': ['string', 'null']}
+    props['context_tokens'] = {'type': ['integer', 'null'], 'minimum': 1}
+    for k in PRICE_FIELDS:
+        props[k] = {'anyOf': [{'type': 'number', 'minimum': 0}, {'type': 'null'}, {'const': 'n/a'}]}
+    props['offpeak'] = {'type': ['object', 'null'], 'required': list(build_api.OFFPEAK_FIELDS),
+                        'properties': {k: {'type': 'number', 'minimum': 0} for k in build_api.OFFPEAK_FIELDS},
+                        'additionalProperties': False}
+    for name in ('limits', 'reasoning_effort'):
+        for field in ('status', 'field_status'):
+            props[name]['properties'].pop(field, None)
+            if field in props[name]['required']:
+                props[name]['required'].remove(field)
+    props['unverified_fields']['uniqueItems'] = True
+    schema['required'] = [k for k in props if k != 'offpeak']
+    schema['components'] = spec['components']
+    return schema
+
+
+def numeric(v):
+    return isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) and v >= 0
+
+
+def expected_unverified(m):
+    missing = {k for k in PRICE_FIELDS if m.get(k) is None}
+    missing |= {'limits.' + k for k in build_api.LIMIT_FIELDS if m['limits'][k] is None}
+    r = m['reasoning_effort']
+    missing |= {'reasoning_effort.' + k for k in ('supported', 'levels', 'default', 'can_disable')
+                if r[k] is None and not (r['supported'] is False and k in ('levels', 'default'))}
+    return missing
+
+
+def validate_data(d):
+    errors = []
+    def fail(where, message):
+        errors.append(where + ': ' + message)
+    if not isinstance(d, dict) or not isinstance(d.get('models'), list) or not isinstance(d.get('vendors'), list):
+        return ['dataset: models and vendors must be arrays']
+    if not all(isinstance(v, str) for v in d['vendors']):
+        return ['vendors: names must be strings']
+    if not d['models'] or not d['vendors']:
+        return ['dataset: models and vendors cannot be empty']
+    def finite(value, where):
+        if isinstance(value, float) and not math.isfinite(value):
+            fail(where, 'numbers must be finite')
+        elif isinstance(value, dict):
+            for k, v in value.items():
+                finite(v, where + '.' + k)
+        elif isinstance(value, list):
+            for i, v in enumerate(value):
+                finite(v, where + '[%d]' % i)
+    finite(d, 'dataset')
+    try:
+        snapshot = dt.date.fromisoformat(d['meta']['last_updated'])
+    except (KeyError, ValueError, TypeError):
+        return ['meta.last_updated: invalid calendar date']
+    if snapshot > dt.datetime.now(dt.timezone.utc).date():
+        fail('meta.last_updated', 'verification date is in the future')
+    if len(d['vendors']) != len(set(d['vendors'])):
+        fail('vendors', 'duplicate vendor')
+    for v in d['vendors']:
+        if v not in build_api.VENDOR_SLUGS:
+            fail('vendors', 'unknown vendor ' + str(v))
+    validator = Draft202012Validator(source_schema(d), format_checker=FormatChecker())
+    by_id, ids = {}, set()
+    for i, m in enumerate(d['models']):
+        where = 'models[%d]' % i
+        schema_errors = list(validator.iter_errors(m))
+        for e in schema_errors:
+            fail(where + '.' + '.'.join(map(str, e.path)), e.message)
+        if schema_errors:
+            continue
+        where = m['model_id']
+        for k in REMOVED:
+            if k in m:
+                fail(where, 'removed field ' + k)
+        if m['id'] in ids or where in by_id:
+            fail(where, 'duplicate identifier')
+        ids.add(m['id']); by_id[where] = m
+        if dt.date.fromisoformat(m['last_updated']) > snapshot:
+            fail(where, 'model verification date is after dataset date')
+        if set(m['unverified_fields']) != expected_unverified(m):
+            fail(where, 'unverified_fields must equal ' + repr(sorted(expected_unverified(m))))
+        if m['limits']['context_length'] != m['context_tokens']:
+            fail(where, 'limits.context_length != context_tokens')
+        if (m['context_tokens'] is None) != (m['context_length'] is None):
+            fail(where, 'context label and numeric value must both be null or present')
+        L = m['limits']
+        if L['max_output_tokens'] is not None and L['context_length'] is not None and L['max_output_tokens'] > L['context_length']:
+            fail(where, 'max output exceeds context')
+        r = m['reasoning_effort']
+        if r['supported'] is None and (r['levels'] is not None or r['default'] is not None):
+            fail(where, 'unknown reasoning support with populated levels/default')
+        if r['supported'] is False and (r['levels'] is not None or r['default'] is not None):
+            fail(where, 'non-adjustable reasoning cannot have levels/default')
+        if r['levels'] is not None and (not r['levels'] or len(set(r['levels'])) != len(r['levels'])):
+            fail(where, 'empty or duplicate reasoning levels')
+        if r['default'] is not None and r['levels'] is not None and r['default'] not in r['levels']:
+            fail(where, 'reasoning default is not an accepted level')
+        basis, bill = m['price_basis'], m['billing']
+        if basis['type'] == 'reference':
+            if not basis['reference_model_id'] or bill['price_type'] != 'reference':
+                fail(where, 'reference price requires reference model and billing.price_type=reference')
+        elif basis['reference_model_id'] is not None or bill['price_type'] == 'reference':
+            fail(where, 'official price cannot have a reference model/type')
+        C = m['cache_pricing']
+        for k in PRICE_FIELDS:
+            if isinstance(m[k], (int, float)) and not numeric(m[k]):
+                fail(where, 'nonfinite price ' + k)
+        for label, cache in [('cache_pricing', C)] + [('tier.cache_pricing', t['cache_pricing']) for t in m['pricing_tiers'] if t['cache_pricing']]:
+            for k, v in cache.items():
+                if k != 'note' and v is not None and not numeric(v):
+                    fail(where, 'invalid ' + label + '.' + k)
+        for k, base in [('explicit_write', 'cache_write')]:
+            if numeric(C[k]) and numeric(m[base]) and C[k] != m[base]:
+                fail(where, 'cache write breakdown disagrees with base')
+        ctype = bill['cached_input_type']
+        if ctype != 'unspecified' and C[ctype + '_read'] != m['cached_input']:
+            fail(where, 'cached_input_type disagrees with cache price')
+        tiers = sorted(m['pricing_tiers'], key=lambda t: t['input_tokens_gt'])
+        previous_end = None
+        for j, t in enumerate(tiers):
+            lo, hi = t['input_tokens_gt'], t['input_tokens_lte']
+            condition = 'input_tokens>%d' % lo + (' and input_tokens<=%d' % hi if hi is not None else '')
+            if t['condition'] != condition or (hi is not None and hi <= lo):
+                fail(where, 'tier condition/bounds disagree')
+            if j and (previous_end is None or lo != previous_end):
+                fail(where, 'tier ranges overlap or have a gap')
+            previous_end = hi
+            if t['input'] is None or t['output'] is None:
+                fail(where, 'tier needs input/output prices')
+        if m.get('offpeak') is not None:
+            if m['off_peak_schedule'] is None:
+                fail(where, 'offpeak requires complete schedule')
+            else:
+                windows = sorted(m['off_peak_schedule']['peak_windows'], key=lambda w: w['start'])
+                for j, w in enumerate(windows):
+                    if w['start'] >= w['end'] or (j and windows[j-1]['end'] > w['start']):
+                        fail(where, 'invalid or overlapping peak windows')
+        elif m['off_peak_schedule'] is not None:
+            fail(where, 'schedule without offpeak prices')
+        names = [s['name'] for s in m['service_tiers']]
+        if len(names) != len(set(names)):
+            fail(where, 'duplicate service tier')
+        for s in m['service_tiers']:
+            if s['multipliers']['input'] != s['multiplier'] or s['multipliers']['output'] != s['multiplier']:
+                fail(where, 'display multiplier must match input/output multipliers')
+        schedules = m['price_schedule']
+        starts = [e['effective_from'] for e in schedules if e['kind'] != 'promotion' and e['effective_from']]
+        if starts != sorted(starts) or len(starts) != len(set(starts)):
+            fail(where, 'scheduled changes must have unique chronological start dates')
+        for e in m['price_schedule']:
+            start, end = e['effective_from'], e['effective_until']
+            if start and end and start > end:
+                fail(where, 'price schedule ends before it starts')
+            if e['kind'] != 'promotion' and not start:
+                fail(where, 'scheduled price change requires effective_from')
+            if e['kind'] == 'promotion' and end and end < m['last_updated']:
+                fail(where, 'expired promotion needs re-verification')
+            if tiers and e['multiplier'] is None and any(e[k] is not None and e[k] != m[k] for k in PRICE_FIELDS):
+                fail(where, 'flat scheduled changes on tiered models need a documented tier multiplier')
+    for mid, m in by_id.items():
+        ref = m['price_basis']['reference_model_id']
+        if ref is not None:
+            target = by_id.get(ref)
+            if not target or ref == mid or target['price_basis']['type'] != 'official':
+                fail(mid, 'reference model must exist and have official prices')
+            elif any(m[k] != target[k] for k in PRICE_FIELDS):
+                fail(mid, 'reference base prices disagree with reference model')
+    return errors
+
+
+def validate_api(d, files=None):
+    files = files or build_api.build(d)
+    spec = files['openapi.json']
+    errors = []
+    for name, schema in spec['components']['schemas'].items():
+        try:
+            Draft202012Validator.check_schema(schema)
+        except Exception as e:
+            errors.append('schema ' + name + ': ' + str(e))
+    for rel, response in files.items():
+        if rel == 'openapi.json':
+            continue
+        path = '/models/{model_id}.json' if rel.startswith('models/') else '/vendors/{vendor}.json' if rel.startswith('vendors/') else '/' + rel
+        schema = copy.deepcopy(spec['paths'][path]['get']['responses']['200']['content']['application/json']['schema'])
+        schema['components'] = spec['components']
+        for e in Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(response):
+            errors.append(rel + '.' + '.'.join(map(str, e.path)) + ': ' + e.message)
+    return errors
+
+
+def main():
+    d = build_api.load()
+    problems = validate_data(d)
+    if not problems:
+        problems += validate_api(d)
+        problems += build_api.check(d)
+    for problem in problems:
+        print('BAD', problem)
+    print('%d models, %d problem(s)' % (len(d['models']), len(problems)))
+    for m in d['models']:
+        for k in m['unverified_fields']:
+            print('unverified:', m['model_id'], k)
+    print('api/v1: in sync and schema-valid' if not problems else 'validation FAILED')
+    return bool(problems)
+
+
+if __name__ == '__main__':
+    sys.exit(main())

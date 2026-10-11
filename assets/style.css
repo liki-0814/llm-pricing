@@ -375,3 +375,6 @@ table.mini .price{font-size:13px}
 .c-model .badge{margin-bottom:5px}
 .model-act{margin-top:4px}
 td.c-lim,td.c-ctx{white-space:nowrap}
+
+.cost-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-bottom:18px; }
+.cost-grid label { display:flex; flex-direction:column; gap:6px; font-size:14px; }

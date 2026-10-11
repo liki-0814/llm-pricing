@@ -4,7 +4,8 @@
     "updated_at": "2026-10-11",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens"
+    "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e"
   },
   "data": {
     "id": "qwen3.8-2.4t-a95b",
@@ -25,6 +26,22 @@
       "cached_input": "verified",
       "cache_write": "verified"
     },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": "Singapore",
+      "cached_input_type": "implicit",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
     "has_off_peak": false,
     "off_peak_pricing": null,
     "peak_note": null,
@@ -47,6 +64,12 @@
       "default": "xhigh",
       "can_disable": false,
       "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      },
       "note": "reasoning_effort 取 low/medium/xhigh，默认 xhigh（OpenAI 的 high/max 映射到 xhigh，minimal 映射到 low，none 映射为关闭思考）；不可与 thinking_budget 同时设置。仅思考模型，无法关闭。",
       "sources": [
         "https://docs.qwencloud.com/api-reference/chat/openai-chat",

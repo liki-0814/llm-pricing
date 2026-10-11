@@ -5,6 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e",
     "count": 2
   },
   "vendor": {
@@ -43,6 +44,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.minimax.io/docs/guides/pricing-paygo"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -61,6 +78,12 @@
         "default": null,
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "verified"
+        },
         "note": "官方 OpenAI 兼容 API 文档：reasoning_effort 仅 MiniMax-M3.1-Flash-Preview 支持真实的思考深度调节，其他模型忽略该字段。MiniMax-M3 默认自适应思考（thinking.type=adaptive），可传 thinking.type=disabled 跳过思考直接作答。",
         "sources": [
           "https://platform.minimax.io/docs/api-reference/text-chat-openai",
@@ -101,7 +124,22 @@
         {
           "name": "priority",
           "multiplier": 1.5,
-          "note": "Priority 档（service_tier: priority）：标准价 1.5×；≤512K：$0.45 / $1.80 / 缓存 $0.09；>512K：$0.90 / $3.60 / $0.18（折后价）。"
+          "note": "Priority 档（service_tier: priority）：标准价 1.5×；≤512K：$0.45 / $1.80 / 缓存 $0.09；>512K：$0.90 / $3.60 / $0.18（折后价）。",
+          "multipliers": {
+            "input": 1.5,
+            "output": 1.5,
+            "cached_input": 1.5,
+            "cache_write": 1.5,
+            "implicit_read": 1.5,
+            "explicit_read": 1.5,
+            "explicit_write": 1.5,
+            "explicit_write_1h": 1.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.minimax.io/docs/guides/pricing-paygo"
+          ]
         }
       ],
       "cache_pricing": {
@@ -133,11 +171,28 @@
         "cache_write": null
       },
       "pricing_status": {
-        "input": "verified",
-        "output": "verified",
-        "cached_input": "verified",
+        "input": "reference",
+        "output": "reference",
+        "cached_input": "reference",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "reference",
+        "reference_model_id": "minimax-m3",
+        "sources": [
+          "https://platform.minimax.io/docs/guides/text-generation",
+          "https://platform.minimax.io/docs/guides/pricing-paygo"
+        ],
+        "note": "用户确认保留参照价；参照 minimax-m3 的 token 单价，并非本订阅模型的官方按量报价。"
+      },
+      "billing": {
+        "channel": "subscription",
+        "price_type": "reference",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -162,6 +217,12 @@
         "default": "max",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "OpenAI 格式 reasoning_effort / Anthropic 格式 output_config.effort / Responses 格式 reasoning.effort，取 low/medium/high/xhigh/max，缺省为 max。恒开思考：thinking.type=disabled 或 effort=none 返回 400，需降低 effort 以减少思考。",
         "sources": [
           "https://platform.minimax.io/docs/guides/text-generation",

@@ -111,6 +111,21 @@
       return '<div class="svc" title="' + esc(t.note || "") + '"><span class="lv lv-def">' + esc(SVCLABEL[t.name] || t.name) + '</span><b>×' + t.multiplier + "</b></div>";
     }).join("") + sv.map(function (t) { return t.note ? '<p class="dnote"><b>' + esc(SVCLABEL[t.name] || t.name) + "：</b>" + esc(t.note) + "</p>" : ""; }).join("")
       : '<span class="na">官方未列出服务档倍率</span>';
+    if (sv.length) {
+      x += '<p class="dnote">上述倍率用于输入与输出；缓存和存储按各费用项规则计费。</p>';
+      sv.forEach(function (t) {
+        var rules = [];
+        ["cached_input", "cache_write"].forEach(function (k) {
+          if (t.pricing && Object.prototype.hasOwnProperty.call(t.pricing, k))
+            rules.push((k === "cached_input" ? "缓存读单价 " : "缓存写单价 ") + pcell(t.pricing[k]));
+          else if (t.multipliers && t.multipliers[k] !== t.multiplier)
+            rules.push((k === "cached_input" ? "缓存读 " : "缓存写 ") + (t.multipliers[k] === null ? "倍率待核实" : "×" + t.multipliers[k]));
+        });
+        if (m.cache_pricing.storage_per_1M_tokens_hour !== null)
+          rules.push("存储费 " + (t.multipliers.storage_per_1M_tokens_hour === null ? "倍率待核实" : "×" + t.multipliers.storage_per_1M_tokens_hour));
+        if (rules.length) x += '<p class="dnote"><b>' + esc(SVCLABEL[t.name] || t.name) + "：</b>" + rules.join(" · ") + "</p>";
+      });
+    }
     out.push(block("服务档倍率", x));
     // 3 cache
     var C = m.cache_pricing || {};
@@ -122,9 +137,20 @@
     if (isNum(C.storage_per_1M_tokens_hour)) x += kv("缓存存储 / 百万 token / 小时", C.storage_per_1M_tokens_hour === 0 ? "限时免费" : money(C.storage_per_1M_tokens_hour));
     if (C.note) x += '<p class="dnote">' + esc(C.note) + "</p>";
     out.push(block("缓存价细分", x || '<span class="na">官方未列细分缓存价</span>'));
-    // 4 sources
+    // 4 provenance and billing (reference prices remain visible).
+    var basis = m.price_basis || {}, billing = m.billing || {};
+    x = '<p class="dnote"><b>' + (basis.type === "reference" ? "用户确认参照价" : "官方价格") + '</b>：' + esc(basis.note || "") + '</p>';
+    if (basis.reference_model_id) x += '<p class="dnote">参照模型：<a href="api/v1/models/' + encodeURIComponent(basis.reference_model_id) + '.json">' + esc(basis.reference_model_id) + '</a></p>';
+    x += '<p class="dnote">计费渠道：' + (billing.channel === "subscription" ? "订阅" : "按量付费") + (billing.region ? " · 地区：" + esc(billing.region) : "") +
+      ' · 主价格口径：' + esc(billing.price_type || "current") + ' · 缓存类型：' + esc(billing.cached_input_type || "unspecified") + '</p>';
+    out.push(block("价格依据与计费口径", x, true));
+    // 5 sources
     var urls = [];
-    [m.source_url].concat(m.extra_sources || [], L.sources || []).forEach(function (u) { if (u && urls.indexOf(u) === -1) urls.push(u); });
+    var structuredSources = [];
+    sv.concat(m.price_schedule || [], m.off_peak_schedule ? [m.off_peak_schedule] : []).forEach(function (rule) {
+      structuredSources = structuredSources.concat(rule.sources || []);
+    });
+    [m.source_url].concat(m.extra_sources || [], L.sources || [], basis.sources || [], structuredSources).forEach(function (u) { if (u && urls.indexOf(u) === -1) urls.push(u); });
     x = srcLinks(urls);
     if (L.note) x += '<p class="dnote"><b>上限口径：</b>' + esc(L.note) + "</p>";
     (m.price_schedule || []).forEach(function (e) {
@@ -140,7 +166,8 @@
   }
   function row(m, best) {
     var slug = LP.slug(m.vendor);
-    var notes = m.notes ? '<details class="note"><summary>备注</summary><p>' + esc(m.notes) + "</p></details>" : "";
+    var notes = (m.price_basis && m.price_basis.type === "reference" ? '<span class="tbd" title="' + esc(m.price_basis.note) + '">参照价 · ' + esc(m.price_basis.reference_model_id) + '</span>' : "") +
+      (m.notes ? '<details class="note"><summary>备注</summary><p>' + esc(m.notes) + "</p></details>" : "");
     var idBtn = m.model_id ? '<button type="button" class="model-id" data-copy="' + esc(m.model_id) + '" title="点击复制模型 ID">' + esc(m.model_id) + "</button>" : "";
     var det = '<button type="button" class="detail-btn" data-id="' + esc(m.model_id) + '" aria-expanded="' + (state.open[m.model_id] ? "true" : "false") + '">详情<span class="chev" aria-hidden="true"></span></button>';
     var cells = [

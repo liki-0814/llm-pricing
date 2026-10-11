@@ -5,6 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e",
     "count": 3
   },
   "vendor": {
@@ -43,6 +44,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": "官方为 2026-12-31 前的限时价；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
@@ -63,7 +80,13 @@
         ],
         "default": "medium",
         "can_disable": null,
-        "status": "verified",
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "unverified"
+        },
         "note": "thinking_level 取 low/medium/high，默认开启且为 medium；官方文档未提供关闭选项。",
         "sources": [
           "https://ai.google.dev/gemini-api/docs/thinking"
@@ -83,17 +106,62 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "Batch API：官方定价页逐项列出，价格为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 推理：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "Flex 推理：官方定价页逐项列出，价格为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "priority",
           "multiplier": 1.8,
-          "note": "Priority 推理：官方定价页逐项列出，输入/输出/缓存价均为标准价 1.8×。"
+          "note": "Priority 推理：官方定价页逐项列出，输入/输出/缓存价均为标准价 1.8×。",
+          "multipliers": {
+            "input": 1.8,
+            "output": 1.8,
+            "cached_input": 1.8,
+            "cache_write": 1.8,
+            "implicit_read": 1.8,
+            "explicit_read": 1.8,
+            "explicit_write": 1.8,
+            "explicit_write_1h": 1.8,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -113,10 +181,19 @@
           "output": 7.5,
           "cached_input": 0.15,
           "cache_write": null,
-          "note": "官方：当前价格仅到 2026-12-31；2027-01-01 起 Standard 输入 $1.50、输出 $7.50、缓存 $0.15，缓存存储费 $1.00/百万 token/小时；Batch/Flex/Priority 价同比例上调。"
+          "note": "官方：当前价格仅到 2026-12-31；2027-01-01 起 Standard 输入 $1.50、输出 $7.50、缓存 $0.15，缓存存储费 $1.00/百万 token/小时；Batch/Flex/Priority 价同比例上调。",
+          "multiplier": null,
+          "cache_pricing": {
+            "storage_per_1M_tokens_hour": 1.0
+          },
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         }
       ],
-      "unverified_fields": [],
+      "unverified_fields": [
+        "reasoning_effort.can_disable"
+      ],
       "links": {
         "self": "models/gemini-3.8-flash.json",
         "vendor": "vendors/google.json"
@@ -141,6 +218,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -162,7 +255,13 @@
         ],
         "default": "minimal",
         "can_disable": null,
-        "status": "verified",
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "unverified"
+        },
         "note": "thinking_level 取 minimal/low/medium/high，默认开启且为 minimal；官方文档未提供完全关闭选项。",
         "sources": [
           "https://ai.google.dev/gemini-api/docs/thinking"
@@ -182,17 +281,68 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "输入/输出倍率见 multiplier；缓存读取采用 pricing.cached_input 明确单价，缓存存储费保持标准价。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {
+            "cached_input": 0.02
+          },
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 推理：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "输入/输出倍率见 multiplier；缓存读取采用 pricing.cached_input 明确单价，缓存存储费保持标准价。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {
+            "cached_input": 0.02
+          },
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "priority",
           "multiplier": 1.8,
-          "note": "Priority 推理：官方定价页逐项列出，输入/输出/缓存价均为标准价 1.8×。"
+          "note": "输入/输出倍率见 multiplier；缓存读取采用 pricing.cached_input 明确单价，缓存存储费保持标准价。",
+          "multipliers": {
+            "input": 1.8,
+            "output": 1.8,
+            "cached_input": 1.8,
+            "cache_write": 1.8,
+            "implicit_read": 1.8,
+            "explicit_read": 1.8,
+            "explicit_write": 1.8,
+            "explicit_write_1h": 1.8,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {
+            "cached_input": 0.05
+          },
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -204,7 +354,9 @@
         "note": "缓存命中价即 pricing.cached_input；官方另收缓存存储费 $1.00 / 百万 token / 小时。"
       },
       "price_schedule": [],
-      "unverified_fields": [],
+      "unverified_fields": [
+        "reasoning_effort.can_disable"
+      ],
       "links": {
         "self": "models/gemini-3.5-flash-lite.json",
         "vendor": "vendors/google.json"
@@ -229,6 +381,22 @@
         "cached_input": "verified",
         "cache_write": "not_listed"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -249,7 +417,13 @@
         ],
         "default": "high",
         "can_disable": null,
-        "status": "verified",
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "unverified"
+        },
         "note": "thinking_level 取 low/medium/high，默认开启且为 high；官方文档未提供关闭选项。",
         "sources": [
           "https://ai.google.dev/gemini-api/docs/thinking"
@@ -288,17 +462,62 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "Batch/Flex：输入输出五折，缓存读取和存储费保持标准价；Priority：输入输出、缓存读取和存储费均为 1.8 倍。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 1,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 推理：官方定价页逐项列出，价格为标准价 50%。"
+          "note": "Batch/Flex：输入输出五折，缓存读取和存储费保持标准价；Priority：输入输出、缓存读取和存储费均为 1.8 倍。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 1,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         },
         {
           "name": "priority",
           "multiplier": 1.8,
-          "note": "Priority 推理：官方定价页逐项列出，输入/输出/缓存价均为标准价 1.8×。"
+          "note": "Batch/Flex：输入输出五折，缓存读取和存储费保持标准价；Priority：输入输出、缓存读取和存储费均为 1.8 倍。",
+          "multipliers": {
+            "input": 1.8,
+            "output": 1.8,
+            "cached_input": 1.8,
+            "cache_write": 1.8,
+            "implicit_read": 1.8,
+            "explicit_read": 1.8,
+            "explicit_write": 1.8,
+            "explicit_write_1h": 1.8,
+            "storage_per_1M_tokens_hour": 1.8
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -310,7 +529,9 @@
         "note": "缓存命中价即 pricing.cached_input（>200K 提示 $0.40，见 pricing_tiers）；官方另收缓存存储费 $4.50 / 百万 token / 小时。"
       },
       "price_schedule": [],
-      "unverified_fields": [],
+      "unverified_fields": [
+        "reasoning_effort.can_disable"
+      ],
       "links": {
         "self": "models/gemini-3.1-pro-preview.json",
         "vendor": "vendors/google.json"

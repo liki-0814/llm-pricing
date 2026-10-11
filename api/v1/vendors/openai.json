@@ -5,6 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e",
     "count": 7
   },
   "vendor": {
@@ -47,6 +48,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -71,6 +88,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
@@ -102,22 +125,82 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -137,7 +220,12 @@
           "output": 20.0,
           "cached_input": 0.4,
           "cache_write": 5.0,
-          "note": "GPT-5.6 Sol 促销价（输入 $4 / 输出 $20，较此前降 20% / 33%）官方称“至少持续到 2026-11-21”；到期后价格官方未公布（待核实）。"
+          "note": "GPT-5.6 Sol 促销价（输入 $4 / 输出 $20，较此前降 20% / 33%）官方称“至少持续到 2026-11-21”；到期后价格官方未公布（待核实）。",
+          "multiplier": null,
+          "cache_pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "unverified_fields": [],
@@ -165,6 +253,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -189,6 +293,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
@@ -220,22 +330,82 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -272,6 +442,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -296,6 +482,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
@@ -327,22 +519,82 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -379,6 +631,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -401,7 +669,13 @@
         ],
         "default": null,
         "can_disable": null,
-        "status": "verified",
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
         "note": "官方模型页列出 reasoning.effort 支持 low/medium/high/xhigh/max；未标注默认档，且未列 none（是否可关闭推理待核实）。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-astra"
@@ -433,27 +707,102 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "ultrafast",
           "multiplier": 6.0,
-          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。"
+          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。",
+          "multipliers": {
+            "input": 6.0,
+            "output": 6.0,
+            "cached_input": 6.0,
+            "cache_write": 6.0,
+            "implicit_read": 6.0,
+            "explicit_read": 6.0,
+            "explicit_write": 6.0,
+            "explicit_write_1h": 6.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -465,7 +814,10 @@
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
       },
       "price_schedule": [],
-      "unverified_fields": [],
+      "unverified_fields": [
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
       "links": {
         "self": "models/gpt-6-astra.json",
         "vendor": "vendors/openai.json"
@@ -490,6 +842,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -514,6 +882,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-sol"
@@ -545,22 +919,82 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -597,6 +1031,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -621,6 +1071,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6-luna"
@@ -652,22 +1108,82 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -704,6 +1220,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -727,6 +1259,12 @@
         "default": "medium",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "reasoning.effort 支持 low/medium(默认)/high/xhigh/max；官方明确不支持 none 与 minimal，推理无法关闭。",
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
@@ -758,27 +1296,102 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。"
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "flex",
           "multiplier": 0.5,
-          "note": "Flex 处理档，官方定价页逐项列出。"
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。"
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "ultrafast",
           "multiplier": 6.0,
-          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。"
+          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。",
+          "multipliers": {
+            "input": 6.0,
+            "output": 6.0,
+            "cached_input": 6.0,
+            "cache_write": 6.0,
+            "implicit_read": 6.0,
+            "explicit_read": 6.0,
+            "explicit_write": 6.0,
+            "explicit_write_1h": 6.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。"
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
         }
       ],
       "cache_pricing": {

@@ -4,7 +4,8 @@
     "updated_at": "2026-10-11",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens"
+    "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e"
   },
   "data": {
     "id": "kimi-k2.7-code",
@@ -25,6 +26,22 @@
       "cached_input": "verified",
       "cache_write": "not_listed"
     },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://platform.kimi.ai/docs/pricing/chat"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
     "has_off_peak": false,
     "off_peak_pricing": null,
     "peak_note": null,
@@ -40,6 +57,12 @@
       "default": null,
       "can_disable": false,
       "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "not_applicable",
+        "default": "not_applicable",
+        "can_disable": "verified"
+      },
       "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
       "sources": [
         "https://platform.kimi.ai/docs/guide/use-thinking-models"
@@ -61,7 +84,22 @@
       {
         "name": "batch",
         "multiplier": 0.6,
-        "note": "Batch API 价为标准价的 60%（官方 BatchJob 定价：K2.7 Code 输入 $0.57 / 缓存命中 $0.114 / 输出 $2.40）。"
+        "note": "Batch API 价为标准价的 60%（官方 BatchJob 定价：K2.7 Code 输入 $0.57 / 缓存命中 $0.114 / 输出 $2.40）。",
+        "multipliers": {
+          "input": 0.6,
+          "output": 0.6,
+          "cached_input": 0.6,
+          "cache_write": 0.6,
+          "implicit_read": 0.6,
+          "explicit_read": 0.6,
+          "explicit_write": 0.6,
+          "explicit_write_1h": 0.6,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {},
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ]
       }
     ],
     "cache_pricing": {

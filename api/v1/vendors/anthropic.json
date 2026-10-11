@@ -5,6 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e",
     "count": 13
   },
   "vendor": {
@@ -53,6 +54,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -74,6 +91,12 @@
         "default": "high",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -95,12 +118,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -137,6 +190,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -158,6 +227,12 @@
         "default": "high",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -179,12 +254,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -221,6 +326,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -242,6 +363,12 @@
         "default": "high",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -263,12 +390,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -305,6 +462,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -326,6 +499,12 @@
         "default": "high",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。自适应思考恒开，thinking 传 disabled/enabled 会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -347,12 +526,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -389,6 +598,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -410,6 +635,12 @@
         "default": "medium",
         "can_disable": false,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。默认 medium（其余多数模型默认 high）；自适应思考恒开，thinking:disabled 在所有档位都会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -431,17 +662,62 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $8 / 输出 $40，约 2×；全上下文窗口适用，不可与 Batch 同用。"
+          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $8 / 输出 $40，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -478,6 +754,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -499,6 +791,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。thinking 默认开启；thinking:{type:disabled} 仅在 effort 为 high 及以下可用，xhigh/max 下会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -520,17 +818,62 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。"
+          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -567,6 +910,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -588,6 +947,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。仅自适应思考（不支持 budget_tokens）；思考默认关闭，需显式设置 thinking:{type:adaptive} 开启。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -609,17 +974,62 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。"
+          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -656,6 +1066,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -677,6 +1103,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。仅自适应思考（不支持 budget_tokens）；思考默认关闭，需显式设置 thinking:{type:adaptive} 开启。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -698,12 +1130,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -740,6 +1202,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -760,6 +1238,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 官方文档列出 max 可用、xhigh 不在支持名单；默认 high。思考默认关闭，支持自适应思考，旧的 budget_tokens（extended thinking）已弃用但仍可用。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -781,12 +1265,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -823,6 +1337,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -844,6 +1374,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。思考默认开启；无 disabled，改用 thinking:{type:between_tools} 关闭前置思考（仅 low/medium/high 档可用，xhigh/max 下 400）。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -865,12 +1401,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -907,6 +1473,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -928,6 +1510,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。思考默认开启；可传 thinking:{type:disabled} 关闭。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -949,12 +1537,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -991,6 +1609,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1011,6 +1645,12 @@
         "default": "high",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 官方文档列出 max 可用、xhigh 不在支持名单；默认 high。思考默认关闭，支持自适应思考，旧的 budget_tokens（extended thinking）已弃用但仍可用。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1032,12 +1672,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。"
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {
@@ -1074,6 +1744,22 @@
         "cached_input": "verified",
         "cache_write": "verified"
       },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
       "has_off_peak": false,
       "off_peak_pricing": null,
       "peak_note": null,
@@ -1097,6 +1783,12 @@
         "default": "medium",
         "can_disable": true,
         "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
         "note": "output_config.effort 支持 low/medium/high/xhigh/max。默认 medium；思考默认开启，thinking:{type:disabled} 仅在 high 及以下可用，xhigh/max 下会 400。",
         "sources": [
           "https://platform.claude.com/docs/en/build-with-claude/effort",
@@ -1137,12 +1829,42 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "Message Batches API：输入、输出均 5 折（≤100K 提示：$0.05 / $0.25；>100K 提示：$0.25 / $1.25）。"
+          "note": "Message Batches API：输入、输出均 5 折（≤100K 提示：$0.05 / $0.25；>100K 提示：$0.25 / $1.25）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         },
         {
           "name": "data_residency",
           "multiplier": 1.1,
-          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。对 Haiku 5.5 的 >100K 高价同样适用。"
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。对 Haiku 5.5 的 >100K 高价同样适用。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
         }
       ],
       "cache_pricing": {

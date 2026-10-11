@@ -4,7 +4,8 @@
     "updated_at": "2026-10-11",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens"
+    "unit_label": "USD per 1M tokens",
+    "data_version": "e7b9cb057c61dc089689384bdc2e3ae9cd2e1bedc90ceeddf57cbc7f5639af1e"
   },
   "data": {
     "id": "kimi-k3",
@@ -25,6 +26,22 @@
       "cached_input": "verified",
       "cache_write": "verified"
     },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://platform.kimi.ai/docs/pricing/chat"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
     "has_off_peak": false,
     "off_peak_pricing": null,
     "peak_note": null,
@@ -44,6 +61,12 @@
       "default": "max",
       "can_disable": false,
       "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      },
       "note": "顶层 reasoning_effort 支持 low/high/max，默认 max；K3 恒开思考，不支持 thinking 参数，无法关闭。",
       "sources": [
         "https://platform.kimi.ai/docs/guide/use-thinking-models",
