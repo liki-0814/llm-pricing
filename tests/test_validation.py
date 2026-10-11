@@ -23,6 +23,14 @@ class ValidationTests(unittest.TestCase):
         self.data['models'][0]['last_updated'] = '2026-02-31'
         self.assertTrue(validate.validate_data(self.data))
 
+    def test_absent_output_cap_is_documented_not_unknown(self):
+        m = self.model('grok-4.7')
+        self.assertEqual(m['limits']['max_output_tokens'], 'n/a')
+        m['limits']['note'] = None
+        self.assertTrue(validate.validate_data(self.data))
+        m['limits']['max_output_tokens'] = 'unlimited'
+        self.assertTrue(validate.validate_data(self.data))
+
     def test_missing_price_marker(self):
         self.model('qwen3.8-omni-flash')['unverified_fields'] = []
         self.assertTrue(validate.validate_data(self.data))

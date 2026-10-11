@@ -23,6 +23,19 @@ test('cache reads/writes replace ordinary input, including 1h writes', () => {
   close(estimate(model('claude-opus-5.5'), usage(1000, 100, {cachedInputTokens: 500, cacheWriteTokens: 100, cacheWrite1hTokens: 100}), opts).total, 0.0046);
   close(estimate(model('qwen3.8-max'), usage(1000, 0, {cachedInputTokens: 1000}), {...opts, cacheType: 'explicit'}).total, 0.00017);
 });
+test('Grok 4.7 inclusive 200k tier, cache, priority and US residency', () => {
+  const m = model('grok-4.7');
+  assert.equal(estimate(m, usage(199999, 1), opts).pricing_tier, 'base');
+  const tier = estimate(m, usage(200000, 10000, {cachedInputTokens: 100000}), opts);
+  close(tier.total, 0.62);
+  assert.equal(tier.pricing_tier, 'input_tokens>199999');
+  close(estimate(m, usage(200000, 10000, {cachedInputTokens: 100000}), {...opts, serviceTier:'priority',dataResidency:true}).total, 1.364);
+  assert.equal(m.limits.max_output_tokens, null);
+  assert.equal(m.limits.status, 'verified');
+  assert.deepEqual(m.unverified_fields, []);
+  code(() => estimate(m, usage(1, 1), {...opts, serviceTier:'batch'}), 'UNSUPPORTED_SERVICE_TIER');
+  code(() => estimate(m, usage(500001, 0), opts), 'LIMIT_EXCEEDED');
+});
 test('per-component service rules and fixed exceptions', () => {
   const lite = model('gemini-3.5-flash-lite');
   close(estimate(lite, usage(1000000, 0, {cachedInputTokens: 1000000}), {...opts, serviceTier:'batch'}).total, 0.02);
@@ -99,9 +112,9 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
   const base=`http://127.0.0.1:${server.address().port}/api/v1/`;
   const client=createClient(base);
   const index=await client.getIndex(), vendors=await client.listVendors(), full=await client.listModels();
-  assert.equal(full.data.length,43);
+  assert.equal(full.data.length,all.data.length);
   assert.equal(index.data.models.length,full.data.length);
-  assert.equal(vendors.data.length,8);
+  assert.equal(vendors.data.length,new Set(all.data.map(m=>m.vendor)).size);
   for(const v of vendors.data) {
     const envelope=await client.getVendor(v.slug);
     assert.deepEqual(envelope.data,full.data.filter(m=>m.vendor===v.slug));
@@ -117,7 +130,7 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
   const spec=await client.getOpenAPI();assert.equal(Object.keys(spec.paths).length,5);
   const staticPaths=new Set(requests);
   const expected=['index.json','models.json','vendors.json','openapi.json',...full.data.map(m=>`models/${m.id}.json`),...vendors.data.map(v=>`vendors/${v.slug}.json`)];
-  assert.equal(expected.length,55);
+  assert.equal(expected.length,4+all.data.length+vendors.data.length);
   assert.deepEqual([...staticPaths].sort(),expected.map(p=>'/api/v1/'+p).sort());
   assert.deepEqual(index.data.models.map(m=>m.id),full.data.map(m=>m.id));
   for (const v of vendors.data) assert.deepEqual(v.model_ids,full.data.filter(m=>m.vendor===v.slug).map(m=>m.id));

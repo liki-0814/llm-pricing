@@ -27,7 +27,7 @@
   // Vendor display name -> slug (same slugs as scripts/build_api.py VENDOR_SLUGS)
   var SLUGS = {
     "DeepSeek": "deepseek", "OpenAI": "openai", "Anthropic": "anthropic", "智谱 Z.ai": "zhipu",
-    "Moonshot Kimi": "moonshot", "阿里云 Qwen": "qwen", "Google Gemini": "google", "MiniMax": "minimax"
+    "Moonshot Kimi": "moonshot", "阿里云 Qwen": "qwen", "Google Gemini": "google", "MiniMax": "minimax", "xAI": "xai"
   };
   function slug(name) {
     return SLUGS[name] || String(name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "other";

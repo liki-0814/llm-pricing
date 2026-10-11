@@ -36,6 +36,7 @@ VENDOR_SLUGS = {
     "阿里云 Qwen": "qwen",
     "Google Gemini": "google",
     "MiniMax": "minimax",
+    "xAI": "xai",
 }
 
 
@@ -63,10 +64,10 @@ SCHEDULE_KINDS = ("promotion", "scheduled_increase", "scheduled_decrease")
 
 
 def limits_obj(m):
-    """data limits -> API object {context_length, max_output_tokens, status, note, sources}. null = 待核实 (never guessed)."""
+    """Numeric limits, or null; source n/a means a documented absent output cap."""
     L = m.get("limits") or {}
-    o = {k: L.get(k) for k in LIMIT_FIELDS}
-    vals = [o[k] for k in LIMIT_FIELDS]
+    o = {k: None if L.get(k) == "n/a" else L.get(k) for k in LIMIT_FIELDS}
+    vals = [L.get(k) for k in LIMIT_FIELDS]
     o["status"] = ("verified" if all(x is not None for x in vals)
                    else "partial" if any(x is not None for x in vals) else "unverified")
     o["note"] = L.get("note")
@@ -315,12 +316,12 @@ def openapi(d, vendor_slugs, model_ids):
             },
             "limits": {
                 "type": "object",
-                "description": "Context window and max output from official pages. null = 待核实 (not verified, never guessed). Official K/M labels are recorded as 1K=1,000 / 1M=1,000,000 unless the page gives exact numbers (see note).",
+                "description": "Official context and output limits. null listed in unverified_fields = unknown; an explicitly absent output cap is also null, documented in note. Official K/M labels use 1K=1,000 / 1M=1,000,000 unless exact numbers are given.",
                 "required": list(LIMIT_FIELDS) + ["status", "note", "sources"],
                 "properties": {
                     "context_length": {"type": ["integer", "null"], "description": "Maximum context window in tokens (same value as top-level context_length)"},
-                    "max_output_tokens": {"type": ["integer", "null"], "description": "Maximum output tokens per request; null = 待核实"},
-                    "status": {"type": "string", "enum": ["verified", "partial", "unverified"], "description": "verified = context_length and max_output_tokens both known; partial = one; unverified = none"},
+                    "max_output_tokens": {"type": ["integer", "null"], "description": "Maximum output tokens per request; null = unknown if listed in unverified_fields, otherwise no separate output cap documented (see note)"},
+                    "status": {"type": "string", "enum": ["verified", "partial", "unverified"], "description": "verified = both limits documented, including an explicitly absent output cap; partial = one; unverified = none"},
                     "note": {"type": ["string", "null"]},
                     "sources": {"type": "array", "items": {"type": "string", "format": "uri"}},
                 },

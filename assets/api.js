@@ -167,7 +167,11 @@
       if ($("costHoliday").value) options.isChineseHoliday = $("costHoliday").value === "true";
       if ($("costCacheType").value) options.cacheType = $("costCacheType").value;
       var estimate = LLMPrice.estimate(costData, usage, options);
-      $("costStatus").textContent = "估算 " + estimate.total.toFixed(6) + " USD · " + estimate.pricing_tier + " · " + estimate.period;
+      var tier = costData.pricing_tiers.find(function (t) { return t.condition === estimate.pricing_tier; });
+      var tierLabel = tier ? "输入 ≥ " + (tier.input_tokens_gt + 1).toLocaleString("en-US") +
+        (tier.input_tokens_lte === null ? "" : " 且 ≤ " + tier.input_tokens_lte.toLocaleString("en-US")) + " tokens" : "基础档";
+      var periodLabel = {standard:"标准计费",peak:"高峰时段",off_peak:"闲时时段"}[estimate.period];
+      $("costStatus").textContent = "估算 " + estimate.total.toFixed(6) + " USD · " + tierLabel + " · " + periodLabel;
       $("costOut").textContent = JSON.stringify(estimate, null, 2);
     } catch (e) {
       var messages = {PRICE_UNAVAILABLE:"所用费用项没有可核实的价格",HOLIDAY_REQUIRED:"高峰时段需确认是否为中国法定节假日",TIME_REQUIRED:"请填写带时区的完整时间",PRICE_EXPIRED:"促销已超出已确认期限，需复核",HISTORICAL_PRICE_UNAVAILABLE:"本快照不含更早的历史价格",LIMIT_EXCEEDED:"输入或输出超过已记录的上限",INVALID_ARGUMENT:"输入参数不正确"};

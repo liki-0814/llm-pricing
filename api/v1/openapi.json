@@ -119,7 +119,8 @@
                 "gemini-3.1-pro-preview",
                 "minimax-m3",
                 "minimax-m3.1-flash-preview",
-                "kimi-for-coding"
+                "kimi-for-coding",
+                "grok-4.7"
               ]
             }
           }
@@ -181,7 +182,8 @@
                 "moonshot",
                 "qwen",
                 "google",
-                "minimax"
+                "minimax",
+                "xai"
               ]
             }
           }
@@ -305,7 +307,8 @@
               "moonshot",
               "qwen",
               "google",
-              "minimax"
+              "minimax",
+              "xai"
             ]
           },
           "vendor_name": {
@@ -613,7 +616,7 @@
           },
           "limits": {
             "type": "object",
-            "description": "Context window and max output from official pages. null = 待核实 (not verified, never guessed). Official K/M labels are recorded as 1K=1,000 / 1M=1,000,000 unless the page gives exact numbers (see note).",
+            "description": "Official context and output limits. null listed in unverified_fields = unknown; an explicitly absent output cap is also null, documented in note. Official K/M labels use 1K=1,000 / 1M=1,000,000 unless exact numbers are given.",
             "required": [
               "context_length",
               "max_output_tokens",
@@ -634,7 +637,7 @@
                   "integer",
                   "null"
                 ],
-                "description": "Maximum output tokens per request; null = 待核实"
+                "description": "Maximum output tokens per request; null = unknown if listed in unverified_fields, otherwise no separate output cap documented (see note)"
               },
               "status": {
                 "type": "string",
@@ -643,7 +646,7 @@
                   "partial",
                   "unverified"
                 ],
-                "description": "verified = context_length and max_output_tokens both known; partial = one; unverified = none"
+                "description": "verified = both limits documented, including an explicitly absent output cap; partial = one; unverified = none"
               },
               "note": {
                 "type": [
@@ -1282,7 +1285,8 @@
               "moonshot",
               "qwen",
               "google",
-              "minimax"
+              "minimax",
+              "xai"
             ]
           },
           "name": {
@@ -1553,7 +1557,8 @@
                         "moonshot",
                         "qwen",
                         "google",
-                        "minimax"
+                        "minimax",
+                        "xai"
                       ]
                     },
                     "links": {
@@ -1592,7 +1597,8 @@
                         "moonshot",
                         "qwen",
                         "google",
-                        "minimax"
+                        "minimax",
+                        "xai"
                       ]
                     },
                     "name": {

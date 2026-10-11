@@ -76,6 +76,7 @@
   }
   function outCell(m) {
     var L = m.limits || {};
+    if (L.max_output_tokens === "n/a") return '<span class="tokv" title="' + esc(L.note || "") + '">无独立上限</span>';
     return tokSpan(L.max_output_tokens);
   }
   function ctxCell(m) {
@@ -83,9 +84,10 @@
     return tokSpan(n);
   }
   function tierCond(t) {
-    var a = fmtTok(t.input_tokens_gt), b = fmtTok(t.input_tokens_lte);
+    var a = isNum(t.input_tokens_gt) ? (t.input_tokens_gt + 1).toLocaleString("en-US") : null;
+    var b = isNum(t.input_tokens_lte) ? t.input_tokens_lte.toLocaleString("en-US") : null;
     if (a && b) return a + " – " + b + " 输入";
-    if (a) return "&gt; " + a + " 输入";
+    if (a) return "≥ " + a + " 输入";
     return esc(t.condition);
   }
   function pcell(v) { return isNum(v) ? '<span class="price">' + money(v) + "</span>" : '<span class="na" title="官方未列出该档价格">—</span>'; }
@@ -116,6 +118,7 @@
       sv.forEach(function (t) {
         var rules = [];
         ["cached_input", "cache_write"].forEach(function (k) {
+          if (m[k] === "n/a" && !Object.prototype.hasOwnProperty.call(t.pricing || {}, k)) return;
           if (t.pricing && Object.prototype.hasOwnProperty.call(t.pricing, k))
             rules.push((k === "cached_input" ? "缓存读单价 " : "缓存写单价 ") + pcell(t.pricing[k]));
           else if (t.multipliers && t.multipliers[k] !== t.multiplier)

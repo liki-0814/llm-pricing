@@ -15,6 +15,7 @@
 | `peak_note` | 高峰/闲时说明文字 |
 | `offpeak` | 可选，`{input, output, cached_input}`，闲时价；此时主价格字段写高峰价 |
 | `context_length` / `context_tokens` | 显示文本 / 排序用数字；未知两者均为 `null` |
+| `limits.max_output_tokens` | 数字为官方独立输出上限；`null` 为待核实；源数据 `"n/a"` 专用于官方明确无独立输出上限，必须有 note 和 sources。接口转换成 null，但不列为待核实，页面显示“无独立上限” |
 | `source_url` | **必填**，主要官方来源 URL；完整价格依据见 `price_basis` |
 | `extra_sources` | 其他官方来源（如上下文长度来源） |
 | `last_updated` | 该模型最后核实日期 `YYYY-MM-DD` |
@@ -27,7 +28,7 @@
 1. 打开每个模型的 `source_url`，逐项对照价格；有变动就改数字，并把该条 `last_updated` 改为今天。
 2. 新增模型：复制一条已有记录，改 `id`（唯一）和各字段。下架旧模型：直接删除该条（本站只收录最新模型）。
 3. 修改 `meta.last_updated`（页面顶部显示的“数据更新日期”）。
-4. 重新生成接口：`python3 scripts/build_api.py`（生成 `api/v1/`；新增厂商需先在该脚本 `VENDOR_SLUGS` 中加 slug）。
+4. 重新生成接口：`python3 scripts/build_api.py`（生成 `api/v1/`；新增厂商需先在该脚本 `VENDOR_SLUGS` 和 `assets/common.js` 中加 slug）。
 5. 按根目录 README 创建虚拟环境、安装开发依赖，运行 `.venv/bin/python scripts/validate.py` 和回归测试（会打印待核实字段，并检查接口是否同步）。
 6. 本地预览：`python3 -m http.server 8000`，打开 http://localhost:8000 。
 7. 提交并推送（包括 `api/` 目录），GitHub Pages 会自动更新。
@@ -53,6 +54,7 @@
 - 阿里云 Qwen: https://www.alibabacloud.com/help/en/model-studio/model-pricing
 - Google Gemini: https://ai.google.dev/gemini-api/docs/pricing
 - MiniMax: https://platform.minimax.io/docs/guides/pricing-paygo
+- xAI Grok 4.7: https://docs.x.ai/developers/grok-4-7 、https://docs.x.ai/developers/pricing 、https://docs.x.ai/developers/model-capabilities/text/reasoning
 
 ## 价格依据、计算与校验补充
 
@@ -64,6 +66,8 @@
 
 价格生效事件补全 `multiplier`（无整体折扣为 null）、`cache_pricing`（存储与缓存例外，无则空对象）、`sources`。分档条件必须精确对应结构化上下界，各区间不能重叠或断开。日期必须是真实日期，不能用过期促销冒充当前已核实价。
 
-`unverified_fields` 精确列出基础价格、limits 和 reasoning_effort 的未核实字段路径；不能漏标或多标。不可调推理的 levels/default 为不适用，不列为待核实。状态由生成器派生，勿手写 API 状态。
+`unverified_fields` 精确列出基础价格、limits 和 reasoning_effort 的未核实字段路径；不能漏标或多标。不可调推理的 levels/default 为不适用；官方明确无独立输出上限的源值 n/a 也不列为待核实。状态由生成器派生，勿手写 API 状态。
+
+Grok 4.7 定价表采用 ≥200,000 输入 tokens 的长上下文边界。现有分档字段为开区间 `input_tokens_gt`，整数 token 用 199999 表达，condition 必须为 `input_tokens>199999`；不可以写成 >200000。计费以官方价格表为据，model detail 页的简略文字另见 notes。发布后的双客户端全接口检查见根 README 的 `scripts/check_live.cjs`。
 
 运行生成、校验、Python 回归测试和 Node HTTP/计费测试的完整命令见根目录 README；GitHub Actions 使用同一流程。每次修改后需同时提交源数据和生成 JSON，`meta.data_version` 自动由内容生成，不需手动填写。

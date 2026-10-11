@@ -42,6 +42,9 @@ def source_schema(d):
             props[name]['properties'].pop(field, None)
             if field in props[name]['required']:
                 props[name]['required'].remove(field)
+    props['limits']['properties']['max_output_tokens']['type'] = ['integer', 'null', 'string']
+    props['limits']['properties']['max_output_tokens']['anyOf'] = [
+        {'type': ['integer', 'null']}, {'const': 'n/a'}]
     props['unverified_fields']['uniqueItems'] = True
     schema['required'] = [k for k in props if k != 'offpeak']
     schema['components'] = spec['components']
@@ -117,7 +120,9 @@ def validate_data(d):
         if (m['context_tokens'] is None) != (m['context_length'] is None):
             fail(where, 'context label and numeric value must both be null or present')
         L = m['limits']
-        if L['max_output_tokens'] is not None and L['context_length'] is not None and L['max_output_tokens'] > L['context_length']:
+        if L['max_output_tokens'] == 'n/a' and (not L['note'] or not L['sources']):
+            fail(where, 'documented absent output cap requires note and sources')
+        if numeric(L['max_output_tokens']) and L['context_length'] is not None and L['max_output_tokens'] > L['context_length']:
             fail(where, 'max output exceeds context')
         r = m['reasoning_effort']
         if r['supported'] is None and (r['levels'] is not None or r['default'] is not None):

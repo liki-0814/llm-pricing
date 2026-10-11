@@ -1,0 +1,190 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-11",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "data_version": "7bdd6a56ba31bcaa84204c20222aa52834814db38395c66f5c4506186861a5eb",
+    "count": 1
+  },
+  "vendor": {
+    "slug": "xai",
+    "name": "xAI",
+    "model_count": 1,
+    "model_ids": [
+      "grok-4.7"
+    ],
+    "source_urls": [
+      "https://docs.x.ai/developers/pricing"
+    ],
+    "links": {
+      "self": "vendors/xai.json"
+    }
+  },
+  "data": [
+    {
+      "id": "grok-4.7",
+      "name": "Grok 4.7",
+      "vendor": "xai",
+      "vendor_name": "xAI",
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 6.0,
+        "cached_input": 0.5,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://docs.x.ai/developers/pricing",
+          "https://docs.x.ai/developers/grok-4-7"
+        ],
+        "note": "全球公共 API 官方美元按量报价；主价格为短上下文价，长上下文、Priority 与美国区域价见结构化规则。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "global",
+        "cached_input_type": "implicit",
+        "note": "outputTokens 包含计费推理 token；缓存为自动前缀缓存。dataResidency=true 表示采用美国区域加价。工具调用另计，未包含在估算中。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 500000,
+      "context_length_label": "500,000 tokens",
+      "source_url": "https://docs.x.ai/developers/pricing",
+      "extra_sources": [
+        "https://docs.x.ai/developers/grok-4-7",
+        "https://docs.x.ai/developers/models/grok-4.7",
+        "https://docs.x.ai/developers/model-capabilities/text/reasoning",
+        "https://docs.x.ai/developers/advanced-api-usage/prompt-caching",
+        "https://docs.x.ai/developers/advanced-api-usage/regions",
+        "https://docs.x.ai/developers/advanced-api-usage/priority-processing"
+      ],
+      "last_updated": "2026-10-11",
+      "notes": "公共 xAI API 模型 ID：grok-4.7。全球接口 https://api.x.ai/v1；输入达到 200,000 tokens（含缓存）后，整次请求使用长上下文单价。美国区域接口 https://us.api.x.ai/v1 加价 10%；Priority 仅在响应确认 priority 时按 2 倍计价。Batch 当前不支持；Grok 4.7 Fast 仅在 Cursor/Grok Build 提供，未作为公共 API 模型收录。工具费用不在本表范围内。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh"
+        ],
+        "default": "high",
+        "can_disable": false,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "reasoning_effort 支持 low/medium/high/xhigh，默认 high；推理不能关闭。",
+        "sources": [
+          "https://docs.x.ai/developers/model-capabilities/text/reasoning",
+          "https://docs.x.ai/developers/grok-4-7"
+        ]
+      },
+      "limits": {
+        "context_length": 500000,
+        "max_output_tokens": null,
+        "status": "verified",
+        "note": "官方指南：上下文窗口 500,000 tokens；No text output limit（无独立文本输出上限，不代表上下文窗口无限）。",
+        "sources": [
+          "https://docs.x.ai/developers/grok-4-7"
+        ]
+      },
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>199999",
+          "input_tokens_gt": 199999,
+          "input_tokens_lte": null,
+          "input": 4.0,
+          "output": 12.0,
+          "cached_input": 1.0,
+          "cache_write": null,
+          "cache_pricing": {
+            "implicit_read": 1.0,
+            "explicit_read": null,
+            "explicit_write": null,
+            "explicit_write_1h": null,
+            "storage_per_1M_tokens_hour": null,
+            "note": "自动前缀缓存命中价；官方未单列缓存写入或存储价格。"
+          },
+          "note": "官方定价表阈值为 ≥200,000 输入 tokens（含缓存）；输入、缓存与输出均使用长上下文价。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "priority",
+          "multiplier": 2.0,
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": null,
+            "implicit_read": 2.0,
+            "explicit_read": null,
+            "explicit_write": null,
+            "explicit_write_1h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "note": "响应 service_tier 为 priority 时，输入、输出、缓存与推理 token 单价均为标准档的 2 倍；降回 default 则使用标准价。",
+          "sources": [
+            "https://docs.x.ai/developers/pricing",
+            "https://docs.x.ai/developers/advanced-api-usage/priority-processing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": null,
+            "implicit_read": 1.1,
+            "explicit_read": null,
+            "explicit_write": null,
+            "explicit_write_1h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "note": "仅美国区域接口 https://us.api.x.ai/v1：输入、缓存、输出 token 加价 10%，包括长上下文价。",
+          "sources": [
+            "https://docs.x.ai/developers/pricing",
+            "https://docs.x.ai/developers/advanced-api-usage/regions"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": 0.5,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "自动前缀缓存命中价；官方未单列缓存写入或存储价格。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/grok-4.7.json",
+        "vendor": "vendors/xai.json"
+      }
+    }
+  ]
+}
