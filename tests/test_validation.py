@@ -60,6 +60,19 @@ class ValidationTests(unittest.TestCase):
         m['price_basis']['reference_model_id'] = 'kimi-k2.7-code'; m['input'] = 100
         self.assertTrue(validate.validate_data(self.data))
 
+    def test_documented_reference_multiplier_is_required_and_valid(self):
+        m = self.model('grok-4.7-build-fast')
+        self.assertEqual(m['price_basis']['reference_multiplier'], 2)
+        self.assertEqual(validate.validate_data(self.data), [])
+        del m['price_basis']['reference_multiplier']
+        self.assertTrue(validate.validate_data(self.data))
+        for bad in (0, -1, True, '2', float('inf'), 1.5):
+            m['price_basis']['reference_multiplier'] = bad
+            self.assertTrue(validate.validate_data(self.data), repr(bad))
+        m['price_basis']['reference_multiplier'] = 2
+        self.model('grok-4.7')['price_basis']['reference_multiplier'] = 1
+        self.assertTrue(validate.validate_data(self.data))
+
     def test_wrong_response_status_and_type_rejected(self):
         files = build_api.build(self.data)
         files['models.json']['data'][0]['pricing_status']['input'] = 'fake'

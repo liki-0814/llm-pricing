@@ -80,12 +80,21 @@ async function main() {
   const estimate=await client.estimate('grok-4.7',{inputTokens:200000,outputTokens:10000,cachedInputTokens:100000},
     {at:'2026-10-11',serviceTier:'priority',dataResidency:true});
   assert.ok(Math.abs(estimate.total-1.364)<1e-10);
+  const fast=await client.getModel('grok-4.7-build-fast');
+  assert.equal(fast.data.billing.channel,'subscription');
+  assert.equal(fast.data.price_basis.type,'reference');
+  assert.equal(fast.data.pricing_status.input,'reference');
+  const fastEstimate=await client.estimate('grok-4.7-build-fast',
+    {inputTokens:200001,outputTokens:10000,cachedInputTokens:100000},{at:'2026-10-11'});
+  assert.ok(Math.abs(fastEstimate.total-0.930006)<1e-10);
+  assert.ok(fastEstimate.warnings.some(w=>w.includes('not the subscription bill')));
   const report={checked_at:new Date().toISOString(),base_url:base.href,node_version:process.version,
     dns_mode:doh?'explicit HTTPS DNS; default TLS verification':'system DNS',
     count:rows.length,rows:rows.sort((a,b)=>a.file.localeCompare(b.file)),negative_checks:negatives,
-    grok_query:search.data[0].id,grok_estimate:estimate};
+    grok_query:search.data[0].id,grok_estimate:estimate,build_fast_estimate:fastEstimate};
   if(output) fs.writeFileSync(output,JSON.stringify(report,null,2)+'\n');
   console.log(JSON.stringify({count:report.count,curl:'all passed',node_client:'all passed',
-    negative_checks:'passed',grok_estimate:estimate.total,data_version:search.meta.data_version,output},null,2));
+    negative_checks:'passed',grok_estimate:estimate.total,build_fast_reference_estimate:fastEstimate.total,
+    data_version:search.meta.data_version,output},null,2));
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});

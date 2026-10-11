@@ -120,7 +120,8 @@
                 "minimax-m3",
                 "minimax-m3.1-flash-preview",
                 "kimi-for-coding",
-                "grok-4.7"
+                "grok-4.7",
+                "grok-4.7-build-fast"
               ]
             }
           }
@@ -1131,6 +1132,11 @@
               "note": {
                 "type": "string",
                 "minLength": 1
+              },
+              "reference_multiplier": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "description": "Documented multiplier of reference model base prices; omitted means 1. Tier prices are already expanded, not multiplied again."
               }
             },
             "required": [

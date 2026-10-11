@@ -5,8 +5,8 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "7bdd6a56ba31bcaa84204c20222aa52834814db38395c66f5c4506186861a5eb",
-    "count": 44
+    "data_version": "0d361f99de555bfc1d0cbea316320444b4d3fbe1c0d45a27b6b56ff2957946cb",
+    "count": 45
   },
   "data": {
     "endpoints": {
@@ -408,6 +408,15 @@
         "vendor": "xai",
         "links": {
           "self": "models/grok-4.7.json",
+          "vendor": "vendors/xai.json"
+        }
+      },
+      {
+        "id": "grok-4.7-build-fast",
+        "name": "Grok 4.7 Build Fast",
+        "vendor": "xai",
+        "links": {
+          "self": "models/grok-4.7-build-fast.json",
           "vendor": "vendors/xai.json"
         }
       }

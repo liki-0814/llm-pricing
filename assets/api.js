@@ -171,7 +171,9 @@
       var tierLabel = tier ? "输入 ≥ " + (tier.input_tokens_gt + 1).toLocaleString("en-US") +
         (tier.input_tokens_lte === null ? "" : " 且 ≤ " + tier.input_tokens_lte.toLocaleString("en-US")) + " tokens" : "基础档";
       var periodLabel = {standard:"标准计费",peak:"高峰时段",off_peak:"闲时时段"}[estimate.period];
-      $("costStatus").textContent = "估算 " + estimate.total.toFixed(6) + " USD · " + tierLabel + " · " + periodLabel;
+      $("costStatus").textContent = (estimate.price_basis.type === "reference" ? "参照估算 " : "估算 ") +
+        estimate.total.toFixed(6) + " USD · " + tierLabel + " · " + periodLabel +
+        (estimate.price_basis.type === "reference" ? " · 不代表订阅实际扣费" : "");
       $("costOut").textContent = JSON.stringify(estimate, null, 2);
     } catch (e) {
       var messages = {PRICE_UNAVAILABLE:"所用费用项没有可核实的价格",HOLIDAY_REQUIRED:"高峰时段需确认是否为中国法定节假日",TIME_REQUIRED:"请填写带时区的完整时间",PRICE_EXPIRED:"促销已超出已确认期限，需复核",HISTORICAL_PRICE_UNAVAILABLE:"本快照不含更早的历史价格",LIMIT_EXCEEDED:"输入或输出超过已记录的上限",INVALID_ARGUMENT:"输入参数不正确"};

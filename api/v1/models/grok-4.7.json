@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "7bdd6a56ba31bcaa84204c20222aa52834814db38395c66f5c4506186861a5eb"
+    "data_version": "0d361f99de555bfc1d0cbea316320444b4d3fbe1c0d45a27b6b56ff2957946cb"
   },
   "data": {
     "id": "grok-4.7",
@@ -33,7 +33,7 @@
         "https://docs.x.ai/developers/pricing",
         "https://docs.x.ai/developers/grok-4-7"
       ],
-      "note": "全球公共 API 官方美元按量报价；主价格为短上下文价，长上下文、Priority 与美国区域价见结构化规则。"
+      "note": "全球公共 API 官方美元按量报价；主价格为短上下文价，长上下文、Priority 与美国区域价见结构化规则。 价格核对自官方定价文档。"
     },
     "billing": {
       "channel": "pay_as_you_go",
@@ -55,10 +55,11 @@
       "https://docs.x.ai/developers/model-capabilities/text/reasoning",
       "https://docs.x.ai/developers/advanced-api-usage/prompt-caching",
       "https://docs.x.ai/developers/advanced-api-usage/regions",
-      "https://docs.x.ai/developers/advanced-api-usage/priority-processing"
+      "https://docs.x.ai/developers/advanced-api-usage/priority-processing",
+      "https://docs.x.ai/developers/rest-api-reference/inference/models"
     ],
     "last_updated": "2026-10-11",
-    "notes": "公共 xAI API 模型 ID：grok-4.7。全球接口 https://api.x.ai/v1；输入达到 200,000 tokens（含缓存）后，整次请求使用长上下文单价。美国区域接口 https://us.api.x.ai/v1 加价 10%；Priority 仅在响应确认 priority 时按 2 倍计价。Batch 当前不支持；Grok 4.7 Fast 仅在 Cursor/Grok Build 提供，未作为公共 API 模型收录。工具费用不在本表范围内。",
+    "notes": "公共 xAI API 模型 ID：grok-4.7。全球接口 https://api.x.ai/v1；输入达到 200,000 tokens（含缓存）后，整次请求使用长上下文单价。美国区域接口 https://us.api.x.ai/v1 加价 10%；Priority 仅在响应确认 priority 时按 2 倍计价。Batch 当前不支持；Grok 4.7 Fast 仅在 Cursor/Grok Build 提供，未作为公共 API 模型收录。工具费用不在本表范围内。 Grok Build 同名模型的渠道默认上下文为 256,000、可选 500,000；本条 500,000 为公共 API 文档口径。",
     "reasoning_effort": {
       "supported": true,
       "levels": [

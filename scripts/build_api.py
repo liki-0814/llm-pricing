@@ -202,6 +202,9 @@ def extend_schemas(model, cache_pricing, price):
     model["properties"]["price_basis"] = obj({
         "type": {"enum": ["official", "reference"]}, "reference_model_id": nullable,
         "sources": urls, "note": note})
+    model["properties"]["price_basis"]["properties"]["reference_multiplier"] = {
+        "type": "number", "exclusiveMinimum": 0,
+        "description": "Documented multiplier of reference model base prices; omitted means 1. Tier prices are already expanded, not multiplied again."}
     model["properties"]["billing"] = obj({
         "channel": {"enum": ["pay_as_you_go", "subscription"]},
         "price_type": {"enum": ["current", "list", "reference"]}, "region": nullable,

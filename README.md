@@ -2,7 +2,7 @@
 
 中文静态站点，直接部署到 GitHub Pages；运行时只有 HTML、CSS 和 JavaScript，无后端、数据库或第三方运行依赖。
 
-覆盖 9 个厂商、44 个模型，统一美元 / 每百万 token；缓存存储另按百万 token·小时计价。价格表支持主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
+覆盖 9 个厂商、45 个模型，统一美元 / 每百万 token；缓存存储另按百万 token·小时计价。价格表支持主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
 
 ## 本地预览
 
@@ -95,6 +95,8 @@ node scripts/check_live.cjs --doh \
 
 该命令用 curl 和 Node 客户端逐一查询本地快照对应的全部线上 JSON 路径，核对 HTTP 状态、JSON 类型、实际内容与版本；再验证未知模型/厂商的 404、Grok 筛选和费用计算。内容不一致或请求失败时退出码非零。它属于发布后的人工检查，CI 保留不依赖外部站点的本地检查。
 
+DNS 方式需要按域名判断：2026-10-11 本机查询 xAI 官方价格接口 `https://api.x.ai/v1/language-models/grok-4.7` 时，普通 curl 和 Node fetch 均成功连接并返回 HTTP 401（没有 API Key）；强制 DoH 公网路径则在 TLS 阶段连接被重置。因此 xAI 使用默认系统 DNS，不复用 Pages 的 DoH 设置。这证明 xAI 的默认路径可连通，没有取得认证后的价格返回；本仓库 Grok 价格按官方定价文档核对。
+
 ## 费用计算口径
 
 `inputTokens` 为总输入，包含缓存读取、缓存创建和 1 小时 TTL 创建的 token；这些部分会从普通输入中扣除，不能重复计费。`outputTokens` 包含供应商计费的思考 token。可选用量：`cachedInputTokens`、`cacheWriteTokens`、`cacheWrite1hTokens`、`storageTokenHours`（token 数乘存储小时数）。
@@ -116,6 +118,7 @@ const r = await api.estimate('gemini-3.5-flash-lite', {
 - 缺失且实际使用的价格报错，不当作零；未使用的未知费用项不影响计算。未提供最大输出时不猜上限。
 - 参照价返回 `price_basis` 和订阅提示，仅作成本参考，不代表会员额度或实际账单。
 - Grok 4.7 的长上下文价从总输入 **200,000** tokens 开始（含缓存），整次请求输入/缓存/输出价为 4/1/12 美元；短上下文为 2/0.5/6。Priority ×2、美国区域 ×1.1；只有响应确认 Priority 才采用其倍率。
+- `grok-4.7-build-fast` 单独收录为 **Grok Build 订阅参照价**，不代表实际扣费或会员额度。官方 Fast 表的输入/缓存/输出参照价为 4/1/12；总输入 **超过 200,000** 时为 6/1.5/18 美元。单价已展开，不再乘参照倍率，不套用公共 API Priority/美国区域加价。Build 模型列表实查没有价格字段，默认上下文为 256,000、可选 500,000；本站按渠道默认值校验，独立输出上限和能否关闭推理待核实。
 - 返回 `total`、`breakdown`、`unit_prices`、分档、时段、依据和 warnings。范围为记录内的 token 与缓存费用，排除工具、税费、未收录的多模态费率和订阅额度结算。
 
 ## 数据范围与状态
@@ -125,7 +128,7 @@ const r = await api.estimate('gemini-3.5-flash-lite', {
 模型字段仍限于价格、推理强度、上下文与最大输出、分档、服务档、缓存、生效日期及来源。未恢复最大输入、思考子上限、模态、功能、知识截止、思考预算、可用性、快照和别名。新增的 `price_basis`、`billing`、`off_peak_schedule` 只表达价格依据和计费口径。
 
 - `pricing_status`：verified 官方价；reference 用户确认参照价；unverified 待核实；not_listed 官方未列。
-- `price_basis`：official/reference，参照模型 ID、来源 URL 与说明。原参照数值保留。
+- `price_basis`：official/reference，参照模型 ID、来源 URL 与说明。可选 `reference_multiplier` 表示基础档相对参照模型的已公布倍率，省略为 1；单价已经展开，分档使用 `pricing_tiers` 中的单价，计算时不再乘此值。原参照数值保留。
 - `billing`：按量/订阅渠道、current/list/reference 主价格类型、已记录地区、主缓存读取类型。
 - `reasoning_effort.field_status`：verified/unverified/not_applicable；不可调模型的档位与默认值为不适用，未说明的关闭选项为待核实，整体状态据此派生。
 - `limits.max_output_tokens`：数值为独立输出上限；`null` 且出现在 `unverified_fields` 为待核实，否则表示官方明确无独立输出上限（见 note）。上下文窗口仍有记录的上限。

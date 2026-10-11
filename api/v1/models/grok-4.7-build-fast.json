@@ -1,0 +1,130 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-11",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "data_version": "0d361f99de555bfc1d0cbea316320444b4d3fbe1c0d45a27b6b56ff2957946cb"
+  },
+  "data": {
+    "id": "grok-4.7-build-fast",
+    "name": "Grok 4.7 Build Fast",
+    "vendor": "xai",
+    "vendor_name": "xAI",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 4,
+      "output": 12,
+      "cached_input": 1,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "reference",
+      "output": "reference",
+      "cached_input": "reference",
+      "cache_write": "not_listed"
+    },
+    "price_basis": {
+      "type": "reference",
+      "reference_model_id": "grok-4.7",
+      "reference_multiplier": 2,
+      "sources": [
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/grok-4-7"
+      ],
+      "note": "Grok Build 订阅渠道参照价：采用官方 Fast 价格表，短上下文为公共 Grok 4.7 基础价 ×2（输入/缓存/输出 4/1/12 USD per 1M tokens）；总输入 >200,000 时为公共长上下文价 ×1.5（6/1.5/18）。数据中已展开单价，不再叠加倍率。不是公共 xAI API 模型报价；不代表订阅实际扣费、会员额度消耗或账单。"
+    },
+    "billing": {
+      "channel": "subscription",
+      "price_type": "reference",
+      "region": null,
+      "cached_input_type": "implicit",
+      "note": "通过 Grok Build 订阅计划计费；免费层不含 Fast。cli-chat-proxy.grok.com 的模型列表实际返回此 ID，但没有价格字段。此处只作参照估算，实际会员权益、额度和扣费以订阅渠道账单为准；不套用公共 API Priority 或美国区域加价。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 256000,
+    "context_length_label": "256,000 tokens（Grok Build 默认；可选 500,000）",
+    "source_url": "https://docs.x.ai/developers/pricing",
+    "extra_sources": [
+      "https://docs.x.ai/developers/grok-4-7",
+      "https://cli-chat-proxy.grok.com/v1/models"
+    ],
+    "last_updated": "2026-10-11",
+    "notes": "订阅渠道模型 ID 为 grok-4.7-build-fast（2026-10-11 上游模型列表实查 HTTP 200）。官方 Fast 价格表仅供订阅成本参照；不在公共 xAI API 上提供，不代表会员额度或实际扣费。短上下文输入/缓存/输出 4/1/12，总输入 >200,000 后 6/1.5/18 USD per 1M tokens。渠道默认上下文 256,000，可选 500,000；独立输出上限和能否关闭推理待核实。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "default": "high",
+      "can_disable": null,
+      "status": "partial",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "unverified"
+      },
+      "note": "2026-10-11 实查 Grok Build 模型列表：支持 low/medium/high/xhigh，默认 high；未返回能否关闭推理的独立字段，该订阅渠道能力标为待核实。",
+      "sources": [
+        "https://cli-chat-proxy.grok.com/v1/models"
+      ]
+    },
+    "limits": {
+      "context_length": 256000,
+      "max_output_tokens": null,
+      "status": "partial",
+      "note": "2026-10-11 实查 Grok Build 模型列表：context_window=256000，context_windows=[256000,500000]。本站记录渠道默认值；选择 500000 属于渠道配置，未自动作为默认上限。上游未返回独立最大输出字段，标为待核实，不借用公共 API 的无独立上限说明。",
+      "sources": [
+        "https://cli-chat-proxy.grok.com/v1/models",
+        "https://docs.x.ai/developers/grok-4-7"
+      ]
+    },
+    "pricing_tiers": [
+      {
+        "condition": "input_tokens>200000",
+        "input_tokens_gt": 200000,
+        "input_tokens_lte": null,
+        "input": 6,
+        "output": 18,
+        "cached_input": 1.5,
+        "cache_write": null,
+        "cache_pricing": {
+          "implicit_read": 1.5,
+          "explicit_read": null,
+          "explicit_write": null,
+          "explicit_write_1h": null,
+          "storage_per_1M_tokens_hour": null,
+          "note": "Grok Build Fast 长上下文缓存参照价；不代表订阅实际扣费。"
+        },
+        "note": "Fast 官方定价说明使用 prompt exceeds 200k，按总输入 >200,000（含缓存）记录，区别于公共 API 的 ≥200,000。整次请求使用输入/缓存/输出 6/1.5/18 参照价，实际扣费以渠道账单为准。"
+      }
+    ],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": 1,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "官方 Fast 表列 cached input 参照价；按同一 Grok 4.7 模型的隐式缓存读取口径估算。订阅模型列表不提供实际缓存扣费，未列出独立写入及存储价。"
+    },
+    "price_schedule": [],
+    "unverified_fields": [
+      "limits.max_output_tokens",
+      "reasoning_effort.can_disable"
+    ],
+    "links": {
+      "self": "models/grok-4.7-build-fast.json",
+      "vendor": "vendors/xai.json"
+    }
+  }
+}

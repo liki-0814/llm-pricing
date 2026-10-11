@@ -36,6 +36,26 @@ test('Grok 4.7 inclusive 200k tier, cache, priority and US residency', () => {
   code(() => estimate(m, usage(1, 1), {...opts, serviceTier:'batch'}), 'UNSUPPORTED_SERVICE_TIER');
   code(() => estimate(m, usage(500001, 0), opts), 'LIMIT_EXCEEDED');
 });
+test('Build Fast is a subscription reference, with its own 200k boundary', () => {
+  const m = model('grok-4.7-build-fast');
+  const short = estimate(m, usage(200000,10000,{cachedInputTokens:100000}), opts);
+  close(short.total, 0.62);
+  assert.equal(short.pricing_tier, 'base');
+  const long = estimate(m, usage(200001,10000,{cachedInputTokens:100000}), opts);
+  close(long.total, 0.930006);
+  assert.equal(long.pricing_tier, 'input_tokens>200000');
+  assert.equal(long.price_basis.type, 'reference');
+  assert.equal(long.price_basis.reference_multiplier, 2);
+  assert.equal(long.billing.channel, 'subscription');
+  assert.ok(long.warnings.some(w => w.includes('not the subscription bill')));
+  assert.equal(m.pricing_status.input, 'reference');
+  assert.equal(m.limits.context_length, 256000);
+  assert.equal(m.limits.status, 'partial');
+  assert.equal(m.reasoning_effort.field_status.can_disable, 'unverified');
+  code(() => estimate(m,usage(256001,0),opts), 'LIMIT_EXCEEDED');
+  code(() => estimate(m,usage(1,1),{...opts,serviceTier:'priority'}), 'UNSUPPORTED_SERVICE_TIER');
+  code(() => estimate(m,usage(1,1),{...opts,dataResidency:true}), 'UNSUPPORTED_SERVICE_TIER');
+});
 test('per-component service rules and fixed exceptions', () => {
   const lite = model('gemini-3.5-flash-lite');
   close(estimate(lite, usage(1000000, 0, {cachedInputTokens: 1000000}), {...opts, serviceTier:'batch'}).total, 0.02);

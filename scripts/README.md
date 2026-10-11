@@ -60,7 +60,7 @@
 
 开发校验先安装 `requirements-dev.txt`，建议使用仓库 `.venv/bin/python`；站点运行时仍无依赖。
 
-维护时每个模型都要填写 `price_basis`（official/reference、reference_model_id、sources、note）、`billing`（渠道、主价类型、地区、缓存类型、说明）以及 `off_peak_schedule`（无闲时价为 null）。参照价必须引用现有官方报价模型，基本价格与参照模型一致；不可标成官方已核实价。
+维护时每个模型都要填写 `price_basis`（official/reference、reference_model_id、sources、note）、`billing`（渠道、主价类型、地区、缓存类型、说明）以及 `off_peak_schedule`（无闲时价为 null）。参照价必须引用现有官方报价模型，基本价格与参照模型一致；如官方文档明确给出倍率，可在 price_basis 填正数 `reference_multiplier`（仅用于基础档核对，省略为 1），来源和 note 必须说明倍率及分档。基础单价和各分档单价均已展开，客户端不得再次乘该倍率；不可标成官方已核实价。
 
 服务档保留 `multiplier` 作为输入输出展示倍率，补全 `multipliers` 中各 token 与缓存费用项倍率；不知道的倍率为 null。`pricing` 是例外单价的对象，无例外为空对象；`sources` 必填。存储费不默认乘 token 倍率。
 
@@ -69,5 +69,9 @@
 `unverified_fields` 精确列出基础价格、limits 和 reasoning_effort 的未核实字段路径；不能漏标或多标。不可调推理的 levels/default 为不适用；官方明确无独立输出上限的源值 n/a 也不列为待核实。状态由生成器派生，勿手写 API 状态。
 
 Grok 4.7 定价表采用 ≥200,000 输入 tokens 的长上下文边界。现有分档字段为开区间 `input_tokens_gt`，整数 token 用 199999 表达，condition 必须为 `input_tokens>199999`；不可以写成 >200000。计费以官方价格表为据，model detail 页的简略文字另见 notes。发布后的双客户端全接口检查见根 README 的 `scripts/check_live.cjs`。
+
+Build Fast 另按官方 Fast 段落的 “prompt exceeds 200k” 记录 `input_tokens>200000`，输入/缓存/输出短档 4/1/12、长档 6/1.5/18，分别对应公共 Grok 4.7 的短档 ×2、长档 ×1.5。这是 Grok Build 订阅参照价，渠道上游模型列表不含价格；独立保留实际查询到的默认上下文与推理设置，未返回的渠道限制标为待核实，不能借用公共 API 的限制状态。
+
+xAI 官方价格查询接口见 https://docs.x.ai/developers/rest-api-reference/inference/models 。价格字段单位为 USD cents / 100M tokens，转本站 USD / 1M tokens 时除以 10000；长上下文字段为 0 时沿用对应基础价，不表示免费；`long_context_threshold` 为包含边界的阈值。当前使用官方定价文档，未取得认证价格接口返回。2026-10-11 默认系统 DNS 下 curl/Node 查询此接口返回 401，强制公网 DoH 路径连接被重置；该域名使用系统 DNS，不沿用 Pages 的可选 DoH 路径。
 
 运行生成、校验、Python 回归测试和 Node HTTP/计费测试的完整命令见根目录 README；GitHub Actions 使用同一流程。每次修改后需同时提交源数据和生成 JSON，`meta.data_version` 自动由内容生成，不需手动填写。

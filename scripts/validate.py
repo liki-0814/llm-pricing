@@ -137,7 +137,7 @@ def validate_data(d):
         if basis['type'] == 'reference':
             if not basis['reference_model_id'] or bill['price_type'] != 'reference':
                 fail(where, 'reference price requires reference model and billing.price_type=reference')
-        elif basis['reference_model_id'] is not None or bill['price_type'] == 'reference':
+        elif basis['reference_model_id'] is not None or bill['price_type'] == 'reference' or 'reference_multiplier' in basis:
             fail(where, 'official price cannot have a reference model/type')
         C = m['cache_pricing']
         for k in PRICE_FIELDS:
@@ -201,8 +201,12 @@ def validate_data(d):
             target = by_id.get(ref)
             if not target or ref == mid or target['price_basis']['type'] != 'official':
                 fail(mid, 'reference model must exist and have official prices')
-            elif any(m[k] != target[k] for k in PRICE_FIELDS):
-                fail(mid, 'reference base prices disagree with reference model')
+            else:
+                multiplier = m['price_basis'].get('reference_multiplier', 1)
+                if any(not math.isclose(m[k], target[k] * multiplier, rel_tol=1e-12)
+                       if numeric(m[k]) and numeric(target[k]) else m[k] != target[k]
+                       for k in PRICE_FIELDS):
+                    fail(mid, 'reference base prices disagree with reference model and documented multiplier')
     return errors
 
 

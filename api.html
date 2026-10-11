@@ -85,7 +85,7 @@
         <p>每个响应都是同一个外层结构：</p>
         <div class="code"><pre>{
   <span class="tok-k">"api_version"</span>: <span class="tok-s">"v1"</span>,
-  <span class="tok-k">"meta"</span>: { <span class="tok-k">"updated_at"</span>: <span class="tok-s">"YYYY-MM-DD"</span>, <span class="tok-k">"data_version"</span>: <span class="tok-s">"源数据 SHA-256"</span>, <span class="tok-k">"currency"</span>: <span class="tok-s">"USD"</span>, <span class="tok-k">"unit"</span>: <span class="tok-s">"per_1M_tokens"</span>, <span class="tok-k">"unit_label"</span>: <span class="tok-s">"USD per 1M tokens"</span>, <span class="tok-k">"count"</span>: <span class="tok-n">44</span> },
+  <span class="tok-k">"meta"</span>: { <span class="tok-k">"updated_at"</span>: <span class="tok-s">"YYYY-MM-DD"</span>, <span class="tok-k">"data_version"</span>: <span class="tok-s">"源数据 SHA-256"</span>, <span class="tok-k">"currency"</span>: <span class="tok-s">"USD"</span>, <span class="tok-k">"unit"</span>: <span class="tok-s">"per_1M_tokens"</span>, <span class="tok-k">"unit_label"</span>: <span class="tok-s">"USD per 1M tokens"</span>, <span class="tok-k">"count"</span>: <span class="tok-n">45</span> },
   <span class="tok-k">"data"</span>: [ <span class="tok-c">/* Model[] | Vendor[] | Model */</span> ]
 }</pre></div>
         <p><code>vendors/{vendor}.json</code> 额外包含 <code>vendor</code> 对象；<code>models/{id}.json</code> 的 <code>data</code> 是单个对象，<code>meta</code> 无 <code>count</code>。</p>
@@ -130,7 +130,7 @@
 <tr><td>cache_pricing.implicit_read / explicit_read / explicit_write</td><td>number | null</td><td>缓存细分价（主要用于 Qwen）：隐式命中 / 显式命中 / 显式创建。<code>pricing.cached_input</code> 与 <code>pricing.cache_write</code> 含义不变：<code>cached_input</code> 等于 implicit_read 或 explicit_read 之一（见 <code>cache_pricing.note</code> 的逐模型说明），<code>cache_write</code> = explicit_write</td></tr>
 <tr><td>cache_pricing.explicit_write_1h / storage_per_1M_tokens_hour</td><td>number | null</td><td>1 小时 TTL 缓存写入价（如 Claude）/ 缓存存储费（每百万 token·小时，如 Gemini），官方列出才有值</td></tr>
 <tr><td>price_schedule[]</td><td>array</td><td>已公布的价格变更 <code>{kind, effective_from, effective_until, input, output, cached_input, cache_write, multiplier, cache_pricing, sources, note}</code>，<code>kind</code> ∈ promotion / scheduled_increase / scheduled_decrease，空数组 = 无</td></tr>
-<tr><td>price_basis</td><td>object</td><td>价格依据：<code>type</code> 为 official/reference；<code>reference_model_id</code> 为参照模型；<code>sources</code> 与 <code>note</code> 说明来源。参照价不代表订阅模型的实际账单</td></tr>
+<tr><td>price_basis</td><td>object</td><td>价格依据：<code>type</code> 为 official/reference；<code>reference_model_id</code> 为参照模型；可选 <code>reference_multiplier</code> 为基础档参照倍率（省略为 1），单价已展开，计算时不再乘倍率；<code>sources</code> 与 <code>note</code> 说明来源及分档。参照价不代表订阅模型的实际账单</td></tr>
 <tr><td>billing</td><td>object</td><td><code>channel</code> 区分按量/订阅；<code>price_type</code> 区分 current/list/reference；<code>region</code> 为已记录地区；<code>cached_input_type</code> 明确隐式/显式/未分类缓存</td></tr>
 <tr><td>off_peak_schedule</td><td>object | null</td><td>UTC 时区、工作日、起点包含终点不包含的高峰窗口、中国法定节假日规则及来源。每个模型独立包含完整规则</td></tr>
 <tr><td>reasoning_effort.field_status</td><td>object</td><td>supported/levels/default/can_disable 的字段级状态：verified/unverified/not_applicable。整体存在未核实项时为 partial</td></tr>
