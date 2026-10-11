@@ -41,10 +41,11 @@ async function main() {
   async function curlQuery(file) {
     const argv = ['--silent','--show-error','--connect-timeout','10','--max-time','20'];
     if(doh) argv.push('--doh-url','https://dns.google/dns-query');
-    argv.push('--write-out','\n%{http_code} %{ssl_verify_result} %{content_type} %{time_total}',new URL(file,base).href);
+    argv.push('--write-out','\n%{http_code}\t%{ssl_verify_result}\t%{content_type}\t%{time_total}',new URL(file,base).href);
     const {stdout} = await execFile('curl',argv,{maxBuffer:4*1024*1024});
     const split = stdout.lastIndexOf('\n');
-    const [status,tls,contentType,seconds] = stdout.slice(split+1).split(' ');
+    const [status,tls,contentType,seconds] = stdout.slice(split+1).split('\t');
+    assert.ok(Number.isFinite(Number(seconds)),file+' curl timing is invalid');
     return {body:stdout.slice(0,split),status:Number(status),tls_verified:Number(tls)===0,
       content_type:contentType,ms:Number(seconds)*1000};
   }
