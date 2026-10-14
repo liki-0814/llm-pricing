@@ -111,8 +111,10 @@ test('missing prices and invalid inputs never become free or silently coerce', (
   code(() => estimate(huge,usage(0,0,{storageTokenHours:Number.MAX_VALUE}),opts),'INVALID_ARGUMENT');
 });
 test('all model snapshots estimate standard text usage', () => {
+  // Use the newest snapshot date so routine data updates (which bump last_updated) don't break this test.
+  const at = all.data.map(m => m.last_updated).sort().at(-1) + 'T12:00:00Z';
   for (const m of all.data) {
-    const r = estimate(m,usage(1000,100),{at:'2026-10-11T12:00:00Z'});
+    const r = estimate(m,usage(1000,100),{at});
     assert.ok(Number.isFinite(r.total) && r.total > 0,m.id);
   }
 });

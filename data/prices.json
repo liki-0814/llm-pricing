@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-10-11",
+    "last_updated": "2026-10-14",
     "description": "美元 / 每百万 token；官方价格与用户确认参照价明确区分，参照依据见 price_basis。null 不代表零；状态与计费规则见各结构化字段。",
     "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3 系列最新；MiniMax 3 系列；xAI Grok 4.7；Grok Build Fast 单独作为订阅渠道参照价收录。"
   },
@@ -3013,10 +3013,11 @@
       "context_tokens": 1000000,
       "source_url": "https://docs.z.ai/guides/overview/pricing",
       "extra_sources": [
-        "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+        "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
+      "last_updated": "2026-10-14",
+      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "unverified_fields": [],
       "id": "m23",
       "reasoning_effort": {
@@ -3036,11 +3037,12 @@
       },
       "limits": {
         "context_length": 1000000,
-        "max_output_tokens": 128000,
-        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录。",
+        "max_output_tokens": 131072,
+        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致）；最大输出精确值取智谱开放平台「核心参数」页 max_tokens 表：glm-5.3 默认 65,536、最大 131,072。上下文按 1M=1,000,000 记录（官方未给精确 token 数）。",
         "sources": [
           "https://docs.z.ai/guides/llm/glm-5.3",
-          "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+          "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+          "https://docs.bigmodel.cn/cn/guide/start/concept-param"
         ]
       },
       "pricing_tiers": [],
@@ -3104,10 +3106,11 @@
       "context_tokens": 1000000,
       "source_url": "https://docs.z.ai/guides/overview/pricing",
       "extra_sources": [
-        "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+        "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
+      "last_updated": "2026-10-14",
+      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "unverified_fields": [],
       "id": "m24",
       "reasoning_effort": {
@@ -3127,11 +3130,12 @@
       },
       "limits": {
         "context_length": 1000000,
-        "max_output_tokens": 128000,
-        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录。",
+        "max_output_tokens": 131072,
+        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致）；最大输出精确值取智谱开放平台「核心参数」页 max_tokens 表：glm-5.3-flash 默认 65,536、最大 131,072。上下文按 1M=1,000,000 记录（官方未给精确 token 数）。",
         "sources": [
           "https://docs.z.ai/guides/vlm/glm-5.3-flash",
-          "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+          "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+          "https://docs.bigmodel.cn/cn/guide/start/concept-param"
         ]
       },
       "pricing_tiers": [],
@@ -3195,10 +3199,11 @@
       "context_tokens": 1000000,
       "source_url": "https://docs.z.ai/guides/overview/pricing",
       "extra_sources": [
-        "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+        "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
+      "last_updated": "2026-10-14",
+      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "unverified_fields": [],
       "id": "m25",
       "reasoning_effort": {
@@ -3220,11 +3225,12 @@
       },
       "limits": {
         "context_length": 1000000,
-        "max_output_tokens": 128000,
-        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录。",
+        "max_output_tokens": 131072,
+        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致）；最大输出精确值取智谱开放平台「核心参数」页 max_tokens 表：glm-5.3-flashx 默认 65,536、最大 131,072。上下文按 1M=1,000,000 记录（官方未给精确 token 数）。",
         "sources": [
           "https://docs.z.ai/guides/vlm/glm-5.3-flash",
-          "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+          "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+          "https://docs.bigmodel.cn/cn/guide/start/concept-param"
         ]
       },
       "pricing_tiers": [],
@@ -3288,10 +3294,11 @@
       "context_tokens": 1000000,
       "source_url": "https://docs.z.ai/guides/overview/pricing",
       "extra_sources": [
-        "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+        "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+        "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度与最大输出(128K)来自智谱开放平台模型概览。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
+      "last_updated": "2026-10-14",
+      "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "unverified_fields": [],
       "id": "m26",
       "reasoning_effort": {
@@ -3314,11 +3321,12 @@
       },
       "limits": {
         "context_length": 1000000,
-        "max_output_tokens": 128000,
-        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致），按 1M=1,000,000、1K=1,000 记录。",
+        "max_output_tokens": 131072,
+        "note": "官方：Context Length 1M、Maximum Output Tokens 128K（Z.ai 模型页与智谱模型概览一致）；最大输出精确值取智谱开放平台「核心参数」页 max_tokens 表：glm-5.2 默认 65,536、最大 131,072。上下文按 1M=1,000,000 记录（官方未给精确 token 数）。",
         "sources": [
           "https://docs.z.ai/guides/llm/glm-5.2",
-          "https://docs.bigmodel.cn/cn/guide/start/model-overview"
+          "https://docs.bigmodel.cn/cn/guide/start/model-overview",
+          "https://docs.bigmodel.cn/cn/guide/start/concept-param"
         ]
       },
       "pricing_tiers": [],
