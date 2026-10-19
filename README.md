@@ -2,7 +2,7 @@
 
 中文静态站点，直接部署到 GitHub Pages；运行时只有 HTML、CSS 和 JavaScript，无后端、数据库或第三方运行依赖。
 
-覆盖 9 个厂商、45 个模型，统一美元 / 每百万 token；缓存存储另按百万 token·小时计价。价格表支持主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
+覆盖 9 个厂商、46 个模型，统一美元 / 每百万 token；缓存存储另按百万 token·小时计价。价格表支持主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
 
 ## 本地预览
 
@@ -161,6 +161,7 @@ GitHub Actions 在 push、pull request 和手动运行时执行同样的校验�
 按现有官方来源逐项核对需要修正的规则：
 
 - [Gemini 官方定价](https://ai.google.dev/gemini-api/docs/pricing)：Flash-Lite 的缓存例外单价、Pro 的 Batch/Flex 缓存原价与 Priority 存储倍率、Flash 2027 年存储涨价。
+- [Gemini 4 Argon 模型页](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon)、[新特性与定价说明](https://ai.google.dev/gemini-api/docs/latest-model)和[推理档位](https://ai.google.dev/gemini-api/docs/thinking)：2026-11-30 前介绍价及 2026-12-01 起涨价、仅隐式缓存、1M 统一上下文与 65,536 同步输出上限。
 - [DeepSeek 定价](https://api-docs.deepseek.com/quick_start/pricing/)：UTC 高峰时段、中国节假日与闲时价。
 - [Claude 定价](https://platform.claude.com/docs/en/about-claude/pricing)：缓存 TTL、Batch 和数据驻留倍率。
 - [MiniMax 模型调用](https://platform.minimax.io/docs/guides/text-generation)和[按量定价](https://platform.minimax.io/docs/guides/pricing-paygo)：订阅 Preview 模型及 M3 参照价格。
