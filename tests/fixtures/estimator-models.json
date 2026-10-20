@@ -1,0 +1,1233 @@
+{
+  "deepseek-v4-pro": {
+    "id": "deepseek-v4-pro",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 1.32,
+      "output": 3.96,
+      "cached_input": 0.044,
+      "cache_write": null
+    },
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null
+    },
+    "pricing_tiers": [],
+    "price_schedule": [],
+    "has_off_peak": true,
+    "off_peak_schedule": {
+      "timezone": "UTC",
+      "weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "peak_windows": [
+        {
+          "start": "01:00",
+          "end": "04:00"
+        },
+        {
+          "start": "06:00",
+          "end": "10:00"
+        }
+      ],
+      "holiday_region": "CN"
+    },
+    "off_peak_pricing": {
+      "input": 0.66,
+      "output": 1.98,
+      "cached_input": 0.022
+    },
+    "service_tiers": [],
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": 384000,
+      "status": "verified"
+    },
+    "context_length": 1000000,
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "cached_input_type": "unspecified"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "high",
+        "max"
+      ],
+      "default": "high",
+      "can_disable": true,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      }
+    },
+    "unverified_fields": [],
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    }
+  },
+  "gpt-5.6-sol": {
+    "id": "gpt-5.6-sol",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 4.0,
+      "output": 20.0,
+      "cached_input": 0.4,
+      "cache_write": 5.0
+    },
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": 5.0,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null
+    },
+    "pricing_tiers": [
+      {
+        "condition": "input_tokens>272000",
+        "input_tokens_gt": 272000,
+        "input_tokens_lte": null,
+        "input": 8.0,
+        "output": 30.0,
+        "cached_input": 0.8,
+        "cache_write": 10.0,
+        "cache_pricing": null
+      }
+    ],
+    "price_schedule": [
+      {
+        "kind": "promotion",
+        "effective_from": null,
+        "effective_until": "2026-11-21",
+        "input": 4.0,
+        "output": 20.0,
+        "cached_input": 0.4,
+        "cache_write": 5.0,
+        "multiplier": null,
+        "cache_pricing": {},
+        "note": "GPT-5.6 Sol 促销价（输入 $4 / 输出 $20，较此前降 20% / 33%）官方称“至少持续到 2026-11-21”；到期后价格官方未公布（待核实）。"
+      }
+    ],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {}
+      },
+      {
+        "name": "flex",
+        "multiplier": 0.5,
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {}
+      },
+      {
+        "name": "fast",
+        "multiplier": 2.0,
+        "multipliers": {
+          "input": 2.0,
+          "output": 2.0,
+          "cached_input": 2.0,
+          "cache_write": 2.0,
+          "implicit_read": 2.0,
+          "explicit_read": 2.0,
+          "explicit_write": 2.0,
+          "explicit_write_1h": 2.0,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {}
+      },
+      {
+        "name": "data_residency",
+        "multiplier": 1.1,
+        "multipliers": {
+          "input": 1.1,
+          "output": 1.1,
+          "cached_input": 1.1,
+          "cache_write": 1.1,
+          "implicit_read": 1.1,
+          "explicit_read": 1.1,
+          "explicit_write": 1.1,
+          "explicit_write_1h": 1.1,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {}
+      }
+    ],
+    "limits": {
+      "context_length": 1050000,
+      "max_output_tokens": 128000,
+      "status": "verified"
+    },
+    "context_length": 1050000,
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "cached_input_type": "unspecified"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default": "medium",
+      "can_disable": true,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      }
+    },
+    "unverified_fields": [],
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    }
+  },
+  "claude-opus-5.5": {
+    "id": "claude-opus-5.5",
+    "last_updated": "2026-10-20",
+    "pricing": {
+      "input": 4,
+      "output": 20,
+      "cached_input": 0.2,
+      "cache_write": 5
+    },
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": 0.2,
+      "explicit_write": 5,
+      "explicit_write_1h": 8,
+      "storage_per_1M_tokens_hour": null
+    },
+    "pricing_tiers": [],
+    "price_schedule": [],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {}
+      },
+      {
+        "name": "fast",
+        "multiplier": 2.0,
+        "multipliers": {
+          "input": 2.0,
+          "output": 2.0,
+          "cached_input": 2.0,
+          "cache_write": 2.0,
+          "implicit_read": 2.0,
+          "explicit_read": 2.0,
+          "explicit_write": 2.0,
+          "explicit_write_1h": 2.0,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {}
+      },
+      {
+        "name": "data_residency",
+        "multiplier": 1.1,
+        "multipliers": {
+          "input": 1.1,
+          "output": 1.1,
+          "cached_input": 1.1,
+          "cache_write": 1.1,
+          "implicit_read": 1.1,
+          "explicit_read": 1.1,
+          "explicit_write": 1.1,
+          "explicit_write_1h": 1.1,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {}
+      }
+    ],
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": 128000,
+      "status": "verified"
+    },
+    "context_length": 1000000,
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "cached_input_type": "explicit"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default": "medium",
+      "can_disable": false,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      }
+    },
+    "unverified_fields": [],
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    }
+  },
+  "qwen3.8-max": {
+    "id": "qwen3.8-max",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 2,
+      "output": 6,
+      "cached_input": 0.25,
+      "cache_write": 2.5
+    },
+    "cache_pricing": {
+      "implicit_read": 0.25,
+      "explicit_read": 0.17,
+      "explicit_write": 2.5,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null
+    },
+    "pricing_tiers": [],
+    "price_schedule": [],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [],
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": 131072,
+      "status": "verified"
+    },
+    "context_length": 1000000,
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "cached_input_type": "implicit"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default": "xhigh",
+      "can_disable": true,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      }
+    },
+    "unverified_fields": [],
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    }
+  },
+  "qwen3.7-plus": {
+    "id": "qwen3.7-plus",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 0.4,
+      "output": 1.6,
+      "cached_input": 0.04,
+      "cache_write": 0.5
+    },
+    "cache_pricing": {
+      "implicit_read": 0.08,
+      "explicit_read": 0.04,
+      "explicit_write": 0.5,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null
+    },
+    "pricing_tiers": [
+      {
+        "condition": "input_tokens>256000 and input_tokens<=1000000",
+        "input_tokens_gt": 256000,
+        "input_tokens_lte": 1000000,
+        "input": 1.2,
+        "output": 4.8,
+        "cached_input": 0.12,
+        "cache_write": 1.5,
+        "cache_pricing": {
+          "implicit_read": 0.24,
+          "explicit_read": 0.12,
+          "explicit_write": 1.5,
+          "explicit_write_1h": null,
+          "storage_per_1M_tokens_hour": null
+        }
+      }
+    ],
+    "price_schedule": [
+      {
+        "kind": "promotion",
+        "effective_from": null,
+        "effective_until": null,
+        "input": 0.32,
+        "output": 1.28,
+        "cached_input": 0.032,
+        "cache_write": 0.4,
+        "multiplier": 0.8,
+        "cache_pricing": {
+          "implicit_read": 0.064,
+          "explicit_read": 0.032,
+          "explicit_write": 0.4
+        },
+        "note": "官方标注“限时 8 折”（≤256K 档：输入 $0.32 / 输出 $1.28 / 隐式缓存 $0.064 / 显式命中 $0.032 / 显式创建 $0.40）；截止日期官方未公布；表中为标价。"
+      }
+    ],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {}
+      }
+    ],
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": 131072,
+      "status": "verified"
+    },
+    "context_length": 1000000,
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "cached_input_type": "explicit"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default": "xhigh",
+      "can_disable": true,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      }
+    },
+    "unverified_fields": [],
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    }
+  },
+  "qwen3.8-omni-flash": {
+    "id": "qwen3.8-omni-flash",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 0.15,
+      "output": 0.47,
+      "cached_input": 0.016,
+      "cache_write": null
+    },
+    "cache_pricing": {
+      "implicit_read": 0.016,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null
+    },
+    "pricing_tiers": [],
+    "price_schedule": [],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [],
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": 131072,
+      "status": "verified"
+    },
+    "context_length": 1000000,
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "cached_input_type": "implicit"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default": "xhigh",
+      "can_disable": true,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      }
+    },
+    "unverified_fields": [
+      "cache_write"
+    ],
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "unverified"
+    }
+  },
+  "gemini-3.8-flash": {
+    "id": "gemini-3.8-flash",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 0.75,
+      "output": 3.75,
+      "cached_input": 0.075,
+      "cache_write": null
+    },
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": 0.5
+    },
+    "pricing_tiers": [],
+    "price_schedule": [
+      {
+        "kind": "scheduled_increase",
+        "effective_from": "2027-01-01",
+        "effective_until": null,
+        "input": 1.5,
+        "output": 7.5,
+        "cached_input": 0.15,
+        "cache_write": null,
+        "multiplier": null,
+        "cache_pricing": {
+          "storage_per_1M_tokens_hour": 1.0
+        },
+        "note": "官方：当前价格仅到 2026-12-31；2027-01-01 起 Standard 输入 $1.50、输出 $7.50、缓存 $0.15，缓存存储费 $1.00/百万 token/小时；Batch/Flex/Priority 价同比例上调。"
+      }
+    ],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {}
+      },
+      {
+        "name": "flex",
+        "multiplier": 0.5,
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {}
+      },
+      {
+        "name": "priority",
+        "multiplier": 1.8,
+        "multipliers": {
+          "input": 1.8,
+          "output": 1.8,
+          "cached_input": 1.8,
+          "cache_write": 1.8,
+          "implicit_read": 1.8,
+          "explicit_read": 1.8,
+          "explicit_write": 1.8,
+          "explicit_write_1h": 1.8,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {}
+      }
+    ],
+    "limits": {
+      "context_length": 1048576,
+      "max_output_tokens": 65536,
+      "status": "verified"
+    },
+    "context_length": 1048576,
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "cached_input_type": "unspecified"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "medium",
+      "can_disable": null,
+      "status": "partial",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "unverified"
+      }
+    },
+    "unverified_fields": [
+      "reasoning_effort.can_disable"
+    ],
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    }
+  },
+  "gemini-3.5-flash-lite": {
+    "id": "gemini-3.5-flash-lite",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 0.3,
+      "output": 2.5,
+      "cached_input": 0.03,
+      "cache_write": null
+    },
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": 1.0
+    },
+    "pricing_tiers": [],
+    "price_schedule": [],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {
+          "cached_input": 0.02
+        }
+      },
+      {
+        "name": "flex",
+        "multiplier": 0.5,
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {
+          "cached_input": 0.02
+        }
+      },
+      {
+        "name": "priority",
+        "multiplier": 1.8,
+        "multipliers": {
+          "input": 1.8,
+          "output": 1.8,
+          "cached_input": 1.8,
+          "cache_write": 1.8,
+          "implicit_read": 1.8,
+          "explicit_read": 1.8,
+          "explicit_write": 1.8,
+          "explicit_write_1h": 1.8,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {
+          "cached_input": 0.05
+        }
+      }
+    ],
+    "limits": {
+      "context_length": 1048576,
+      "max_output_tokens": 65536,
+      "status": "verified"
+    },
+    "context_length": 1048576,
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "cached_input_type": "unspecified"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "minimal",
+      "can_disable": null,
+      "status": "partial",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "unverified"
+      }
+    },
+    "unverified_fields": [
+      "reasoning_effort.can_disable"
+    ],
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    }
+  },
+  "gemini-3.1-pro-preview": {
+    "id": "gemini-3.1-pro-preview",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 2.0,
+      "output": 12.0,
+      "cached_input": 0.2,
+      "cache_write": null
+    },
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": 4.5
+    },
+    "pricing_tiers": [
+      {
+        "condition": "input_tokens>200000",
+        "input_tokens_gt": 200000,
+        "input_tokens_lte": null,
+        "input": 4.0,
+        "output": 18.0,
+        "cached_input": 0.4,
+        "cache_write": null,
+        "cache_pricing": {
+          "implicit_read": null,
+          "explicit_read": null,
+          "explicit_write": null,
+          "explicit_write_1h": null,
+          "storage_per_1M_tokens_hour": 4.5
+        }
+      }
+    ],
+    "price_schedule": [],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 1,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {}
+      },
+      {
+        "name": "flex",
+        "multiplier": 0.5,
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 1,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {}
+      },
+      {
+        "name": "priority",
+        "multiplier": 1.8,
+        "multipliers": {
+          "input": 1.8,
+          "output": 1.8,
+          "cached_input": 1.8,
+          "cache_write": 1.8,
+          "implicit_read": 1.8,
+          "explicit_read": 1.8,
+          "explicit_write": 1.8,
+          "explicit_write_1h": 1.8,
+          "storage_per_1M_tokens_hour": 1.8
+        },
+        "pricing": {}
+      }
+    ],
+    "limits": {
+      "context_length": 1048576,
+      "max_output_tokens": 65536,
+      "status": "verified"
+    },
+    "context_length": 1048576,
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "cached_input_type": "unspecified"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "high",
+      "can_disable": null,
+      "status": "partial",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "unverified"
+      }
+    },
+    "unverified_fields": [
+      "reasoning_effort.can_disable"
+    ],
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    }
+  },
+  "kimi-for-coding": {
+    "id": "kimi-for-coding",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 0.95,
+      "output": 4.0,
+      "cached_input": 0.19,
+      "cache_write": null
+    },
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null
+    },
+    "pricing_tiers": [],
+    "price_schedule": [],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [],
+    "limits": {
+      "context_length": 1048576,
+      "max_output_tokens": null,
+      "status": "partial"
+    },
+    "context_length": 1048576,
+    "price_basis": {
+      "type": "reference",
+      "reference_model_id": "kimi-k2.7-code"
+    },
+    "billing": {
+      "channel": "subscription",
+      "price_type": "reference",
+      "cached_input_type": "unspecified"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "high",
+        "max"
+      ],
+      "default": "max",
+      "can_disable": true,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      }
+    },
+    "unverified_fields": [
+      "limits.max_output_tokens"
+    ],
+    "pricing_status": {
+      "input": "reference",
+      "output": "reference",
+      "cached_input": "reference",
+      "cache_write": "not_listed"
+    }
+  },
+  "grok-4.7": {
+    "id": "grok-4.7",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 2.0,
+      "output": 6.0,
+      "cached_input": 0.5,
+      "cache_write": null
+    },
+    "cache_pricing": {
+      "implicit_read": 0.5,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null
+    },
+    "pricing_tiers": [
+      {
+        "condition": "input_tokens>199999",
+        "input_tokens_gt": 199999,
+        "input_tokens_lte": null,
+        "input": 4.0,
+        "output": 12.0,
+        "cached_input": 1.0,
+        "cache_write": null,
+        "cache_pricing": {
+          "implicit_read": 1.0,
+          "explicit_read": null,
+          "explicit_write": null,
+          "explicit_write_1h": null,
+          "storage_per_1M_tokens_hour": null
+        }
+      }
+    ],
+    "price_schedule": [],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [
+      {
+        "name": "priority",
+        "multiplier": 2.0,
+        "multipliers": {
+          "input": 2.0,
+          "output": 2.0,
+          "cached_input": 2.0,
+          "cache_write": null,
+          "implicit_read": 2.0,
+          "explicit_read": null,
+          "explicit_write": null,
+          "explicit_write_1h": null,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {}
+      },
+      {
+        "name": "data_residency",
+        "multiplier": 1.1,
+        "multipliers": {
+          "input": 1.1,
+          "output": 1.1,
+          "cached_input": 1.1,
+          "cache_write": null,
+          "implicit_read": 1.1,
+          "explicit_read": null,
+          "explicit_write": null,
+          "explicit_write_1h": null,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {}
+      }
+    ],
+    "limits": {
+      "context_length": 500000,
+      "max_output_tokens": null,
+      "status": "verified"
+    },
+    "context_length": 500000,
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "cached_input_type": "implicit"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "default": "high",
+      "can_disable": false,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      }
+    },
+    "unverified_fields": [],
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    }
+  },
+  "grok-4.7-build-fast": {
+    "id": "grok-4.7-build-fast",
+    "last_updated": "2026-10-11",
+    "pricing": {
+      "input": 4,
+      "output": 12,
+      "cached_input": 1,
+      "cache_write": null
+    },
+    "cache_pricing": {
+      "implicit_read": 1,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "storage_per_1M_tokens_hour": null
+    },
+    "pricing_tiers": [
+      {
+        "condition": "input_tokens>200000",
+        "input_tokens_gt": 200000,
+        "input_tokens_lte": null,
+        "input": 6,
+        "output": 18,
+        "cached_input": 1.5,
+        "cache_write": null,
+        "cache_pricing": {
+          "implicit_read": 1.5,
+          "explicit_read": null,
+          "explicit_write": null,
+          "explicit_write_1h": null,
+          "storage_per_1M_tokens_hour": null
+        }
+      }
+    ],
+    "price_schedule": [],
+    "has_off_peak": false,
+    "off_peak_schedule": null,
+    "off_peak_pricing": null,
+    "service_tiers": [],
+    "limits": {
+      "context_length": 256000,
+      "max_output_tokens": null,
+      "status": "partial"
+    },
+    "context_length": 256000,
+    "price_basis": {
+      "type": "reference",
+      "reference_model_id": "grok-4.7",
+      "reference_multiplier": 2
+    },
+    "billing": {
+      "channel": "subscription",
+      "price_type": "reference",
+      "cached_input_type": "implicit"
+    },
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "default": "high",
+      "can_disable": null,
+      "status": "partial",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "unverified"
+      }
+    },
+    "unverified_fields": [
+      "limits.max_output_tokens",
+      "reasoning_effort.can_disable"
+    ],
+    "pricing_status": {
+      "input": "reference",
+      "output": "reference",
+      "cached_input": "reference",
+      "cache_write": "not_listed"
+    }
+  }
+}

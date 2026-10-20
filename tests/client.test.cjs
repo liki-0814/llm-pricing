@@ -6,7 +6,9 @@ const http = require('node:http');
 const { createClient, estimate } = require('../assets/client.js');
 const root = path.resolve(__dirname, '..');
 const all = JSON.parse(fs.readFileSync(path.join(root, 'api/v1/models.json')));
-const model = id => all.data.find(m => m.id === id);
+// Arithmetic and calendar cases use frozen fixtures, not the changing published catalog.
+const fixtures = require('./fixtures/estimator-models.json');
+const model = id => structuredClone(fixtures[id]);
 const opts = { at: '2026-10-11' };
 const usage = (inputTokens, outputTokens, more) => Object.assign({ inputTokens, outputTokens }, more);
 function close(actual, expected) { assert.ok(Math.abs(actual - expected) < 1e-10, `${actual} != ${expected}`); }
@@ -20,7 +22,8 @@ test('long-context threshold includes all cached input; boundary is exclusive', 
   close(estimate(m, usage(300000, 0, {cachedInputTokens: 290000}), opts).total, 0.156);
 });
 test('cache reads/writes replace ordinary input, including 1h writes', () => {
-  close(estimate(model('claude-opus-5.5'), usage(1000, 100, {cachedInputTokens: 500, cacheWriteTokens: 100, cacheWrite1hTokens: 100}), opts).total, 0.0046);
+  const opus = model('claude-opus-5.5');
+  close(estimate(opus, usage(1000, 100, {cachedInputTokens: 500, cacheWriteTokens: 100, cacheWrite1hTokens: 100}), {at: opus.last_updated}).total, 0.0046);
   close(estimate(model('qwen3.8-max'), usage(1000, 0, {cachedInputTokens: 1000}), {...opts, cacheType: 'explicit'}).total, 0.00017);
 });
 test('Grok 4.7 inclusive 200k tier, cache, priority and US residency', () => {
@@ -63,7 +66,8 @@ test('per-component service rules and fixed exceptions', () => {
   const pro = model('gemini-3.1-pro-preview');
   close(estimate(pro, usage(300000, 0, {cachedInputTokens:300000, storageTokenHours:1000000}), {...opts, serviceTier:'batch'}).total, 4.62);
   close(estimate(pro, usage(0, 0, {storageTokenHours:1000000}), {...opts, serviceTier:'priority'}).total, 8.1);
-  close(estimate(model('claude-opus-5.5'), usage(1000, 100), {...opts, serviceTier:'batch', dataResidency:true}).total, 0.0033);
+  const opus = model('claude-opus-5.5');
+  close(estimate(opus, usage(1000, 100), {at: opus.last_updated, serviceTier:'batch', dataResidency:true}).total, 0.0033);
 });
 test('future storage and token changes and promotion on long tiers', () => {
   close(estimate(model('gemini-3.8-flash'), usage(1000, 1000, {storageTokenHours:1000000}), {at:'2027-01-01', serviceTier:'batch'}).total, 1.0045);
@@ -110,13 +114,27 @@ test('missing prices and invalid inputs never become free or silently coerce', (
   huge.cache_pricing.storage_per_1M_tokens_hour = Number.MAX_VALUE;
   code(() => estimate(huge,usage(0,0,{storageTokenHours:Number.MAX_VALUE}),opts),'INVALID_ARGUMENT');
 });
-test('all model snapshots estimate standard text usage', () => {
-  // Use the newest snapshot date so routine data updates (which bump last_updated) don't break this test.
-  const at = all.data.map(m => m.last_updated).sort().at(-1) + 'T12:00:00Z';
+test('published snapshots estimate on their verification date and reject earlier dates', () => {
   for (const m of all.data) {
-    const r = estimate(m,usage(1000,100),{at});
+    // Noon UTC is outside the recorded peak windows. An explicit holiday flag
+    // also keeps this smoke test independent of which weekday a snapshot uses.
+    const at = m.last_updated + 'T12:00:00Z';
+    const r = estimate(m,usage(1000,100),{at, isChineseHoliday:false});
     assert.ok(Number.isFinite(r.total) && r.total > 0,m.id);
+    assert.equal(r.model_id,m.id);
+    const before = new Date(m.last_updated + 'T00:00:00Z');
+    before.setUTCDate(before.getUTCDate() - 1);
+    assert.throws(() => estimate(m,usage(1000,100),{at:before.toISOString(), isChineseHoliday:false}),
+      e => e.code === 'HISTORICAL_PRICE_UNAVAILABLE',m.id);
   }
+});
+
+test('historical date guard uses the UTC day at the snapshot boundary', () => {
+  const m = model('claude-opus-5.5');
+  code(() => estimate(m,usage(1000,100),{at:'2026-10-19T23:59:59.999Z'}),'HISTORICAL_PRICE_UNAVAILABLE');
+  code(() => estimate(m,usage(1000,100),{at:'2026-10-20T00:00:00+01:00'}),'HISTORICAL_PRICE_UNAVAILABLE');
+  close(estimate(m,usage(1000,100),{at:'2026-10-20T00:00:00Z'}).total,0.006);
+  close(estimate(m,usage(1000,100),{at:'2026-10-19T23:00:00-01:00'}).total,0.006);
 });
 
 test('real HTTP queries cover every static endpoint, IDs, filters and errors', async t => {
@@ -160,7 +178,10 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
   assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,7);
   const search=await client.listModels({q:'gemini pro'});assert.equal(search.data[0].id,'gemini-3.1-pro-preview');
   const missingLast=await client.listModels({sort:'-cache_write'});assert.equal(missingLast.data.at(-1).pricing.cache_write,null);
-  close((await client.estimate('gemini-3.1-pro-preview',usage(300000,10000),opts)).total,1.38);
+  const current = full.data.find(m=>m.id==='gemini-3.1-pro-preview');
+  const currentOptions = {at:current.last_updated + 'T12:00:00Z',isChineseHoliday:false};
+  assert.deepEqual(await client.estimate(current.id,usage(1000,100),currentOptions),
+    estimate(current,usage(1000,100),currentOptions));
   await assert.rejects(client.getModel('unknown-model'),e=>e.code==='NOT_FOUND');
   assert.throws(()=>client.getModel('../prices'),e=>e.code==='INVALID_ARGUMENT');
   await assert.rejects(client.listModels({sort:'bogus'}),e=>e.code==='INVALID_ARGUMENT');
