@@ -1,11 +1,11 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-19",
+    "updated_at": "2026-10-20",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "493581c15b53924737c6cbfab651e8e0f491b08db41a77966458ab0b06ede06b"
+    "data_version": "d45c3729746f3da306ca06665c9a194440d87c6b3fe2084f90d7298db0c98ea1"
   },
   "data": {
     "id": "claude-opus-5.5",
@@ -49,8 +49,8 @@
     "context_length_label": "1M",
     "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
     "extra_sources": [],
-    "last_updated": "2026-10-11",
-    "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（研究预览）输入 $8 / 输出 $40。",
+    "last_updated": "2026-10-20",
+    "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（已正式提供，不再是研究预览）输入 $8 / 输出 $40。",
     "reasoning_effort": {
       "supported": true,
       "levels": [
@@ -110,7 +110,7 @@
       {
         "name": "fast",
         "multiplier": 2.0,
-        "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $8 / 输出 $40，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+        "note": "Fast mode（Opus 5.5 已非研究预览；Claude API 一方及 Microsoft Foundry Azure 部署）：输入 $8 / 输出 $40，约 2×；全上下文窗口适用，不可与 Batch 同用。",
         "multipliers": {
           "input": 2.0,
           "output": 2.0,

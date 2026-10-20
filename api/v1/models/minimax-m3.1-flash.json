@@ -1,43 +1,43 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-19",
+    "updated_at": "2026-10-20",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "493581c15b53924737c6cbfab651e8e0f491b08db41a77966458ab0b06ede06b"
+    "data_version": "d45c3729746f3da306ca06665c9a194440d87c6b3fe2084f90d7298db0c98ea1"
   },
   "data": {
-    "id": "minimax-m3.1-flash-preview",
-    "name": "MiniMax-M3.1-Flash-Preview",
+    "id": "minimax-m3.1-flash",
+    "name": "MiniMax-M3.1-Flash",
     "vendor": "minimax",
     "vendor_name": "MiniMax",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
-      "input": 0.3,
-      "output": 1.2,
-      "cached_input": 0.06,
+      "input": 0.15,
+      "output": 0.6,
+      "cached_input": 0.015,
       "cache_write": null
     },
     "pricing_status": {
-      "input": "reference",
-      "output": "reference",
-      "cached_input": "reference",
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
       "cache_write": "not_listed"
     },
     "price_basis": {
-      "type": "reference",
-      "reference_model_id": "minimax-m3",
+      "type": "official",
+      "reference_model_id": null,
       "sources": [
-        "https://platform.minimax.io/docs/guides/text-generation",
-        "https://platform.minimax.io/docs/guides/pricing-paygo"
+        "https://platform.minimax.io/docs/guides/pricing-paygo",
+        "https://www.minimax.io/blog/minimax-m31f"
       ],
-      "note": "用户确认保留参照价；参照 minimax-m3 的 token 单价，并非本订阅模型的官方按量报价。"
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
     },
     "billing": {
-      "channel": "subscription",
-      "price_type": "reference",
+      "channel": "pay_as_you_go",
+      "price_type": "current",
       "region": null,
       "cached_input_type": "unspecified",
       "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
@@ -48,13 +48,14 @@
     "peak_note": null,
     "context_length": 1000000,
     "context_length_label": "1,000,000 tokens",
-    "source_url": "https://platform.minimax.io/docs/guides/text-generation",
+    "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
     "extra_sources": [
-      "https://platform.minimax.io/docs/api-reference/text-chat-openai",
-      "https://platform.minimax.io/docs/guides/pricing-paygo"
+      "https://www.minimax.io/blog/minimax-m31f",
+      "https://platform.minimax.io/docs/guides/text-generation",
+      "https://platform.minimax.io/docs/api-reference/text-chat-openai"
     ],
-    "last_updated": "2026-10-11",
-    "notes": "官方文档:该预览模型目前仅通过 M Plan 订阅与 MiniMax Code 提供(Subscription Key),按量付费(pay-as-you-go)定价页未单独列出其 token 单价。价格暂按 MiniMax-M3 计价(用户确认,官方暂未单独标价;该模型目前仅在 M Plan / MiniMax Code 提供)。表中为标准档、输入 ≤512K tokens 的价格;输入 >512K tokens 时同 M3:输入 $0.60、输出 $2.40、缓存读取 $0.12。官方页未列缓存写入价。max_completion_tokens 建议 128K、上限 512K。",
+    "last_updated": "2026-10-20",
+    "notes": "已正式发布（GA，2026-10-19）。官方按量付费统一价（不分输入长度档）：输入 $0.15、输出 $0.60、缓存读取 $0.015 / 1M tokens。官方页未列缓存写入价，无 Priority 档。max_completion_tokens 建议 128K、上限 512K。",
     "reasoning_effort": {
       "supported": true,
       "levels": [
@@ -89,26 +90,7 @@
         "https://platform.minimax.io/docs/api-reference/text-chat-openai"
       ]
     },
-    "pricing_tiers": [
-      {
-        "condition": "input_tokens>512000",
-        "input_tokens_gt": 512000,
-        "input_tokens_lte": null,
-        "input": 0.6,
-        "output": 2.4,
-        "cached_input": 0.12,
-        "cache_write": null,
-        "cache_pricing": {
-          "implicit_read": null,
-          "explicit_read": null,
-          "explicit_write": null,
-          "explicit_write_1h": null,
-          "storage_per_1M_tokens_hour": null,
-          "note": null
-        },
-        "note": "官方（“永久 5 折”折后价；原价 $1.20 / $4.80 / $0.24）：输入超过 512K tokens 档。M3.1-Flash-Preview 暂按 M3 计价（用户确认）。"
-      }
-    ],
+    "pricing_tiers": [],
     "service_tiers": [],
     "cache_pricing": {
       "implicit_read": null,
@@ -121,7 +103,7 @@
     "price_schedule": [],
     "unverified_fields": [],
     "links": {
-      "self": "models/minimax-m3.1-flash-preview.json",
+      "self": "models/minimax-m3.1-flash.json",
       "vendor": "vendors/minimax.json"
     }
   }

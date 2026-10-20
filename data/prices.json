@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-10-19",
+    "last_updated": "2026-10-20",
     "description": "美元 / 每百万 token；官方价格与用户确认参照价明确区分，参照依据见 price_basis。null 不代表零；状态与计费规则见各结构化字段。",
     "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3、4 系列最新；MiniMax 3 系列；xAI Grok 4.7；Grok Build Fast 单独作为订阅渠道参照价收录。"
   },
@@ -1908,8 +1908,8 @@
       "context_tokens": 1000000,
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
-      "last_updated": "2026-10-11",
-      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（研究预览）输入 $8 / 输出 $40。",
+      "last_updated": "2026-10-20",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（已正式提供，不再是研究预览）输入 $8 / 输出 $40。",
       "unverified_fields": [],
       "id": "m14",
       "reasoning_effort": {
@@ -1963,7 +1963,7 @@
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $8 / 输出 $40，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+          "note": "Fast mode（Opus 5.5 已非研究预览；Claude API 一方及 Microsoft Foundry Azure 部署）：输入 $8 / 输出 $40，约 2×；全上下文窗口适用，不可与 Batch 同用。",
           "multipliers": {
             "input": 2.0,
             "output": 2.0,
@@ -4922,7 +4922,7 @@
     },
     {
       "currency": "USD",
-      "last_updated": "2026-10-11",
+      "last_updated": "2026-10-20",
       "extra_sources": [
         "https://platform.minimax.io/docs/guides/text-generation",
         "https://platform.minimax.io/docs/api-reference/text-chat-openai"
@@ -4939,14 +4939,14 @@
       "context_length": "1,000,000 tokens",
       "context_tokens": 1000000,
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
-      "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方标注“永久 5 折”，划线原价 $0.60 / $2.40 / 缓存读取 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12（折后）。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09）。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
+      "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09）。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
       "unverified_fields": [],
       "reasoning_effort": {
         "supported": false,
         "levels": null,
         "default": null,
         "can_disable": true,
-        "note": "官方 OpenAI 兼容 API 文档：reasoning_effort 仅 MiniMax-M3.1-Flash-Preview 支持真实的思考深度调节，其他模型忽略该字段。MiniMax-M3 默认自适应思考（thinking.type=adaptive），可传 thinking.type=disabled 跳过思考直接作答。",
+        "note": "官方 OpenAI 兼容 API 文档：reasoning_effort 仅 MiniMax-M3.1-Flash 支持真实的思考深度调节，其他模型忽略该字段。MiniMax-M3 默认自适应思考（thinking.type=adaptive），可传 thinking.type=disabled 跳过思考直接作答。",
         "sources": [
           "https://platform.minimax.io/docs/api-reference/text-chat-openai",
           "https://platform.minimax.io/docs/guides/text-generation"
@@ -4979,14 +4979,14 @@
             "storage_per_1M_tokens_hour": null,
             "note": null
           },
-          "note": "官方（“永久 5 折”折后价；原价 $1.20 / $4.80 / $0.24）：输入超过 512K tokens 档。"
+          "note": "官方：输入超过 512K tokens 档。"
         }
       ],
       "service_tiers": [
         {
           "name": "priority",
           "multiplier": 1.5,
-          "note": "Priority 档（service_tier: priority）：标准价 1.5×；≤512K：$0.45 / $1.80 / 缓存 $0.09；>512K：$0.90 / $3.60 / $0.18（折后价）。",
+          "note": "Priority 档（service_tier: priority）：标准价 1.5×；≤512K：$0.45 / $1.80 / 缓存 $0.09；>512K：$0.90 / $3.60 / $0.18。",
           "multipliers": {
             "input": 1.5,
             "output": 1.5,
@@ -5032,24 +5032,25 @@
     },
     {
       "currency": "USD",
-      "last_updated": "2026-10-11",
+      "last_updated": "2026-10-20",
       "extra_sources": [
-        "https://platform.minimax.io/docs/api-reference/text-chat-openai",
-        "https://platform.minimax.io/docs/guides/pricing-paygo"
+        "https://www.minimax.io/blog/minimax-m31f",
+        "https://platform.minimax.io/docs/guides/text-generation",
+        "https://platform.minimax.io/docs/api-reference/text-chat-openai"
       ],
       "peak_note": null,
       "offpeak": null,
       "vendor": "MiniMax",
-      "model": "MiniMax-M3.1-Flash-Preview",
-      "model_id": "minimax-m3.1-flash-preview",
-      "input": 0.3,
-      "output": 1.2,
-      "cached_input": 0.06,
+      "model": "MiniMax-M3.1-Flash",
+      "model_id": "minimax-m3.1-flash",
+      "input": 0.15,
+      "output": 0.6,
+      "cached_input": 0.015,
       "cache_write": "n/a",
       "context_length": "1,000,000 tokens",
       "context_tokens": 1000000,
-      "source_url": "https://platform.minimax.io/docs/guides/text-generation",
-      "notes": "官方文档:该预览模型目前仅通过 M Plan 订阅与 MiniMax Code 提供(Subscription Key),按量付费(pay-as-you-go)定价页未单独列出其 token 单价。价格暂按 MiniMax-M3 计价(用户确认,官方暂未单独标价;该模型目前仅在 M Plan / MiniMax Code 提供)。表中为标准档、输入 ≤512K tokens 的价格;输入 >512K tokens 时同 M3:输入 $0.60、输出 $2.40、缓存读取 $0.12。官方页未列缓存写入价。max_completion_tokens 建议 128K、上限 512K。",
+      "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
+      "notes": "已正式发布（GA，2026-10-19）。官方按量付费统一价（不分输入长度档）：输入 $0.15、输出 $0.60、缓存读取 $0.015 / 1M tokens。官方页未列缓存写入价，无 Priority 档。max_completion_tokens 建议 128K、上限 512K。",
       "unverified_fields": [],
       "reasoning_effort": {
         "supported": true,
@@ -5078,26 +5079,7 @@
           "https://platform.minimax.io/docs/api-reference/text-chat-openai"
         ]
       },
-      "pricing_tiers": [
-        {
-          "condition": "input_tokens>512000",
-          "input_tokens_gt": 512000,
-          "input_tokens_lte": null,
-          "input": 0.6,
-          "output": 2.4,
-          "cached_input": 0.12,
-          "cache_write": null,
-          "cache_pricing": {
-            "implicit_read": null,
-            "explicit_read": null,
-            "explicit_write": null,
-            "explicit_write_1h": null,
-            "storage_per_1M_tokens_hour": null,
-            "note": null
-          },
-          "note": "官方（“永久 5 折”折后价；原价 $1.20 / $4.80 / $0.24）：输入超过 512K tokens 档。M3.1-Flash-Preview 暂按 M3 计价（用户确认）。"
-        }
-      ],
+      "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
         "implicit_read": null,
@@ -5109,17 +5091,17 @@
       },
       "price_schedule": [],
       "price_basis": {
-        "type": "reference",
-        "reference_model_id": "minimax-m3",
+        "type": "official",
+        "reference_model_id": null,
         "sources": [
-          "https://platform.minimax.io/docs/guides/text-generation",
-          "https://platform.minimax.io/docs/guides/pricing-paygo"
+          "https://platform.minimax.io/docs/guides/pricing-paygo",
+          "https://www.minimax.io/blog/minimax-m31f"
         ],
-        "note": "用户确认保留参照价；参照 minimax-m3 的 token 单价，并非本订阅模型的官方按量报价。"
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
       },
       "billing": {
-        "channel": "subscription",
-        "price_type": "reference",
+        "channel": "pay_as_you_go",
+        "price_type": "current",
         "region": null,
         "cached_input_type": "unspecified",
         "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"

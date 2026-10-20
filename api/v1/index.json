@@ -1,11 +1,11 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-19",
+    "updated_at": "2026-10-20",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "493581c15b53924737c6cbfab651e8e0f491b08db41a77966458ab0b06ede06b",
+    "data_version": "d45c3729746f3da306ca06665c9a194440d87c6b3fe2084f90d7298db0c98ea1",
     "count": 46
   },
   "data": {
@@ -394,11 +394,11 @@
         }
       },
       {
-        "id": "minimax-m3.1-flash-preview",
-        "name": "MiniMax-M3.1-Flash-Preview",
+        "id": "minimax-m3.1-flash",
+        "name": "MiniMax-M3.1-Flash",
         "vendor": "minimax",
         "links": {
-          "self": "models/minimax-m3.1-flash-preview.json",
+          "self": "models/minimax-m3.1-flash.json",
           "vendor": "vendors/minimax.json"
         }
       },

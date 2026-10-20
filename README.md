@@ -164,7 +164,7 @@ GitHub Actions 在 push、pull request 和手动运行时执行同样的校验�
 - [Gemini 4 Argon 模型页](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon)、[新特性与定价说明](https://ai.google.dev/gemini-api/docs/latest-model)和[推理档位](https://ai.google.dev/gemini-api/docs/thinking)：2026-11-30 前介绍价及 2026-12-01 起涨价、仅隐式缓存、1M 统一上下文与 65,536 同步输出上限。
 - [DeepSeek 定价](https://api-docs.deepseek.com/quick_start/pricing/)：UTC 高峰时段、中国节假日与闲时价。
 - [Claude 定价](https://platform.claude.com/docs/en/about-claude/pricing)：缓存 TTL、Batch 和数据驻留倍率。
-- [MiniMax 模型调用](https://platform.minimax.io/docs/guides/text-generation)和[按量定价](https://platform.minimax.io/docs/guides/pricing-paygo)：订阅 Preview 模型及 M3 参照价格。
+- [MiniMax 模型调用](https://platform.minimax.io/docs/guides/text-generation)和[按量定价](https://platform.minimax.io/docs/guides/pricing-paygo)：M3 与 M3.1-Flash 按量价格。
 - [Kimi Code 模型配置](https://www.kimi.com/code/docs/en/kimi-code/models)：订阅模型、推理档位和上下文来源。
 - [Grok 4.7 官方指南](https://docs.x.ai/developers/grok-4-7)、[定价](https://docs.x.ai/developers/pricing)和[推理规则](https://docs.x.ai/developers/model-capabilities/text/reasoning)：500,000 上下文、无独立文本输出上限、长上下文阈值、缓存、Priority 和美国区域计费。
 
