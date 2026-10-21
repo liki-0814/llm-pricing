@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "4bc60a4085e05889d08fa147b838ffa06766443d69e9017be80c773e95c7c02b"
+    "data_version": "35ff4379e1cc17dee733a5f59d1650b105cb71ec022c87772422e56b88e7d1ac"
   },
   "data": {
     "id": "glm-5.3",
@@ -94,6 +94,7 @@
       "explicit_read": null,
       "explicit_write": null,
       "explicit_write_1h": null,
+      "explicit_write_12h": null,
       "storage_per_1M_tokens_hour": 0.0,
       "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
     },

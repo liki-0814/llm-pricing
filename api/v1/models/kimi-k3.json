@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "4bc60a4085e05889d08fa147b838ffa06766443d69e9017be80c773e95c7c02b"
+    "data_version": "35ff4379e1cc17dee733a5f59d1650b105cb71ec022c87772422e56b88e7d1ac"
   },
   "data": {
     "id": "kimi-k3",
@@ -91,6 +91,7 @@
       "explicit_read": null,
       "explicit_write": 3.0,
       "explicit_write_1h": 6.0,
+      "explicit_write_12h": null,
       "storage_per_1M_tokens_hour": null,
       "note": "Kimi API 自动缓存重复前缀；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h；命中自动续期、无额外写入费。"
     },

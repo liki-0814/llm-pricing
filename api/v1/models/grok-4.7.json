@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "4bc60a4085e05889d08fa147b838ffa06766443d69e9017be80c773e95c7c02b"
+    "data_version": "35ff4379e1cc17dee733a5f59d1650b105cb71ec022c87772422e56b88e7d1ac"
   },
   "data": {
     "id": "grok-4.7",
@@ -106,6 +106,7 @@
           "explicit_read": null,
           "explicit_write": null,
           "explicit_write_1h": null,
+          "explicit_write_12h": null,
           "storage_per_1M_tokens_hour": null,
           "note": "自动前缀缓存命中价；官方未单列缓存写入或存储价格。"
         },
@@ -125,6 +126,7 @@
           "explicit_read": null,
           "explicit_write": null,
           "explicit_write_1h": null,
+          "explicit_write_12h": null,
           "storage_per_1M_tokens_hour": null
         },
         "pricing": {},
@@ -147,6 +149,7 @@
           "explicit_read": null,
           "explicit_write": null,
           "explicit_write_1h": null,
+          "explicit_write_12h": null,
           "storage_per_1M_tokens_hour": null
         },
         "pricing": {},
@@ -168,6 +171,7 @@
           "explicit_read": null,
           "explicit_write": null,
           "explicit_write_1h": null,
+          "explicit_write_12h": null,
           "storage_per_1M_tokens_hour": null
         },
         "pricing": {},
@@ -183,6 +187,7 @@
       "explicit_read": null,
       "explicit_write": null,
       "explicit_write_1h": null,
+      "explicit_write_12h": null,
       "storage_per_1M_tokens_hour": null,
       "note": "自动前缀缓存命中价；官方未单列缓存写入或存储价格。"
     },

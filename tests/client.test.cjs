@@ -189,3 +189,24 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
   await assert.rejects(createClient(base+'slow/',{timeoutMs:10}).listModels(),e=>e.code==='TIMEOUT');
   assert.ok(requests.every(url=>!url.includes('?')),'filters are client-side, no fake server query parameters');
 });
+
+test('OpenAI 12h TTL cache writes are a separate 2.5x field, tier-aware and service-tier scaled', () => {
+  const ids = ['gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-astra','gpt-6-sol','gpt-6-luna','gpt-6.1-sol'];
+  for (const m of all.data) {
+    if (!ids.includes(m.id)) { assert.equal(m.cache_pricing.explicit_write_12h, null, m.id); continue; }
+    const c = m.cache_pricing, t = m.pricing_tiers[0];
+    close(c.explicit_write_12h, 2.5 * m.pricing.input);
+    close(m.pricing.cache_write, 1.25 * m.pricing.input);
+    assert.equal(c.explicit_write_1h, null, m.id + ' must not reuse the 1h field');
+    close(t.cache_pricing.explicit_write_12h, 2.5 * t.input);
+    const at = {at: m.last_updated + 'T12:00:00Z'};
+    const short = estimate(m, usage(1000, 0, {cacheWrite12hTokens: 1000}), at);
+    close(short.breakdown.cache_write_12h, c.explicit_write_12h / 1000);
+    close(short.total, c.explicit_write_12h / 1000);
+    const long = estimate(m, usage(300000, 0, {cacheWrite12hTokens: 100000, cacheWriteTokens: 100000}), at);
+    close(long.total, 0.1 * (t.input + t.cache_pricing.explicit_write_12h + t.cache_write));
+    close(estimate(m, usage(1000, 0, {cacheWrite12hTokens: 1000}), {...at, serviceTier: 'batch'}).total, c.explicit_write_12h / 2000);
+    code(() => estimate(m, usage(10, 0, {cacheWrite12hTokens: 6, cacheWriteTokens: 5}), at), 'INVALID_ARGUMENT');
+  }
+  code(() => estimate(model('claude-opus-5.5'), usage(1000, 0, {cacheWrite12hTokens: 1}), {at: '2026-10-20'}), 'PRICE_UNAVAILABLE');
+});

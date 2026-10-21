@@ -6,7 +6,7 @@
 })(typeof globalThis !== "undefined" ? globalThis : this, function () {
   "use strict";
   var PRICE = ["input", "output", "cached_input", "cache_write"];
-  var CACHE = ["implicit_read", "explicit_read", "explicit_write", "explicit_write_1h", "storage_per_1M_tokens_hour"];
+  var CACHE = ["implicit_read", "explicit_read", "explicit_write", "explicit_write_1h", "explicit_write_12h", "storage_per_1M_tokens_hour"];
   function error(code, message) { var e = new Error(message); e.code = code; return e; }
   function number(value, label, integer) {
     if (typeof value !== "number" || !Number.isFinite(value) || value < 0 || (integer && !Number.isSafeInteger(value)))
@@ -23,7 +23,7 @@
   }
   function estimate(model, usage, options) {
     usage = usage || {}; options = options || {};
-    var allowedUsage = ["inputTokens", "outputTokens", "cachedInputTokens", "cacheWriteTokens", "cacheWrite1hTokens", "storageTokenHours"];
+    var allowedUsage = ["inputTokens", "outputTokens", "cachedInputTokens", "cacheWriteTokens", "cacheWrite1hTokens", "cacheWrite12hTokens", "storageTokenHours"];
     Object.keys(usage).forEach(function (k) { if (allowedUsage.indexOf(k) < 0) throw error("INVALID_ARGUMENT", "Unknown usage field: " + k); });
     var allowedOptions = ["at", "serviceTier", "dataResidency", "cacheType", "isChineseHoliday"];
     Object.keys(options).forEach(function (k) { if (allowedOptions.indexOf(k) < 0) throw error("INVALID_ARGUMENT", "Unknown estimate option: " + k); });
@@ -31,7 +31,7 @@
       throw error("INVALID_ARGUMENT", "inputTokens and outputTokens are required");
     var counts = {};
     allowedUsage.forEach(function (k) { counts[k] = number(usage[k] === undefined ? 0 : usage[k], k, k !== "storageTokenHours"); });
-    if (counts.cachedInputTokens + counts.cacheWriteTokens + counts.cacheWrite1hTokens > counts.inputTokens)
+    if (counts.cachedInputTokens + counts.cacheWriteTokens + counts.cacheWrite1hTokens + counts.cacheWrite12hTokens > counts.inputTokens)
       throw error("INVALID_ARGUMENT", "inputTokens includes cache reads and writes; their sum cannot exceed inputTokens");
     if (options.dataResidency !== undefined && typeof options.dataResidency !== "boolean")
       throw error("INVALID_ARGUMENT", "dataResidency must be boolean");
@@ -122,11 +122,12 @@
       number(rate, rateKey, false); units[key] = rate; parts[key] = amount / 1e6 * rate;
       if (!Number.isFinite(parts[key])) throw error("INVALID_ARGUMENT", "Usage is too large to estimate " + key);
     }
-    cost("input", counts.inputTokens - counts.cachedInputTokens - counts.cacheWriteTokens - counts.cacheWrite1hTokens, prices.input, "input");
+    cost("input", counts.inputTokens - counts.cachedInputTokens - counts.cacheWriteTokens - counts.cacheWrite1hTokens - counts.cacheWrite12hTokens, prices.input, "input");
     cost("output", counts.outputTokens, prices.output, "output");
     cost("cached_input", counts.cachedInputTokens, readPrice, readKey);
     cost("cache_write", counts.cacheWriteTokens, prices.cache_write, "cache_write");
     cost("cache_write_1h", counts.cacheWrite1hTokens, cache.explicit_write_1h, "explicit_write_1h");
+    cost("cache_write_12h", counts.cacheWrite12hTokens, cache.explicit_write_12h, "explicit_write_12h");
     cost("storage", counts.storageTokenHours, cache.storage_per_1M_tokens_hour, "storage_per_1M_tokens_hour");
     var reference = model.price_basis.type === "reference";
     if (reference) warnings.push("Reference estimate using " + model.price_basis.reference_model_id + "; this is not the subscription bill.");

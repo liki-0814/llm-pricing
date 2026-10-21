@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "4bc60a4085e05889d08fa147b838ffa06766443d69e9017be80c773e95c7c02b",
+    "data_version": "35ff4379e1cc17dee733a5f59d1650b105cb71ec022c87772422e56b88e7d1ac",
     "count": 8
   },
   "vendor": {
@@ -116,6 +116,7 @@
         "explicit_read": 0.17,
         "explicit_write": 2.5,
         "explicit_write_1h": null,
+        "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
@@ -213,6 +214,7 @@
         "explicit_read": 0.25,
         "explicit_write": 3.125,
         "explicit_write_1h": null,
+        "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
@@ -317,6 +319,7 @@
             "explicit_read": 0.12,
             "explicit_write": 1.5,
             "explicit_write_1h": null,
+            "explicit_write_12h": null,
             "storage_per_1M_tokens_hour": null,
             "note": null
           },
@@ -337,6 +340,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -350,6 +354,7 @@
         "explicit_read": 0.04,
         "explicit_write": 0.5,
         "explicit_write_1h": null,
+        "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
@@ -466,6 +471,7 @@
         "explicit_read": 0.016,
         "explicit_write": 0.2,
         "explicit_write_1h": null,
+        "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
@@ -570,6 +576,7 @@
             "explicit_read": 0.01,
             "explicit_write": 0.125,
             "explicit_write_1h": null,
+            "explicit_write_12h": null,
             "storage_per_1M_tokens_hour": null,
             "note": null
           },
@@ -588,6 +595,7 @@
             "explicit_read": 0.02,
             "explicit_write": 0.25,
             "explicit_write_1h": null,
+            "explicit_write_12h": null,
             "storage_per_1M_tokens_hour": null,
             "note": null
           },
@@ -608,6 +616,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -621,6 +630,7 @@
         "explicit_read": 0.003,
         "explicit_write": 0.038,
         "explicit_write_1h": null,
+        "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
@@ -717,6 +727,7 @@
         "explicit_read": 0.17,
         "explicit_write": 2.5,
         "explicit_write_1h": null,
+        "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
@@ -812,6 +823,7 @@
         "explicit_read": 0.05,
         "explicit_write": 0.625,
         "explicit_write_1h": null,
+        "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
       },
@@ -907,6 +919,7 @@
         "explicit_read": null,
         "explicit_write": null,
         "explicit_write_1h": null,
+        "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
         "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。 本模型官方未列显式缓存价（不在显式缓存支持列表），explicit_* 待核实。"
       },

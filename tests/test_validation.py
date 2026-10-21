@@ -19,6 +19,18 @@ class ValidationTests(unittest.TestCase):
         self.assertEqual(validate.validate_api(self.data), [])
         self.assertEqual(build_api.check(self.data), [])
 
+    def test_openai_12h_cache_write_rules(self):
+        m = self.model('gpt-5.6-sol')
+        self.assertEqual((m['cache_pricing']['explicit_write_12h'], m['pricing_tiers'][0]['cache_pricing']['explicit_write_12h']), (10.0, 20.0))
+        self.assertIsNone(m['cache_pricing']['explicit_write_1h'])
+        for mutate in (lambda m: m['pricing_tiers'][0].update(cache_pricing=None),
+                       lambda m: m['cache_pricing'].update(explicit_write_12h=1.0),
+                       lambda m: m['service_tiers'][0]['multipliers'].update(explicit_write_12h=None),
+                       lambda m: m['pricing_tiers'][0]['cache_pricing'].update(explicit_write=9.0)):
+            d = copy.deepcopy(self.data)
+            mutate(next(x for x in d['models'] if x['model_id'] == 'gpt-5.6-sol'))
+            self.assertTrue(validate.validate_data(d))
+
     def test_invalid_calendar_date(self):
         self.data['models'][0]['last_updated'] = '2026-02-31'
         self.assertTrue(validate.validate_data(self.data))

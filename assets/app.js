@@ -137,6 +137,8 @@
     if (isNum(C.explicit_read)) x += kv("显式缓存命中", money(C.explicit_read));
     if (isNum(C.explicit_write)) x += kv("缓存写入 / 创建", money(C.explicit_write));
     if (isNum(C.explicit_write_1h)) x += kv("缓存写入（1 小时 TTL）", money(C.explicit_write_1h));
+    if (isNum(C.explicit_write_12h)) x += kv("缓存写入（12 小时 TTL）", money(C.explicit_write_12h) +
+      (tiers.filter(function (t) { return t.cache_pricing && isNum(t.cache_pricing.explicit_write_12h); }).map(function (t) { return "；" + tierCond(t) + " " + money(t.cache_pricing.explicit_write_12h); }).join("")));
     if (isNum(C.storage_per_1M_tokens_hour)) x += kv("缓存存储 / 百万 token / 小时", C.storage_per_1M_tokens_hour === 0 ? "限时免费" : money(C.storage_per_1M_tokens_hour));
     if (C.note) x += '<p class="dnote">' + esc(C.note) + "</p>";
     out.push(block("缓存价细分", x || '<span class="na">官方未列细分缓存价</span>'));

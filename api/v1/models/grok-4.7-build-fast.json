@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "4bc60a4085e05889d08fa147b838ffa06766443d69e9017be80c773e95c7c02b"
+    "data_version": "35ff4379e1cc17dee733a5f59d1650b105cb71ec022c87772422e56b88e7d1ac"
   },
   "data": {
     "id": "grok-4.7-build-fast",
@@ -102,6 +102,7 @@
           "explicit_read": null,
           "explicit_write": null,
           "explicit_write_1h": null,
+          "explicit_write_12h": null,
           "storage_per_1M_tokens_hour": null,
           "note": "Grok Build Fast 长上下文缓存参照价；不代表订阅实际扣费。"
         },
@@ -114,6 +115,7 @@
       "explicit_read": null,
       "explicit_write": null,
       "explicit_write_1h": null,
+      "explicit_write_12h": null,
       "storage_per_1M_tokens_hour": null,
       "note": "官方 Fast 表列 cached input 参照价；按同一 Grok 4.7 模型的隐式缓存读取口径估算。订阅模型列表不提供实际缓存扣费，未列出独立写入及存储价。"
     },

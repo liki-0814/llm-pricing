@@ -99,7 +99,7 @@ DNS 方式需要按域名判断：2026-10-11 本机查询 xAI 官方价格接口
 
 ## 费用计算口径
 
-`inputTokens` 为总输入，包含缓存读取、缓存创建和 1 小时 TTL 创建的 token；这些部分会从普通输入中扣除，不能重复计费。`outputTokens` 包含供应商计费的思考 token。可选用量：`cachedInputTokens`、`cacheWriteTokens`、`cacheWrite1hTokens`、`storageTokenHours`（token 数乘存储小时数）。
+`inputTokens` 为总输入，包含缓存读取、缓存创建、1 小时 TTL 创建和 12 小时 TTL 创建的 token；这些部分会从普通输入中扣除，不能重复计费。`outputTokens` 包含供应商计费的思考 token。可选用量：`cachedInputTokens`、`cacheWriteTokens`、`cacheWrite1hTokens`、`cacheWrite12hTokens`（按 `cache_pricing.explicit_write_12h` 计费，长上下文档用档内值，OpenAI GPT-5.6 及以后）、`storageTokenHours`（token 数乘存储小时数）。
 
 计算按总输入选择分档 → 高峰/闲时 → 价格生效日期 → 服务档各费用项倍率 → 服务档例外单价 → 数据驻留倍率 → 各项用量费用。`cacheType` 可选 implicit/explicit；默认使用该模型 `pricing.cached_input` 的已标注类型。`serviceTier` 默认 standard；`dataResidency: true` 可叠加已列出的驻留费用。
 
@@ -117,6 +117,7 @@ const r = await api.estimate('gemini-3.5-flash-lite', {
 - 更早日期的历史价不在该快照中，计算会拒绝；晚于核实日的估算会说明快照可能未涵盖后续未公布调整。
 - 缺失且实际使用的价格报错，不当作零；未使用的未知费用项不影响计算。未提供最大输出时不猜上限。
 - 参照价返回 `price_basis` 和订阅提示，仅作成本参考，不代表会员额度或实际账单。
+- OpenAI GPT-5.6 及以后：`cacheWriteTokens` 按默认 30 分钟 TTL 写入价（输入价 ×1.25），`cacheWrite12hTokens` 按 `cache_pricing.explicit_write_12h`（Responses API `ttl: "12h"`，输入价 ×2.5）；长上下文档用 `pricing_tiers[].cache_pricing` 的档内值，Batch/Flex/Fast/Ultrafast/数据驻留按该项倍率计算。
 - Grok 4.7 的长上下文价从总输入 **200,000** tokens 开始（含缓存），整次请求输入/缓存/输出价为 4/1/12 美元；短上下文为 2/0.5/6。Priority ×2、美国区域 ×1.1；只有响应确认 Priority 才采用其倍率。
 - `grok-4.7-build-fast` 单独收录为 **Grok Build 订阅参照价**，不代表实际扣费或会员额度。官方 Fast 表的输入/缓存/输出参照价为 4/1/12；总输入 **超过 200,000** 时为 6/1.5/18 美元。单价已展开，不再乘参照倍率，不套用公共 API Priority/美国区域加价。Build 模型列表实查没有价格字段，默认上下文为 256,000、可选 500,000；本站按渠道默认值校验，独立输出上限和能否关闭推理待核实。
 - 返回 `total`、`breakdown`、`unit_prices`、分档、时段、依据和 warnings。范围为记录内的 token 与缓存费用，排除工具、税费、未收录的多模态费率和订阅额度结算。
@@ -163,6 +164,7 @@ GitHub Actions 在 push、pull request 和手动运行时执行同样的校验�
 - [Gemini 官方定价](https://ai.google.dev/gemini-api/docs/pricing)：Flash-Lite 的缓存例外单价、Pro 的 Batch/Flex 缓存原价与 Priority 存储倍率、Flash 2027 年存储涨价。
 - [Gemini 4 Argon 模型页](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon)、[新特性与定价说明](https://ai.google.dev/gemini-api/docs/latest-model)和[推理档位](https://ai.google.dev/gemini-api/docs/thinking)：2026-11-30 前介绍价及 2026-12-01 起涨价、仅隐式缓存、1M 统一上下文与 65,536 同步输出上限。
 - [DeepSeek 定价](https://api-docs.deepseek.com/quick_start/pricing/)：UTC 高峰时段、中国节假日与闲时价。
+- [OpenAI 定价](https://developers.openai.com/api/docs/pricing)和[提示缓存指南](https://developers.openai.com/api/docs/guides/prompt-caching)：GPT-5.6 及以后默认 30 分钟与 12 小时 TTL 缓存写入价（短/长上下文）。
 - [Claude 定价](https://platform.claude.com/docs/en/about-claude/pricing)：缓存 TTL、Batch 和数据驻留倍率。
 - [MiniMax 模型调用](https://platform.minimax.io/docs/guides/text-generation)和[按量定价](https://platform.minimax.io/docs/guides/pricing-paygo)：M3 与 M3.1-Flash 按量价格。
 - [Kimi Code 模型配置](https://www.kimi.com/code/docs/en/kimi-code/models)：订阅模型、推理档位和上下文来源。

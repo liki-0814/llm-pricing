@@ -157,7 +157,7 @@
     if (!costData) return;
     try {
       var usage = {};
-      ["inputTokens", "outputTokens", "cachedInputTokens", "cacheWriteTokens", "cacheWrite1hTokens", "storageTokenHours"].forEach(function (key) {
+      ["inputTokens", "outputTokens", "cachedInputTokens", "cacheWriteTokens", "cacheWrite1hTokens", "cacheWrite12hTokens", "storageTokenHours"].forEach(function (key) {
         var value = $(key).value.trim();
         if (!value) throw new Error("请填写 " + key + "，不用时填 0。");
         usage[key] = Number(value);

@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "4bc60a4085e05889d08fa147b838ffa06766443d69e9017be80c773e95c7c02b",
+    "data_version": "35ff4379e1cc17dee733a5f59d1650b105cb71ec022c87772422e56b88e7d1ac",
     "count": 7
   },
   "vendor": {
@@ -71,10 +71,11 @@
       "context_length_label": "1.05M",
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [
-        "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+        "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价至少持续到 2026-11-21。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价至少持续到 2026-11-21。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $10.0（长上下文 $20.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -117,7 +118,15 @@
           "output": 30.0,
           "cached_input": 0.8,
           "cache_write": 10.0,
-          "cache_pricing": null,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 10.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 20.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $10.0、12 小时 TTL $20.0（官方定价页）。"
+          },
           "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
         }
       ],
@@ -135,6 +144,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -155,6 +165,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -175,6 +186,7 @@
             "explicit_read": 2.0,
             "explicit_write": 2.0,
             "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -195,6 +207,7 @@
             "explicit_read": 1.1,
             "explicit_write": 1.1,
             "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -208,8 +221,9 @@
         "explicit_read": null,
         "explicit_write": 5.0,
         "explicit_write_1h": null,
+        "explicit_write_12h": 10.0,
         "storage_per_1M_tokens_hour": null,
-        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
       },
       "price_schedule": [
         {
@@ -276,10 +290,11 @@
       "context_length_label": "1.05M",
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [
-        "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
+        "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $18.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $18.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -322,7 +337,15 @@
           "output": 18.0,
           "cached_input": 0.4,
           "cache_write": 5.0,
-          "cache_pricing": null,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 5.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 10.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $5.0、12 小时 TTL $10.0（官方定价页）。"
+          },
           "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
         }
       ],
@@ -340,6 +363,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -360,6 +384,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -380,6 +405,7 @@
             "explicit_read": 2.0,
             "explicit_write": 2.0,
             "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -400,6 +426,7 @@
             "explicit_read": 1.1,
             "explicit_write": 1.1,
             "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -413,8 +440,9 @@
         "explicit_read": null,
         "explicit_write": 2.5,
         "explicit_write_1h": null,
+        "explicit_write_12h": 5.0,
         "storage_per_1M_tokens_hour": null,
-        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
       },
       "price_schedule": [],
       "unverified_fields": [],
@@ -465,10 +493,11 @@
       "context_length_label": "1.05M",
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [
-        "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+        "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.4、缓存读取 $0.04、缓存写入 $0.5、输出 $1.8。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.4、缓存读取 $0.04、缓存写入 $0.5、输出 $1.8。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $0.5（长上下文 $1.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -511,7 +540,15 @@
           "output": 1.8,
           "cached_input": 0.04,
           "cache_write": 0.5,
-          "cache_pricing": null,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 0.5,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 1.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $0.5、12 小时 TTL $1.0（官方定价页）。"
+          },
           "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
         }
       ],
@@ -529,6 +566,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -549,6 +587,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -569,6 +608,7 @@
             "explicit_read": 2.0,
             "explicit_write": 2.0,
             "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -589,6 +629,7 @@
             "explicit_read": 1.1,
             "explicit_write": 1.1,
             "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -602,8 +643,9 @@
         "explicit_read": null,
         "explicit_write": 0.25,
         "explicit_write_1h": null,
+        "explicit_write_12h": 0.5,
         "storage_per_1M_tokens_hour": null,
-        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
       },
       "price_schedule": [],
       "unverified_fields": [],
@@ -654,10 +696,11 @@
       "context_length_label": "1.05M",
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [
-        "https://developers.openai.com/api/docs/models/gpt-6-astra"
+        "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $20.0、缓存读取 $2.0、缓存写入 $25.0、输出 $75.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $20.0、缓存读取 $2.0、缓存写入 $25.0、输出 $75.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $25.0（长上下文 $50.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -699,7 +742,15 @@
           "output": 75.0,
           "cached_input": 2.0,
           "cache_write": 25.0,
-          "cache_pricing": null,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 25.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 50.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $25.0、12 小时 TTL $50.0（官方定价页）。"
+          },
           "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
         }
       ],
@@ -717,6 +768,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -737,6 +789,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -757,6 +810,7 @@
             "explicit_read": 2.0,
             "explicit_write": 2.0,
             "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -777,6 +831,7 @@
             "explicit_read": 6.0,
             "explicit_write": 6.0,
             "explicit_write_1h": 6.0,
+            "explicit_write_12h": 6.0,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -797,6 +852,7 @@
             "explicit_read": 1.1,
             "explicit_write": 1.1,
             "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -810,8 +866,9 @@
         "explicit_read": null,
         "explicit_write": 12.5,
         "explicit_write_1h": null,
+        "explicit_write_12h": 25.0,
         "storage_per_1M_tokens_hour": null,
-        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
       },
       "price_schedule": [],
       "unverified_fields": [
@@ -865,10 +922,11 @@
       "context_length_label": "1.05M",
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [
-        "https://developers.openai.com/api/docs/models/gpt-6-sol"
+        "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -911,7 +969,15 @@
           "output": 15.0,
           "cached_input": 0.4,
           "cache_write": 5.0,
-          "cache_pricing": null,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 5.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 10.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $5.0、12 小时 TTL $10.0（官方定价页）。"
+          },
           "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
         }
       ],
@@ -929,6 +995,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -949,6 +1016,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -969,6 +1037,7 @@
             "explicit_read": 2.0,
             "explicit_write": 2.0,
             "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -989,6 +1058,7 @@
             "explicit_read": 1.1,
             "explicit_write": 1.1,
             "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -1002,8 +1072,9 @@
         "explicit_read": null,
         "explicit_write": 2.5,
         "explicit_write_1h": null,
+        "explicit_write_12h": 5.0,
         "storage_per_1M_tokens_hour": null,
-        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
       },
       "price_schedule": [],
       "unverified_fields": [],
@@ -1054,10 +1125,11 @@
       "context_length_label": "1.05M",
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [
-        "https://developers.openai.com/api/docs/models/gpt-6-luna"
+        "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.2、缓存读取 $0.02、缓存写入 $0.25、输出 $0.75。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.2、缓存读取 $0.02、缓存写入 $0.25、输出 $0.75。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $0.25（长上下文 $0.5），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -1100,7 +1172,15 @@
           "output": 0.75,
           "cached_input": 0.02,
           "cache_write": 0.25,
-          "cache_pricing": null,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 0.25,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $0.25、12 小时 TTL $0.5（官方定价页）。"
+          },
           "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
         }
       ],
@@ -1118,6 +1198,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -1138,6 +1219,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -1158,6 +1240,7 @@
             "explicit_read": 2.0,
             "explicit_write": 2.0,
             "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -1178,6 +1261,7 @@
             "explicit_read": 1.1,
             "explicit_write": 1.1,
             "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -1191,8 +1275,9 @@
         "explicit_read": null,
         "explicit_write": 0.125,
         "explicit_write_1h": null,
+        "explicit_write_12h": 0.25,
         "storage_per_1M_tokens_hour": null,
-        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
       },
       "price_schedule": [],
       "unverified_fields": [],
@@ -1243,10 +1328,11 @@
       "context_length_label": "1.05M",
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [
-        "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+        "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.2、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。",
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.2、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -1288,7 +1374,15 @@
           "output": 15.0,
           "cached_input": 0.2,
           "cache_write": 5.0,
-          "cache_pricing": null,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 5.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 10.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $5.0、12 小时 TTL $10.0（官方定价页）。"
+          },
           "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
         }
       ],
@@ -1306,6 +1400,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -1326,6 +1421,7 @@
             "explicit_read": 0.5,
             "explicit_write": 0.5,
             "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -1346,6 +1442,7 @@
             "explicit_read": 2.0,
             "explicit_write": 2.0,
             "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -1366,6 +1463,7 @@
             "explicit_read": 6.0,
             "explicit_write": 6.0,
             "explicit_write_1h": 6.0,
+            "explicit_write_12h": 6.0,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -1386,6 +1484,7 @@
             "explicit_read": 1.1,
             "explicit_write": 1.1,
             "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
@@ -1399,8 +1498,9 @@
         "explicit_read": null,
         "explicit_write": 2.5,
         "explicit_write_1h": null,
+        "explicit_write_12h": 5.0,
         "storage_per_1M_tokens_hour": null,
-        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write 为缓存写入价（官方：标准输入价 ×1.25）；长上下文档缓存价同为 2×（见 pricing_tiers）。"
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
       },
       "price_schedule": [],
       "unverified_fields": [],

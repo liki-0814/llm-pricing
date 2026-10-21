@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "4bc60a4085e05889d08fa147b838ffa06766443d69e9017be80c773e95c7c02b",
+    "data_version": "35ff4379e1cc17dee733a5f59d1650b105cb71ec022c87772422e56b88e7d1ac",
     "count": 2
   },
   "vendor": {
@@ -133,6 +133,7 @@
         "explicit_read": null,
         "explicit_write": null,
         "explicit_write_1h": null,
+        "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
         "note": "缓存命中价即 pricing.cached_input（高峰/闲时各有一档，见 off_peak_pricing）；官方页未列缓存写入价。"
       },
@@ -253,6 +254,7 @@
         "explicit_read": null,
         "explicit_write": null,
         "explicit_write_1h": null,
+        "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
         "note": "缓存命中价即 pricing.cached_input（高峰/闲时各有一档，见 off_peak_pricing）；官方页未列缓存写入价。"
       },

@@ -863,6 +863,13 @@
                       ],
                       "exclusiveMinimum": 0
                     },
+                    "explicit_write_12h": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "exclusiveMinimum": 0
+                    },
                     "storage_per_1M_tokens_hour": {
                       "type": [
                         "number",
@@ -880,6 +887,7 @@
                     "explicit_read",
                     "explicit_write",
                     "explicit_write_1h",
+                    "explicit_write_12h",
                     "storage_per_1M_tokens_hour"
                   ],
                   "additionalProperties": false
@@ -1054,6 +1062,14 @@
                       "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "explicit_write_1h": {
+                      "type": [
+                        "number",
+                        "null"
+                      ],
+                      "minimum": 0,
+                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                    },
+                    "explicit_write_12h": {
                       "type": [
                         "number",
                         "null"
@@ -1332,6 +1348,7 @@
           "explicit_read",
           "explicit_write",
           "explicit_write_1h",
+          "explicit_write_12h",
           "storage_per_1M_tokens_hour",
           "note"
         ],
@@ -1359,7 +1376,7 @@
               "null"
             ],
             "minimum": 0,
-            "description": "Cache creation / write price (5-minute TTL where TTLs exist)"
+            "description": "Cache creation / write price at the default TTL (Anthropic 5 minutes, OpenAI 30 minutes)"
           },
           "explicit_write_1h": {
             "type": [
@@ -1368,6 +1385,14 @@
             ],
             "minimum": 0,
             "description": "1-hour TTL cache write price (Anthropic, Kimi K3)"
+          },
+          "explicit_write_12h": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "12-hour minimum-TTL cache write price (OpenAI GPT-5.6+ Responses API prompt_cache_options.ttl=\"12h\", 2.5x uncached input; the default 30-minute write is explicit_write / pricing.cache_write). Total write rate, not a surcharge. Long-context values are in pricing_tiers[].cache_pricing"
           },
           "storage_per_1M_tokens_hour": {
             "type": [

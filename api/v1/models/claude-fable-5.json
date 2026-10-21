@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "4bc60a4085e05889d08fa147b838ffa06766443d69e9017be80c773e95c7c02b"
+    "data_version": "35ff4379e1cc17dee733a5f59d1650b105cb71ec022c87772422e56b88e7d1ac"
   },
   "data": {
     "id": "claude-fable-5",
@@ -100,6 +100,7 @@
           "explicit_read": 0.5,
           "explicit_write": 0.5,
           "explicit_write_1h": 0.5,
+          "explicit_write_12h": null,
           "storage_per_1M_tokens_hour": null
         },
         "pricing": {},
@@ -120,6 +121,7 @@
           "explicit_read": 1.1,
           "explicit_write": 1.1,
           "explicit_write_1h": 1.1,
+          "explicit_write_12h": null,
           "storage_per_1M_tokens_hour": null
         },
         "pricing": {},
@@ -133,6 +135,7 @@
       "explicit_read": 1,
       "explicit_write": 12.5,
       "explicit_write_1h": 20,
+      "explicit_write_12h": null,
       "storage_per_1M_tokens_hour": null,
       "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
     },

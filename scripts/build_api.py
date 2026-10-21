@@ -57,7 +57,7 @@ def price_value(v):
 LIMIT_FIELDS = ("context_length", "max_output_tokens")
 TIER_FIELDS = ("condition", "input_tokens_gt", "input_tokens_lte", "input", "output", "cached_input",
                "cache_write", "cache_pricing", "note")
-CACHE_FIELDS = ("implicit_read", "explicit_read", "explicit_write", "explicit_write_1h",
+CACHE_FIELDS = ("implicit_read", "explicit_read", "explicit_write", "explicit_write_1h", "explicit_write_12h",
                 "storage_per_1M_tokens_hour", "note")
 SERVICE_TIER_NAMES = ("batch", "flex", "fast", "priority", "ultrafast", "data_residency")
 SCHEDULE_KINDS = ("promotion", "scheduled_increase", "scheduled_decrease")
@@ -372,8 +372,9 @@ def openapi(d, vendor_slugs, model_ids):
         "properties": {
             "implicit_read": dict(price, description="Implicit (automatic) cache hit price"),
             "explicit_read": dict(price, description="Explicit cache hit (read) price"),
-            "explicit_write": dict(price, description="Cache creation / write price (5-minute TTL where TTLs exist)"),
+            "explicit_write": dict(price, description="Cache creation / write price at the default TTL (Anthropic 5 minutes, OpenAI 30 minutes)"),
             "explicit_write_1h": dict(price, description="1-hour TTL cache write price (Anthropic, Kimi K3)"),
+            "explicit_write_12h": dict(price, description="12-hour minimum-TTL cache write price (OpenAI GPT-5.6+ Responses API prompt_cache_options.ttl=\"12h\", 2.5x uncached input; the default 30-minute write is explicit_write / pricing.cache_write). Total write rate, not a surcharge. Long-context values are in pricing_tiers[].cache_pricing"),
             "storage_per_1M_tokens_hour": dict(price, description="Cache storage fee per 1M tokens per hour (USD, not per 1M tokens; 0 = currently free)"),
             "note": {"type": ["string", "null"]}},
     }

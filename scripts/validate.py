@@ -150,6 +150,22 @@ def validate_data(d):
         for k, base in [('explicit_write', 'cache_write')]:
             if numeric(C[k]) and numeric(m[base]) and C[k] != m[base]:
                 fail(where, 'cache write breakdown disagrees with base')
+        for t in m['pricing_tiers']:
+            tc = t['cache_pricing'] or {}
+            if numeric(tc.get('explicit_write')) and numeric(t['cache_write']) and tc['explicit_write'] != t['cache_write']:
+                fail(where, 'tier cache write breakdown disagrees with tier cache_write')
+        # 12-hour TTL writes are a separate, longer-lived write rate; never a substitute for 1h or default writes.
+        if numeric(C['explicit_write_12h']):
+            if not numeric(C['explicit_write']) or C['explicit_write_12h'] < C['explicit_write']:
+                fail(where, 'explicit_write_12h requires a default explicit_write no greater than it')
+            for t in m['pricing_tiers']:
+                tc = t['cache_pricing'] or {}
+                # Without a tier value the estimator would silently reuse the short-context 12h rate.
+                if numeric(t['cache_write']) and not numeric(tc.get('explicit_write_12h')):
+                    fail(where, 'tiered model with explicit_write_12h needs tier cache_pricing.explicit_write_12h')
+        for s in m['service_tiers']:
+            if numeric(C['explicit_write_12h']) and s['multipliers']['explicit_write_12h'] is None and 'explicit_write_12h' not in s['pricing']:
+                fail(where, 'service tier ' + s['name'] + ' lacks explicit_write_12h multiplier')
         ctype = bill['cached_input_type']
         if ctype != 'unspecified' and C[ctype + '_read'] != m['cached_input']:
             fail(where, 'cached_input_type disagrees with cache price')
