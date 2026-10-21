@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { promisify } = require('node:util');
 const execFile = promisify(require('node:child_process').execFile);
-const { createClient } = require('../assets/client.js');
+const { createClient, estimate: localEstimate } = require('../assets/client.js');
 const { createDohFetch } = require('../assets/node-doh.cjs');
 const root = path.resolve(__dirname, '..');
 
@@ -77,16 +77,27 @@ async function main() {
   }
   const search=await client.listModels({vendor:'xai',q:'grok 4.7',sort:'input',priceBasis:'official',limit:1});
   assert.equal(search.data[0].id,'grok-4.7');
-  const estimate=await client.estimate('grok-4.7',{inputTokens:200000,outputTokens:10000,cachedInputTokens:100000},
-    {at:'2026-10-11',serviceTier:'priority',dataResidency:true});
-  assert.ok(Math.abs(estimate.total-1.364)<1e-10);
+  // Date-independent: estimate at each model's own verification date (no hard-coded snapshot day)
+  // and compare the live client result with the same estimate over the committed local snapshot.
+  const localModel=id=>JSON.parse(fs.readFileSync(path.join(root,'api/v1/models',id+'.json'))).data;
+  const atSnapshot=m=>({at:m.last_updated+'T12:00:00Z',isChineseHoliday:false});
+  const grok=localModel('grok-4.7');
+  const grokUsage={inputTokens:200000,outputTokens:10000,cachedInputTokens:100000};
+  const grokOptions={...atSnapshot(grok),serviceTier:'priority',dataResidency:true};
+  const estimate=await client.estimate('grok-4.7',grokUsage,grokOptions);
+  assert.deepEqual(estimate,localEstimate(grok,grokUsage,grokOptions),'grok-4.7 live estimate differs from local snapshot');
+  assert.equal(estimate.pricing_tier,'input_tokens>199999');
+  assert.equal(estimate.service_tier,'priority');
+  assert.ok(Number.isFinite(estimate.total)&&estimate.total>0);
   const fast=await client.getModel('grok-4.7-build-fast');
   assert.equal(fast.data.billing.channel,'subscription');
   assert.equal(fast.data.price_basis.type,'reference');
   assert.equal(fast.data.pricing_status.input,'reference');
-  const fastEstimate=await client.estimate('grok-4.7-build-fast',
-    {inputTokens:200001,outputTokens:10000,cachedInputTokens:100000},{at:'2026-10-11'});
-  assert.ok(Math.abs(fastEstimate.total-0.930006)<1e-10);
+  const fastUsage={inputTokens:200001,outputTokens:10000,cachedInputTokens:100000};
+  const fastEstimate=await client.estimate('grok-4.7-build-fast',fastUsage,atSnapshot(fast.data));
+  assert.deepEqual(fastEstimate,localEstimate(localModel('grok-4.7-build-fast'),fastUsage,atSnapshot(fast.data)),
+    'grok-4.7-build-fast live estimate differs from local snapshot');
+  assert.equal(fastEstimate.pricing_tier,'input_tokens>200000');
   assert.ok(fastEstimate.warnings.some(w=>w.includes('not the subscription bill')));
   const report={checked_at:new Date().toISOString(),base_url:base.href,node_version:process.version,
     dns_mode:doh?'explicit HTTPS DNS; default TLS verification':'system DNS',
