@@ -1,11 +1,11 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-20",
+    "updated_at": "2026-10-21",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "d45c3729746f3da306ca06665c9a194440d87c6b3fe2084f90d7298db0c98ea1",
+    "data_version": "4bc60a4085e05889d08fa147b838ffa06766443d69e9017be80c773e95c7c02b",
     "count": 46,
     "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3、4 系列最新；MiniMax 3 系列；xAI Grok 4.7；Grok Build Fast 单独作为订阅渠道参照价收录。",
     "description": "美元 / 每百万 token；官方价格与用户确认参照价明确区分，参照依据见 price_basis。null 不代表零；状态与计费规则见各结构化字段。"
@@ -6197,8 +6197,8 @@
         "https://docs.x.ai/developers/advanced-api-usage/priority-processing",
         "https://docs.x.ai/developers/rest-api-reference/inference/models"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "公共 xAI API 模型 ID：grok-4.7。全球接口 https://api.x.ai/v1；输入达到 200,000 tokens（含缓存）后，整次请求使用长上下文单价。美国区域接口 https://us.api.x.ai/v1 加价 10%；Priority 仅在响应确认 priority 时按 2 倍计价。Batch 当前不支持；Grok 4.7 Fast 仅在 Cursor/Grok Build 提供，未作为公共 API 模型收录。工具费用不在本表范围内。 Grok Build 同名模型的渠道默认上下文为 256,000、可选 500,000；本条 500,000 为公共 API 文档口径。",
+      "last_updated": "2026-10-21",
+      "notes": "公共 xAI API 模型 ID：grok-4.7。全球接口 https://api.x.ai/v1；输入达到 200,000 tokens（含缓存）后，整次请求使用长上下文单价。美国区域接口 https://us.api.x.ai/v1 加价 10%；Priority 仅在响应确认 priority 时按 2 倍计价。Batch API 在 us-east-1 / us-west-2 集群支持，按标准价 8 折（批量折扣 20%，输入、输出、缓存与推理 token 同折扣）；美国区域加价集群（us-central-1）不支持 Batch；Grok 4.7 Fast 仅在 Cursor/Grok Build 提供，未作为公共 API 模型收录。工具费用不在本表范围内。 Grok Build 同名模型的渠道默认上下文为 256,000、可选 500,000；本条 500,000 为公共 API 文档口径。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -6252,6 +6252,28 @@
         }
       ],
       "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.8,
+          "multipliers": {
+            "input": 0.8,
+            "output": 0.8,
+            "cached_input": 0.8,
+            "cache_write": null,
+            "implicit_read": 0.8,
+            "explicit_read": null,
+            "explicit_write": null,
+            "explicit_write_1h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "note": "Batch API：官方定价页批量折扣表列出 grok-4.7 为 20%（输入、输出、缓存与推理 token 均适用），即标准价 0.8×（含长上下文价）；模型页标注 Batch 支持 us-east-1、us-west-2，美国区域加价集群（us-central-1，即数据驻留端点）不支持 Batch，故不应与 data_residency 叠加。",
+          "sources": [
+            "https://docs.x.ai/developers/pricing",
+            "https://docs.x.ai/developers/models/grok-4.7",
+            "https://docs.x.ai/developers/advanced-api-usage/batch-api"
+          ]
+        },
         {
           "name": "priority",
           "multiplier": 2.0,
