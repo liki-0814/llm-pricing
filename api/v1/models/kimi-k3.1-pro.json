@@ -1,0 +1,108 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-25",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "data_version": "3f2ae07764590648f08d7a1f93f111890566a6de82be2b65b07ab5ebf9bdcb7c"
+  },
+  "data": {
+    "id": "kimi-k3.1-pro",
+    "name": "Kimi K3.1 Pro",
+    "vendor": "moonshot",
+    "vendor_name": "Moonshot Kimi",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 2.0,
+      "output": 10.0,
+      "cached_input": 0.2,
+      "cache_write": 2.0
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://platform.kimi.ai/docs/pricing/chat"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1048576,
+    "context_length_label": "1,048,576 tokens",
+    "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+    "extra_sources": [
+      "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+      "https://platform.kimi.ai/docs/models",
+      "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+    ],
+    "last_updated": "2026-10-25",
+    "notes": "K3 的后训练升级版，K3.1 系列首个模型；按量计费、无上下文长度分档。缓存写入按 TTL 计价：5 分钟 $2.00，1 小时 $4.00（表中为 5 分钟）。缓存命中 $0.20、自动续期、无额外写入费。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "high",
+        "max"
+      ],
+      "default": "max",
+      "can_disable": false,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      },
+      "note": "官方：顶层 reasoning_effort 支持 low/high/max，默认 max；K3.1 Pro 恒开思考，关闭思考的请求会被拒绝。",
+      "sources": [
+        "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+        "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+      ]
+    },
+    "limits": {
+      "context_length": 1048576,
+      "max_output_tokens": 1048576,
+      "status": "verified",
+      "note": "官方 K3.1 Pro 文档：上下文 1M（1,048,576）；max_completion_tokens 默认 131072，最大可设 1048576。",
+      "sources": [
+        "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+        "https://platform.kimi.ai/docs/pricing/chat"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": 2.0,
+      "explicit_write_1h": 4.0,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "Kimi API 自动缓存重复前缀；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h；命中自动续期、无额外写入费。"
+    },
+    "price_schedule": [],
+    "unverified_fields": [],
+    "links": {
+      "self": "models/kimi-k3.1-pro.json",
+      "vendor": "vendors/moonshot.json"
+    }
+  }
+}

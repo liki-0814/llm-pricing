@@ -1,11 +1,11 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-21",
+    "updated_at": "2026-10-25",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "35ff4379e1cc17dee733a5f59d1650b105cb71ec022c87772422e56b88e7d1ac",
+    "data_version": "3f2ae07764590648f08d7a1f93f111890566a6de82be2b65b07ab5ebf9bdcb7c",
     "count": 2
   },
   "vendor": {
@@ -69,8 +69,8 @@
         "https://platform.minimax.io/docs/guides/text-generation",
         "https://platform.minimax.io/docs/api-reference/text-chat-openai"
       ],
-      "last_updated": "2026-10-20",
-      "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09）。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
+      "last_updated": "2026-10-25",
+      "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方页标注“Permanent 50% off”，原价 $0.60 / $2.40 / 缓存 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12。>512K 原价 $1.20 / $4.80 / $0.24。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09，原价 $0.90 / $3.60 / $0.18），同样标注 Permanent 50% off。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
       "reasoning_effort": {
         "supported": false,
         "levels": null,

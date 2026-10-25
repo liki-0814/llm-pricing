@@ -1,12 +1,12 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-21",
+    "updated_at": "2026-10-25",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "35ff4379e1cc17dee733a5f59d1650b105cb71ec022c87772422e56b88e7d1ac",
-    "count": 46
+    "data_version": "3f2ae07764590648f08d7a1f93f111890566a6de82be2b65b07ab5ebf9bdcb7c",
+    "count": 48
   },
   "data": {
     "endpoints": {
@@ -255,6 +255,24 @@
         "vendor": "moonshot",
         "links": {
           "self": "models/kimi-k3.json",
+          "vendor": "vendors/moonshot.json"
+        }
+      },
+      {
+        "id": "kimi-k3.1-pro",
+        "name": "Kimi K3.1 Pro",
+        "vendor": "moonshot",
+        "links": {
+          "self": "models/kimi-k3.1-pro.json",
+          "vendor": "vendors/moonshot.json"
+        }
+      },
+      {
+        "id": "kimi-k3.1-pro-highspeed",
+        "name": "Kimi K3.1 Pro Highspeed",
+        "vendor": "moonshot",
+        "links": {
+          "self": "models/kimi-k3.1-pro-highspeed.json",
           "vendor": "vendors/moonshot.json"
         }
       },

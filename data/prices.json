@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-10-21",
+    "last_updated": "2026-10-25",
     "description": "美元 / 每百万 token；官方价格与用户确认参照价明确区分，参照依据见 price_basis。null 不代表零；状态与计费规则见各结构化字段。",
     "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3、4 系列最新；MiniMax 3 系列；xAI Grok 4.7；Grok Build Fast 单独作为订阅渠道参照价收录。"
   },
@@ -3599,6 +3599,158 @@
     },
     {
       "vendor": "Moonshot Kimi",
+      "model": "Kimi K3.1 Pro",
+      "model_id": "kimi-k3.1-pro",
+      "currency": "USD",
+      "input": 2.0,
+      "output": 10.0,
+      "cached_input": 0.2,
+      "cache_write": 2.0,
+      "peak_note": null,
+      "offpeak": null,
+      "context_length": "1,048,576 tokens",
+      "context_tokens": 1048576,
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [
+        "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+        "https://platform.kimi.ai/docs/models",
+        "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+      ],
+      "last_updated": "2026-10-25",
+      "notes": "K3 的后训练升级版，K3.1 系列首个模型；按量计费、无上下文长度分档。缓存写入按 TTL 计价：5 分钟 $2.00，1 小时 $4.00（表中为 5 分钟）。缓存命中 $0.20、自动续期、无额外写入费。",
+      "unverified_fields": [],
+      "id": "m47",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": false,
+        "note": "官方：顶层 reasoning_effort 支持 low/high/max，默认 max；K3.1 Pro 恒开思考，关闭思考的请求会被拒绝。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+          "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+        ]
+      },
+      "limits": {
+        "context_length": 1048576,
+        "max_output_tokens": 1048576,
+        "note": "官方 K3.1 Pro 文档：上下文 1M（1,048,576）；max_completion_tokens 默认 131072，最大可设 1048576。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 2.0,
+        "explicit_write_1h": 4.0,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "Kimi API 自动缓存重复前缀；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h；命中自动续期、无额外写入费。"
+      },
+      "price_schedule": [],
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null
+    },
+    {
+      "vendor": "Moonshot Kimi",
+      "model": "Kimi K3.1 Pro Highspeed",
+      "model_id": "kimi-k3.1-pro-highspeed",
+      "currency": "USD",
+      "input": 4.0,
+      "output": 20.0,
+      "cached_input": 0.2,
+      "cache_write": 4.0,
+      "peak_note": null,
+      "offpeak": null,
+      "context_length": "1,048,576 tokens",
+      "context_tokens": 1048576,
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [
+        "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+        "https://platform.kimi.ai/docs/models",
+        "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+      ],
+      "last_updated": "2026-10-25",
+      "notes": "K3.1 Pro 高速版（同一模型，约 2–3× 输出速度）；按量计费、无上下文长度分档。缓存写入按 TTL 计价：5 分钟 $4.00，1 小时 $8.00（表中为 5 分钟）。缓存命中 $0.20、自动续期、无额外写入费。",
+      "unverified_fields": [],
+      "id": "m48",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": false,
+        "note": "官方：顶层 reasoning_effort 支持 low/high/max，默认 max；K3.1 Pro 恒开思考，关闭思考的请求会被拒绝。 高速版与 K3.1 Pro 能力相同（官方模型列表），沿用同一设置。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+          "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+        ]
+      },
+      "limits": {
+        "context_length": 1048576,
+        "max_output_tokens": 1048576,
+        "note": "官方 K3.1 Pro 文档：上下文 1M（1,048,576）；max_completion_tokens 默认 131072，最大可设 1048576。 高速版为同一模型（官方），沿用同一上限。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 4.0,
+        "explicit_write_1h": 8.0,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "Kimi API 自动缓存重复前缀；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h；命中自动续期、无额外写入费。"
+      },
+      "price_schedule": [],
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null
+    },
+    {
+      "vendor": "Moonshot Kimi",
       "model": "Kimi K2.7 Code",
       "model_id": "kimi-k2.7-code",
       "currency": "USD",
@@ -3611,9 +3763,11 @@
       "context_length": "262,144 tokens",
       "context_tokens": 262144,
       "source_url": "https://platform.kimi.ai/docs/pricing/chat",
-      "extra_sources": [],
-      "last_updated": "2026-10-11",
-      "notes": "官方页未列缓存写入价。",
+      "extra_sources": [
+        "https://platform.kimi.ai/docs/models"
+      ],
+      "last_updated": "2026-10-25",
+      "notes": "官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
       "unverified_fields": [],
       "id": "m28",
       "reasoning_effort": {
@@ -3701,9 +3855,11 @@
       "context_length": "262,144 tokens",
       "context_tokens": 262144,
       "source_url": "https://platform.kimi.ai/docs/pricing/chat",
-      "extra_sources": [],
-      "last_updated": "2026-10-11",
-      "notes": "高速版；官方页未列缓存写入价。",
+      "extra_sources": [
+        "https://platform.kimi.ai/docs/models"
+      ],
+      "last_updated": "2026-10-25",
+      "notes": "高速版；官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
       "unverified_fields": [],
       "id": "m29",
       "reasoning_effort": {
@@ -5105,7 +5261,7 @@
     },
     {
       "currency": "USD",
-      "last_updated": "2026-10-20",
+      "last_updated": "2026-10-25",
       "extra_sources": [
         "https://platform.minimax.io/docs/guides/text-generation",
         "https://platform.minimax.io/docs/api-reference/text-chat-openai"
@@ -5122,7 +5278,7 @@
       "context_length": "1,000,000 tokens",
       "context_tokens": 1000000,
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
-      "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09）。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
+      "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方页标注“Permanent 50% off”，原价 $0.60 / $2.40 / 缓存 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12。>512K 原价 $1.20 / $4.80 / $0.24。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09，原价 $0.90 / $3.60 / $0.18），同样标注 Permanent 50% off。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
       "unverified_fields": [],
       "reasoning_effort": {
         "supported": false,
