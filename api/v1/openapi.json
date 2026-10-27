@@ -3,7 +3,7 @@
   "info": {
     "title": "LLM API Pricing (static JSON API)",
     "version": "1.1.0",
-    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD per 1M tokens. Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-10-25."
+    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD per 1M tokens. Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-10-27."
   },
   "servers": [
     {
@@ -86,6 +86,7 @@
                 "gpt-6-sol",
                 "gpt-6-luna",
                 "gpt-6.1-sol",
+                "gpt-6.1-terra",
                 "claude-fable-5.1",
                 "claude-mythos-5.1",
                 "claude-fable-5",

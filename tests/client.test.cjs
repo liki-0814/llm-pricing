@@ -175,7 +175,7 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
   assert.deepEqual(index.data.models.map(m=>m.id),full.data.map(m=>m.id));
   for (const v of vendors.data) assert.deepEqual(v.model_ids,full.data.filter(m=>m.vendor===v.slug).map(m=>m.id));
   const cheapest=await client.listModels({vendor:'openai',sort:'input',limit:2,priceBasis:'official'});
-  assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,7);
+  assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,8);
   const search=await client.listModels({q:'gemini pro'});assert.equal(search.data[0].id,'gemini-3.1-pro-preview');
   const missingLast=await client.listModels({sort:'-cache_write'});assert.equal(missingLast.data.at(-1).pricing.cache_write,null);
   const current = full.data.find(m=>m.id==='gemini-3.1-pro-preview');
@@ -191,7 +191,7 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
 });
 
 test('OpenAI 12h TTL cache writes are a separate 2.5x field, tier-aware and service-tier scaled', () => {
-  const ids = ['gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-astra','gpt-6-sol','gpt-6-luna','gpt-6.1-sol'];
+  const ids = ['gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-astra','gpt-6-sol','gpt-6-luna','gpt-6.1-sol','gpt-6.1-terra'];
   for (const m of all.data) {
     if (!ids.includes(m.id)) { assert.equal(m.cache_pricing.explicit_write_12h, null, m.id); continue; }
     const c = m.cache_pricing, t = m.pricing_tiers[0];
