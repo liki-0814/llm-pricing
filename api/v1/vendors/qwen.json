@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "9daa868b95d2f77783c136836273c1d19d5f87f467f886a8acaa8518732b8e10",
+    "data_version": "34d0633be30a7e43f85623099999e893d5ed769c992ebaa041c1f02fef218f7f",
     "count": 8
   },
   "vendor": {
@@ -73,9 +73,10 @@
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
       "extra_sources": [
         "https://www.alibabacloud.com/help/en/model-studio/context-cache",
-        "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max"
+        "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max",
+        "https://www.qwencloud.com/models/qwen3.8-max"
       ],
-      "last_updated": "2026-10-11",
+      "last_updated": "2026-10-28",
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
       "reasoning_effort": {
         "supported": true,
@@ -110,7 +111,32 @@
         ]
       },
       "pricing_tiers": [],
-      "service_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch File 价来自 qwencloud 模型页（https://www.qwencloud.com/models/qwen3.8-max，2026-10-28 复核）：Input(Batch File) $1 / Output(Batch File) $3，为标价（$2 / $6）的 0.5×。阿里云国际站（新加坡）模型页 qwen3-8-max 的 Batch Inference 能力仍标 Unsupported，新加坡价格表也未列 Batch 价，即新加坡页面尚未列出 Batch，此档依据 qwencloud 页面，待新加坡页更新后再核对。官方定价页（Qwen-Max/Flash 小节）原文：“If the model supports batch calls, the unit price for both input and output tokens is 50% of the real-time inference price. If the model supports context cache, only input tokens receive a discount. These two discounts cannot apply simultaneously.”；Context Cache 文档：“Calls made using the OpenAI-compatible - Batch (file input) method are not eligible for cache discounts.” 因此 Batch 档只对输入、输出打 5 折，缓存相关价（命中/创建）不再叠加 Batch 折扣，倍率取 1（保持各档标准缓存价）；Batch 调用中缓存 token 的实际结算价官方未单独列出，待核实。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 1,
+            "cache_write": 1,
+            "implicit_read": 1,
+            "explicit_read": 1,
+            "explicit_write": 1,
+            "explicit_write_1h": 1,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://www.qwencloud.com/models/qwen3.8-max",
+            "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max",
+            "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+            "https://www.alibabacloud.com/help/en/model-studio/context-cache"
+          ]
+        }
+      ],
       "cache_pricing": {
         "implicit_read": 0.25,
         "explicit_read": 0.17,
@@ -269,7 +295,7 @@
       "extra_sources": [
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
-      "last_updated": "2026-10-11",
+      "last_updated": "2026-10-28",
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤256K 输入档（非思考/思考输出价相同）；256K–1M 档：输入 $1.2、输出 $4.8。官方标注限时 8 折（表中为标价）。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-plus，Singapore，美元，标价口径，不含限时 8 折）：≤256K 档隐式 $0.08、显式创建 $0.5、显式命中 $0.04；>256K 档隐式 $0.24、显式创建 $1.5、显式命中 $0.12；cached_input=显式缓存命中价，cache_write=显式缓存创建价。结构化字段见 cache_pricing / pricing_tiers。",
       "reasoning_effort": {
         "supported": true,
@@ -330,22 +356,24 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "官方 qwencloud 模型页：Batch File 输入 $0.2 / 输出 $0.8（为标价 50%，标价口径 ≤256K 档）。",
+          "note": "官方 qwencloud 模型页（https://www.qwencloud.com/models/qwen3.7-plus，2026-10-28 复核）：Batch File 输入 $0.2 / 输出 $0.8（为标价 50%，标价口径 ≤256K 档）。官方定价页（Qwen-Max/Flash 小节）原文：“If the model supports batch calls, the unit price for both input and output tokens is 50% of the real-time inference price. If the model supports context cache, only input tokens receive a discount. These two discounts cannot apply simultaneously.”；Context Cache 文档：“Calls made using the OpenAI-compatible - Batch (file input) method are not eligible for cache discounts.” 因此 Batch 档只对输入、输出打 5 折，缓存相关价（命中/创建）不再叠加 Batch 折扣，倍率取 1（保持各档标准缓存价）；Batch 调用中缓存 token 的实际结算价官方未单独列出，待核实。（该原文位于定价页 Qwen-Max/Qwen-Flash 小节，Qwen-Plus 小节未重复该句，此处按 Context Cache 文档及同一计费规则处理。）",
           "multipliers": {
             "input": 0.5,
             "output": 0.5,
-            "cached_input": 0.5,
-            "cache_write": 0.5,
-            "implicit_read": 0.5,
-            "explicit_read": 0.5,
-            "explicit_write": 0.5,
-            "explicit_write_1h": 0.5,
+            "cached_input": 1,
+            "cache_write": 1,
+            "implicit_read": 1,
+            "explicit_read": 1,
+            "explicit_write": 1,
+            "explicit_write_1h": 1,
             "explicit_write_12h": null,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
           "sources": [
-            "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+            "https://www.qwencloud.com/models/qwen3.7-plus",
+            "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+            "https://www.alibabacloud.com/help/en/model-studio/context-cache"
           ]
         }
       ],
@@ -526,7 +554,7 @@
       "extra_sources": [
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
-      "last_updated": "2026-10-11",
+      "last_updated": "2026-10-28",
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤32K 输入档；32K–256K：输入 $0.10、输出 $0.40；256K–1M：输入 $0.20、输出 $0.80。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-flash，Singapore，美元）：≤32K 档隐式 $0.006、显式创建 $0.038、显式命中 $0.003；32K–256K 与 >256K 档缓存价见 pricing_tiers；cached_input=显式缓存命中价，cache_write=显式缓存创建价（官方页四舍五入标 $0.038）。",
       "reasoning_effort": {
         "supported": true,
@@ -606,22 +634,23 @@
         {
           "name": "batch",
           "multiplier": 0.5,
-          "note": "官方定价页：50% batch inference discount（输入、输出均 5 折）。",
+          "note": "官方定价页（Singapore 行 qwen3.7-flash）标注：50% batch inference discount（输入、输出均 5 折）；qwencloud 模型页未列 Batch 价；注意新加坡 qwen3-7-flash 模型页能力表标 Batch Inference Unsupported，与定价页标签不一致，待核实。官方定价页（Qwen-Max/Flash 小节）原文：“If the model supports batch calls, the unit price for both input and output tokens is 50% of the real-time inference price. If the model supports context cache, only input tokens receive a discount. These two discounts cannot apply simultaneously.”；Context Cache 文档：“Calls made using the OpenAI-compatible - Batch (file input) method are not eligible for cache discounts.” 因此 Batch 档只对输入、输出打 5 折，缓存相关价（命中/创建）不再叠加 Batch 折扣，倍率取 1（保持各档标准缓存价）；Batch 调用中缓存 token 的实际结算价官方未单独列出，待核实。",
           "multipliers": {
             "input": 0.5,
             "output": 0.5,
-            "cached_input": 0.5,
-            "cache_write": 0.5,
-            "implicit_read": 0.5,
-            "explicit_read": 0.5,
-            "explicit_write": 0.5,
-            "explicit_write_1h": 0.5,
+            "cached_input": 1,
+            "cache_write": 1,
+            "implicit_read": 1,
+            "explicit_read": 1,
+            "explicit_write": 1,
+            "explicit_write_1h": 1,
             "explicit_write_12h": null,
             "storage_per_1M_tokens_hour": null
           },
           "pricing": {},
           "sources": [
-            "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+            "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+            "https://www.alibabacloud.com/help/en/model-studio/context-cache"
           ]
         }
       ],

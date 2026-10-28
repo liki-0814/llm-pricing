@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "9daa868b95d2f77783c136836273c1d19d5f87f467f886a8acaa8518732b8e10"
+    "data_version": "34d0633be30a7e43f85623099999e893d5ed769c992ebaa041c1f02fef218f7f"
   },
   "data": {
     "id": "qwen3.7-plus",
@@ -51,7 +51,7 @@
     "extra_sources": [
       "https://www.alibabacloud.com/help/en/model-studio/context-cache"
     ],
-    "last_updated": "2026-10-11",
+    "last_updated": "2026-10-28",
     "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤256K 输入档（非思考/思考输出价相同）；256K–1M 档：输入 $1.2、输出 $4.8。官方标注限时 8 折（表中为标价）。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-plus，Singapore，美元，标价口径，不含限时 8 折）：≤256K 档隐式 $0.08、显式创建 $0.5、显式命中 $0.04；>256K 档隐式 $0.24、显式创建 $1.5、显式命中 $0.12；cached_input=显式缓存命中价，cache_write=显式缓存创建价。结构化字段见 cache_pricing / pricing_tiers。",
     "reasoning_effort": {
       "supported": true,
@@ -112,22 +112,24 @@
       {
         "name": "batch",
         "multiplier": 0.5,
-        "note": "官方 qwencloud 模型页：Batch File 输入 $0.2 / 输出 $0.8（为标价 50%，标价口径 ≤256K 档）。",
+        "note": "官方 qwencloud 模型页（https://www.qwencloud.com/models/qwen3.7-plus，2026-10-28 复核）：Batch File 输入 $0.2 / 输出 $0.8（为标价 50%，标价口径 ≤256K 档）。官方定价页（Qwen-Max/Flash 小节）原文：“If the model supports batch calls, the unit price for both input and output tokens is 50% of the real-time inference price. If the model supports context cache, only input tokens receive a discount. These two discounts cannot apply simultaneously.”；Context Cache 文档：“Calls made using the OpenAI-compatible - Batch (file input) method are not eligible for cache discounts.” 因此 Batch 档只对输入、输出打 5 折，缓存相关价（命中/创建）不再叠加 Batch 折扣，倍率取 1（保持各档标准缓存价）；Batch 调用中缓存 token 的实际结算价官方未单独列出，待核实。（该原文位于定价页 Qwen-Max/Qwen-Flash 小节，Qwen-Plus 小节未重复该句，此处按 Context Cache 文档及同一计费规则处理。）",
         "multipliers": {
           "input": 0.5,
           "output": 0.5,
-          "cached_input": 0.5,
-          "cache_write": 0.5,
-          "implicit_read": 0.5,
-          "explicit_read": 0.5,
-          "explicit_write": 0.5,
-          "explicit_write_1h": 0.5,
+          "cached_input": 1,
+          "cache_write": 1,
+          "implicit_read": 1,
+          "explicit_read": 1,
+          "explicit_write": 1,
+          "explicit_write_1h": 1,
           "explicit_write_12h": null,
           "storage_per_1M_tokens_hour": null
         },
         "pricing": {},
         "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+          "https://www.qwencloud.com/models/qwen3.7-plus",
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+          "https://www.alibabacloud.com/help/en/model-studio/context-cache"
         ]
       }
     ],
