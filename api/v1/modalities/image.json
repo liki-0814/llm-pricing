@@ -1,0 +1,1755 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-29",
+    "currency": "USD",
+    "unit": "see_media_pricing",
+    "unit_label": "USD; see each model's media_pricing (per image / per second of video / per 1M tokens)",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5",
+    "count": 12
+  },
+  "modality": {
+    "name": "image",
+    "label": "图像生成",
+    "model_count": 12,
+    "model_ids": [
+      "gpt-image-2.5-flare",
+      "gpt-image-2.5-sunburst",
+      "grok-imagine-image-2.0",
+      "gemini-nano-banana-2.1",
+      "gemini-3.1-flash-lite-image",
+      "gemini-3-pro-image",
+      "qwen-image-3.0-pro",
+      "qwen-image-3.0",
+      "wan2.7-image-pro",
+      "wan2.7-image",
+      "minimax-image-01",
+      "glm-image"
+    ],
+    "vendors": [
+      "openai",
+      "zhipu",
+      "qwen",
+      "google",
+      "minimax",
+      "xai"
+    ],
+    "links": {
+      "self": "modalities/image.json"
+    }
+  },
+  "data": [
+    {
+      "id": "gpt-image-2.5-flare",
+      "name": "GPT Image 2.5 Flare",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+      ],
+      "last_updated": "2026-10-29",
+      "notes": "Token 计价：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token；Batch 为标准价一半。官方定价页未列 2.5 的按张价格（按尺寸/质量），按 token 结算，按张价格待核实。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 5,
+            "text_cached_input": 1.25,
+            "text_output": null,
+            "image_input": 8,
+            "image_cached_input": 2,
+            "image_output": 30,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": {
+            "text_input": 2.5,
+            "text_cached_input": 0.625,
+            "text_output": null,
+            "image_input": 4,
+            "image_cached_input": 1,
+            "image_output": 15,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "priority": null
+        },
+        "image_prices": [],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": true,
+        "promotion": null,
+        "billing_note": "按 token 计费，官方未公布 GPT Image 2.5 按尺寸/质量的单张价格（image_prices 为空，已列入 unverified_fields）。Batch 价为官方列出的标价。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "media_pricing.image_prices"
+      ],
+      "links": {
+        "self": "models/gpt-image-2.5-flare.json",
+        "vendor": "vendors/openai.json"
+      }
+    },
+    {
+      "id": "gpt-image-2.5-sunburst",
+      "name": "GPT Image 2.5 Sunburst",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+      ],
+      "last_updated": "2026-10-29",
+      "notes": "Token 计价：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token；Batch 为标准价一半。官方定价页未列 2.5 的按张价格（按尺寸/质量），按 token 结算，按张价格待核实。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 5,
+            "text_cached_input": 1.25,
+            "text_output": null,
+            "image_input": 8,
+            "image_cached_input": 2,
+            "image_output": 30,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": {
+            "text_input": 2.5,
+            "text_cached_input": 0.625,
+            "text_output": null,
+            "image_input": 4,
+            "image_cached_input": 1,
+            "image_output": 15,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "priority": null
+        },
+        "image_prices": [],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": true,
+        "promotion": null,
+        "billing_note": "按 token 计费，官方未公布 GPT Image 2.5 按尺寸/质量的单张价格（image_prices 为空，已列入 unverified_fields）。Batch 价为官方列出的标价。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "media_pricing.image_prices"
+      ],
+      "links": {
+        "self": "models/gpt-image-2.5-sunburst.json",
+        "vendor": "vendors/openai.json"
+      }
+    },
+    {
+      "id": "grok-imagine-image-2.0",
+      "name": "Grok Imagine Image 2.0",
+      "vendor": "xai",
+      "vendor_name": "xAI",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://docs.x.ai/developers/pricing",
+          "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://docs.x.ai/developers/pricing",
+      "extra_sources": [
+        "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+      ],
+      "last_updated": "2026-10-29",
+      "notes": "按张计价（1K/1.5K/2K × low/medium 质量）；输入图片 $0.01/张。quality=auto 时生成用 low、编辑用 medium。支持 Batch，按标准价计费；不支持 Priority。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://docs.x.ai/developers/pricing",
+          "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://docs.x.ai/developers/pricing",
+          "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "per_image"
+        ],
+        "token_pricing": null,
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "1k",
+            "quality": "low",
+            "price": 0.04,
+            "tokens": null,
+            "basis": "listed",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "1k",
+            "quality": "medium",
+            "price": 0.06,
+            "tokens": null,
+            "basis": "listed",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "1.5k",
+            "quality": "low",
+            "price": 0.05,
+            "tokens": null,
+            "basis": "listed",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "1.5k",
+            "quality": "medium",
+            "price": 0.07,
+            "tokens": null,
+            "basis": "listed",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "2k",
+            "quality": "low",
+            "price": 0.06,
+            "tokens": null,
+            "basis": "listed",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "2k",
+            "quality": "medium",
+            "price": 0.08,
+            "tokens": null,
+            "basis": "listed",
+            "note": null
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": 0.01,
+        "input_image_price_batch": null,
+        "batch_supported": true,
+        "promotion": null,
+        "billing_note": "价格为每张输出图片。输入图片（编辑）$0.01/张。Batch 按标准价计费（无折扣）。quality 取 low / medium / auto，auto 生成用 low、编辑用 medium。",
+        "sources": [
+          "https://docs.x.ai/developers/pricing",
+          "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/grok-imagine-image-2.0.json",
+        "vendor": "vendors/xai.json"
+      }
+    },
+    {
+      "id": "gemini-nano-banana-2.1",
+      "name": "Gemini Nano Banana 2.1",
+      "vendor": "google",
+      "vendor_name": "Google Gemini",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "extra_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+      ],
+      "last_updated": "2026-10-29",
+      "notes": "Token 计价并给出等价单张价：1K（1120 token）$0.0336、2K（1680）$0.0504、4K（3780）$0.113；Batch 为半价。联网检索 grounding 每月 5000 次免费，之后 $14/千次。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token",
+          "per_image"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 1.5,
+            "text_cached_input": null,
+            "text_output": 7.5,
+            "image_input": 1.5,
+            "image_cached_input": null,
+            "image_output": 30,
+            "video_input": 1.5,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": {
+            "text_input": 0.75,
+            "text_cached_input": null,
+            "text_output": 3.75,
+            "image_input": 0.75,
+            "image_cached_input": null,
+            "image_output": 15,
+            "video_input": 0.75,
+            "video_output": null,
+            "audio_input": null
+          },
+          "priority": null
+        },
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "1k",
+            "quality": null,
+            "price": 0.0336,
+            "tokens": 1120,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "2k",
+            "quality": null,
+            "price": 0.0504,
+            "tokens": 1680,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "4k",
+            "quality": null,
+            "price": 0.113,
+            "tokens": 3780,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "batch",
+            "size": "1k",
+            "quality": null,
+            "price": 0.0168,
+            "tokens": 1120,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "batch",
+            "size": "2k",
+            "quality": null,
+            "price": 0.0252,
+            "tokens": 1680,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "batch",
+            "size": "4k",
+            "quality": null,
+            "price": 0.0567,
+            "tokens": 3780,
+            "basis": "token_equivalent",
+            "note": null
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": true,
+        "promotion": null,
+        "billing_note": "输入价对文本/图像/视频相同；文本与思考输出 $7.50（Batch $3.75）。官方给出的单张价为 token 价的等价值。Grounding：每月 5000 次免费（与 Gemini 3 及更新模型共享），之后 $14/千次。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gemini-nano-banana-2.1.json",
+        "vendor": "vendors/google.json"
+      }
+    },
+    {
+      "id": "gemini-3.1-flash-lite-image",
+      "name": "Gemini Nano Banana 2 Lite",
+      "vendor": "google",
+      "vendor_name": "Google Gemini",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "extra_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
+      ],
+      "last_updated": "2026-10-29",
+      "notes": "Token 计价：输入 $0.25，图像输出 $30 / 百万 token；等价单张价仅列 1K：$0.0336（1120 token）；Batch 半价。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token",
+          "per_image"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 0.25,
+            "text_cached_input": null,
+            "text_output": 1.5,
+            "image_input": 0.25,
+            "image_cached_input": null,
+            "image_output": 30,
+            "video_input": 0.25,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": {
+            "text_input": 0.125,
+            "text_cached_input": null,
+            "text_output": 0.75,
+            "image_input": 0.125,
+            "image_cached_input": null,
+            "image_output": 15,
+            "video_input": 0.125,
+            "video_output": null,
+            "audio_input": null
+          },
+          "priority": null
+        },
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "1k",
+            "quality": null,
+            "price": 0.0336,
+            "tokens": 1120,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "batch",
+            "size": "1k",
+            "quality": null,
+            "price": 0.0168,
+            "tokens": 1120,
+            "basis": "token_equivalent",
+            "note": null
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": true,
+        "promotion": null,
+        "billing_note": "官方仅列 1K 等价单张价，2K / 4K 未列出（未标注支持）。文本与思考输出 $1.50（Batch $0.75）。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gemini-3.1-flash-lite-image.json",
+        "vendor": "vendors/google.json"
+      }
+    },
+    {
+      "id": "gemini-3-pro-image",
+      "name": "Gemini 3 Pro Image (Nano Banana Pro)",
+      "vendor": "google",
+      "vendor_name": "Google Gemini",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "extra_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
+      ],
+      "last_updated": "2026-10-29",
+      "notes": "Token 计价并给出等价单张价：1K/2K（1120 token）$0.134、4K（2000 token）$0.24；Batch/Flex 为 $0.067 / $0.12；输入图片 560 token ≈ $0.0011/张（Batch $0.0006）；Priority 另计。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token",
+          "per_image"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 2,
+            "text_cached_input": null,
+            "text_output": 12,
+            "image_input": 2,
+            "image_cached_input": null,
+            "image_output": 120,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": {
+            "text_input": 1,
+            "text_cached_input": null,
+            "text_output": 6,
+            "image_input": null,
+            "image_cached_input": null,
+            "image_output": null,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "priority": {
+            "text_input": 3.6,
+            "text_cached_input": null,
+            "text_output": 21.6,
+            "image_input": 3.6,
+            "image_cached_input": null,
+            "image_output": 216,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          }
+        },
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "1k",
+            "quality": null,
+            "price": 0.134,
+            "tokens": 1120,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "2k",
+            "quality": null,
+            "price": 0.134,
+            "tokens": 1120,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "4k",
+            "quality": null,
+            "price": 0.24,
+            "tokens": 2000,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "batch",
+            "size": "1k",
+            "quality": null,
+            "price": 0.067,
+            "tokens": null,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "batch",
+            "size": "2k",
+            "quality": null,
+            "price": 0.067,
+            "tokens": null,
+            "basis": "token_equivalent",
+            "note": null
+          },
+          {
+            "tier": "batch",
+            "size": "4k",
+            "quality": null,
+            "price": 0.12,
+            "tokens": null,
+            "basis": "token_equivalent",
+            "note": null
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": 0.0011,
+        "input_image_price_batch": 0.0006,
+        "batch_supported": true,
+        "promotion": null,
+        "billing_note": "官方页将 Batch 与 Flex 价格列为相同；Batch 的图像输出按单张价列出，未给出 token 单价（batch.image_output 为 null）。Priority 档图像输出 $216 / 百万 token。Grounding：每月 5000 次免费，之后 $14/千次。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gemini-3-pro-image.json",
+        "vendor": "vendors/google.json"
+      }
+    },
+    {
+      "id": "qwen-image-3.0-pro",
+      "name": "Qwen-Image 3.0 Pro",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": "Singapore",
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-29",
+      "notes": "按张计价：1K $0.04、2K $0.075；输入图片 $0.003/张。新用户有 10 张免费额度。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "per_image"
+        ],
+        "token_pricing": null,
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "1k",
+            "quality": null,
+            "price": 0.04,
+            "tokens": null,
+            "basis": "listed",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "2k",
+            "quality": null,
+            "price": 0.075,
+            "tokens": null,
+            "basis": "listed",
+            "note": null
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": 0.003,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "国际站（新加坡）按量标价；免费额度 10 张，不计入价格。",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/qwen-image-3.0-pro.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "qwen-image-3.0",
+      "name": "Qwen-Image 3.0",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": "Singapore",
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-29",
+      "notes": "按张计价：1K $0.03、2K $0.03；输入图片 $0.003/张。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "per_image"
+        ],
+        "token_pricing": null,
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "1k",
+            "quality": null,
+            "price": 0.03,
+            "tokens": null,
+            "basis": "listed",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "size": "2k",
+            "quality": null,
+            "price": 0.03,
+            "tokens": null,
+            "basis": "listed",
+            "note": null
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": 0.003,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "国际站（新加坡）按量标价。",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/qwen-image-3.0.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "wan2.7-image-pro",
+      "name": "Wan 2.7 Image Pro",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": "Singapore",
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-29",
+      "notes": "按张计价 $0.075/张（不区分尺寸）；新用户有 50 张免费额度。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "per_image"
+        ],
+        "token_pricing": null,
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "any",
+            "quality": null,
+            "price": 0.075,
+            "tokens": null,
+            "basis": "listed",
+            "note": "官方为统一单张价，不区分尺寸"
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "国际站（新加坡）按量标价；免费额度 50 张，不计入价格。",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/wan2.7-image-pro.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "wan2.7-image",
+      "name": "Wan 2.7 Image",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": "Singapore",
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-29",
+      "notes": "按张计价 $0.03/张（不区分尺寸）；新用户有 50 张免费额度。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "per_image"
+        ],
+        "token_pricing": null,
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "any",
+            "quality": null,
+            "price": 0.03,
+            "tokens": null,
+            "basis": "listed",
+            "note": "官方为统一单张价，不区分尺寸"
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "国际站（新加坡）按量标价；免费额度 50 张，不计入价格。",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/wan2.7-image.json",
+        "vendor": "vendors/qwen.json"
+      }
+    },
+    {
+      "id": "minimax-image-01",
+      "name": "MiniMax image-01",
+      "vendor": "minimax",
+      "vendor_name": "MiniMax",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.minimax.io/docs/guides/pricing-paygo"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
+      "extra_sources": [],
+      "last_updated": "2026-10-29",
+      "notes": "按张计价 $0.0035/张（不区分尺寸）。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://platform.minimax.io/docs/guides/pricing-paygo"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://platform.minimax.io/docs/guides/pricing-paygo"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "per_image"
+        ],
+        "token_pricing": null,
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "any",
+            "quality": null,
+            "price": 0.0035,
+            "tokens": null,
+            "basis": "listed",
+            "note": "官方为统一单张价，不区分尺寸"
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "官方为统一单张价。",
+        "sources": [
+          "https://platform.minimax.io/docs/guides/pricing-paygo"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/minimax-image-01.json",
+        "vendor": "vendors/minimax.json"
+      }
+    },
+    {
+      "id": "glm-image",
+      "name": "GLM-Image",
+      "vendor": "zhipu",
+      "vendor_name": "智谱 Z.ai",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://docs.z.ai/guides/overview/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-29",
+      "notes": "按张计价 $0.015/张（不区分尺寸）。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "per_image"
+        ],
+        "token_pricing": null,
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "any",
+            "quality": null,
+            "price": 0.015,
+            "tokens": null,
+            "basis": "listed",
+            "note": "官方为统一单张价，不区分尺寸"
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "官方为统一单张价。",
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/glm-image.json",
+        "vendor": "vendors/zhipu.json"
+      }
+    }
+  ]
+}

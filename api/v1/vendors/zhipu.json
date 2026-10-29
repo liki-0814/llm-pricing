@@ -1,23 +1,29 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-28",
+    "updated_at": "2026-10-29",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "34d0633be30a7e43f85623099999e893d5ed769c992ebaa041c1f02fef218f7f",
-    "count": 4
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5",
+    "count": 5
   },
   "vendor": {
     "slug": "zhipu",
     "name": "智谱 Z.ai",
-    "model_count": 4,
+    "model_count": 5,
     "model_ids": [
       "glm-5.3",
       "glm-5.3-flash",
       "glm-5.3-flashx",
-      "glm-5.2"
+      "glm-5.2",
+      "glm-image"
     ],
+    "modality_counts": {
+      "text": 4,
+      "image": 1,
+      "video": 0
+    },
     "source_urls": [
       "https://docs.z.ai/guides/overview/pricing"
     ],
@@ -31,6 +37,7 @@
       "name": "GLM-5.3",
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -106,6 +113,7 @@
           "https://docs.bigmodel.cn/cn/guide/start/concept-param"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
@@ -147,6 +155,7 @@
       "name": "GLM-5.3-Flash",
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -222,6 +231,7 @@
           "https://docs.bigmodel.cn/cn/guide/start/concept-param"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
@@ -263,6 +273,7 @@
       "name": "GLM-5.3-FlashX",
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -340,6 +351,7 @@
           "https://docs.bigmodel.cn/cn/guide/start/concept-param"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
@@ -381,6 +393,7 @@
       "name": "GLM-5.2",
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -459,6 +472,7 @@
           "https://docs.bigmodel.cn/cn/guide/start/concept-param"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
@@ -492,6 +506,122 @@
       "unverified_fields": [],
       "links": {
         "self": "models/glm-5.2.json",
+        "vendor": "vendors/zhipu.json"
+      }
+    },
+    {
+      "id": "glm-image",
+      "name": "GLM-Image",
+      "vendor": "zhipu",
+      "vendor_name": "智谱 Z.ai",
+      "modality": "image",
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://docs.z.ai/guides/overview/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-10-29",
+      "notes": "按张计价 $0.015/张（不区分尺寸）。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "per_image"
+        ],
+        "token_pricing": null,
+        "image_prices": [
+          {
+            "tier": "standard",
+            "size": "any",
+            "quality": null,
+            "price": 0.015,
+            "tokens": null,
+            "basis": "listed",
+            "note": "官方为统一单张价，不区分尺寸"
+          }
+        ],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "官方为统一单张价。",
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/glm-image.json",
         "vendor": "vendors/zhipu.json"
       }
     }

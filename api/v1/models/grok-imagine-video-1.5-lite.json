@@ -1,0 +1,153 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-29",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5"
+  },
+  "data": {
+    "id": "grok-imagine-video-1.5-lite",
+    "name": "Grok Imagine Video 1.5 Lite",
+    "vendor": "xai",
+    "vendor_name": "xAI",
+    "modality": "video",
+    "currency": "USD",
+    "unit": "see_media_pricing",
+    "pricing": {
+      "input": null,
+      "output": null,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "not_applicable",
+      "output": "not_applicable",
+      "cached_input": "not_applicable",
+      "cache_write": "not_applicable"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/models/grok-imagine-video-1.5-lite"
+      ],
+      "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://docs.x.ai/developers/pricing",
+    "extra_sources": [
+      "https://docs.x.ai/developers/models/grok-imagine-video-1.5-lite"
+    ],
+    "last_updated": "2026-10-29",
+    "notes": "按秒计价：480p $0.02、720p $0.03、1080p $0.14（由 720p 上采样）；输入图片 $0.01/张。支持 Batch。",
+    "reasoning_effort": {
+      "supported": false,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "not_applicable",
+      "field_status": {
+        "supported": "not_applicable",
+        "levels": "not_applicable",
+        "default": "not_applicable",
+        "can_disable": "not_applicable"
+      },
+      "note": "Not applicable: video generation model.",
+      "sources": [
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/models/grok-imagine-video-1.5-lite"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "not_applicable",
+      "note": "Not applicable: video generation model (no token context window).",
+      "sources": [
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/models/grok-imagine-video-1.5-lite"
+      ]
+    },
+    "media_pricing": {
+      "output_kind": "video",
+      "billing_methods": [
+        "per_second"
+      ],
+      "token_pricing": null,
+      "image_prices": [],
+      "video_prices": [
+        {
+          "tier": "standard",
+          "resolution": "480p",
+          "audio": "any",
+          "price_per_second": 0.02,
+          "tokens_per_second": null,
+          "input_video_price_per_second": null,
+          "basis": "listed",
+          "note": null
+        },
+        {
+          "tier": "standard",
+          "resolution": "720p",
+          "audio": "any",
+          "price_per_second": 0.03,
+          "tokens_per_second": null,
+          "input_video_price_per_second": null,
+          "basis": "listed",
+          "note": null
+        },
+        {
+          "tier": "standard",
+          "resolution": "1080p",
+          "audio": "any",
+          "price_per_second": 0.14,
+          "tokens_per_second": null,
+          "input_video_price_per_second": null,
+          "basis": "listed",
+          "note": "由 720p 上采样得到"
+        }
+      ],
+      "input_image_price": 0.01,
+      "input_image_price_batch": null,
+      "batch_supported": true,
+      "promotion": null,
+      "billing_note": "每秒输出视频价格，官方价格表不区分是否含音频。",
+      "sources": [
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/models/grok-imagine-video-1.5-lite"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": null
+    },
+    "price_schedule": [],
+    "unverified_fields": [],
+    "links": {
+      "self": "models/grok-imagine-video-1.5-lite.json",
+      "vendor": "vendors/xai.json"
+    }
+  }
+}

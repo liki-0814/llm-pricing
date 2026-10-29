@@ -1,11 +1,11 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-28",
+    "updated_at": "2026-10-29",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "34d0633be30a7e43f85623099999e893d5ed769c992ebaa041c1f02fef218f7f",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5",
     "count": 13
   },
   "vendor": {
@@ -27,6 +27,11 @@
       "claude-sonnet-4.6",
       "claude-haiku-5.5"
     ],
+    "modality_counts": {
+      "text": 13,
+      "image": 0,
+      "video": 0
+    },
     "source_urls": [
       "https://platform.claude.com/docs/en/about-claude/pricing"
     ],
@@ -40,6 +45,7 @@
       "name": "Claude Fable 5.1",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -113,6 +119,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -179,6 +186,7 @@
       "name": "Claude Mythos 5.1",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -252,6 +260,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -318,6 +327,7 @@
       "name": "Claude Fable 5",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -391,6 +401,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -457,6 +468,7 @@
       "name": "Claude Mythos 5",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -530,6 +542,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -596,6 +609,7 @@
       "name": "Claude Opus 5.5",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -669,6 +683,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -756,6 +771,7 @@
       "name": "Claude Opus 5",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -829,6 +845,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -916,6 +933,7 @@
       "name": "Claude Opus 4.8",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -989,6 +1007,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -1076,6 +1095,7 @@
       "name": "Claude Opus 4.7",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1149,6 +1169,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -1215,6 +1236,7 @@
       "name": "Claude Opus 4.6",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1287,6 +1309,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -1353,6 +1376,7 @@
       "name": "Claude Sonnet 5.5",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1426,6 +1450,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -1492,6 +1517,7 @@
       "name": "Claude Sonnet 5",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1565,6 +1591,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -1631,6 +1658,7 @@
       "name": "Claude Sonnet 4.6",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1703,6 +1731,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -1769,6 +1798,7 @@
       "name": "Claude Haiku 5.5",
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1844,6 +1874,7 @@
           "https://platform.claude.com/docs/en/about-claude/models/overview"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [
         {
           "condition": "input_tokens>100000",

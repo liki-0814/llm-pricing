@@ -1,0 +1,177 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-29",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5"
+  },
+  "data": {
+    "id": "grok-imagine-image-2.0",
+    "name": "Grok Imagine Image 2.0",
+    "vendor": "xai",
+    "vendor_name": "xAI",
+    "modality": "image",
+    "currency": "USD",
+    "unit": "see_media_pricing",
+    "pricing": {
+      "input": null,
+      "output": null,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "not_applicable",
+      "output": "not_applicable",
+      "cached_input": "not_applicable",
+      "cache_write": "not_applicable"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+      ],
+      "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://docs.x.ai/developers/pricing",
+    "extra_sources": [
+      "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+    ],
+    "last_updated": "2026-10-29",
+    "notes": "按张计价（1K/1.5K/2K × low/medium 质量）；输入图片 $0.01/张。quality=auto 时生成用 low、编辑用 medium。支持 Batch，按标准价计费；不支持 Priority。",
+    "reasoning_effort": {
+      "supported": false,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "not_applicable",
+      "field_status": {
+        "supported": "not_applicable",
+        "levels": "not_applicable",
+        "default": "not_applicable",
+        "can_disable": "not_applicable"
+      },
+      "note": "Not applicable: image generation model.",
+      "sources": [
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "not_applicable",
+      "note": "Not applicable: image generation model (no token context window).",
+      "sources": [
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+      ]
+    },
+    "media_pricing": {
+      "output_kind": "image",
+      "billing_methods": [
+        "per_image"
+      ],
+      "token_pricing": null,
+      "image_prices": [
+        {
+          "tier": "standard",
+          "size": "1k",
+          "quality": "low",
+          "price": 0.04,
+          "tokens": null,
+          "basis": "listed",
+          "note": null
+        },
+        {
+          "tier": "standard",
+          "size": "1k",
+          "quality": "medium",
+          "price": 0.06,
+          "tokens": null,
+          "basis": "listed",
+          "note": null
+        },
+        {
+          "tier": "standard",
+          "size": "1.5k",
+          "quality": "low",
+          "price": 0.05,
+          "tokens": null,
+          "basis": "listed",
+          "note": null
+        },
+        {
+          "tier": "standard",
+          "size": "1.5k",
+          "quality": "medium",
+          "price": 0.07,
+          "tokens": null,
+          "basis": "listed",
+          "note": null
+        },
+        {
+          "tier": "standard",
+          "size": "2k",
+          "quality": "low",
+          "price": 0.06,
+          "tokens": null,
+          "basis": "listed",
+          "note": null
+        },
+        {
+          "tier": "standard",
+          "size": "2k",
+          "quality": "medium",
+          "price": 0.08,
+          "tokens": null,
+          "basis": "listed",
+          "note": null
+        }
+      ],
+      "video_prices": [],
+      "input_image_price": 0.01,
+      "input_image_price_batch": null,
+      "batch_supported": true,
+      "promotion": null,
+      "billing_note": "价格为每张输出图片。输入图片（编辑）$0.01/张。Batch 按标准价计费（无折扣）。quality 取 low / medium / auto，auto 生成用 low、编辑用 medium。",
+      "sources": [
+        "https://docs.x.ai/developers/pricing",
+        "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": null
+    },
+    "price_schedule": [],
+    "unverified_fields": [],
+    "links": {
+      "self": "models/grok-imagine-image-2.0.json",
+      "vendor": "vendors/xai.json"
+    }
+  }
+}

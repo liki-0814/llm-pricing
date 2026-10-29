@@ -16,3 +16,10 @@ Published data is still tested separately: every current model must estimate at
 its own verification date and reject the preceding day, and the HTTP tests read
 all real static endpoints. The client-estimate HTTP assertion compares against the
 same current model at its own verification date, rather than a frozen price/date.
+
+`media-models.json` freezes six image / video records (selected fields only: `id`, `name`,
+`vendor`, `modality`, `media_pricing`, `price_basis`, `billing`, `last_updated`, `unverified_fields`)
+copied from `api/v1/models/*.json` when image and video models were added (2026-10-29,
+on top of commit `5ca2d568a131522ce93c75ddbea97fa0d7eb22c2`). They drive the deterministic `estimateMedia` arithmetic tests
+(per image, per second, per token, batch tier, null prices, promotion and approximate-price warnings).
+Do not regenerate them during routine price updates.

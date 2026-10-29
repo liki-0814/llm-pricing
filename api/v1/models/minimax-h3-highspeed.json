@@ -1,0 +1,127 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-29",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5"
+  },
+  "data": {
+    "id": "minimax-h3-highspeed",
+    "name": "MiniMax-H3-Highspeed",
+    "vendor": "minimax",
+    "vendor_name": "MiniMax",
+    "modality": "video",
+    "currency": "USD",
+    "unit": "see_media_pricing",
+    "pricing": {
+      "input": null,
+      "output": null,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "not_applicable",
+      "output": "not_applicable",
+      "cached_input": "not_applicable",
+      "cache_write": "not_applicable"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://platform.minimax.io/docs/guides/pricing-paygo"
+      ],
+      "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
+    "extra_sources": [],
+    "last_updated": "2026-10-29",
+    "notes": "按秒计价：768P $0.06（输入视频同价）；输入图片 $0.03/张。",
+    "reasoning_effort": {
+      "supported": false,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "not_applicable",
+      "field_status": {
+        "supported": "not_applicable",
+        "levels": "not_applicable",
+        "default": "not_applicable",
+        "can_disable": "not_applicable"
+      },
+      "note": "Not applicable: video generation model.",
+      "sources": [
+        "https://platform.minimax.io/docs/guides/pricing-paygo"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "not_applicable",
+      "note": "Not applicable: video generation model (no token context window).",
+      "sources": [
+        "https://platform.minimax.io/docs/guides/pricing-paygo"
+      ]
+    },
+    "media_pricing": {
+      "output_kind": "video",
+      "billing_methods": [
+        "per_second"
+      ],
+      "token_pricing": null,
+      "image_prices": [],
+      "video_prices": [
+        {
+          "tier": "standard",
+          "resolution": "768p",
+          "audio": "any",
+          "price_per_second": 0.06,
+          "tokens_per_second": null,
+          "input_video_price_per_second": 0.06,
+          "basis": "listed",
+          "note": null
+        }
+      ],
+      "input_image_price": 0.03,
+      "input_image_price_batch": null,
+      "batch_supported": null,
+      "promotion": null,
+      "billing_note": "输入音频免费；同一模型与分辨率在文生视频、图生视频、首尾帧、参考图任务中价格相同；官方价格表不区分输出是否含音频。",
+      "sources": [
+        "https://platform.minimax.io/docs/guides/pricing-paygo"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": null
+    },
+    "price_schedule": [],
+    "unverified_fields": [],
+    "links": {
+      "self": "models/minimax-h3-highspeed.json",
+      "vendor": "vendors/minimax.json"
+    }
+  }
+}

@@ -1,11 +1,11 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-28",
+    "updated_at": "2026-10-29",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "34d0633be30a7e43f85623099999e893d5ed769c992ebaa041c1f02fef218f7f",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5",
     "count": 9
   },
   "data": [
@@ -17,6 +17,11 @@
         "deepseek-flash",
         "deepseek-v4-pro"
       ],
+      "modality_counts": {
+        "text": 2,
+        "image": 0,
+        "video": 0
+      },
       "source_urls": [
         "https://api-docs.deepseek.com/quick_start/pricing"
       ],
@@ -27,7 +32,7 @@
     {
       "slug": "openai",
       "name": "OpenAI",
-      "model_count": 8,
+      "model_count": 10,
       "model_ids": [
         "gpt-5.6-sol",
         "gpt-5.6-terra",
@@ -36,8 +41,15 @@
         "gpt-6-sol",
         "gpt-6-luna",
         "gpt-6.1-sol",
-        "gpt-6.1-terra"
+        "gpt-6.1-terra",
+        "gpt-image-2.5-flare",
+        "gpt-image-2.5-sunburst"
       ],
+      "modality_counts": {
+        "text": 8,
+        "image": 2,
+        "video": 0
+      },
       "source_urls": [
         "https://developers.openai.com/api/docs/pricing"
       ],
@@ -64,6 +76,11 @@
         "claude-sonnet-4.6",
         "claude-haiku-5.5"
       ],
+      "modality_counts": {
+        "text": 13,
+        "image": 0,
+        "video": 0
+      },
       "source_urls": [
         "https://platform.claude.com/docs/en/about-claude/pricing"
       ],
@@ -74,13 +91,19 @@
     {
       "slug": "zhipu",
       "name": "智谱 Z.ai",
-      "model_count": 4,
+      "model_count": 5,
       "model_ids": [
         "glm-5.3",
         "glm-5.3-flash",
         "glm-5.3-flashx",
-        "glm-5.2"
+        "glm-5.2",
+        "glm-image"
       ],
+      "modality_counts": {
+        "text": 4,
+        "image": 1,
+        "video": 0
+      },
       "source_urls": [
         "https://docs.z.ai/guides/overview/pricing"
       ],
@@ -100,6 +123,11 @@
         "kimi-k2.7-code-highspeed",
         "kimi-for-coding"
       ],
+      "modality_counts": {
+        "text": 6,
+        "image": 0,
+        "video": 0
+      },
       "source_urls": [
         "https://platform.kimi.ai/docs/pricing/chat",
         "https://www.kimi.com/code/docs/en/kimi-code/models"
@@ -111,7 +139,7 @@
     {
       "slug": "qwen",
       "name": "阿里云 Qwen",
-      "model_count": 8,
+      "model_count": 14,
       "model_ids": [
         "qwen3.8-max",
         "qwen3.7-max",
@@ -120,8 +148,19 @@
         "qwen3.7-flash",
         "qwen3.8-2.4t-a95b",
         "qwen3.8-27b",
-        "qwen3.8-omni-flash"
+        "qwen3.8-omni-flash",
+        "qwen-image-3.0-pro",
+        "qwen-image-3.0",
+        "wan2.7-image-pro",
+        "wan2.7-image",
+        "wan3.0-video",
+        "wan3.0-video-prime"
       ],
+      "modality_counts": {
+        "text": 8,
+        "image": 4,
+        "video": 2
+      },
       "source_urls": [
         "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
       ],
@@ -132,13 +171,22 @@
     {
       "slug": "google",
       "name": "Google Gemini",
-      "model_count": 4,
+      "model_count": 8,
       "model_ids": [
         "gemini-4-argon",
         "gemini-3.8-flash",
         "gemini-3.5-flash-lite",
-        "gemini-3.1-pro-preview"
+        "gemini-3.1-pro-preview",
+        "gemini-nano-banana-2.1",
+        "gemini-3.1-flash-lite-image",
+        "gemini-3-pro-image",
+        "gemini-omni-1.1-flash"
       ],
+      "modality_counts": {
+        "text": 4,
+        "image": 3,
+        "video": 1
+      },
       "source_urls": [
         "https://ai.google.dev/gemini-api/docs/pricing"
       ],
@@ -149,11 +197,21 @@
     {
       "slug": "minimax",
       "name": "MiniMax",
-      "model_count": 2,
+      "model_count": 7,
       "model_ids": [
         "minimax-m3",
-        "minimax-m3.1-flash"
+        "minimax-m3.1-flash",
+        "minimax-h3",
+        "minimax-h3-highspeed",
+        "minimax-h3-lite",
+        "minimax-h3-max",
+        "minimax-image-01"
       ],
+      "modality_counts": {
+        "text": 2,
+        "image": 1,
+        "video": 4
+      },
       "source_urls": [
         "https://platform.minimax.io/docs/guides/pricing-paygo"
       ],
@@ -164,11 +222,19 @@
     {
       "slug": "xai",
       "name": "xAI",
-      "model_count": 2,
+      "model_count": 5,
       "model_ids": [
         "grok-4.7",
-        "grok-4.7-build-fast"
+        "grok-4.7-build-fast",
+        "grok-imagine-image-2.0",
+        "grok-imagine-video-1.5",
+        "grok-imagine-video-1.5-lite"
       ],
+      "modality_counts": {
+        "text": 2,
+        "image": 1,
+        "video": 2
+      },
       "source_urls": [
         "https://docs.x.ai/developers/pricing"
       ],

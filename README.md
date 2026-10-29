@@ -2,7 +2,7 @@
 
 中文静态站点，直接部署到 GitHub Pages；运行时只有 HTML、CSS 和 JavaScript，无后端、数据库或第三方运行依赖。
 
-覆盖 9 个厂商、46 个模型，统一美元 / 每百万 token；缓存存储另按百万 token·小时计价。价格表支持主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
+覆盖 9 个厂商、70 个模型（文本 49、图像生成 12、视频生成 9），统一美元：文本模型按每百万 token（缓存存储另按百万 token·小时计价），图像按张 / 按 token，视频按秒 / 按 token。价格表支持“文本 / 图像 / 视频”分页签、主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
 
 ## 本地预览
 
@@ -23,6 +23,8 @@ python3 -m http.server 8000
 | `models/<model_id>.json` | 单模型，完整价格、来源和规则 |
 | `vendors.json` | 全部厂商和模型目录 |
 | `vendors/<vendor>.json` | 单厂商及其所有模型 |
+| `modalities.json` | 模态目录：`text` / `image` / `video` 的模型数、模型 ID、厂商 |
+| `modalities/<modality>.json` | 单一模态的全部模型（完整 Model 对象），如 `modalities/image.json`、`modalities/video.json` |
 | `openapi.json` | OpenAPI 3.1 合约 |
 
 数据接口统一返回 `{api_version, meta, data}`；`data` 在列表接口为数组，单模型为对象，索引为对象。厂商详情另含 `vendor`。`links` 和索引的路径均相对于基础地址 `api/v1/`，用 `new URL(path, BASE)` 拼接，不以单模型文件所在目录为基准。
@@ -34,6 +36,10 @@ BASE='https://liki-0814.github.io/llm-pricing/api/v1'
 curl --fail --silent --show-error "$BASE/index.json"
 curl --fail --silent --show-error "$BASE/models/gemini-3.1-pro-preview.json"
 curl --fail --silent --show-error "$BASE/vendors/openai.json"
+curl --fail --silent --show-error "$BASE/modalities/image.json"
+# 视频模型按秒价格（标准档）
+curl --fail --silent --show-error "$BASE/modalities/video.json" \
+  | jq -r '.data[] | .id as $id | .media_pricing.video_prices[] | select(.tier == "standard") | "\($id) \(.resolution) \(.audio) \(.price_per_second)"'
 curl --fail --silent --show-error "$BASE/models.json" \
   | jq '.data | map(select(.vendor == "openai" and .price_basis.type == "official")) | sort_by(.pricing.input) | .[:5]'
 ```
@@ -45,7 +51,7 @@ GitHub Pages 当前返回 `Access-Control-Allow-Origin: *`，支持跨域 fetch�
 HTML 加载 `assets/client.js`，全局对象为 `LLMPrice`。Node.js 18+ 可通过 `require` 使用同一文件，无 npm 安装步骤。
 
 ```js
-const { createClient, estimate } = require('./assets/client.js');
+const { createClient, estimate, estimateMedia } = require('./assets/client.js');
 const api = createClient('https://liki-0814.github.io/llm-pricing/api/v1/');
 
 async function main() {
@@ -59,11 +65,16 @@ async function main() {
     at: '2026-10-11'
   });
   console.log(result.total, result.breakdown, result.warnings); // 1.38 USD
+
+  // 图像 / 视频模型：按模态筛选，用 estimateMedia 估算
+  const { data: videos } = await api.listModels({ modality: 'video', sort: 'media_price' });
+  const { data: clip } = await api.getModel('grok-imagine-video-1.5');
+  console.log(estimateMedia(clip, { seconds: 10, resolution: '720p' }).total); // 1.4 USD
 }
 main().catch(console.error);
 ```
 
-`getIndex()` 和 `listVendors()` 返回目录；`getOpenAPI()` 直接返回 OpenAPI 描述对象；`api.estimate(id, usage, options)` 可以一次取模型并计算。筛选和排序在客户端执行，HTTP 请求仍然是普通 GET 静态文件。`sort` 支持 input/output/cached_input/cache_write/context_length/max_output_tokens/name，前缀 `-` 表示降序；未知价格始终排最后。`meta.count` 是返回数，`matched_count` 是筛选匹配数，`total_count` 是全量数。
+`getIndex()`、`listVendors()` 和 `listModalities()` 返回目录；`getModality('image')` 读取单一模态文件；`listModels({ modality: 'image' })` 在客户端按模态筛选，`sort: 'media_price'` 按图像 / 视频的最低标准档单价排序；`getOpenAPI()` 直接返回 OpenAPI 描述对象；`api.estimate(id, usage, options)` 可以一次取模型并计算。筛选和排序在客户端执行，HTTP 请求仍然是普通 GET 静态文件。`sort` 支持 input/output/cached_input/cache_write/context_length/max_output_tokens/name，前缀 `-` 表示降序；未知价格始终排最后。`meta.count` 是返回数，`matched_count` 是筛选匹配数，`total_count` 是全量数。
 
 客户端默认 15 秒超时，可用 `{timeoutMs: 5000}` 调整。错误具有稳定 `code`：`NOT_FOUND`、`HTTP_ERROR`、`TIMEOUT`、`NETWORK_ERROR`、`INVALID_RESPONSE`、`INVALID_ARGUMENT`、`PRICE_UNAVAILABLE`、`PRICE_EXPIRED`、`HISTORICAL_PRICE_UNAVAILABLE`、`UNSUPPORTED_SERVICE_TIER`、`LIMIT_EXCEEDED`、`TIME_REQUIRED`、`HOLIDAY_REQUIRED`。
 
@@ -93,9 +104,21 @@ node scripts/check_live.cjs --doh \
   https://liki-0814.github.io/llm-pricing/api/v1/ /tmp/llm-pricing-live.json
 ```
 
-该命令用 curl 和 Node 客户端逐一查询本地快照对应的全部线上 JSON 路径，核对 HTTP 状态、JSON 类型、实际内容与版本；再验证未知模型/厂商的 404、Grok 筛选和费用计算。内容不一致或请求失败时退出码非零。它属于发布后的人工检查，CI 保留不依赖外部站点的本地检查。
+该命令用 curl 和 Node 客户端逐一查询本地快照对应的全部线上 JSON 路径（含 `modalities*.json`），核对 HTTP 状态、JSON 类型、实际内容与版本；再验证未知模型/厂商/模态的 404、各模态线上数量（文本 49、图像 12、视频 9）、Grok 筛选以及文本和图像 / 视频费用计算。内容不一致或请求失败时退出码非零。它属于发布后的人工检查，CI 保留不依赖外部站点的本地检查。
 
 DNS 方式需要按域名判断：2026-10-11 本机查询 xAI 官方价格接口 `https://api.x.ai/v1/language-models/grok-4.7` 时，普通 curl 和 Node fetch 均成功连接并返回 HTTP 401（没有 API Key）；强制 DoH 公网路径则在 TLS 阶段连接被重置。因此 xAI 使用默认系统 DNS，不复用 Pages 的 DoH 设置。这证明 xAI 的默认路径可连通，没有取得认证后的价格返回；本仓库 Grok 价格按官方定价文档核对。
+
+## 图像与视频模型
+
+每个模型都有 `modality`（`text` / `image` / `video`；原有 49 个文本模型均为 `text`，其余字段不变）。图像 / 视频模型的 `pricing.*` 为 `null`（状态 `not_applicable`），`unit` 为 `see_media_pricing`，价格全部在结构化的 `media_pricing` 对象里（文本模型该字段为 `null`）：
+
+- `billing_methods`：`token` / `per_image` / `per_second`，与下列数据一一对应。
+- `image_prices[]`：`{tier(standard|batch), size(0.5k/1k/1.5k/2k/4k，any=不分尺寸), quality|null, price(USD/张)|null, tokens|null, basis(listed|token_equivalent), note}`。
+- `video_prices[]`：`{tier, resolution, audio(with_audio|without_audio|any), price_per_second|null, tokens_per_second|null, input_video_price_per_second|null, basis(listed|token_equivalent|approximate), note}`。
+- `token_pricing`：`{unit, standard, batch, priority}`，每档含 `text_input`、`text_cached_input`、`text_output`、`image_input`、`image_cached_input`、`image_output`、`video_input`、`video_output`、`audio_input`（美元 / 百万 token，官方未列为 `null`）。
+- `input_image_price`、`input_image_price_batch`、`batch_supported`、`promotion {discount_percent, effective_until, note}`、`billing_note`、`sources`。
+
+官方没有公布的价格保持 `null` 并列入 `unverified_fields`（如 GPT Image 2.5 只公布 token 价，没有单张价；Gemini Omni 只给出 720p 的约值）。限时促销只记录在 `promotion`，价格字段保留官方原价，`estimateMedia` 会附带警告而不自动打折。`estimate()` 仅适用于文本模型，对图像 / 视频模型抛出 `UNSUPPORTED_MODALITY`。`estimateMedia(model, usage, { tier })` 的用量字段：`images` + `size` + `quality`、`seconds` + `resolution` + `audio`、`inputImages`、`inputVideoSeconds`，以及 `textInputTokens` / `textCachedInputTokens` / `textOutputTokens` / `imageInputTokens` / `imageCachedInputTokens` / `imageOutputTokens` / `videoInputTokens` / `videoOutputTokens` / `audioInputTokens`；所用价格缺失时抛出 `PRICE_UNAVAILABLE`，不当作零。
 
 ## 费用计算口径
 
@@ -126,7 +149,7 @@ const r = await api.estimate('gemini-3.5-flash-lite', {
 
 `data/prices.json` 为唯一数据源；`api/v1/` 由脚本生成，勿手改。
 
-模型字段仍限于价格、推理强度、上下文与最大输出、分档、服务档、缓存、生效日期及来源。未恢复最大输入、思考子上限、模态、功能、知识截止、思考预算、可用性、快照和别名。新增的 `price_basis`、`billing`、`off_peak_schedule` 只表达价格依据和计费口径。
+模型字段仍限于价格、推理强度、上下文与最大输出、分档、服务档、缓存、生效日期及来源，另有 `modality` 和图像 / 视频的 `media_pricing`（见上节）。未恢复最大输入、思考子上限、输入输出模态列表（`modalities`）、功能、知识截止、思考预算、可用性、快照和别名。新增的 `price_basis`、`billing`、`off_peak_schedule` 只表达价格依据和计费口径。
 
 - `pricing_status`：verified 官方价；reference 用户确认参照价；unverified 待核实；not_listed 官方未列。
 - `price_basis`：official/reference，参照模型 ID、来源 URL 与说明。可选 `reference_multiplier` 表示基础档相对参照模型的已公布倍率，省略为 1；单价已经展开，分档使用 `pricing_tiers` 中的单价，计算时不再乘此值。原参照数值保留。
@@ -169,5 +192,7 @@ GitHub Actions 在 push、pull request 和手动运行时执行同样的校验�
 - [MiniMax 模型调用](https://platform.minimax.io/docs/guides/text-generation)和[按量定价](https://platform.minimax.io/docs/guides/pricing-paygo)：M3 与 M3.1-Flash 按量价格。
 - [Kimi Code 模型配置](https://www.kimi.com/code/docs/en/kimi-code/models)：订阅模型、推理档位和上下文来源。
 - [Grok 4.7 官方指南](https://docs.x.ai/developers/grok-4-7)、[定价](https://docs.x.ai/developers/pricing)和[推理规则](https://docs.x.ai/developers/model-capabilities/text/reasoning)：500,000 上下文、无独立文本输出上限、长上下文阈值、缓存、Priority 和美国区域计费。
+
+- 图像与视频生成：[OpenAI 定价](https://developers.openai.com/api/docs/pricing)（GPT Image 2.5）、[xAI 定价](https://docs.x.ai/developers/pricing)（Grok Imagine）、[Gemini 定价](https://ai.google.dev/gemini-api/docs/pricing)（Nano Banana / Gemini Omni）、[阿里云百炼定价](https://www.alibabacloud.com/help/en/model-studio/model-pricing)（Qwen-Image / Wan）、[MiniMax 按量定价](https://platform.minimax.io/docs/guides/pricing-paygo)和[智谱定价](https://docs.z.ai/guides/overview/pricing)；仅收录最新一代、官方按量美元价。
 
 本次针对已发现问题核实相关规则，没有声称重新核实所有已收录模型的全部价格。每个模型的 `source_url`、`extra_sources` 和结构化 `sources` 可追溯具体依据。未知数值保留未知，不用其他模型的值冒充官方确认。

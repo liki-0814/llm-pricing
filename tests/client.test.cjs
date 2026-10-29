@@ -3,12 +3,14 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
-const { createClient, estimate } = require('../assets/client.js');
+const { createClient, estimate, estimateMedia } = require('../assets/client.js');
 const root = path.resolve(__dirname, '..');
 const all = JSON.parse(fs.readFileSync(path.join(root, 'api/v1/models.json')));
 // Arithmetic and calendar cases use frozen fixtures, not the changing published catalog.
 const fixtures = require('./fixtures/estimator-models.json');
 const model = id => structuredClone(fixtures[id]);
+const mediaFixtures = require('./fixtures/media-models.json');
+const media = id => structuredClone(mediaFixtures[id]);
 const opts = { at: '2026-10-11' };
 const usage = (inputTokens, outputTokens, more) => Object.assign({ inputTokens, outputTokens }, more);
 function close(actual, expected) { assert.ok(Math.abs(actual - expected) < 1e-10, `${actual} != ${expected}`); }
@@ -115,7 +117,7 @@ test('missing prices and invalid inputs never become free or silently coerce', (
   code(() => estimate(huge,usage(0,0,{storageTokenHours:Number.MAX_VALUE}),opts),'INVALID_ARGUMENT');
 });
 test('published snapshots estimate on their verification date and reject earlier dates', () => {
-  for (const m of all.data) {
+  for (const m of all.data.filter(m => m.modality === 'text')) {
     // Noon UTC is outside the recorded peak windows. An explicit holiday flag
     // also keeps this smoke test independent of which weekday a snapshot uses.
     const at = m.last_updated + 'T12:00:00Z';
@@ -167,15 +169,22 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
     assert.equal(envelope.meta.data_version,full.meta.data_version);
     const linked=await (await fetch(new URL(m.links.self,base))).json();assert.deepEqual(linked,envelope);
   }
-  const spec=await client.getOpenAPI();assert.equal(Object.keys(spec.paths).length,5);
+  const modalities=await client.listModalities();
+  for(const x of modalities.data) {
+    const env=await client.getModality(x.name);
+    assert.deepEqual(env.data,full.data.filter(m=>m.modality===x.name));
+    assert.equal(env.meta.count,x.model_count);assert.equal(env.meta.data_version,full.meta.data_version);
+  }
+  const spec=await client.getOpenAPI();assert.equal(Object.keys(spec.paths).length,7);
   const staticPaths=new Set(requests);
-  const expected=['index.json','models.json','vendors.json','openapi.json',...full.data.map(m=>`models/${m.id}.json`),...vendors.data.map(v=>`vendors/${v.slug}.json`)];
-  assert.equal(expected.length,4+all.data.length+vendors.data.length);
+  const expected=['index.json','models.json','vendors.json','modalities.json','openapi.json',...modalities.data.map(x=>`modalities/${x.name}.json`),...full.data.map(m=>`models/${m.id}.json`),...vendors.data.map(v=>`vendors/${v.slug}.json`)];
+  assert.equal(expected.length,5+modalities.data.length+all.data.length+vendors.data.length);
   assert.deepEqual([...staticPaths].sort(),expected.map(p=>'/api/v1/'+p).sort());
   assert.deepEqual(index.data.models.map(m=>m.id),full.data.map(m=>m.id));
   for (const v of vendors.data) assert.deepEqual(v.model_ids,full.data.filter(m=>m.vendor===v.slug).map(m=>m.id));
   const cheapest=await client.listModels({vendor:'openai',sort:'input',limit:2,priceBasis:'official'});
-  assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,8);
+  assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,10); // 8 text + 2 image models
+  assert.equal((await client.listModels({vendor:'openai',modality:'text',sort:'input',priceBasis:'official'})).meta.matched_count,8);
   const search=await client.listModels({q:'gemini pro'});assert.equal(search.data[0].id,'gemini-3.1-pro-preview');
   const missingLast=await client.listModels({sort:'-cache_write'});assert.equal(missingLast.data.at(-1).pricing.cache_write,null);
   const current = full.data.find(m=>m.id==='gemini-3.1-pro-preview');
@@ -209,4 +218,100 @@ test('OpenAI 12h TTL cache writes are a separate 2.5x field, tier-aware and serv
     code(() => estimate(m, usage(10, 0, {cacheWrite12hTokens: 6, cacheWriteTokens: 5}), at), 'INVALID_ARGUMENT');
   }
   code(() => estimate(model('claude-opus-5.5'), usage(1000, 0, {cacheWrite12hTokens: 1}), {at: '2026-10-20'}), 'PRICE_UNAVAILABLE');
+});
+
+test('every model has a modality; modality files partition the catalog', async () => {
+  const names = ['text', 'image', 'video'];
+  assert.ok(all.data.every(m => names.includes(m.modality)));
+  assert.deepEqual(all.meta.modality_counts, Object.fromEntries(names.map(n => [n, all.data.filter(m => m.modality === n).length])));
+  assert.equal(all.meta.count, all.data.length);
+  const seen = new Set();
+  for (const n of names) {
+    const f = JSON.parse(fs.readFileSync(path.join(root, `api/v1/modalities/${n}.json`)));
+    assert.equal(f.modality.name, n);
+    assert.equal(f.modality.model_count, f.data.length);
+    assert.deepEqual(f.modality.model_ids, f.data.map(m => m.id));
+    assert.ok(f.data.every(m => m.modality === n));
+    assert.deepEqual(f.data, all.data.filter(m => m.modality === n));
+    f.data.forEach(m => { assert.ok(!seen.has(m.id), m.id); seen.add(m.id); });
+  }
+  assert.equal(seen.size, all.data.length);
+  // text models keep the legacy shape; media models are neutral in text fields
+  for (const m of all.data) {
+    if (m.modality === 'text') { assert.equal(m.media_pricing, null, m.id); assert.equal(m.unit, 'per_1M_tokens'); continue; }
+    assert.ok(m.media_pricing && m.media_pricing.output_kind === m.modality, m.id);
+    assert.equal(m.unit, 'see_media_pricing');
+    assert.ok(Object.values(m.pricing).every(v => v === null), m.id);
+    assert.ok(Object.values(m.pricing_status).every(v => v === 'not_applicable'), m.id);
+  }
+});
+
+test('client filters by modality and sorts media models by price', async t => {
+  const server = http.createServer((req, res) => {
+    const target = path.resolve(root, '.' + new URL(req.url, 'http://localhost').pathname);
+    if (!target.startsWith(root + path.sep) || !fs.existsSync(target)) { res.statusCode = 404; res.end('<html>404</html>'); return; }
+    res.setHeader('content-type', 'application/json'); res.end(fs.readFileSync(target));
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  const client = createClient(`http://127.0.0.1:${server.address().port}/api/v1/`);
+  const mods = await client.listModalities();
+  assert.deepEqual(mods.data.map(m => m.name), ['text', 'image', 'video']);
+  for (const m of mods.data) {
+    assert.equal((await client.listModels({ modality: m.name })).data.length, m.model_count);
+    assert.deepEqual((await client.getModality(m.name)).data.map(x => x.id), m.model_ids);
+  }
+  const videos = await client.listModels({ modality: 'video', sort: 'media_price' });
+  assert.ok(videos.data.length > 0 && videos.data.every(m => m.modality === 'video'));
+  await assert.rejects(client.listModels({ modality: 'audio' }), e => e.code === 'INVALID_ARGUMENT');
+  await assert.rejects(client.getModality('audio'), e => e.code === 'NOT_FOUND');
+  const price = m => Math.min(...m.media_pricing.video_prices.map(p => p.price_per_second).filter(v => v !== null));
+  const sorted = videos.data.filter(m => m.media_pricing.video_prices.some(p => p.price_per_second !== null));
+  for (let i = 1; i < sorted.length; i++) assert.ok(price(sorted[i - 1]) <= price(sorted[i]));
+  const e = await client.estimateMedia('grok-imagine-video-1.5', { seconds: 10, resolution: '720p' });
+  close(e.total, 1.4);
+  await assert.rejects(client.estimate('grok-imagine-video-1.5', usage(1, 1)), e => e.code === 'UNSUPPORTED_MODALITY');
+});
+
+test('estimateMedia: per image, per second, tokens, batch tier, nulls and warnings', () => {
+  const grokImg = media('grok-imagine-image-2.0');
+  close(estimateMedia(grokImg, { images: 4, size: '1k', quality: 'low' }).total, 0.16);
+  close(estimateMedia(grokImg, { images: 2, size: '2k', quality: 'medium', inputImages: 3 }).total, 0.16 + 0.03);
+  code(() => estimateMedia(grokImg, { images: 1, size: '1k' }), 'INVALID_ARGUMENT');      // quality is required: low or medium
+  code(() => estimateMedia(grokImg, { images: 1, size: '8k', quality: 'low' }), 'PRICE_UNAVAILABLE');
+  code(() => estimate(grokImg, usage(1, 1)), 'UNSUPPORTED_MODALITY');
+  code(() => estimateMedia(model('claude-opus-5.5'), { images: 1, size: '1k' }), 'UNSUPPORTED_MODALITY');
+  code(() => estimateMedia(grokImg, { seconds: 1, resolution: '720p' }), 'INVALID_ARGUMENT');   // seconds is video only
+  code(() => estimateMedia(grokImg, { images: 1, size: '1k', quality: 'low', bogus: 1 }), 'INVALID_ARGUMENT');
+  code(() => estimateMedia(grokImg, { images: -1, size: '1k', quality: 'low' }), 'INVALID_ARGUMENT');
+  code(() => estimateMedia(grokImg, { images: 1, size: '1k', quality: 'low' }, { tier: 'priority' }), 'INVALID_ARGUMENT');
+  const video = media('grok-imagine-video-1.5');
+  const r = estimateMedia(video, { seconds: 8, resolution: '1080p' });
+  close(r.total, 2); assert.equal(r.breakdown.video_seconds, 2); assert.equal(r.currency, 'USD');
+  close(estimateMedia(video, { seconds: 8, resolution: '480p', audio: 'with_audio' }).total, 0.64); // audio "any" row applies to both
+  code(() => estimateMedia(video, { seconds: 8 }), 'INVALID_ARGUMENT');
+  // token-equivalent per-image prices carry a warning; batch tier uses its own rows
+  const banana = media('gemini-nano-banana-2.1');
+  const std = estimateMedia(banana, { images: 10, size: '4k' });
+  close(std.total, 1.13); assert.ok(std.warnings.some(w => w.includes('token-cost equivalent')));
+  close(estimateMedia(banana, { images: 10, size: '4k' }, { tier: 'batch' }).total, 0.567);
+  close(estimateMedia(banana, { imageOutputTokens: 1000000, textInputTokens: 500000 }).total, 30 + 0.75);
+  close(estimateMedia(banana, { imageOutputTokens: 1000000 }, { tier: 'batch' }).total, 15);
+  // OpenAI GPT Image publishes tokens only: no per-image price, so per-image estimates must fail rather than guess
+  const gpt = media('gpt-image-2.5-flare');
+  code(() => estimateMedia(gpt, { images: 1, size: '1k', quality: 'high' }), 'PRICE_UNAVAILABLE');
+  close(estimateMedia(gpt, { textInputTokens: 1000, imageOutputTokens: 4000 }).total, 0.005 + 0.12);
+  close(estimateMedia(gpt, { textInputTokens: 1000, imageOutputTokens: 4000 }, { tier: 'batch' }).total, (0.005 + 0.12) / 2);
+  code(() => estimateMedia(gpt, { videoOutputTokens: 1 }), 'PRICE_UNAVAILABLE');
+  // Alibaba list price with a recorded, un-applied limited-time promotion
+  const wan = media('wan3.0-video');
+  const w = estimateMedia(wan, { seconds: 10, resolution: '720p' });
+  close(w.total, 1); assert.ok(w.warnings.some(x => x.includes('promotion')));
+  close(estimateMedia(wan, { seconds: 5, resolution: '1080p', inputVideoSeconds: 2 }).total, 1 + 0.4);
+  // Google Omni: an unverified resolution is null, never zero; 720p is an approximate listed figure
+  const omni = media('gemini-omni-1.1-flash');
+  code(() => estimateMedia(omni, { seconds: 5, resolution: '1080p' }), 'PRICE_UNAVAILABLE');
+  const o = estimateMedia(omni, { seconds: 5, resolution: '720p' });
+  close(o.total, 0.5); assert.ok(o.warnings.some(x => x.includes('approximate')));
+  close(estimateMedia(omni, { videoOutputTokens: 1000000 }).total, 17.5);
 });

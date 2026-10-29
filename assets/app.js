@@ -3,7 +3,13 @@
   var DATA_URL = "data/prices.json";
   var PRICE_KEYS = ["input", "output", "cached_input", "cache_write"];
   var esc = LP.esc;
-  var state = { models: [], vendors: [], vendor: "", q: "", sortKey: "_i", sortDir: 1, open: {} };
+  var state = { models: [], vendors: [], vendor: "", q: "", sortKey: "_i", sortDir: 1, open: {}, modality: "text" };
+  var MODS = ["text", "image", "video"];
+  var MODLABEL = { text: "文本", image: "图像", video: "视频" };
+  var TOKLABEL = { text_input: "文本输入", text_cached_input: "文本缓存输入", text_output: "文本输出", image_input: "图像输入", image_cached_input: "图像缓存输入",
+    image_output: "图像输出", video_input: "视频输入", video_output: "视频输出", audio_input: "音频输入" };
+  var AUDIO = { with_audio: "含音频", without_audio: "无音频", any: "" };
+  var BASIS = { token_equivalent: "按 token 折算", approximate: "官方近似值" };
   var $ = function (id) { return document.getElementById(id); };
 
   function fmtNum(n) {
@@ -191,8 +197,114 @@
       return '<td class="' + c[0] + '" data-label="' + c[1] + '">' + c[2] + "</td>";
     }).join("") + "</tr>" + (open ? detailRow(m, slug) : "");
   }
+  // ---- image / video models: structured media_pricing (same data as api/v1/models/<id>.json) ----
+  function imgLabel(e) { return e.size === "any" ? "任意尺寸" : e.size; }
+  function priceRows(m, tier) {
+    var mp = m.media_pricing, out = [];
+    mp.image_prices.filter(function (e) { return e.tier === tier; }).forEach(function (e) {
+      out.push({ label: imgLabel(e) + (e.quality ? " · " + e.quality : ""), price: e.price, unit: "/张", basis: e.basis, note: e.note });
+    });
+    mp.video_prices.filter(function (e) { return e.tier === tier; }).forEach(function (e) {
+      out.push({ label: e.resolution + (AUDIO[e.audio] ? " · " + AUDIO[e.audio] : ""), price: e.price_per_second, unit: "/秒", basis: e.basis, note: e.note, inVideo: e.input_video_price_per_second });
+    });
+    return out;
+  }
+  function chipPrice(r) {
+    var v = isNum(r.price) ? money(r.price) + '<span class="u">' + r.unit + "</span>" : '<span class="tbd" title="官方未列出，未做推测">待核实</span>';
+    return '<span class="op" title="' + esc((BASIS[r.basis] ? BASIS[r.basis] + "：" : "") + (r.note || "")) + '">' + esc(r.label) + " <span>" + v + "</span>" +
+      (BASIS[r.basis] && isNum(r.price) ? '<i class="bsz">≈</i>' : "") + "</span>";
+  }
+  function matrixCell(m) {
+    var rows = priceRows(m, "standard"), mp = m.media_pricing, x = "";
+    if (rows.length) x += '<div class="offpeak">' + rows.map(chipPrice).join("") + "</div>";
+    else x += '<span class="tbd" title="官方未公布按张 / 按秒单价，未做推测">按张单价待核实</span>';
+    if (mp.promotion) x += '<div class="promo" title="' + esc(mp.promotion.note || "") + '">限时促销' + (isNum(mp.promotion.discount_percent) ? " −" + mp.promotion.discount_percent + "%" : "") + "（表内为原价）</div>";
+    return x;
+  }
+  function batchCell(m) {
+    var mp = m.media_pricing, rows = priceRows(m, "batch");
+    if (rows.length) return '<div class="offpeak">' + rows.map(chipPrice).join("") + "</div>";
+    if (mp.batch_supported === true) return '<span class="na" title="Batch 价格见详情">支持</span>';
+    if (mp.batch_supported === false) return '<span class="na">不支持</span>';
+    return '<span class="na">—</span>';
+  }
+  function inputCell(m) {
+    var mp = m.media_pricing, b = [];
+    if (isNum(mp.input_image_price)) b.push('<span class="op">输入图片 <span>' + money(mp.input_image_price) + '<span class="u">/张</span></span></span>');
+    mp.video_prices.filter(function (e) { return e.tier === "standard" && isNum(e.input_video_price_per_second); }).forEach(function (e) {
+      b.push('<span class="op">输入视频 ' + esc(e.resolution) + " <span>" + money(e.input_video_price_per_second) + '<span class="u">/秒</span></span></span>');
+    });
+    return b.length ? '<div class="offpeak">' + b.join("") + "</div>" : '<span class="na">—</span>';
+  }
+  function tokenCell(m) {
+    var tp = m.media_pricing.token_pricing;
+    if (!tp || !tp.standard) return '<span class="na">—</span>';
+    var b = Object.keys(TOKLABEL).filter(function (k) { return isNum(tp.standard[k]); }).map(function (k) {
+      return '<span class="op">' + TOKLABEL[k] + " <span>" + money(tp.standard[k]) + "</span></span>";
+    });
+    return '<div class="offpeak">' + b.join("") + '</div><div class="dnote">USD / 百万 token</div>';
+  }
+  function mediaDetail(m) {
+    var mp = m.media_pricing, out = [], x;
+    var std = priceRows(m, "standard"), bat = priceRows(m, "batch"), labels = [];
+    std.concat(bat).forEach(function (r) { if (labels.indexOf(r.label + r.unit) < 0) labels.push(r.label + r.unit); });
+    if (labels.length) {
+      var find = function (arr, l) { return arr.filter(function (r) { return r.label + r.unit === l; })[0]; };
+      var cell = function (r) { return r ? (isNum(r.price) ? '<span class="price">' + money(r.price) + "</span>" + (BASIS[r.basis] ? " ≈" : "") : '<span class="tbd">待核实</span>') : '<span class="na">—</span>'; };
+      var hasIn = std.some(function (r) { return isNum(r.inVideo); });
+      x = '<table class="mini"><thead><tr><th>' + (m.modality === "image" ? "尺寸 · 质量" : "分辨率 · 音频") + "</th><th>单价（标准）</th><th>单价（Batch）</th>" + (hasIn ? "<th>输入视频 / 秒</th>" : "") + "</tr></thead><tbody>" +
+        labels.map(function (l) {
+          var a = find(std, l), b = find(bat, l), u = (a || b).unit;
+          return "<tr><td>" + esc((a || b).label) + " <small>" + u + "</small></td><td>" + cell(a) + "</td><td>" + cell(b) + "</td>" + (hasIn ? "<td>" + (a && isNum(a.inVideo) ? pcell(a.inVideo) : '<span class="na">—</span>') + "</td>" : "") + "</tr>";
+        }).join("") + "</tbody></table>" +
+        std.concat(bat).filter(function (r) { return r.note; }).map(function (r) { return '<p class="dnote"><b>' + esc(r.label) + "：</b>" + esc(r.note) + "</p>"; }).join("");
+    } else x = '<span class="tbd">官方未公布按张 / 按秒单价（待核实）</span>';
+    out.push(block(m.modality === "image" ? "按张价格（USD）" : "按秒价格（USD）", x, true));
+    var tp = mp.token_pricing;
+    if (tp) {
+      var tiers = ["standard", "batch", "priority"].filter(function (t) { return tp[t]; });
+      x = '<table class="mini"><thead><tr><th>USD / 百万 token</th>' + tiers.map(function (t) { return "<th>" + t + "</th>"; }).join("") + "</tr></thead><tbody>" +
+        Object.keys(TOKLABEL).filter(function (k) { return tiers.some(function (t) { return isNum(tp[t][k]); }); }).map(function (k) {
+          return "<tr><td>" + TOKLABEL[k] + "</td>" + tiers.map(function (t) { return "<td>" + pcell(tp[t][k]) + "</td>"; }).join("") + "</tr>";
+        }).join("") + "</tbody></table>";
+      out.push(block("Token 计价", x, true));
+    }
+    var basis = m.price_basis || {}, billing = m.billing || {};
+    x = "";
+    if (isNum(mp.input_image_price)) x += kv("输入图片 / 张", money(mp.input_image_price));
+    if (isNum(mp.input_image_price_batch)) x += kv("输入图片 / 张（Batch）", money(mp.input_image_price_batch));
+    x += kv("计费方式", mp.billing_methods.map(function (k) { return { token: "按 token", per_image: "按张", per_second: "按秒" }[k] || k; }).join(" + "));
+    x += kv("Batch", mp.batch_supported === true ? "支持" : mp.batch_supported === false ? "不支持" : "待核实");
+    if (mp.promotion) x += '<p class="dnote"><b>促销：</b>' + esc(mp.promotion.note || "") + (mp.promotion.effective_until ? "（至 " + esc(mp.promotion.effective_until) + "）" : "（官方未给截止日期）") + "</p>";
+    if (mp.billing_note) x += '<p class="dnote">' + esc(mp.billing_note) + "</p>";
+    out.push(block("计费口径", x, false));
+    x = '<p class="dnote"><b>官方价格</b>：' + esc(basis.note || "") + "</p>" + (m.notes ? '<p class="dnote">' + esc(m.notes) + "</p>" : "");
+    var urls = [];
+    [m.source_url].concat(m.extra_sources || [], mp.sources || []).forEach(function (u) { if (u && urls.indexOf(u) < 0) urls.push(u); });
+    x += srcLinks(urls) + '<p class="dnote">更新于 ' + esc(m.last_updated || "") + (billing.region ? " · 地区：" + esc(billing.region) : "") +
+      ' · <a href="api/v1/models/' + encodeURIComponent(m.model_id) + '.json">JSON</a></p>';
+    if ((m.unverified_fields || []).length) x += '<p class="dnote"><span class="tbd">待核实</span> ' + m.unverified_fields.map(function (f) { return "<code>" + esc(f) + "</code>"; }).join(" ") + "</p>";
+    out.push(block("来源", x, false));
+    return '<div class="detail">' + out.join("") + "</div>";
+  }
+  function mediaRow(m) {
+    var slug = LP.slug(m.vendor), open = state.open[m.model_id];
+    var idBtn = '<button type="button" class="model-id" data-copy="' + esc(m.model_id) + '" title="点击复制模型 ID">' + esc(m.model_id) + "</button>";
+    var det = '<button type="button" class="detail-btn" data-id="' + esc(m.model_id) + '" aria-expanded="' + (open ? "true" : "false") + '">详情<span class="chev" aria-hidden="true"></span></button>';
+    var cells = [
+      ["c-model", "厂商 / 模型", '<span class="badge">' + esc(m.vendor) + '</span><div class="model-name">' + esc(m.model) + "</div>" + idBtn + '<div class="model-act">' + det + "</div>"],
+      ["c-matrix", m.modality === "image" ? "单价（按张，标准）" : "单价（按秒，标准）", matrixCell(m)],
+      ["c-batch", "Batch", batchCell(m)],
+      ["c-minput", "输入素材", inputCell(m)],
+      ["c-tok", "Token 计价", tokenCell(m)],
+      ["c-mnote", "备注", m.notes ? '<details class="note"><summary>备注</summary><p>' + esc(m.notes) + "</p></details>" : '<span class="na">—</span>']
+    ];
+    return '<tr class="v-' + slug + (open ? " has-detail" : "") + '">' + cells.map(function (c) {
+      return '<td class="' + c[0] + '" data-label="' + c[1] + '">' + c[2] + "</td>";
+    }).join("") + "</tr>" + (open ? '<tr class="detail-row v-' + slug + '" data-for="' + esc(m.model_id) + '"><td colspan="6">' + mediaDetail(m) + "</td></tr>" : "");
+  }
   function haystack(m) {
-    return [m.vendor, m.model, m.model_id, m.notes, m.peak_note, m.context_length,
+    return [m.modality, MODLABEL[m.modality], m.vendor, m.model, m.model_id, m.notes, m.peak_note, m.context_length,
       m.reasoning_effort ? [(m.reasoning_effort.levels || []).join(" "), m.reasoning_effort.default, m.reasoning_effort.note].join(" ") : "推理强度 待核实"].join(" ").toLowerCase();
   }
   function cmp(a, b) {
@@ -208,6 +320,7 @@
     var q = state.q.trim().toLowerCase();
     var terms = q ? q.split(/\s+/) : [];
     return state.models.filter(function (m) {
+      if (m.modality !== state.modality) return false;
       if (state.vendor && m.vendor !== state.vendor) return false;
       var h = m._h;
       for (var i = 0; i < terms.length; i++) if (h.indexOf(terms[i]) === -1) return false;
@@ -216,7 +329,8 @@
   }
   function syncUrl() {
     var p = new URLSearchParams(location.search);
-    ["vendor", "q", "sort"].forEach(function (k) { p.delete(k); });
+    ["vendor", "q", "sort", "modality"].forEach(function (k) { p.delete(k); });
+    if (state.modality !== "text") p.set("modality", state.modality);
     if (state.vendor) p.set("vendor", LP.slug(state.vendor));
     if (state.q.trim()) p.set("q", state.q.trim());
     if (state.sortKey !== "_i") p.set("sort", (state.sortDir < 0 ? "-" : "") + state.sortKey);
@@ -232,16 +346,31 @@
   function render() {
     var list = filtered();
     list.sort(function (a, b) { return cmp(a, b) || a._i - b._i; });
-    var best = {};
+    var best = {}, media = state.modality !== "text";
+    $("priceTable").hidden = media; $("mediaTable").hidden = !media;
     PRICE_KEYS.forEach(function (k) {
       var vals = list.map(function (m) { return m[k]; }).filter(isNum);
       // only mark a "lowest" when there is something to compare against
       best[k] = vals.length > 1 ? Math.min.apply(null, vals) : undefined;
     });
-    $("tbody").innerHTML = list.map(function (m) { return row(m, best); }).join("");
+    if (media) $("mediaBody").innerHTML = list.map(mediaRow).join("");
+    else $("tbody").innerHTML = list.map(function (m) { return row(m, best); }).join("");
+    document.querySelector(".table-card").classList.toggle("media", media);
     fitDetail();
     $("empty").hidden = list.length > 0;
-    $("count").innerHTML = "显示 <b>" + list.length + "</b> / " + state.models.length + " 个模型";
+    var inMod = state.models.filter(function (m) { return m.modality === state.modality; }).length;
+    $("count").innerHTML = "显示 <b>" + list.length + "</b> / " + inMod + " 个" + MODLABEL[state.modality] + "模型（共 " + state.models.length + "）";
+    $("textLegend").hidden = media; $("mediaLegend").hidden = !media;
+    Array.prototype.forEach.call(document.querySelectorAll("#modalityTabs .tab"), function (t) {
+      t.setAttribute("aria-selected", String(t.dataset.modality === state.modality));
+    });
+    $("sortText").hidden = media; $("sortMedia").hidden = !media;
+    // vendor chips: only vendors that have models in this modality
+    var cnt = {}; state.models.forEach(function (m) { if (m.modality === state.modality) cnt[m.vendor] = (cnt[m.vendor] || 0) + 1; });
+    Array.prototype.forEach.call(document.querySelectorAll("#vendorChips .chip"), function (c) {
+      var v = c.dataset.vendor, n = v ? (cnt[v] || 0) : inMod;
+      c.querySelector(".n").textContent = n; c.hidden = !!v && !n;
+    });
     Array.prototype.forEach.call(document.querySelectorAll("th[data-key]"), function (th) {
       if (th.dataset.key === state.sortKey) th.setAttribute("aria-sort", state.sortDir === 1 ? "ascending" : "descending");
       else th.removeAttribute("aria-sort");
@@ -251,6 +380,8 @@
     });
     var ss = $("sortSelect"), want = state.sortKey + ":" + state.sortDir;
     ss.value = Array.prototype.some.call(ss.options, function (o) { return o.value === want; }) ? want : "_i:1";
+    var sm = $("sortSelectMedia");
+    sm.value = Array.prototype.some.call(sm.options, function (o) { return o.value === want; }) ? want : "_i:1";
     syncUrl();
   }
   function chip(label, value, n, slug) {
@@ -259,12 +390,24 @@
   }
   function setSort(k, dir) { state.sortKey = k; state.sortDir = dir; render(); }
   function reset() { state.vendor = ""; state.q = ""; $("searchBox").value = ""; setSort("_i", 1); }
+  function setModality(mod) {
+    if (MODS.indexOf(mod) < 0) mod = "text";
+    state.modality = mod; state.vendor = "";
+    var valid = mod === "text" ? ["_i", "input", "output", "cached_input", "cache_write", "peak_note", "context_tokens", "lim_out", "re_sort", "model"] : ["_i", "model", "media_price"];
+    if (valid.indexOf(state.sortKey) < 0) { state.sortKey = "_i"; state.sortDir = 1; }
+    render();
+  }
 
   function init(data) {
     var models = data.models;
     state.models = models.map(function (m, i) {
       m._i = i; m._h = haystack(m);
       m.lim_out = m.limits ? m.limits.max_output_tokens : null;
+      m.media_price = null;
+      if (m.media_pricing) {
+        var mpv = priceRows(m, "standard").map(function (r) { return r.price; }).filter(isNum);
+        m.media_price = mpv.length ? Math.min.apply(null, mpv) : null;
+      }
       var r = m.reasoning_effort;   // sortable: number of levels (0 = not adjustable); 待核实 sorts last
       m.re_sort = (r && r.supported === false) ? 0 : (r && r.levels ? r.levels.length : null);
       return m;
@@ -273,14 +416,24 @@
     (new URLSearchParams(location.search).get("open") || "").split(",").forEach(function (id) { if (id) state.open[id] = true; });
     $("statUpdated").textContent = data.meta.last_updated;
     $("footUpdated").textContent = data.meta.last_updated;
+    var mc = { text: 0, image: 0, video: 0 };
+    models.forEach(function (m) { mc[m.modality]++; });
     $("statModels").innerHTML = models.length + "<small>个</small>";
+    $("statModels").title = "文本 " + mc.text + " · 图像 " + mc.image + " · 视频 " + mc.video;
+    $("modalityTabs").innerHTML = MODS.map(function (k) {
+      return '<button type="button" class="tab" role="tab" data-modality="' + k + '" aria-selected="false">' + MODLABEL[k] + ' <span class="n">' + mc[k] + "</span></button>";
+    }).join("");
+    $("modalityTabs").addEventListener("click", function (e) {
+      var t = e.target.closest(".tab"); if (t) setModality(t.dataset.modality);
+    });
     $("statVendors").innerHTML = data.vendors.length + "<small>家</small>";
-    var cheap = models.filter(function (m) { return isNum(m.input); }).sort(function (a, b) { return a.input - b.input; })[0];
+    var cheap = models.filter(function (m) { return m.modality === "text" && isNum(m.input); }).sort(function (a, b) { return a.input - b.input; })[0];
     if (cheap) $("statCheapest").innerHTML = "$" + fmtNum(cheap.input) + "<small>" + esc(cheap.model) + "</small>";
     $("statCheapest").title = cheap ? cheap.model : "";
 
     var counts = {};
     models.forEach(function (m) { counts[m.vendor] = (counts[m.vendor] || 0) + 1; });
+    state.modality = MODS.indexOf(new URLSearchParams(location.search).get("modality")) >= 0 ? new URLSearchParams(location.search).get("modality") : "text";
     $("vendorChips").innerHTML = chip("全部", "", models.length, "") + data.vendors.map(function (v) {
       return chip(v, v, counts[v] || 0, LP.slug(v));
     }).join("");
@@ -301,7 +454,8 @@
     if (vs) data.vendors.forEach(function (v) { if (LP.slug(v) === vs || v === vs) state.vendor = v; });
     if (p.get("q")) { state.q = p.get("q"); $("searchBox").value = state.q; }
     var so = p.get("sort");
-    if (so && document.querySelector('th[data-key="' + so.replace(/^-/, "") + '"]')) {
+    var validSort = state.modality === "text" ? "#priceTable" : "#mediaTable";
+    if (so && document.querySelector(validSort + ' th[data-key="' + so.replace(/^-/, "") + '"]')) {
       state.sortDir = so.charAt(0) === "-" ? -1 : 1; state.sortKey = so.replace(/^-/, "");
     }
 
@@ -315,6 +469,9 @@
     $("sortSelect").addEventListener("change", function (e) {
       var v = e.target.value.split(":"); setSort(v[0], Number(v[1]));
     });
+    $("sortSelectMedia").addEventListener("change", function (e) {
+      var v = e.target.value.split(":"); setSort(v[0], Number(v[1]));
+    });
     Array.prototype.forEach.call(document.querySelectorAll("th[data-key] .th"), function (btn) {
       btn.addEventListener("click", function () {
         var k = btn.parentNode.dataset.key;
@@ -323,7 +480,7 @@
         } else setSort(k, 1);
       });
     });
-    $("tbody").addEventListener("click", function (e) {
+    function bodyClick(e) {
       var db = e.target.closest(".detail-btn");
       if (db) { var id = db.dataset.id; if (state.open[id]) delete state.open[id]; else state.open[id] = true; render(); var b2 = document.querySelector('.detail-btn[data-id="' + id.replace(/"/g, "") + '"]'); if (b2) b2.focus(); return; }
       var more = e.target.closest(".more");
@@ -333,7 +490,9 @@
       }
       var b = e.target.closest(".model-id"); if (!b) return;
       LP.copy(b.dataset.copy).then(function () { LP.toast("已复制模型 ID：" + b.dataset.copy); }, function () { LP.toast("复制失败"); });
-    });
+    }
+    $("tbody").addEventListener("click", bodyClick);
+    $("mediaBody").addEventListener("click", bodyClick);
     document.addEventListener("keydown", function (e) {
       if (e.key === "/" && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); $("searchBox").focus(); }
       else if (e.key === "Escape" && document.activeElement === $("searchBox")) { $("searchBox").value = ""; state.q = ""; render(); }

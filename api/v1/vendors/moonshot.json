@@ -1,11 +1,11 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-28",
+    "updated_at": "2026-10-29",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "34d0633be30a7e43f85623099999e893d5ed769c992ebaa041c1f02fef218f7f",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5",
     "count": 6
   },
   "vendor": {
@@ -20,6 +20,11 @@
       "kimi-k2.7-code-highspeed",
       "kimi-for-coding"
     ],
+    "modality_counts": {
+      "text": 6,
+      "image": 0,
+      "video": 0
+    },
     "source_urls": [
       "https://platform.kimi.ai/docs/pricing/chat",
       "https://www.kimi.com/code/docs/en/kimi-code/models"
@@ -34,6 +39,7 @@
       "name": "Kimi K3",
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -106,6 +112,7 @@
           "https://platform.kimi.ai/docs/pricing/chat"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
@@ -129,6 +136,7 @@
       "name": "Kimi K3.1 Pro",
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -204,6 +212,7 @@
           "https://platform.kimi.ai/docs/pricing/chat"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
@@ -227,6 +236,7 @@
       "name": "Kimi K3.1 Pro Highspeed",
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -302,6 +312,7 @@
           "https://platform.kimi.ai/docs/pricing/chat"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
@@ -325,6 +336,7 @@
       "name": "Kimi K2.7 Code",
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -394,6 +406,7 @@
           "https://platform.kimi.ai/docs/guide/troubleshooting"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [
         {
@@ -439,6 +452,7 @@
       "name": "Kimi K2.7 Code Highspeed",
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -508,6 +522,7 @@
           "https://platform.kimi.ai/docs/guide/troubleshooting"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
@@ -531,6 +546,7 @@
       "name": "Kimi K2.8 Preview",
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
+      "modality": "text",
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -604,6 +620,7 @@
           "https://www.kimi.com/code/docs/en/kimi-code/models"
         ]
       },
+      "media_pricing": null,
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {

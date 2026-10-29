@@ -1,17 +1,18 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-28",
+    "updated_at": "2026-10-29",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "34d0633be30a7e43f85623099999e893d5ed769c992ebaa041c1f02fef218f7f"
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5"
   },
   "data": {
     "id": "gemini-3.1-pro-preview",
     "name": "Gemini 3.1 Pro Preview",
     "vendor": "google",
     "vendor_name": "Google Gemini",
+    "modality": "text",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
@@ -83,6 +84,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
       ]
     },
+    "media_pricing": null,
     "pricing_tiers": [
       {
         "condition": "input_tokens>200000",

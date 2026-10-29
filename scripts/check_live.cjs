@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { promisify } = require('node:util');
 const execFile = promisify(require('node:child_process').execFile);
-const { createClient, estimate: localEstimate } = require('../assets/client.js');
+const { createClient, estimate: localEstimate, estimateMedia: localEstimateMedia } = require('../assets/client.js');
 const { createDohFetch } = require('../assets/node-doh.cjs');
 const root = path.resolve(__dirname, '..');
 
@@ -15,7 +15,8 @@ async function main() {
   const base = new URL(positional[0] || 'https://liki-0814.github.io/llm-pricing/api/v1/');
   assert.ok(base.pathname.endsWith('/'), 'base URL must end with /');
   const output = positional[1];
-  const files = ['index.json','models.json','vendors.json','openapi.json',
+  const files = ['index.json','models.json','vendors.json','modalities.json','openapi.json',
+    ...fs.readdirSync(path.join(root,'api/v1/modalities')).filter(p=>p.endsWith('.json')).map(p=>'modalities/'+p),
     ...fs.readdirSync(path.join(root,'api/v1/models')).filter(p=>p.endsWith('.json')).map(p=>'models/'+p),
     ...fs.readdirSync(path.join(root,'api/v1/vendors')).filter(p=>p.endsWith('.json')).map(p=>'vendors/'+p)];
   const fetcher = doh ? createDohFetch(base.href) : globalThis.fetch;
@@ -34,6 +35,8 @@ async function main() {
       return data;
     }
     if(file==='vendors.json') return client.listVendors();
+    if(file==='modalities.json') return client.listModalities();
+    if(file.startsWith('modalities/')) return client.getModality(path.basename(file,'.json'));
     if(file==='openapi.json') return client.getOpenAPI();
     const id = path.basename(file,'.json');
     return file.startsWith('models/') ? client.getModel(id) : client.getVendor(id);
@@ -69,7 +72,7 @@ async function main() {
   }
   await Promise.all(Array.from({length:4},worker));
   const negatives=[];
-  for(const file of ['models/unknown-model.json','vendors/unknown-vendor.json']) {
+  for(const file of ['models/unknown-model.json','vendors/unknown-vendor.json','modalities/unknown-modality.json']) {
     const curl=await curlQuery(file);
     assert.equal(curl.status,404);
     await assert.rejects(nodeQuery(file),e=>e.code==='NOT_FOUND');
@@ -99,12 +102,32 @@ async function main() {
     'grok-4.7-build-fast live estimate differs from local snapshot');
   assert.equal(fastEstimate.pricing_tier,'input_tokens>200000');
   assert.ok(fastEstimate.warnings.some(w=>w.includes('not the subscription bill')));
+  // Modality counts, per-modality filtering and media estimates over the live API.
+  const live=await client.listModalities();
+  const modalityCounts=Object.fromEntries(live.data.map(m=>[m.name,m.model_count]));
+  assert.deepEqual(modalityCounts,{text:49,image:12,video:9},'live modality counts');
+  assert.deepEqual(live.meta.modality_counts,modalityCounts);
+  assert.equal(live.meta.count,70);
+  for(const name of ['text','image','video']) {
+    const filtered=await client.listModels({modality:name});
+    const direct=await client.getModality(name);
+    assert.equal(filtered.data.length,modalityCounts[name],name+' listModels({modality}) count');
+    assert.equal(direct.data.length,modalityCounts[name],name+' modalities/'+name+'.json count');
+    assert.ok(direct.data.every(m=>m.modality===name),name+' modality file mixes modalities');
+  }
+  const mediaUsage={xai_video:{seconds:10,resolution:'720p'},xai_image:{images:4,size:'1k',quality:'low'}};
+  const videoModel=localModel('grok-imagine-video-1.5'), imageModel=localModel('grok-imagine-image-2.0');
+  const liveVideo=await client.estimateMedia('grok-imagine-video-1.5',mediaUsage.xai_video);
+  const liveImage=await client.estimateMedia('grok-imagine-image-2.0',mediaUsage.xai_image);
+  assert.deepEqual(liveVideo,localEstimateMedia(videoModel,mediaUsage.xai_video),'live video estimate differs from local snapshot');
+  assert.deepEqual(liveImage,localEstimateMedia(imageModel,mediaUsage.xai_image),'live image estimate differs from local snapshot');
+  await assert.rejects(client.estimate('grok-imagine-video-1.5',{inputTokens:1,outputTokens:1}),e=>e.code==='UNSUPPORTED_MODALITY');
   const report={checked_at:new Date().toISOString(),base_url:base.href,node_version:process.version,
     dns_mode:doh?'explicit HTTPS DNS; default TLS verification':'system DNS',
-    count:rows.length,rows:rows.sort((a,b)=>a.file.localeCompare(b.file)),negative_checks:negatives,
-    grok_query:search.data[0].id,grok_estimate:estimate,build_fast_estimate:fastEstimate};
+    count:rows.length,modality_counts:modalityCounts,rows:rows.sort((a,b)=>a.file.localeCompare(b.file)),negative_checks:negatives,
+    grok_query:search.data[0].id,video_estimate:liveVideo,image_estimate:liveImage,grok_estimate:estimate,build_fast_estimate:fastEstimate};
   if(output) fs.writeFileSync(output,JSON.stringify(report,null,2)+'\n');
-  console.log(JSON.stringify({count:report.count,curl:'all passed',node_client:'all passed',
+  console.log(JSON.stringify({count:report.count,modality_counts:modalityCounts,video_estimate_total:liveVideo.total,image_estimate_total:liveImage.total,curl:'all passed',node_client:'all passed',
     negative_checks:'passed',grok_estimate:estimate.total,build_fast_reference_estimate:fastEstimate.total,
     data_version:search.meta.data_version,output},null,2));
 }

@@ -1,0 +1,126 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-29",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5"
+  },
+  "data": {
+    "id": "glm-image",
+    "name": "GLM-Image",
+    "vendor": "zhipu",
+    "vendor_name": "智谱 Z.ai",
+    "modality": "image",
+    "currency": "USD",
+    "unit": "see_media_pricing",
+    "pricing": {
+      "input": null,
+      "output": null,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "not_applicable",
+      "output": "not_applicable",
+      "cached_input": "not_applicable",
+      "cache_write": "not_applicable"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://docs.z.ai/guides/overview/pricing"
+      ],
+      "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://docs.z.ai/guides/overview/pricing",
+    "extra_sources": [],
+    "last_updated": "2026-10-29",
+    "notes": "按张计价 $0.015/张（不区分尺寸）。",
+    "reasoning_effort": {
+      "supported": false,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "not_applicable",
+      "field_status": {
+        "supported": "not_applicable",
+        "levels": "not_applicable",
+        "default": "not_applicable",
+        "can_disable": "not_applicable"
+      },
+      "note": "Not applicable: image generation model.",
+      "sources": [
+        "https://docs.z.ai/guides/overview/pricing"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "not_applicable",
+      "note": "Not applicable: image generation model (no token context window).",
+      "sources": [
+        "https://docs.z.ai/guides/overview/pricing"
+      ]
+    },
+    "media_pricing": {
+      "output_kind": "image",
+      "billing_methods": [
+        "per_image"
+      ],
+      "token_pricing": null,
+      "image_prices": [
+        {
+          "tier": "standard",
+          "size": "any",
+          "quality": null,
+          "price": 0.015,
+          "tokens": null,
+          "basis": "listed",
+          "note": "官方为统一单张价，不区分尺寸"
+        }
+      ],
+      "video_prices": [],
+      "input_image_price": null,
+      "input_image_price_batch": null,
+      "batch_supported": null,
+      "promotion": null,
+      "billing_note": "官方为统一单张价。",
+      "sources": [
+        "https://docs.z.ai/guides/overview/pricing"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": null
+    },
+    "price_schedule": [],
+    "unverified_fields": [],
+    "links": {
+      "self": "models/glm-image.json",
+      "vendor": "vendors/zhipu.json"
+    }
+  }
+}

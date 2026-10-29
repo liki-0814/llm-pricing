@@ -23,8 +23,9 @@ def source_schema(d):
     schema = copy.deepcopy(spec['components']['schemas']['Model'])
     props = schema['properties']
     for field in ('api_version', 'unit', 'vendor_name', 'pricing', 'pricing_status', 'has_off_peak',
-                  'off_peak_pricing', 'links', 'context_length_label'):
+                  'off_peak_pricing', 'links', 'context_length_label', 'media_pricing'):
         props.pop(field, None)
+    props['modality'] = {'const': 'text'}
     props['model_id'] = props.pop('id')
     props['model_id']['pattern'] = build_api.SLUG_RE.pattern
     props['id'] = {'type': 'string', 'minLength': 1}
@@ -51,6 +52,23 @@ def source_schema(d):
     return schema
 
 
+def media_source_schema(d):
+    """Source contract for image / video models: no token-price, context, reasoning, limits or tier fields."""
+    spec = build_api.openapi(d, list(build_api.VENDOR_SLUGS.values()), [])
+    props = spec['components']['schemas']['Model']['properties']
+    keep = ('currency', 'source_url', 'extra_sources', 'last_updated', 'notes', 'unverified_fields', 'price_basis', 'billing')
+    out = {k: copy.deepcopy(props[k]) for k in keep}
+    out['model_id'] = dict(copy.deepcopy(props['id']), pattern=build_api.SLUG_RE.pattern)
+    out['id'] = {'type': 'string', 'minLength': 1}
+    out['model'] = copy.deepcopy(props['name'])
+    out['vendor'] = {'enum': d.get('vendors', [])}
+    out['modality'] = {'enum': ['image', 'video']}
+    out['media_pricing'] = {'$ref': '#/components/schemas/MediaPricing'}
+    out['unverified_fields']['uniqueItems'] = True
+    return {'type': 'object', 'required': list(out), 'properties': out, 'additionalProperties': False,
+            'components': spec['components']}
+
+
 def numeric(v):
     return isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) and v >= 0
 
@@ -62,6 +80,101 @@ def expected_unverified(m):
     missing |= {'reasoning_effort.' + k for k in ('supported', 'levels', 'default', 'can_disable')
                 if r[k] is None and not (r['supported'] is False and k in ('levels', 'default'))}
     return missing
+
+
+def expected_unverified_media(m):
+    """Paths of media prices that are null, plus an empty price table for the model's own output kind."""
+    mp = m['media_pricing']
+    missing = set()
+    if mp['output_kind'] == 'image' and not mp['image_prices']:
+        missing.add('media_pricing.image_prices')
+    if mp['output_kind'] == 'video' and not mp['video_prices']:
+        missing.add('media_pricing.video_prices')
+    for e in mp['image_prices']:
+        if e['price'] is None:
+            missing.add('media_pricing.image_prices.%s.%s.%s' % (e['size'], e['quality'] or 'default', e['tier']))
+    for e in mp['video_prices']:
+        if e['price_per_second'] is None:
+            missing.add('media_pricing.video_prices.%s.%s.%s' % (e['resolution'], e['audio'], e['tier']))
+    return missing
+
+
+def validate_media(m, snapshot, fail):
+    where = m['model_id']
+    mp, kind = m['media_pricing'], m['modality']
+    if mp['output_kind'] != kind:
+        fail(where, 'media_pricing.output_kind must equal modality')
+    if m['price_basis']['type'] != 'official' or m['price_basis']['reference_model_id'] is not None:
+        fail(where, 'image / video prices must be official')
+    if m['billing']['price_type'] == 'reference' or m['billing']['channel'] != 'pay_as_you_go':
+        fail(where, 'image / video prices must be pay-as-you-go list prices')
+    if m['source_url'] not in mp['sources']:
+        fail(where, 'media_pricing.sources must include source_url')
+    methods = set(mp['billing_methods'])
+    if ('token' in methods) != (mp['token_pricing'] is not None):
+        fail(where, 'billing_methods token must match token_pricing presence')
+    if ('per_image' in methods) != bool(mp['image_prices']):
+        fail(where, 'billing_methods per_image must match image_prices presence')
+    if ('per_second' in methods) != bool(mp['video_prices']):
+        fail(where, 'billing_methods per_second must match video_prices presence')
+    if kind == 'image' and mp['video_prices'] or kind == 'video' and mp['image_prices']:
+        fail(where, 'price table does not match output_kind')
+    if kind == 'image' and (methods - {'token', 'per_image'}) or kind == 'video' and (methods - {'token', 'per_second'}):
+        fail(where, 'billing_methods do not match output_kind')
+    if set(m['unverified_fields']) != expected_unverified_media(m):
+        fail(where, 'unverified_fields must equal ' + repr(sorted(expected_unverified_media(m))))
+    tp = mp['token_pricing']
+    for tier in ('standard', 'batch', 'priority'):
+        prices = (tp or {}).get(tier)
+        for k, v in (prices or {}).items():
+            if v is not None and not numeric(v):
+                fail(where, 'invalid token price %s.%s' % (tier, k))
+    if tp is not None and tp['standard'] is None:
+        fail(where, 'token_pricing requires standard prices')
+    seen = set()
+    for e in mp['image_prices']:
+        key = (e['tier'], e['size'], e['quality'])
+        if key in seen:
+            fail(where, 'duplicate image price ' + repr(key))
+        seen.add(key)
+        if e['size'] != e['size'].lower():
+            fail(where, 'image size labels must be lowercase')
+    seen, audio = set(), {}
+    for e in mp['video_prices']:
+        key = (e['tier'], e['resolution'], e['audio'])
+        if key in seen:
+            fail(where, 'duplicate video price ' + repr(key))
+        seen.add(key)
+        audio.setdefault((e['tier'], e['resolution']), set()).add(e['audio'])
+        if e['resolution'] != e['resolution'].lower():
+            fail(where, 'video resolution labels must be lowercase')
+    for k, a in audio.items():
+        if 'any' in a and len(a) > 1:
+            fail(where, 'audio "any" cannot coexist with with_audio/without_audio for %s' % (k,))
+    # A documented token equivalence must match the token price within vendor rounding.
+    for e, rate_key, price_key, count_key, tol in (
+            [(e, 'image_output', 'price', 'tokens', 0.01) for e in mp['image_prices']] +
+            [(e, 'video_output', 'price_per_second', 'tokens_per_second', 0.02) for e in mp['video_prices']]):
+        count, price = e.get(count_key), e.get(price_key)
+        rate = ((tp or {}).get(e['tier']) or {}).get(rate_key)
+        if count is not None and tp is None:
+            fail(where, count_key + ' requires token_pricing')
+        elif count is not None and numeric(rate) and numeric(price) and not math.isclose(price, count * rate / 1e6, rel_tol=tol):
+            fail(where, '%s %s x %s disagrees with listed price' % (count_key, count, rate_key))
+    for e in mp['image_prices'] + mp['video_prices']:
+        if e['basis'] in ('token_equivalent',) and tp is None:
+            fail(where, 'token_equivalent prices require token_pricing')
+    for k in ('input_image_price', 'input_image_price_batch'):
+        if mp[k] is not None and not numeric(mp[k]):
+            fail(where, 'invalid ' + k)
+    for e in mp['video_prices']:
+        if e['input_video_price_per_second'] is not None and not numeric(e['input_video_price_per_second']):
+            fail(where, 'invalid input_video_price_per_second')
+    if mp['batch_supported'] is False and any(e['tier'] == 'batch' for e in mp['image_prices'] + mp['video_prices']):
+        fail(where, 'batch prices on a model without batch support')
+    promo = mp['promotion']
+    if promo and promo['effective_until'] and promo['effective_until'] < m['last_updated']:
+        fail(where, 'expired promotion needs re-verification')
 
 
 def validate_data(d):
@@ -95,10 +208,15 @@ def validate_data(d):
     for v in d['vendors']:
         if v not in build_api.VENDOR_SLUGS:
             fail('vendors', 'unknown vendor ' + str(v))
-    validator = Draft202012Validator(source_schema(d), format_checker=FormatChecker())
+    validators = {'text': Draft202012Validator(source_schema(d), format_checker=FormatChecker()),
+                  'media': Draft202012Validator(media_source_schema(d), format_checker=FormatChecker())}
     by_id, ids = {}, set()
     for i, m in enumerate(d['models']):
         where = 'models[%d]' % i
+        if not isinstance(m, dict) or m.get('modality') not in build_api.MODALITIES:
+            fail(where, 'modality must be one of ' + ', '.join(build_api.MODALITIES))
+            continue
+        validator = validators['text' if m['modality'] == 'text' else 'media']
         schema_errors = list(validator.iter_errors(m))
         for e in schema_errors:
             fail(where + '.' + '.'.join(map(str, e.path)), e.message)
@@ -113,6 +231,9 @@ def validate_data(d):
         ids.add(m['id']); by_id[where] = m
         if dt.date.fromisoformat(m['last_updated']) > snapshot:
             fail(where, 'model verification date is after dataset date')
+        if m['modality'] != 'text':
+            validate_media(m, snapshot, fail)
+            continue
         if set(m['unverified_fields']) != expected_unverified(m):
             fail(where, 'unverified_fields must equal ' + repr(sorted(expected_unverified(m))))
         if m['limits']['context_length'] != m['context_tokens']:
@@ -238,11 +359,25 @@ def validate_api(d, files=None):
     for rel, response in files.items():
         if rel == 'openapi.json':
             continue
-        path = '/models/{model_id}.json' if rel.startswith('models/') else '/vendors/{vendor}.json' if rel.startswith('vendors/') else '/' + rel
+        path = ('/models/{model_id}.json' if rel.startswith('models/') else '/vendors/{vendor}.json' if rel.startswith('vendors/')
+                else '/modalities/{modality}.json' if rel.startswith('modalities/') else '/' + rel)
         schema = copy.deepcopy(spec['paths'][path]['get']['responses']['200']['content']['application/json']['schema'])
         schema['components'] = spec['components']
         for e in Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(response):
             errors.append(rel + '.' + '.'.join(map(str, e.path)) + ': ' + e.message)
+    for o in files['models.json']['data']:
+        applicable = o['modality'] == 'text'
+        if (o['media_pricing'] is None) != applicable:
+            errors.append(o['id'] + ': media_pricing must be null for text models and present for image / video models')
+        if not applicable and (any(v is not None for v in o['pricing'].values()) or
+                               set(o['pricing_status'].values()) != {'not_applicable'}):
+            errors.append(o['id'] + ': token price fields must be null / not_applicable on image / video models')
+    for k in build_api.MODALITIES:
+        f = files['modalities/%s.json' % k]
+        if any(o['modality'] != k for o in f['data']) or [o['id'] for o in f['data']] != f['modality']['model_ids']:
+            errors.append('modalities/%s.json: data does not match modality' % k)
+    if sum(len(files['modalities/%s.json' % k]['data']) for k in build_api.MODALITIES) != len(files['models.json']['data']):
+        errors.append('modalities: every model must belong to exactly one modality')
     return errors
 
 
@@ -254,7 +389,8 @@ def main():
         problems += build_api.check(d)
     for problem in problems:
         print('BAD', problem)
-    print('%d models, %d problem(s)' % (len(d['models']), len(problems)))
+    counts = {k: sum(1 for m in d['models'] if m.get('modality') == k) for k in build_api.MODALITIES}
+    print('%d models (%s), %d problem(s)' % (len(d['models']), ', '.join('%s %d' % kv for kv in counts.items()), len(problems)))
     for m in d['models']:
         for k in m['unverified_fields']:
             print('unverified:', m['model_id'], k)

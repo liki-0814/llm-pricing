@@ -1,0 +1,167 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-29",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5"
+  },
+  "data": {
+    "id": "gemini-3.1-flash-lite-image",
+    "name": "Gemini Nano Banana 2 Lite",
+    "vendor": "google",
+    "vendor_name": "Google Gemini",
+    "modality": "image",
+    "currency": "USD",
+    "unit": "see_media_pricing",
+    "pricing": {
+      "input": null,
+      "output": null,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "not_applicable",
+      "output": "not_applicable",
+      "cached_input": "not_applicable",
+      "cache_write": "not_applicable"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
+      ],
+      "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+    "extra_sources": [
+      "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
+    ],
+    "last_updated": "2026-10-29",
+    "notes": "Token 计价：输入 $0.25，图像输出 $30 / 百万 token；等价单张价仅列 1K：$0.0336（1120 token）；Batch 半价。",
+    "reasoning_effort": {
+      "supported": false,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "not_applicable",
+      "field_status": {
+        "supported": "not_applicable",
+        "levels": "not_applicable",
+        "default": "not_applicable",
+        "can_disable": "not_applicable"
+      },
+      "note": "Not applicable: image generation model.",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "not_applicable",
+      "note": "Not applicable: image generation model (no token context window).",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
+      ]
+    },
+    "media_pricing": {
+      "output_kind": "image",
+      "billing_methods": [
+        "token",
+        "per_image"
+      ],
+      "token_pricing": {
+        "unit": "per_1M_tokens",
+        "standard": {
+          "text_input": 0.25,
+          "text_cached_input": null,
+          "text_output": 1.5,
+          "image_input": 0.25,
+          "image_cached_input": null,
+          "image_output": 30,
+          "video_input": 0.25,
+          "video_output": null,
+          "audio_input": null
+        },
+        "batch": {
+          "text_input": 0.125,
+          "text_cached_input": null,
+          "text_output": 0.75,
+          "image_input": 0.125,
+          "image_cached_input": null,
+          "image_output": 15,
+          "video_input": 0.125,
+          "video_output": null,
+          "audio_input": null
+        },
+        "priority": null
+      },
+      "image_prices": [
+        {
+          "tier": "standard",
+          "size": "1k",
+          "quality": null,
+          "price": 0.0336,
+          "tokens": 1120,
+          "basis": "token_equivalent",
+          "note": null
+        },
+        {
+          "tier": "batch",
+          "size": "1k",
+          "quality": null,
+          "price": 0.0168,
+          "tokens": 1120,
+          "basis": "token_equivalent",
+          "note": null
+        }
+      ],
+      "video_prices": [],
+      "input_image_price": null,
+      "input_image_price_batch": null,
+      "batch_supported": true,
+      "promotion": null,
+      "billing_note": "官方仅列 1K 等价单张价，2K / 4K 未列出（未标注支持）。文本与思考输出 $1.50（Batch $0.75）。",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": null
+    },
+    "price_schedule": [],
+    "unverified_fields": [],
+    "links": {
+      "self": "models/gemini-3.1-flash-lite-image.json",
+      "vendor": "vendors/google.json"
+    }
+  }
+}

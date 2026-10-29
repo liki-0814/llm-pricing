@@ -21,6 +21,15 @@ API_DIR = ROOT / "api" / "v1"
 API_VERSION = "v1"
 UNIT = "per_1M_tokens"
 UNIT_LABEL = "USD per 1M tokens"
+MEDIA_UNIT = "see_media_pricing"
+MEDIA_UNIT_LABEL = "USD; see each model's media_pricing (per image / per second of video / per 1M tokens)"
+MODALITIES = ("text", "image", "video")
+MODALITY_LABELS = {"text": "文本生成（token 计价）", "image": "图像生成", "video": "视频生成"}
+BILLING_METHODS = ("token", "per_image", "per_second")
+PRICE_TIERS = ("standard", "batch")
+VIDEO_AUDIO = ("with_audio", "without_audio", "any")
+TOKEN_PRICE_FIELDS = ("text_input", "text_cached_input", "text_output", "image_input", "image_cached_input",
+                      "image_output", "video_input", "video_output", "audio_input")
 PRICE_FIELDS = ("input", "output", "cached_input", "cache_write")
 OFFPEAK_FIELDS = ("input", "output", "cached_input")
 SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9.\-]*$")
@@ -116,9 +125,50 @@ def reasoning_obj(m):
     }
 
 
+def media_obj(mp):
+    """Source media_pricing -> API object (explicit keys, stable order)."""
+    def tokens(t):
+        return None if t is None else {k: t.get(k) for k in TOKEN_PRICE_FIELDS}
+    tp = mp.get("token_pricing")
+    return {
+        "output_kind": mp["output_kind"],
+        "billing_methods": list(mp["billing_methods"]),
+        "token_pricing": None if tp is None else {"unit": "per_1M_tokens", "standard": tokens(tp["standard"]),
+                                                  "batch": tokens(tp.get("batch")), "priority": tokens(tp.get("priority"))},
+        "image_prices": [{k: e.get(k) for k in ("tier", "size", "quality", "price", "tokens", "basis", "note")}
+                         for e in mp.get("image_prices") or []],
+        "video_prices": [{k: e.get(k) for k in ("tier", "resolution", "audio", "price_per_second",
+                                                "tokens_per_second",
+                                                "input_video_price_per_second", "basis", "note")}
+                         for e in mp.get("video_prices") or []],
+        "input_image_price": mp.get("input_image_price"),
+        "input_image_price_batch": mp.get("input_image_price_batch"),
+        "batch_supported": mp.get("batch_supported"),
+        "promotion": copy.deepcopy(mp.get("promotion")),
+        "billing_note": mp["billing_note"],
+        "sources": list(mp["sources"]),
+    }
+
+
+def media_na_objects(m):
+    """Text-only structures are not applicable to image / video models."""
+    na = {k: "not_applicable" for k in ("supported", "levels", "default", "can_disable")}
+    reasoning = {"supported": False, "levels": None, "default": None, "can_disable": None,
+                 "status": "not_applicable", "field_status": na,
+                 "note": "Not applicable: %s generation model." % m["modality"], "sources": list(m["media_pricing"]["sources"])}
+    limits = {"context_length": None, "max_output_tokens": None, "status": "not_applicable",
+              "note": "Not applicable: %s generation model (no token context window)." % m["modality"],
+              "sources": list(m["media_pricing"]["sources"])}
+    return reasoning, limits
+
+
 def model_obj(m):
     pricing, status = {}, {}
+    modality = m["modality"]
     for k in PRICE_FIELDS:
+        if modality != "text":
+            pricing[k], status[k] = None, "not_applicable"
+            continue
         pricing[k], status[k] = price_value(m.get(k))
         if status[k] == "verified" and m["price_basis"]["type"] == "reference":
             status[k] = "reference"
@@ -126,13 +176,19 @@ def model_obj(m):
     off_pricing = None
     if off:
         off_pricing = {k: off.get(k) for k in OFFPEAK_FIELDS}
+    if modality == "text":
+        reasoning, limits, media = reasoning_obj(m), limits_obj(m), None
+    else:
+        reasoning, limits = media_na_objects(m)
+        media = media_obj(m["media_pricing"])
     return {
         "id": m["model_id"],
         "name": m["model"],
         "vendor": VENDOR_SLUGS[m["vendor"]],
         "vendor_name": m["vendor"],
+        "modality": modality,
         "currency": m["currency"],
-        "unit": UNIT,
+        "unit": UNIT if modality == "text" else MEDIA_UNIT,
         "pricing": pricing,
         "pricing_status": status,
         "price_basis": copy.deepcopy(m["price_basis"]),
@@ -147,8 +203,9 @@ def model_obj(m):
         "extra_sources": list(m.get("extra_sources") or []),
         "last_updated": m.get("last_updated"),
         "notes": m.get("notes"),
-        "reasoning_effort": reasoning_obj(m),
-        "limits": limits_obj(m),
+        "reasoning_effort": reasoning,
+        "limits": limits,
+        "media_pricing": media,
         "pricing_tiers": [tier_obj(t) for t in m.get("pricing_tiers") or []],
         "service_tiers": copy.deepcopy(m.get("service_tiers") or []),
         "cache_pricing": cache_obj(m.get("cache_pricing")),
@@ -184,9 +241,63 @@ def vendor_obj(d, name, models):
         "name": name,
         "model_count": len(models),
         "model_ids": [m["model_id"] for m in models],
+        "modality_counts": {k: sum(1 for m in models if m["modality"] == k) for k in MODALITIES},
         "source_urls": srcs,
         "links": {"self": "vendors/%s.json" % slug},
     }
+
+
+def media_pricing_schema():
+    """Structured non-token billing for image / video generation models (USD)."""
+    def obj(properties, required=None):
+        return {"type": "object", "properties": properties,
+                "required": list(properties) if required is None else required,
+                "additionalProperties": False}
+    usd = {"type": ["number", "null"], "minimum": 0}
+    tok = dict(usd, description="USD per 1M tokens; null = not billed separately / not applicable for this model")
+    tier = {"enum": list(PRICE_TIERS), "description": "standard = on-demand list price; batch = Batch API list price"}
+    urls = {"type": "array", "minItems": 1, "uniqueItems": True,
+            "items": {"type": "string", "format": "uri", "pattern": "^https?://"}}
+    token_prices = obj({k: tok for k in TOKEN_PRICE_FIELDS})
+    return obj({
+        "output_kind": {"enum": ["image", "video"]},
+        "billing_methods": {"type": "array", "minItems": 1, "uniqueItems": True, "items": {"enum": list(BILLING_METHODS)},
+                            "description": "Official billing dimensions: token (token_pricing), per_image (image_prices), per_second (video_prices)"},
+        "token_pricing": {"anyOf": [{"type": "null"}, obj({
+            "unit": {"enum": ["per_1M_tokens"]},
+            "standard": token_prices,
+            "batch": {"anyOf": [{"type": "null"}, token_prices]},
+            "priority": {"anyOf": [{"type": "null"}, token_prices]}})],
+            "description": "Per-modality token prices where the vendor bills tokens (OpenAI GPT Image, Gemini image/video); null otherwise"},
+        "image_prices": {"type": "array", "description": "USD per generated image by size x quality x tier. Empty + listed in unverified_fields = per-image price 待核实.",
+                         "items": obj({
+                             "tier": tier,
+                             "size": {"type": "string", "minLength": 1, "description": "Resolution tier label (0.5k, 1k, 1.5k, 2k, 4k), lowercase; \"any\" = one flat price regardless of size"},
+                             "quality": {"type": ["string", "null"], "description": "Quality setting (low / medium / high ...); null = no quality dimension"},
+                             "price": dict(usd, description="USD per image; null = 待核实 (listed in unverified_fields)"),
+                             "tokens": {"type": ["integer", "null"], "minimum": 1, "description": "Output tokens the vendor documents for this image (token-priced models)"},
+                             "basis": {"enum": ["listed", "token_equivalent"], "description": "listed = price printed by the vendor; token_equivalent = per-image figure printed by the vendor as the token cost equivalent"},
+                             "note": {"type": ["string", "null"]}})},
+        "video_prices": {"type": "array", "description": "USD per second of generated video by resolution x audio x tier. Empty + listed in unverified_fields = 待核实.",
+                         "items": obj({
+                             "tier": tier,
+                             "resolution": {"type": "string", "minLength": 1, "description": "Output resolution label, lowercase (480p, 720p, 768p, 1080p, 2k, 4k ...)"},
+                             "audio": {"enum": list(VIDEO_AUDIO), "description": "with_audio / without_audio = separate official prices; any = the official price does not distinguish audio"},
+                             "price_per_second": dict(usd, description="USD per second of output video; null = 待核实"),
+                             "tokens_per_second": {"type": ["integer", "null"], "minimum": 1, "description": "Tokens per second where the vendor bills video by tokens"},
+                             "input_video_price_per_second": dict(usd, description="USD per second of input (source) video at this output resolution when the vendor bills input video; null = not billed"),
+                             "basis": {"enum": ["listed", "token_equivalent", "approximate"], "description": "approximate = vendor publishes only an approximate per-second figure"},
+                             "note": {"type": ["string", "null"]}})},
+        "input_image_price": dict(usd, description="USD per input / reference image (editing, image-to-video) when billed per image; null = not billed per image"),
+        "input_image_price_batch": dict(usd, description="USD per input image under Batch when it differs from input_image_price; null = same / not listed"),
+        "batch_supported": {"type": ["boolean", "null"], "description": "Whether the Batch API is documented for this model; null = 待核实"},
+        "promotion": {"anyOf": [{"type": "null"}, obj({
+            "discount_percent": {"type": ["number", "null"], "exclusiveMinimum": 0, "maximum": 100},
+            "effective_until": {"type": ["string", "null"], "format": "date"},
+            "note": {"type": "string", "minLength": 1}})],
+            "description": "Vendor promotion on the recorded prices. Recorded prices are LIST prices before the discount."},
+        "billing_note": {"type": "string", "minLength": 1},
+        "sources": urls})
 
 
 def extend_schemas(model, cache_pricing, price):
@@ -254,7 +365,7 @@ def extend_schemas(model, cache_pricing, price):
 def openapi(d, vendor_slugs, model_ids):
     price = {"type": ["number", "null"], "minimum": 0,
              "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"}
-    status = {"type": "string", "enum": ["verified", "reference", "unverified", "not_listed"],
+    status = {"type": "string", "enum": ["verified", "reference", "unverified", "not_listed", "not_applicable"],
               "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"}
     meta = {
         "type": "object",
@@ -262,8 +373,10 @@ def openapi(d, vendor_slugs, model_ids):
         "properties": {
             "updated_at": {"type": "string", "format": "date", "description": "Dataset last-verified date"},
             "currency": {"type": "string", "enum": ["USD"]},
-            "unit": {"type": "string", "enum": [UNIT]},
+            "unit": {"type": "string", "enum": [UNIT, MEDIA_UNIT], "description": "per_1M_tokens for top-level token prices; see_media_pricing on modality endpoints that only hold image / video models"},
             "unit_label": {"type": "string"},
+            "modality_counts": {"type": "object", "description": "Models per modality in the full dataset (models.json and index.json only)",
+                                "required": list(MODALITIES), "properties": {k: {"type": "integer"} for k in MODALITIES}},
             "count": {"type": "integer", "description": "Number of items in data"},
             "data_version": {"type": "string", "pattern": "^[a-f0-9]{64}$", "description": "SHA-256 of canonical source data, shared by all endpoints"},
             "scope": {"type": "string"},
@@ -272,19 +385,22 @@ def openapi(d, vendor_slugs, model_ids):
     }
     model = {
         "type": "object",
-        "required": ["id", "name", "vendor", "vendor_name", "currency", "unit", "pricing",
+        "required": ["id", "name", "vendor", "vendor_name", "modality", "currency", "unit", "pricing",
                      "pricing_status", "has_off_peak", "off_peak_pricing", "peak_note",
                      "context_length", "context_length_label", "source_url", "extra_sources",
                      "last_updated", "notes", "reasoning_effort", "limits", "pricing_tiers", "service_tiers",
-                     "cache_pricing", "price_schedule", "unverified_fields", "links"],
+                     "cache_pricing", "price_schedule", "media_pricing", "unverified_fields", "links"],
         "properties": {
             "id": {"type": "string", "description": "Query ID for this dataset and /models/{model_id}.json; use vendor docs for the actual vendor API name and case"},
             "name": {"type": "string", "description": "Display name"},
             "vendor": {"type": "string", "description": "Vendor slug", "enum": vendor_slugs},
             "vendor_name": {"type": "string"},
+            "modality": {"type": "string", "enum": list(MODALITIES), "description": "Output modality: text (token-priced LLM), image or video generation. Image / video models carry null pricing (pricing_status not_applicable) and use media_pricing."},
             "currency": {"type": "string", "enum": ["USD"]},
-            "unit": {"type": "string", "enum": [UNIT]},
-            "pricing": {"type": "object", "description": "Standard price (peak price when off-peak pricing exists)",
+            "unit": {"type": "string", "enum": [UNIT, MEDIA_UNIT], "description": "per_1M_tokens for text models; see_media_pricing for image / video models"},
+            "media_pricing": {"anyOf": [{"type": "null"}, {"$ref": "#/components/schemas/MediaPricing"}],
+                              "description": "Non-token billing for image / video models (per image, per second of video, per-modality token prices); null for text models"},
+            "pricing": {"type": "object", "description": "Standard price (peak price when off-peak pricing exists); all null with pricing_status not_applicable on image / video models",
                         "required": list(PRICE_FIELDS),
                         "properties": {
                             "input": price, "output": price,
@@ -312,7 +428,7 @@ def openapi(d, vendor_slugs, model_ids):
                     "levels": {"type": ["array", "null"], "items": {"type": "string"}, "description": "Accepted effort levels in ascending order (e.g. low, medium, high); null when not applicable or 待核实"},
                     "default": {"type": ["string", "null"], "description": "Default level when the parameter is omitted; null when not stated / 待核实"},
                     "can_disable": {"type": ["boolean", "null"], "description": "Whether reasoning can be turned off via the API; null = not stated in official docs"},
-                    "status": {"type": "string", "enum": ["verified", "partial", "unverified"], "description": "verified = all applicable facts documented; partial = some fields 待核实; unverified = support 待核实; see field_status"},
+                    "status": {"type": "string", "enum": ["verified", "partial", "unverified", "not_applicable"], "description": "verified = all applicable facts documented; partial = some fields 待核实; unverified = support 待核实; see field_status"},
                     "note": {"type": ["string", "null"], "description": "Parameter names, level mappings and caveats"},
                     "sources": {"type": "array", "items": {"type": "string", "format": "uri"}, "description": "Official documentation pages used"},
                 },
@@ -324,7 +440,7 @@ def openapi(d, vendor_slugs, model_ids):
                 "properties": {
                     "context_length": {"type": ["integer", "null"], "description": "Maximum context window in tokens (same value as top-level context_length)"},
                     "max_output_tokens": {"type": ["integer", "null"], "description": "Maximum output tokens per request; null = unknown if listed in unverified_fields, otherwise no separate output cap documented (see note)"},
-                    "status": {"type": "string", "enum": ["verified", "partial", "unverified"], "description": "verified = both limits documented, including an explicitly absent output cap; partial = one; unverified = none"},
+                    "status": {"type": "string", "enum": ["verified", "partial", "unverified", "not_applicable"], "description": "verified = both limits documented, including an explicitly absent output cap; partial = one; unverified = none"},
                     "note": {"type": ["string", "null"]},
                     "sources": {"type": "array", "items": {"type": "string", "format": "uri"}},
                 },
@@ -381,12 +497,14 @@ def openapi(d, vendor_slugs, model_ids):
     extend_schemas(model, cache_pricing, price)
     vendor = {
         "type": "object",
-        "required": ["slug", "name", "model_count", "model_ids", "source_urls", "links"],
+        "required": ["slug", "name", "model_count", "model_ids", "modality_counts", "source_urls", "links"],
         "properties": {
             "slug": {"type": "string", "enum": vendor_slugs},
             "name": {"type": "string"},
             "model_count": {"type": "integer"},
             "model_ids": {"type": "array", "items": {"type": "string"}},
+            "modality_counts": {"type": "object", "required": list(MODALITIES), "additionalProperties": False,
+                                "properties": {k: {"type": "integer"} for k in MODALITIES}},
             "source_urls": {"type": "array", "items": {"type": "string", "format": "uri"}},
             "links": {"type": "object", "properties": {"self": {"type": "string"}}},
         },
@@ -401,13 +519,30 @@ def openapi(d, vendor_slugs, model_ids):
     vendor_env = env({"type": "array", "items": {"$ref": "#/components/schemas/Model"}})
     vendor_env["required"].append("vendor")
     vendor_env["properties"]["vendor"] = {"$ref": "#/components/schemas/Vendor"}
-    index_schema = {"type": "object", "required": ["endpoints", "models", "vendors"], "additionalProperties": False,
+    modality_obj = {
+        "type": "object",
+        "required": ["name", "label", "model_count", "model_ids", "vendors", "links"],
+        "additionalProperties": False,
+        "properties": {
+            "name": {"type": "string", "enum": list(MODALITIES)},
+            "label": {"type": "string"},
+            "model_count": {"type": "integer"},
+            "model_ids": {"type": "array", "items": {"type": "string"}},
+            "vendors": {"type": "array", "items": {"type": "string", "enum": vendor_slugs}, "description": "Vendor slugs with at least one model of this modality"},
+            "links": {"type": "object", "properties": {"self": {"type": "string"}}},
+        },
+    }
+    modality_env = env({"type": "array", "items": {"$ref": "#/components/schemas/Model"}})
+    modality_env["required"].append("modality")
+    modality_env["properties"]["modality"] = {"$ref": "#/components/schemas/Modality"}
+    index_schema = {"type": "object", "required": ["endpoints", "models", "vendors", "modalities"], "additionalProperties": False,
                     "properties": {
-                        "endpoints": {"type": "object", "required": ["models", "vendors", "openapi"], "additionalProperties": False,
-                                      "properties": {k: {"const": k + ".json"} for k in ("models", "vendors", "openapi")}},
-                        "models": {"type": "array", "items": {"type": "object", "required": ["id", "name", "vendor", "links"],
+                        "endpoints": {"type": "object", "required": ["models", "vendors", "modalities", "openapi"], "additionalProperties": False,
+                                      "properties": {k: {"const": k + ".json"} for k in ("models", "vendors", "modalities", "openapi")}},
+                        "models": {"type": "array", "items": {"type": "object", "required": ["id", "name", "vendor", "modality", "links"],
                             "additionalProperties": False,
-                            "properties": {k: model["properties"][k] for k in ("id", "name", "vendor", "links")}}},
+                            "properties": {k: model["properties"][k] for k in ("id", "name", "vendor", "modality", "links")}}},
+                        "modalities": {"type": "array", "items": {"$ref": "#/components/schemas/Modality"}},
                         "vendors": {"type": "array", "items": {"type": "object", "required": ["slug", "name", "links"],
                             "additionalProperties": False,
                             "properties": {k: vendor["properties"][k] for k in ("slug", "name", "links")}}}}}
@@ -415,9 +550,12 @@ def openapi(d, vendor_slugs, model_ids):
         "openapi": "3.1.0",
         "info": {
             "title": "LLM API Pricing (static JSON API)",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "description": ("Read-only static JSON files generated from data/prices.json by scripts/build_api.py "
-                            "and served by GitHub Pages. All prices are USD per 1M tokens. Only GET is supported; "
+                            "and served by GitHub Pages. All prices are USD. Text models are priced per 1M tokens (top-level pricing); "
+                            "image and video generation models (modality image / video) carry pricing_status not_applicable "
+                            "and express prices in media_pricing (per image by size and quality, per second of video by "
+                            "resolution and audio, and per-modality token prices). Only GET is supported; "
                             "there is no server-side filtering or query parameters, filter on the client. "
                             "CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. "
                             "Dataset updated_at: %s." % d["meta"]["last_updated"]),
@@ -442,6 +580,13 @@ def openapi(d, vendor_slugs, model_ids):
                 "parameters": [{"name": "vendor", "in": "path", "required": True,
                                 "schema": {"type": "string", "enum": vendor_slugs}}],
                 "responses": ok("Vendor with its models", "#/components/schemas/VendorModels")}},
+            "/modalities.json": {"get": {"operationId": "listModalities", "summary": "Modalities (text / image / video) and their model ids",
+                                         "responses": ok("All modalities", "#/components/schemas/ModalityList")}},
+            "/modalities/{modality}.json": {"get": {
+                "operationId": "getModality", "summary": "All models of one modality (text, image or video)",
+                "parameters": [{"name": "modality", "in": "path", "required": True,
+                                "schema": {"type": "string", "enum": list(MODALITIES)}}],
+                "responses": ok("Modality with its models", "#/components/schemas/ModalityModels")}},
         },
         "components": {"schemas": {
             "Meta": meta, "Model": model, "Vendor": vendor, "CachePricing": cache_pricing,
@@ -449,6 +594,10 @@ def openapi(d, vendor_slugs, model_ids):
             "ModelItem": env({"$ref": "#/components/schemas/Model"}),
             "VendorList": env({"type": "array", "items": {"$ref": "#/components/schemas/Vendor"}}),
             "VendorModels": vendor_env,
+            "MediaPricing": media_pricing_schema(),
+            "Modality": modality_obj,
+            "ModalityList": env({"type": "array", "items": {"$ref": "#/components/schemas/Modality"}}),
+            "ModalityModels": modality_env,
             "Index": env(index_schema),
         }},
     }
@@ -465,7 +614,9 @@ def build(d):
     for o in objs:
         if not SLUG_RE.match(o["id"]):
             raise SystemExit("build_api: model_id %r is not URL-safe" % o["id"])
+    modality_counts = {k: sum(1 for o in objs if o["modality"] == k) for k in MODALITIES}
     meta = base_meta(d, len(objs))
+    meta["modality_counts"] = modality_counts
     meta["scope"] = d["meta"].get("scope")
     meta["description"] = d["meta"].get("description")
     out["models.json"] = {"api_version": API_VERSION, "meta": meta, "data": objs}
@@ -478,9 +629,24 @@ def build(d):
             "api_version": API_VERSION, "meta": base_meta(d, len(vm)), "vendor": v,
             "data": [o for o in objs if o["vendor"] == v["slug"]]}
     out["vendors.json"] = {"api_version": API_VERSION, "meta": base_meta(d, len(vendors)), "data": vendors}
-    out["index.json"] = {"api_version": API_VERSION, "meta": base_meta(d, len(objs)), "data": {
-        "endpoints": {"models": "models.json", "vendors": "vendors.json", "openapi": "openapi.json"},
-        "models": [{k: o[k] for k in ("id", "name", "vendor", "links")} for o in objs],
+    modalities = []
+    for k in MODALITIES:
+        mo = [o for o in objs if o["modality"] == k]
+        mobj = {"name": k, "label": MODALITY_LABELS[k], "model_count": len(mo), "model_ids": [o["id"] for o in mo],
+                "vendors": [v["slug"] for v in vendors if any(o["vendor"] == v["slug"] for o in mo)],
+                "links": {"self": "modalities/%s.json" % k}}
+        modalities.append(mobj)
+        mmeta = base_meta(d, len(mo))
+        if k != "text":
+            mmeta["unit"], mmeta["unit_label"] = MEDIA_UNIT, MEDIA_UNIT_LABEL
+        out["modalities/%s.json" % k] = {"api_version": API_VERSION, "meta": mmeta, "modality": mobj, "data": mo}
+    out["modalities.json"] = {"api_version": API_VERSION, "meta": base_meta(d, len(modalities)), "data": modalities}
+    imeta = base_meta(d, len(objs))
+    imeta["modality_counts"] = modality_counts
+    out["index.json"] = {"api_version": API_VERSION, "meta": imeta, "data": {
+        "endpoints": {"models": "models.json", "vendors": "vendors.json", "modalities": "modalities.json", "openapi": "openapi.json"},
+        "models": [{k: o[k] for k in ("id", "name", "vendor", "modality", "links")} for o in objs],
+        "modalities": modalities,
         "vendors": [{k: v[k] for k in ("slug", "name", "links")} for v in vendors]}}
     for o in objs:
         out["models/%s.json" % o["id"]] = {"api_version": API_VERSION, "meta": base_meta(d), "data": o}

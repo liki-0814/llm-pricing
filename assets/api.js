@@ -10,6 +10,8 @@
     curl:
       "# 全部模型\ncurl --fail --silent --show-error " + BASE + "models.json\n\n" +
       "# 单个模型 / 单个厂商\ncurl --fail --silent --show-error " + BASE + "models/deepseek-flash.json\ncurl --fail --silent --show-error " + BASE + "vendors/anthropic.json\n\n" +
+      "# 图像 / 视频模型（按张、按秒、分模态 token 价）\ncurl --fail --silent --show-error " + BASE + "modalities/image.json\ncurl --fail --silent --show-error " + BASE + "modalities/video.json\n\n" +
+      "# 配合 jq：视频模型按秒价格（标准档）\ncurl --fail --silent --show-error " + BASE + "modalities/video.json \\\n  | jq -r '.data[] | .id as $id | .media_pricing.video_prices[] | select(.tier == \"standard\") | \"\\($id) \\(.resolution) \\(.audio) \\(.price_per_second)\"'\n\n" +
       "# 配合 jq：官方输入价最低的 5 个模型\ncurl --fail --silent --show-error " + BASE + "models.json \\\n  | jq -r '.data | map(select(.pricing.input != null and .price_basis.type == \"official\")) | sort_by(.pricing.input) | .[:5][] | \"\\(.id)\\t$\\(.pricing.input)\"'",
     js:
       '// 在 HTML 中加载站点的 assets/client.js（暴露 LLMPrice）\n' +
@@ -20,6 +22,10 @@
       'const { data: model } = await api.getModel("gemini-3.1-pro-preview");\n' +
       'const { data: vendorModels } = await api.getVendor("openai");\n' +
       'const { data: cheapest } = await api.listModels({ vendor: "openai", sort: "input", limit: 5, priceBasis: "official" });\n\n' +
+      '// 图像 / 视频模型：按模态过滤，用 estimateMedia 估算（estimate 仅适用于文本模型）\n' +
+      'const { data: videos } = await api.listModels({ modality: "video", sort: "media_price" });\n' +
+      'const { data: wan } = await api.getModel("wan3.0-video");\n' +
+      'const clip = LLMPrice.estimateMedia(wan, { seconds: 10, resolution: "720p" }); // 1 USD（促销折扣未计入）\n\n' +
       '// inputTokens 为总输入，包含缓存读写；outputTokens 包含计费思考 token\n' +
       'const result = LLMPrice.estimate(model, { inputTokens: 300000, outputTokens: 10000 }, { at: "2026-10-11" });\n' +
       'console.log(result.total, result.breakdown, result.warnings); // 1.38 USD\n',
@@ -29,6 +35,7 @@
       "models = get(\"models.json\")\nprint(models[\"meta\"][\"updated_at\"], models[\"meta\"][\"count\"])\n\n" +
       "# 官方输入价最低的 5 个模型（跳过 null 和参照价）\npriced = [m for m in models[\"data\"] if m[\"pricing\"][\"input\"] is not None and m[\"price_basis\"][\"type\"] == \"official\"]\n" +
       "for m in sorted(priced, key=lambda m: m[\"pricing\"][\"input\"])[:5]:\n    print(f'{m[\"id\"]:<28} in ${m[\"pricing\"][\"input\"]}  out ${m[\"pricing\"][\"output\"]}')\n\n" +
+      "images = get(\"modalities/image.json\")\nfor m in images[\"data\"]:\n    for p in m[\"media_pricing\"][\"image_prices\"]:\n        if p[\"tier\"] == \"standard\":\n            print(m[\"id\"], p[\"size\"], p[\"quality\"], p[\"price\"])\n\n" +
       "claude = get(\"models/claude-opus-5.json\")[\"data\"]\nprint(claude[\"pricing\"], claude[\"pricing_status\"])"
   };
   function hlCode(s) {
@@ -72,6 +79,26 @@
           .map(function (m) { return { id: m.id, vendor: m.vendor, input: m.pricing.input, output: m.pricing.output }; });
       }
     },
+    imageprice: {
+      path: "modalities/image.json",
+      code: 'const { data } = await (await fetch(BASE + "modalities/image.json")).json();\nreturn data.flatMap(m => m.media_pricing.image_prices\n  .filter(p => p.tier === "standard")\n  .map(p => ({ id: m.id, size: p.size, quality: p.quality, usd_per_image: p.price })));',
+      run: function (d) {
+        return d.data.reduce(function (a, m) {
+          return a.concat(m.media_pricing.image_prices.filter(function (p) { return p.tier === "standard"; })
+            .map(function (p) { return { id: m.id, size: p.size, quality: p.quality, usd_per_image: p.price }; }));
+        }, []);
+      }
+    },
+    videoprice: {
+      path: "modalities/video.json",
+      code: 'const { data } = await (await fetch(BASE + "modalities/video.json")).json();\nreturn data.flatMap(m => m.media_pricing.video_prices\n  .filter(p => p.tier === "standard")\n  .map(p => ({ id: m.id, resolution: p.resolution, audio: p.audio, usd_per_second: p.price_per_second })));',
+      run: function (d) {
+        return d.data.reduce(function (a, m) {
+          return a.concat(m.media_pricing.video_prices.filter(function (p) { return p.tier === "standard"; })
+            .map(function (p) { return { id: m.id, resolution: p.resolution, audio: p.audio, usd_per_second: p.price_per_second }; }));
+        }, []);
+      }
+    },
     offpeak: {
       path: "models.json",
       code: 'const { data } = await (await fetch(BASE + "models.json")).json();\nreturn data\n  .filter(m => m.has_off_peak)\n  .map(m => ({ id: m.id, peak: m.pricing, off_peak: m.off_peak_pricing }));',
@@ -81,10 +108,10 @@
       }
     }
   };
-  var vendors = [], modelIds = [];
+  var vendors = [], modelIds = [], modalities = [];
   function fillParam() {
     var v = $("tryPreset").value, p = $("tryParam");
-    var list = v === "vendor" ? vendors : v === "model" ? modelIds : null;
+    var list = v === "vendor" ? vendors : v === "model" ? modelIds : v === "modality" ? modalities : null;
     p.hidden = !list;
     if (list) p.innerHTML = list.map(function (x) { return '<option value="' + esc(x) + '">' + esc(x) + "</option>"; }).join("");
     updateUrl();
@@ -92,6 +119,7 @@
   function updateUrl() {
     var v = $("tryPreset").value, path = v;
     if (v === "vendor") path = "vendors/" + ($("tryParam").value || "openai") + ".json";
+    else if (v === "modality") path = "modalities/" + ($("tryParam").value || "image") + ".json";
     else if (v === "model") path = "models/" + ($("tryParam").value || "deepseek-flash") + ".json";
     var sn = v.indexOf("snippet:") === 0 ? SNIPPETS[v.slice(8)] : null;
     if (sn) path = sn.path;
@@ -191,8 +219,17 @@
       return '<a href="api/v1/vendors/' + esc(v.slug) + '.json"><code>' + esc(v.slug) + "</code></a>（" + esc(v.name) + "，" + v.model_count + "）";
     }).join("、") + "。全部 <code>model_id</code> 见 <a href=\"api/v1/vendors.json\">vendors.json</a> 的 <code>model_ids</code>。";
     fillParam();
-    $("costModel").innerHTML = modelIds.map(function (id) { return '<option value="' + esc(id) + '">' + esc(id) + '</option>'; }).join("");
-    $("costModel").value = "gemini-3.1-pro-preview";
-    updateService();
+    return client.listModalities().then(function (m) {
+      modalities = m.data.map(function (x) { return x.name; });
+      $("modalityList").innerHTML = "可用 <code>modality</code>：" + m.data.map(function (x) {
+        return '<a href="api/v1/modalities/' + esc(x.name) + '.json"><code>' + esc(x.name) + "</code></a>（" + esc(x.label) + "，" + x.model_count + "）";
+      }).join("、") + "。";
+      fillParam();
+      // the token / cache estimator only applies to text models
+      var textIds = (m.data.filter(function (x) { return x.name === "text"; })[0] || { model_ids: [] }).model_ids;
+      $("costModel").innerHTML = textIds.map(function (id) { return '<option value="' + esc(id) + '">' + esc(id) + '</option>'; }).join("");
+      $("costModel").value = "gemini-3.1-pro-preview";
+      updateService();
+    });
   }).catch(function (e) { $("tryStatus").textContent = "接口列表加载失败：" + e.message; $("costStatus").textContent = "接口列表加载失败，请刷新重试。"; });
 })();

@@ -22,6 +22,8 @@
 | `notes` | 阶梯价、促销、长上下文价等备注 |
 | `reasoning_effort` | **必填**对象，推理强度（取自官方 API 文档）：`supported`（有可调项 true、无可调项 false、待核实 null）、`levels`（由低到高，不适用/待核实为 null）、`default`（默认档，未明确为 null）、`can_disable`（能否关闭，未说明为 null）、`note`、`sources`（官方 URL）。未核实项以精确字段路径列入 `unverified_fields`，如 `reasoning_effort.default`；不可调模型的 levels/default 不适用。接口派生 `status` 和 `field_status` |
 | `unverified_fields` | 记录哪些字段待核实（供 validate 输出清单） |
+| `modality` | **必填**，`text` / `image` / `video`；图像 / 视频模型还需 `media_pricing`（文本模型不得有），且不写 `input`/`output` 等 token 价、`reasoning_effort`、`limits`（接口层自动填 null / `not_applicable`） |
+| `media_pricing` | 图像 / 视频价格：`output_kind`、`billing_methods`、`token_pricing{standard,batch,priority}`、`image_prices[]`（tier/size/quality/price/tokens/basis）、`video_prices[]`（tier/resolution/audio/price_per_second/…）、`input_image_price`、`batch_supported`、`promotion`、`sources`。官方未列的价格写 `null`，并在 `unverified_fields` 登记：整表为空写 `media_pricing.image_prices` / `media_pricing.video_prices`，单项写 `media_pricing.image_prices.<size>.<quality或default>.<tier>` / `media_pricing.video_prices.<resolution>.<audio>.<tier>`；有 `tokens` 的折算价会与 token 价核对 |
 
 ## 更新流程
 

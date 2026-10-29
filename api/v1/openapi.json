@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LLM API Pricing (static JSON API)",
-    "version": "1.1.0",
-    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD per 1M tokens. Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-10-28."
+    "version": "1.2.0",
+    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD. Text models are priced per 1M tokens (top-level pricing); image and video generation models (modality image / video) carry pricing_status not_applicable and express prices in media_pricing (per image by size and quality, per second of video by resolution and audio, and per-modality token prices). Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-10-29."
   },
   "servers": [
     {
@@ -125,7 +125,28 @@
                 "minimax-m3.1-flash",
                 "kimi-for-coding",
                 "grok-4.7",
-                "grok-4.7-build-fast"
+                "grok-4.7-build-fast",
+                "gpt-image-2.5-flare",
+                "gpt-image-2.5-sunburst",
+                "grok-imagine-image-2.0",
+                "grok-imagine-video-1.5",
+                "grok-imagine-video-1.5-lite",
+                "gemini-nano-banana-2.1",
+                "gemini-3.1-flash-lite-image",
+                "gemini-3-pro-image",
+                "gemini-omni-1.1-flash",
+                "qwen-image-3.0-pro",
+                "qwen-image-3.0",
+                "wan2.7-image-pro",
+                "wan2.7-image",
+                "wan3.0-video",
+                "wan3.0-video-prime",
+                "minimax-h3",
+                "minimax-h3-highspeed",
+                "minimax-h3-lite",
+                "minimax-h3-max",
+                "minimax-image-01",
+                "glm-image"
               ]
             }
           }
@@ -209,6 +230,63 @@
           }
         }
       }
+    },
+    "/modalities.json": {
+      "get": {
+        "operationId": "listModalities",
+        "summary": "Modalities (text / image / video) and their model ids",
+        "responses": {
+          "200": {
+            "description": "All modalities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModalityList"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    },
+    "/modalities/{modality}.json": {
+      "get": {
+        "operationId": "getModality",
+        "summary": "All models of one modality (text, image or video)",
+        "parameters": [
+          {
+            "name": "modality",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "text",
+                "image",
+                "video"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Modality with its models",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModalityModels"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -237,11 +315,33 @@
           "unit": {
             "type": "string",
             "enum": [
-              "per_1M_tokens"
-            ]
+              "per_1M_tokens",
+              "see_media_pricing"
+            ],
+            "description": "per_1M_tokens for top-level token prices; see_media_pricing on modality endpoints that only hold image / video models"
           },
           "unit_label": {
             "type": "string"
+          },
+          "modality_counts": {
+            "type": "object",
+            "description": "Models per modality in the full dataset (models.json and index.json only)",
+            "required": [
+              "text",
+              "image",
+              "video"
+            ],
+            "properties": {
+              "text": {
+                "type": "integer"
+              },
+              "image": {
+                "type": "integer"
+              },
+              "video": {
+                "type": "integer"
+              }
+            }
           },
           "count": {
             "type": "integer",
@@ -267,6 +367,7 @@
           "name",
           "vendor",
           "vendor_name",
+          "modality",
           "currency",
           "unit",
           "pricing",
@@ -286,6 +387,7 @@
           "service_tiers",
           "cache_pricing",
           "price_schedule",
+          "media_pricing",
           "unverified_fields",
           "links",
           "price_basis",
@@ -319,6 +421,15 @@
           "vendor_name": {
             "type": "string"
           },
+          "modality": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "video"
+            ],
+            "description": "Output modality: text (token-priced LLM), image or video generation. Image / video models carry null pricing (pricing_status not_applicable) and use media_pricing."
+          },
           "currency": {
             "type": "string",
             "enum": [
@@ -328,12 +439,25 @@
           "unit": {
             "type": "string",
             "enum": [
-              "per_1M_tokens"
-            ]
+              "per_1M_tokens",
+              "see_media_pricing"
+            ],
+            "description": "per_1M_tokens for text models; see_media_pricing for image / video models"
+          },
+          "media_pricing": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MediaPricing"
+              }
+            ],
+            "description": "Non-token billing for image / video models (per image, per second of video, per-modality token prices); null for text models"
           },
           "pricing": {
             "type": "object",
-            "description": "Standard price (peak price when off-peak pricing exists)",
+            "description": "Standard price (peak price when off-peak pricing exists); all null with pricing_status not_applicable on image / video models",
             "required": [
               "input",
               "output",
@@ -391,7 +515,8 @@
                   "verified",
                   "reference",
                   "unverified",
-                  "not_listed"
+                  "not_listed",
+                  "not_applicable"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               },
@@ -401,7 +526,8 @@
                   "verified",
                   "reference",
                   "unverified",
-                  "not_listed"
+                  "not_listed",
+                  "not_applicable"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               },
@@ -411,7 +537,8 @@
                   "verified",
                   "reference",
                   "unverified",
-                  "not_listed"
+                  "not_listed",
+                  "not_applicable"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               },
@@ -421,7 +548,8 @@
                   "verified",
                   "reference",
                   "unverified",
-                  "not_listed"
+                  "not_listed",
+                  "not_applicable"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               }
@@ -558,7 +686,8 @@
                 "enum": [
                   "verified",
                   "partial",
-                  "unverified"
+                  "unverified",
+                  "not_applicable"
                 ],
                 "description": "verified = all applicable facts documented; partial = some fields 待核实; unverified = support 待核实; see field_status"
               },
@@ -649,7 +778,8 @@
                 "enum": [
                   "verified",
                   "partial",
-                  "unverified"
+                  "unverified",
+                  "not_applicable"
                 ],
                 "description": "verified = both limits documented, including an explicitly absent output cap; partial = one; unverified = none"
               },
@@ -1297,6 +1427,7 @@
           "name",
           "model_count",
           "model_ids",
+          "modality_counts",
           "source_urls",
           "links"
         ],
@@ -1325,6 +1456,26 @@
             "type": "array",
             "items": {
               "type": "string"
+            }
+          },
+          "modality_counts": {
+            "type": "object",
+            "required": [
+              "text",
+              "image",
+              "video"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "text": {
+                "type": "integer"
+              },
+              "image": {
+                "type": "integer"
+              },
+              "video": {
+                "type": "integer"
+              }
             }
           },
           "source_urls": {
@@ -1515,6 +1666,684 @@
           }
         }
       },
+      "MediaPricing": {
+        "type": "object",
+        "properties": {
+          "output_kind": {
+            "enum": [
+              "image",
+              "video"
+            ]
+          },
+          "billing_methods": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "token",
+                "per_image",
+                "per_second"
+              ]
+            },
+            "description": "Official billing dimensions: token (token_pricing), per_image (image_prices), per_second (video_prices)"
+          },
+          "token_pricing": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "unit": {
+                    "enum": [
+                      "per_1M_tokens"
+                    ]
+                  },
+                  "standard": {
+                    "type": "object",
+                    "properties": {
+                      "text_input": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0,
+                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                      },
+                      "text_cached_input": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0,
+                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                      },
+                      "text_output": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0,
+                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                      },
+                      "image_input": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0,
+                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                      },
+                      "image_cached_input": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0,
+                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                      },
+                      "image_output": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0,
+                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                      },
+                      "video_input": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0,
+                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                      },
+                      "video_output": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0,
+                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                      },
+                      "audio_input": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0,
+                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                      }
+                    },
+                    "required": [
+                      "text_input",
+                      "text_cached_input",
+                      "text_output",
+                      "image_input",
+                      "image_cached_input",
+                      "image_output",
+                      "video_input",
+                      "video_output",
+                      "audio_input"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "batch": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "text_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "text_cached_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "text_output": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "image_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "image_cached_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "image_output": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "video_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "video_output": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "audio_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          }
+                        },
+                        "required": [
+                          "text_input",
+                          "text_cached_input",
+                          "text_output",
+                          "image_input",
+                          "image_cached_input",
+                          "image_output",
+                          "video_input",
+                          "video_output",
+                          "audio_input"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  },
+                  "priority": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "text_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "text_cached_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "text_output": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "image_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "image_cached_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "image_output": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "video_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "video_output": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          },
+                          "audio_input": {
+                            "type": [
+                              "number",
+                              "null"
+                            ],
+                            "minimum": 0,
+                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                          }
+                        },
+                        "required": [
+                          "text_input",
+                          "text_cached_input",
+                          "text_output",
+                          "image_input",
+                          "image_cached_input",
+                          "image_output",
+                          "video_input",
+                          "video_output",
+                          "audio_input"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "unit",
+                  "standard",
+                  "batch",
+                  "priority"
+                ],
+                "additionalProperties": false
+              }
+            ],
+            "description": "Per-modality token prices where the vendor bills tokens (OpenAI GPT Image, Gemini image/video); null otherwise"
+          },
+          "image_prices": {
+            "type": "array",
+            "description": "USD per generated image by size x quality x tier. Empty + listed in unverified_fields = per-image price 待核实.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tier": {
+                  "enum": [
+                    "standard",
+                    "batch"
+                  ],
+                  "description": "standard = on-demand list price; batch = Batch API list price"
+                },
+                "size": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Resolution tier label (0.5k, 1k, 1.5k, 2k, 4k), lowercase; \"any\" = one flat price regardless of size"
+                },
+                "quality": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Quality setting (low / medium / high ...); null = no quality dimension"
+                },
+                "price": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "USD per image; null = 待核实 (listed in unverified_fields)"
+                },
+                "tokens": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 1,
+                  "description": "Output tokens the vendor documents for this image (token-priced models)"
+                },
+                "basis": {
+                  "enum": [
+                    "listed",
+                    "token_equivalent"
+                  ],
+                  "description": "listed = price printed by the vendor; token_equivalent = per-image figure printed by the vendor as the token cost equivalent"
+                },
+                "note": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "tier",
+                "size",
+                "quality",
+                "price",
+                "tokens",
+                "basis",
+                "note"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "video_prices": {
+            "type": "array",
+            "description": "USD per second of generated video by resolution x audio x tier. Empty + listed in unverified_fields = 待核实.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tier": {
+                  "enum": [
+                    "standard",
+                    "batch"
+                  ],
+                  "description": "standard = on-demand list price; batch = Batch API list price"
+                },
+                "resolution": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Output resolution label, lowercase (480p, 720p, 768p, 1080p, 2k, 4k ...)"
+                },
+                "audio": {
+                  "enum": [
+                    "with_audio",
+                    "without_audio",
+                    "any"
+                  ],
+                  "description": "with_audio / without_audio = separate official prices; any = the official price does not distinguish audio"
+                },
+                "price_per_second": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "USD per second of output video; null = 待核实"
+                },
+                "tokens_per_second": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 1,
+                  "description": "Tokens per second where the vendor bills video by tokens"
+                },
+                "input_video_price_per_second": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "description": "USD per second of input (source) video at this output resolution when the vendor bills input video; null = not billed"
+                },
+                "basis": {
+                  "enum": [
+                    "listed",
+                    "token_equivalent",
+                    "approximate"
+                  ],
+                  "description": "approximate = vendor publishes only an approximate per-second figure"
+                },
+                "note": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "tier",
+                "resolution",
+                "audio",
+                "price_per_second",
+                "tokens_per_second",
+                "input_video_price_per_second",
+                "basis",
+                "note"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "input_image_price": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "USD per input / reference image (editing, image-to-video) when billed per image; null = not billed per image"
+          },
+          "input_image_price_batch": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "USD per input image under Batch when it differs from input_image_price; null = same / not listed"
+          },
+          "batch_supported": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether the Batch API is documented for this model; null = 待核实"
+          },
+          "promotion": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "discount_percent": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "exclusiveMinimum": 0,
+                    "maximum": 100
+                  },
+                  "effective_until": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date"
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "discount_percent",
+                  "effective_until",
+                  "note"
+                ],
+                "additionalProperties": false
+              }
+            ],
+            "description": "Vendor promotion on the recorded prices. Recorded prices are LIST prices before the discount."
+          },
+          "billing_note": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sources": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https?://"
+            }
+          }
+        },
+        "required": [
+          "output_kind",
+          "billing_methods",
+          "token_pricing",
+          "image_prices",
+          "video_prices",
+          "input_image_price",
+          "input_image_price_batch",
+          "batch_supported",
+          "promotion",
+          "billing_note",
+          "sources"
+        ],
+        "additionalProperties": false
+      },
+      "Modality": {
+        "type": "object",
+        "required": [
+          "name",
+          "label",
+          "model_count",
+          "model_ids",
+          "vendors",
+          "links"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "video"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "model_count": {
+            "type": "integer"
+          },
+          "model_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "vendors": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "deepseek",
+                "openai",
+                "anthropic",
+                "zhipu",
+                "moonshot",
+                "qwen",
+                "google",
+                "minimax",
+                "xai"
+              ]
+            },
+            "description": "Vendor slugs with at least one model of this modality"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "self": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ModalityList": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Modality"
+            }
+          }
+        }
+      },
+      "ModalityModels": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data",
+          "modality"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Model"
+            }
+          },
+          "modality": {
+            "$ref": "#/components/schemas/Modality"
+          }
+        }
+      },
       "Index": {
         "type": "object",
         "required": [
@@ -1537,7 +2366,8 @@
             "required": [
               "endpoints",
               "models",
-              "vendors"
+              "vendors",
+              "modalities"
             ],
             "additionalProperties": false,
             "properties": {
@@ -1546,6 +2376,7 @@
                 "required": [
                   "models",
                   "vendors",
+                  "modalities",
                   "openapi"
                 ],
                 "additionalProperties": false,
@@ -1555,6 +2386,9 @@
                   },
                   "vendors": {
                     "const": "vendors.json"
+                  },
+                  "modalities": {
+                    "const": "modalities.json"
                   },
                   "openapi": {
                     "const": "openapi.json"
@@ -1569,6 +2403,7 @@
                     "id",
                     "name",
                     "vendor",
+                    "modality",
                     "links"
                   ],
                   "additionalProperties": false,
@@ -1596,6 +2431,15 @@
                         "xai"
                       ]
                     },
+                    "modality": {
+                      "type": "string",
+                      "enum": [
+                        "text",
+                        "image",
+                        "video"
+                      ],
+                      "description": "Output modality: text (token-priced LLM), image or video generation. Image / video models carry null pricing (pricing_status not_applicable) and use media_pricing."
+                    },
                     "links": {
                       "type": "object",
                       "properties": {
@@ -1609,6 +2453,12 @@
                       "additionalProperties": false
                     }
                   }
+                }
+              },
+              "modalities": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Modality"
                 }
               },
               "vendors": {

@@ -1,0 +1,149 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-29",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5"
+  },
+  "data": {
+    "id": "gpt-image-2.5-sunburst",
+    "name": "GPT Image 2.5 Sunburst",
+    "vendor": "openai",
+    "vendor_name": "OpenAI",
+    "modality": "image",
+    "currency": "USD",
+    "unit": "see_media_pricing",
+    "pricing": {
+      "input": null,
+      "output": null,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "not_applicable",
+      "output": "not_applicable",
+      "cached_input": "not_applicable",
+      "cache_write": "not_applicable"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+      ],
+      "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://developers.openai.com/api/docs/pricing",
+    "extra_sources": [
+      "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+    ],
+    "last_updated": "2026-10-29",
+    "notes": "Token 计价：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token；Batch 为标准价一半。官方定价页未列 2.5 的按张价格（按尺寸/质量），按 token 结算，按张价格待核实。",
+    "reasoning_effort": {
+      "supported": false,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "not_applicable",
+      "field_status": {
+        "supported": "not_applicable",
+        "levels": "not_applicable",
+        "default": "not_applicable",
+        "can_disable": "not_applicable"
+      },
+      "note": "Not applicable: image generation model.",
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "not_applicable",
+      "note": "Not applicable: image generation model (no token context window).",
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+      ]
+    },
+    "media_pricing": {
+      "output_kind": "image",
+      "billing_methods": [
+        "token"
+      ],
+      "token_pricing": {
+        "unit": "per_1M_tokens",
+        "standard": {
+          "text_input": 5,
+          "text_cached_input": 1.25,
+          "text_output": null,
+          "image_input": 8,
+          "image_cached_input": 2,
+          "image_output": 30,
+          "video_input": null,
+          "video_output": null,
+          "audio_input": null
+        },
+        "batch": {
+          "text_input": 2.5,
+          "text_cached_input": 0.625,
+          "text_output": null,
+          "image_input": 4,
+          "image_cached_input": 1,
+          "image_output": 15,
+          "video_input": null,
+          "video_output": null,
+          "audio_input": null
+        },
+        "priority": null
+      },
+      "image_prices": [],
+      "video_prices": [],
+      "input_image_price": null,
+      "input_image_price_batch": null,
+      "batch_supported": true,
+      "promotion": null,
+      "billing_note": "按 token 计费，官方未公布 GPT Image 2.5 按尺寸/质量的单张价格（image_prices 为空，已列入 unverified_fields）。Batch 价为官方列出的标价。",
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": null
+    },
+    "price_schedule": [],
+    "unverified_fields": [
+      "media_pricing.image_prices"
+    ],
+    "links": {
+      "self": "models/gpt-image-2.5-sunburst.json",
+      "vendor": "vendors/openai.json"
+    }
+  }
+}

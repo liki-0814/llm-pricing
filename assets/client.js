@@ -21,7 +21,73 @@
       throw error("INVALID_ARGUMENT", "at is not a valid calendar date");
     return d;
   }
+  var TOKEN_USAGE = { textInputTokens: "text_input", textCachedInputTokens: "text_cached_input", textOutputTokens: "text_output",
+    imageInputTokens: "image_input", imageCachedInputTokens: "image_cached_input", imageOutputTokens: "image_output",
+    videoInputTokens: "video_input", videoOutputTokens: "video_output", audioInputTokens: "audio_input" };
+  // Image / video models: per-image, per-second and per-modality token prices from model.media_pricing.
+  function estimateMedia(model, usage, options) {
+    usage = usage || {}; options = options || {};
+    if (!model || (model.modality !== "image" && model.modality !== "video") || !model.media_pricing)
+      throw error("UNSUPPORTED_MODALITY", "estimateMedia needs an image or video model; use estimate() for text models");
+    var allowedUsage = ["images", "size", "quality", "seconds", "resolution", "audio", "inputImages", "inputVideoSeconds"].concat(Object.keys(TOKEN_USAGE));
+    Object.keys(usage).forEach(function (k) { if (allowedUsage.indexOf(k) < 0) throw error("INVALID_ARGUMENT", "Unknown usage field: " + k); });
+    Object.keys(options).forEach(function (k) { if (k !== "tier") throw error("INVALID_ARGUMENT", "Unknown estimate option: " + k); });
+    var mp = model.media_pricing, tier = options.tier === undefined ? "standard" : options.tier;
+    if (tier !== "standard" && tier !== "batch") throw error("INVALID_ARGUMENT", "tier must be standard or batch");
+    function count(k, integer) { return usage[k] === undefined ? 0 : number(usage[k], k, integer); }
+    function unavailable(what) { return error("PRICE_UNAVAILABLE", what + " has no verified price for tier " + tier); }
+    var parts = {}, units = {}, warnings = [];
+    function add(key, amount, rate, unit, what) {
+      if (!amount) return;
+      if (rate === null || rate === undefined) throw unavailable(what);
+      parts[key] = amount * rate; units[key] = { rate: rate, unit: unit };
+    }
+    var images = count("images", true), seconds = count("seconds");
+    if (images && model.modality !== "image") throw error("INVALID_ARGUMENT", "images applies to image models only");
+    if (seconds && model.modality !== "video") throw error("INVALID_ARGUMENT", "seconds applies to video models only");
+    var row = null;
+    if (images) {
+      if (typeof usage.size !== "string") throw error("INVALID_ARGUMENT", "size is required with images");
+      var rows = mp.image_prices.filter(function (e) { return e.tier === tier && e.size === usage.size.toLowerCase(); });
+      if (usage.quality !== undefined) rows = rows.filter(function (e) { return e.quality === usage.quality; });
+      else if (rows.length > 1) throw error("INVALID_ARGUMENT", "quality is required for this size: " + rows.map(function (e) { return e.quality; }).join(", "));
+      if (!rows.length) rows = mp.image_prices.filter(function (e) { return e.tier === tier && e.size === "any" && (usage.quality === undefined || e.quality === usage.quality); });
+      if (!rows.length) throw unavailable("image size " + usage.size + (usage.quality ? "/" + usage.quality : ""));
+      add("images", images, rows[0].price, "per_image", "image size " + usage.size);
+      if (rows[0].basis !== "listed") warnings.push("Per-image price is the vendor's token-cost equivalent (" + rows[0].basis + ").");
+    }
+    if (seconds || count("inputVideoSeconds")) {
+      if (typeof usage.resolution !== "string") throw error("INVALID_ARGUMENT", "resolution is required with seconds / inputVideoSeconds");
+      var cands = mp.video_prices.filter(function (e) { return e.tier === tier && e.resolution === usage.resolution.toLowerCase(); });
+      if (usage.audio !== undefined) {
+        if (["with_audio", "without_audio"].indexOf(usage.audio) < 0) throw error("INVALID_ARGUMENT", "audio must be with_audio or without_audio");
+        row = cands.find(function (e) { return e.audio === usage.audio; }) || cands.find(function (e) { return e.audio === "any"; });
+      } else {
+        if (cands.length > 1) throw error("INVALID_ARGUMENT", "audio is required for this resolution (with_audio or without_audio)");
+        row = cands[0];
+      }
+      if (!row) throw unavailable("video resolution " + usage.resolution);
+      add("video_seconds", seconds, row.price_per_second, "per_second", "video resolution " + usage.resolution);
+      add("input_video_seconds", count("inputVideoSeconds"), row.input_video_price_per_second, "per_second", "input video at " + usage.resolution);
+      if (row.basis === "approximate") warnings.push("Per-second price is approximate (vendor publishes only an approximate figure).");
+    }
+    var inputImages = count("inputImages", true);
+    add("input_images", inputImages, tier === "batch" && mp.input_image_price_batch !== null ? mp.input_image_price_batch : mp.input_image_price, "per_image", "input image");
+    Object.keys(TOKEN_USAGE).forEach(function (k) {
+      var n = count(k, true); if (!n) return;
+      var tp = mp.token_pricing && mp.token_pricing[tier];
+      add(TOKEN_USAGE[k], n, tp ? (tp[TOKEN_USAGE[k]] === null ? null : tp[TOKEN_USAGE[k]] / 1e6) : null, "per_token", TOKEN_USAGE[k] + " tokens");
+    });
+    if (mp.promotion) warnings.push("Prices are list prices; vendor promotion not applied: " + mp.promotion.note);
+    var total = Object.keys(parts).reduce(function (n, k) { return n + parts[k]; }, 0);
+    if (!Number.isFinite(total)) throw error("INVALID_ARGUMENT", "Usage is too large to estimate the total");
+    return { model_id: model.id, modality: model.modality, currency: "USD", total: total, breakdown: parts, unit_prices: units,
+      tier: tier, price_basis: model.price_basis, billing: model.billing, warnings: warnings,
+      excluded_costs: ["server_tools", "grounding", "taxes", "free_quota", "unrecorded_multimodal_rates"] };
+  }
   function estimate(model, usage, options) {
+    if (model && model.modality && model.modality !== "text")
+      throw error("UNSUPPORTED_MODALITY", "estimate() is for text models; use estimateMedia() for " + model.modality + " models");
     usage = usage || {}; options = options || {};
     var allowedUsage = ["inputTokens", "outputTokens", "cachedInputTokens", "cacheWriteTokens", "cacheWrite1hTokens", "cacheWrite12hTokens", "storageTokenHours"];
     Object.keys(usage).forEach(function (k) { if (allowedUsage.indexOf(k) < 0) throw error("INVALID_ARGUMENT", "Unknown usage field: " + k); });
@@ -170,22 +236,30 @@
       } finally { clearTimeout(timer); }
     }
     function safeId(id) { if (typeof id !== "string" || !/^[a-z0-9][a-z0-9.\-]*$/.test(id)) throw error("INVALID_ARGUMENT", "Use a model ID or vendor slug from index.json"); return id; }
+    // Lowest listed standard per-image / per-second price (null for text models or when unverified).
+    function mediaPrice(m) {
+      var mp = m.media_pricing; if (!mp) return null;
+      var v = mp.image_prices.concat(mp.video_prices).filter(function (e) { return e.tier === "standard"; })
+        .map(function (e) { return e.price === undefined ? e.price_per_second : e.price; }).filter(function (x) { return x !== null; });
+      return v.length ? Math.min.apply(null, v) : null;
+    }
     function query(envelope, options) {
       options = options || {};
-      var keys = ["vendor", "q", "sort", "limit", "priceBasis"];
+      var keys = ["vendor", "q", "sort", "limit", "priceBasis", "modality"];
       Object.keys(options).forEach(function (k) { if (keys.indexOf(k) < 0) throw error("INVALID_ARGUMENT", "Unknown query option: " + k); });
       if (options.vendor !== undefined) safeId(options.vendor);
       if (options.q !== undefined && typeof options.q !== "string") throw error("INVALID_ARGUMENT", "q must be a string");
       if (options.sort !== undefined && typeof options.sort !== "string") throw error("INVALID_ARGUMENT", "sort must be a string");
+      if (options.modality !== undefined && ["text", "image", "video"].indexOf(options.modality) < 0) throw error("INVALID_ARGUMENT", "modality must be text, image or video");
       if (options.priceBasis !== undefined && ["official", "reference"].indexOf(options.priceBasis) < 0) throw error("INVALID_ARGUMENT", "priceBasis must be official or reference");
       var models = envelope.data.filter(function (m) {
         var terms = (options.q || "").trim().toLowerCase().split(/\s+/).filter(Boolean);
-        var text = [m.id, m.name, m.vendor, m.vendor_name, m.notes || ""].join(" ").toLowerCase();
-        return (!options.vendor || m.vendor === options.vendor) && (!options.priceBasis || m.price_basis.type === options.priceBasis) && terms.every(function (t) { return text.indexOf(t) >= 0; });
+        var text = [m.id, m.name, m.vendor, m.vendor_name, m.modality, m.notes || ""].join(" ").toLowerCase();
+        return (!options.vendor || m.vendor === options.vendor) && (!options.modality || m.modality === options.modality) && (!options.priceBasis || m.price_basis.type === options.priceBasis) && terms.every(function (t) { return text.indexOf(t) >= 0; });
       });
       if (options.sort) {
         var desc = options.sort[0] === "-", key = desc ? options.sort.slice(1) : options.sort;
-        var sorting = { input: function (m) { return m.pricing.input; }, output: function (m) { return m.pricing.output; }, cached_input: function (m) { return m.pricing.cached_input; }, cache_write: function (m) { return m.pricing.cache_write; }, context_length: function (m) { return m.context_length; }, max_output_tokens: function (m) { return m.limits.max_output_tokens; }, name: function (m) { return m.name; } };
+        var sorting = { input: function (m) { return m.pricing.input; }, output: function (m) { return m.pricing.output; }, cached_input: function (m) { return m.pricing.cached_input; }, cache_write: function (m) { return m.pricing.cache_write; }, context_length: function (m) { return m.context_length; }, max_output_tokens: function (m) { return m.limits.max_output_tokens; }, name: function (m) { return m.name; }, media_price: mediaPrice };
         if (!sorting[key]) throw error("INVALID_ARGUMENT", "Unknown sort field: " + key);
         models.sort(function (a, b) { var x = sorting[key](a), y = sorting[key](b); return x === null ? (y === null ? 0 : 1) : y === null ? -1 : (typeof x === "number" ? x - y : x.localeCompare(y)) * (desc ? -1 : 1); });
       }
@@ -196,10 +270,13 @@
     return { baseUrl: base.href, getIndex: function () { return get("index.json"); },
       getOpenAPI: function () { return get("openapi.json", true); },
       listVendors: function () { return get("vendors.json"); },
+      listModalities: function () { return get("modalities.json"); },
+      getModality: function (name) { return get("modalities/" + safeId(name) + ".json"); },
       getVendor: function (slug) { return get("vendors/" + safeId(slug) + ".json"); },
       getModel: function (id) { return get("models/" + safeId(id) + ".json"); },
       listModels: async function (options) { return query(await get("models.json"), options); },
-      estimate: async function (id, usage, options) { return estimate((await get("models/" + safeId(id) + ".json")).data, usage, options); } };
+      estimate: async function (id, usage, options) { return estimate((await get("models/" + safeId(id) + ".json")).data, usage, options); },
+      estimateMedia: async function (id, usage, options) { return estimateMedia((await get("models/" + safeId(id) + ".json")).data, usage, options); } };
   }
-  return { createClient: createClient, estimate: estimate };
+  return { createClient: createClient, estimate: estimate, estimateMedia: estimateMedia };
 });

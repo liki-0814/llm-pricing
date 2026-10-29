@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>大模型 API 价格速查 · 报价与来源（USD / 每百万 token）</title>
-<meta name="description" content="最新大模型 API 报价对比：DeepSeek、OpenAI、Anthropic、智谱、Kimi、Qwen、Gemini、MiniMax、xAI Grok。官方价格与参照价格分别标注来源，统一美元计价，每 100 万 token，附静态 JSON 接口。">
+<title>大模型 API 价格速查 · 文本 / 图像 / 视频报价与来源（USD）</title>
+<meta name="description" content="最新大模型 API 报价对比：DeepSeek、OpenAI、Anthropic、智谱、Kimi、Qwen、Gemini、MiniMax、xAI Grok。文本模型按每 100 万 token，图像 / 视频生成模型按张、按秒或分模态 token 计价；官方价格与参照价格分别标注来源，统一美元计价，附静态 JSON 接口。">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0a0c11" media="(prefers-color-scheme: dark)">
@@ -36,18 +36,19 @@
     <div class="wrap">
       <span class="eyebrow"><span class="dot" aria-hidden="true"></span>官方价格与参照价格分开标注</span>
       <h1>大模型 API <span class="grad">价格速查</span></h1>
-      <p class="sub">仅收录各厂商最新模型，统一<strong>美元（USD）</strong>计价、单位<strong>每 100 万 token</strong>。点击表头排序，<span class="best-tag" style="margin:0">最低</span> 标记当前筛选结果中每列的最低价。</p>
+      <p class="sub">仅收录各厂商最新模型，统一<strong>美元（USD）</strong>计价：文本模型<strong>每 100 万 token</strong>，图像 / 视频模型按<strong>张 / 秒 / token</strong>，用上方标签切换。点击表头排序，<span class="best-tag" style="margin:0">最低</span> 标记当前筛选结果中每列的最低价。</p>
       <div class="stats">
         <div class="stat"><div class="k">数据更新</div><div class="v" id="statUpdated">—</div></div>
         <div class="stat"><div class="k">收录模型</div><div class="v" id="statModels">—</div></div>
         <div class="stat"><div class="k">覆盖厂商</div><div class="v" id="statVendors">—</div></div>
-        <div class="stat"><div class="k">最低输入价</div><div class="v" id="statCheapest">—</div></div>
+        <div class="stat"><div class="k">文本最低输入价</div><div class="v" id="statCheapest">—</div></div>
       </div>
     </div>
   </section>
 
   <section class="wrap" aria-label="价格表">
     <div class="toolbar" role="search">
+      <div class="modality-tabs" id="modalityTabs" role="tablist" aria-label="按模态筛选"></div>
       <div class="toolbar-row">
         <label class="search">
           <span class="sr-only">搜索</span>
@@ -56,7 +57,15 @@
           <kbd>/</kbd>
         </label>
         <button id="resetBtn" type="button" class="btn">重置</button>
-        <div class="mobile-sort">
+        <div class="mobile-sort" id="sortMedia" hidden>
+          <select id="sortSelectMedia" class="input" aria-label="排序方式（图像 / 视频）">
+            <option value="_i:1">默认排序</option>
+            <option value="media_price:1">标准单价 低→高</option>
+            <option value="media_price:-1">标准单价 高→低</option>
+            <option value="model:1">模型名 A→Z</option>
+          </select>
+        </div>
+        <div class="mobile-sort" id="sortText">
           <select id="sortSelect" class="input" aria-label="排序方式">
             <option value="_i:1">默认排序</option>
             <option value="input:1">输入价 低→高</option>
@@ -76,7 +85,13 @@
     </div>
 
     <div class="meta-row">
-      <div class="legend">
+      <div class="legend" id="mediaLegend" hidden>
+        <span><span class="tbd">待核实</span>官方未公布，未做推测</span>
+        <span><i class="bsz">≈</i>由官方 token 价折算或官方近似值（悬停查看依据）</span>
+        <span><span class="promo">限时促销</span>表内为原价，折扣未计入</span>
+        <span><span class="detail-btn static">详情<span class="chev" aria-hidden="true"></span></span>展开：完整价格矩阵（标准 / Batch）、token 计价、来源</span>
+      </div>
+      <div class="legend" id="textLegend">
         <span><span class="tbd">待核实</span>未能从官方来源核实，未做推测</span>
         <span><span class="na">未列出</span>官方定价页没有该项</span>
         <span><span class="best-tag" style="margin:0">最低</span>当前结果中该列最低价</span>
@@ -107,6 +122,20 @@
             <tr class="skeleton"><td colspan="9"></td></tr><tr class="skeleton"><td colspan="9"></td></tr><tr class="skeleton"><td colspan="9"></td></tr>
           </tbody>
         </table>
+        <table id="mediaTable" hidden>
+          <caption class="sr-only">图像 / 视频生成模型价格（USD，按张 / 按秒 / 按 token）</caption>
+          <thead>
+            <tr>
+          <th data-key="model"><button type="button" class="th">厂商 / 模型<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th data-key="media_price"><button type="button" class="th">单价（标准）<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></th>
+          <th class="plain">Batch</th>
+          <th class="plain">输入素材</th>
+          <th class="plain">Token 计价</th>
+          <th class="plain">备注</th>
+            </tr>
+          </thead>
+          <tbody id="mediaBody"></tbody>
+        </table>
       </div>
       <div id="empty" class="empty" hidden><b>没有匹配的模型</b>换个关键词，或 <a href="#" id="emptyReset">清除筛选</a></div>
       <div id="error" class="empty error" hidden></div>
@@ -118,7 +147,7 @@
   <div class="wrap">
     <div>
       <h3>关于数据</h3>
-      <p>官方价格取自各厂商定价页；用户确认的参照价单独标注依据，统一为美元（USD）/ 每 100 万 token；表中主价格为标准价（有闲时价时为高峰价）。长上下文分档价、服务档费用规则（Batch / Fast 等）、缓存细分价与来源请点每行“详情”展开，促销等见“备注”；以上数据均同步提供于 JSON 接口。</p>
+      <p>官方价格取自各厂商定价页；用户确认的参照价单独标注依据，统一为美元（USD）；文本模型每 100 万 token，图像 / 视频模型按张（尺寸 × 质量）、按秒（分辨率 × 是否含音频）或分模态 token 计价；表中主价格为标准价（有闲时价时为高峰价）。长上下文分档价、服务档费用规则（Batch / Fast 等）、缓存细分价与来源请点每行“详情”展开，促销等见“备注”；以上数据均同步提供于 JSON 接口。</p>
       <p>价格可能随时调整，下单前请以官方页面为准。数据更新：<span id="footUpdated">—</span>。</p>
       <p>原始数据 <a href="data/prices.json">data/prices.json</a> · JSON 接口 <a href="api.html">接口文档</a> · <a href="api/v1/openapi.json">OpenAPI</a></p>
     </div>

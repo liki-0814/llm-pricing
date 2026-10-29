@@ -1,0 +1,188 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-10-29",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "USD per 1M tokens",
+    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5"
+  },
+  "data": {
+    "id": "gemini-omni-1.1-flash",
+    "name": "Gemini Omni 1.1 Flash",
+    "vendor": "google",
+    "vendor_name": "Google Gemini",
+    "modality": "video",
+    "currency": "USD",
+    "unit": "see_media_pricing",
+    "pricing": {
+      "input": null,
+      "output": null,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "not_applicable",
+      "output": "not_applicable",
+      "cached_input": "not_applicable",
+      "cache_write": "not_applicable"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "https://ai.google.dev/gemini-api/docs/video"
+      ],
+      "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+    "extra_sources": [
+      "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+      "https://ai.google.dev/gemini-api/docs/video"
+    ],
+    "last_updated": "2026-10-29",
+    "notes": "Token 计价：输入 $1.50（文本/图像/视频/音频）、文本输出 $9.00、视频输出 $17.50 / 百万 token；按 720p 视频 5,792 token/秒计，官方称约 $0.10/秒（近似值）。官方未列 360p / 1080p / 4k 的单价，待核实。",
+    "reasoning_effort": {
+      "supported": false,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "not_applicable",
+      "field_status": {
+        "supported": "not_applicable",
+        "levels": "not_applicable",
+        "default": "not_applicable",
+        "can_disable": "not_applicable"
+      },
+      "note": "Not applicable: video generation model.",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "https://ai.google.dev/gemini-api/docs/video"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "not_applicable",
+      "note": "Not applicable: video generation model (no token context window).",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "https://ai.google.dev/gemini-api/docs/video"
+      ]
+    },
+    "media_pricing": {
+      "output_kind": "video",
+      "billing_methods": [
+        "token",
+        "per_second"
+      ],
+      "token_pricing": {
+        "unit": "per_1M_tokens",
+        "standard": {
+          "text_input": 1.5,
+          "text_cached_input": null,
+          "text_output": 9,
+          "image_input": 1.5,
+          "image_cached_input": null,
+          "image_output": null,
+          "video_input": 1.5,
+          "video_output": 17.5,
+          "audio_input": 1.5
+        },
+        "batch": null,
+        "priority": null
+      },
+      "image_prices": [],
+      "video_prices": [
+        {
+          "tier": "standard",
+          "resolution": "360p",
+          "audio": "any",
+          "price_per_second": null,
+          "tokens_per_second": null,
+          "input_video_price_per_second": null,
+          "basis": "approximate",
+          "note": "官方未列该分辨率的 token/秒与单价，待核实"
+        },
+        {
+          "tier": "standard",
+          "resolution": "720p",
+          "audio": "any",
+          "price_per_second": 0.1,
+          "tokens_per_second": 5792,
+          "input_video_price_per_second": null,
+          "basis": "approximate",
+          "note": "官方：约 $0.10/秒（5,792 token/秒 × $17.50/百万 token ≈ $0.101）"
+        },
+        {
+          "tier": "standard",
+          "resolution": "1080p",
+          "audio": "any",
+          "price_per_second": null,
+          "tokens_per_second": null,
+          "input_video_price_per_second": null,
+          "basis": "approximate",
+          "note": "官方未列该分辨率的 token/秒与单价，待核实"
+        },
+        {
+          "tier": "standard",
+          "resolution": "4k",
+          "audio": "any",
+          "price_per_second": null,
+          "tokens_per_second": null,
+          "input_video_price_per_second": null,
+          "basis": "approximate",
+          "note": "4k 为上采样输出，官方未列单价，待核实"
+        }
+      ],
+      "input_image_price": null,
+      "input_image_price_batch": null,
+      "batch_supported": null,
+      "promotion": null,
+      "billing_note": "按总输出 token 计费；720p 为 5,792 token/秒。分辨率 360p、720p（默认）、1080p、4k；默认含音频；延长以 10 秒为步长，最长 40 秒。Veo 系列已停服，由 Omni 取代。",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
+        "https://ai.google.dev/gemini-api/docs/video"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": null
+    },
+    "price_schedule": [],
+    "unverified_fields": [
+      "media_pricing.video_prices.360p.any.standard",
+      "media_pricing.video_prices.1080p.any.standard",
+      "media_pricing.video_prices.4k.any.standard"
+    ],
+    "links": {
+      "self": "models/gemini-omni-1.1-flash.json",
+      "vendor": "vendors/google.json"
+    }
+  }
+}
