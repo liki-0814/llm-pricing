@@ -1,11 +1,11 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-29",
+    "updated_at": "2026-10-31",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "36d353caf94a3837bf5785d58ce869008ef9999d5929682f8bfe6fc81e5d4ae5",
+    "data_version": "10d188d635c3cf0f2d257b590c8ad94f5dd2c8a4b716b6299140771a937f80e6",
     "count": 7
   },
   "vendor": {
@@ -444,8 +444,8 @@
       "context_length_label": null,
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
-      "last_updated": "2026-10-29",
-      "notes": "按秒计价：768P $0.06（输入视频同价）；输入图片 $0.03/张。",
+      "last_updated": "2026-10-31",
+      "notes": "按秒计价：768P $0.06、480P $0.04（输入视频同价）；输入图片 $0.03/张。",
       "reasoning_effort": {
         "supported": false,
         "levels": null,
@@ -487,6 +487,16 @@
             "price_per_second": 0.06,
             "tokens_per_second": null,
             "input_video_price_per_second": 0.06,
+            "basis": "listed",
+            "note": null
+          },
+          {
+            "tier": "standard",
+            "resolution": "480p",
+            "audio": "any",
+            "price_per_second": 0.04,
+            "tokens_per_second": null,
+            "input_video_price_per_second": 0.04,
             "basis": "listed",
             "note": null
           }

@@ -3,7 +3,7 @@
   "info": {
     "title": "LLM API Pricing (static JSON API)",
     "version": "1.2.0",
-    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD. Text models are priced per 1M tokens (top-level pricing); image and video generation models (modality image / video) carry pricing_status not_applicable and express prices in media_pricing (per image by size and quality, per second of video by resolution and audio, and per-modality token prices). Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-10-29."
+    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD. Text models are priced per 1M tokens (top-level pricing); image and video generation models (modality image / video) carry pricing_status not_applicable and express prices in media_pricing (per image by size and quality, per second of video by resolution and audio, and per-modality token prices). Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-10-31."
   },
   "servers": [
     {
