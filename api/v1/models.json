@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "cecc01044a9e0cfb70127944e7939f3c75fb62e90d8bcb2ab8b27367f2ee3cd2",
+    "data_version": "1e6582317c3e6a8881e83e8f2ad30a179385c01c993de1f7b3fb8c086467c5d2",
     "count": 71,
     "modality_counts": {
       "text": 50,
@@ -1978,7 +1978,7 @@
         "input": "verified",
         "output": "verified",
         "cached_input": "verified",
-        "cache_write": "not_listed"
+        "cache_write": "unverified"
       },
       "price_basis": {
         "type": "official",
@@ -2004,7 +2004,7 @@
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [],
       "last_updated": "2026-11-01",
-      "notes": "OpenAI 定价页“Legal model configurations”一节的法律场景模型配置（GPT-6 Astra for Law），仅列输入 $10.00 / 输出 $50.00 / 缓存读取 $1.00（每百万 token）。官方注明 GPT-6 Astra for Law 促销价至少持续到 2026-12-31；到期后价格官方未公布（待核实）。官方定价页未列该配置的缓存写入价、长上下文（>272K）分档、Batch/Flex/Fast 服务档和数据驻留加价，OpenAI 模型页 /api/docs/models/gpt-6-astra-law 也尚不存在（HTTP 404），故上下文窗口、最大输出和推理强度均待核实；不借用 gpt-6-astra 的数值。 2026-11-01 新增（OpenAI 官方模型配置；liki 于 2026-11-01 批准入库）。",
+      "notes": "OpenAI 定价页“Legal model configurations”一节的法律场景模型配置（GPT-6 Astra for Law），仅列输入 $10.00 / 输出 $50.00 / 缓存读取 $1.00（每百万 token）。官方注明 GPT-6 Astra for Law 促销价至少持续到 2026-12-31；到期后价格官方未公布（待核实）。官方定价页未列该配置的缓存写入价（cache_write 待核实）、长上下文（>272K）分档、Batch/Flex/Fast 服务档和数据驻留加价，OpenAI 模型页 /api/docs/models/gpt-6-astra-law 也尚不存在（HTTP 404），故上下文窗口、最大输出和推理强度均待核实；不借用 gpt-6-astra 的数值。 2026-11-01 新增（OpenAI 官方模型配置；liki 于 2026-11-01 批准入库）。",
       "reasoning_effort": {
         "supported": null,
         "levels": null,
@@ -2061,6 +2061,7 @@
         }
       ],
       "unverified_fields": [
+        "cache_write",
         "limits.context_length",
         "limits.max_output_tokens",
         "reasoning_effort.supported",
