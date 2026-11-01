@@ -1,14 +1,14 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-31",
+    "updated_at": "2026-11-01",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "10d188d635c3cf0f2d257b590c8ad94f5dd2c8a4b716b6299140771a937f80e6",
-    "count": 70,
+    "data_version": "cecc01044a9e0cfb70127944e7939f3c75fb62e90d8bcb2ab8b27367f2ee3cd2",
+    "count": 71,
     "modality_counts": {
-      "text": 49,
+      "text": 50,
       "image": 12,
       "video": 9
     }
@@ -118,6 +118,16 @@
         "modality": "text",
         "links": {
           "self": "models/gpt-6.1-terra.json",
+          "vendor": "vendors/openai.json"
+        }
+      },
+      {
+        "id": "gpt-6-astra-law",
+        "name": "GPT-6 Astra for Law",
+        "vendor": "openai",
+        "modality": "text",
+        "links": {
+          "self": "models/gpt-6-astra-law.json",
           "vendor": "vendors/openai.json"
         }
       },
@@ -726,7 +736,7 @@
       {
         "name": "text",
         "label": "文本生成（token 计价）",
-        "model_count": 49,
+        "model_count": 50,
         "model_ids": [
           "deepseek-flash",
           "deepseek-v4-pro",
@@ -738,6 +748,7 @@
           "gpt-6-luna",
           "gpt-6.1-sol",
           "gpt-6.1-terra",
+          "gpt-6-astra-law",
           "claude-fable-5.1",
           "claude-mythos-5.1",
           "claude-fable-5",

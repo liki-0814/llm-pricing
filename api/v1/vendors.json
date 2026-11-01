@@ -1,11 +1,11 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-10-31",
+    "updated_at": "2026-11-01",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "10d188d635c3cf0f2d257b590c8ad94f5dd2c8a4b716b6299140771a937f80e6",
+    "data_version": "cecc01044a9e0cfb70127944e7939f3c75fb62e90d8bcb2ab8b27367f2ee3cd2",
     "count": 9
   },
   "data": [
@@ -32,7 +32,7 @@
     {
       "slug": "openai",
       "name": "OpenAI",
-      "model_count": 10,
+      "model_count": 11,
       "model_ids": [
         "gpt-5.6-sol",
         "gpt-5.6-terra",
@@ -42,11 +42,12 @@
         "gpt-6-luna",
         "gpt-6.1-sol",
         "gpt-6.1-terra",
+        "gpt-6-astra-law",
         "gpt-image-2.5-flare",
         "gpt-image-2.5-sunburst"
       ],
       "modality_counts": {
-        "text": 8,
+        "text": 9,
         "image": 2,
         "video": 0
       },

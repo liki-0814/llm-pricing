@@ -105,11 +105,11 @@ async function main() {
   // Modality counts, per-modality filtering and media estimates over the live API.
   const live=await client.listModalities();
   const modalityCounts=Object.fromEntries(live.data.map(m=>[m.name,m.model_count]));
-  assert.deepEqual(modalityCounts,{text:49,image:12,video:9},'live modality counts');
+  assert.deepEqual(modalityCounts,{text:50,image:12,video:9},'live modality counts');
   assert.equal(live.meta.count,3,'modalities.json count is the number of modalities');
   const allModels=await client.listModels();
   assert.deepEqual(allModels.meta.modality_counts,modalityCounts);
-  assert.equal(allModels.meta.count,70);
+  assert.equal(allModels.meta.count,71);
   for(const name of ['text','image','video']) {
     const filtered=await client.listModels({modality:name});
     const direct=await client.getModality(name);
