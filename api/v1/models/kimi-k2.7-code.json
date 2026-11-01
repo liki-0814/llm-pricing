@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "1e6582317c3e6a8881e83e8f2ad30a179385c01c993de1f7b3fb8c086467c5d2"
+    "data_version": "cebf142f577896d8b1977f48aa83d4643d29479d8bc09fdc311a5f914a6ab890"
   },
   "data": {
     "id": "kimi-k2.7-code",
@@ -25,7 +25,7 @@
       "input": "verified",
       "output": "verified",
       "cached_input": "verified",
-      "cache_write": "not_listed"
+      "cache_write": "unverified"
     },
     "price_basis": {
       "type": "official",
@@ -117,7 +117,9 @@
       "note": "缓存命中价即 pricing.cached_input；官方页未列缓存写入价。"
     },
     "price_schedule": [],
-    "unverified_fields": [],
+    "unverified_fields": [
+      "cache_write"
+    ],
     "links": {
       "self": "models/kimi-k2.7-code.json",
       "vendor": "vendors/moonshot.json"
