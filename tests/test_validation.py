@@ -122,6 +122,40 @@ class ValidationTests(unittest.TestCase):
         mutate(next(x for x in d['models'] if x['model_id'] == mid))
         return validate.validate_data(d)
 
+    def test_null_price_must_be_listed_as_unverified(self):
+        # gpt-6-astra-law has an unknown cache write price: null AND listed in unverified_fields.
+        law = self.model('gpt-6-astra-law')
+        self.assertIsNone(law['cache_write'])
+        self.assertIn('cache_write', law['unverified_fields'])
+        errors = self.invalid('gpt-6-astra-law', lambda m: m['unverified_fields'].remove('cache_write'))
+        self.assertTrue(any('null price field(s) must be listed in unverified_fields: cache_write' in e for e in errors), errors)
+        # any other null price field is held to the same contract
+        errors = self.invalid('gpt-6-astra-law', lambda m: m.update(cached_input=None))
+        self.assertTrue(any('null price field(s) must be listed in unverified_fields: cached_input' in e for e in errors), errors)
+
+    def test_cache_write_na_requires_vendor_declaration(self):
+        # OpenAI bills cache writes, so "n/a" is wrong for gpt-6-astra-law (and any other OpenAI model).
+        self.assertTrue(self.data['vendor_billing']['OpenAI']['cache_write_billed'])
+        errors = self.invalid('gpt-6-astra-law', lambda m: (m.update(cache_write='n/a'), m['unverified_fields'].remove('cache_write')))
+        self.assertTrue(any('cache_write "n/a" requires vendor_billing' in e for e in errors), errors)
+        self.assertTrue(self.invalid('claude-opus-5.5', lambda m: m.update(cache_write='n/a')))
+        # vendors that declare cache_write_billed=false may keep "n/a"; flipping the declaration makes it an error
+        self.assertEqual(self.model('grok-4.7')['cache_write'], 'n/a')
+        self.assertFalse(self.data['vendor_billing']['xAI']['cache_write_billed'])
+        d = copy.deepcopy(self.data)
+        d['vendor_billing']['xAI']['cache_write_billed'] = True
+        self.assertTrue(any('cache_write "n/a" requires vendor_billing' in e for e in validate.validate_data(d)))
+        # the declaration itself is required, complete and boolean
+        d = copy.deepcopy(self.data)
+        del d['vendor_billing']['xAI']
+        self.assertTrue(validate.validate_data(d))
+        d = copy.deepcopy(self.data)
+        d['vendor_billing']['xAI']['cache_write_billed'] = 'no'
+        self.assertTrue(validate.validate_data(d))
+        d = copy.deepcopy(self.data)
+        del d['vendor_billing']
+        self.assertTrue(validate.validate_data(d))
+
     def test_modality_counts_and_required_field(self):
         counts = {}
         for m in self.data['models']:

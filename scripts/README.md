@@ -10,8 +10,8 @@
 | `currency` | 固定 `USD`（站点统一美元计价，validate 会拒绝其他币种） |
 | `input` / `output` | 每 100 万 token 价格（数字） |
 | `cached_input` | 缓存命中（读取）价 |
-| `cache_write` | 缓存写入 / 缓存输出价 |
-| 以上价格字段取值 | 数字的依据由 `price_basis` 区分官方价与参照价；`null` = 待核实；`"n/a"` = 官方页没有该项（显示“未列出”） |
+| `cache_write` | 缓存写入 / 缓存输出价。`"n/a"` 仅限在 `vendor_billing` 中声明 `cache_write_billed: false`（该厂商不单独收缓存写入费）的厂商；收取写入费或不确定的厂商，官方未列时必须写 `null` 并把 `cache_write` 列入 `unverified_fields`（参照 `qwen3.8-omni-flash`、`gpt-6-astra-law`） |
+| 以上价格字段取值 | 数字的依据由 `price_basis` 区分官方价与参照价；`null` = 待核实（**必须**同时把该字段名列入该模型的 `unverified_fields`，validate 会报错）；`"n/a"` = 官方页没有该项（显示“未列出”） |
 | `peak_note` | 高峰/闲时说明文字 |
 | `offpeak` | 可选，`{input, output, cached_input}`，闲时价；此时主价格字段写高峰价 |
 | `context_length` / `context_tokens` | 显示文本 / 排序用数字；未知两者均为 `null` |
@@ -77,3 +77,22 @@ Build Fast 另按官方 Fast 段落的 “prompt exceeds 200k” 记录 `input_t
 xAI 官方价格查询接口见 https://docs.x.ai/developers/rest-api-reference/inference/models 。价格字段单位为 USD cents / 100M tokens，转本站 USD / 1M tokens 时除以 10000；长上下文字段为 0 时沿用对应基础价，不表示免费；`long_context_threshold` 为包含边界的阈值。当前使用官方定价文档，未取得认证价格接口返回。2026-10-11 默认系统 DNS 下 curl/Node 查询此接口返回 401，强制公网 DoH 路径连接被重置；该域名使用系统 DNS，不沿用 Pages 的可选 DoH 路径。
 
 运行生成、校验、Python 回归测试和 Node HTTP/计费测试的完整命令见根目录 README；GitHub Actions 使用同一流程。每次修改后需同时提交源数据和生成 JSON，`meta.data_version` 自动由内容生成，不需手动填写。
+
+## 厂商计费声明 `vendor_billing` 与价格字段数据契约
+
+顶层 `vendor_billing` 为每个厂商（必须与 `vendors` 一一对应）声明 `{"cache_write_billed": true|false}`：
+
+- `false`：该厂商不单独收取缓存写入费（缓存只收命中价，或仅隐式缓存），其模型的 `cache_write` 可写 `"n/a"`。当前为 DeepSeek、智谱 Z.ai、Google Gemini、MiniMax、xAI，均按现有数据中这些厂商全部模型为 `"n/a"` 且官方说明无写入价得出。
+- `true`：收取缓存写入费（OpenAI、Anthropic、Qwen、Moonshot Kimi 的 K3 系列）。这类厂商的模型 `cache_write` 只能是数字，官方未列时写 `null` 并列入 `unverified_fields`，不能写 `"n/a"`。
+- 新增厂商必须同时补 `vendor_billing`；没有依据时写 `true`。
+
+`validate.py` 强制两条规则：
+
+1. 任何为 `null` 的基础价格字段（`input`/`output`/`cached_input`/`cache_write`）必须列入该模型的 `unverified_fields`（缺漏会报“null price field(s) must be listed in unverified_fields”；多列也会报错）。
+2. `cache_write == "n/a"` 仅当该厂商 `cache_write_billed` 为 `false` 时允许，否则报错。
+
+两条规则只适用于文本模型；图片 / 视频模型没有 `input`/`output`/`cached_input`/`cache_write` 字段（价格在 `media_pricing`，其 `null` 由 `expected_unverified_media` 约束）。
+
+Moonshot Kimi 同时有收写入费的 K3 系列和官方页未列写入价的 K2.7 系列，无法整体声明为 `false`，因此声明为 `true`，K2.7 Code / Highspeed 和 kimi-for-coding（参照 K2.7 Code）的 `cache_write` 由 `"n/a"` 改为 `null` 并列入 `unverified_fields`。若官方确认 K2.x 不收缓存写入费，再改回 `"n/a"` 需先拆分厂商声明。
+
+回归测试 `tests/test_validation.py` 含反例：`gpt-6-astra-law` 的 `cache_write` 写 `"n/a"` 必须失败；`null` 价格字段不在 `unverified_fields` 中必须失败；缺失 / 非布尔 / 被改动的 `vendor_billing` 必须失败。

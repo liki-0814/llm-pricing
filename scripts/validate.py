@@ -208,6 +208,14 @@ def validate_data(d):
     for v in d['vendors']:
         if v not in build_api.VENDOR_SLUGS:
             fail('vendors', 'unknown vendor ' + str(v))
+    # Provider-level billing metadata: every vendor must declare whether it bills cache writes separately.
+    billing = d.get('vendor_billing')
+    if not isinstance(billing, dict) or set(billing) != set(d['vendors']):
+        fail('vendor_billing', 'must be an object with exactly one entry per vendor')
+        billing = {}
+    for name, entry in billing.items():
+        if not isinstance(entry, dict) or set(entry) != {'cache_write_billed'} or not isinstance(entry['cache_write_billed'], bool):
+            fail('vendor_billing.' + str(name), 'must be {"cache_write_billed": true|false}')
     validators = {'text': Draft202012Validator(source_schema(d), format_checker=FormatChecker()),
                   'media': Draft202012Validator(media_source_schema(d), format_checker=FormatChecker())}
     by_id, ids = {}, set()
@@ -234,6 +242,14 @@ def validate_data(d):
         if m['modality'] != 'text':
             validate_media(m, snapshot, fail)
             continue
+        # Data contract: a null price is unknown, never silent -> it must be listed in unverified_fields.
+        unlisted = sorted(k for k in PRICE_FIELDS if m[k] is None and k not in m['unverified_fields'])
+        if unlisted:
+            fail(where, 'null price field(s) must be listed in unverified_fields: ' + ', '.join(unlisted))
+        # "n/a" (not charged / not listed) is only valid for vendors that declare no separate cache-write billing.
+        if m['cache_write'] == 'n/a' and not (isinstance(billing.get(m['vendor']), dict)
+                                              and billing[m['vendor']].get('cache_write_billed') is False):
+            fail(where, 'cache_write "n/a" requires vendor_billing[%r].cache_write_billed = false; use null and list cache_write in unverified_fields' % m['vendor'])
         if set(m['unverified_fields']) != expected_unverified(m):
             fail(where, 'unverified_fields must equal ' + repr(sorted(expected_unverified(m))))
         if m['limits']['context_length'] != m['context_tokens']:
