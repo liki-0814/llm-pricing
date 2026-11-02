@@ -122,11 +122,45 @@ class ValidationTests(unittest.TestCase):
         mutate(next(x for x in d['models'] if x['model_id'] == mid))
         return validate.validate_data(d)
 
+    def test_null_price_must_be_listed_as_unverified(self):
+        # gpt-6-astra-law has an unknown cache write price: null AND listed in unverified_fields.
+        law = self.model('gpt-6-astra-law')
+        self.assertIsNone(law['cache_write'])
+        self.assertIn('cache_write', law['unverified_fields'])
+        errors = self.invalid('gpt-6-astra-law', lambda m: m['unverified_fields'].remove('cache_write'))
+        self.assertTrue(any('null price field(s) must be listed in unverified_fields: cache_write' in e for e in errors), errors)
+        # any other null price field is held to the same contract
+        errors = self.invalid('gpt-6-astra-law', lambda m: m.update(cached_input=None))
+        self.assertTrue(any('null price field(s) must be listed in unverified_fields: cached_input' in e for e in errors), errors)
+
+    def test_cache_write_na_requires_vendor_declaration(self):
+        # OpenAI bills cache writes, so "n/a" is wrong for gpt-6-astra-law (and any other OpenAI model).
+        self.assertTrue(self.data['vendor_billing']['OpenAI']['cache_write_billed'])
+        errors = self.invalid('gpt-6-astra-law', lambda m: (m.update(cache_write='n/a'), m['unverified_fields'].remove('cache_write')))
+        self.assertTrue(any('cache_write "n/a" requires vendor_billing' in e for e in errors), errors)
+        self.assertTrue(self.invalid('claude-opus-5.5', lambda m: m.update(cache_write='n/a')))
+        # vendors that declare cache_write_billed=false may keep "n/a"; flipping the declaration makes it an error
+        self.assertEqual(self.model('grok-4.7')['cache_write'], 'n/a')
+        self.assertFalse(self.data['vendor_billing']['xAI']['cache_write_billed'])
+        d = copy.deepcopy(self.data)
+        d['vendor_billing']['xAI']['cache_write_billed'] = True
+        self.assertTrue(any('cache_write "n/a" requires vendor_billing' in e for e in validate.validate_data(d)))
+        # the declaration itself is required, complete and boolean
+        d = copy.deepcopy(self.data)
+        del d['vendor_billing']['xAI']
+        self.assertTrue(validate.validate_data(d))
+        d = copy.deepcopy(self.data)
+        d['vendor_billing']['xAI']['cache_write_billed'] = 'no'
+        self.assertTrue(validate.validate_data(d))
+        d = copy.deepcopy(self.data)
+        del d['vendor_billing']
+        self.assertTrue(validate.validate_data(d))
+
     def test_modality_counts_and_required_field(self):
         counts = {}
         for m in self.data['models']:
             counts[m['modality']] = counts.get(m['modality'], 0) + 1
-        self.assertEqual(counts, {'text': 49, 'image': 12, 'video': 9})
+        self.assertEqual(counts, {'text': 50, 'image': 12, 'video': 9})
         self.assertTrue(all(m.get('media_pricing') is None for m in self.data['models'] if m['modality'] == 'text'))
         self.assertTrue(self.invalid('grok-4.7', lambda m: m.pop('modality')))
         self.assertTrue(self.invalid('grok-4.7', lambda m: m.update(modality='audio')))
@@ -143,7 +177,7 @@ class ValidationTests(unittest.TestCase):
             self.assertTrue(all(v == 'not_applicable' for v in m['pricing_status'].values()))
             self.assertIsNotNone(m['media_pricing'])
         self.assertIsNone(files['models/grok-4.7.json']['data']['media_pricing'])
-        self.assertEqual(files['models.json']['meta']['modality_counts'], {'text': 49, 'image': 12, 'video': 9})
+        self.assertEqual(files['models.json']['meta']['modality_counts'], {'text': 50, 'image': 12, 'video': 9})
         for k in ('text', 'image', 'video'):
             self.assertTrue(all(o['modality'] == k for o in files['modalities/%s.json' % k]['data']))
 

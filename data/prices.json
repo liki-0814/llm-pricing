@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-10-31",
+    "last_updated": "2026-11-01",
     "description": "美元。文本模型为美元 / 每百万 token；图像与视频生成模型（modality = image / video）的价格见 media_pricing：按张（尺寸×质量）、按秒（分辨率×是否含音频）以及分模态 token 价。官方价格与用户确认参照价明确区分，参照依据见 price_basis。null 不代表零；状态与计费规则见各结构化字段。",
     "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3、4 系列最新；MiniMax 3 系列；xAI Grok 4.7；Grok Build Fast 单独作为订阅渠道参照价收录。 图像与视频生成（仅最新一代）：OpenAI GPT Image 2.5；xAI Grok Imagine Image 2.0、Video 1.5 / 1.5 Lite；Google Nano Banana 2.1 / 2 Lite / Pro 与 Gemini Omni 1.1 Flash（Veo 已停服）；阿里云 Qwen-Image 3.0、Wan 2.7 Image、Wan 3.0 Video；MiniMax H3 系列与 image-01；智谱 GLM-Image。"
   },
@@ -15,6 +15,35 @@
     "MiniMax",
     "xAI"
   ],
+  "vendor_billing": {
+    "DeepSeek": {
+      "cache_write_billed": false
+    },
+    "OpenAI": {
+      "cache_write_billed": true
+    },
+    "Anthropic": {
+      "cache_write_billed": true
+    },
+    "智谱 Z.ai": {
+      "cache_write_billed": false
+    },
+    "Moonshot Kimi": {
+      "cache_write_billed": true
+    },
+    "阿里云 Qwen": {
+      "cache_write_billed": true
+    },
+    "Google Gemini": {
+      "cache_write_billed": false
+    },
+    "MiniMax": {
+      "cache_write_billed": false
+    },
+    "xAI": {
+      "cache_write_billed": false
+    }
+  },
   "models": [
     {
       "vendor": "DeepSeek",
@@ -1713,6 +1742,97 @@
         "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
       },
       "price_schedule": [],
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-6 Astra for Law",
+      "model_id": "gpt-6-astra-law",
+      "modality": "text",
+      "currency": "USD",
+      "input": 10.0,
+      "output": 50.0,
+      "cached_input": 1.0,
+      "cache_write": null,
+      "peak_note": null,
+      "offpeak": null,
+      "context_length": null,
+      "context_tokens": null,
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-11-01",
+      "notes": "OpenAI 定价页“Legal model configurations”一节的法律场景模型配置（GPT-6 Astra for Law），仅列输入 $10.00 / 输出 $50.00 / 缓存读取 $1.00（每百万 token）。官方注明 GPT-6 Astra for Law 促销价至少持续到 2026-12-31；到期后价格官方未公布（待核实）。官方定价页未列该配置的缓存写入价（cache_write 待核实）、长上下文（>272K）分档、Batch/Flex/Fast 服务档和数据驻留加价，OpenAI 模型页 /api/docs/models/gpt-6-astra-law 也尚不存在（HTTP 404），故上下文窗口、最大输出和推理强度均待核实；不借用 gpt-6-astra 的数值。 2026-11-01 新增（OpenAI 官方模型配置；liki 于 2026-11-01 批准入库）。",
+      "unverified_fields": [
+        "cache_write",
+        "limits.context_length",
+        "limits.max_output_tokens",
+        "reasoning_effort.supported",
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "id": "m71",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "note": "官方定价页未列该配置的推理强度，OpenAI 模型页尚不存在（404），待核实。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "note": "官方定价页未列上下文窗口与最大输出，OpenAI 模型页 /api/docs/models/gpt-6-astra-law 尚不存在（404），待核实。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "官方定价页 Legal model configurations 仅列缓存读取价 $1.00，未列缓存写入价（30 分钟 / 12 小时 TTL）。"
+      },
+      "price_schedule": [
+        {
+          "kind": "promotion",
+          "effective_from": null,
+          "effective_until": "2026-12-31",
+          "input": 10.0,
+          "output": 50.0,
+          "cached_input": 1.0,
+          "cache_write": null,
+          "note": "GPT-6 Astra for Law 促销价（输入 $10 / 输出 $50 / 缓存读取 $1）官方称“至少持续到 2026-12-31”；到期后价格官方未公布（待核实）。",
+          "multiplier": null,
+          "cache_pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
       "price_basis": {
         "type": "official",
         "reference_model_id": null,
@@ -4018,7 +4138,7 @@
       "input": 0.95,
       "output": 4.0,
       "cached_input": 0.19,
-      "cache_write": "n/a",
+      "cache_write": null,
       "peak_note": null,
       "offpeak": null,
       "context_length": "262,144 tokens",
@@ -4029,7 +4149,9 @@
       ],
       "last_updated": "2026-10-25",
       "notes": "官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
-      "unverified_fields": [],
+      "unverified_fields": [
+        "cache_write"
+      ],
       "id": "m28",
       "reasoning_effort": {
         "supported": false,
@@ -4111,7 +4233,7 @@
       "input": 1.9,
       "output": 8.0,
       "cached_input": 0.38,
-      "cache_write": "n/a",
+      "cache_write": null,
       "peak_note": null,
       "offpeak": null,
       "context_length": "262,144 tokens",
@@ -4122,7 +4244,9 @@
       ],
       "last_updated": "2026-10-25",
       "notes": "高速版；官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
-      "unverified_fields": [],
+      "unverified_fields": [
+        "cache_write"
+      ],
       "id": "m29",
       "reasoning_effort": {
         "supported": false,
@@ -5772,12 +5896,13 @@
       "input": 0.95,
       "output": 4.0,
       "cached_input": 0.19,
-      "cache_write": "n/a",
+      "cache_write": null,
       "context_length": "1,048,576 tokens",
       "context_tokens": 1048576,
       "source_url": "https://www.kimi.com/code/docs/en/kimi-code/models",
       "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无官方 token 单价。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。 价格暂按 Kimi K2.7 Code 计价(用户确认,Kimi 官方暂未单独标价)",
       "unverified_fields": [
+        "cache_write",
         "limits.max_output_tokens"
       ],
       "reasoning_effort": {

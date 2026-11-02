@@ -183,8 +183,8 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
   assert.deepEqual(index.data.models.map(m=>m.id),full.data.map(m=>m.id));
   for (const v of vendors.data) assert.deepEqual(v.model_ids,full.data.filter(m=>m.vendor===v.slug).map(m=>m.id));
   const cheapest=await client.listModels({vendor:'openai',sort:'input',limit:2,priceBasis:'official'});
-  assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,10); // 8 text + 2 image models
-  assert.equal((await client.listModels({vendor:'openai',modality:'text',sort:'input',priceBasis:'official'})).meta.matched_count,8);
+  assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,11); // 9 text + 2 image models
+  assert.equal((await client.listModels({vendor:'openai',modality:'text',sort:'input',priceBasis:'official'})).meta.matched_count,9);
   const search=await client.listModels({q:'gemini pro'});assert.equal(search.data[0].id,'gemini-3.1-pro-preview');
   const missingLast=await client.listModels({sort:'-cache_write'});assert.equal(missingLast.data.at(-1).pricing.cache_write,null);
   const current = full.data.find(m=>m.id==='gemini-3.1-pro-preview');
