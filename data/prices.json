@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-11-01",
+    "last_updated": "2026-11-06",
     "description": "美元。文本模型为美元 / 每百万 token；图像与视频生成模型（modality = image / video）的价格见 media_pricing：按张（尺寸×质量）、按秒（分辨率×是否含音频）以及分模态 token 价。官方价格与用户确认参照价明确区分，参照依据见 price_basis。null 不代表零；状态与计费规则见各结构化字段。",
     "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3、4 系列最新；MiniMax 3 系列；xAI Grok 4.7；Grok Build Fast 单独作为订阅渠道参照价收录。 图像与视频生成（仅最新一代）：OpenAI GPT Image 2.5；xAI Grok Imagine Image 2.0、Video 1.5 / 1.5 Lite；Google Nano Banana 2.1 / 2 Lite / Pro 与 Gemini Omni 1.1 Flash（Veo 已停服）；阿里云 Qwen-Image 3.0、Wan 2.7 Image、Wan 3.0 Video；MiniMax H3 系列与 image-01；智谱 GLM-Image。"
   },
@@ -5399,8 +5399,8 @@
       "extra_sources": [
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
       ],
-      "last_updated": "2026-10-11",
-      "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。价格已对照官方定价页复核无变化。",
+      "last_updated": "2026-11-06",
+      "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。2026-11-06：Batch 档 Context caching 官方为 $0.015（此前 repo 误记 0.02）；Flex 仍为 $0.02，Priority $0.05。来源：https://ai.google.dev/gemini-api/docs/pricing",
       "unverified_fields": [
         "reasoning_effort.can_disable"
       ],
@@ -5447,7 +5447,7 @@
             "storage_per_1M_tokens_hour": 1
           },
           "pricing": {
-            "cached_input": 0.02
+            "cached_input": 0.015
           },
           "sources": [
             "https://ai.google.dev/gemini-api/docs/pricing"
@@ -7020,8 +7020,8 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
         "https://ai.google.dev/gemini-api/docs/video"
       ],
-      "last_updated": "2026-10-29",
-      "notes": "Token 计价：输入 $1.50（文本/图像/视频/音频）、文本输出 $9.00、视频输出 $17.50 / 百万 token；按 720p 视频 5,792 token/秒计，官方称约 $0.10/秒（近似值）。官方未列 360p / 1080p / 4k 的单价，待核实。",
+      "last_updated": "2026-11-06",
+      "notes": "Token 计价：输入 $1.50（文本/图像/视频/音频）、文本输出 $9.00、视频输出 $17.50 / 百万 token；按 720p 视频 5,792 token/秒计，官方称约 $0.10/秒（近似值）。官方未列 360p / 1080p / 4k 的单价，待核实。 Effective December 3, 2026, API requests to gemini-omni-1.1-flash automatically route to gemini-omni-1.2-flash and are billed at 1.2 rates (video output $12/1M tokens vs current 1.1 $17.50; ~$0.07/s @720p). Current 1.1 Standard prices still apply until then. Source: https://ai.google.dev/gemini-api/docs/pricing (changelog 2026-11-05). Schema note: media models cannot yet store price_schedule; route recorded in notes only.",
       "unverified_fields": [
         "media_pricing.video_prices.360p.any.standard",
         "media_pricing.video_prices.1080p.any.standard",
