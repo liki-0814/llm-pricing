@@ -24,6 +24,28 @@
   var TOKEN_USAGE = { textInputTokens: "text_input", textCachedInputTokens: "text_cached_input", textOutputTokens: "text_output",
     imageInputTokens: "image_input", imageCachedInputTokens: "image_cached_input", imageOutputTokens: "image_output",
     videoInputTokens: "video_input", videoOutputTokens: "video_output", audioInputTokens: "audio_input" };
+  // Overlay dated media price changes (media_pricing.price_schedule) in force on `day` (YYYY-MM-DD, inclusive bounds).
+  function mediaAt(base, day) {
+    var schedule = base.price_schedule || [];
+    if (!schedule.length) return base;
+    var mp = JSON.parse(JSON.stringify(base));
+    schedule.forEach(function (e) {
+      if (day < e.effective_from || (e.effective_until && day > e.effective_until)) return;
+      Object.keys(e.token_pricing || {}).forEach(function (t) {
+        if (!e.token_pricing[t]) return;
+        if (!mp.token_pricing || !mp.token_pricing[t]) throw error("INVALID_DATA", "Scheduled media change has no base token tier " + t);
+        Object.assign(mp.token_pricing[t], e.token_pricing[t]);
+      });
+      [["video_prices", ["tier", "resolution", "audio"]], ["image_prices", ["tier", "size", "quality"]]].forEach(function (spec) {
+        (e[spec[0]] || []).forEach(function (r) {
+          var row = mp[spec[0]].find(function (x) { return spec[1].every(function (k) { return x[k] === r[k]; }); });
+          if (!row) throw error("INVALID_DATA", "Scheduled media change targets an unknown " + spec[0] + " row");
+          Object.keys(r).forEach(function (k) { if (spec[1].indexOf(k) < 0) row[k] = r[k]; });
+        });
+      });
+    });
+    return mp;
+  }
   // Image / video models: per-image, per-second and per-modality token prices from model.media_pricing.
   function estimateMedia(model, usage, options) {
     usage = usage || {}; options = options || {};
@@ -31,8 +53,9 @@
       throw error("UNSUPPORTED_MODALITY", "estimateMedia needs an image or video model; use estimate() for text models");
     var allowedUsage = ["images", "size", "quality", "seconds", "resolution", "audio", "inputImages", "inputVideoSeconds"].concat(Object.keys(TOKEN_USAGE));
     Object.keys(usage).forEach(function (k) { if (allowedUsage.indexOf(k) < 0) throw error("INVALID_ARGUMENT", "Unknown usage field: " + k); });
-    Object.keys(options).forEach(function (k) { if (k !== "tier") throw error("INVALID_ARGUMENT", "Unknown estimate option: " + k); });
-    var mp = model.media_pricing, tier = options.tier === undefined ? "standard" : options.tier;
+    Object.keys(options).forEach(function (k) { if (k !== "tier" && k !== "at") throw error("INVALID_ARGUMENT", "Unknown estimate option: " + k); });
+    var day = date(options.at === undefined ? new Date().toISOString() : options.at).toISOString().slice(0, 10);
+    var mp = mediaAt(model.media_pricing, day), tier = options.tier === undefined ? "standard" : options.tier;
     if (tier !== "standard" && tier !== "batch") throw error("INVALID_ARGUMENT", "tier must be standard or batch");
     function count(k, integer) { return usage[k] === undefined ? 0 : number(usage[k], k, integer); }
     function unavailable(what) { return error("PRICE_UNAVAILABLE", what + " has no verified price for tier " + tier); }
@@ -82,7 +105,7 @@
     var total = Object.keys(parts).reduce(function (n, k) { return n + parts[k]; }, 0);
     if (!Number.isFinite(total)) throw error("INVALID_ARGUMENT", "Usage is too large to estimate the total");
     return { model_id: model.id, modality: model.modality, currency: "USD", total: total, breakdown: parts, unit_prices: units,
-      tier: tier, price_basis: model.price_basis, billing: model.billing, warnings: warnings,
+      tier: tier, price_date: day, price_basis: model.price_basis, billing: model.billing, warnings: warnings,
       excluded_costs: ["server_tools", "grounding", "taxes", "free_quota", "unrecorded_multimodal_rates"] };
   }
   function estimate(model, usage, options) {
@@ -278,5 +301,6 @@
       estimate: async function (id, usage, options) { return estimate((await get("models/" + safeId(id) + ".json")).data, usage, options); },
       estimateMedia: async function (id, usage, options) { return estimateMedia((await get("models/" + safeId(id) + ".json")).data, usage, options); } };
   }
-  return { createClient: createClient, estimate: estimate, estimateMedia: estimateMedia };
+  return { createClient: createClient, estimate: estimate, estimateMedia: estimateMedia, mediaPricingAt: function (model, at) {
+    return mediaAt(model.media_pricing, date(at).toISOString().slice(0, 10)); } };
 });

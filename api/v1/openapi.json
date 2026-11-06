@@ -2214,6 +2214,344 @@
               "format": "uri",
               "pattern": "^https?://"
             }
+          },
+          "price_schedule": {
+            "type": "array",
+            "description": "Announced dated media price changes (same kinds as text price_schedule except promotion, which stays in `promotion`). Each entry is a partial overlay: listed token prices / rows replace the base media_pricing values from effective_from (inclusive) through effective_until (inclusive, null = open-ended); unlisted fields are unchanged. Base fields keep today's list price.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "scheduled_increase",
+                    "scheduled_decrease"
+                  ]
+                },
+                "effective_from": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "effective_until": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date"
+                },
+                "token_pricing": {
+                  "type": "object",
+                  "properties": {
+                    "standard": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "object",
+                          "minProperties": 1,
+                          "additionalProperties": false,
+                          "properties": {
+                            "text_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "text_cached_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "text_output": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "image_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "image_cached_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "image_output": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "video_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "video_output": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "audio_input": {
+                              "type": "number",
+                              "minimum": 0
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "batch": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "object",
+                          "minProperties": 1,
+                          "additionalProperties": false,
+                          "properties": {
+                            "text_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "text_cached_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "text_output": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "image_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "image_cached_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "image_output": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "video_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "video_output": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "audio_input": {
+                              "type": "number",
+                              "minimum": 0
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "priority": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "object",
+                          "minProperties": 1,
+                          "additionalProperties": false,
+                          "properties": {
+                            "text_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "text_cached_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "text_output": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "image_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "image_cached_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "image_output": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "video_input": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "video_output": {
+                              "type": "number",
+                              "minimum": 0
+                            },
+                            "audio_input": {
+                              "type": "number",
+                              "minimum": 0
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "standard",
+                    "batch",
+                    "priority"
+                  ],
+                  "additionalProperties": false
+                },
+                "video_prices": {
+                  "type": "array",
+                  "description": "Replacement values for existing video_prices rows matched by tier x resolution x audio",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "tier": {
+                        "enum": [
+                          "standard",
+                          "batch"
+                        ],
+                        "description": "standard = on-demand list price; batch = Batch API list price"
+                      },
+                      "resolution": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "audio": {
+                        "enum": [
+                          "with_audio",
+                          "without_audio",
+                          "any"
+                        ]
+                      },
+                      "price_per_second": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0
+                      },
+                      "tokens_per_second": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "minimum": 1
+                      },
+                      "basis": {
+                        "enum": [
+                          "listed",
+                          "token_equivalent",
+                          "approximate"
+                        ]
+                      },
+                      "note": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "tier",
+                      "resolution",
+                      "audio",
+                      "price_per_second",
+                      "tokens_per_second",
+                      "basis",
+                      "note"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "image_prices": {
+                  "type": "array",
+                  "description": "Replacement values for existing image_prices rows matched by tier x size x quality",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "tier": {
+                        "enum": [
+                          "standard",
+                          "batch"
+                        ],
+                        "description": "standard = on-demand list price; batch = Batch API list price"
+                      },
+                      "size": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "quality": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "price": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0
+                      },
+                      "tokens": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "minimum": 1
+                      },
+                      "basis": {
+                        "enum": [
+                          "listed",
+                          "token_equivalent"
+                        ]
+                      },
+                      "note": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "tier",
+                      "size",
+                      "quality",
+                      "price",
+                      "tokens",
+                      "basis",
+                      "note"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "note": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sources": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://"
+                  }
+                }
+              },
+              "required": [
+                "kind",
+                "effective_from",
+                "effective_until",
+                "token_pricing",
+                "video_prices",
+                "image_prices",
+                "note",
+                "sources"
+              ],
+              "additionalProperties": false
+            }
           }
         },
         "required": [
@@ -2227,7 +2565,8 @@
           "batch_supported",
           "promotion",
           "billing_note",
-          "sources"
+          "sources",
+          "price_schedule"
         ],
         "additionalProperties": false
       },

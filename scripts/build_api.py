@@ -103,6 +103,42 @@ def schedule_obj(e):
             "sources": e.get("sources", [])}
 
 
+MEDIA_SCHEDULE_KINDS = ("scheduled_increase", "scheduled_decrease")
+VIDEO_ROW_KEYS = ("tier", "resolution", "audio", "price_per_second", "tokens_per_second", "basis", "note")
+IMAGE_ROW_KEYS = ("tier", "size", "quality", "price", "tokens", "basis", "note")
+
+
+def media_schedule_obj(e):
+    """Dated media price change: a partial overlay on media_pricing (only listed fields change)."""
+    tp = e.get("token_pricing") or {}
+    return {"kind": e["kind"], "effective_from": e.get("effective_from"), "effective_until": e.get("effective_until"),
+            "token_pricing": {t: (None if tp.get(t) is None else {k: tp[t][k] for k in TOKEN_PRICE_FIELDS if k in tp[t]})
+                              for t in ("standard", "batch", "priority")},
+            "video_prices": [{k: r.get(k) for k in VIDEO_ROW_KEYS} for r in e.get("video_prices") or []],
+            "image_prices": [{k: r.get(k) for k in IMAGE_ROW_KEYS} for r in e.get("image_prices") or []],
+            "note": e["note"], "sources": list(e["sources"])}
+
+
+def apply_media_schedule(mp, day):
+    """Return a copy of a source/API media_pricing with every schedule entry in force on ISO date `day` applied."""
+    out = copy.deepcopy(mp)
+    for e in mp.get("price_schedule") or []:
+        if e.get("effective_from") and day < e["effective_from"]:
+            continue
+        if e.get("effective_until") and day > e["effective_until"]:
+            continue
+        for tier, prices in (e.get("token_pricing") or {}).items():
+            if prices and (out.get("token_pricing") or {}).get(tier):
+                out["token_pricing"][tier].update(prices)
+        for rows, keys, src in (("video_prices", ("tier", "resolution", "audio"), e.get("video_prices") or []),
+                                ("image_prices", ("tier", "size", "quality"), e.get("image_prices") or [])):
+            for r in src:
+                row = next((x for x in out[rows] if all(x[k] == r[k] for k in keys)), None)
+                if row is not None:
+                        row.update({k: v for k, v in r.items() if k not in keys})
+    return out
+
+
 def reasoning_obj(m):
     """data reasoning_effort -> API object. null = 待核实 (never guessed)."""
     r = m.get("reasoning_effort")
@@ -147,6 +183,7 @@ def media_obj(mp):
         "promotion": copy.deepcopy(mp.get("promotion")),
         "billing_note": mp["billing_note"],
         "sources": list(mp["sources"]),
+        "price_schedule": [media_schedule_obj(e) for e in mp.get("price_schedule") or []],
     }
 
 
@@ -297,7 +334,28 @@ def media_pricing_schema():
             "note": {"type": "string", "minLength": 1}})],
             "description": "Vendor promotion on the recorded prices. Recorded prices are LIST prices before the discount."},
         "billing_note": {"type": "string", "minLength": 1},
-        "sources": urls})
+        "sources": urls,
+        "price_schedule": {"type": "array",
+            "description": "Announced dated media price changes (same kinds as text price_schedule except promotion, which stays in `promotion`). "
+                           "Each entry is a partial overlay: listed token prices / rows replace the base media_pricing values from effective_from (inclusive) "
+                           "through effective_until (inclusive, null = open-ended); unlisted fields are unchanged. Base fields keep today's list price.",
+            "items": obj({
+                "kind": {"enum": list(MEDIA_SCHEDULE_KINDS)},
+                "effective_from": {"type": "string", "format": "date"},
+                "effective_until": {"type": ["string", "null"], "format": "date"},
+                "token_pricing": obj({t: {"anyOf": [{"type": "null"}, {"type": "object", "minProperties": 1, "additionalProperties": False,
+                                                                     "properties": {k: {"type": "number", "minimum": 0} for k in TOKEN_PRICE_FIELDS}}]}
+                                      for t in ("standard", "batch", "priority")}),
+                "video_prices": {"type": "array", "description": "Replacement values for existing video_prices rows matched by tier x resolution x audio",
+                                 "items": obj({"tier": tier, "resolution": {"type": "string", "minLength": 1}, "audio": {"enum": list(VIDEO_AUDIO)},
+                                               "price_per_second": dict(usd), "tokens_per_second": {"type": ["integer", "null"], "minimum": 1},
+                                               "basis": {"enum": ["listed", "token_equivalent", "approximate"]}, "note": {"type": ["string", "null"]}})},
+                "image_prices": {"type": "array", "description": "Replacement values for existing image_prices rows matched by tier x size x quality",
+                                 "items": obj({"tier": tier, "size": {"type": "string", "minLength": 1}, "quality": {"type": ["string", "null"]},
+                                               "price": dict(usd), "tokens": {"type": ["integer", "null"], "minimum": 1},
+                                               "basis": {"enum": ["listed", "token_equivalent"]}, "note": {"type": ["string", "null"]}})},
+                "note": {"type": "string", "minLength": 1},
+                "sources": urls})}})
 
 
 def extend_schemas(model, cache_pricing, price):
