@@ -65,8 +65,11 @@ def media_source_schema(d):
     out['modality'] = {'enum': ['image', 'video']}
     out['media_pricing'] = {'$ref': '#/components/schemas/MediaPricing'}
     out['unverified_fields']['uniqueItems'] = True
+    components = copy.deepcopy(spec['components'])
+    # Source files may omit an empty media price_schedule; the API always emits it.
+    components['schemas']['MediaPricing']['required'].remove('price_schedule')
     return {'type': 'object', 'required': list(out), 'properties': out, 'additionalProperties': False,
-            'components': spec['components']}
+            'components': components}
 
 
 def numeric(v):
@@ -172,9 +175,63 @@ def validate_media(m, snapshot, fail):
             fail(where, 'invalid input_video_price_per_second')
     if mp['batch_supported'] is False and any(e['tier'] == 'batch' for e in mp['image_prices'] + mp['video_prices']):
         fail(where, 'batch prices on a model without batch support')
+    validate_media_schedule(m, fail)
     promo = mp['promotion']
     if promo and promo['effective_until'] and promo['effective_until'] < m['last_updated']:
         fail(where, 'expired promotion needs re-verification')
+
+
+def validate_media_schedule(m, fail):
+    """Mirror text price_schedule rules and check every overlay against the base table and token equivalences."""
+    where, mp = m['model_id'], m['media_pricing']
+    schedule = mp.get('price_schedule') or []
+    starts = [e['effective_from'] for e in schedule]
+    if starts != sorted(starts) or len(starts) != len(set(starts)):
+        fail(where, 'media scheduled changes must have unique chronological start dates')
+    for e in schedule:
+        if e['effective_until'] and e['effective_from'] > e['effective_until']:
+            fail(where, 'media price schedule ends before it starts')
+        if e['effective_from'] <= m['last_updated']:
+            fail(where, 'media scheduled change must start after last_updated; fold past changes into base prices')
+        if not set(e['sources']) <= set(mp['sources']) | {m['source_url']} | set(m['extra_sources']):
+            fail(where, 'media schedule sources must be among the model sources')
+        changed = False
+        for tier, prices in e['token_pricing'].items():
+            if prices is None:
+                continue
+            base = (mp['token_pricing'] or {}).get(tier)
+            if base is None:
+                fail(where, 'media schedule token_pricing.%s has no base tier' % tier)
+                continue
+            for k, v in prices.items():
+                changed |= v != base[k]
+                if e['kind'] == 'scheduled_decrease' and numeric(base[k]) and v > base[k] or \
+                   e['kind'] == 'scheduled_increase' and numeric(base[k]) and v < base[k]:
+                    fail(where, 'media schedule %s.%s contradicts kind %s' % (tier, k, e['kind']))
+        for rows, keys, price_key, src in (('video_prices', ('tier', 'resolution', 'audio'), 'price_per_second', e['video_prices']),
+                                           ('image_prices', ('tier', 'size', 'quality'), 'price', e['image_prices'])):
+            seen = set()
+            for r in src:
+                key = tuple(r[k] for k in keys)
+                base = [x for x in mp[rows] if tuple(x[k] for k in keys) == key]
+                if key in seen or not base:
+                    fail(where, 'media schedule %s row %r is duplicated or not in the base table' % (rows, key))
+                    continue
+                seen.add(key)
+                if r[price_key] is None:
+                    fail(where, 'media schedule %s row %r must carry an announced price' % (rows, key))
+                changed |= any(r[k] != base[0][k] for k in r if k not in keys)
+        if not changed:
+            fail(where, 'media scheduled change does not change any price')
+        # The effective table on that date must still satisfy the token-equivalence checks.
+        after = build_api.apply_media_schedule(mp, e['effective_from'])
+        tp = after['token_pricing']
+        for r, rate_key, price_key, count_key, tol in (
+                [(r, 'image_output', 'price', 'tokens', 0.01) for r in after['image_prices']] +
+                [(r, 'video_output', 'price_per_second', 'tokens_per_second', 0.02) for r in after['video_prices']]):
+            count, price, rate = r.get(count_key), r.get(price_key), ((tp or {}).get(r['tier']) or {}).get(rate_key)
+            if count is not None and numeric(rate) and numeric(price) and not math.isclose(price, count * rate / 1e6, rel_tol=tol):
+                fail(where, 'from %s: %s %s x %s disagrees with listed price' % (e['effective_from'], count_key, count, rate_key))
 
 
 def validate_data(d):

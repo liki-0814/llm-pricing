@@ -315,3 +315,31 @@ test('estimateMedia: per image, per second, tokens, batch tier, nulls and warnin
   close(o.total, 0.5); assert.ok(o.warnings.some(x => x.includes('approximate')));
   close(estimateMedia(omni, { videoOutputTokens: 1000000 }).total, 17.5);
 });
+
+test('media price_schedule: Omni 1.1 switches to 1.2 media rates from 2026-12-03 (inclusive)', () => {
+  const omni = all.data.find(m => m.id === 'gemini-omni-1.1-flash');
+  assert.equal(omni.media_pricing.token_pricing.standard.video_output, 17.5);   // base stays the current list price
+  const before = estimateMedia(omni, { videoOutputTokens: 1000000 }, { at: '2026-12-02' });
+  close(before.total, 17.5); assert.equal(before.price_date, '2026-12-02');
+  close(estimateMedia(omni, { videoOutputTokens: 1000000 }, { at: '2026-12-02T23:59:59Z' }).total, 17.5);
+  close(estimateMedia(omni, { videoOutputTokens: 1000000 }, { at: '2026-12-03' }).total, 12);
+  close(estimateMedia(omni, { videoOutputTokens: 1000000 }, { at: '2027-06-01' }).total, 12);
+  // unchanged token fields stay put
+  close(estimateMedia(omni, { textInputTokens: 1000000, textOutputTokens: 1000000 }, { at: '2026-12-03' }).total, 1.5 + 9);
+  close(estimateMedia(omni, { seconds: 10, resolution: '720p' }, { at: '2026-12-02' }).total, 1);
+  close(estimateMedia(omni, { seconds: 10, resolution: '720p' }, { at: '2026-12-03' }).total, 0.7);
+  code(() => estimateMedia(omni, { seconds: 10, resolution: '1080p' }, { at: '2026-12-02' }), 'PRICE_UNAVAILABLE');
+  close(estimateMedia(omni, { seconds: 10, resolution: '1080p' }, { at: '2026-12-03' }).total, 1.04);
+  code(() => estimateMedia(omni, { videoOutputTokens: 1 }, { at: '2026-13-01' }), 'INVALID_ARGUMENT');
+  // the published object itself is not mutated by an estimate
+  assert.equal(omni.media_pricing.token_pricing.standard.video_output, 17.5);
+});
+
+test('media models without price_schedule and text price_schedule behave as before', () => {
+  const video = media('grok-imagine-video-1.5');
+  close(estimateMedia(video, { seconds: 8, resolution: '1080p' }, { at: '2030-01-01' }).total, 2);
+  const sol = all.data.find(m => m.id === 'gpt-5.6-sol');
+  assert.equal(sol.media_pricing, null);
+  close(estimate(sol, usage(100000, 10000), { at: '2026-11-10' }).total, 0.1 * 4 + 0.01 * 20);   // promotion still applies
+  code(() => estimate(sol, usage(1, 1), { at: '2026-11-22' }), 'PRICE_EXPIRED');
+});

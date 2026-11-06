@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "see_media_pricing",
     "unit_label": "USD; see each model's media_pricing (per image / per second of video / per 1M tokens)",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
+    "data_version": "fe1fe30b0dd993757c1321c31dd7ff2fc56d9fe2c347c3ec3fe6a638b2b64f6c",
     "count": 12
   },
   "modality": {
@@ -156,7 +156,8 @@
         "sources": [
           "https://developers.openai.com/api/docs/pricing",
           "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -295,7 +296,8 @@
         "sources": [
           "https://developers.openai.com/api/docs/pricing",
           "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -464,7 +466,8 @@
         "sources": [
           "https://docs.x.ai/developers/pricing",
           "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -657,7 +660,8 @@
         "sources": [
           "https://ai.google.dev/gemini-api/docs/pricing",
           "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -814,7 +818,8 @@
         "sources": [
           "https://ai.google.dev/gemini-api/docs/pricing",
           "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -1017,7 +1022,8 @@
         "sources": [
           "https://ai.google.dev/gemini-api/docs/pricing",
           "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -1142,7 +1148,8 @@
         "billing_note": "国际站（新加坡）按量标价；免费额度 10 张，不计入价格。",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -1267,7 +1274,8 @@
         "billing_note": "国际站（新加坡）按量标价。",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -1383,7 +1391,8 @@
         "billing_note": "国际站（新加坡）按量标价；免费额度 50 张，不计入价格。",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -1499,7 +1508,8 @@
         "billing_note": "国际站（新加坡）按量标价；免费额度 50 张，不计入价格。",
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -1615,7 +1625,8 @@
         "billing_note": "官方为统一单张价。",
         "sources": [
           "https://platform.minimax.io/docs/guides/pricing-paygo"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],
@@ -1731,7 +1742,8 @@
         "billing_note": "官方为统一单张价。",
         "sources": [
           "https://docs.z.ai/guides/overview/pricing"
-        ]
+        ],
+        "price_schedule": []
       },
       "pricing_tiers": [],
       "service_tiers": [],

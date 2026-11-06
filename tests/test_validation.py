@@ -240,3 +240,60 @@ class ValidationTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class MediaScheduleTests(unittest.TestCase):
+    def setUp(self):
+        self.data = build_api.load()
+
+    def omni(self, d=None):
+        return next(m for m in (d or self.data)['models'] if m['model_id'] == 'gemini-omni-1.1-flash')
+
+    def invalid(self, mutate):
+        d = copy.deepcopy(self.data)
+        mutate(self.omni(d))
+        return validate.validate_data(d)
+
+    def test_media_model_may_carry_dated_schedule(self):
+        self.assertEqual(validate.validate_data(self.data), [])
+        mp = self.omni()['media_pricing']
+        self.assertEqual(mp['token_pricing']['standard']['video_output'], 17.5)
+        e, = mp['price_schedule']
+        self.assertEqual((e['kind'], e['effective_from'], e['token_pricing']['standard']), ('scheduled_decrease', '2026-12-03', {'video_output': 12}))
+        api = build_api.build(self.data)['models/gemini-omni-1.1-flash.json']['data']['media_pricing']
+        self.assertEqual(api['price_schedule'][0]['token_pricing']['standard'], {'video_output': 12})
+        self.assertEqual(build_api.build(self.data)['models/grok-imagine-video-1.5.json']['data']['media_pricing']['price_schedule'], [])
+
+    def test_schedule_overlay_by_date(self):
+        mp = self.omni()['media_pricing']
+        before, after = build_api.apply_media_schedule(mp, '2026-12-02'), build_api.apply_media_schedule(mp, '2026-12-03')
+        self.assertEqual(before['token_pricing']['standard']['video_output'], 17.5)
+        self.assertEqual(after['token_pricing']['standard']['video_output'], 12)
+        self.assertEqual({k: v for k, v in after['token_pricing']['standard'].items() if k != 'video_output'},
+                         {k: v for k, v in before['token_pricing']['standard'].items() if k != 'video_output'})
+        self.assertEqual(next(r for r in after['video_prices'] if r['resolution'] == '720p')['price_per_second'], 0.07)
+        self.assertEqual(mp['token_pricing']['standard']['video_output'], 17.5)  # not mutated
+
+    def test_invalid_media_schedules_rejected(self):
+        s = lambda m: m['media_pricing']['price_schedule'][0]
+        self.assertTrue(self.invalid(lambda m: s(m).update(kind='promotion')))
+        self.assertTrue(self.invalid(lambda m: s(m).update(kind='scheduled_increase')))
+        self.assertTrue(self.invalid(lambda m: s(m).update(effective_from=None)))
+        self.assertTrue(self.invalid(lambda m: s(m).update(effective_from='2026-11-01')))
+        self.assertTrue(self.invalid(lambda m: s(m).update(effective_until='2026-12-01')))
+        self.assertTrue(self.invalid(lambda m: s(m).update(bogus=1)))
+        self.assertTrue(self.invalid(lambda m: s(m)['token_pricing']['standard'].update(video_output=-1)))
+        self.assertTrue(self.invalid(lambda m: s(m)['token_pricing'].update(batch={'video_output': 6})))
+        self.assertTrue(self.invalid(lambda m: s(m)['token_pricing'].update(standard={})))
+        self.assertTrue(self.invalid(lambda m: s(m)['video_prices'][1].update(price_per_second=0.1)))  # 5792 x $12 != $0.10
+        self.assertTrue(self.invalid(lambda m: s(m)['video_prices'][0].update(resolution='8k')))
+        self.assertTrue(self.invalid(lambda m: s(m)['video_prices'].append(copy.deepcopy(s(m)['video_prices'][0]))))
+        self.assertTrue(self.invalid(lambda m: s(m).update(sources=['https://example.com/x'])))
+        self.assertTrue(self.invalid(lambda m: m['media_pricing']['price_schedule'].append(copy.deepcopy(s(m)))))
+
+    def test_text_price_schedule_unchanged(self):
+        m = next(x for x in self.data['models'] if x['model_id'] == 'gpt-5.6-sol')
+        self.assertEqual(m['price_schedule'][0]['kind'], 'promotion')
+        self.assertEqual(set(build_api.schedule_obj(m['price_schedule'][0])),
+                         {'kind', 'effective_from', 'effective_until', 'input', 'output', 'cached_input', 'cache_write',
+                          'note', 'multiplier', 'cache_pricing', 'sources'})

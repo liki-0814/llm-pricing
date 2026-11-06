@@ -5,7 +5,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "data_version": "fe1fe30b0dd993757c1321c31dd7ff2fc56d9fe2c347c3ec3fe6a638b2b64f6c"
   },
   "data": {
     "id": "gpt-image-2.5-flare",
@@ -124,7 +124,8 @@
       "sources": [
         "https://developers.openai.com/api/docs/pricing",
         "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
-      ]
+      ],
+      "price_schedule": []
     },
     "pricing_tiers": [],
     "service_tiers": [],
