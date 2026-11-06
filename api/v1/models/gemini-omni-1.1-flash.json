@@ -1,11 +1,11 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-01",
+    "updated_at": "2026-11-06",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "USD per 1M tokens",
-    "data_version": "cebf142f577896d8b1977f48aa83d4643d29479d8bc09fdc311a5f914a6ab890"
+    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
   },
   "data": {
     "id": "gemini-omni-1.1-flash",
@@ -55,8 +55,8 @@
       "https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash",
       "https://ai.google.dev/gemini-api/docs/video"
     ],
-    "last_updated": "2026-10-29",
-    "notes": "Token 计价：输入 $1.50（文本/图像/视频/音频）、文本输出 $9.00、视频输出 $17.50 / 百万 token；按 720p 视频 5,792 token/秒计，官方称约 $0.10/秒（近似值）。官方未列 360p / 1080p / 4k 的单价，待核实。",
+    "last_updated": "2026-11-06",
+    "notes": "Token 计价：输入 $1.50（文本/图像/视频/音频）、文本输出 $9.00、视频输出 $17.50 / 百万 token；按 720p 视频 5,792 token/秒计，官方称约 $0.10/秒（近似值）。官方未列 360p / 1080p / 4k 的单价，待核实。 Effective December 3, 2026, API requests to gemini-omni-1.1-flash automatically route to gemini-omni-1.2-flash and are billed at 1.2 rates (video output $12/1M tokens vs current 1.1 $17.50; ~$0.07/s @720p). Current 1.1 Standard prices still apply until then. Source: https://ai.google.dev/gemini-api/docs/pricing (changelog 2026-11-05). Schema note: media models cannot yet store price_schedule; route recorded in notes only.",
     "reasoning_effort": {
       "supported": false,
       "levels": null,
