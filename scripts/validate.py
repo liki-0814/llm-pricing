@@ -8,6 +8,7 @@ import sys
 
 sys.dont_write_bytecode = True
 import build_api
+import build_sdk
 try:
     from jsonschema import Draft202012Validator, FormatChecker
 except ImportError:
@@ -246,7 +247,13 @@ def validate_data(d):
                 except ValueError:
                     fail(where, 'retired_at requires precise official time and timezone')
             if life['status'] == 'retired' and not life['retired_at'] and not life['conflict']:
-                fail(where, 'retired status requires exact retired_at; otherwise pending_confirmation')
+                try:
+                    observed = life.get('observed_at')
+                    instant = dt.datetime.fromisoformat((observed or '').replace('Z', '+00:00'))
+                    if instant.tzinfo is None or 'T' not in observed:
+                        raise ValueError()
+                except ValueError:
+                    fail(where, 'confirmed retired without exact T requires precise evidence observed_at, not an invented retirement time')
         offer = m.get('token_offer')
         if offer:
             try:
@@ -428,6 +435,8 @@ def validate_api(d, files=None):
 def main():
     d = build_api.load()
     problems = validate_data(d)
+    if not build_sdk.check():
+        problems.append("SDK bundle stale; run python3 scripts/build_sdk.py")
     if not problems:
         problems += validate_api(d)
         problems += validate_api(d, build_api.build(d, mixed=True))

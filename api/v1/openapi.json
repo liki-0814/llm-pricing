@@ -1477,6 +1477,13 @@
                 ],
                 "format": "date-time"
               },
+              "observed_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
               "retirement_date": {
                 "type": [
                   "string",
@@ -1556,7 +1563,8 @@
                   "active",
                   "scheduled",
                   "pending_confirmation",
-                  "retired"
+                  "retired",
+                  "history_unknown"
                 ]
               },
               "estimable": {

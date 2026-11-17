@@ -390,13 +390,14 @@ def extend_schemas(model, cache_pricing, price):
     model["properties"]["lifecycle"] = {"type": ["object", "null"], "properties": {
         "status": {"enum": ["active", "scheduled", "pending_confirmation", "retired"]},
         "retired_at": {"type": ["string", "null"], "format": "date-time"},
+        "observed_at": {"type": ["string", "null"], "format": "date-time"},
         "retirement_date": {"type": ["string", "null"], "format": "date"},
         "timezone": nullable, "precision": {"enum": ["instant", "date", "unknown"]}, "original_text": nullable, "scope": {"enum": ["entity", "endpoint"]},
         "routes_to": nullable, "conflict": {"type": "boolean"}, "note": nullable,
         "sources": {"type": "array", "items": {"type": "string", "format": "uri"}, "minItems": 1}},
         "required": ["status", "retired_at", "retirement_date", "timezone", "precision", "original_text", "scope", "routes_to", "conflict", "note", "sources"]}
     model["properties"]["availability"] = obj({
-        "status": {"enum": ["active", "scheduled", "pending_confirmation", "retired"]},
+        "status": {"enum": ["active", "scheduled", "pending_confirmation", "retired", "history_unknown"]},
         "estimable": {"type": "boolean"}, "reason": nullable})
     model["properties"]["token_offer"] = {"type": ["object", "null"], "properties": {
         "observed_at": {"type": "string", "format": "date-time"},

@@ -408,7 +408,12 @@
     var models = data.models;
     state.currency = new URLSearchParams(location.search).get("currency") === "CNY" ? "CNY" : "USD";
     state.models = models.map(function (m, i) {
-      if (m.lifecycle) m.notes = (m.notes || "") + " 生命周期：" + m.lifecycle.note;
+      if (m.lifecycle) {
+        var life = m.lifecycle;
+        var announced = life.retirement_date ? "官方退役日期 " + life.retirement_date +
+          (life.precision !== "instant" || !life.timezone ? "（具体时刻及时区待确认）" : "（" + life.timezone + "）") + "；" : "";
+        m.notes = (m.notes || "") + " 生命周期：" + announced + (life.note || "待确认");
+      }
       if (m.billing && m.billing.price_type === "list") m.notes = "表内为目录价；" + (m.notes || "");
       m._i = i; m._h = haystack(m);
       m.lim_out = m.limits ? m.limits.max_output_tokens : null;
@@ -428,7 +433,11 @@
     if (nearest.length) setTimeout(function () { render(); }, Math.min(2147483647, Math.min.apply(null, nearest) - Date.now() + 1));
     (new URLSearchParams(location.search).get("open") || "").split(",").forEach(function (id) { if (id) state.open[id] = true; });
     $("statUpdated").textContent = data.meta.last_updated;
-    $("footUpdated").textContent = data.meta.last_updated;
+    var snapshot = data.meta.as_of || data.meta.availability_as_of;
+    var instant = snapshot && Date.parse(snapshot);
+    var snapshotLabel = Number.isFinite(instant) ? new Date(instant + 8 * 3600000).toISOString().slice(0, 19).replace("T", " ") + " 北京时间（UTC+08:00）" : "时点待核实";
+    $("statAsOf").textContent = "快照：" + snapshotLabel;
+    $("footUpdated").textContent = data.meta.last_updated + "；快照时点：" + snapshotLabel;
     var mc = { text: 0, image: 0, video: 0 };
     models.forEach(function (m) { mc[m.modality]++; });
     $("statModels").innerHTML = models.length + "<small>个</small>";

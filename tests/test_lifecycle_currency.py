@@ -27,6 +27,7 @@ class LifecycleCurrencyTests(unittest.TestCase):
                 m = next(m for m in d["models"] if m["model_id"] == "qwen4-max")
                 m["lifecycle"] = c["lifecycle"]
                 d["meta"]["availability_as_of"] = c["at"]
+                self.assertEqual(validate.validate_data(d), [])
                 files = build_api.build(d, mixed=True)
                 detail = files["models/qwen4-max.json"]["data"]
                 self.assertEqual(detail["availability"]["status"], c["status"])
@@ -119,3 +120,30 @@ class LifecycleCurrencyTests(unittest.TestCase):
         self.assertTrue(result["not_observed_this_run_not_retired"])
         mapped = catalog_diff.compare_catalogs(self.data, [snap], aliases=[{"vendor": "阿里云 Qwen", "channel": "pay_as_you_go", "alias": "qwen3-8-max", "canonical": "qwen3.8-max", "source_url": "https://example.org/official-map"}])
         self.assertEqual(len(mapped["not_in_database"]), 1)
+
+    def test_confirmed_retired_unknown_time_complete_artifact_and_observation_contract(self):
+        cases=json.loads((build_api.ROOT / "tests/fixtures/lifecycle-cases.json").read_text())
+        case=next(c for c in cases if c["name"]=="confirmed-retired-unknown-T-current")
+        d=copy.deepcopy(self.data)
+        model=next(m for m in d["models"] if m["model_id"]=="qwen4-max")
+        model["lifecycle"]=case["lifecycle"]
+        self.assertEqual(validate.validate_data(d),[])
+        with tempfile.TemporaryDirectory() as t, mock.patch.object(build_api,"load",return_value=d):
+            output=pathlib.Path(t)/"release"
+            build_site.build_site(output,case["at"],"confirmed-retired-fixture")
+            detail=json.loads((output/"api/v2/models/qwen4-max.json").read_text())["data"]
+            self.assertEqual(detail["availability"]["status"],"retired")
+            self.assertEqual(detail["lifecycle"]["routes_to"],"new-entity")
+            self.assertTrue(all(v is None for v in detail["pricing"].values()))
+            page=json.loads((output/"data/page-models.json").read_text())
+            self.assertFalse(any(m["model_id"]=="qwen4-max" for m in page["models"]))
+        model["lifecycle"]=dict(case["lifecycle"])
+        model["lifecycle"].pop("observed_at")
+        self.assertTrue(any("observed_at" in e for e in validate.validate_data(d)))
+
+    def test_stale_generated_sdk_cannot_publish(self):
+        with tempfile.TemporaryDirectory() as t, mock.patch.object(build_site.build_sdk,"check",return_value=False):
+            output=pathlib.Path(t)/"release"
+            with self.assertRaisesRegex(ValueError,"SDK bundle stale"):
+                build_site.build_site(output,"2026-11-17T12:26:37Z","fixture")
+            self.assertFalse(output.exists())

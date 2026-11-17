@@ -26,6 +26,9 @@ test("page single-currency filter controls rows, symbols, cheapest and v2 detail
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, "../assets/app.js"), "utf8"), context);
   await new Promise(setImmediate);
   assert.equal(el("error").innerHTML, "");
+  assert.ok(el("statAsOf").textContent.includes("2026-11-17 20:26:37"));
+  assert.ok(el("statAsOf").textContent.includes("UTC+08:00"));
+  assert.ok(el("footUpdated").textContent.includes("快照时点"));
   assert.ok(el("tbody").innerHTML.includes("qwen4-max"));
   assert.ok(!el("tbody").innerHTML.includes('data-id="hy4"'));
   assert.ok(el("statCheapest").innerHTML.includes("USD"));
@@ -36,4 +39,6 @@ test("page single-currency filter controls rows, symbols, cheapest and v2 detail
   assert.ok(!el("tbody").innerHTML.includes("qwen4-max"));
   assert.ok(!el("tbody").innerHTML.includes('<span class="cur">$'));
   assert.ok(el("statCheapest").innerHTML.includes("CNY"));
+  assert.ok(el("tbody").innerHTML.includes("2026-12-07"));
+  assert.ok(el("tbody").innerHTML.includes("具体时刻及时区待确认"));
 });

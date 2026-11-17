@@ -48,7 +48,7 @@ GitHub Pages 当前返回 `Access-Control-Allow-Origin: *`，支持跨域 fetch�
 
 ## 自然调用：轻量 JavaScript 客户端
 
-HTML 先加载 `assets/availability.js` 再加载 `assets/client.js`，全局对象为 `LLMPrice`。Node.js 18+ 可通过 `require` 使用同一文件，无 npm 安装步骤。
+HTML **只需加载 `assets/client.js` 一个文件**，全局对象为 `LLMPrice`，不做隐式网络加载。Node.js 18+ 可复制同一单文件并 `require`，不依赖相邻脚本。发布物由 `python3 scripts/build_sdk.py` 从唯一生命周期源码 `assets/availability.js` 和 `src/client-core.js` 生成；不要手改生成文件。CI、校验器和完整产物构建均检查生成物同步。
 
 ```js
 const { createClient, estimate, estimateMedia } = require('./assets/client.js');
@@ -203,7 +203,7 @@ GitHub Actions 在 push、pull request 和手动运行时执行同样的校验�
 
 - v1保持USD 72项；`api/v2/`显式支持USD/CNY共75项。页面默认USD；选择CNY后只比较该币种。不做汇率转换。SDK混币价格排序会抛`CURRENCY_MISMATCH`，使用`listModels({currency: "CNY", sort: "input"})`。
 - 新增Qwen4-Max与广州TokenHub Hy4三款；Sol促销日期改11-30，数值不变。未知缓存用量拒绝报价，Hy4目录价与折扣分开。
-- `availability.js`为浏览器/SDK/Python生成器共用判定。精确退役T按`as_of>=T`；日期/时区不明及冲突保留待确认。退役详情不提供现价；显式历史估价需合适的历史快照。
+- `availability.js`为浏览器/SDK/Python生成器共用判定。精确退役T按`as_of>=T`；未来日期/时区不明及冲突保留待确认；确认已退役但精确T未知须记录证据 `observed_at`，观察时点及以后不可估价，更早历史边界未知也拒绝估价。退役详情不提供现价；显式历史估价需合适的历史快照。
 - 本轮没有完成全厂商完整发现验收，也没有重新核完原71项。未改模型保留各自原核实日。媒体PR4未混入。
 - 冻结产物：`python3 scripts/build_site.py --output /tmp/pricing-review-UNIQUE --as-of 2026-11-17T20:26:37+08:00`。失败演练加`--fail-before-publish`；输出路径必须未存在，旧完整产物不会被覆盖。用HTTP服务该目录预览。
 - 详见[架构取舍/发布前提](docs/adr-currency-lifecycle.md)、[本轮来源/哈希](docs/update-evidence-2026-11-17.md)。

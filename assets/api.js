@@ -198,7 +198,7 @@
       var tier = costData.pricing_tiers.find(function (t) { return t.condition === estimate.pricing_tier; });
       var tierLabel = tier ? "输入 ≥ " + (tier.input_tokens_gt + 1).toLocaleString("en-US") +
         (tier.input_tokens_lte === null ? "" : " 且 ≤ " + tier.input_tokens_lte.toLocaleString("en-US")) + " tokens" : "基础档";
-      var periodLabel = {standard:"标准计费",peak:"高峰时段",off_peak:"闲时时段"}[estimate.period];
+      var periodLabel = {standard:"标准计费",peak:"高峰时段",off_peak:"闲时时段",promotion:"已核实优惠时段"}[estimate.period] || "计费时段待核实";
       $("costStatus").textContent = (estimate.price_basis.type === "reference" ? "参照估算 " : "估算 ") +
         estimate.total.toFixed(6) + " " + estimate.currency + " · " + tierLabel + " · " + periodLabel +
         (estimate.price_basis.type === "reference" ? " · 不代表订阅实际扣费" : "");
@@ -212,7 +212,8 @@
 
   client.listVendors().then(function (d) {
     $("footUpdated").textContent = d.meta.updated_at;
-    $("costAt").value = d.meta.updated_at + "T12:00:00+08:00";
+    // Current explicit instant, not arbitrary noon before an observed offer.
+    $("costAt").value = new Date().toISOString();
     vendors = d.data.map(function (v) { return v.slug; });
     d.data.forEach(function (v) { modelIds = modelIds.concat(v.model_ids); });
     $("slugList").innerHTML = "可用 <code>vendor</code>：" + d.data.map(function (v) {

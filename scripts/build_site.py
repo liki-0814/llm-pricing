@@ -14,12 +14,15 @@ import shutil
 import subprocess
 import tempfile
 import build_api
+import build_sdk
 import validate
 
 ROOT = build_api.ROOT
 
 
 def build_site(output, as_of, source_commit=None, fail_before_publish=False):
+    if not build_sdk.check():
+        raise ValueError("SDK bundle stale; run python3 scripts/build_sdk.py")
     instant = dt.datetime.fromisoformat(as_of.replace("Z", "+00:00"))
     if instant.tzinfo is None or "T" not in as_of:
         raise ValueError("as_of requires an exact timezone-aware instant")

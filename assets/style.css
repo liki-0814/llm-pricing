@@ -403,3 +403,5 @@ table.mini small{color:var(--muted)}
 }
 #mediaTable thead th.plain{padding:11px 14px}
 #mediaTable td.c-mnote{min-width:84px}
+
+.snapshot-time { display: block; font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; }
