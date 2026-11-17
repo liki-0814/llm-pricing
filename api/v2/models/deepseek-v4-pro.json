@@ -1,0 +1,145 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2"
+  },
+  "data": {
+    "id": "deepseek-v4-pro",
+    "name": "DeepSeek-V4-Pro-0813",
+    "vendor": "deepseek",
+    "vendor_name": "DeepSeek",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 1.32,
+      "output": 3.96,
+      "cached_input": 0.044,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://api-docs.deepseek.com/quick_start/pricing"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": {
+      "timezone": "UTC",
+      "weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "peak_windows": [
+        {
+          "start": "01:00",
+          "end": "04:00"
+        },
+        {
+          "start": "06:00",
+          "end": "10:00"
+        }
+      ],
+      "holiday_region": "CN",
+      "sources": [
+        "https://api-docs.deepseek.com/quick_start/pricing"
+      ],
+      "note": "起点包含、终点不包含；中国法定节假日全天闲时。计算时需调用方确认是否为中国法定节假日，不内置推测日历。"
+    },
+    "has_off_peak": true,
+    "off_peak_pricing": {
+      "input": 0.66,
+      "output": 1.98,
+      "cached_input": 0.022
+    },
+    "peak_note": "高峰（周一至周五 UTC 01:00-04:00、06:00-10:00，即北京时间 09:00-12:00、14:00-18:00，中国法定节假日除外）按表中价格；其余时间（含周末、节假日全天）闲时价为高峰价的一半。",
+    "context_length": 1000000,
+    "context_length_label": "1M",
+    "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
+    "extra_sources": [],
+    "last_updated": "2026-10-11",
+    "notes": "表中价格为高峰价。最大输出 384K；官方页未列缓存写入价。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "high",
+        "max"
+      ],
+      "default": "high",
+      "can_disable": true,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      },
+      "note": "同 DeepSeek 官方思考模式文档（文档统称“DeepSeek model”，未单列 Pro）；阿里云文档列出 deepseek-v4-pro-0813 取 low/high/max、默认 high，medium/xhigh 映射 high。thinking 默认开启，可用 thinking.type=disabled 关闭。",
+      "sources": [
+        "https://api-docs.deepseek.com/guides/thinking_mode",
+        "https://docs.qwencloud.com/api-reference/chat/openai-chat"
+      ]
+    },
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": 384000,
+      "status": "verified",
+      "note": "官方页仅给出 “CONTEXT LENGTH 1M / MAX OUTPUT MAXIMUM: 384K”，按 1M=1,000,000、1K=1,000 记录（官方未给精确 token 数）。",
+      "sources": [
+        "https://api-docs.deepseek.com/quick_start/pricing"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "缓存命中价即 pricing.cached_input（高峰/闲时各有一档，见 off_peak_pricing）；官方页未列缓存写入价。"
+    },
+    "price_schedule": [],
+    "unverified_fields": [],
+    "links": {
+      "self": "models/deepseek-v4-pro.json",
+      "vendor": "vendors/deepseek.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

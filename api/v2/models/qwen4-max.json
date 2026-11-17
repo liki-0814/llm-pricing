@@ -1,0 +1,127 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2"
+  },
+  "data": {
+    "id": "qwen4-max",
+    "name": "Qwen4-Max",
+    "vendor": "qwen",
+    "vendor_name": "阿里云 Qwen",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": {
+      "max_input_tokens": 983616,
+      "max_output_tokens": 131072,
+      "note": "只支持保守的普通文本试算，取两种模式均支持的输入/输出上限；超出需指定模式另核。",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+      ]
+    },
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 1.5,
+      "output": 4.5,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "unverified",
+      "cache_write": "unverified"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": "Singapore",
+      "cached_input_type": "unspecified",
+      "note": "新加坡普通文本按量价；缓存、工具、媒体与Batch不在已核估价范围。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1000000,
+    "context_length_label": "≤1M 输入（计费档位上限）",
+    "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max",
+    "extra_sources": [],
+    "last_updated": "2026-11-17",
+    "notes": "百炼国际站新加坡普通文本输入/输出美元价，0<Token≤1M；不覆盖图片、视频、工具费。缓存表提取粘连，未确认的缓存价不填0、不套其它Qwen规则。输出/输入上限依思考模式而异，试算采用两种模式都安全的保守上限，见 estimation_limits。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "high",
+        "xhigh"
+      ],
+      "default": "high",
+      "can_disable": true,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      },
+      "note": "模型页列low/high/xhigh，默认high；enable_thinking=false可关闭。",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+      ]
+    },
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": null,
+      "status": "partial",
+      "note": "上下文1,000,000；思考输入983,616/输出262,144，非思考输入991,808/输出131,072；当前schema不混合宣称一个模式无关最大输出。",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "隐式/显式缓存命中和写入均待核实；非零缓存用量拒绝试算，不回退普通输入价。"
+    },
+    "price_schedule": [],
+    "unverified_fields": [
+      "cached_input",
+      "cache_write",
+      "limits.max_output_tokens"
+    ],
+    "links": {
+      "self": "models/qwen4-max.json",
+      "vendor": "vendors/qwen.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

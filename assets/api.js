@@ -1,7 +1,7 @@
 (function () {
   "use strict";
   var esc = LP.esc, $ = function (id) { return document.getElementById(id); };
-  var BASE = new URL("api/v1/", location.href).href;
+  var BASE = new URL("api/v2/", location.href).href;
   var client = LLMPrice.createClient(BASE);
   $("baseUrl").textContent = BASE;
 
@@ -12,7 +12,7 @@
       "# 单个模型 / 单个厂商\ncurl --fail --silent --show-error " + BASE + "models/deepseek-flash.json\ncurl --fail --silent --show-error " + BASE + "vendors/anthropic.json\n\n" +
       "# 图像 / 视频模型（按张、按秒、分模态 token 价）\ncurl --fail --silent --show-error " + BASE + "modalities/image.json\ncurl --fail --silent --show-error " + BASE + "modalities/video.json\n\n" +
       "# 配合 jq：视频模型按秒价格（标准档）\ncurl --fail --silent --show-error " + BASE + "modalities/video.json \\\n  | jq -r '.data[] | .id as $id | .media_pricing.video_prices[] | select(.tier == \"standard\") | \"\\($id) \\(.resolution) \\(.audio) \\(.price_per_second)\"'\n\n" +
-      "# 配合 jq：官方输入价最低的 5 个模型\ncurl --fail --silent --show-error " + BASE + "models.json \\\n  | jq -r '.data | map(select(.pricing.input != null and .price_basis.type == \"official\")) | sort_by(.pricing.input) | .[:5][] | \"\\(.id)\\t$\\(.pricing.input)\"'",
+      "# 配合 jq：官方输入价最低的 5 个模型\ncurl --fail --silent --show-error " + BASE + "models.json \\\n  | jq -r '.data | map(select(.currency == \"USD\" and .pricing.input != null and .price_basis.type == \"official\")) | sort_by(.pricing.input) | .[:5][] | \"\\(.id)\\t$\\(.pricing.input)\"'",
     js:
       '// 在 HTML 中加载站点的 assets/client.js（暴露 LLMPrice）\n' +
       'const api = LLMPrice.createClient("' + BASE + '");\n\n' +
@@ -21,7 +21,7 @@
       'const openapi = await api.getOpenAPI();\n' +
       'const { data: model } = await api.getModel("gemini-3.1-pro-preview");\n' +
       'const { data: vendorModels } = await api.getVendor("openai");\n' +
-      'const { data: cheapest } = await api.listModels({ vendor: "openai", sort: "input", limit: 5, priceBasis: "official" });\n\n' +
+      'const { data: cheapest } = await api.listModels({ vendor: "openai", currency: "USD", sort: "input", limit: 5, priceBasis: "official" });\n\n' +
       '// 图像 / 视频模型：按模态过滤，用 estimateMedia 估算（estimate 仅适用于文本模型）\n' +
       'const { data: videos } = await api.listModels({ modality: "video", sort: "media_price" });\n' +
       'const { data: wan } = await api.getModel("wan3.0-video");\n' +
@@ -33,7 +33,7 @@
       "import json, urllib.request\n\nBASE = \"" + BASE + "\"\n\n" +
       "def get(path):\n    with urllib.request.urlopen(BASE + path) as r:\n        return json.load(r)\n\n" +
       "models = get(\"models.json\")\nprint(models[\"meta\"][\"updated_at\"], models[\"meta\"][\"count\"])\n\n" +
-      "# 官方输入价最低的 5 个模型（跳过 null 和参照价）\npriced = [m for m in models[\"data\"] if m[\"pricing\"][\"input\"] is not None and m[\"price_basis\"][\"type\"] == \"official\"]\n" +
+      "# 官方输入价最低的 5 个模型（跳过 null 和参照价）\npriced = [m for m in models[\"data\"] if m[\"currency\"] == \"USD\" and m[\"pricing\"][\"input\"] is not None and m[\"price_basis\"][\"type\"] == \"official\"]\n" +
       "for m in sorted(priced, key=lambda m: m[\"pricing\"][\"input\"])[:5]:\n    print(f'{m[\"id\"]:<28} in ${m[\"pricing\"][\"input\"]}  out ${m[\"pricing\"][\"output\"]}')\n\n" +
       "images = get(\"modalities/image.json\")\nfor m in images[\"data\"]:\n    for p in m[\"media_pricing\"][\"image_prices\"]:\n        if p[\"tier\"] == \"standard\":\n            print(m[\"id\"], p[\"size\"], p[\"quality\"], p[\"price\"])\n\n" +
       "claude = get(\"models/claude-opus-5.json\")[\"data\"]\nprint(claude[\"pricing\"], claude[\"pricing_status\"])"
@@ -72,11 +72,11 @@
   var SNIPPETS = {
     cheapest: {
       path: "models.json",
-      code: 'const { data } = await (await fetch(BASE + "models.json")).json();\nreturn data\n  .filter(m => m.pricing.input != null && m.price_basis.type === "official")\n  .sort((a, b) => a.pricing.input - b.pricing.input)\n  .slice(0, 5)\n  .map(m => ({ id: m.id, vendor: m.vendor, input: m.pricing.input, output: m.pricing.output }));',
+      code: 'const { data } = await (await fetch(BASE + "models.json")).json();\nreturn data\n  .filter(m => m.currency === "USD" && m.pricing.input != null && m.price_basis.type === "official")\n  .sort((a, b) => a.pricing.input - b.pricing.input)\n  .slice(0, 5)\n  .map(m => ({ id: m.id, vendor: m.vendor, input: m.pricing.input, output: m.pricing.output }));',
       run: function (d) {
-        return d.data.filter(function (m) { return m.pricing.input != null && m.price_basis.type === "official"; })
+        return d.data.filter(function (m) { return m.currency === "USD" && m.pricing.input != null && m.price_basis.type === "official"; })
           .sort(function (a, b) { return a.pricing.input - b.pricing.input; }).slice(0, 5)
-          .map(function (m) { return { id: m.id, vendor: m.vendor, input: m.pricing.input, output: m.pricing.output }; });
+          .map(function (m) { return { id: m.id, vendor: m.vendor, currency: m.currency, input: m.pricing.input, output: m.pricing.output }; });
       }
     },
     imageprice: {
@@ -200,7 +200,7 @@
         (tier.input_tokens_lte === null ? "" : " 且 ≤ " + tier.input_tokens_lte.toLocaleString("en-US")) + " tokens" : "基础档";
       var periodLabel = {standard:"标准计费",peak:"高峰时段",off_peak:"闲时时段"}[estimate.period];
       $("costStatus").textContent = (estimate.price_basis.type === "reference" ? "参照估算 " : "估算 ") +
-        estimate.total.toFixed(6) + " USD · " + tierLabel + " · " + periodLabel +
+        estimate.total.toFixed(6) + " " + estimate.currency + " · " + tierLabel + " · " + periodLabel +
         (estimate.price_basis.type === "reference" ? " · 不代表订阅实际扣费" : "");
       $("costOut").textContent = JSON.stringify(estimate, null, 2);
     } catch (e) {

@@ -1,8 +1,9 @@
 {
   "meta": {
-    "last_updated": "2026-11-06",
-    "description": "美元。文本模型为美元 / 每百万 token；图像与视频生成模型（modality = image / video）的价格见 media_pricing：按张（尺寸×质量）、按秒（分辨率×是否含音频）以及分模态 token 价。官方价格与用户确认参照价明确区分，参照依据见 price_basis。null 不代表零；状态与计费规则见各结构化字段。",
-    "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3、4 系列最新；MiniMax 3 系列；xAI Grok 4.7；Grok Build Fast 单独作为订阅渠道参照价收录。 图像与视频生成（仅最新一代）：OpenAI GPT Image 2.5；xAI Grok Imagine Image 2.0、Video 1.5 / 1.5 Lite；Google Nano Banana 2.1 / 2 Lite / Pro 与 Gemini Omni 1.1 Flash（Veo 已停服）；阿里云 Qwen-Image 3.0、Wan 2.7 Image、Wan 3.0 Video；MiniMax H3 系列与 image-01；智谱 GLM-Image。"
+    "last_updated": "2026-11-17",
+    "description": "按 model.currency 标明 USD 或 CNY，禁止跨币种直接比较或汇总，不做换汇。文本每百万 token；媒体见 media_pricing。2026-11-17仅核实本轮修改项及部分旧价，其余保留原核实日期，不代表全量复核。null不是0。v1保持美元，v2显式支持多币种。",
+    "scope": "仅收录最新模型：DeepSeek V4；OpenAI GPT-5.6 及以后；Claude 4.6 及以后；智谱 GLM-5.2 及以后；Kimi 2.7 及以后；Qwen 3.7 及以后；Gemini 3、4 系列最新；MiniMax 3 系列；xAI Grok 4.7；Grok Build Fast 单独作为订阅渠道参照价收录。 图像与视频生成（仅最新一代）：OpenAI GPT Image 2.5；xAI Grok Imagine Image 2.0、Video 1.5 / 1.5 Lite；Google Nano Banana 2.1 / 2 Lite / Pro 与 Gemini Omni 1.1 Flash（Veo 已停服）；阿里云 Qwen-Image 3.0、Wan 2.7 Image、Wan 3.0 Video；MiniMax H3 系列与 image-01；智谱 GLM-Image。 腾讯 TokenHub 广州 Hy4 系列（CNY），Qwen4-Max 新加坡（USD）；本轮不扩展其他渠道。",
+    "availability_as_of": "2026-11-17T20:26:37+08:00"
   },
   "vendors": [
     "DeepSeek",
@@ -13,7 +14,8 @@
     "阿里云 Qwen",
     "Google Gemini",
     "MiniMax",
-    "xAI"
+    "xAI",
+    "腾讯混元"
   ],
   "vendor_billing": {
     "DeepSeek": {
@@ -42,6 +44,9 @@
     },
     "xAI": {
       "cache_write_billed": false
+    },
+    "腾讯混元": {
+      "cache_write_billed": true
     }
   },
   "models": [
@@ -263,8 +268,8 @@
         "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
-      "last_updated": "2026-10-21",
-      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价至少持续到 2026-11-21。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $10.0（长上下文 $20.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
+      "last_updated": "2026-11-17",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价持续到 2026-11-30（原文 until November 30, 2026；具体时刻和时区未给出，不自动涨价）。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $10.0（长上下文 $20.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "unverified_fields": [],
       "id": "m03",
       "reasoning_effort": {
@@ -412,17 +417,19 @@
         {
           "kind": "promotion",
           "effective_from": null,
-          "effective_until": "2026-11-21",
+          "effective_until": "2026-11-30",
           "input": 4.0,
           "output": 20.0,
           "cached_input": 0.4,
           "cache_write": 5.0,
-          "note": "GPT-5.6 Sol 促销价（输入 $4 / 输出 $20，较此前降 20% / 33%）官方称“至少持续到 2026-11-21”；到期后价格官方未公布（待核实）。",
+          "note": "GPT-5.6 Sol 促销价官方称 available until November 30, 2026；仅日期，具体时刻/时区及后续价未知，不自动推算终止时刻或涨价。",
           "multiplier": null,
           "cache_pricing": {},
           "sources": [
             "https://developers.openai.com/api/docs/pricing"
-          ]
+          ],
+          "effective_until_precision": "date",
+          "effective_until_timezone": null
         }
       ],
       "price_basis": {
@@ -7898,6 +7905,384 @@
         "billing_note": "官方为统一单张价。",
         "sources": [
           "https://docs.z.ai/guides/overview/pricing"
+        ]
+      }
+    },
+    {
+      "vendor": "阿里云 Qwen",
+      "model": "Qwen4-Max",
+      "model_id": "qwen4-max",
+      "modality": "text",
+      "currency": "USD",
+      "input": 1.5,
+      "output": 4.5,
+      "cached_input": null,
+      "cache_write": null,
+      "peak_note": null,
+      "offpeak": null,
+      "context_length": "≤1M 输入（计费档位上限）",
+      "context_tokens": 1000000,
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max",
+      "extra_sources": [],
+      "last_updated": "2026-11-17",
+      "notes": "百炼国际站新加坡普通文本输入/输出美元价，0<Token≤1M；不覆盖图片、视频、工具费。缓存表提取粘连，未确认的缓存价不填0、不套其它Qwen规则。输出/输入上限依思考模式而异，试算采用两种模式都安全的保守上限，见 estimation_limits。",
+      "unverified_fields": [
+        "cached_input",
+        "cache_write",
+        "limits.max_output_tokens"
+      ],
+      "id": "m72",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "xhigh"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "note": "模型页列low/high/xhigh，默认high；enable_thinking=false可关闭。",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+        ]
+      },
+      "limits": {
+        "context_length": 1000000,
+        "max_output_tokens": null,
+        "note": "上下文1,000,000；思考输入983,616/输出262,144，非思考输入991,808/输出131,072；当前schema不混合宣称一个模式无关最大输出。",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "隐式/显式缓存命中和写入均待核实；非零缓存用量拒绝试算，不回退普通输入价。"
+      },
+      "price_schedule": [],
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "unspecified",
+        "note": "新加坡普通文本按量价；缓存、工具、媒体与Batch不在已核估价范围。"
+      },
+      "off_peak_schedule": null,
+      "estimation_limits": {
+        "max_input_tokens": 983616,
+        "max_output_tokens": 131072,
+        "note": "只支持保守的普通文本试算，取两种模式均支持的输入/输出上限；超出需指定模式另核。",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+        ]
+      }
+    },
+    {
+      "vendor": "腾讯混元",
+      "model": "Hy4 flash",
+      "model_id": "hy4-flash",
+      "modality": "text",
+      "currency": "CNY",
+      "input": 0.5,
+      "output": 2,
+      "cached_input": 0.02,
+      "cache_write": null,
+      "peak_note": null,
+      "offpeak": null,
+      "context_length": "1M",
+      "context_tokens": 1000000,
+      "source_url": "https://cloud.tencent.com/document/product/1823/130055",
+      "extra_sources": [
+        "https://cloud.tencent.com/document/product/1823/130051"
+      ],
+      "last_updated": "2026-11-17",
+      "notes": "腾讯云TokenHub广州后付费目录价，人民币/百万token，不换汇。缓存写入表为“-”，未核实，不按零收费。官方明确五折，限本轮观测之后、精确截止前后按token_offer计算；表内保留目录价。",
+      "unverified_fields": [
+        "cache_write",
+        "reasoning_effort.supported",
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "id": "m73",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "note": "目录列深度思考，但可调强度、默认值与关闭方式本轮未核，不借用Qwen配置。",
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ]
+      },
+      "limits": {
+        "context_length": 1000000,
+        "max_output_tokens": 64000,
+        "note": "官方目录1M上下文/960k最大输入/64k最大输出，k按千token；只估普通文本，不估图片输入。",
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "表列缓存命中价；缓存写入为“-”且无不收费声明，保留未知，非零写入试算拒绝。"
+      },
+      "price_schedule": [],
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130055",
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ],
+        "note": "官方广州目录价；若有折扣在token_offer单列，不预先折算主价格。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": "Guangzhou (TokenHub)",
+        "cached_input_type": "unspecified",
+        "note": "广州目录CNY报价；不含税费/工具费/媒体，未取证其他地域。"
+      },
+      "off_peak_schedule": null,
+      "estimation_limits": {
+        "max_input_tokens": 960000,
+        "max_output_tokens": 64000,
+        "note": "广州TokenHub普通文本，图片与其它媒体不在试算范围。",
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ]
+      },
+      "token_offer": {
+        "observed_at": "2026-11-17T20:19:21.624057+08:00",
+        "valid_until": "2026-11-30T12:00:00+08:00",
+        "multiplier": 0.5,
+        "fields": [
+          "input",
+          "output",
+          "cached_input"
+        ],
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130055"
+        ],
+        "note": "官方至该北京时间按目录价50%结算，截止瞬间按包含端点处理，之后恢复目录价。observed_at仅本轮观察时间，不假定官方未知起点，也不提供此前历史优惠试算。"
+      }
+    },
+    {
+      "vendor": "腾讯混元",
+      "model": "Hy4",
+      "model_id": "hy4",
+      "modality": "text",
+      "currency": "CNY",
+      "input": 6,
+      "output": 18,
+      "cached_input": 0.3,
+      "cache_write": null,
+      "peak_note": null,
+      "offpeak": null,
+      "context_length": "1M",
+      "context_tokens": 1000000,
+      "source_url": "https://cloud.tencent.com/document/product/1823/130055",
+      "extra_sources": [
+        "https://cloud.tencent.com/document/product/1823/130051"
+      ],
+      "last_updated": "2026-11-17",
+      "notes": "腾讯云TokenHub广州后付费目录价，人民币/百万token，不换汇。缓存写入表为“-”，未核实，不按零收费。官方明确五折，限本轮观测之后、精确截止前后按token_offer计算；表内保留目录价。",
+      "unverified_fields": [
+        "cache_write",
+        "reasoning_effort.supported",
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "id": "m74",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "note": "目录列深度思考，但可调强度、默认值与关闭方式本轮未核，不借用Qwen配置。",
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ]
+      },
+      "limits": {
+        "context_length": 1000000,
+        "max_output_tokens": 64000,
+        "note": "官方目录1M上下文/960k最大输入/64k最大输出，k按千token；只估普通文本，不估图片输入。",
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "表列缓存命中价；缓存写入为“-”且无不收费声明，保留未知，非零写入试算拒绝。"
+      },
+      "price_schedule": [],
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130055",
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ],
+        "note": "官方广州目录价；若有折扣在token_offer单列，不预先折算主价格。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": "Guangzhou (TokenHub)",
+        "cached_input_type": "unspecified",
+        "note": "广州目录CNY报价；不含税费/工具费/媒体，未取证其他地域。"
+      },
+      "off_peak_schedule": null,
+      "estimation_limits": {
+        "max_input_tokens": 960000,
+        "max_output_tokens": 64000,
+        "note": "广州TokenHub普通文本，图片与其它媒体不在试算范围。",
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ]
+      },
+      "token_offer": {
+        "observed_at": "2026-11-17T20:19:21.624057+08:00",
+        "valid_until": "2026-12-31T23:59:59+08:00",
+        "multiplier": 0.5,
+        "fields": [
+          "input",
+          "output",
+          "cached_input"
+        ],
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130055"
+        ],
+        "note": "官方至该北京时间按目录价50%结算，截止瞬间按包含端点处理，之后恢复目录价。observed_at仅本轮观察时间，不假定官方未知起点，也不提供此前历史优惠试算。"
+      }
+    },
+    {
+      "vendor": "腾讯混元",
+      "model": "Hy4 preview",
+      "model_id": "hy4-preview",
+      "modality": "text",
+      "currency": "CNY",
+      "input": 6,
+      "output": 18,
+      "cached_input": 0.3,
+      "cache_write": null,
+      "peak_note": null,
+      "offpeak": null,
+      "context_length": "1M",
+      "context_tokens": 1000000,
+      "source_url": "https://cloud.tencent.com/document/product/1823/130055",
+      "extra_sources": [
+        "https://cloud.tencent.com/document/product/1823/130051"
+      ],
+      "last_updated": "2026-11-17",
+      "notes": "腾讯云TokenHub广州后付费目录价，人民币/百万token，不换汇。缓存写入表为“-”，未核实，不按零收费。不将Hy4或flash折扣套用到preview；官方退役仅给日期，时刻/时区待确认。",
+      "unverified_fields": [
+        "cache_write",
+        "reasoning_effort.supported",
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "id": "m75",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "note": "目录列深度思考，但可调强度、默认值与关闭方式本轮未核，不借用Qwen配置。",
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ]
+      },
+      "limits": {
+        "context_length": 1000000,
+        "max_output_tokens": 64000,
+        "note": "官方目录1M上下文/960k最大输入/64k最大输出，k按千token；只估普通文本，不估图片输入。",
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "表列缓存命中价；缓存写入为“-”且无不收费声明，保留未知，非零写入试算拒绝。"
+      },
+      "price_schedule": [],
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130055",
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ],
+        "note": "官方广州目录价；若有折扣在token_offer单列，不预先折算主价格。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": "Guangzhou (TokenHub)",
+        "cached_input_type": "unspecified",
+        "note": "广州目录CNY报价；不含税费/工具费/媒体，未取证其他地域。"
+      },
+      "off_peak_schedule": null,
+      "estimation_limits": {
+        "max_input_tokens": 960000,
+        "max_output_tokens": 64000,
+        "note": "广州TokenHub普通文本，图片与其它媒体不在试算范围。",
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130051"
+        ]
+      },
+      "lifecycle": {
+        "status": "pending_confirmation",
+        "retired_at": null,
+        "retirement_date": "2026-12-07",
+        "timezone": null,
+        "precision": "date",
+        "original_text": "Hy4 preview（2026-12-07下线）",
+        "scope": "endpoint",
+        "routes_to": null,
+        "conflict": false,
+        "note": "官方仅给退役日期；具体时刻/时区未明，不补零点，不自动下线，不视为确定可用。",
+        "sources": [
+          "https://cloud.tencent.com/document/product/1823/130051"
         ]
       }
     }

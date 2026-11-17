@@ -19,7 +19,7 @@
       <a href="api.html" aria-current="page">接口文档</a>
     </nav>
     <div class="header-actions">
-      <a class="icon-btn" href="api/v1/models.json" title="JSON 数据" aria-label="JSON 数据"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1"/></svg></a>
+      <a class="icon-btn" href="api/v2/models.json" title="JSON 数据" aria-label="JSON 数据"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1"/></svg></a>
       <button class="icon-btn theme-toggle" type="button" aria-label="切换深浅色模式" title="切换深浅色模式">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -31,13 +31,14 @@
 <main>
   <section class="hero">
     <div class="wrap">
+      <p>本页显式使用多币种 <code>api/v2/</code>；旧 <code>api/v1/</code> 保持USD兼容。报价必须检查 currency，不得跨币种直接排序或相加。</p>
       <span class="eyebrow"><span class="dot" aria-hidden="true"></span>只读 · 静态 JSON · 支持跨域 · 无需密钥</span>
       <h1>公开查询 <span class="grad">接口文档</span></h1>
-      <p class="sub">GitHub Pages 无法运行服务端，因此接口以<strong>预生成的静态 JSON 文件</strong>提供：直接 <code>GET</code> 对应 URL 即可。token 价格为<strong>美元 / 每 100 万 token</strong>；缓存存储单独按百万 token·小时计价。</p>
+      <p class="sub">GitHub Pages 无法运行服务端，因此接口以<strong>预生成的静态 JSON 文件</strong>提供：直接 <code>GET</code> 对应 URL 即可。token 价格为<strong>model.currency / 每 100 万 token</strong>；缓存存储单独按百万 token·小时计价。</p>
       <div class="hero-cta">
         <a class="btn primary" href="#try">在线试用</a>
-        <a class="btn" href="api/v1/openapi.json">OpenAPI 3.1 描述</a>
-        <a class="btn" href="api/v1/models.json">models.json</a>
+        <a class="btn" href="api/v2/openapi.json">OpenAPI 3.1 描述</a>
+        <a class="btn" href="api/v2/models.json">models.json</a>
       </div>
     </div>
   </section>
@@ -56,9 +57,9 @@
     <div>
       <section id="base">
         <h2>基础地址</h2>
-        <p>所有接口位于站点下的 <code>api/v1/</code>。当前页面对应的基础地址：</p>
-        <div class="code"><button type="button" class="btn sm copy" data-copy-target="baseUrl">复制</button><pre id="baseUrl">api/v1/</pre></div>
-        <p>部署到 GitHub Pages 后通常为 <code>https://&lt;用户名&gt;.github.io/&lt;仓库名&gt;/api/v1/</code>。</p>
+        <p>所有接口位于站点下的 <code>api/v2/</code>。当前页面对应的基础地址：</p>
+        <div class="code"><button type="button" class="btn sm copy" data-copy-target="baseUrl">复制</button><pre id="baseUrl">api/v2/</pre></div>
+        <p>部署到 GitHub Pages 后通常为 <code>https://&lt;用户名&gt;.github.io/&lt;仓库名&gt;/api/v2/</code>。</p>
       </section>
 
       <section id="endpoints">
@@ -67,14 +68,14 @@
           <table class="endpoints">
             <thead><tr><th>路径</th><th>说明</th></tr></thead>
             <tbody>
-              <tr><td><span class="method">GET</span><a class="path" href="api/v1/index.json">/index.json</a></td><td>轻量索引：接口路径、模型 ID 和厂商 slug；路径均相对于 api/v1/</td></tr>
-              <tr><td><span class="method">GET</span><a class="path" href="api/v1/models.json">/models.json</a></td><td>全部模型（文本 + 图像 + 视频）；<code>meta</code> 含 <code>updated_at</code>、<code>currency</code>、<code>unit</code>、<code>count</code>、<code>modality_counts</code></td></tr>
-              <tr><td><span class="method">GET</span><a class="path" href="api/v1/modalities.json">/modalities.json</a></td><td>模态列表（<code>text</code> / <code>image</code> / <code>video</code>）：各模态模型数、模型 ID 与厂商</td></tr>
-              <tr><td><span class="method">GET</span><span class="path">/modalities/<b>{modality}</b>.json</span></td><td>某一模态的全部模型（完整 Model 对象），如 <a href="api/v1/modalities/image.json"><code>modalities/image.json</code></a>、<a href="api/v1/modalities/video.json"><code>modalities/video.json</code></a>、<a href="api/v1/modalities/text.json"><code>modalities/text.json</code></a></td></tr>
-              <tr><td><span class="method">GET</span><span class="path">/models/<b>{model_id}</b>.json</span></td><td>单个模型，如 <a href="api/v1/models/deepseek-flash.json"><code>models/deepseek-flash.json</code></a></td></tr>
-              <tr><td><span class="method">GET</span><a class="path" href="api/v1/vendors.json">/vendors.json</a></td><td>全部厂商，含模型数、模型 ID 列表、官方来源</td></tr>
-              <tr><td><span class="method">GET</span><span class="path">/vendors/<b>{vendor}</b>.json</span></td><td>单个厂商及其全部模型，如 <a href="api/v1/vendors/openai.json"><code>vendors/openai.json</code></a></td></tr>
-              <tr><td><span class="method">GET</span><a class="path" href="api/v1/openapi.json">/openapi.json</a></td><td>OpenAPI 3.1 描述（可导入 Swagger UI / Postman）</td></tr>
+              <tr><td><span class="method">GET</span><a class="path" href="api/v2/index.json">/index.json</a></td><td>轻量索引：接口路径、模型 ID 和厂商 slug；路径均相对于 api/v2/</td></tr>
+              <tr><td><span class="method">GET</span><a class="path" href="api/v2/models.json">/models.json</a></td><td>全部模型（文本 + 图像 + 视频）；<code>meta</code> 含 <code>updated_at</code>、<code>currency</code>、<code>unit</code>、<code>count</code>、<code>modality_counts</code></td></tr>
+              <tr><td><span class="method">GET</span><a class="path" href="api/v2/modalities.json">/modalities.json</a></td><td>模态列表（<code>text</code> / <code>image</code> / <code>video</code>）：各模态模型数、模型 ID 与厂商</td></tr>
+              <tr><td><span class="method">GET</span><span class="path">/modalities/<b>{modality}</b>.json</span></td><td>某一模态的全部模型（完整 Model 对象），如 <a href="api/v2/modalities/image.json"><code>modalities/image.json</code></a>、<a href="api/v2/modalities/video.json"><code>modalities/video.json</code></a>、<a href="api/v2/modalities/text.json"><code>modalities/text.json</code></a></td></tr>
+              <tr><td><span class="method">GET</span><span class="path">/models/<b>{model_id}</b>.json</span></td><td>单个模型，如 <a href="api/v2/models/deepseek-flash.json"><code>models/deepseek-flash.json</code></a></td></tr>
+              <tr><td><span class="method">GET</span><a class="path" href="api/v2/vendors.json">/vendors.json</a></td><td>全部厂商，含模型数、模型 ID 列表、官方来源</td></tr>
+              <tr><td><span class="method">GET</span><span class="path">/vendors/<b>{vendor}</b>.json</span></td><td>单个厂商及其全部模型，如 <a href="api/v2/vendors/openai.json"><code>vendors/openai.json</code></a></td></tr>
+              <tr><td><span class="method">GET</span><a class="path" href="api/v2/openapi.json">/openapi.json</a></td><td>OpenAPI 3.1 描述（可导入 Swagger UI / Postman）</td></tr>
             </tbody>
           </table>
         </div>
@@ -87,8 +88,8 @@
         <h2>数据结构</h2>
         <p>每个响应都是同一个外层结构：</p>
         <div class="code"><pre>{
-  <span class="tok-k">"api_version"</span>: <span class="tok-s">"v1"</span>,
-  <span class="tok-k">"meta"</span>: { <span class="tok-k">"updated_at"</span>: <span class="tok-s">"YYYY-MM-DD"</span>, <span class="tok-k">"data_version"</span>: <span class="tok-s">"源数据 SHA-256"</span>, <span class="tok-k">"currency"</span>: <span class="tok-s">"USD"</span>, <span class="tok-k">"unit"</span>: <span class="tok-s">"per_1M_tokens"</span>, <span class="tok-k">"unit_label"</span>: <span class="tok-s">"USD per 1M tokens"</span>, <span class="tok-k">"count"</span>: <span class="tok-n">71</span>, <span class="tok-k">"modality_counts"</span>: { <span class="tok-k">"text"</span>: <span class="tok-n">50</span>, <span class="tok-k">"image"</span>: <span class="tok-n">12</span>, <span class="tok-k">"video"</span>: <span class="tok-n">9</span> } },
+  <span class="tok-k">"api_version"</span>: <span class="tok-s">"v2"</span>,
+  <span class="tok-k">"meta"</span>: { <span class="tok-k">"updated_at"</span>: <span class="tok-s">"YYYY-MM-DD"</span>, <span class="tok-k">"data_version"</span>: <span class="tok-s">"源数据 SHA-256"</span>, <span class="tok-k">"currency"</span>: <span class="tok-s">"mixed"</span>, <span class="tok-k">"unit"</span>: <span class="tok-s">"per_1M_tokens"</span>, <span class="tok-k">"unit_label"</span>: <span class="tok-s">"USD per 1M tokens"</span>, <span class="tok-k">"count"</span>: <span class="tok-n">71</span>, <span class="tok-k">"modality_counts"</span>: { <span class="tok-k">"text"</span>: <span class="tok-n">50</span>, <span class="tok-k">"image"</span>: <span class="tok-n">12</span>, <span class="tok-k">"video"</span>: <span class="tok-n">9</span> } },
   <span class="tok-k">"data"</span>: [ <span class="tok-c">/* Model[] | Vendor[] | Model */</span> ]
 }</pre></div>
         <p><code>meta.unit</code> / <code>unit_label</code> 描述文本模型（每 100 万 token）；图像 / 视频模型的计价单位见各自 <code>media_pricing</code>（模型对象的 <code>unit</code> 为 <code>see_media_pricing</code>）。<code>modalities/{modality}.json</code> 额外包含 <code>modality</code> 对象（<code>name</code>、<code>label</code>、<code>model_count</code>、<code>model_ids</code>、<code>vendors</code>、<code>links</code>）；<code>vendors/{vendor}.json</code> 额外包含 <code>vendor</code> 对象；<code>models/{id}.json</code> 的 <code>data</code> 是单个对象，<code>meta</code> 无 <code>count</code>。</p>
@@ -101,16 +102,16 @@
 <tr><td>name</td><td>string</td><td>展示名称</td></tr>
 <tr><td>vendor</td><td>string</td><td>厂商 slug：deepseek / openai / anthropic / zhipu / moonshot / qwen / google / minimax / xai</td></tr>
 <tr><td>vendor_name</td><td>string</td><td>厂商展示名（中文）</td></tr>
-<tr><td>currency</td><td>"USD"</td><td>币种，固定为 USD</td></tr>
+<tr><td>currency</td><td>"USD" | "CNY"</td><td>单模型币种；v2按currency隔离，v1仅USD</td></tr>
 <tr><td>modality</td><td>"text" | "image" | "video"</td><td>模型模态：文本（token 计价）/ 图像生成 / 视频生成。所有模型都有该字段，原有模型均为 <code>text</code></td></tr>
 <tr><td>unit</td><td>"per_1M_tokens" | "see_media_pricing"</td><td>文本模型固定为每 100 万 token；图像 / 视频模型为 <code>see_media_pricing</code>，价格见 <code>media_pricing</code></td></tr>
 <tr><td>media_pricing</td><td>object | null</td><td>图像 / 视频模型的结构化价格；文本模型为 <code>null</code>。此时 <code>pricing.*</code> 全为 null、<code>pricing_status.*</code> 为 <code>not_applicable</code>，<code>limits</code> / <code>reasoning_effort</code> 为 <code>not_applicable</code></td></tr>
 <tr><td>media_pricing.output_kind</td><td>"image" | "video"</td><td>与 <code>modality</code> 一致</td></tr>
 <tr><td>media_pricing.billing_methods</td><td>string[]</td><td>计费方式：<code>token</code>（分模态 token 价）· <code>per_image</code>（按张）· <code>per_second</code>（按秒）；与下面的数据一一对应</td></tr>
-<tr><td>media_pricing.image_prices[]</td><td>array</td><td>按张价格（USD / 张）。元素：<code>tier</code>（standard / batch）、<code>size</code>（<code>0.5k</code> / <code>1k</code> / <code>1.5k</code> / <code>2k</code> / <code>4k</code> 等档位；<code>any</code> = 不分尺寸统一价）、<code>quality</code>（如 low / medium；无则 null）、<code>price</code>（官方未列则 null，并列入 <code>unverified_fields</code>）、<code>tokens</code>（官方折算用的输出 token 数，可为 null）、<code>basis</code>（<code>listed</code> 官方直接标价 · <code>token_equivalent</code> 官方按 token 价折算的每张价格）、<code>note</code></td></tr>
-<tr><td>media_pricing.video_prices[]</td><td>array</td><td>按秒价格（USD / 秒）。元素：<code>tier</code>、<code>resolution</code>（480p / 720p / 1080p / 2k / 4k 等）、<code>audio</code>（<code>with_audio</code> / <code>without_audio</code> / <code>any</code> = 官方未区分）、<code>price_per_second</code>（未列则 null）、<code>tokens_per_second</code>、<code>input_video_price_per_second</code>（输入视频按秒计费时）、<code>basis</code>（listed / token_equivalent / <code>approximate</code> 官方近似值）、<code>note</code></td></tr>
-<tr><td>media_pricing.token_pricing</td><td>object | null</td><td>分模态 token 价（USD / 百万 token）<code>{unit, standard, batch, priority}</code>；每档含 <code>text_input</code>、<code>text_cached_input</code>、<code>text_output</code>、<code>image_input</code>、<code>image_cached_input</code>、<code>image_output</code>、<code>video_input</code>、<code>video_output</code>、<code>audio_input</code>（官方未列的项为 null）。该档不存在时为 null</td></tr>
-<tr><td>media_pricing.input_image_price / input_image_price_batch</td><td>number | null</td><td>每张输入（参考）图片的价格（USD / 张）</td></tr>
+<tr><td>media_pricing.image_prices[]</td><td>array</td><td>按张价格（model.currency / 张）。元素：<code>tier</code>（standard / batch）、<code>size</code>（<code>0.5k</code> / <code>1k</code> / <code>1.5k</code> / <code>2k</code> / <code>4k</code> 等档位；<code>any</code> = 不分尺寸统一价）、<code>quality</code>（如 low / medium；无则 null）、<code>price</code>（官方未列则 null，并列入 <code>unverified_fields</code>）、<code>tokens</code>（官方折算用的输出 token 数，可为 null）、<code>basis</code>（<code>listed</code> 官方直接标价 · <code>token_equivalent</code> 官方按 token 价折算的每张价格）、<code>note</code></td></tr>
+<tr><td>media_pricing.video_prices[]</td><td>array</td><td>按秒价格（model.currency / 秒）。元素：<code>tier</code>、<code>resolution</code>（480p / 720p / 1080p / 2k / 4k 等）、<code>audio</code>（<code>with_audio</code> / <code>without_audio</code> / <code>any</code> = 官方未区分）、<code>price_per_second</code>（未列则 null）、<code>tokens_per_second</code>、<code>input_video_price_per_second</code>（输入视频按秒计费时）、<code>basis</code>（listed / token_equivalent / <code>approximate</code> 官方近似值）、<code>note</code></td></tr>
+<tr><td>media_pricing.token_pricing</td><td>object | null</td><td>分模态 token 价（model.currency / 百万 token）<code>{unit, standard, batch, priority}</code>；每档含 <code>text_input</code>、<code>text_cached_input</code>、<code>text_output</code>、<code>image_input</code>、<code>image_cached_input</code>、<code>image_output</code>、<code>video_input</code>、<code>video_output</code>、<code>audio_input</code>（官方未列的项为 null）。该档不存在时为 null</td></tr>
+<tr><td>media_pricing.input_image_price / input_image_price_batch</td><td>number | null</td><td>每张输入（参考）图片的价格（model.currency / 张）</td></tr>
 <tr><td>media_pricing.batch_supported</td><td>boolean | null</td><td>是否支持 Batch；<code>null</code> = 官方未说明</td></tr>
 <tr><td>media_pricing.promotion</td><td>object | null</td><td>官方限时促销 <code>{discount_percent, effective_until, note}</code>。价格表记录的是原价，促销折扣<strong>不会</strong>计入价格字段，<code>effective_until</code> 官方未给时为 null</td></tr>
 <tr><td>media_pricing.billing_note / sources</td><td>string | null / string[]</td><td>计费口径说明与官方来源 URL</td></tr>
@@ -151,11 +152,11 @@
 <tr><td>reasoning_effort.field_status</td><td>object</td><td>supported/levels/default/can_disable 的字段级状态：verified/unverified/not_applicable。整体存在未核实项时为 partial</td></tr>
 <tr><td>meta.data_version</td><td>string</td><td>源数据内容的 SHA-256；同一快照所有接口一致，可用于识别数据变更</td></tr>
 <tr><td>unverified_fields</td><td>string[]</td><td>待核实字段列表</td></tr>
-<tr><td>links.self / links.vendor</td><td>string</td><td>相对于 <code>api/v1/</code> 的文件路径</td></tr>
+<tr><td>links.self / links.vendor</td><td>string</td><td>相对于 <code>api/v2/</code> 的文件路径</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="callout">稳定性约定：<code>v1</code> 已于 2026-10-11 精简：移除 <code>max_input_tokens</code>、思考模式最大输入/输出等子上限、<code>modalities</code>、<code>features</code>、<code>knowledge_cutoff</code>、<code>thinking_budget</code>、<code>availability</code>、<code>snapshot</code>、<code>aliases</code>；之后 <code>v1</code> 内只会新增字段，不会删除或改名已有字段；价格为 <code>null</code> 时请看 <code>pricing_status</code> 区分“待核实”与“官方未列出”；推理字段的 <code>null</code> 可能为不适用或待核实，以 <code>field_status</code> 为准；<code>limits</code> 的 <code>null</code> 表示待核实；<code>pricing_tiers</code>、<code>service_tiers</code>、<code>price_schedule</code> 为空数组表示无或官方未列出。参照价格新增 <code>reference</code> 状态；不要将 <code>null</code> 当作零。2026-10-29 新增图像 / 视频模型：新增 <code>modality</code>、<code>media_pricing</code> 字段和 <code>modalities</code> 接口，均为向后兼容的新增；文本模型的原有字段不变。图像 / 视频模型的 <code>pricing.*</code> 为 <code>null</code>（状态 <code>not_applicable</code>），请先按 <code>modality</code> 过滤再读取 <code>pricing</code>，或读取 <code>modalities/text.json</code>。网站上展示的每一项数据（含“详情”展开行）均可在对应模型 JSON 中查询。</div>
+        <div class="callout">本轮增补 lifecycle/availability、token_offer、estimation_limits 仅用于价格有效性和安全试算；v1仍仅USD，v2显式多币种。原精简约定：<code>v1</code> 已于 2026-10-11 精简：移除 <code>max_input_tokens</code>、思考模式最大输入/输出等子上限、<code>modalities</code>、<code>features</code>、<code>knowledge_cutoff</code>、<code>thinking_budget</code>、<code>snapshot</code>、<code>aliases</code>；之后 <code>v1</code> 内只会新增字段，不会删除或改名已有字段；价格为 <code>null</code> 时请看 <code>pricing_status</code> 区分“待核实”与“官方未列出”；推理字段的 <code>null</code> 可能为不适用或待核实，以 <code>field_status</code> 为准；<code>limits</code> 的 <code>null</code> 表示待核实；<code>pricing_tiers</code>、<code>service_tiers</code>、<code>price_schedule</code> 为空数组表示无或官方未列出。参照价格新增 <code>reference</code> 状态；不要将 <code>null</code> 当作零。2026-10-29 新增图像 / 视频模型：新增 <code>modality</code>、<code>media_pricing</code> 字段和 <code>modalities</code> 接口，均为向后兼容的新增；文本模型的原有字段不变。图像 / 视频模型的 <code>pricing.*</code> 为 <code>null</code>（状态 <code>not_applicable</code>），请先按 <code>modality</code> 过滤再读取 <code>pricing</code>，或读取 <code>modalities/text.json</code>。网站上展示的每一项数据（含“详情”展开行）均可在对应模型 JSON 中查询。</div>
       </section>
 
       <section id="examples">
@@ -224,7 +225,7 @@
           <p id="costStatus" role="status" aria-live="polite">加载模型列表…</p>
           <div class="code"><pre id="costOut">填写用量后查看费用明细。</pre></div>
         </form>
-        <p>JavaScript：加载 <a href="assets/client.js">assets/client.js</a> 后使用 <code>LLMPrice.createClient(baseUrl)</code>；Node.js 18+ 可直接 <code>require("./assets/client.js")</code>。错误带稳定的 <code>code</code>，包括 NOT_FOUND、TIMEOUT、UNSUPPORTED_MODALITY、PRICE_UNAVAILABLE、PRICE_EXPIRED、HOLIDAY_REQUIRED 等。</p>
+        <p>JavaScript：先加载 <code>assets/availability.js</code>，再加载 <a href="assets/client.js">assets/client.js</a> 后使用 <code>LLMPrice.createClient(baseUrl)</code>；Node.js 18+ 可直接 <code>require("./assets/client.js")</code>。错误带稳定的 <code>code</code>，包括 NOT_FOUND、TIMEOUT、UNSUPPORTED_MODALITY、PRICE_UNAVAILABLE、PRICE_EXPIRED、HOLIDAY_REQUIRED 等。</p>
       </section>
 
       <section id="cors">
@@ -235,9 +236,9 @@
 
       <section id="update">
         <h2>数据更新（维护者）</h2>
-        <p>接口文件由 <code>scripts/build_api.py</code> 从 <code>data/prices.json</code> 生成，<strong>修改数据后务必重新生成</strong>：</p>
-        <div class="code"><pre>.venv/bin/python scripts/build_api.py      <span class="tok-c"># 重新生成 api/v1/</span>
-.venv/bin/python scripts/validate.py       <span class="tok-c"># 校验数据，并检查 api/v1/ 与数据是否同步</span></pre></div>
+        <p>接口文件由 <code>scripts/build_api.py</code> 从 <code>data/page-models.json</code> 生成，<strong>修改数据后务必重新生成</strong>：</p>
+        <div class="code"><pre>.venv/bin/python scripts/build_api.py      <span class="tok-c"># 重新生成 api/v2/</span>
+.venv/bin/python scripts/validate.py       <span class="tok-c"># 校验数据，并检查 api/v2/ 与数据是否同步</span></pre></div>
         <p>生成结果是确定性的（不含生成时间戳），<code>validate.py</code> 会逐个比对文件，发现缺失、过期或多余文件即报错。</p>
       </section>
     </div>
@@ -248,16 +249,17 @@
   <div class="wrap">
     <div>
       <h3>关于数据</h3>
-      <p>官方报价和用户确认参照价分别标注来源，统一为美元 / 每 100 万 token。价格可能随时调整，请以官方页面为准。</p>
+      <p>官方报价和用户确认参照价分别标注来源，按币种分别显示 / 每 100 万 token，不换汇。价格可能随时调整，请以官方页面为准。</p>
       <p>数据更新：<span id="footUpdated">—</span> · <a href="./">返回价格表</a></p>
     </div>
     <div>
       <h3>接口</h3>
-      <p><a href="api/v1/models.json">models.json</a> · <a href="api/v1/vendors.json">vendors.json</a> · <a href="api/v1/openapi.json">openapi.json</a> · 原始数据 <a href="data/prices.json">data/prices.json</a></p>
+      <p><a href="api/v2/models.json">models.json</a> · <a href="api/v2/vendors.json">vendors.json</a> · <a href="api/v2/openapi.json">openapi.json</a> · 页面快照 <a href="data/page-models.json">data/page-models.json</a></p>
       <p>只读、免费、无需密钥，欢迎引用；请注明数据来源并以官方页面为准。</p>
     </div>
   </div>
 </footer>
+<script src="assets/availability.js"></script>
 <script src="assets/common.js"></script>
 <script src="assets/client.js"></script>
 <script src="assets/api.js"></script>

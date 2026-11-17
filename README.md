@@ -2,7 +2,7 @@
 
 中文静态站点，直接部署到 GitHub Pages；运行时只有 HTML、CSS 和 JavaScript，无后端、数据库或第三方运行依赖。
 
-覆盖 9 个厂商、71 个模型（文本 50、图像生成 12、视频生成 9），统一美元：文本模型按每百万 token（缓存存储另按百万 token·小时计价），图像按张 / 按 token，视频按秒 / 按 token。价格表支持“文本 / 图像 / 视频”分页签、主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
+覆盖 10 个厂商、75 个模型（文本 54、图像生成 12、视频生成 9），按 USD / CNY 单币种隔离：文本模型按所示币种每百万 token（缓存存储另按百万 token·小时计价），图像按张 / 按 token，视频按秒 / 按 token。价格表支持“文本 / 图像 / 视频”分页签、主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
 
 ## 本地预览
 
@@ -48,7 +48,7 @@ GitHub Pages 当前返回 `Access-Control-Allow-Origin: *`，支持跨域 fetch�
 
 ## 自然调用：轻量 JavaScript 客户端
 
-HTML 加载 `assets/client.js`，全局对象为 `LLMPrice`。Node.js 18+ 可通过 `require` 使用同一文件，无 npm 安装步骤。
+HTML 先加载 `assets/availability.js` 再加载 `assets/client.js`，全局对象为 `LLMPrice`。Node.js 18+ 可通过 `require` 使用同一文件，无 npm 安装步骤。
 
 ```js
 const { createClient, estimate, estimateMedia } = require('./assets/client.js');
@@ -147,9 +147,9 @@ const r = await api.estimate('gemini-3.5-flash-lite', {
 
 ## 数据范围与状态
 
-`data/prices.json` 为唯一数据源；`api/v1/` 由脚本生成，勿手改。
+`data/prices.json` 为唯一数据源；`api/v1/`（USD兼容）、`api/v2/`（显式多币种）与 `data/page-models.json` 由脚本生成，勿手改。
 
-模型字段仍限于价格、推理强度、上下文与最大输出、分档、服务档、缓存、生效日期及来源，另有 `modality` 和图像 / 视频的 `media_pricing`（见上节）。未恢复最大输入、思考子上限、输入输出模态列表（`modalities`）、功能、知识截止、思考预算、可用性、快照和别名。新增的 `price_basis`、`billing`、`off_peak_schedule` 只表达价格依据和计费口径。
+模型字段仍限于价格、推理强度、上下文与最大输出、分档、服务档、缓存、生效日期及来源，另有 `modality` 和图像 / 视频的 `media_pricing`（见上节）。未恢复最大输入、思考子上限、输入输出模态列表（`modalities`）、功能、知识截止、思考预算及任意别名自动合并。当前新增生命周期证据 `lifecycle` / 派生 `availability`、精确文本促销 `token_offer` 和保守试算范围 `estimation_limits`，详见ADR。新增的 `price_basis`、`billing`、`off_peak_schedule` 只表达价格依据和计费口径。
 
 - `pricing_status`：verified 官方价；reference 用户确认参照价；unverified 待核实；not_listed 官方未列。
 - `price_basis`：official/reference，参照模型 ID、来源 URL 与说明。可选 `reference_multiplier` 表示基础档相对参照模型的已公布倍率，省略为 1；单价已经展开，分档使用 `pricing_tiers` 中的单价，计算时不再乘此值。原参照数值保留。
@@ -167,6 +167,8 @@ const r = await api.estimate('gemini-3.5-flash-lite', {
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements-dev.txt
 .venv/bin/python scripts/build_api.py
+.venv/bin/python scripts/build_api.py --v2
+.venv/bin/python scripts/build_api.py --page
 .venv/bin/python scripts/validate.py
 .venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
 node --test tests/*.test.cjs
@@ -174,11 +176,11 @@ node --test tests/*.test.cjs
 
 只有开发校验使用 jsonschema；部署站点和客户端无第三方运行依赖。校验检查真实日期、非负有限价格、唯一标识、缺失标记、缓存口径、参照关系、分档范围、时段、价格生效日期及所有响应的 OpenAPI Schema，并逐文件核对生成结果。
 
-GitHub Actions 在 push、pull request 和手动运行时执行同样的校验、回归测试、全部静态数据接口的 HTTP 查询及 JavaScript 语法检查。CI 只验证，不自动部署或改写数据。
+GitHub Actions 在 push、pull request 和手动运行时执行同样的校验、回归测试、全部静态数据接口的 HTTP 查询及 JavaScript 语法检查。验证工作流只验证；独立 Pages 工作流在main推送/定时/手动时构建完整快照并发布，不改写源数据。发布前必须完成审核并协调Pages模式切换。
 
 ## 部署到 GitHub Pages
 
-将网站文件、`data/` 和生成的 `api/` 一起提交到仓库根目录。在仓库 Settings → Pages 中选择 Deploy from a branch，分支为 `main`、目录为 `/ (root)`。发布后使用站点地址访问页面和 `api/v1/`；更新数据时先完成上述校验，再按现有发布流程推送。`.nojekyll` 保留在根目录。
+发布切换为 **GitHub Actions**，由 `.github/workflows/pages.yml` 从单个冻结as_of构建完整产物、校验后整包部署（本次尚未激活或上线）。旧Pages配置为main/root，需在合并前由发布协调切换，避免legacy构建竞争。定时每15分钟最佳努力重建，不保证准点；客户端在退役时刻拒绝陈旧估价。`deployment.json`可核对源SHA、版本、as_of、下一失效点及构建链接；失败保留旧完整发布。
 
 ## 数据来源与本次修复
 
@@ -196,3 +198,12 @@ GitHub Actions 在 push、pull request 和手动运行时执行同样的校验�
 - 图像与视频生成：[OpenAI 定价](https://developers.openai.com/api/docs/pricing)（GPT Image 2.5）、[xAI 定价](https://docs.x.ai/developers/pricing)（Grok Imagine）、[Gemini 定价](https://ai.google.dev/gemini-api/docs/pricing)（Nano Banana / Gemini Omni）、[阿里云百炼定价](https://www.alibabacloud.com/help/en/model-studio/model-pricing)（Qwen-Image / Wan）、[MiniMax 按量定价](https://platform.minimax.io/docs/guides/pricing-paygo)和[智谱定价](https://docs.z.ai/guides/overview/pricing)；仅收录最新一代、官方按量美元价。
 
 本次针对已发现问题核实相关规则，没有声称重新核实所有已收录模型的全部价格。每个模型的 `source_url`、`extra_sources` 和结构化 `sources` 可追溯具体依据。未知数值保留未知，不用其他模型的值冒充官方确认。
+
+## 2026-11-17 增量更新（待审核、未上线）
+
+- v1保持USD 72项；`api/v2/`显式支持USD/CNY共75项。页面默认USD；选择CNY后只比较该币种。不做汇率转换。SDK混币价格排序会抛`CURRENCY_MISMATCH`，使用`listModels({currency: "CNY", sort: "input"})`。
+- 新增Qwen4-Max与广州TokenHub Hy4三款；Sol促销日期改11-30，数值不变。未知缓存用量拒绝报价，Hy4目录价与折扣分开。
+- `availability.js`为浏览器/SDK/Python生成器共用判定。精确退役T按`as_of>=T`；日期/时区不明及冲突保留待确认。退役详情不提供现价；显式历史估价需合适的历史快照。
+- 本轮没有完成全厂商完整发现验收，也没有重新核完原71项。未改模型保留各自原核实日。媒体PR4未混入。
+- 冻结产物：`python3 scripts/build_site.py --output /tmp/pricing-review-UNIQUE --as-of 2026-11-17T20:26:37+08:00`。失败演练加`--fail-before-publish`；输出路径必须未存在，旧完整产物不会被覆盖。用HTTP服务该目录预览。
+- 详见[架构取舍/发布前提](docs/adr-currency-lifecycle.md)、[本轮来源/哈希](docs/update-evidence-2026-11-17.md)。

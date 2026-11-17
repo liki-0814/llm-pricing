@@ -23,7 +23,7 @@ def source_schema(d):
     schema = copy.deepcopy(spec['components']['schemas']['Model'])
     props = schema['properties']
     for field in ('api_version', 'unit', 'vendor_name', 'pricing', 'pricing_status', 'has_off_peak',
-                  'off_peak_pricing', 'links', 'context_length_label', 'media_pricing'):
+                  'off_peak_pricing', 'links', 'context_length_label', 'media_pricing', 'availability'):
         props.pop(field, None)
     props['modality'] = {'const': 'text'}
     props['model_id'] = props.pop('id')
@@ -47,7 +47,7 @@ def source_schema(d):
     props['limits']['properties']['max_output_tokens']['anyOf'] = [
         {'type': ['integer', 'null']}, {'const': 'n/a'}]
     props['unverified_fields']['uniqueItems'] = True
-    schema['required'] = [k for k in props if k != 'offpeak']
+    schema['required'] = [k for k in props if k not in ('offpeak', 'lifecycle', 'token_offer', 'estimation_limits')]
     schema['components'] = spec['components']
     return schema
 
@@ -65,7 +65,8 @@ def media_source_schema(d):
     out['modality'] = {'enum': ['image', 'video']}
     out['media_pricing'] = {'$ref': '#/components/schemas/MediaPricing'}
     out['unverified_fields']['uniqueItems'] = True
-    return {'type': 'object', 'required': list(out), 'properties': out, 'additionalProperties': False,
+    out['lifecycle'] = copy.deepcopy(props['lifecycle'])
+    return {'type': 'object', 'required': [k for k in out if k != 'lifecycle'], 'properties': out, 'additionalProperties': False,
             'components': spec['components']}
 
 
@@ -231,6 +232,31 @@ def validate_data(d):
         if schema_errors:
             continue
         where = m['model_id']
+        life = m.get('lifecycle')
+        if life:
+            if life['status'] == 'scheduled' and not life['retired_at']:
+                fail(where, 'scheduled retirement requires exact official retired_at')
+            if life['retired_at'] and (life['precision'] != 'instant' or not life['timezone']):
+                fail(where, 'exact retirement requires precision=instant and official timezone')
+            if life['retired_at']:
+                try:
+                    instant = dt.datetime.fromisoformat(life['retired_at'].replace('Z', '+00:00'))
+                    if instant.tzinfo is None or 'T' not in life['retired_at']:
+                        raise ValueError()
+                except ValueError:
+                    fail(where, 'retired_at requires precise official time and timezone')
+            if life['status'] == 'retired' and not life['retired_at'] and not life['conflict']:
+                fail(where, 'retired status requires exact retired_at; otherwise pending_confirmation')
+        offer = m.get('token_offer')
+        if offer:
+            try:
+                start, end = [dt.datetime.fromisoformat(offer[k].replace('Z', '+00:00')) for k in ('observed_at', 'valid_until')]
+                if start.tzinfo is None or end.tzinfo is None or start > end:
+                    raise ValueError()
+            except ValueError:
+                fail(where, 'token_offer needs ordered exact timezone-aware instants')
+            if m['billing']['price_type'] != 'list':
+                fail(where, 'token_offer requires undiscounted list prices')
         for k in REMOVED:
             if k in m:
                 fail(where, 'removed field ' + k)
@@ -355,6 +381,8 @@ def validate_data(d):
             if not target or ref == mid or target['price_basis']['type'] != 'official':
                 fail(mid, 'reference model must exist and have official prices')
             else:
+                if m['currency'] != target['currency']:
+                    fail(mid, 'cross-currency reference pricing is forbidden')
                 multiplier = m['price_basis'].get('reference_multiplier', 1)
                 if any(not math.isclose(m[k], target[k] * multiplier, rel_tol=1e-12)
                        if numeric(m[k]) and numeric(target[k]) else m[k] != target[k]
@@ -402,6 +430,7 @@ def main():
     problems = validate_data(d)
     if not problems:
         problems += validate_api(d)
+        problems += validate_api(d, build_api.build(d, mixed=True))
         problems += build_api.check(d)
     for problem in problems:
         print('BAD', problem)

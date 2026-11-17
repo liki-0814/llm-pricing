@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
     "count": 11
   },
   "vendor": {
@@ -44,6 +48,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -84,8 +91,8 @@
         "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
-      "last_updated": "2026-10-21",
-      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价至少持续到 2026-11-21。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $10.0（长上下文 $20.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
+      "last_updated": "2026-11-17",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价持续到 2026-11-30（原文 until November 30, 2026；具体时刻和时区未给出，不自动涨价）。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $10.0（长上下文 $20.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -240,23 +247,30 @@
         {
           "kind": "promotion",
           "effective_from": null,
-          "effective_until": "2026-11-21",
+          "effective_until": "2026-11-30",
           "input": 4.0,
           "output": 20.0,
           "cached_input": 0.4,
           "cache_write": 5.0,
-          "note": "GPT-5.6 Sol 促销价（输入 $4 / 输出 $20，较此前降 20% / 33%）官方称“至少持续到 2026-11-21”；到期后价格官方未公布（待核实）。",
+          "note": "GPT-5.6 Sol 促销价官方称 available until November 30, 2026；仅日期，具体时刻/时区及后续价未知，不自动推算终止时刻或涨价。",
           "multiplier": null,
           "cache_pricing": {},
           "sources": [
             "https://developers.openai.com/api/docs/pricing"
-          ]
+          ],
+          "effective_until_precision": "date",
+          "effective_until_timezone": null
         }
       ],
       "unverified_fields": [],
       "links": {
         "self": "models/gpt-5.6-sol.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -265,6 +279,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -462,6 +479,11 @@
       "links": {
         "self": "models/gpt-5.6-terra.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -470,6 +492,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -667,6 +692,11 @@
       "links": {
         "self": "models/gpt-5.6-luna.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -675,6 +705,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -895,6 +928,11 @@
       "links": {
         "self": "models/gpt-6-astra.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -903,6 +941,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1100,6 +1141,11 @@
       "links": {
         "self": "models/gpt-6-sol.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1108,6 +1154,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1305,6 +1354,11 @@
       "links": {
         "self": "models/gpt-6-luna.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1313,6 +1367,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1530,6 +1587,11 @@
       "links": {
         "self": "models/gpt-6.1-sol.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1538,6 +1600,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1735,6 +1800,11 @@
       "links": {
         "self": "models/gpt-6.1-terra.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1743,6 +1813,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1849,6 +1922,11 @@
       "links": {
         "self": "models/gpt-6-astra-law.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1857,6 +1935,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -1988,6 +2069,11 @@
       "links": {
         "self": "models/gpt-image-2.5-flare.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1996,6 +2082,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -2127,6 +2216,11 @@
       "links": {
         "self": "models/gpt-image-2.5-sunburst.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     }
   ]

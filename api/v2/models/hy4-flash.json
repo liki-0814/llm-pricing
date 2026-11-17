@@ -1,0 +1,141 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2"
+  },
+  "data": {
+    "id": "hy4-flash",
+    "name": "Hy4 flash",
+    "vendor": "tencent",
+    "vendor_name": "腾讯混元",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": {
+      "observed_at": "2026-11-17T20:19:21.624057+08:00",
+      "valid_until": "2026-11-30T12:00:00+08:00",
+      "multiplier": 0.5,
+      "fields": [
+        "input",
+        "output",
+        "cached_input"
+      ],
+      "sources": [
+        "https://cloud.tencent.com/document/product/1823/130055"
+      ],
+      "note": "官方至该北京时间按目录价50%结算，截止瞬间按包含端点处理，之后恢复目录价。observed_at仅本轮观察时间，不假定官方未知起点，也不提供此前历史优惠试算。"
+    },
+    "estimation_limits": {
+      "max_input_tokens": 960000,
+      "max_output_tokens": 64000,
+      "note": "广州TokenHub普通文本，图片与其它媒体不在试算范围。",
+      "sources": [
+        "https://cloud.tencent.com/document/product/1823/130051"
+      ]
+    },
+    "currency": "CNY",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 0.5,
+      "output": 2,
+      "cached_input": 0.02,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "unverified"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://cloud.tencent.com/document/product/1823/130055",
+        "https://cloud.tencent.com/document/product/1823/130051"
+      ],
+      "note": "官方广州目录价；若有折扣在token_offer单列，不预先折算主价格。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": "Guangzhou (TokenHub)",
+      "cached_input_type": "unspecified",
+      "note": "广州目录CNY报价；不含税费/工具费/媒体，未取证其他地域。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1000000,
+    "context_length_label": "1M",
+    "source_url": "https://cloud.tencent.com/document/product/1823/130055",
+    "extra_sources": [
+      "https://cloud.tencent.com/document/product/1823/130051"
+    ],
+    "last_updated": "2026-11-17",
+    "notes": "腾讯云TokenHub广州后付费目录价，人民币/百万token，不换汇。缓存写入表为“-”，未核实，不按零收费。官方明确五折，限本轮观测之后、精确截止前后按token_offer计算；表内保留目录价。",
+    "reasoning_effort": {
+      "supported": null,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "unverified",
+      "field_status": {
+        "supported": "unverified",
+        "levels": "unverified",
+        "default": "unverified",
+        "can_disable": "unverified"
+      },
+      "note": "目录列深度思考，但可调强度、默认值与关闭方式本轮未核，不借用Qwen配置。",
+      "sources": [
+        "https://cloud.tencent.com/document/product/1823/130051"
+      ]
+    },
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": 64000,
+      "status": "verified",
+      "note": "官方目录1M上下文/960k最大输入/64k最大输出，k按千token；只估普通文本，不估图片输入。",
+      "sources": [
+        "https://cloud.tencent.com/document/product/1823/130051"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "表列缓存命中价；缓存写入为“-”且无不收费声明，保留未知，非零写入试算拒绝。"
+    },
+    "price_schedule": [],
+    "unverified_fields": [
+      "cache_write",
+      "reasoning_effort.supported",
+      "reasoning_effort.levels",
+      "reasoning_effort.default",
+      "reasoning_effort.can_disable"
+    ],
+    "links": {
+      "self": "models/hy4-flash.json",
+      "vendor": "vendors/tencent.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

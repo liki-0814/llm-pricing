@@ -1,17 +1,21 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
-    "count": 50
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
+    "count": 51
   },
   "modality": {
     "name": "text",
     "label": "文本生成（token 计价）",
-    "model_count": 50,
+    "model_count": 51,
     "model_ids": [
       "deepseek-flash",
       "deepseek-v4-pro",
@@ -62,7 +66,8 @@
       "minimax-m3.1-flash",
       "kimi-for-coding",
       "grok-4.7",
-      "grok-4.7-build-fast"
+      "grok-4.7-build-fast",
+      "qwen4-max"
     ],
     "vendors": [
       "deepseek",
@@ -86,6 +91,9 @@
       "vendor": "deepseek",
       "vendor_name": "DeepSeek",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -200,6 +208,11 @@
       "links": {
         "self": "models/deepseek-flash.json",
         "vendor": "vendors/deepseek.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -208,6 +221,9 @@
       "vendor": "deepseek",
       "vendor_name": "DeepSeek",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -323,6 +339,11 @@
       "links": {
         "self": "models/deepseek-v4-pro.json",
         "vendor": "vendors/deepseek.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -331,6 +352,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -371,8 +395,8 @@
         "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
-      "last_updated": "2026-10-21",
-      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价至少持续到 2026-11-21。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $10.0（长上下文 $20.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
+      "last_updated": "2026-11-17",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价持续到 2026-11-30（原文 until November 30, 2026；具体时刻和时区未给出，不自动涨价）。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $10.0（长上下文 $20.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -527,23 +551,30 @@
         {
           "kind": "promotion",
           "effective_from": null,
-          "effective_until": "2026-11-21",
+          "effective_until": "2026-11-30",
           "input": 4.0,
           "output": 20.0,
           "cached_input": 0.4,
           "cache_write": 5.0,
-          "note": "GPT-5.6 Sol 促销价（输入 $4 / 输出 $20，较此前降 20% / 33%）官方称“至少持续到 2026-11-21”；到期后价格官方未公布（待核实）。",
+          "note": "GPT-5.6 Sol 促销价官方称 available until November 30, 2026；仅日期，具体时刻/时区及后续价未知，不自动推算终止时刻或涨价。",
           "multiplier": null,
           "cache_pricing": {},
           "sources": [
             "https://developers.openai.com/api/docs/pricing"
-          ]
+          ],
+          "effective_until_precision": "date",
+          "effective_until_timezone": null
         }
       ],
       "unverified_fields": [],
       "links": {
         "self": "models/gpt-5.6-sol.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -552,6 +583,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -749,6 +783,11 @@
       "links": {
         "self": "models/gpt-5.6-terra.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -757,6 +796,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -954,6 +996,11 @@
       "links": {
         "self": "models/gpt-5.6-luna.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -962,6 +1009,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1182,6 +1232,11 @@
       "links": {
         "self": "models/gpt-6-astra.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1190,6 +1245,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1387,6 +1445,11 @@
       "links": {
         "self": "models/gpt-6-sol.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1395,6 +1458,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1592,6 +1658,11 @@
       "links": {
         "self": "models/gpt-6-luna.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1600,6 +1671,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1817,6 +1891,11 @@
       "links": {
         "self": "models/gpt-6.1-sol.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1825,6 +1904,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -2022,6 +2104,11 @@
       "links": {
         "self": "models/gpt-6.1-terra.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -2030,6 +2117,9 @@
       "vendor": "openai",
       "vendor_name": "OpenAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -2136,6 +2226,11 @@
       "links": {
         "self": "models/gpt-6-astra-law.json",
         "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -2144,6 +2239,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -2277,6 +2375,11 @@
       "links": {
         "self": "models/claude-fable-5.1.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -2285,6 +2388,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -2418,6 +2524,11 @@
       "links": {
         "self": "models/claude-mythos-5.1.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -2426,6 +2537,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -2559,6 +2673,11 @@
       "links": {
         "self": "models/claude-fable-5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -2567,6 +2686,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -2700,6 +2822,11 @@
       "links": {
         "self": "models/claude-mythos-5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -2708,6 +2835,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -2862,6 +2992,11 @@
       "links": {
         "self": "models/claude-opus-5.5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -2870,6 +3005,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -3024,6 +3162,11 @@
       "links": {
         "self": "models/claude-opus-5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -3032,6 +3175,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -3186,6 +3332,11 @@
       "links": {
         "self": "models/claude-opus-4.8.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -3194,6 +3345,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -3327,6 +3481,11 @@
       "links": {
         "self": "models/claude-opus-4.7.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -3335,6 +3494,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -3467,6 +3629,11 @@
       "links": {
         "self": "models/claude-opus-4.6.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -3475,6 +3642,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -3608,6 +3778,11 @@
       "links": {
         "self": "models/claude-sonnet-5.5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -3616,6 +3791,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -3749,6 +3927,11 @@
       "links": {
         "self": "models/claude-sonnet-5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -3757,6 +3940,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -3889,6 +4075,11 @@
       "links": {
         "self": "models/claude-sonnet-4.6.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -3897,6 +4088,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -4052,6 +4246,11 @@
       "links": {
         "self": "models/claude-haiku-5.5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -4060,6 +4259,9 @@
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -4170,6 +4372,11 @@
       "links": {
         "self": "models/glm-5.3.json",
         "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -4178,6 +4385,9 @@
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -4288,6 +4498,11 @@
       "links": {
         "self": "models/glm-5.3-flash.json",
         "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -4296,6 +4511,9 @@
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -4408,6 +4626,11 @@
       "links": {
         "self": "models/glm-5.3-flashx.json",
         "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -4416,6 +4639,9 @@
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -4529,6 +4755,11 @@
       "links": {
         "self": "models/glm-5.2.json",
         "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -4537,6 +4768,9 @@
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -4651,6 +4885,11 @@
       "links": {
         "self": "models/kimi-k3.json",
         "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -4659,6 +4898,9 @@
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -4775,6 +5017,11 @@
       "links": {
         "self": "models/kimi-k3.1-pro.json",
         "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -4783,6 +5030,9 @@
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -4875,6 +5125,11 @@
       "links": {
         "self": "models/kimi-k3.1-pro-highspeed.json",
         "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -4883,6 +5138,9 @@
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -4993,6 +5251,11 @@
       "links": {
         "self": "models/kimi-k2.7-code.json",
         "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -5001,6 +5264,9 @@
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -5089,6 +5355,11 @@
       "links": {
         "self": "models/kimi-k2.7-code-highspeed.json",
         "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -5097,6 +5368,9 @@
       "vendor": "qwen",
       "vendor_name": "阿里云 Qwen",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -5214,6 +5488,11 @@
       "links": {
         "self": "models/qwen3.8-max.json",
         "vendor": "vendors/qwen.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -5222,6 +5501,9 @@
       "vendor": "qwen",
       "vendor_name": "阿里云 Qwen",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -5314,6 +5596,11 @@
       "links": {
         "self": "models/qwen3.7-max.json",
         "vendor": "vendors/qwen.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -5322,6 +5609,9 @@
       "vendor": "qwen",
       "vendor_name": "阿里云 Qwen",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -5478,6 +5768,11 @@
       "links": {
         "self": "models/qwen3.7-plus.json",
         "vendor": "vendors/qwen.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -5486,6 +5781,9 @@
       "vendor": "qwen",
       "vendor_name": "阿里云 Qwen",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -5577,6 +5875,11 @@
       "links": {
         "self": "models/qwen3.8-flash.json",
         "vendor": "vendors/qwen.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -5585,6 +5888,9 @@
       "vendor": "qwen",
       "vendor_name": "阿里云 Qwen",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -5739,6 +6045,11 @@
       "links": {
         "self": "models/qwen3.7-flash.json",
         "vendor": "vendors/qwen.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -5747,6 +6058,9 @@
       "vendor": "qwen",
       "vendor_name": "阿里云 Qwen",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -5838,6 +6152,11 @@
       "links": {
         "self": "models/qwen3.8-2.4t-a95b.json",
         "vendor": "vendors/qwen.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -5846,6 +6165,9 @@
       "vendor": "qwen",
       "vendor_name": "阿里云 Qwen",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -5936,6 +6258,11 @@
       "links": {
         "self": "models/qwen3.8-27b.json",
         "vendor": "vendors/qwen.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -5944,6 +6271,9 @@
       "vendor": "qwen",
       "vendor_name": "阿里云 Qwen",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -6036,6 +6366,11 @@
       "links": {
         "self": "models/qwen3.8-omni-flash.json",
         "vendor": "vendors/qwen.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -6044,6 +6379,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -6223,6 +6561,11 @@
       "links": {
         "self": "models/gemini-4-argon.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -6231,6 +6574,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -6403,6 +6749,11 @@
       "links": {
         "self": "models/gemini-3.8-flash.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -6411,6 +6762,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -6572,6 +6926,11 @@
       "links": {
         "self": "models/gemini-3.5-flash-lite.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -6580,6 +6939,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -6754,6 +7116,11 @@
       "links": {
         "self": "models/gemini-3.1-pro-preview.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -6762,6 +7129,9 @@
       "vendor": "minimax",
       "vendor_name": "MiniMax",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -6891,6 +7261,11 @@
       "links": {
         "self": "models/minimax-m3.json",
         "vendor": "vendors/minimax.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -6899,6 +7274,9 @@
       "vendor": "minimax",
       "vendor_name": "MiniMax",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -6994,6 +7372,11 @@
       "links": {
         "self": "models/minimax-m3.1-flash.json",
         "vendor": "vendors/minimax.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -7002,6 +7385,9 @@
       "vendor": "moonshot",
       "vendor_name": "Moonshot Kimi",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -7095,6 +7481,11 @@
       "links": {
         "self": "models/kimi-for-coding.json",
         "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -7103,6 +7494,9 @@
       "vendor": "xai",
       "vendor_name": "xAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -7288,6 +7682,11 @@
       "links": {
         "self": "models/grok-4.7.json",
         "vendor": "vendors/xai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -7296,6 +7695,9 @@
       "vendor": "xai",
       "vendor_name": "xAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -7412,6 +7814,124 @@
       "links": {
         "self": "models/grok-4.7-build-fast.json",
         "vendor": "vendors/xai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "qwen4-max",
+      "name": "Qwen4-Max",
+      "vendor": "qwen",
+      "vendor_name": "阿里云 Qwen",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": {
+        "max_input_tokens": 983616,
+        "max_output_tokens": 131072,
+        "note": "只支持保守的普通文本试算，取两种模式均支持的输入/输出上限；超出需指定模式另核。",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+        ]
+      },
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 1.5,
+        "output": 4.5,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "unverified",
+        "cache_write": "unverified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": "Singapore",
+        "cached_input_type": "unspecified",
+        "note": "新加坡普通文本按量价；缓存、工具、媒体与Batch不在已核估价范围。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "≤1M 输入（计费档位上限）",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max",
+      "extra_sources": [],
+      "last_updated": "2026-11-17",
+      "notes": "百炼国际站新加坡普通文本输入/输出美元价，0<Token≤1M；不覆盖图片、视频、工具费。缓存表提取粘连，未确认的缓存价不填0、不套其它Qwen规则。输出/输入上限依思考模式而异，试算采用两种模式都安全的保守上限，见 estimation_limits。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "xhigh"
+        ],
+        "default": "high",
+        "can_disable": true,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "模型页列low/high/xhigh，默认high；enable_thinking=false可关闭。",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+        ]
+      },
+      "limits": {
+        "context_length": 1000000,
+        "max_output_tokens": null,
+        "status": "partial",
+        "note": "上下文1,000,000；思考输入983,616/输出262,144，非思考输入991,808/输出131,072；当前schema不混合宣称一个模式无关最大输出。",
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "隐式/显式缓存命中和写入均待核实；非零缓存用量拒绝试算，不回退普通输入价。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "cached_input",
+        "cache_write",
+        "limits.max_output_tokens"
+      ],
+      "links": {
+        "self": "models/qwen4-max.json",
+        "vendor": "vendors/qwen.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     }
   ]

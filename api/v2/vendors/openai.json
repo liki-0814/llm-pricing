@@ -1,0 +1,2227 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
+    "count": 11
+  },
+  "vendor": {
+    "slug": "openai",
+    "name": "OpenAI",
+    "model_count": 11,
+    "model_ids": [
+      "gpt-5.6-sol",
+      "gpt-5.6-terra",
+      "gpt-5.6-luna",
+      "gpt-6-astra",
+      "gpt-6-sol",
+      "gpt-6-luna",
+      "gpt-6.1-sol",
+      "gpt-6.1-terra",
+      "gpt-6-astra-law",
+      "gpt-image-2.5-flare",
+      "gpt-image-2.5-sunburst"
+    ],
+    "modality_counts": {
+      "text": 9,
+      "image": 2,
+      "video": 0
+    },
+    "source_urls": [
+      "https://developers.openai.com/api/docs/pricing"
+    ],
+    "links": {
+      "self": "vendors/openai.json"
+    }
+  },
+  "data": [
+    {
+      "id": "gpt-5.6-sol",
+      "name": "GPT-5.6 Sol",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 4.0,
+        "output": 20.0,
+        "cached_input": 0.4,
+        "cache_write": 5.0
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
+      ],
+      "last_updated": "2026-11-17",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价持续到 2026-11-30（原文 until November 30, 2026；具体时刻和时区未给出，不自动涨价）。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $10.0（长上下文 $20.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+        ]
+      },
+      "limits": {
+        "context_length": 1050000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 8.0,
+          "output": 30.0,
+          "cached_input": 0.8,
+          "cache_write": 10.0,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 10.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 20.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $10.0、12 小时 TTL $20.0（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 5.0,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 10.0,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
+      },
+      "price_schedule": [
+        {
+          "kind": "promotion",
+          "effective_from": null,
+          "effective_until": "2026-11-30",
+          "input": 4.0,
+          "output": 20.0,
+          "cached_input": 0.4,
+          "cache_write": 5.0,
+          "note": "GPT-5.6 Sol 促销价官方称 available until November 30, 2026；仅日期，具体时刻/时区及后续价未知，不自动推算终止时刻或涨价。",
+          "multiplier": null,
+          "cache_pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "effective_until_precision": "date",
+          "effective_until_timezone": null
+        }
+      ],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-5.6-sol.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-5.6-terra",
+      "name": "GPT-5.6 Terra",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 12.0,
+        "cached_input": 0.2,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
+      ],
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $18.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
+        ]
+      },
+      "limits": {
+        "context_length": 1050000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-5.6-terra"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 4.0,
+          "output": 18.0,
+          "cached_input": 0.4,
+          "cache_write": 5.0,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 5.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 10.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $5.0、12 小时 TTL $10.0（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 2.5,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 5.0,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-5.6-terra.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-5.6-luna",
+      "name": "GPT-5.6 Luna",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.2,
+        "output": 1.2,
+        "cached_input": 0.02,
+        "cache_write": 0.25
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
+      ],
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.4、缓存读取 $0.04、缓存写入 $0.5、输出 $1.8。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $0.5（长上下文 $1.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+        ]
+      },
+      "limits": {
+        "context_length": 1050000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 0.4,
+          "output": 1.8,
+          "cached_input": 0.04,
+          "cache_write": 0.5,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 0.5,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 1.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $0.5、12 小时 TTL $1.0（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 0.25,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 0.5,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-5.6-luna.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-6-astra",
+      "name": "GPT-6 Astra",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 10.0,
+        "output": 50.0,
+        "cached_input": 1.0,
+        "cache_write": 12.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-astra",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
+      ],
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $20.0、缓存读取 $2.0、缓存写入 $25.0、输出 $75.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $25.0（长上下文 $50.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": null,
+        "can_disable": null,
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "官方模型页列出 reasoning.effort 支持 low/medium/high/xhigh/max；未标注默认档，且未列 none（是否可关闭推理待核实）。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6-astra"
+        ]
+      },
+      "limits": {
+        "context_length": 1050000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6-astra"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 20.0,
+          "output": 75.0,
+          "cached_input": 2.0,
+          "cache_write": 25.0,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 25.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 50.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $25.0、12 小时 TTL $50.0（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "ultrafast",
+          "multiplier": 6.0,
+          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。",
+          "multipliers": {
+            "input": 6.0,
+            "output": 6.0,
+            "cached_input": 6.0,
+            "cache_write": 6.0,
+            "implicit_read": 6.0,
+            "explicit_read": 6.0,
+            "explicit_write": 6.0,
+            "explicit_write_1h": 6.0,
+            "explicit_write_12h": 6.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 12.5,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 25.0,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "links": {
+        "self": "models/gpt-6-astra.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-6-sol",
+      "name": "GPT-6 Sol",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cached_input": 0.2,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-sol",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
+      ],
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6-sol"
+        ]
+      },
+      "limits": {
+        "context_length": 1050000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6-sol"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 4.0,
+          "output": 15.0,
+          "cached_input": 0.4,
+          "cache_write": 5.0,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 5.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 10.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $5.0、12 小时 TTL $10.0（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 2.5,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 5.0,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-6-sol.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-6-luna",
+      "name": "GPT-6 Luna",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.1,
+        "output": 0.5,
+        "cached_input": 0.01,
+        "cache_write": 0.125
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6-luna",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
+      ],
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.2、缓存读取 $0.02、缓存写入 $0.25、输出 $0.75。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $0.25（长上下文 $0.5），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6-luna"
+        ]
+      },
+      "limits": {
+        "context_length": 1050000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6-luna"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 0.2,
+          "output": 0.75,
+          "cached_input": 0.02,
+          "cache_write": 0.25,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 0.25,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $0.25、12 小时 TTL $0.5（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 0.125,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 0.25,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-6-luna.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-6.1-sol",
+      "name": "GPT-6.1 Sol",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cached_input": 0.1,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
+      ],
+      "last_updated": "2026-10-21",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.2、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": false,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "reasoning.effort 支持 low/medium(默认)/high/xhigh/max；官方明确不支持 none 与 minimal，推理无法关闭。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+        ]
+      },
+      "limits": {
+        "context_length": 1050000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 4.0,
+          "output": 15.0,
+          "cached_input": 0.2,
+          "cache_write": 5.0,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 5.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 10.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $5.0、12 小时 TTL $10.0（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "ultrafast",
+          "multiplier": 6.0,
+          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。",
+          "multipliers": {
+            "input": 6.0,
+            "output": 6.0,
+            "cached_input": 6.0,
+            "cache_write": 6.0,
+            "implicit_read": 6.0,
+            "explicit_read": 6.0,
+            "explicit_write": 6.0,
+            "explicit_write_1h": 6.0,
+            "explicit_write_12h": 6.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 2.5,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 5.0,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-6.1-sol.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-6.1-terra",
+      "name": "GPT-6.1 Terra",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 1.0,
+        "output": 5.0,
+        "cached_input": 0.05,
+        "cache_write": 1.25
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+        "https://developers.openai.com/api/docs/guides/prompt-caching"
+      ],
+      "last_updated": "2026-10-27",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $2.0、缓存读取 $0.1、缓存写入 $2.5、输出 $7.5。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍（官方定价页未列 Ultrafast）。数据驻留端点加收 10%（where available）。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $2.5（长上下文 $5.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。 2026-10-27 新增（OpenAI 新模型）。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "none",
+          "low",
+          "medium",
+          "high",
+          "xhigh",
+          "max"
+        ],
+        "default": "medium",
+        "can_disable": true,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "reasoning.effort 支持 none/low/medium(默认)/high/xhigh/max；none 即关闭推理。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+        ]
+      },
+      "limits": {
+        "context_length": 1050000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 2.0,
+          "output": 7.5,
+          "cached_input": 0.1,
+          "cache_write": 2.5,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 2.5,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 5.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $2.5、12 小时 TTL $5.0（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API 价，官方定价页逐项列出（短/长上下文各档均为标准价同倍数）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 处理档，官方定价页逐项列出。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast 模式（原 Priority 处理，2026-07-30 更名为 Fast mode）。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "区域处理（数据驻留）端点加收 10%（“where available”；2026-03-05 及之后发布且支持数据驻留的模型）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 1.25,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 2.5,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价（官方：标准输入价 ×1.25）；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL（prompt_cache_options.ttl=\"12h\"）缓存写入价（官方：标准输入价 ×2.5）。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价同为 2×（见 pricing_tiers[].cache_pricing）。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/gpt-6.1-terra.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-6-astra-law",
+      "name": "GPT-6 Astra for Law",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 10.0,
+        "output": 50.0,
+        "cached_input": 1.0,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "unverified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-11-01",
+      "notes": "OpenAI 定价页“Legal model configurations”一节的法律场景模型配置（GPT-6 Astra for Law），仅列输入 $10.00 / 输出 $50.00 / 缓存读取 $1.00（每百万 token）。官方注明 GPT-6 Astra for Law 促销价至少持续到 2026-12-31；到期后价格官方未公布（待核实）。官方定价页未列该配置的缓存写入价（cache_write 待核实）、长上下文（>272K）分档、Batch/Flex/Fast 服务档和数据驻留加价，OpenAI 模型页 /api/docs/models/gpt-6-astra-law 也尚不存在（HTTP 404），故上下文窗口、最大输出和推理强度均待核实；不借用 gpt-6-astra 的数值。 2026-11-01 新增（OpenAI 官方模型配置；liki 于 2026-11-01 批准入库）。",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "unverified",
+        "field_status": {
+          "supported": "unverified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "官方定价页未列该配置的推理强度，OpenAI 模型页尚不存在（404），待核实。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "unverified",
+        "note": "官方定价页未列上下文窗口与最大输出，OpenAI 模型页 /api/docs/models/gpt-6-astra-law 尚不存在（404），待核实。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "官方定价页 Legal model configurations 仅列缓存读取价 $1.00，未列缓存写入价（30 分钟 / 12 小时 TTL）。"
+      },
+      "price_schedule": [
+        {
+          "kind": "promotion",
+          "effective_from": null,
+          "effective_until": "2026-12-31",
+          "input": 10.0,
+          "output": 50.0,
+          "cached_input": 1.0,
+          "cache_write": null,
+          "note": "GPT-6 Astra for Law 促销价（输入 $10 / 输出 $50 / 缓存读取 $1）官方称“至少持续到 2026-12-31”；到期后价格官方未公布（待核实）。",
+          "multiplier": null,
+          "cache_pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "unverified_fields": [
+        "cache_write",
+        "limits.context_length",
+        "limits.max_output_tokens",
+        "reasoning_effort.supported",
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "links": {
+        "self": "models/gpt-6-astra-law.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-image-2.5-flare",
+      "name": "GPT Image 2.5 Flare",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+      ],
+      "last_updated": "2026-10-29",
+      "notes": "Token 计价：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token；Batch 为标准价一半。官方定价页未列 2.5 的按张价格（按尺寸/质量），按 token 结算，按张价格待核实。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 5,
+            "text_cached_input": 1.25,
+            "text_output": null,
+            "image_input": 8,
+            "image_cached_input": 2,
+            "image_output": 30,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": {
+            "text_input": 2.5,
+            "text_cached_input": 0.625,
+            "text_output": null,
+            "image_input": 4,
+            "image_cached_input": 1,
+            "image_output": 15,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "priority": null
+        },
+        "image_prices": [],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": true,
+        "promotion": null,
+        "billing_note": "按 token 计费，官方未公布 GPT Image 2.5 按尺寸/质量的单张价格（image_prices 为空，已列入 unverified_fields）。Batch 价为官方列出的标价。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "media_pricing.image_prices"
+      ],
+      "links": {
+        "self": "models/gpt-image-2.5-flare.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-image-2.5-sunburst",
+      "name": "GPT Image 2.5 Sunburst",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+        ],
+        "note": "价格依据官方来源，美元；图像/视频价格见 media_pricing 的结构化字段。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+      ],
+      "last_updated": "2026-10-29",
+      "notes": "Token 计价：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token；Batch 为标准价一半。官方定价页未列 2.5 的按张价格（按尺寸/质量），按 token 结算，按张价格待核实。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 5,
+            "text_cached_input": 1.25,
+            "text_output": null,
+            "image_input": 8,
+            "image_cached_input": 2,
+            "image_output": 30,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": {
+            "text_input": 2.5,
+            "text_cached_input": 0.625,
+            "text_output": null,
+            "image_input": 4,
+            "image_cached_input": 1,
+            "image_output": 15,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "priority": null
+        },
+        "image_prices": [],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": true,
+        "promotion": null,
+        "billing_note": "按 token 计费，官方未公布 GPT Image 2.5 按尺寸/质量的单张价格（image_prices 为空，已列入 unverified_fields）。Batch 价为官方列出的标价。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "media_pricing.image_prices"
+      ],
+      "links": {
+        "self": "models/gpt-image-2.5-sunburst.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "name": "before",
+    "lifecycle": {
+      "status": "scheduled",
+      "retired_at": "2026-12-01T12:00:00+08:00",
+      "retirement_date": "2026-12-01",
+      "timezone": "Asia/Shanghai",
+      "precision": "instant",
+      "original_text": "Fixture: retires at 2026-12-01 12:00 Beijing",
+      "scope": "endpoint",
+      "routes_to": null,
+      "conflict": false,
+      "note": "Fixture official exact retirement",
+      "sources": [
+        "https://example.org/official-retirement"
+      ]
+    },
+    "at": "2026-12-01T03:59:59.999Z",
+    "status": "scheduled",
+    "estimable": true
+  },
+  {
+    "name": "equal",
+    "lifecycle": {
+      "status": "scheduled",
+      "retired_at": "2026-12-01T12:00:00+08:00",
+      "retirement_date": "2026-12-01",
+      "timezone": "Asia/Shanghai",
+      "precision": "instant",
+      "original_text": "Fixture: retires at 2026-12-01 12:00 Beijing",
+      "scope": "endpoint",
+      "routes_to": null,
+      "conflict": false,
+      "note": "Fixture official exact retirement",
+      "sources": [
+        "https://example.org/official-retirement"
+      ]
+    },
+    "at": "2026-12-01T04:00:00Z",
+    "status": "retired",
+    "estimable": false
+  },
+  {
+    "name": "after",
+    "lifecycle": {
+      "status": "scheduled",
+      "retired_at": "2026-12-01T12:00:00+08:00",
+      "retirement_date": "2026-12-01",
+      "timezone": "Asia/Shanghai",
+      "precision": "instant",
+      "original_text": "Fixture: retires at 2026-12-01 12:00 Beijing",
+      "scope": "endpoint",
+      "routes_to": null,
+      "conflict": false,
+      "note": "Fixture official exact retirement",
+      "sources": [
+        "https://example.org/official-retirement"
+      ]
+    },
+    "at": "2026-12-01T04:00:00.001Z",
+    "status": "retired",
+    "estimable": false
+  },
+  {
+    "name": "equal-offset",
+    "lifecycle": {
+      "status": "scheduled",
+      "retired_at": "2026-12-01T12:00:00+08:00",
+      "retirement_date": "2026-12-01",
+      "timezone": "Asia/Shanghai",
+      "precision": "instant",
+      "original_text": "Fixture: retires at 2026-12-01 12:00 Beijing",
+      "scope": "endpoint",
+      "routes_to": null,
+      "conflict": false,
+      "note": "Fixture official exact retirement",
+      "sources": [
+        "https://example.org/official-retirement"
+      ]
+    },
+    "at": "2026-12-01T12:00:00+08:00",
+    "status": "retired",
+    "estimable": false
+  },
+  {
+    "name": "date-only",
+    "lifecycle": {
+      "status": "pending_confirmation",
+      "retired_at": null,
+      "retirement_date": "2026-12-01",
+      "timezone": null,
+      "precision": "date",
+      "original_text": "Fixture: retires at 2026-12-01 12:00 Beijing",
+      "scope": "endpoint",
+      "routes_to": null,
+      "conflict": false,
+      "note": "Fixture official exact retirement",
+      "sources": [
+        "https://example.org/official-retirement"
+      ]
+    },
+    "at": "2027-01-01T00:00:00Z",
+    "status": "pending_confirmation",
+    "estimable": true
+  },
+  {
+    "name": "conflict",
+    "lifecycle": {
+      "status": "scheduled",
+      "retired_at": "2026-12-01T12:00:00+08:00",
+      "retirement_date": "2026-12-01",
+      "timezone": "Asia/Shanghai",
+      "precision": "instant",
+      "original_text": "Fixture: retires at 2026-12-01 12:00 Beijing",
+      "scope": "endpoint",
+      "routes_to": null,
+      "conflict": true,
+      "note": "Fixture official exact retirement",
+      "sources": [
+        "https://example.org/official-retirement"
+      ]
+    },
+    "at": "2027-01-01T00:00:00Z",
+    "status": "pending_confirmation",
+    "estimable": true
+  },
+  {
+    "name": "timezone-unknown",
+    "lifecycle": {
+      "status": "scheduled",
+      "retired_at": "2026-12-01T12:00:00+08:00",
+      "retirement_date": "2026-12-01",
+      "timezone": null,
+      "precision": "instant",
+      "original_text": "Fixture: retires at 2026-12-01 12:00 Beijing",
+      "scope": "endpoint",
+      "routes_to": null,
+      "conflict": false,
+      "note": "Fixture official exact retirement",
+      "sources": [
+        "https://example.org/official-retirement"
+      ]
+    },
+    "at": "2027-01-01T00:00:00Z",
+    "status": "pending_confirmation",
+    "estimable": true
+  },
+  {
+    "name": "retired-entity-id-routes",
+    "lifecycle": {
+      "status": "scheduled",
+      "retired_at": "2026-12-01T12:00:00+08:00",
+      "retirement_date": "2026-12-01",
+      "timezone": "Asia/Shanghai",
+      "precision": "instant",
+      "original_text": "Fixture: retires at 2026-12-01 12:00 Beijing",
+      "scope": "entity",
+      "routes_to": "new-entity",
+      "conflict": false,
+      "note": "Fixture official exact retirement",
+      "sources": [
+        "https://example.org/official-retirement"
+      ]
+    },
+    "at": "2026-12-01T04:00:00Z",
+    "status": "retired",
+    "estimable": false
+  }
+]

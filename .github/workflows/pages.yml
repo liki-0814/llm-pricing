@@ -1,0 +1,60 @@
+name: Rebuild and publish complete pricing snapshot
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+  workflow_dispatch:
+# The entire build/deploy workflow is serial; an old run cannot overtake a newer one.
+concurrency:
+  group: pricing-pages
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python scripts/validate.py
+      - run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - run: node --test tests/*.test.cjs
+      - name: Build a new fully validated immutable artifact
+        run: python scripts/build_site.py --output "$RUNNER_TEMP/pricing-site"
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/pricing-site
+      - name: Build validity summary
+        if: always()
+        run: |
+          echo 'Cron may be delayed. A failed build leaves the prior complete publication in place.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Inspect deployment.json (source_commit / data_version / as_of / next_invalidation) and this workflow result.' >> "$GITHUB_STEP_SUMMARY"
+          if test -f "$RUNNER_TEMP/pricing-site/deployment.json"; then python -m json.tool "$RUNNER_TEMP/pricing-site/deployment.json" >> "$GITHUB_STEP_SUMMARY"; fi
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Reject stale main source immediately before publishing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)" = "$GITHUB_SHA"
+      - name: Publish the complete artifact only
+        id: deployment
+        uses: actions/deploy-pages@v4

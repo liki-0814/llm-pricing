@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
     "count": 13
   },
   "vendor": {
@@ -46,6 +50,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -179,6 +186,11 @@
       "links": {
         "self": "models/claude-fable-5.1.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -187,6 +199,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -320,6 +335,11 @@
       "links": {
         "self": "models/claude-mythos-5.1.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -328,6 +348,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -461,6 +484,11 @@
       "links": {
         "self": "models/claude-fable-5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -469,6 +497,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -602,6 +633,11 @@
       "links": {
         "self": "models/claude-mythos-5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -610,6 +646,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -764,6 +803,11 @@
       "links": {
         "self": "models/claude-opus-5.5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -772,6 +816,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -926,6 +973,11 @@
       "links": {
         "self": "models/claude-opus-5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -934,6 +986,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1088,6 +1143,11 @@
       "links": {
         "self": "models/claude-opus-4.8.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1096,6 +1156,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1229,6 +1292,11 @@
       "links": {
         "self": "models/claude-opus-4.7.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1237,6 +1305,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1369,6 +1440,11 @@
       "links": {
         "self": "models/claude-opus-4.6.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1377,6 +1453,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1510,6 +1589,11 @@
       "links": {
         "self": "models/claude-sonnet-5.5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1518,6 +1602,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1651,6 +1738,11 @@
       "links": {
         "self": "models/claude-sonnet-5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1659,6 +1751,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1791,6 +1886,11 @@
       "links": {
         "self": "models/claude-sonnet-4.6.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1799,6 +1899,9 @@
       "vendor": "anthropic",
       "vendor_name": "Anthropic",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -1954,6 +2057,11 @@
       "links": {
         "self": "models/claude-haiku-5.5.json",
         "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     }
   ]

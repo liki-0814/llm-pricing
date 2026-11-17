@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
     "count": 5
   },
   "vendor": {
@@ -38,6 +42,9 @@
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -148,6 +155,11 @@
       "links": {
         "self": "models/glm-5.3.json",
         "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -156,6 +168,9 @@
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -266,6 +281,11 @@
       "links": {
         "self": "models/glm-5.3-flash.json",
         "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -274,6 +294,9 @@
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -386,6 +409,11 @@
       "links": {
         "self": "models/glm-5.3-flashx.json",
         "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -394,6 +422,9 @@
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -507,6 +538,11 @@
       "links": {
         "self": "models/glm-5.2.json",
         "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -515,6 +551,9 @@
       "vendor": "zhipu",
       "vendor_name": "智谱 Z.ai",
       "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -623,6 +662,11 @@
       "links": {
         "self": "models/glm-image.json",
         "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     }
   ]

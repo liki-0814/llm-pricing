@@ -1,9 +1,9 @@
 /* Static JSON client and token/cache estimator. Browser: LLMPrice; Node: require(). */
 (function (root, factory) {
-  var api = factory();
+  var api = factory(typeof module === "object" && module.exports ? require("./availability.js") : root.LLMAvailability);
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.LLMPrice = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (lifecycle) {
   "use strict";
   var PRICE = ["input", "output", "cached_input", "cache_write"];
   var CACHE = ["implicit_read", "explicit_read", "explicit_write", "explicit_write_1h", "explicit_write_12h", "storage_per_1M_tokens_hour"];
@@ -21,6 +21,13 @@
       throw error("INVALID_ARGUMENT", "at is not a valid calendar date");
     return d;
   }
+  function modelAt(model, at) {
+    if (["USD", "CNY"].indexOf(model.currency) < 0) throw error("INVALID_DATA", "Missing or unsupported currency");
+    if (!lifecycle) throw error("INVALID_DATA", "Load assets/availability.js before client.js");
+    var decision = lifecycle.availability(model, at.toISOString());
+    if (!decision.estimable) throw error("MODEL_RETIRED", "Model retired at this instant; routing aliases do not prove the old entity is available");
+    return decision;
+  }
   var TOKEN_USAGE = { textInputTokens: "text_input", textCachedInputTokens: "text_cached_input", textOutputTokens: "text_output",
     imageInputTokens: "image_input", imageCachedInputTokens: "image_cached_input", imageOutputTokens: "image_output",
     videoInputTokens: "video_input", videoOutputTokens: "video_output", audioInputTokens: "audio_input" };
@@ -31,7 +38,13 @@
       throw error("UNSUPPORTED_MODALITY", "estimateMedia needs an image or video model; use estimate() for text models");
     var allowedUsage = ["images", "size", "quality", "seconds", "resolution", "audio", "inputImages", "inputVideoSeconds"].concat(Object.keys(TOKEN_USAGE));
     Object.keys(usage).forEach(function (k) { if (allowedUsage.indexOf(k) < 0) throw error("INVALID_ARGUMENT", "Unknown usage field: " + k); });
-    Object.keys(options).forEach(function (k) { if (k !== "tier") throw error("INVALID_ARGUMENT", "Unknown estimate option: " + k); });
+    Object.keys(options).forEach(function (k) { if (["tier", "at"].indexOf(k) < 0) throw error("INVALID_ARGUMENT", "Unknown estimate option: " + k); });
+    var quoteAt = date(options.at === undefined ? new Date().toISOString() : options.at);
+    if (model.lifecycle && model.lifecycle.retired_at && options.at && options.at.length === 10)
+      throw error("TIME_REQUIRED", "Lifecycle boundary needs an explicit instant for historical estimation");
+    var available = modelAt(model, quoteAt);
+    if (model.last_updated && quoteAt.toISOString().slice(0, 10) < model.last_updated)
+      throw error("HISTORICAL_PRICE_UNAVAILABLE", "This snapshot does not contain earlier media prices");
     var mp = model.media_pricing, tier = options.tier === undefined ? "standard" : options.tier;
     if (tier !== "standard" && tier !== "batch") throw error("INVALID_ARGUMENT", "tier must be standard or batch");
     function count(k, integer) { return usage[k] === undefined ? 0 : number(usage[k], k, integer); }
@@ -81,7 +94,7 @@
     if (mp.promotion) warnings.push("Prices are list prices; vendor promotion not applied: " + mp.promotion.note);
     var total = Object.keys(parts).reduce(function (n, k) { return n + parts[k]; }, 0);
     if (!Number.isFinite(total)) throw error("INVALID_ARGUMENT", "Usage is too large to estimate the total");
-    return { model_id: model.id, modality: model.modality, currency: "USD", total: total, breakdown: parts, unit_prices: units,
+    return { model_id: model.id, modality: model.modality, currency: model.currency, unit: model.unit, region: model.billing.region, channel: model.billing.channel, availability: available, total: total, breakdown: parts, unit_prices: units,
       tier: tier, price_basis: model.price_basis, billing: model.billing, warnings: warnings,
       excluded_costs: ["server_tools", "grounding", "taxes", "free_quota", "unrecorded_multimodal_rates"] };
   }
@@ -106,12 +119,19 @@
     if (options.cacheType !== undefined && ["implicit", "explicit"].indexOf(options.cacheType) < 0)
       throw error("INVALID_ARGUMENT", "cacheType must be implicit or explicit");
     var at = date(options.at === undefined ? new Date().toISOString() : options.at), day = at.toISOString().slice(0, 10), warnings = [];
+    if (model.lifecycle && model.lifecycle.retired_at && options.at && options.at.length === 10)
+      throw error("TIME_REQUIRED", "Lifecycle boundary needs an explicit instant for historical estimation");
+    var available = modelAt(model, at);
+    if (available.status === "pending_confirmation") warnings.push("Official lifecycle date/time is unresolved; availability is not confirmed: " + available.reason);
     if (day < model.last_updated) throw error("HISTORICAL_PRICE_UNAVAILABLE", "This snapshot does not contain prices before " + model.last_updated);
     if (model.limits.max_output_tokens !== null && counts.outputTokens > model.limits.max_output_tokens)
       throw error("LIMIT_EXCEEDED", "outputTokens exceeds the documented maximum");
     if (model.context_length !== null && counts.inputTokens > model.context_length)
       throw error("LIMIT_EXCEEDED", "inputTokens exceeds the recorded context window");
     if (day > model.last_updated) warnings.push("Prices are based on the " + model.last_updated + " snapshot and announced schedules; later unannounced changes are not known.");
+    var cap = model.estimation_limits;
+    if (cap && (counts.inputTokens > cap.max_input_tokens || counts.outputTokens > cap.max_output_tokens))
+      throw error("LIMIT_EXCEEDED", "Usage exceeds the verified conservative estimation scope: " + cap.note);
     var prices = Object.assign({}, model.pricing), cache = Object.assign({}, model.cache_pricing), tier = null, period = "standard";
     (model.pricing_tiers || []).forEach(function (t) {
       if (counts.inputTokens > t.input_tokens_gt && (t.input_tokens_lte === null || counts.inputTokens <= t.input_tokens_lte)) {
@@ -133,6 +153,8 @@
       if (!peak) Object.assign(prices, model.off_peak_pricing);
     }
     (model.price_schedule || []).forEach(function (e) {
+      if (e.effective_until_precision === "date" && e.effective_until && at.getTime() >= Date.parse(e.effective_until + "T00:00:00Z") - 14 * 3600000)
+        throw error("PRICE_BOUNDARY_UNCONFIRMED", "Date-only promotional cutoff needs manual confirmation; no exact ending instant or post-promotion price is inferred");
       if (e.effective_from && day < e.effective_from) return;
       if (e.effective_until && day > e.effective_until) {
         if (e.kind === "promotion") throw error("PRICE_EXPIRED", "Promotion needs re-verification after " + e.effective_until);
@@ -177,6 +199,15 @@
       if (!region) throw error("UNSUPPORTED_SERVICE_TIER", "No documented data residency surcharge");
       applyService(region);
     }
+    var offer = model.token_offer;
+    if (offer) {
+      if (options.at && options.at.length === 10) throw error("TIME_REQUIRED", "Offer needs an exact timestamp with timezone");
+      if (at.getTime() < Date.parse(offer.observed_at)) throw error("HISTORICAL_PRICE_UNAVAILABLE", "Offer start is unknown; no historic estimate before observed_at");
+      if (at.getTime() <= Date.parse(offer.valid_until)) {
+        offer.fields.forEach(function (k) { if (prices[k] !== null) prices[k] *= offer.multiplier; });
+        period = "promotion";
+      }
+    }
     var readPrice = prices.cached_input, readKey = "cached_input";
     if (options.cacheType && options.cacheType !== model.billing.cached_input_type) {
       readKey = options.cacheType + "_read"; readPrice = cache[readKey];
@@ -199,7 +230,7 @@
     if (reference) warnings.push("Reference estimate using " + model.price_basis.reference_model_id + "; this is not the subscription bill.");
     var total = Object.keys(parts).reduce(function (n, k) { return n + parts[k]; }, 0);
     if (!Number.isFinite(total)) throw error("INVALID_ARGUMENT", "Usage is too large to estimate the total");
-    return { model_id: model.id, currency: "USD", total: total,
+    return { model_id: model.id, currency: model.currency, unit: model.unit, region: model.billing.region, channel: model.billing.channel, availability: available, total: total,
       breakdown: parts, unit_prices: units, input_tokens: counts.inputTokens, at: at.toISOString(),
       pricing_tier: tier ? tier.condition : "base", period: period, service_tier: selected,
       price_basis: model.price_basis, billing: model.billing, warnings: warnings,
@@ -226,7 +257,7 @@
             throw error("INVALID_RESPONSE", "Expected an OpenAPI 3.1 document for " + path);
           return data;
         }
-        if (!data || data.api_version !== "v1" || !data.meta || data.data === undefined)
+        if (!data || data.api_version !== (/\/v2\/$/.test(base.pathname) ? "v2" : "v1") || !data.meta || data.data === undefined)
           throw error("INVALID_RESPONSE", "Unexpected response envelope for " + path);
         return data;
       } catch (e) {
@@ -245,21 +276,25 @@
     }
     function query(envelope, options) {
       options = options || {};
-      var keys = ["vendor", "q", "sort", "limit", "priceBasis", "modality"];
+      var keys = ["vendor", "q", "sort", "limit", "priceBasis", "modality", "currency"];
       Object.keys(options).forEach(function (k) { if (keys.indexOf(k) < 0) throw error("INVALID_ARGUMENT", "Unknown query option: " + k); });
+      if (options.currency !== undefined && ["USD", "CNY"].indexOf(options.currency) < 0) throw error("INVALID_ARGUMENT", "currency must be USD or CNY");
       if (options.vendor !== undefined) safeId(options.vendor);
       if (options.q !== undefined && typeof options.q !== "string") throw error("INVALID_ARGUMENT", "q must be a string");
       if (options.sort !== undefined && typeof options.sort !== "string") throw error("INVALID_ARGUMENT", "sort must be a string");
       if (options.modality !== undefined && ["text", "image", "video"].indexOf(options.modality) < 0) throw error("INVALID_ARGUMENT", "modality must be text, image or video");
       if (options.priceBasis !== undefined && ["official", "reference"].indexOf(options.priceBasis) < 0) throw error("INVALID_ARGUMENT", "priceBasis must be official or reference");
       var models = envelope.data.filter(function (m) {
+        if (!lifecycle.availability(m, new Date().toISOString()).estimable) return false;
         var terms = (options.q || "").trim().toLowerCase().split(/\s+/).filter(Boolean);
         var text = [m.id, m.name, m.vendor, m.vendor_name, m.modality, m.notes || ""].join(" ").toLowerCase();
-        return (!options.vendor || m.vendor === options.vendor) && (!options.modality || m.modality === options.modality) && (!options.priceBasis || m.price_basis.type === options.priceBasis) && terms.every(function (t) { return text.indexOf(t) >= 0; });
+        return (!options.currency || m.currency === options.currency) && (!options.vendor || m.vendor === options.vendor) && (!options.modality || m.modality === options.modality) && (!options.priceBasis || m.price_basis.type === options.priceBasis) && terms.every(function (t) { return text.indexOf(t) >= 0; });
       });
       if (options.sort) {
         var desc = options.sort[0] === "-", key = desc ? options.sort.slice(1) : options.sort;
         var sorting = { input: function (m) { return m.pricing.input; }, output: function (m) { return m.pricing.output; }, cached_input: function (m) { return m.pricing.cached_input; }, cache_write: function (m) { return m.pricing.cache_write; }, context_length: function (m) { return m.context_length; }, max_output_tokens: function (m) { return m.limits.max_output_tokens; }, name: function (m) { return m.name; }, media_price: mediaPrice };
+        if (["input", "output", "cached_input", "cache_write", "media_price"].indexOf(key) >= 0 && new Set(models.map(function (m) { return m.currency; })).size > 1)
+          throw error("CURRENCY_MISMATCH", "Price ranking needs a single explicit currency filter; no implicit FX");
         if (!sorting[key]) throw error("INVALID_ARGUMENT", "Unknown sort field: " + key);
         models.sort(function (a, b) { var x = sorting[key](a), y = sorting[key](b); return x === null ? (y === null ? 0 : 1) : y === null ? -1 : (typeof x === "number" ? x - y : x.localeCompare(y)) * (desc ? -1 : 1); });
       }

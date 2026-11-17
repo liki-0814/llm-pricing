@@ -94,7 +94,9 @@
       "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
     },
     "last_updated": "2026-10-29",
-    "unverified_fields": []
+    "unverified_fields": [],
+    "currency": "USD",
+    "unit": "see_media_pricing"
   },
   "grok-imagine-video-1.5": {
     "id": "grok-imagine-video-1.5",
@@ -167,7 +169,9 @@
       "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
     },
     "last_updated": "2026-10-29",
-    "unverified_fields": []
+    "unverified_fields": [],
+    "currency": "USD",
+    "unit": "see_media_pricing"
   },
   "gemini-nano-banana-2.1": {
     "id": "gemini-nano-banana-2.1",
@@ -290,7 +294,9 @@
       "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
     },
     "last_updated": "2026-10-29",
-    "unverified_fields": []
+    "unverified_fields": [],
+    "currency": "USD",
+    "unit": "see_media_pricing"
   },
   "gpt-image-2.5-flare": {
     "id": "gpt-image-2.5-flare",
@@ -359,7 +365,9 @@
     "last_updated": "2026-10-29",
     "unverified_fields": [
       "media_pricing.image_prices"
-    ]
+    ],
+    "currency": "USD",
+    "unit": "see_media_pricing"
   },
   "wan3.0-video": {
     "id": "wan3.0-video",
@@ -438,7 +446,9 @@
       "note": "仅记录官方公布的按量付费标价，不含工具、税费、免费额度或订阅额度结算。"
     },
     "last_updated": "2026-10-29",
-    "unverified_fields": []
+    "unverified_fields": [],
+    "currency": "USD",
+    "unit": "see_media_pricing"
   },
   "gemini-omni-1.1-flash": {
     "id": "gemini-omni-1.1-flash",
@@ -543,6 +553,8 @@
       "media_pricing.video_prices.360p.any.standard",
       "media_pricing.video_prices.1080p.any.standard",
       "media_pricing.video_prices.4k.any.standard"
-    ]
+    ],
+    "currency": "USD",
+    "unit": "see_media_pricing"
   }
 }

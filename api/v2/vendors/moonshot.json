@@ -1,0 +1,751 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
+    "count": 6
+  },
+  "vendor": {
+    "slug": "moonshot",
+    "name": "Moonshot Kimi",
+    "model_count": 6,
+    "model_ids": [
+      "kimi-k3",
+      "kimi-k3.1-pro",
+      "kimi-k3.1-pro-highspeed",
+      "kimi-k2.7-code",
+      "kimi-k2.7-code-highspeed",
+      "kimi-for-coding"
+    ],
+    "modality_counts": {
+      "text": 6,
+      "image": 0,
+      "video": 0
+    },
+    "source_urls": [
+      "https://platform.kimi.ai/docs/pricing/chat",
+      "https://www.kimi.com/code/docs/en/kimi-code/models"
+    ],
+    "links": {
+      "self": "vendors/moonshot.json"
+    }
+  },
+  "data": [
+    {
+      "id": "kimi-k3",
+      "name": "Kimi K3",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 3.0,
+        "output": 15.0,
+        "cached_input": 0.3,
+        "cache_write": 3.0
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1,048,576 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [
+        "https://platform.kimi.ai/docs/pricing/batch"
+      ],
+      "last_updated": "2026-10-31",
+      "notes": "缓存写入按 TTL 计价：5 分钟 $3.00，1 小时 $6.00（表中为 5 分钟）。缓存命中自动续期、无额外写入费。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": false,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "顶层 reasoning_effort 支持 low/high/max，默认 max；K3 恒开思考，不支持 thinking 参数，无法关闭。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/use-thinking-models",
+          "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+        ]
+      },
+      "limits": {
+        "context_length": 1048576,
+        "max_output_tokens": 1048576,
+        "status": "verified",
+        "note": "官方 K3 文档：max_completion_tokens 默认 131072，最大可设 1048576（等于上下文窗口；输入+输出总和不得超过窗口）。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
+          "https://platform.kimi.ai/docs/api/chat",
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.6,
+          "note": "Batch API 价为标准价的 60%（官方 BatchJob 定价：K3 输入 $1.80 / 输出 $9.00 / 缓存命中 $0.18 / 5 分钟缓存写入 $1.80 / 1 小时缓存写入 $3.60）。",
+          "multipliers": {
+            "input": 0.6,
+            "output": 0.6,
+            "cached_input": 0.6,
+            "cache_write": 0.6,
+            "implicit_read": 0.6,
+            "explicit_read": 0.6,
+            "explicit_write": 0.6,
+            "explicit_write_1h": 0.6,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.kimi.ai/docs/pricing/batch",
+            "https://platform.kimi.ai/docs/pricing/chat"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 3.0,
+        "explicit_write_1h": 6.0,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "Kimi API 自动缓存重复前缀；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h；命中自动续期、无额外写入费。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/kimi-k3.json",
+        "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "kimi-k3.1-pro",
+      "name": "Kimi K3.1 Pro",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cached_input": 0.2,
+        "cache_write": 2.0
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1,048,576 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [
+        "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+        "https://platform.kimi.ai/docs/models",
+        "https://platform.kimi.ai/docs/guide/use-reasoning-effort",
+        "https://platform.kimi.ai/docs/pricing/batch"
+      ],
+      "last_updated": "2026-10-31",
+      "notes": "K3 的后训练升级版，K3.1 系列首个模型；按量计费、无上下文长度分档。缓存写入按 TTL 计价：5 分钟 $2.00，1 小时 $4.00（表中为 5 分钟）。缓存命中 $0.20、自动续期、无额外写入费。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": false,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "官方：顶层 reasoning_effort 支持 low/high/max，默认 max；K3.1 Pro 恒开思考，关闭思考的请求会被拒绝。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+          "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+        ]
+      },
+      "limits": {
+        "context_length": 1048576,
+        "max_output_tokens": 1048576,
+        "status": "verified",
+        "note": "官方 K3.1 Pro 文档：上下文 1M（1,048,576）；max_completion_tokens 默认 131072，最大可设 1048576。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.6,
+          "note": "Batch API 价为标准价的 60%（官方 BatchJob 定价：K3.1 Pro 输入 $1.20 / 输出 $6.00 / 缓存命中 $0.12 / 5 分钟缓存写入 $1.20 / 1 小时缓存写入 $2.40）。",
+          "multipliers": {
+            "input": 0.6,
+            "output": 0.6,
+            "cached_input": 0.6,
+            "cache_write": 0.6,
+            "implicit_read": 0.6,
+            "explicit_read": 0.6,
+            "explicit_write": 0.6,
+            "explicit_write_1h": 0.6,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.kimi.ai/docs/pricing/batch",
+            "https://platform.kimi.ai/docs/pricing/chat"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 2.0,
+        "explicit_write_1h": 4.0,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "Kimi API 自动缓存重复前缀；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h；命中自动续期、无额外写入费。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/kimi-k3.1-pro.json",
+        "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "kimi-k3.1-pro-highspeed",
+      "name": "Kimi K3.1 Pro Highspeed",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 4.0,
+        "output": 20.0,
+        "cached_input": 0.2,
+        "cache_write": 4.0
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1,048,576 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [
+        "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+        "https://platform.kimi.ai/docs/models",
+        "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+      ],
+      "last_updated": "2026-10-25",
+      "notes": "K3.1 Pro 高速版（同一模型，约 2–3× 输出速度）；按量计费、无上下文长度分档。缓存写入按 TTL 计价：5 分钟 $4.00，1 小时 $8.00（表中为 5 分钟）。缓存命中 $0.20、自动续期、无额外写入费。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": false,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "官方：顶层 reasoning_effort 支持 low/high/max，默认 max；K3.1 Pro 恒开思考，关闭思考的请求会被拒绝。 高速版与 K3.1 Pro 能力相同（官方模型列表），沿用同一设置。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+          "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
+        ]
+      },
+      "limits": {
+        "context_length": 1048576,
+        "max_output_tokens": 1048576,
+        "status": "verified",
+        "note": "官方 K3.1 Pro 文档：上下文 1M（1,048,576）；max_completion_tokens 默认 131072，最大可设 1048576。 高速版为同一模型（官方），沿用同一上限。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k3-1-pro-quickstart",
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 4.0,
+        "explicit_write_1h": 8.0,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "Kimi API 自动缓存重复前缀；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h；命中自动续期、无额外写入费。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [],
+      "links": {
+        "self": "models/kimi-k3.1-pro-highspeed.json",
+        "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "kimi-k2.7-code",
+      "name": "Kimi K2.7 Code",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.95,
+        "output": 4.0,
+        "cached_input": 0.19,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "unverified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 262144,
+      "context_length_label": "262,144 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [
+        "https://platform.kimi.ai/docs/models"
+      ],
+      "last_updated": "2026-10-25",
+      "notes": "官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": false,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "verified"
+        },
+        "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/use-thinking-models"
+        ]
+      },
+      "limits": {
+        "context_length": 262144,
+        "max_output_tokens": 262144,
+        "status": "verified",
+        "note": "官方：上下文窗口 262,144 tokens（256K）；官方故障排查 FAQ：kimi-k2.7-code 最大输出长度为 256*1024 − prompt_tokens，即以 262,144 计（与输入共享窗口）；max_tokens 默认 32768（32k）。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
+          "https://platform.kimi.ai/docs/pricing/chat",
+          "https://platform.kimi.ai/docs/guide/troubleshooting"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.6,
+          "note": "Batch API 价为标准价的 60%（官方 BatchJob 定价：K2.7 Code 输入 $0.57 / 缓存命中 $0.114 / 输出 $2.40）。",
+          "multipliers": {
+            "input": 0.6,
+            "output": 0.6,
+            "cached_input": 0.6,
+            "cache_write": 0.6,
+            "implicit_read": 0.6,
+            "explicit_read": 0.6,
+            "explicit_write": 0.6,
+            "explicit_write_1h": 0.6,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.kimi.ai/docs/pricing/chat"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存命中价即 pricing.cached_input；官方页未列缓存写入价。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "cache_write"
+      ],
+      "links": {
+        "self": "models/kimi-k2.7-code.json",
+        "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "kimi-k2.7-code-highspeed",
+      "name": "Kimi K2.7 Code Highspeed",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 1.9,
+        "output": 8.0,
+        "cached_input": 0.38,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "unverified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 262144,
+      "context_length_label": "262,144 tokens",
+      "source_url": "https://platform.kimi.ai/docs/pricing/chat",
+      "extra_sources": [
+        "https://platform.kimi.ai/docs/models"
+      ],
+      "last_updated": "2026-10-25",
+      "notes": "高速版；官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": false,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "verified"
+        },
+        "note": "不支持 reasoning_effort；思考恒开（thinking 只接受 enabled，传 disabled 报错），无强度档位可调。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/use-thinking-models"
+        ]
+      },
+      "limits": {
+        "context_length": 262144,
+        "max_output_tokens": 262144,
+        "status": "verified",
+        "note": "官方：上下文窗口 262,144 tokens（256K）；官方故障排查 FAQ：kimi-k2.7-code 最大输出长度为 256*1024 − prompt_tokens，即以 262,144 计（与输入共享窗口）；max_tokens 默认 32768（32k）。highspeed 为同一模型的高速版（官方快速入门），沿用同一上限。",
+        "sources": [
+          "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart",
+          "https://platform.kimi.ai/docs/pricing/chat",
+          "https://platform.kimi.ai/docs/guide/troubleshooting"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存命中价即 pricing.cached_input；官方页未列缓存写入价。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "cache_write"
+      ],
+      "links": {
+        "self": "models/kimi-k2.7-code-highspeed.json",
+        "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "kimi-for-coding",
+      "name": "Kimi K2.8 Preview",
+      "vendor": "moonshot",
+      "vendor_name": "Moonshot Kimi",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.95,
+        "output": 4.0,
+        "cached_input": 0.19,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "reference",
+        "output": "reference",
+        "cached_input": "reference",
+        "cache_write": "unverified"
+      },
+      "price_basis": {
+        "type": "reference",
+        "reference_model_id": "kimi-k2.7-code",
+        "sources": [
+          "https://www.kimi.com/code/docs/en/kimi-code/models",
+          "https://platform.kimi.ai/docs/pricing/chat"
+        ],
+        "note": "用户确认保留参照价；参照 kimi-k2.7-code 的 token 单价，并非本订阅模型的官方按量报价。"
+      },
+      "billing": {
+        "channel": "subscription",
+        "price_type": "reference",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1,048,576 tokens",
+      "source_url": "https://www.kimi.com/code/docs/en/kimi-code/models",
+      "extra_sources": [
+        "https://www.kimi.com/code/docs/en/",
+        "https://platform.kimi.ai/docs/models"
+      ],
+      "last_updated": "2026-10-11",
+      "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无官方 token 单价。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。 价格暂按 Kimi K2.7 Code 计价(用户确认,Kimi 官方暂未单独标价)",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": [
+          "low",
+          "high",
+          "max"
+        ],
+        "default": "max",
+        "can_disable": true,
+        "status": "verified",
+        "field_status": {
+          "supported": "verified",
+          "levels": "verified",
+          "default": "verified",
+          "can_disable": "verified"
+        },
+        "note": "Kimi Code 文档：K3 与 K2.8 Preview 支持 low/high/max 思考强度，K2.8 Preview 默认 max；关闭思考时请求由 K2.8 Preview（无思考）处理。",
+        "sources": [
+          "https://www.kimi.com/code/docs/en/kimi-code/models"
+        ]
+      },
+      "limits": {
+        "context_length": 1048576,
+        "max_output_tokens": null,
+        "status": "partial",
+        "note": "Kimi Code 官方模型配置页：kimi-for-coding（K2.8 Preview）上下文窗口 1048576；最大输出官方未列出（待核实）。",
+        "sources": [
+          "https://www.kimi.com/code/docs/en/kimi-code/models"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "cache_write",
+        "limits.max_output_tokens"
+      ],
+      "links": {
+        "self": "models/kimi-for-coding.json",
+        "vendor": "vendors/moonshot.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    }
+  ]
+}

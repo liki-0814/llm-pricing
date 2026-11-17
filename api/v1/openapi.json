@@ -3,7 +3,7 @@
   "info": {
     "title": "LLM API Pricing (static JSON API)",
     "version": "1.2.0",
-    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD. Text models are priced per 1M tokens (top-level pricing); image and video generation models (modality image / video) carry pricing_status not_applicable and express prices in media_pricing (per image by size and quality, per second of video by resolution and audio, and per-modality token prices). Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-11-06."
+    "description": "USD-only v1 compatibility endpoint. Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. Prices use each model.currency (USD or CNY); never compare or sum across currencies. Text models are priced per 1M tokens (top-level pricing); image and video generation models (modality image / video) carry pricing_status not_applicable and express prices in media_pricing (per image by size and quality, per second of video by resolution and audio, and per-modality token prices). Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-11-17."
   },
   "servers": [
     {
@@ -147,7 +147,8 @@
                 "minimax-h3-lite",
                 "minimax-h3-max",
                 "minimax-image-01",
-                "glm-image"
+                "glm-image",
+                "qwen4-max"
               ]
             }
           }
@@ -306,6 +307,27 @@
             "type": "string",
             "format": "date",
             "description": "Dataset last-verified date"
+          },
+          "availability_as_of": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "source_commit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "next_invalidation": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
           },
           "currency": {
             "type": "string",
@@ -472,7 +494,7 @@
                   "null"
                 ],
                 "minimum": 0,
-                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
               },
               "output": {
                 "type": [
@@ -480,7 +502,7 @@
                   "null"
                 ],
                 "minimum": 0,
-                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
               },
               "cached_input": {
                 "type": [
@@ -517,7 +539,8 @@
                   "reference",
                   "unverified",
                   "not_listed",
-                  "not_applicable"
+                  "not_applicable",
+                  "not_available"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               },
@@ -528,7 +551,8 @@
                   "reference",
                   "unverified",
                   "not_listed",
-                  "not_applicable"
+                  "not_applicable",
+                  "not_available"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               },
@@ -539,7 +563,8 @@
                   "reference",
                   "unverified",
                   "not_listed",
-                  "not_applicable"
+                  "not_applicable",
+                  "not_available"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               },
@@ -550,7 +575,8 @@
                   "reference",
                   "unverified",
                   "not_listed",
-                  "not_applicable"
+                  "not_applicable",
+                  "not_available"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               }
@@ -573,7 +599,7 @@
                   "null"
                 ],
                 "minimum": 0,
-                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
               },
               "output": {
                 "type": [
@@ -581,7 +607,7 @@
                   "null"
                 ],
                 "minimum": 0,
-                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
               },
               "cached_input": {
                 "type": [
@@ -589,7 +615,7 @@
                   "null"
                 ],
                 "minimum": 0,
-                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
               }
             },
             "additionalProperties": false
@@ -855,7 +881,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "output": {
                   "type": [
@@ -863,7 +889,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "cached_input": {
                   "type": [
@@ -1035,7 +1061,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "output": {
                       "type": [
@@ -1043,7 +1069,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "cached_input": {
                       "type": [
@@ -1051,7 +1077,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "cache_write": {
                       "type": [
@@ -1059,7 +1085,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     }
                   },
                   "required": [],
@@ -1129,7 +1155,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "output": {
                   "type": [
@@ -1137,7 +1163,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "cached_input": {
                   "type": [
@@ -1145,7 +1171,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "cache_write": {
                   "type": [
@@ -1153,7 +1179,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "note": {
                   "type": [
@@ -1177,7 +1203,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "explicit_read": {
                       "type": [
@@ -1185,7 +1211,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "explicit_write": {
                       "type": [
@@ -1193,7 +1219,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "explicit_write_1h": {
                       "type": [
@@ -1201,7 +1227,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "explicit_write_12h": {
                       "type": [
@@ -1209,7 +1235,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "storage_per_1M_tokens_hour": {
                       "type": [
@@ -1217,7 +1243,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     }
                   },
                   "required": [],
@@ -1232,6 +1258,18 @@
                     "format": "uri",
                     "pattern": "^https?://"
                   }
+                },
+                "effective_until_precision": {
+                  "enum": [
+                    "date",
+                    "instant"
+                  ]
+                },
+                "effective_until_timezone": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "additionalProperties": false
@@ -1417,6 +1455,218 @@
                 "additionalProperties": false
               }
             ]
+          },
+          "lifecycle": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "active",
+                  "scheduled",
+                  "pending_confirmation",
+                  "retired"
+                ]
+              },
+              "retired_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "retirement_date": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "timezone": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "precision": {
+                "enum": [
+                  "instant",
+                  "date",
+                  "unknown"
+                ]
+              },
+              "original_text": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "scope": {
+                "enum": [
+                  "entity",
+                  "endpoint"
+                ]
+              },
+              "routes_to": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "conflict": {
+                "type": "boolean"
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "status",
+              "retired_at",
+              "retirement_date",
+              "timezone",
+              "precision",
+              "original_text",
+              "scope",
+              "routes_to",
+              "conflict",
+              "note",
+              "sources"
+            ],
+            "additionalProperties": false
+          },
+          "availability": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "enum": [
+                  "active",
+                  "scheduled",
+                  "pending_confirmation",
+                  "retired"
+                ]
+              },
+              "estimable": {
+                "type": "boolean"
+              },
+              "reason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "status",
+              "estimable",
+              "reason"
+            ],
+            "additionalProperties": false
+          },
+          "token_offer": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "observed_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "valid_until": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "multiplier": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 1
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "input",
+                    "output",
+                    "cached_input",
+                    "cache_write"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "minItems": 1
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "observed_at",
+              "valid_until",
+              "multiplier",
+              "fields",
+              "sources",
+              "note"
+            ],
+            "additionalProperties": false
+          },
+          "estimation_limits": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "max_input_tokens": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "max_output_tokens": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sources": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https?://"
+                }
+              }
+            },
+            "required": [
+              "max_input_tokens",
+              "max_output_tokens",
+              "note",
+              "sources"
+            ],
+            "additionalProperties": false
           }
         },
         "additionalProperties": false
@@ -1507,7 +1757,7 @@
           "storage_per_1M_tokens_hour",
           "note"
         ],
-        "description": "Cache price breakdown where documented (USD per 1M tokens; null = not documented / 待核实). pricing.cached_input and pricing.cache_write keep their meaning; this object adds the finer split. Qwen: implicit_read / explicit_read / explicit_write are the three official cache prices.",
+        "description": "Cache price breakdown where documented (model.currency per 1M tokens; null = not documented / 待核实). pricing.cached_input and pricing.cache_write keep their meaning; this object adds the finer split. Qwen: implicit_read / explicit_read / explicit_write are the three official cache prices.",
         "properties": {
           "implicit_read": {
             "type": [
@@ -1555,7 +1805,7 @@
               "null"
             ],
             "minimum": 0,
-            "description": "Cache storage fee per 1M tokens per hour (USD, not per 1M tokens; 0 = currently free)"
+            "description": "Cache storage fee per 1M tokens per hour (model.currency, not per 1M tokens; 0 = currently free)"
           },
           "note": {
             "type": [
@@ -1711,7 +1961,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "text_cached_input": {
                         "type": [
@@ -1719,7 +1969,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "text_output": {
                         "type": [
@@ -1727,7 +1977,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "image_input": {
                         "type": [
@@ -1735,7 +1985,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "image_cached_input": {
                         "type": [
@@ -1743,7 +1993,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "image_output": {
                         "type": [
@@ -1751,7 +2001,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "video_input": {
                         "type": [
@@ -1759,7 +2009,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "video_output": {
                         "type": [
@@ -1767,7 +2017,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "audio_input": {
                         "type": [
@@ -1775,7 +2025,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       }
                     },
                     "required": [
@@ -1805,7 +2055,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "text_cached_input": {
                             "type": [
@@ -1813,7 +2063,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "text_output": {
                             "type": [
@@ -1821,7 +2071,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_input": {
                             "type": [
@@ -1829,7 +2079,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_cached_input": {
                             "type": [
@@ -1837,7 +2087,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_output": {
                             "type": [
@@ -1845,7 +2095,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "video_input": {
                             "type": [
@@ -1853,7 +2103,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "video_output": {
                             "type": [
@@ -1861,7 +2111,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "audio_input": {
                             "type": [
@@ -1869,7 +2119,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           }
                         },
                         "required": [
@@ -1901,7 +2151,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "text_cached_input": {
                             "type": [
@@ -1909,7 +2159,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "text_output": {
                             "type": [
@@ -1917,7 +2167,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_input": {
                             "type": [
@@ -1925,7 +2175,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_cached_input": {
                             "type": [
@@ -1933,7 +2183,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_output": {
                             "type": [
@@ -1941,7 +2191,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "video_input": {
                             "type": [
@@ -1949,7 +2199,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "video_output": {
                             "type": [
@@ -1957,7 +2207,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "audio_input": {
                             "type": [
@@ -1965,7 +2215,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           }
                         },
                         "required": [
@@ -1997,7 +2247,7 @@
           },
           "image_prices": {
             "type": "array",
-            "description": "USD per generated image by size x quality x tier. Empty + listed in unverified_fields = per-image price 待核实.",
+            "description": "model.currency per generated image by size x quality x tier. Empty + listed in unverified_fields = per-image price 待核实.",
             "items": {
               "type": "object",
               "properties": {
@@ -2026,7 +2276,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per image; null = 待核实 (listed in unverified_fields)"
+                  "description": "model.currency per image; null = 待核实 (listed in unverified_fields)"
                 },
                 "tokens": {
                   "type": [
@@ -2064,7 +2314,7 @@
           },
           "video_prices": {
             "type": "array",
-            "description": "USD per second of generated video by resolution x audio x tier. Empty + listed in unverified_fields = 待核实.",
+            "description": "model.currency per second of generated video by resolution x audio x tier. Empty + listed in unverified_fields = 待核实.",
             "items": {
               "type": "object",
               "properties": {
@@ -2094,7 +2344,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per second of output video; null = 待核实"
+                  "description": "model.currency per second of output video; null = 待核实"
                 },
                 "tokens_per_second": {
                   "type": [
@@ -2110,7 +2360,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per second of input (source) video at this output resolution when the vendor bills input video; null = not billed"
+                  "description": "model.currency per second of input (source) video at this output resolution when the vendor bills input video; null = not billed"
                 },
                 "basis": {
                   "enum": [
@@ -2146,7 +2396,7 @@
               "null"
             ],
             "minimum": 0,
-            "description": "USD per input / reference image (editing, image-to-video) when billed per image; null = not billed per image"
+            "description": "model.currency per input / reference image (editing, image-to-video) when billed per image; null = not billed per image"
           },
           "input_image_price_batch": {
             "type": [
@@ -2154,7 +2404,7 @@
               "null"
             ],
             "minimum": 0,
-            "description": "USD per input image under Batch when it differs from input_image_price; null = same / not listed"
+            "description": "model.currency per input image under Batch when it differs from input_image_price; null = same / not listed"
           },
           "batch_supported": {
             "type": [

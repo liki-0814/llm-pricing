@@ -1,0 +1,274 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
+    "count": 10
+  },
+  "data": [
+    {
+      "slug": "deepseek",
+      "name": "DeepSeek",
+      "model_count": 2,
+      "model_ids": [
+        "deepseek-flash",
+        "deepseek-v4-pro"
+      ],
+      "modality_counts": {
+        "text": 2,
+        "image": 0,
+        "video": 0
+      },
+      "source_urls": [
+        "https://api-docs.deepseek.com/quick_start/pricing"
+      ],
+      "links": {
+        "self": "vendors/deepseek.json"
+      }
+    },
+    {
+      "slug": "openai",
+      "name": "OpenAI",
+      "model_count": 11,
+      "model_ids": [
+        "gpt-5.6-sol",
+        "gpt-5.6-terra",
+        "gpt-5.6-luna",
+        "gpt-6-astra",
+        "gpt-6-sol",
+        "gpt-6-luna",
+        "gpt-6.1-sol",
+        "gpt-6.1-terra",
+        "gpt-6-astra-law",
+        "gpt-image-2.5-flare",
+        "gpt-image-2.5-sunburst"
+      ],
+      "modality_counts": {
+        "text": 9,
+        "image": 2,
+        "video": 0
+      },
+      "source_urls": [
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "links": {
+        "self": "vendors/openai.json"
+      }
+    },
+    {
+      "slug": "anthropic",
+      "name": "Anthropic",
+      "model_count": 13,
+      "model_ids": [
+        "claude-fable-5.1",
+        "claude-mythos-5.1",
+        "claude-fable-5",
+        "claude-mythos-5",
+        "claude-opus-5.5",
+        "claude-opus-5",
+        "claude-opus-4.8",
+        "claude-opus-4.7",
+        "claude-opus-4.6",
+        "claude-sonnet-5.5",
+        "claude-sonnet-5",
+        "claude-sonnet-4.6",
+        "claude-haiku-5.5"
+      ],
+      "modality_counts": {
+        "text": 13,
+        "image": 0,
+        "video": 0
+      },
+      "source_urls": [
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "links": {
+        "self": "vendors/anthropic.json"
+      }
+    },
+    {
+      "slug": "zhipu",
+      "name": "智谱 Z.ai",
+      "model_count": 5,
+      "model_ids": [
+        "glm-5.3",
+        "glm-5.3-flash",
+        "glm-5.3-flashx",
+        "glm-5.2",
+        "glm-image"
+      ],
+      "modality_counts": {
+        "text": 4,
+        "image": 1,
+        "video": 0
+      },
+      "source_urls": [
+        "https://docs.z.ai/guides/overview/pricing"
+      ],
+      "links": {
+        "self": "vendors/zhipu.json"
+      }
+    },
+    {
+      "slug": "moonshot",
+      "name": "Moonshot Kimi",
+      "model_count": 6,
+      "model_ids": [
+        "kimi-k3",
+        "kimi-k3.1-pro",
+        "kimi-k3.1-pro-highspeed",
+        "kimi-k2.7-code",
+        "kimi-k2.7-code-highspeed",
+        "kimi-for-coding"
+      ],
+      "modality_counts": {
+        "text": 6,
+        "image": 0,
+        "video": 0
+      },
+      "source_urls": [
+        "https://platform.kimi.ai/docs/pricing/chat",
+        "https://www.kimi.com/code/docs/en/kimi-code/models"
+      ],
+      "links": {
+        "self": "vendors/moonshot.json"
+      }
+    },
+    {
+      "slug": "qwen",
+      "name": "阿里云 Qwen",
+      "model_count": 15,
+      "model_ids": [
+        "qwen3.8-max",
+        "qwen3.7-max",
+        "qwen3.7-plus",
+        "qwen3.8-flash",
+        "qwen3.7-flash",
+        "qwen3.8-2.4t-a95b",
+        "qwen3.8-27b",
+        "qwen3.8-omni-flash",
+        "qwen-image-3.0-pro",
+        "qwen-image-3.0",
+        "wan2.7-image-pro",
+        "wan2.7-image",
+        "wan3.0-video",
+        "wan3.0-video-prime",
+        "qwen4-max"
+      ],
+      "modality_counts": {
+        "text": 9,
+        "image": 4,
+        "video": 2
+      },
+      "source_urls": [
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+      ],
+      "links": {
+        "self": "vendors/qwen.json"
+      }
+    },
+    {
+      "slug": "google",
+      "name": "Google Gemini",
+      "model_count": 8,
+      "model_ids": [
+        "gemini-4-argon",
+        "gemini-3.8-flash",
+        "gemini-3.5-flash-lite",
+        "gemini-3.1-pro-preview",
+        "gemini-nano-banana-2.1",
+        "gemini-3.1-flash-lite-image",
+        "gemini-3-pro-image",
+        "gemini-omni-1.1-flash"
+      ],
+      "modality_counts": {
+        "text": 4,
+        "image": 3,
+        "video": 1
+      },
+      "source_urls": [
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "links": {
+        "self": "vendors/google.json"
+      }
+    },
+    {
+      "slug": "minimax",
+      "name": "MiniMax",
+      "model_count": 7,
+      "model_ids": [
+        "minimax-m3",
+        "minimax-m3.1-flash",
+        "minimax-h3",
+        "minimax-h3-highspeed",
+        "minimax-h3-lite",
+        "minimax-h3-max",
+        "minimax-image-01"
+      ],
+      "modality_counts": {
+        "text": 2,
+        "image": 1,
+        "video": 4
+      },
+      "source_urls": [
+        "https://platform.minimax.io/docs/guides/pricing-paygo"
+      ],
+      "links": {
+        "self": "vendors/minimax.json"
+      }
+    },
+    {
+      "slug": "xai",
+      "name": "xAI",
+      "model_count": 5,
+      "model_ids": [
+        "grok-4.7",
+        "grok-4.7-build-fast",
+        "grok-imagine-image-2.0",
+        "grok-imagine-video-1.5",
+        "grok-imagine-video-1.5-lite"
+      ],
+      "modality_counts": {
+        "text": 2,
+        "image": 1,
+        "video": 2
+      },
+      "source_urls": [
+        "https://docs.x.ai/developers/pricing"
+      ],
+      "links": {
+        "self": "vendors/xai.json"
+      }
+    },
+    {
+      "slug": "tencent",
+      "name": "腾讯混元",
+      "model_count": 3,
+      "model_ids": [
+        "hy4-flash",
+        "hy4",
+        "hy4-preview"
+      ],
+      "modality_counts": {
+        "text": 3,
+        "image": 0,
+        "video": 0
+      },
+      "source_urls": [
+        "https://cloud.tencent.com/document/product/1823/130055"
+      ],
+      "links": {
+        "self": "vendors/tencent.json"
+      }
+    }
+  ]
+}

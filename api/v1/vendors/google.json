@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
     "count": 8
   },
   "vendor": {
@@ -41,6 +45,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -220,6 +227,11 @@
       "links": {
         "self": "models/gemini-4-argon.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -228,6 +240,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -400,6 +415,11 @@
       "links": {
         "self": "models/gemini-3.8-flash.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -408,6 +428,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -569,6 +592,11 @@
       "links": {
         "self": "models/gemini-3.5-flash-lite.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -577,6 +605,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -751,6 +782,11 @@
       "links": {
         "self": "models/gemini-3.1-pro-preview.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -759,6 +795,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -944,6 +983,11 @@
       "links": {
         "self": "models/gemini-nano-banana-2.1.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -952,6 +996,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -1101,6 +1148,11 @@
       "links": {
         "self": "models/gemini-3.1-flash-lite-image.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1109,6 +1161,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -1304,6 +1359,11 @@
       "links": {
         "self": "models/gemini-3-pro-image.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1312,6 +1372,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "video",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -1482,6 +1545,11 @@
       "links": {
         "self": "models/gemini-omni-1.1-flash.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     }
   ]

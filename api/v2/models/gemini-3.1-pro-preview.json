@@ -1,0 +1,204 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-17",
+    "as_of": "2026-11-17T20:26:37+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2"
+  },
+  "data": {
+    "id": "gemini-3.1-pro-preview",
+    "name": "Gemini 3.1 Pro Preview",
+    "vendor": "google",
+    "vendor_name": "Google Gemini",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 2.0,
+      "output": 12.0,
+      "cached_input": 0.2,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1048576,
+    "context_length_label": "1M",
+    "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+    "extra_sources": [
+      "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
+    ],
+    "last_updated": "2026-10-11",
+    "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。价格已对照官方定价页复核无变化。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "high",
+      "can_disable": null,
+      "status": "partial",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "unverified"
+      },
+      "note": "thinking_level 取 low/medium/high，默认开启且为 high；官方文档未提供关闭选项。",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/thinking"
+      ]
+    },
+    "limits": {
+      "context_length": 1048576,
+      "max_output_tokens": 65536,
+      "status": "verified",
+      "note": "官方 Gemini 模型页：上下文窗口按 Input token limit 1,048,576 记录；Output token limit 65,536。",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [
+      {
+        "condition": "input_tokens>200000",
+        "input_tokens_gt": 200000,
+        "input_tokens_lte": null,
+        "input": 4.0,
+        "output": 18.0,
+        "cached_input": 0.4,
+        "cache_write": null,
+        "cache_pricing": {
+          "implicit_read": null,
+          "explicit_read": null,
+          "explicit_write": null,
+          "explicit_write_1h": null,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": 4.5,
+          "note": null
+        },
+        "note": "官方：提示超过 200K tokens 的请求按此档计费。"
+      }
+    ],
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "note": "Batch/Flex：输入输出五折，缓存读取和存储费保持标准价；Priority：输入输出、缓存读取和存储费均为 1.8 倍。",
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 1,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {},
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ]
+      },
+      {
+        "name": "flex",
+        "multiplier": 0.5,
+        "note": "Batch/Flex：输入输出五折，缓存读取和存储费保持标准价；Priority：输入输出、缓存读取和存储费均为 1.8 倍。",
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 1,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {},
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ]
+      },
+      {
+        "name": "priority",
+        "multiplier": 1.8,
+        "note": "Batch/Flex：输入输出五折，缓存读取和存储费保持标准价；Priority：输入输出、缓存读取和存储费均为 1.8 倍。",
+        "multipliers": {
+          "input": 1.8,
+          "output": 1.8,
+          "cached_input": 1.8,
+          "cache_write": 1.8,
+          "implicit_read": 1.8,
+          "explicit_read": 1.8,
+          "explicit_write": 1.8,
+          "explicit_write_1h": 1.8,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": 1.8
+        },
+        "pricing": {},
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ]
+      }
+    ],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": 4.5,
+      "note": "缓存命中价即 pricing.cached_input（>200K 提示 $0.40，见 pricing_tiers）；官方另收缓存存储费 $4.50 / 百万 token / 小时。"
+    },
+    "price_schedule": [],
+    "unverified_fields": [
+      "reasoning_effort.can_disable"
+    ],
+    "links": {
+      "self": "models/gemini-3.1-pro-preview.json",
+      "vendor": "vendors/google.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}
