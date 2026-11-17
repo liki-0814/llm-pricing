@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "identity": "literal-case-and-punctuation; aliases require official source quotation",
+  "scopes": [
+    {
+      "vendor": "Anthropic",
+      "channel": "pay_as_you_go",
+      "modalities": [
+        "text"
+      ],
+      "official_hosts": [
+        "platform.claude.com"
+      ]
+    },
+    {
+      "vendor": "DeepSeek",
+      "channel": "pay_as_you_go",
+      "modalities": [
+        "text"
+      ],
+      "official_hosts": [
+        "api-docs.deepseek.com"
+      ]
+    },
+    {
+      "vendor": "Google Gemini",
+      "channel": "pay_as_you_go",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "official_hosts": [
+        "ai.google.dev",
+        "aistudio.google.com"
+      ]
+    },
+    {
+      "vendor": "MiniMax",
+      "channel": "pay_as_you_go",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "official_hosts": [
+        "platform.minimax.io"
+      ]
+    },
+    {
+      "vendor": "Moonshot Kimi",
+      "channel": "pay_as_you_go",
+      "modalities": [
+        "text"
+      ],
+      "official_hosts": [
+        "platform.kimi.ai"
+      ]
+    },
+    {
+      "vendor": "Moonshot Kimi",
+      "channel": "subscription",
+      "modalities": [
+        "text"
+      ],
+      "official_hosts": [
+        "www.kimi.com"
+      ]
+    },
+    {
+      "vendor": "OpenAI",
+      "channel": "pay_as_you_go",
+      "modalities": [
+        "text",
+        "image"
+      ],
+      "official_hosts": [
+        "developers.openai.com"
+      ]
+    },
+    {
+      "vendor": "xAI",
+      "channel": "pay_as_you_go",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "official_hosts": [
+        "docs.x.ai"
+      ]
+    },
+    {
+      "vendor": "xAI",
+      "channel": "subscription",
+      "modalities": [
+        "text"
+      ],
+      "official_hosts": [
+        "docs.x.ai"
+      ]
+    },
+    {
+      "vendor": "智谱 Z.ai",
+      "channel": "pay_as_you_go",
+      "modalities": [
+        "text",
+        "image"
+      ],
+      "official_hosts": [
+        "docs.z.ai",
+        "docs.bigmodel.cn"
+      ]
+    },
+    {
+      "vendor": "阿里云 Qwen",
+      "channel": "pay_as_you_go",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "official_hosts": [
+        "www.alibabacloud.com",
+        "modelstudio.console.alibabacloud.com",
+        "docs.qwencloud.com"
+      ]
+    },
+    {
+      "vendor": "腾讯混元",
+      "channel": "pay_as_you_go",
+      "modalities": [
+        "text"
+      ],
+      "official_hosts": [
+        "cloud.tencent.com"
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "vendor": "智谱 Z.ai",
+      "literal_id": "glm-5.3-prime",
+      "reason": "User decision 2026-10-31: do not import or mark pending; retain excluded observation for coverage audit."
+    }
+  ]
+}

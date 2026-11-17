@@ -102,3 +102,8 @@ Moonshot Kimi 同时有收写入费的 K3 系列和官方页未列写入价的 K
 新增字段/边界/兼容取舍见 `docs/adr-currency-lifecycle.md`。开发构建使用源meta.availability_as_of，不偷偷使用当前时间；发布用 `build_site.py --as-of ISO --output NEW_PATH`，默认as_of为当前时间，SHA取实际HEAD。`--fail-before-publish`可演练完整校验后的失败，输出新目录原子生成。同步提交所有生成文件；`.generated-files`只允许清理已记录的生成物，未知文件不自动删除。
 
 `scripts/catalog_diff.py --database SOURCE.json --inventory INVENTORY.json`返回明确覆盖状态；不完整时退出2是覆盖未通过，不是零新增。调用ID来源未知不自动补猜，别名映射必须附官方来源。此脚本不抓取网络、不自动改库或发布，也不代表例行任务已全量验收。
+
+
+## 固定目录发现入口
+
+执行契约、版本、sources格式、错误码、成功/失败账本及逐厂适配缺口见[discovery-run-contract](../docs/discovery-run-contract.md)。`run_discovery.py`提供真实抓取/快照/比较/账本入口；当前通用适配器明确partial，不是全目录验收，也没有自行修改或接通routine。旧Sage临时归一化脚本不能作为前置输入。

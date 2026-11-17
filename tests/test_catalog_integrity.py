@@ -10,16 +10,17 @@ import catalog_diff as c
 
 class CatalogIntegrityTests(unittest.TestCase):
     def setUp(self):
+        self.scopes = {"version":1,"scopes":[{"vendor":"Vendor","channel":"native","modalities":["text"],"official_hosts":["official.invalid"]}]}
         self.db = {"models": [{"vendor": "Vendor", "billing": {"channel": "native"}, "model_id": "known-v1"}]}
         self.snap = {"vendor": "Vendor", "channel": "native", "complete": True, "errors": [],
             "source_url": "https://official.invalid/catalog", "observed_at": "2026-11-17T12:00:00Z",
             "fetch_status": "ok", "extraction_status": "ok", "coverage_evidence": {
-                "enumeration_verified": True, "pagination_complete": True,
-                "source_url": "https://official.invalid/catalog", "expected_record_count": 1},
+                "enumeration_verified": True, "pagination_complete": True, "native_identity_verified": True,
+                "source_url": "https://official.invalid/catalog", "expected_record_count": 1, "modalities":["text"]},
             "records": [{"model_id": "known-v1", "api_id_explicit": True}]}
 
     def compare(self, snap=None):
-        return c.compare_catalogs(self.db, [self.snap if snap is None else snap])
+        return c.compare_catalogs(self.db, [self.snap if snap is None else snap], scopes=self.scopes)
 
     def test_complete_current_catalog_without_history_is_valid_first_baseline(self):
         result = self.compare()
@@ -47,10 +48,11 @@ class CatalogIntegrityTests(unittest.TestCase):
 
     def test_successful_subset_does_not_hide_missing_vendor_or_partial_source(self):
         db=copy.deepcopy(self.db);db["models"].append({"vendor":"Other", "billing":{"channel":"native"},"model_id":"other-v1"})
-        result=c.compare_catalogs(db,[self.snap]);self.assertEqual(result["status"],"incomplete")
-        self.assertEqual(result["missing_scopes"],[("Other","native")])
+        scopes=copy.deepcopy(self.scopes);scopes["scopes"].append({"vendor":"Other","channel":"native","modalities":["text"],"official_hosts":["official.invalid"]})
+        result=c.compare_catalogs(db,[self.snap],scopes=scopes);self.assertEqual(result["status"],"incomplete")
+        self.assertEqual(result["missing_scopes"],[("Other","native","text")])
         partial=copy.deepcopy(self.snap);partial["complete"]=False
-        result=c.compare_catalogs(self.db,[self.snap,partial])
+        result=c.compare_catalogs(self.db,[self.snap,partial],scopes=self.scopes)
         self.assertFalse(result["vendor_coverage"][0]["complete"])
 
     def test_first_baseline_advances_on_success_only_latest_failure_stays_visible(self):
@@ -80,7 +82,7 @@ class CatalogIntegrityTests(unittest.TestCase):
         self.assertEqual(rows[0]["display_name"],"Model 1.5")
 
     def test_alias_conflicts_and_cycles_fail_instead_of_collapsing_entities(self):
-        base={"vendor":"Vendor","channel":"native","source_url":"https://official.invalid/map"}
+        base={"vendor":"Vendor","channel":"native","source_url":"https://official.invalid/map","evidence_quote":"official a maps to b"}
         for aliases in [[dict(base,alias="a",canonical="b"),dict(base,alias="a",canonical="c")],
                         [dict(base,alias="a",canonical="b"),dict(base,alias="b",canonical="a")]]:
-            with self.assertRaises(ValueError):c.compare_catalogs(self.db,[self.snap],aliases=aliases)
+            with self.assertRaises(ValueError):c.compare_catalogs(self.db,[self.snap],aliases=aliases,scopes=self.scopes)

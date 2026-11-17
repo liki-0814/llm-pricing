@@ -115,11 +115,11 @@ class LifecycleCurrencyTests(unittest.TestCase):
         prev = {"observations": [{"vendor": "阿里云 Qwen", "channel": "pay_as_you_go", "model_id": "qwen-old"}]}
         result = catalog_diff.compare_catalogs(self.data, [snap], prev)
         self.assertEqual(result["status"], "incomplete")
-        self.assertEqual(len(result["observations"]), 3)
-        self.assertEqual({x["model_id"] for x in result["not_in_database"]}, {"qwen4-next-unpriced", "qwen3-8-max"})
+        self.assertEqual(len(result["observations"]), 4)
+        self.assertEqual({x["model_id"] for x in result["not_in_database"]}, {"qwen4-next-unpriced", "QWEN4-NEXT-UNPRICED", "qwen3-8-max"})
         self.assertTrue(result["not_observed_this_run_not_retired"])
-        mapped = catalog_diff.compare_catalogs(self.data, [snap], aliases=[{"vendor": "阿里云 Qwen", "channel": "pay_as_you_go", "alias": "qwen3-8-max", "canonical": "qwen3.8-max", "source_url": "https://example.org/official-map"}])
-        self.assertEqual(len(mapped["not_in_database"]), 1)
+        mapped = catalog_diff.compare_catalogs(self.data, [snap], aliases=[{"vendor": "阿里云 Qwen", "channel": "pay_as_you_go", "alias": "qwen3-8-max", "canonical": "qwen3.8-max", "source_url": "https://www.alibabacloud.com/help/en/model-studio/models", "evidence_quote": "qwen3-8-max maps to qwen3.8-max (synthetic fixture, not a production mapping)"}])
+        self.assertEqual(len(mapped["not_in_database"]), 2)
 
     def test_confirmed_retired_unknown_time_complete_artifact_and_observation_contract(self):
         cases=json.loads((build_api.ROOT / "tests/fixtures/lifecycle-cases.json").read_text())

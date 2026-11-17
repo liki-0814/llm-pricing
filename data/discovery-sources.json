@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "adapter_version": "discovery-adapters/1-partial",
+  "scope_manifest_sha256": "b02d759e7af4d376b0a9d4a74f8a650ce04f0df636a246e9862ebf21763b40d8",
+  "sources": [
+    {
+      "id": "anthropic-models",
+      "vendor": "Anthropic",
+      "channel": "pay_as_you_go",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+      "modalities": [
+        "text"
+      ],
+      "role": "catalog",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+    },
+    {
+      "id": "deepseek-models",
+      "vendor": "DeepSeek",
+      "channel": "pay_as_you_go",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "modalities": [
+        "text"
+      ],
+      "role": "catalog",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+    },
+    {
+      "id": "google-models",
+      "vendor": "Google Gemini",
+      "channel": "pay_as_you_go",
+      "url": "https://aistudio.google.com/docs/models",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "role": "catalog",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+    },
+    {
+      "id": "minimax-models",
+      "vendor": "MiniMax",
+      "channel": "pay_as_you_go",
+      "url": "https://platform.minimax.io/docs/faq/models.md",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "role": "catalog",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+    },
+    {
+      "id": "kimi-models",
+      "vendor": "Moonshot Kimi",
+      "channel": "pay_as_you_go",
+      "url": "https://platform.kimi.ai/docs/models.md",
+      "modalities": [
+        "text"
+      ],
+      "role": "catalog",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+    },
+    {
+      "id": "kimi-code",
+      "vendor": "Moonshot Kimi",
+      "channel": "subscription",
+      "url": "https://www.kimi.com/code/docs/en/kimi-code/models",
+      "modalities": [
+        "text"
+      ],
+      "role": "catalog",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+    },
+    {
+      "id": "openai-models",
+      "vendor": "OpenAI",
+      "channel": "pay_as_you_go",
+      "url": "https://developers.openai.com/api/docs/models/all",
+      "modalities": [
+        "text",
+        "image"
+      ],
+      "role": "catalog",
+      "adapter": "openai_cards_partial",
+      "gap": "Public all/deprecated card enumeration; requires API-ID bridges, scope classification and restricted front-page union."
+    },
+    {
+      "id": "xai-models",
+      "vendor": "xAI",
+      "channel": "pay_as_you_go",
+      "url": "https://docs.x.ai/developers/models",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "role": "catalog",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+    },
+    {
+      "id": "xai-build",
+      "vendor": "xAI",
+      "channel": "subscription",
+      "url": "https://docs.x.ai/developers/pricing",
+      "modalities": [
+        "text"
+      ],
+      "role": "price",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Existing Build pricing reference is not complete subscription-model entitlement catalog; official catalog source/adapter required."
+    },
+    {
+      "id": "zai-models",
+      "vendor": "智谱 Z.ai",
+      "channel": "pay_as_you_go",
+      "url": "https://docs.z.ai/guides/overview/overview.md",
+      "modalities": [
+        "text",
+        "image"
+      ],
+      "role": "catalog",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+    },
+    {
+      "id": "qwen-models",
+      "vendor": "阿里云 Qwen",
+      "channel": "pay_as_you_go",
+      "url": "https://www.alibabacloud.com/help/en/model-studio/models",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "role": "catalog",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+    },
+    {
+      "id": "hunyuan-models",
+      "vendor": "腾讯混元",
+      "channel": "pay_as_you_go",
+      "url": "https://cloud.tencent.com/document/product/1823/130051",
+      "modalities": [
+        "text"
+      ],
+      "role": "catalog",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+    },
+    {
+      "id": "zai-legal-id",
+      "vendor": "智谱 Z.ai",
+      "channel": "pay_as_you_go",
+      "url": "https://docs.z.ai/guides/vlm/glm-5.3-flash.md",
+      "modalities": [
+        "text"
+      ],
+      "role": "detail",
+      "adapter": "explicit_id_labels_partial"
+    },
+    {
+      "id": "openai-front",
+      "vendor": "OpenAI",
+      "channel": "pay_as_you_go",
+      "url": "https://developers.openai.com/api/docs/models",
+      "modalities": [
+        "text",
+        "image"
+      ],
+      "role": "catalog",
+      "adapter": "openai_cards_partial",
+      "gap": "Front-page restricted cards may be absent from /all; display/detail URL is not API ID."
+    }
+  ]
+}
