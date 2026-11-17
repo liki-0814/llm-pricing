@@ -98,7 +98,7 @@ class DiscoveryRegressions(unittest.TestCase):
   source=dict(id='unfamiliar',vendor='Vendor',channel='native',url='https://official.invalid/catalog',modalities=['text'],role='catalog',adapter='explicit_id_labels_partial')
   config=dict(version=1,adapter_version=runner.ADAPTER_VERSION,scope_manifest_sha256=runner.digest(json.dumps(manifest,sort_keys=True).encode()),sources=[source])
   with tempfile.TemporaryDirectory() as d:
-   with mock.patch.object(runner,'fetch_source',return_value=(b'Model Code: `unheard-family-83.2`','2026-11-17T12:00:00Z')) as fetch:
+   with mock.patch.object(runner,'fetch_source',return_value=(b'Model Code: `unheard-family-83.2`','2026-11-17T12:00:00Z',{})) as fetch:
     captures=pathlib.Path(d)/'captures';snaps=runner.execute(config,manifest,{'models':[]},captures)
    self.assertEqual(fetch.call_count,1);self.assertTrue((captures/'unfamiliar.body').exists())
    r=c.compare_catalogs({'models':[]},snaps,scopes=manifest)

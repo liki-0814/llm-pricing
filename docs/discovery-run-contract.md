@@ -51,24 +51,34 @@ The command validates clean committed discovery code against EXPECTED_SHA and th
 scope/config fingerprint (live inputs must match the reviewed committed files), reserves a durable run BEFORE reading configuration,
 reads the current remote main commit and `data/prices.json` at that exact commit
 using read-only `gh api`, then fetches only configured approved public URLs. Each
-source is fetched once, timeout25s, cap8MiB, no retries or automatic redirects.
-Redirects need a reviewed canonical source URL; no credentials, browser-session
-scraping or internal APIs. A source failure is recorded and other configured sources
-still produce evidence. SHA and raw database hash identify the actual main baseline.
+source is fetched once, timeout 25s, cap 8MiB, no retries. A short chain of public
+official HTTPS redirects (maximum 3 hops) may be followed when the Location is on
+an allowlisted official host for that vendor/channel, with no credentials and no
+login or non-public endpoint bypass. Redirect hops and the final URL are recorded
+in capture metadata. The configured Anthropic URL is the public canonical
+`/docs/en/models/overview`; the previous `/docs/en/about-claude/models/overview`
+307 is ordinary public navigation, not a login wall. Gzip or similarly compressed
+bodies are decoded at parse time. No browser-session scraping or internal APIs.
+A source failure is recorded and other configured sources still produce evidence.
+SHA and raw database hash identify the actual main baseline.
 
 ## Sources input format
 
 `data/discovery-sources.json` is version1 with:
 
-- `adapter_version`: `discovery-adapters/1-partial` (strictly checked).
+- `adapter_version`: `discovery-adapters/2-catalog-parsers` (strictly checked).
 - `scope_manifest_sha256`: SHA256 of Python `json.dumps(manifest, sort_keys=True).encode()`.
 - `sources`: unique safe IDs plus original `vendor`, `channel`, HTTPS `url`,
   explicit `modalities`, `role` (`catalog`/`price`/`detail`/`lifecycle`), and `adapter`.
-- Current adapters: `explicit_id_labels_partial`, `openai_cards_partial`.
-  Unknown adapter/config versions fail before requests.
+- Current adapters: `explicit_id_labels_partial`, `openai_cards_partial`,
+  `hunyuan_invocation_tables`, `qwen_recommended_lists`, `deepseek_model_row`,
+  `kimi_model_tables`, `google_endpoint_tables`, `anthropic_claude_api_id`,
+  `minimax_model_list`. Unknown adapter/config versions fail before requests.
 - No input `complete=true` flag or supplied pagination assertion can promote these
-  generic adapters. Both explicitly emit partial. Whole-source reviewed adapters
-  are still required; do not edit partial to true to make the run green.
+  adapters. Every current adapter still emits `complete=false` / partial. Do not
+  edit partial to true to make the run green. OpenAI directory cards without an
+  official API ID are `catalog_entries_pending_api_id`, not unresolved identity
+  rows; the snapshot remains incomplete.
 
 Example source:
 
@@ -150,21 +160,21 @@ that a network request or scheduler invocation happened.
 
 | Vendor | Exact remaining artifact |
 |---|---|
-| Anthropic | Full All-model table adapter, explicit first-party ID/display bridges, all rows/count including legacy; partner IDs separate. |
-| DeepSeek | Parse already-saved MODEL/API entity rows and documented aliases without guessing; prove whole current two-column model table and route/entity distinction. Price source already available. |
-| Google | Parse saved canonical Markdoc endpoint tables, all current/older/shutdown sections; model ID/display/snapshot separation and all-row count. |
-| MiniMax | Full FAQ table adapter and native image01 bridge; media multirow prices separate; retirement conflict cannot be resolved by parser guesses. |
-| Kimi | Full models.md adapter plus Code subscription coverage. Parent browser supplied six numeric price rows, but currency code/region and K2 eligibility remain unconfirmed; do not turn partial eligibility into global retirement. |
-| OpenAI | Public /all parser now captures105 directory cards (38 current/67 historical) plus a separately retained restricted pricing-linked card. Need source-ID bridges and in-scope classification; keep homepage restricted union. Card extraction does not prove every callable ID or variant. |
-| xAI | Full model catalog adapter AND actual subscription entitlement catalog; current Build price page does not enumerate the latter. |
-| Z.ai | Featured+Other Models+image full adapter; Legal exact Model Code is now extracted. Unverified billing conditions remain separate. |
-| Qwen | Parent Singapore market evidence86 cards: native five authors76/Qwen49, third-party10. Need full card/export/variant/native attribution adapter and explicit call-ID bridges; recommended-page generic adapter remains partial. Skeleton details are not full-variant proof. |
-| Hunyuan | Native full directory/table adapter, pagination/count, explicit model IDs and native-vs-TokenHub reseller attribution. |
+| Anthropic | First-party Claude API ID rows are parsed from the canonical overview; older/Mythos display names still pending ID; All-models count and legacy coverage are not proved; partner/Bedrock IDs stay excluded. |
+| DeepSeek | MODEL-row official IDs are parsed and footnotes stripped; aliases, media, and entity-routing are still not fully classified; whole-table/count proof remains. |
+| Google | Endpoint backtick IDs and Model-code labels are parsed; card href slugs are not treated as API IDs. Full section/count/pagination proof remains. |
+| MiniMax | Markdown list labels are extracted; invocation IDs and media-row inheritance are not fully confirmed; retirement conflicts are not auto-applied. |
+| Kimi | Backticked model tables are parsed, including the deprecated section, without treating eligibility limits as global retirement. Code subscription coverage and currency/region remain unconfirmed. |
+| OpenAI | Public /all directory cards are retained as catalog observations (pending official API-ID bridges, not unresolved identity). Slugs and alts are still not API IDs. Homepage restricted cards stay in the union only when absent from /all. Card extraction does not prove every callable ID or variant. |
+| xAI | Full model catalog adapter AND actual subscription entitlement catalog; the saved public models HTML is still a shell with almost no explicit catalog table. The Build price page does not enumerate the subscription catalog. |
+| Z.ai | Featured+Other Models+image full adapter still missing; Legal exact Model Code is extracted. Unverified billing conditions remain separate. |
+| Qwen | The recommended-page adapter now extracts official-looking IDs including `qwen4-max` and splits third-party IDs. This is not the Singapore Model Plaza complete catalog; that body was not in the Sage captures and is not claimed here. Prior browser card counts (86/76/49/10) are not this run's extracted inventory. Skeleton details are not full-variant proof. |
+| Hunyuan | Official 调用参数 IDs are parsed after gzip decode, including `hy4`, `hy4-flash`, and `hy4-preview`. TokenHub third-party rows are split out and are not treated as native Hunyuan. Required scope is still text only; pagination and full directory count are not proved. Not marked complete. |
 
 A future full adapter must ship source fixtures, row/DOM-selector coverage,
 pagination termination proof, unknown/unpriced/foreign future-ID retention,
 source-role/modality/native attribution (`coverage_evidence.native_identity_verified` is required for catalogs), and negative/format-drift fixtures. Generic
 labels do not provide that proof. The current production config therefore honestly
-returns incomplete. The first repair delivery fixes four infrastructure holes and
-provides real plumbing; it does **not** claim full catalog adapters, daily routine
-integration, merge or release.
+returns incomplete. Improved catalog parsers extract more official IDs from saved bodies, but the
+production config still honestly returns incomplete. This delivery does **not**
+claim full catalog adapters, daily routine integration, merge or release.

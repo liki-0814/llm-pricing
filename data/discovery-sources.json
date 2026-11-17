@@ -1,19 +1,19 @@
 {
   "version": 1,
-  "adapter_version": "discovery-adapters/1-partial",
+  "adapter_version": "discovery-adapters/2-catalog-parsers",
   "scope_manifest_sha256": "b02d759e7af4d376b0a9d4a74f8a650ce04f0df636a246e9862ebf21763b40d8",
   "sources": [
     {
       "id": "anthropic-models",
       "vendor": "Anthropic",
       "channel": "pay_as_you_go",
-      "url": "https://platform.claude.com/docs/en/about-claude/models/overview",
+      "url": "https://platform.claude.com/docs/en/models/overview",
       "modalities": [
         "text"
       ],
       "role": "catalog",
-      "adapter": "explicit_id_labels_partial",
-      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+      "adapter": "anthropic_claude_api_id",
+      "gap": "Official 307 to /docs/en/models/overview followed as public same-host navigation. First-party Claude API ID row parsed; older/Mythos names pending ID; partner IDs excluded. Not a complete All-models proof."
     },
     {
       "id": "deepseek-models",
@@ -24,8 +24,8 @@
         "text"
       ],
       "role": "catalog",
-      "adapter": "explicit_id_labels_partial",
-      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+      "adapter": "deepseek_model_row",
+      "gap": "MODEL row official IDs parsed; aliases/media/entity-routing still not fully classified. Not complete."
     },
     {
       "id": "google-models",
@@ -38,8 +38,8 @@
         "video"
       ],
       "role": "catalog",
-      "adapter": "explicit_id_labels_partial",
-      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+      "adapter": "google_endpoint_tables",
+      "gap": "Endpoint backtick IDs and Model code labels parsed; card href slugs are not API IDs. Full section/count/pagination proof still required."
     },
     {
       "id": "minimax-models",
@@ -52,8 +52,8 @@
         "video"
       ],
       "role": "catalog",
-      "adapter": "explicit_id_labels_partial",
-      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+      "adapter": "minimax_model_list",
+      "gap": "Markdown list labels extracted; invocation IDs and media-row inheritance not fully confirmed; retirement conflict not auto-applied."
     },
     {
       "id": "kimi-models",
@@ -64,8 +64,8 @@
         "text"
       ],
       "role": "catalog",
-      "adapter": "explicit_id_labels_partial",
-      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+      "adapter": "kimi_model_tables",
+      "gap": "Backticked model tables parsed, including deprecated section without bulk-retirement. Currency/region/eligibility still unconfirmed; Code subscription is a separate source."
     },
     {
       "id": "kimi-code",
@@ -77,7 +77,7 @@
       ],
       "role": "catalog",
       "adapter": "explicit_id_labels_partial",
-      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+      "gap": "Subscription entitlement catalog adapter not complete."
     },
     {
       "id": "openai-models",
@@ -90,7 +90,7 @@
       ],
       "role": "catalog",
       "adapter": "openai_cards_partial",
-      "gap": "Public all/deprecated card enumeration; requires API-ID bridges, scope classification and restricted front-page union."
+      "gap": "Public /all directory cards + restricted union from the homepage; slugs/alts are not API IDs. Pending official API-ID bridges."
     },
     {
       "id": "xai-models",
@@ -104,7 +104,7 @@
       ],
       "role": "catalog",
       "adapter": "explicit_id_labels_partial",
-      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+      "gap": "Public models page currently yields almost no explicit catalog table in the saved HTML shell."
     },
     {
       "id": "xai-build",
@@ -116,7 +116,7 @@
       ],
       "role": "price",
       "adapter": "explicit_id_labels_partial",
-      "gap": "Existing Build pricing reference is not complete subscription-model entitlement catalog; official catalog source/adapter required."
+      "gap": "Price source, not a subscription catalog."
     },
     {
       "id": "zai-models",
@@ -129,7 +129,7 @@
       ],
       "role": "catalog",
       "adapter": "explicit_id_labels_partial",
-      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+      "gap": "Overview still lacks explicit invocation IDs for Featured/Other Models; remains partial."
     },
     {
       "id": "qwen-models",
@@ -142,8 +142,8 @@
         "video"
       ],
       "role": "catalog",
-      "adapter": "explicit_id_labels_partial",
-      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+      "adapter": "qwen_recommended_lists",
+      "gap": "Recommended-page official-looking IDs parsed, qwen4-max included; third-party split. This is not Model Plaza complete catalog."
     },
     {
       "id": "hunyuan-models",
@@ -154,8 +154,8 @@
         "text"
       ],
       "role": "catalog",
-      "adapter": "explicit_id_labels_partial",
-      "gap": "Full catalog adapter + native identity/full pagination/source-row proof not yet reviewed; never auto-complete."
+      "adapter": "hunyuan_invocation_tables",
+      "gap": "Official 调用参数 column parsed after gzip decode. Native hy*/hunyuan* kept; TokenHub third-party split out and not treated as Hunyuan. Text scope only; other modalities retained as extra native IDs without expanding required scope. Not marked complete."
     },
     {
       "id": "zai-legal-id",
@@ -166,7 +166,8 @@
         "text"
       ],
       "role": "detail",
-      "adapter": "explicit_id_labels_partial"
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Model Code labels; detail source, not a full catalog."
     },
     {
       "id": "openai-front",
@@ -179,7 +180,7 @@
       ],
       "role": "catalog",
       "adapter": "openai_cards_partial",
-      "gap": "Front-page restricted cards may be absent from /all; display/detail URL is not API ID."
+      "gap": "Homepage restricted/front cards; union only retains cards absent from /all."
     }
   ]
 }

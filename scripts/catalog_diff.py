@@ -152,15 +152,17 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
             prepared[-1]["records"] = []
     for row in normalize_rows(flat):
         prepared[row.pop("_snapshot_index")]["records"].append(row)
-    observations, coverage, invalid = {}, [], []
+    observations, coverage, invalid, pending = {}, [], [], []
     for snap in prepared:
         errors = list(snap.get("errors", []))
         rows = normalize_rows(snap.get("records", [])) if isinstance(snap.get("records", []), list) else snap.get("records")
         if not isinstance(rows, list):
             rows = []
             errors.append("records_not_a_list")
-        invalid_rows = sum(not isinstance(row, dict) or row.get("api_id_explicit") is not True
-                           or not canonical_id(row.get("model_id")) for row in rows)
+        pending_cards = [row for row in rows if isinstance(row, dict) and row.get("catalog_observation") is True
+                         and row.get("api_id_explicit") is not True]
+        invalid_rows = sum(not isinstance(row, dict) or (row.get("catalog_observation") is not True and (
+                           row.get("api_id_explicit") is not True or not canonical_id(row.get("model_id")))) for row in rows)
         evidence = snap.get("coverage_evidence", {})
         role = snap.get("role", "catalog")
         modalities = evidence.get("modalities", [])
@@ -178,6 +180,7 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
         elif not official_url(evidence["source_url"], snap["vendor"], snap["channel"], manifest): errors.append("enumeration_origin_not_verified")
         if not rows: errors.append("empty_extraction_not_proof_of_empty_catalog")
         if invalid_rows: errors.append("invalid_or_nonexplicit_rows:%d" % invalid_rows)
+        if pending_cards: errors.append("catalog_entries_pending_api_id:%d" % len(pending_cards))
         expected = evidence.get("expected_record_count")
         if type(expected) is not int or expected != len(rows): errors.append("source_record_count_unverified")
         complete = snap.get("complete") is True and not errors
@@ -190,7 +193,8 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
                 continue
             mid = canonical_id(row.get("model_id", "")) if row.get("api_id_explicit") is True else None
             if not mid:
-                invalid.append(dict(row, source_url=snap["source_url"], capture_path=snap.get("capture_path"), extraction_path=snap.get("extraction_path")))
+                target = pending if row.get("catalog_observation") is True else invalid
+                target.append(dict(row, source_url=snap["source_url"], capture_path=snap.get("capture_path"), extraction_path=snap.get("extraction_path")))
                 continue
             key = (snap["vendor"], snap["channel"], mid)
             canonical = mapping.get(key, mid)
@@ -233,6 +237,7 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
             "discovery_verdict": "differences_need_review" if differences else
                 ("no_untracked_ids_in_verified_scope" if complete else "inconclusive_incomplete_coverage"),
             "coverage": coverage, "observations": list(observations.values()), "unresolved_rows": invalid,
+            "catalog_entries_pending_api_id": pending,
             "not_in_database": differences,
             "not_observed_this_run_not_retired": [list(k) for k in sorted(prior - observations.keys())],
             "historical_comparison": "no_previous_successful_snapshot" if previous is None else "observation_diff_only",

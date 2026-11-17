@@ -6,52 +6,23 @@ of full directory coverage or a connected routine. No automatic data/PR writes.
 """
 import argparse,base64,datetime as dt,hashlib,json,pathlib,re,subprocess,sys
 import urllib.request,urllib.error
-from html.parser import HTMLParser
+from urllib.parse import urljoin,urlparse
 import catalog_diff as c
+import discovery_adapters as adapters
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-ADAPTER_VERSION='discovery-adapters/1-partial'
-class NoRedirect(urllib.request.HTTPRedirectHandler):
-    def redirect_request(self,*args,**kwargs):return None
-class VisibleText(HTMLParser):
-    def __init__(self):super().__init__();self.parts=[];self.hidden=0
-    def handle_starttag(self,tag,attrs):
-        if tag in ('script','style'):self.hidden+=1
-        elif not self.hidden:
-            if tag in ('p','div','tr','li','br','h1','h2','h3'):self.parts.append('\n')
-            if tag=='code':self.parts.append('`')
-    def handle_endtag(self,tag):
-        if tag in ('script','style'):self.hidden=max(0,self.hidden-1)
-        elif not self.hidden and tag=='code':self.parts.append('`')
-    def handle_data(self,data):
-        if not self.hidden:self.parts.append(data)
-class OpenAICards(HTMLParser):
-    """Read public cards as display observations, NEVER infer API IDs from slugs."""
-    def __init__(self):
-        super().__init__();self.in_main=False;self.details=0;self.card=None;self.rows=[]
-    def handle_starttag(self,tag,attrs):
-        attrs=dict(attrs)
-        if tag=='main':self.in_main=True
-        if not self.in_main:return
-        if tag=='details':self.details+=1
-        href=attrs.get('href','')
-        if tag=='a' and href.startswith('/') and not href.startswith('//'):
-            self.card={'detail_url':'https://developers.openai.com'+href,'api_id_explicit':False,
-                'model_id':None,'catalog_section':'historical' if self.details else 'current',
-                'scope_status':'requires_scope_review','line':self.getpos()[0],'card_text':[],
-                'card_kind':'directory' if re.fullmatch(r'/api/docs/models/[^/?#]+',href) and href!='/api/docs/models/all' else 'supplemental',
-                '_model_card':bool(re.fullmatch(r'/api/docs/models/[^/?#]+',href) and href!='/api/docs/models/all')}
-        if tag=='img' and self.card is not None and attrs.get('src','').startswith('/images/api/models/icons/'):
-            self.card['_model_card']=True;self.card['image_alt']=attrs.get('alt')
-    def handle_data(self,data):
-        if self.card is not None and data.strip():
-            self.card.setdefault('display_name',data.strip());self.card['card_text'].append(data.strip())
-    def handle_endtag(self,tag):
-        if tag=='a' and self.card is not None:
-            self.card['card_text']=' '.join(self.card['card_text'])
-            if self.card.pop('_model_card'):self.rows.append(self.card)
-            self.card=None
-        if self.in_main and tag=='details':self.details=max(0,self.details-1)
-        if tag=='main':self.in_main=False
+ADAPTER_VERSION='discovery-adapters/2-catalog-parsers'
+OpenAICards=adapters.OpenAICards
+class LimitedPublicRedirect(urllib.request.HTTPRedirectHandler):
+    """Follow a short chain of public official documentation redirects only."""
+    def __init__(self, allow_hosts, max_hops=3):
+        super().__init__(); self.allow_hosts=set(allow_hosts); self.max_hops=max_hops; self.chain=[]
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        target=urljoin(req.full_url, newurl); parsed=urlparse(target)
+        self.chain.append({'from':req.full_url,'status':code,'location':headers.get('Location'),'resolved':target})
+        if len(self.chain)>self.max_hops: raise ValueError('Official redirect budget exceeded')
+        if parsed.scheme!='https' or parsed.username or parsed.password or parsed.hostname not in self.allow_hosts:
+            raise ValueError('Refusing non-public or off-allowlist redirect to '+target)
+        return urllib.request.Request(target, headers=dict(req.header_items()), method='GET')
 
 def digest(body):return hashlib.sha256(body).hexdigest()
 def command(args):
@@ -83,34 +54,33 @@ def validate_sources(config,manifest):
         if not re.fullmatch('[a-z0-9][a-z0-9-]*',sid) or sid in seen:raise ValueError('Invalid/duplicate source id')
         seen.add(sid)
         if not c.official_url(source['url'],source['vendor'],source['channel'],manifest):raise ValueError('Source URL is not approved for original vendor/channel')
-        if source.get('adapter') not in ('explicit_id_labels_partial','openai_cards_partial'):raise ValueError('Unsupported/unreviewed adapter')
+        if source.get('adapter') not in adapters.ADAPTERS:raise ValueError('Unsupported/unreviewed adapter')
         if source.get('role') not in ('catalog','price','detail','lifecycle'):raise ValueError('Explicit source role required')
         if not source.get('modalities'):raise ValueError('Source modalities required')
 
-def fetch_source(source):
-    request=urllib.request.Request(source['url'],headers={'User-Agent':'llm-pricing-public-discovery/1'})
-    with urllib.request.build_opener(NoRedirect).open(request,timeout=25) as response:
+def fetch_source(source, allow_hosts):
+    request=urllib.request.Request(source['url'],headers={'User-Agent':'llm-pricing-public-discovery/1','Accept':'*/*'})
+    handler=LimitedPublicRedirect(allow_hosts)
+    with urllib.request.build_opener(handler).open(request,timeout=25) as response:
         if response.status!=200:raise ValueError('Non-200 source response')
         body=response.read(8*1024*1024+1)
         if len(body)>8*1024*1024:raise ValueError('Source exceeds 8MiB capture limit')
-        return body,dt.datetime.now(dt.timezone.utc).isoformat()
+        return body,dt.datetime.now(dt.timezone.utc).isoformat(), {'final_url':response.geturl(),'redirects':handler.chain,
+            'content_encoding':response.headers.get('Content-Encoding')}
 
 def parse_source(body,source,observed_at):
-    text=body.decode('utf-8',errors='replace')
-    if '<html' in text.lower() or '<!doctype' in text.lower():
-        parser=VisibleText();parser.feed(text);text=''.join(parser.parts)
-    if source['adapter']=='openai_cards_partial':
-        cards=OpenAICards();cards.feed(body.decode('utf-8',errors='replace'));rows=c.normalize_rows(cards.rows)
-    else:rows=c.normalize_rows(c.extract_explicit_ids(text))
-    for row in rows:row['line_basis']='raw_capture' if source['adapter']=='openai_cards_partial' else 'extraction_text'
-    # This generic label extractor CANNOT prove it saw the whole source. Do not
-    # accept complete/pagination flags from sources config or arbitrary content.
+    raw,text=adapters.decode_body(body)
+    records,reseller,notes=adapters.parse(source['adapter'], raw, source)
+    for row in records+reseller:row['line_basis']='adapter:'+source['adapter']
+    # Adapters here improve extraction; they do not, by themselves, prove a complete official directory.
+    errors=['adapter_partial_not_full_enumeration']+list(notes)
     return dict(_extraction_text=text,vendor=source['vendor'],channel=source['channel'],role=source['role'],
         source_url=source['url'],observed_at=observed_at,complete=False,
         fetch_status='ok',extraction_status='partial',
-        errors=['full_catalog_adapter_not_reviewed'],records=rows,
+        errors=errors,records=records,reseller_records=reseller,
         coverage_evidence=dict(source_url=source['url'],modalities=source['modalities'],
-            enumeration_verified=False,pagination_complete=False,expected_record_count=None))
+            enumeration_verified=False,pagination_complete=False,expected_record_count=None,
+            native_identity_verified=False))
 
 def execute(config,manifest,database,capture_dir,replay_dir=None):
     validate_sources(config,manifest)
@@ -119,7 +89,10 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
         sid=source['id'];now=dt.datetime.now(dt.timezone.utc).isoformat();stage='fetch';http_status=None
         try:
             if replay_dir is None:
-                body,observed=fetch_source(source);http_status=200;capture_kind='http_body'
+                hosts={urlparse(source['url']).hostname}
+                for item in manifest['scopes']:
+                    if (item['vendor'],item['channel'])==(source['vendor'],source['channel']): hosts.update(item.get('official_hosts') or [])
+                body,observed,fetch_meta=fetch_source(source,hosts);http_status=200;capture_kind='http_body'
             else:
                 meta=json.loads((replay_dir/(sid+'.json')).read_text());body=(replay_dir/(sid+'.body')).read_bytes()
                 if meta['url']!=source['url'] or meta['sha256']!=digest(body):raise ValueError('Replay source provenance mismatch')
@@ -129,6 +102,7 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
             stage='capture'
             (capture_dir/(sid+'.body')).write_bytes(body)
             meta=dict(url=source['url'],observed_at=observed,http_status=http_status,capture_kind=capture_kind,sha256=digest(body),mode='replay' if replay_dir else 'fresh')
+            if replay_dir is None: meta.update(fetch_meta)
             c.atomic_json(capture_dir/(sid+'.json'),meta)
             stage='extract'
             snapshot=parse_source(body,source,observed)
@@ -144,6 +118,12 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
                 errors=[stage+': '+type(error).__name__+': '+str(error)])
             c.atomic_json(capture_dir/(sid+'.json'),snapshot)
         inventories.append(snapshot)
+    all_urls={row.get('detail_url') for snap in inventories if snap.get('source_url')=='https://developers.openai.com/api/docs/models/all' for row in snap.get('records') or []}
+    for snap in inventories:
+        if snap.get('source_url')=='https://developers.openai.com/api/docs/models' and all_urls:
+            kept=[row for row in snap.get('records') or [] if row.get('detail_url') not in all_urls]
+            snap['records']=kept
+            snap.setdefault('errors',[]).append('front_page_union_only_cards_absent_from_all:%d' % len(kept))
     c.atomic_json(capture_dir/'inventory.json',inventories)
     return inventories
 
