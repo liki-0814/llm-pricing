@@ -175,11 +175,21 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
     assert.deepEqual(env.data,full.data.filter(m=>m.modality===x.name));
     assert.equal(env.meta.count,x.model_count);assert.equal(env.meta.data_version,full.meta.data_version);
   }
-  const spec=await client.getOpenAPI();assert.equal(Object.keys(spec.paths).length,7);
+  const spec=await client.getOpenAPI();assert.equal(Object.keys(spec.paths).length,8);
+  assert.ok(spec.paths['/price-facts.json']);
+  const priceEvidence=await (await fetch(new URL(index.data.endpoints['price-facts'],base))).json();
+  assert.equal(priceEvidence.data.scope_complete,false);
+  assert.ok(priceEvidence.data.facts.every(f=>f.currency==='USD'));
+  assert.ok(priceEvidence.data.price_candidates.every(f=>f.currency==='USD' && f.price_verified===false));
+  assert.equal(priceEvidence.data.offering_channel_observations[0].channel,'subscription');
+  assert.equal(priceEvidence.data.offering_channel_observations[0].model_id,null);
   const staticPaths=new Set(requests);
-  const expected=['index.json','models.json','vendors.json','modalities.json','openapi.json',...modalities.data.map(x=>`modalities/${x.name}.json`),...full.data.map(m=>`models/${m.id}.json`),...vendors.data.map(v=>`vendors/${v.slug}.json`)];
-  assert.equal(expected.length,5+modalities.data.length+all.data.length+vendors.data.length);
+  const expected=['index.json','models.json','vendors.json','modalities.json','openapi.json','price-facts.json',...modalities.data.map(x=>`modalities/${x.name}.json`),...full.data.map(m=>`models/${m.id}.json`),...vendors.data.map(v=>`vendors/${v.slug}.json`)];
+  assert.equal(expected.length,6+modalities.data.length+all.data.length+vendors.data.length);
   assert.deepEqual([...staticPaths].sort(),expected.map(p=>'/api/v1/'+p).sort());
+  const mixedFacts=await (await fetch(new URL('../v2/price-facts.json',base))).json();
+  assert.ok(mixedFacts.data.facts.some(f=>f.currency==='CNY' && f.model_id==='qwen4-max' && f.region==='华北2（北京）' && f.amount===10));
+  assert.ok(mixedFacts.data.facts.every(f=>f.scope_complete===false));
   assert.deepEqual(index.data.models.map(m=>m.id),full.data.map(m=>m.id));
   for (const v of vendors.data) assert.deepEqual(v.model_ids,full.data.filter(m=>m.vendor===v.slug).map(m=>m.id));
   const cheapest=await client.listModels({vendor:'openai',sort:'input',limit:2,priceBasis:'official'});

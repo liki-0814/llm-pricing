@@ -23,6 +23,27 @@
     }
   ],
   "paths": {
+    "/price-facts.json": {
+      "get": {
+        "operationId": "getPublicPriceObservations",
+        "summary": "Archival official price facts, NOT universe or availability certification",
+        "responses": {
+          "200": {
+            "description": "Source-bound price observations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicPriceEvidence"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    },
     "/index.json": {
       "get": {
         "operationId": "getIndex",
@@ -311,6 +332,123 @@
   },
   "components": {
     "schemas": {
+      "PublicPriceEvidence": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v2"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "facts",
+              "price_verified_count",
+              "scope_complete",
+              "history_complete",
+              "evidence_version"
+            ],
+            "properties": {
+              "scope_complete": {
+                "const": false
+              },
+              "history_complete": {
+                "const": false
+              },
+              "price_verified_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "evidence_version": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "facts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "model_id",
+                    "offering_name",
+                    "identity_kind",
+                    "component",
+                    "amount",
+                    "source_url",
+                    "source_sha256",
+                    "quote",
+                    "quote_sha256",
+                    "context_quotes",
+                    "channel",
+                    "region",
+                    "currency",
+                    "unit",
+                    "tier",
+                    "observed_at",
+                    "price_verified",
+                    "scope_complete",
+                    "history_complete",
+                    "eligible_for_estimation",
+                    "availability"
+                  ],
+                  "properties": {
+                    "currency": {
+                      "enum": [
+                        "USD",
+                        "CNY"
+                      ]
+                    },
+                    "price_verified": {
+                      "const": true
+                    },
+                    "scope_complete": {
+                      "const": false
+                    },
+                    "history_complete": {
+                      "const": false
+                    },
+                    "eligible_for_estimation": {
+                      "const": false
+                    },
+                    "availability": {
+                      "const": "not_assessed"
+                    },
+                    "region": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "quote": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "source_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "quote_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "Meta": {
         "type": "object",
         "required": [
@@ -2845,7 +2983,8 @@
                   "models",
                   "vendors",
                   "modalities",
-                  "openapi"
+                  "openapi",
+                  "price-facts"
                 ],
                 "additionalProperties": false,
                 "properties": {
@@ -2860,6 +2999,9 @@
                   },
                   "openapi": {
                     "const": "openapi.json"
+                  },
+                  "price-facts": {
+                    "const": "price-facts.json"
                   }
                 }
               },

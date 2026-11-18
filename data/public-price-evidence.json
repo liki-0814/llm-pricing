@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "vendor": "阿里云 Qwen",
+      "channel": "pay_as_you_go",
+      "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+      "observed_at": "2026-11-19T05:55:31.721067+08:00",
+      "source_sha256": "f24dbcfd7a40ab522afe3c70502036651379b85bf4595e3f2eaa528688fae6b5",
+      "body_path": "data/evidence/public-prices/qwen-pricing.html",
+      "http_status": 200
+    },
+    {
+      "vendor": "xAI",
+      "channel": "pay_as_you_go",
+      "source_url": "https://docs.x.ai/developers/pricing",
+      "observed_at": "2026-11-19T05:55:29.750030+08:00",
+      "source_sha256": "3081b01ff29686c7b9f1f9a399bd30e20557c3bd86bb4637804c19e7ffc3c23b",
+      "body_path": "data/evidence/public-prices/xai-pricing.html",
+      "http_status": 200
+    }
+  ]
+}

@@ -10152,5 +10152,17 @@
         }
       ]
     }
-  ]
+  ],
+  "public_price_evidence": {
+    "price_verified_count": 1146,
+    "scope_complete": false,
+    "history_complete": false,
+    "observed_at": [
+      "2026-11-19T05:55:29.750030+08:00",
+      "2026-11-19T05:55:31.721067+08:00"
+    ],
+    "url": "api/v2/price-facts.json",
+    "offering_channel_observation_count": 1,
+    "meaning": "archival source observations; audited estimator rates unchanged; not exhaustive directory, current availability or user entitlement"
+  }
 }

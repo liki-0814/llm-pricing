@@ -68,6 +68,7 @@
           <table class="endpoints">
             <thead><tr><th>路径</th><th>说明</th></tr></thead>
             <tbody>
+<tr><td><code>price-facts.json</code></td><td>公开官方原文价格事实：逐项币种/地域/渠道/单位/分档/取证时间及引文。v1 仅 USD，v2 含 CNY；不等于目录全集、历史/别名认证、当前可用性或个人权益，不覆盖现有估算费率。</td></tr>
               <tr><td><span class="method">GET</span><a class="path" href="api/v2/index.json">/index.json</a></td><td>轻量索引：接口路径、模型 ID 和厂商 slug；路径均相对于 api/v2/</td></tr>
               <tr><td><span class="method">GET</span><a class="path" href="api/v2/models.json">/models.json</a></td><td>全部模型（文本 + 图像 + 视频）；<code>meta</code> 含 <code>updated_at</code>、<code>currency</code>、<code>unit</code>、<code>count</code>、<code>modality_counts</code></td></tr>
               <tr><td><span class="method">GET</span><a class="path" href="api/v2/modalities.json">/modalities.json</a></td><td>模态列表（<code>text</code> / <code>image</code> / <code>video</code>）：各模态模型数、模型 ID 与厂商</td></tr>

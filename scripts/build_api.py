@@ -619,8 +619,8 @@ def openapi(d, vendor_slugs, model_ids):
     modality_env["properties"]["modality"] = {"$ref": "#/components/schemas/Modality"}
     index_schema = {"type": "object", "required": ["endpoints", "models", "vendors", "modalities"], "additionalProperties": False,
                     "properties": {
-                        "endpoints": {"type": "object", "required": ["models", "vendors", "modalities", "openapi"], "additionalProperties": False,
-                                      "properties": {k: {"const": k + ".json"} for k in ("models", "vendors", "modalities", "openapi")}},
+                        "endpoints": {"type": "object", "required": ["models", "vendors", "modalities", "openapi", "price-facts"], "additionalProperties": False,
+                                      "properties": {k: {"const": k + ".json"} for k in ("models", "vendors", "modalities", "openapi", "price-facts")}},
                         "models": {"type": "array", "items": {"type": "object", "required": ["id", "name", "vendor", "modality", "links"],
                             "additionalProperties": False,
                             "properties": {k: model["properties"][k] for k in ("id", "name", "vendor", "modality", "links")}}},
@@ -646,6 +646,7 @@ def openapi(d, vendor_slugs, model_ids):
                     {"url": "https://{user}.github.io/{repo}/api/v1",
                      "variables": {"user": {"default": "your-user"}, "repo": {"default": "llm-pricing"}}}],
         "paths": {
+            "/price-facts.json": {"get": {"operationId": "getPublicPriceObservations", "summary": "Archival official price facts, NOT universe or availability certification", "responses": ok("Source-bound price observations", "#/components/schemas/PublicPriceEvidence")}},
             "/index.json": {"get": {"operationId": "getIndex", "summary": "Discover endpoint paths and model IDs",
                                      "responses": ok("API index", "#/components/schemas/Index")}},
             "/models.json": {"get": {"operationId": "listModels", "summary": "All models",
@@ -671,6 +672,11 @@ def openapi(d, vendor_slugs, model_ids):
                 "responses": ok("Modality with its models", "#/components/schemas/ModalityModels")}},
         },
         "components": {"schemas": {
+            "PublicPriceEvidence": env({"type":"object", "required":["facts","price_verified_count","scope_complete","history_complete","evidence_version"], "properties":{
+                "scope_complete":{"const":False},"history_complete":{"const":False},"price_verified_count":{"type":"integer","minimum":0},
+                "evidence_version":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+                "facts":{"type":"array","items":{"type":"object","required":["model_id","offering_name","identity_kind","component","amount","source_url","source_sha256","quote","quote_sha256","context_quotes","channel","region","currency","unit","tier","observed_at","price_verified","scope_complete","history_complete","eligible_for_estimation","availability"],"properties":{
+                    "currency":{"enum":["USD","CNY"]},"price_verified":{"const":True},"scope_complete":{"const":False},"history_complete":{"const":False},"eligible_for_estimation":{"const":False},"availability":{"const":"not_assessed"},"region":{"type":"string","minLength":1},"quote":{"type":"string","minLength":1},"source_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"quote_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"amount":{"type":"number","minimum":0}}}}}}),
             "Meta": meta, "Model": model, "Vendor": vendor, "CachePricing": cache_pricing,
             "ModelList": env({"type": "array", "items": {"$ref": "#/components/schemas/Model"}}),
             "ModelItem": env({"$ref": "#/components/schemas/Model"}),
@@ -749,17 +755,20 @@ def build(d, mixed=False):
     imeta = base_meta(d, len(objs))
     imeta["modality_counts"] = modality_counts
     out["index.json"] = {"api_version": API_VERSION, "meta": imeta, "data": {
-        "endpoints": {"models": "models.json", "vendors": "vendors.json", "modalities": "modalities.json", "openapi": "openapi.json"},
+        "endpoints": {"models": "models.json", "vendors": "vendors.json", "modalities": "modalities.json", "openapi": "openapi.json", "price-facts": "price-facts.json"},
         "models": [{k: o[k] for k in ("id", "name", "vendor", "modality", "links")} for o in objs],
         "modalities": modalities,
         "vendors": [{k: v[k] for k in ("slug", "name", "links")} for v in vendors]}}
     for o in all_objs:
         out["models/%s.json" % o["id"]] = {"api_version": API_VERSION, "meta": base_meta(d), "data": o}
+    import public_price_facts
+    out["price-facts.json"] = {"api_version": API_VERSION, "meta": base_meta(d), "data": public_price_facts.view(public_price_facts.load(), mixed=mixed)}
     out["openapi.json"] = openapi(d, [v["slug"] for v in vendors], [o["id"] for o in all_objs])
     # v1 remains USD-only for existing consumers. v2 is the explicit mixed-currency capability.
     for rel, value in out.items():
         if rel == "openapi.json":
             value["info"]["description"] = ("Explicit mixed-currency v2. " if mixed else "USD-only v1 compatibility endpoint. ") + value["info"]["description"]
+            value["components"]["schemas"]["PublicPriceEvidence"]["properties"]["data"]["properties"]["facts"]["items"]["properties"]["currency"]["enum"] = ["USD", "CNY"] if mixed else ["USD"]
             value["components"]["schemas"]["Model"]["properties"]["currency"]["enum"] = ["USD", "CNY"] if mixed else ["USD"]
             value["components"]["schemas"]["Meta"]["properties"]["currency"]["enum"] = ["mixed"] if mixed else ["USD"]
             if mixed:
@@ -803,6 +812,12 @@ def page_data(d):
     decisions = availability_for(d["models"], at)
     result = copy.deepcopy(d)
     result["meta"].update(base_meta(d))
+    import public_price_facts
+    ledger=public_price_facts.load()
+    result["public_price_evidence"]={"price_verified_count":len(ledger["facts"]),"scope_complete":False,"history_complete":False,
+        "observed_at":sorted({x["observed_at"] for x in ledger["sources"]}),"url":"api/v2/price-facts.json",
+        "offering_channel_observation_count":len(ledger["offering_channel_observations"]),
+        "meaning":"archival source observations; audited estimator rates unchanged; not exhaustive directory, current availability or user entitlement"}
     result["models"] = [m for m, a in zip(result["models"], decisions) if a["estimable"]]
     return result
 

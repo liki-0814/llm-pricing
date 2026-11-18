@@ -448,6 +448,11 @@
     var snapshotLabel = Number.isFinite(instant) ? new Date(instant + 8 * 3600000).toISOString().slice(0, 19).replace("T", " ") + " 北京时间（UTC+08:00）" : "时点待核实";
     $("statAsOf").textContent = "快照：" + snapshotLabel;
     $("footUpdated").textContent = data.meta.last_updated + "；快照时点：" + snapshotLabel;
+    var priceEvidence = data.public_price_evidence;
+    if (priceEvidence) {
+      $("footUpdated").textContent += "；公开原文价格事实 " + priceEvidence.price_verified_count + " 条、公开计划渠道声明 " + (priceEvidence.offering_channel_observation_count || 0) + " 项（历史取证，非目录全集/当前可用性认证；估算费率不变）";
+      $("footUpdated").innerHTML = esc($("footUpdated").textContent) + ' <a href="api/v2/price-facts.json">查看逐项价格原文证据</a>';
+    }
     var mc = { text: 0, image: 0, video: 0 };
     models.forEach(function (m) { mc[m.modality]++; });
     $("statModels").innerHTML = models.length + "<small>个</small>";

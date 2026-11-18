@@ -29,6 +29,9 @@ test("page single-currency filter controls rows, symbols, cheapest and v2 detail
   assert.ok(el("statAsOf").textContent.includes("2026-11-18 08:27:00"));
   assert.ok(el("statAsOf").textContent.includes("UTC+08:00"));
   assert.ok(el("footUpdated").textContent.includes("快照时点"));
+  assert.ok(el("footUpdated").textContent.includes("公开原文价格事实 " + page.public_price_evidence.price_verified_count));
+  assert.ok(el("footUpdated").textContent.includes("非目录全集/当前可用性认证"));
+  assert.ok(el("footUpdated").innerHTML.includes('href="api/v2/price-facts.json"'));
   assert.ok(el("tbody").innerHTML.includes("qwen4-max"));
   assert.ok(!el("tbody").innerHTML.includes('data-id="hy4"'));
   assert.ok(el("statCheapest").innerHTML.includes("USD"));

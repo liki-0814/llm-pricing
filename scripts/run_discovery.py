@@ -34,7 +34,7 @@ def command(args):
 def code_identity(expected):
     sha=command(['git','rev-parse','HEAD'])
     if sha!=expected:raise ValueError('Code SHA differs from expected version')
-    if command(['git','status','--porcelain','--','scripts','data/discovery-scopes.json','data/discovery-sources.json']):
+    if command(['git','status','--porcelain','--','scripts','data/discovery-scopes.json','data/discovery-sources.json','data/public-price-evidence.json','data/evidence/public-prices']):
         raise ValueError('Discovery implementation/config has uncommitted changes')
     return sha
 
@@ -451,6 +451,8 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
     apply_public_catalog_observations(inventories,capture_dir,replay_dir)
     from discovery_scope_projection import attach_scope_certificates
     attach_scope_certificates(inventories,manifest)
+    import public_price_facts
+    public_price_facts.attach(inventories,public_price_facts.load())
     c.atomic_json(capture_dir/'inventory.json',inventories)
     return inventories
 
@@ -495,6 +497,14 @@ def main():
             c.atomic_json(captures/'inventory.json',inventories)
         previous=c.previous_success(args.state_dir)
         result=c.compare_catalogs(database,inventories,previous,scopes=manifest)
+        import public_price_facts
+        ledger=public_price_facts.load()
+        public_price_facts.attach(inventories,ledger)
+        c.atomic_json(captures/'inventory.json',inventories)
+        c.atomic_json(captures/'public-price-evidence.json',ledger)
+        result['public_price_evidence_ledger_path']=str(captures/'public-price-evidence.json')
+        result['public_price_evidence']=public_price_facts.view(ledger)
+        result['price_verification_is_not_scope_completion']=True
         result['scope_certificates']=[certificate for snapshot in inventories for certificate in snapshot.get('scope_certificates',[])]
         result['catalog_export_validation']=catalog_exports
         result['comparison_baseline_run_id']=previous.get('run_id') if previous else None
