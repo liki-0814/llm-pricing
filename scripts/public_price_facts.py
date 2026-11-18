@@ -214,7 +214,7 @@ def quoted_document_rows(meta,text):
         reader=Tables(text);reader.feed(text)
         for table in reader.tables:
             rows=expanded(table)
-            for row,cells in rows[1:]:add(row['quote'],headers=[c['text'] for c in rows[0][1]],heading={k:v['text'] for k,v in table['headings'].items()})
+            for row,cells in rows[1:]:add(row['quote'],headers=[c['text'] for c in rows[0][1]],heading={str(k):v['text'] for k,v in table['headings'].items()})
     else:
         heading=''
         for line in text.splitlines(keepends=True):
