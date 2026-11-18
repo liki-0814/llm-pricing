@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "adapter_version": "discovery-adapters/7-finite-native-request-claims",
+  "adapter_version": "discovery-adapters/8-source-qualified-native-consumption",
   "scope_manifest_sha256": "b02d759e7af4d376b0a9d4a74f8a650ce04f0df636a246e9862ebf21763b40d8",
   "sources": [
     {
@@ -90,7 +90,7 @@
       ],
       "role": "catalog",
       "adapter": "openai_markdown_bridged",
-      "gap": "All Markdown directory cards bridged by literal Model ID/Model IDs on bounded linked pages; channel attribution of open-weight and exhaustive scoped proof remain pending."
+      "gap": "Source-qualified primary/explicit ID enumeration, output and native channel claims consumed from all same-attempt detail captures. Legal EOF accepted. Inline Rosalind output/channel and open-weight PAYG remain unknown; observation consumption is not exhaustive official catalog proof."
     },
     {
       "id": "xai-models",
@@ -104,7 +104,7 @@
       ],
       "role": "catalog",
       "adapter": "xai_markdown_models",
-      "gap": "Official View as Markdown contains priced Model cells unlike HTML; unpriced/retired models and full subscription catalog still unproved."
+      "gap": "Source-qualified per-ID native API usage pricing, output units and native channel claims consumed. Only public priced subset; unpriced/retired/full literal alias and subscription universes remain unproved. Generic alias templates never expanded."
     },
     {
       "id": "xai-build",

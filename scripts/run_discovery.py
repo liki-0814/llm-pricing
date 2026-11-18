@@ -12,7 +12,7 @@ import discovery_adapters as adapters
 import discovery_bridges as bridges
 from concurrent.futures import ThreadPoolExecutor
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-ADAPTER_VERSION='discovery-adapters/7-finite-native-request-claims'
+ADAPTER_VERSION='discovery-adapters/8-source-qualified-native-consumption'
 OpenAICards=adapters.OpenAICards
 class LimitedPublicRedirect(urllib.request.HTTPRedirectHandler):
     """Follow a short chain of public official documentation redirects only."""
@@ -267,6 +267,56 @@ def apply_minimax_observations(inventories,capture_dir,replay_dir=None):
         root['contract_captures']=[{k:v for k,v in doc.items() if k!='text'} for doc in docs.values()]
 
 
+def apply_native_claims(inventories,capture_dir):
+    """Consume only current hash-checked captures; no fetch, research sidecar or ID guesses."""
+    import discovery_native_claims as native
+    def captured(meta):
+        path=pathlib.Path(meta['capture_path']);body=path.read_bytes()
+        if path.resolve().parent!=capture_dir.resolve() or digest(body)!=meta['source_sha256']:raise ValueError('native claim capture hash/path invalid')
+        c.parse_time(meta['observed_at']);_,text=adapters.decode_body(body)
+        return dict(text=text,source_url=meta['source_url'],source_sha256=meta['source_sha256'],capture_path=str(path),observed_at=meta['observed_at'])
+    for snap in inventories:
+        key=(snap['vendor'],snap['channel'],snap['source_url'],snap['role'])
+        if key not in (('OpenAI','pay_as_you_go',native.OA,'catalog'),('xAI','pay_as_you_go',native.XAI,'catalog')):continue
+        if snap.get('fetch_status')!='ok':continue
+        try:root=captured(snap)
+        except (OSError,ValueError,KeyError) as error:
+            snap.setdefault('errors',[]).append('native claims root: '+str(error));continue
+        legacy=snap['records'];records=[];proofs=[];errors=[]
+        if snap['vendor']=='OpenAI':
+            details={x.get('source_url'):x for x in snap.get('detail_captures',[]) if x.get('source_url')}
+            entities={}
+            for row in legacy:
+                url=row.get('detail_url')
+                if bridges.allowed_detail(url or '', 'OpenAI'):entities.setdefault(url,row)
+                elif row.get('api_id_explicit') and row.get('model_id'):
+                    mid=row['model_id'];line=row.get('line');quote=root['text'].splitlines()[line-1] if isinstance(line,int) and 0<line<=len(root['text'].splitlines()) else row.get('id_evidence','directory literal ID')
+                    claims=[native.claim(root,mid,'identity',role='inline_directory_literal',line=line,quote=quote),native.claim(root,mid,'native_channel',status='unknown',reason='inline ID has no bound native endpoint/channel evidence'),native.claim(root,mid,'output',values=None,reason='inline ID has no output declaration')]
+                    records.append(dict(row,**native.project(claims)))
+                else:records.append(row)
+            for url,entity in entities.items():
+                try:
+                    doc=captured(details[url]);rows,proof=native.openai_detail(doc,entity)
+                    if not rows:raise ValueError('no literal native identity declarations')
+                    records.extend(dict(entity,**row) for row in rows);proofs.append(dict(source_url=url,**proof))
+                except (ValueError,KeyError,OSError,TypeError) as error:
+                    errors.append(dict(source_url=url,error=str(error)))
+                    records.extend(row for row in legacy if row.get('detail_url')==url)
+        else:
+            typed=native.xai_records(root);mapped={r['model_id'] for r in typed};records.extend(typed)
+            for row in legacy:
+                if row.get('model_id') not in mapped:records.append(row)
+            proofs.append(dict(source_url=native.XAI,typed_record_count=len(typed),catalog_universe='public priced subset only',alias_enumeration='generic templates are not literal aliases'))
+        snap['records']=records
+        snap['coverage_evidence']['native_claim_consumption']=dict(method='source_qualified_per_ID_channel_output_claims',source_proofs=proofs,errors=errors,
+            typed_record_count=sum(bool(row.get('native_claims')) for row in records),
+            unknown_channel_ids=sorted({row['model_id'] for row in records if row.get('model_id') and row.get('channel_applicability')!='verified'}),
+            unknown_output_ids=sorted({row['model_id'] for row in records if row.get('model_id') and not row.get('output_modalities')}),
+            completeness='NOT CERTIFIED: observation consumption is not official full catalog/alias/lifecycle enumeration')
+        # Typed observations do not repair missing external universes/entitlements.
+        snap['complete']=False
+
+
 def execute(config,manifest,database,capture_dir,replay_dir=None):
     validate_sources(config,manifest)
     capture_dir.mkdir(parents=True,exist_ok=False);inventories=[]
@@ -312,6 +362,7 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
             snap.setdefault('errors',[]).append('front_page_union_only_cards_absent_from_all:%d' % len(kept))
     apply_anthropic_observations(inventories,capture_dir)
     apply_minimax_observations(inventories,capture_dir,replay_dir)
+    apply_native_claims(inventories,capture_dir)
     c.atomic_json(capture_dir/'inventory.json',inventories)
     return inventories
 

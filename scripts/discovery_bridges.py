@@ -33,11 +33,8 @@ def openai_directory(text):
  return rows
 
 def openai_ids(text):
- ids=re.findall(r'(?im)^Model ID:\s*`([^`]+)`',text)
- match=re.search(r'(?m)^## (?:Model IDs|Snapshots)\s*\n(.*?)(?=^## |\Z)',text,re.S)
- if match:
-  ids+=re.findall(r'(?m)^- `([^`]+)`',match[1])
- return list(dict.fromkeys(x for x in ids if c.canonical_id(x)))
+ import discovery_native_claims as native
+ return list(dict.fromkeys(x['model_id'] for x in native.openai_identity(text)))
 
 def anthropic_directory(text):
  rows=[];section=False

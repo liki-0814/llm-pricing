@@ -127,3 +127,24 @@ and channel entitlements are not inferred. Original directory observations and
 all raw bodies remain auditable. Replay never falls back to HTTP. The saved H3
 constant-to-request chain is statically parsed, never executed or refetched for
 this integration replay. Anthropic and Google contracts are unchanged.
+
+
+### Source-qualified OpenAI/xAI observations
+
+`discovery_native_claims.py` supplies one per-literal-ID claim contract to the
+actual inventory **and** catalog diff consumer: raw source URL/hash/path/time,
+identity role, documented native channel, and explicit output declarations.
+Input modalities, cloud-provider IDs, price-label similarity and generic alias
+templates are never used to invent output/channel/alias membership. Closed
+Markdown ID enumerations may end at legal EOF; an unclosed fence is not EOF
+proof. Same-page and cross-page output conflicts remain sticky and retain all
+source declarations, irrespective of order. Explicit official alias maps retain
+the observed literal when projecting the existing canonical comparison key.
+
+OpenAI consumes only this attempt's captured detail bodies. Inline IDs without
+endpoint/output proof and open-weight native-PAYG applicability remain unknown.
+xAI consumes its native API usage pricing rows with typed output units; this
+never supplies subscription IDs or a complete unpriced/retired/alias universe.
+These are production observation consumers, **not** completeness certificates.
+Full official-universe verification remains a separate unfinished gate; no
+observation counts or successful unit tests change a partial scope to complete.

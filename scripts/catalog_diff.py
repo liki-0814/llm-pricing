@@ -208,6 +208,22 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
             if mid not in rec["observed_ids"]:
                 rec["observed_ids"].append(mid)
             rec["price_public"] |= row.get("price_public") is True
+            if row.get("native_claims"):
+                import discovery_native_claims as native
+                qualified_claims=[]
+                supplied=row['native_claims']
+                if not isinstance(supplied,list):
+                    rec.setdefault('native_claim_errors',[]).append('native claims must be a list');supplied=[]
+                for claim in supplied:
+                    if not native.valid_claim(claim) or claim.get('model_id')!=mid or not official_url(claim.get('source_url'),snap['vendor'],snap['channel'],manifest) or not re.fullmatch('[0-9a-f]{64}',str(claim.get('source_sha256',''))):
+                        rec.setdefault('native_claim_errors',[]).append('unqualified/mismatched native claim');continue
+                    if canonical!=mid:
+                        claim=dict(claim,model_id=canonical,observed_model_id=mid,identity_projection='validated_explicit_official_alias_map')
+                    qualified_claims.append(claim)
+                projected=native.project(rec.get('native_claims',[])+qualified_claims)
+                rec.update(projected)
+                rec['scope_status']='native_channel_observed' if rec['channel_applicability']=='verified' else 'pending_native_channel_applicability'
+                rec['origin_status']='verified_per_ID_native_channel_claim' if rec['channel_applicability']=='verified' and not rec.get('native_claim_errors') else 'pending_confirmation'
             rec["sources"].append({"source_url": snap["source_url"], "observed_at": snap["observed_at"], "line": row.get("line"), "line_basis": row.get("line_basis"),
                 "source_sha256": snap.get("source_sha256"), "capture_path": snap.get("capture_path"), "extraction_path": snap.get("extraction_path"), "identity_evidence": row.get("identity_evidence")})
     # Official entity notices survive even without proven invocation IDs. They are

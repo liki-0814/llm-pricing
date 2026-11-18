@@ -1,0 +1,1 @@
+Public official OpenAI detail captures used as data-only EOF fixtures. Both Snapshots enumerations end at legal EOF; no following heading is required. Original source URLs are https://developers.openai.com/api/docs/models/text-moderation-{latest,stable}.md. Tests bind their own raw SHA256 and never fetch or execute documentation.
