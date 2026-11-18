@@ -116,11 +116,61 @@ def directory(value):
  references=re.findall(r'For example:\s*`([^`]+)`',text)
  return rows,dict(directory_row_count=len(rows),directory_literal_count=len({r['model_id'] for r in rows}),required_detail_urls=sorted(linked),reference_example_literals=references,termination='all native model/endpoint tables; version-pattern and deprecations terminal')
 
+def detail_tables(value):
+ """Classify EVERY table before any consumer may use or exclude its cells.
+
+ Property tables pair literal invocation identity, output and Versions. The only
+ supported non-model role is a native robotics guide-navigation section: heading,
+ schema, non-code descriptive cells and native guide-only targets all corroborate
+ that role. A header alone never authorizes ignoring a table. Unknown means stop.
+ """
+ text=document(value);result=[]
+ for start,header,entries in tables(text):
+  evidence=dict(position=start,header=header)
+  if header==['Property','Description']:
+   props={}
+   for label,cell in entries:
+    label=clean(re.sub(r'\[\[\*\]\]\([^)]+\)','',re.sub(r'{%.*?%}','',label,flags=re.S)))
+    if label in props:raise ValueError('duplicate detail property')
+    props[label]=cell
+   if set(props)-PROPERTIES:raise ValueError('unknown model property grammar')
+   identity=[key for key in ('Model code','Agent code') if key in props]
+   if len(identity)!=1 or not {'Supported data types','Versions'}.issubset(props):raise ValueError('model identity/output/versions not paired')
+   evidence.update(kind='model_properties',property_names=sorted(props),identity_property=identity[0],basis='known properties paired with one invocation identity, output and Versions')
+   result.append((evidence,props));continue
+  # This is a positive semantic classification, NOT an unknown-table fallback.
+  headings=list(re.finditer(r'^#{1,6}\s+(.+)$',text[:start],re.M))
+  heading=headings[-1][1] if headings else ''
+  guides=[]
+  if header==['Capability','Description','Guide'] and re.fullmatch(r'Robotics capabilities(?:\s+{% id="capabilities" %})?',heading) and entries:
+   for name,description,target in entries:
+    match=re.fullmatch(r'\[([^]`]+)\]\((/docs/robotics-[a-z0-9-]+)\)',target)
+    if not match or not name.strip() or not description.strip() or any(ch in name+description for ch in '`[]<>') or clean(name) in PROPERTIES:break
+    guides.append(urljoin(ROOT_URL,match[2]))
+   else:
+    evidence.update(kind='guide_navigation',heading=heading,rows=entries,guide_urls=guides,basis='native capability heading + guide schema + non-code descriptive cells + exclusively native robotics guide links')
+    result.append((evidence,None));continue
+  raise ValueError('unclassified native detail table: '+repr(header))
+ return result
+
+def aggregate_claims(claims):
+ """One identity algebra for local AND cross-document claims, never first-wins.
+
+ Literal Model/Agent code is stronger than a repeated family Versions list.
+ All primary claims, or ALL alias claims when none are primary, are applicable.
+ Contradictory outputs stay unknown (union minus intersection), never disappear.
+ Every claim including weaker family context remains in the evidence.
+ """
+ preferred=[x for x in claims if x['primary']] or claims
+ certain=set.intersection(*(set(x['output']) for x in preferred));possible=set.union(*(set(x['output']) for x in preferred))
+ status={x['status'] for x in claims if x['status']}
+ return dict(primary_identity=any(x['primary'] for x in claims),output_modalities=sorted(certain),unknown_output_modalities=sorted(possible-certain),identity_quote=[x['identity_quote'] for x in preferred],versions_quote=[x['versions_quote'] for x in claims],output_quote=[x['output_quote'] for x in preferred],lifecycle_status='retired' if status=={'Shut down'} else 'unconfirmed',lifecycle_quote='\n'.join(x['versions_quote'] for x in claims) if status=={'Shut down'} else None,routing_quotes=sorted(set(q for x in claims for q in x['route_quotes'])),declarations=claims)
+
 def version_links(value):
  links=set()
- for _,header,entries in tables(document(value)):
-  if header!=['Property','Description']:continue
-  for label,cell in entries:
+ for evidence,props in detail_tables(value):
+  if evidence['kind']=='guide_navigation':continue
+  for label,cell in props.items():
    if 'Versions' not in label:continue
    for href in re.findall(r'\]\(([^)]+)\)',cell):
     if '/docs/models/' not in href:continue
@@ -131,9 +181,9 @@ def version_links(value):
 
 def primary_models(value):
  result={}
- for _,header,entries in tables(document(value)):
-  if header!=['Property','Description']:continue
-  for label,cell in entries:
+ for evidence,props in detail_tables(value):
+  if evidence['kind']=='guide_navigation':continue
+  for label,cell in props.items():
    label=clean(re.sub(r'{%.*?%}','',label,flags=re.S))
    if label not in ('Model code','Agent code'):continue
    cell=re.sub(r'^\*\*(?:Gemini API|Interactions API)\*\*\s*','',cell)
@@ -142,17 +192,9 @@ def primary_models(value):
 
 def detail_models(value,reference_models=None):
  text=document(value);result={};declarations={};seen_model_table=False
- for _,header,entries in tables(text):
-  if header!=['Property','Description']:continue
-  props={}
-  for label,cell in entries:
-   label=re.sub(r'{%.*?%}','',label,flags=re.S);label=re.sub(r'\[\[\*\]\]\([^)]+\)','',label);label=clean(label)
-   if label in props:raise ValueError('duplicate detail property')
-   props[label]=cell
-  if not ({'Model code','Agent code','Supported data types'}&set(props)):continue
-  if set(props)-PROPERTIES:raise ValueError('unknown model property grammar')
+ for evidence,props in detail_tables(text):
+  if evidence['kind']=='guide_navigation':continue
   identity=[key for key in ('Model code','Agent code') if key in props]
-  if len(identity)!=1 or not {'Supported data types','Versions'}.issubset(props):raise ValueError('model identity/output/versions not paired')
   field=props[identity[0]]
   if 'Vertex' in field or 'Bedrock' in field:raise ValueError('mixed invocation platform identity')
   field=re.sub(r'^\*\*(?:Gemini API|Interactions API)\*\*\s*','',field)
@@ -200,15 +242,8 @@ def detail_models(value,reference_models=None):
    if tail:route_quotes.append(line.strip())
   if not aliases:raise ValueError('empty version declaration')
   for mid in dict.fromkeys(codes+aliases):
-   declarations.setdefault(mid,[]).append(dict(primary=mid in codes,output=set(output),identity_quote=props[identity[0]],versions_quote=props['Versions'],output_quote=props['Supported data types'],status=statuses.get(mid),route_quotes=route_quotes))
- for mid,claims in declarations.items():
-  # A page can repeat a FAMILY Versions list under differently capable model
-  # tables. Explicit Model/Agent code wins; aliases only inherit what every
-  # applicable table guarantees, with differing modalities left unproven.
-  preferred=[x for x in claims if x['primary']] or claims
-  certain=set.intersection(*(x['output'] for x in preferred));possible=set.union(*(x['output'] for x in preferred))
-  status={x['status'] for x in claims if x['status']}
-  result[mid]=dict(primary_identity=any(x['primary'] for x in claims),output_modalities=sorted(certain),unknown_output_modalities=sorted(possible-certain),identity_quote=[x['identity_quote'] for x in preferred],versions_quote=[x['versions_quote'] for x in claims],output_quote=[x['output_quote'] for x in preferred],lifecycle_status='retired' if status=={'Shut down'} else 'unconfirmed',lifecycle_quote='\n'.join(x['versions_quote'] for x in claims) if status=={'Shut down'} else None,routing_quotes=list(dict.fromkeys(q for x in claims for q in x['route_quotes'])))
+   declarations.setdefault(mid,[]).append(dict(primary=mid in codes,output=sorted(output),table_position=evidence['position'],identity_quote=props[identity[0]],versions_quote=props['Versions'],output_quote=props['Supported data types'],status=statuses.get(mid),route_quotes=route_quotes))
+ for mid,claims in declarations.items():result[mid]=aggregate_claims(claims)
  if not seen_model_table:raise ValueError('no native model property table')
  return result
 
@@ -229,27 +264,34 @@ def prove(value,source,docs):
    c.parse_time(doc['observed_at'])
    if not isinstance(doc.get('source_sha256'),str) or not re.fullmatch(r'[0-9a-f]{64}',doc['source_sha256']):raise ValueError('detail raw hash missing')
    models[url]=detail_models(doc['text'],seeds)
+  # Preserve raw claims from every page/table before aggregating any identity.
+  claims_by_id={}
+  for url,declared in sorted(models.items()):
+   doc=docs[url]
+   for mid,data in sorted(declared.items()):
+    for claim in data['declarations']:
+     claims_by_id.setdefault(mid,[]).append(dict(claim,source_url=url,source_sha256=doc['source_sha256'],observed_at=doc['observed_at'],capture_path=doc.get('capture_path')))
+  aggregated={mid:aggregate_claims(claims) for mid,claims in sorted(claims_by_id.items())}
   for row in rows:
    mid=row['model_id'];url=row['detail_url']
    if url:
     if mid not in models[url]:raise ValueError('directory endpoint absent from explicit Model/Agent code or Versions: '+mid)
-    data=models[url][mid];doc=docs[url]
-    witness=dict(data,source_url=url,source_sha256=doc['source_sha256'],observed_at=doc['observed_at'],capture_path=doc.get('capture_path'))
+    witness=aggregated[mid]
    else:
     if row['description']!='Text-to-image model featuring fast and ultra-fast generation (shut down).' or row['lifecycle_status']!='retired':raise ValueError('unlinked endpoint has no supported explicit output witness')
-    witness=dict(output_modalities=['image'],identity_quote='native Endpoint cell',output_quote=row['description'],source_url=ROOT_URL)
+    if mid in aggregated and (aggregated[mid]['output_modalities']!=['image'] or aggregated[mid]['unknown_output_modalities']):raise ValueError('conflicting unlinked directory/detail output attribution')
+    witness=dict(output_modalities=['image'],unknown_output_modalities=[],identity_quote='native Endpoint cell',output_quote=row['description'],source_url=ROOT_URL)
    by_id.setdefault(mid,dict(row,identity_evidence=witness,output_modalities=witness['output_modalities'],unknown_output_modalities=witness.get('unknown_output_modalities',[])))
-  # Preserve native variants not on the overview. Never canonicalize an alias to
-  # its backend, infer retirement of an alias, or price-filter an official ID.
-  for url,declared in models.items():
-   for mid,data in declared.items():
-    doc=docs[url];witness=dict(data,source_url=url,source_sha256=doc['source_sha256'],observed_at=doc['observed_at'],capture_path=doc.get('capture_path'))
-    if mid in by_id:
-     if by_id[mid]['output_modalities']!=data['output_modalities']:raise ValueError('conflicting directory/detail output attribution')
-    else:by_id[mid]=dict(model_id=mid,api_id_explicit=True,origin_vendor='Google Gemini',price_public=False,lifecycle_status=data['lifecycle_status'],lifecycle_quote=data['lifecycle_quote'],retired_at=None,unknown_output_modalities=data['unknown_output_modalities'],output_modalities=data['output_modalities'],identity_evidence=witness,line_basis='native detail Model/Agent code or Versions literal')
-  records=list(by_id.values());counts={kind:sum(kind in row['output_modalities'] for row in records) for kind in proof['modalities']}
+  # No alias/backend canonicalization, price filtering, or cross-page first-wins.
+  for mid,data in aggregated.items():
+   if mid in by_id:
+    by_id[mid].update(identity_evidence=data,output_modalities=data['output_modalities'],unknown_output_modalities=data['unknown_output_modalities'])
+   else:by_id[mid]=dict(model_id=mid,api_id_explicit=True,origin_vendor='Google Gemini',price_public=False,lifecycle_status=data['lifecycle_status'],lifecycle_quote=data['lifecycle_quote'],retired_at=None,unknown_output_modalities=data['unknown_output_modalities'],output_modalities=data['output_modalities'],identity_evidence=data,line_basis='native detail Model/Agent code or Versions literal')
+  proof['detail_table_classifications']={url:[ev for ev,_ in detail_tables(docs[url]['text'])] for url in sorted(docs)}
+  records=[by_id[mid] for mid in sorted(by_id)];counts={kind:sum(kind in row['output_modalities'] for row in records) for kind in proof['modalities']}
   decisions={kind:dict(verified=bool(counts[kind]) and not any(kind in row.get('unknown_output_modalities',[]) for row in records),unknown_ids=[row['model_id'] for row in records if kind in row.get('unknown_output_modalities',[])]) for kind in proof['modalities']}
   proven=[kind for kind in proof['modalities'] if decisions[kind]['verified']]
+  proof.update(scope_decisions=decisions,modality_record_counts=counts,modalities=proven)
   if not proven:raise ValueError('no output scope has complete explicit attribution')
   proof.update(evidence,root_detail_urls=sorted(root_urls),version_reference_urls=sorted(refs-root_urls),verified=True,modalities=proven,scope_decisions=decisions,expected_record_count=len(records),modality_record_counts=counts,reference_example_policy='naming-convention examples are retained as references, not current endpoint declarations',detail_document_count=len(docs))
  except (ValueError,TypeError,KeyError,AttributeError,StopIteration) as error:proof['error']=str(error)
