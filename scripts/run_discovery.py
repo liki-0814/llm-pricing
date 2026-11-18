@@ -12,7 +12,7 @@ import discovery_adapters as adapters
 import discovery_bridges as bridges
 from concurrent.futures import ThreadPoolExecutor
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-ADAPTER_VERSION='discovery-adapters/9-context-bound-schema-witnesses'
+ADAPTER_VERSION='discovery-adapters/10-published-catalog-certification'
 OpenAICards=adapters.OpenAICards
 class LimitedPublicRedirect(urllib.request.HTTPRedirectHandler):
     """Follow a short chain of public official documentation redirects only."""
@@ -317,6 +317,82 @@ def apply_native_claims(inventories,capture_dir):
         snap['complete']=False
 
 
+def apply_public_catalog_observations(inventories,capture_dir,replay_dir=None):
+    """Published documents only; bounded indexes, no cookies, credentials or internal APIs."""
+    import discovery_document_catalogs as public
+    import discovery_universe_contracts as universe
+    docs={};blocked_hosts=set()
+    def child(url):
+        sid='published-catalog-'+digest(url.encode())[:16];doc={};meta={}
+        try:
+            if replay_dir is None and urlparse(url).hostname in blocked_hosts:raise ValueError('host access gate already observed; further network requests stopped')
+            if replay_dir is None:
+                body,at,extra=fetch_source({'url':url},{urlparse(url).hostname});meta=dict(url=url,observed_at=at,sha256=digest(body),http_status=200,capture_kind='http_body',mode='fresh',**extra)
+            else:
+                meta=json.loads((replay_dir/(sid+'.json')).read_text());body=(replay_dir/(sid+'.body')).read_bytes()
+                if meta.get('url')!=url or meta.get('sha256')!=digest(body) or meta.get('http_status')!=200:raise ValueError('published catalog replay provenance invalid')
+                meta=dict(meta,mode='replay')
+            c.parse_time(meta['observed_at']);_,text=adapters.decode_body(body)
+            (capture_dir/(sid+'.body')).write_bytes(body);c.atomic_json(capture_dir/(sid+'.json'),meta)
+            doc=dict(text=text,source_url=url,source_sha256=meta['sha256'],capture_path=str(capture_dir/(sid+'.body')),observed_at=meta['observed_at'])
+            if public.access_gate(text):
+                blocked_hosts.add(urlparse(url).hostname)
+                raise ValueError('public document access gate; no retry/header substitution')
+            return url,doc
+        except Exception as error:
+            if getattr(error,'code',None) in (401,403,429):blocked_hosts.add(urlparse(url).hostname)
+            failed=dict({k:v for k,v in doc.items() if k!='text'},source_url=url,error=type(error).__name__+': '+str(error),fetch_status='ok' if meta.get('http_status')==200 else 'failed')
+            if not meta:c.atomic_json(capture_dir/(sid+'.json'),failed)
+            return url,failed
+    qwen=next((x for x in inventories if (x.get('vendor'),x.get('channel'),x.get('source_url'))==('阿里云 Qwen','pay_as_you_go',public.QWEN+'models') and x.get('fetch_status')=='ok'),None)
+    if qwen is not None:
+        docs.update(ThreadPoolExecutor(max_workers=3).map(child,public.QWEN_INDEXES))
+        entities=[];index_proofs=[];failures=[]
+        for url in public.QWEN_INDEXES:
+            try:
+                doc=docs[url];rows,proof=public.qwen_index(doc['text'],url);entities.extend(dict(row,index_url=url) for row in rows);index_proofs.append(dict(proof,source_sha256=doc['source_sha256'],capture_path=doc['capture_path']))
+            except (ValueError,KeyError,TypeError) as error:failures.append(dict(source_url=url,error=str(error)))
+        urls=sorted({e['detail_url'] for e in entities})
+        if len(urls)>180:failures.append(dict(error='published Qwen detail budget exceeded180'));urls=[]
+        docs.update(ThreadPoolExecutor(max_workers=6).map(child,urls));observed=[]
+        for entity in entities:
+            doc=docs[entity['detail_url']]
+            try:observed.append(public.qwen_detail(doc,entity))
+            except (ValueError,KeyError,TypeError) as error:
+                failures.append(dict(source_url=entity['detail_url'],error=str(error)));observed.append(dict(model_id=None,api_id_explicit=False,catalog_observation=True,display_name=entity['display_name'],detail_url=entity['detail_url'],catalog_quote=entity['quote'],scope_status='pending_qualified_detail'))
+        qwen['records'].extend(observed)
+        qwen['published_catalog_proof']=dict(method='official_published_category_indexes_and_literal_request_output_details',index_proofs=index_proofs,category_rows=len(entities),unique_detail_documents=len(urls),observations=len(observed),known_output_observations=sum(bool(r.get('output_modalities')) for r in observed),failures=failures,population='published_categories_not_a_claimed_global_native_universe',native_provider_unknown=sum(r.get('native_vendor_status')!='verified_explicit_provider' for r in observed),aliases='unknown: no direct map inferred from snapshots/model-name patterns',lifecycle='unknown where not declared',api_alternative='https://www.alibabacloud.com/help/en/model-studio/list-models; authenticated account/region/filter only, never automatically global')
+        qwen['public_catalog_captures']=[{k:v for k,v in d.items() if k!='text'} for d in docs.values()]
+        qwen['complete']=False
+    subscription=next((x for x in inventories if (x.get('vendor'),x.get('channel'))==('xAI','subscription')),None)
+    if subscription is not None:
+        index_url,index=child(public.XAI_INDEX);subdocs={index_url:index};models=[];failures=[];urls=[]
+        try:urls=public.xai_subscription_urls(index['text'])
+        except (KeyError,ValueError) as error:failures.append(dict(source_url=index_url,error=str(error)))
+        subdocs.update(ThreadPoolExecutor(max_workers=6).map(child,urls))
+        for url in urls:
+            try:
+                rows=public.xai_subscription_catalog(subdocs[url]);models.extend(rows)
+                if rows:
+                    doc=subdocs[url]
+                    inventories.append(dict(vendor='xAI',channel='subscription',role='catalog',source_url=url,observed_at=doc['observed_at'],source_sha256=doc['source_sha256'],capture_path=doc['capture_path'],records=rows,complete=False,fetch_status='ok',extraction_status='partial',errors=['native_catalog_rows_observed_without_global_alias_lifecycle_closure'],coverage_evidence={'modalities':['text'],'enumeration_verified':False,'pagination_complete':False}))
+            except (ValueError,KeyError,TypeError) as error:failures.append(dict(source_url=url,error=str(error)))
+        subscription['native_subscription_enumeration']=dict(method='published_Build_and_subscription_index_sections_only',required_document_count=len(urls),read_document_count=sum('text' in subdocs[u] for u in urls),literal_native_catalog_rows=len(models),failures=failures,empty_state='catalog_not_published_or_unread_NOT_verified_empty' if not models else 'partial_native_catalog_observed',excluded_evidence='config examples, BYOK/API-key/custom endpoints, generic placeholders and PAYG price IDs are not subscription membership',runtime_catalog_evidence=[dict(source_url=u,quote=line) for u,d in subdocs.items() for line in d.get('text','').splitlines() if 'GROK_MODELS_LIST_URL' in line or 'GROK_DEFAULT_MODEL' in line])
+        subscription['public_catalog_captures']=[{k:v for k,v in d.items() if k!='text'} for d in subdocs.values()]
+    for snap in inventories:
+        if snap.get('coverage_evidence',{}).get('native_claim_consumption'):
+            path=pathlib.Path(snap['capture_path']);raw=path.read_bytes()
+            if path.resolve().parent!=capture_dir.resolve() or digest(raw)!=snap['source_sha256']:raise ValueError('universe root capture provenance mismatch')
+            _,text=adapters.decode_body(raw);root_document=dict(text=text,**{k:snap[k] for k in ('source_url','source_sha256','capture_path','observed_at')})
+            extra=[s for s in inventories if s is not snap and s['vendor']==snap['vendor'] and s['channel']==snap['channel'] and s.get('role')=='catalog']
+            snap['scope_certificates']=universe.native_observation_certificates(snap,root_document,extra)
+            certified=[r['modality'] for r in snap['scope_certificates'] if r['complete']]
+            if certified:
+                snap.update(complete=True,extraction_status='ok',errors=[])
+                snap['coverage_evidence'].update(modalities=certified,enumeration_verified=True,pagination_complete=True,native_identity_verified=True,expected_record_count=len(snap['records']))
+        elif snap is qwen:
+            proof=qwen['published_catalog_proof'];snap['scope_certificates']=[universe.scope_certificate(snap['vendor'],snap['channel'],m,snap['records'],population=universe.unknown('published categories do not assert complete native/legacy provider universe'),pagination=universe.unknown('published linked pages read, but Model Plaza/API regional terminal remains unproved',read=proof['unique_detail_documents'],failures=proof['failures']),alias_enumeration=universe.unknown('no complete direct alias declaration'),lifecycle=universe.unknown('historical lifecycle set not declared')) for m in ('text','image','video')]
+
 def execute(config,manifest,database,capture_dir,replay_dir=None):
     validate_sources(config,manifest)
     capture_dir.mkdir(parents=True,exist_ok=False);inventories=[]
@@ -363,6 +439,7 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
     apply_anthropic_observations(inventories,capture_dir)
     apply_minimax_observations(inventories,capture_dir,replay_dir)
     apply_native_claims(inventories,capture_dir)
+    apply_public_catalog_observations(inventories,capture_dir,replay_dir)
     c.atomic_json(capture_dir/'inventory.json',inventories)
     return inventories
 
@@ -374,6 +451,7 @@ def main():
     p.add_argument('--scopes',default=str(c.DEFAULT_SCOPES))
     p.add_argument('--replay-dir',type=pathlib.Path,help='Offline verification only; never advances successful monitoring baseline')
     p.add_argument('--replay-database',type=pathlib.Path)
+    p.add_argument('--catalog-export-dir',type=pathlib.Path,help='Offline-only original documented Qwen/xAI model catalog HTTP exports; never credentials or a fresh/global universe proof')
     args=p.parse_args();attempt=None
     try:
         attempt=c.begin_attempt(args.state_dir)
@@ -389,8 +467,20 @@ def main():
         else:database,main_sha,baseline_digest=remote_main()
         captures=pathlib.Path(args.state_dir)/'captures'/attempt['run_id']
         inventories=execute(config,manifest,database,captures,args.replay_dir)
+        catalog_exports=None
+        if args.catalog_export_dir:
+            if not args.replay_dir:raise ValueError('offline catalog exports cannot participate in a fresh success baseline')
+            import discovery_universe_contracts as universe
+            pages=[]
+            for meta_path in sorted(args.catalog_export_dir.glob('*.json')):
+                meta=json.loads(meta_path.read_text());meta['body']=meta_path.with_suffix('.body').read_bytes();meta['capture_path']=str(meta_path.with_suffix('.body'));pages.append(meta)
+            qwen_pages=[d for d in pages if urlparse(d.get('url','')).hostname!='api.x.ai']
+            xai_pages=[d for d in pages if urlparse(d.get('url','')).hostname=='api.x.ai']
+            catalog_exports=dict(qwen=universe.qwen_catalog_pages(qwen_pages) if qwen_pages else None,xai=universe.xai_catalog_exports(xai_pages) if xai_pages else None)
         previous=c.previous_success(args.state_dir)
         result=c.compare_catalogs(database,inventories,previous,scopes=manifest)
+        result['scope_certificates']=[certificate for snapshot in inventories for certificate in snapshot.get('scope_certificates',[])]
+        result['catalog_export_validation']=catalog_exports
         result['comparison_baseline_run_id']=previous.get('run_id') if previous else None
         result.update(code_sha=sha,adapter_version=ADAPTER_VERSION,sources_sha256=digest(pathlib.Path(args.sources).read_bytes()),
             baseline_branch='main' if not args.replay_dir else 'offline-unverified',baseline_commit=main_sha,

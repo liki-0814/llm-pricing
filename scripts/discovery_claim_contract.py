@@ -33,7 +33,7 @@ def claim(doc,mid,kind,**fields):return dict(qualified(doc),model_id=mid,kind=ki
 
 def valid_claim(value, *, vendor=None, channel=None, source_url=None):
     """JSON contract validation before claims enter the shared diff consumer."""
-    if not isinstance(value,dict) or value.get('kind') not in ('identity','output','native_channel','lifecycle'):return False
+    if not isinstance(value,dict) or value.get('kind') not in ('identity','output','native_channel','lifecycle','alias'):return False
     if not isinstance(value.get('model_id'),str) or canonical_id(value['model_id'])!=value['model_id']:return False
     try:qualified(value)
     except (ValueError,TypeError,AttributeError):return False
@@ -44,7 +44,9 @@ def valid_claim(value, *, vendor=None, channel=None, source_url=None):
         modes=value.get('values')
         if modes is not None and (not isinstance(modes,list) or not modes or any(not isinstance(x,str) for x in modes) or len(modes)!=len(set(modes)) or not set(modes)<=MODALITIES):return False
     if value['kind']=='native_channel' and (value.get('status') not in ('verified','unknown') or not isinstance(value.get('reason'),str)):return False
-    if value['kind']=='lifecycle' and value.get('status') not in ('retired','deprecated'):return False
+    if value['kind']=='lifecycle' and value.get('status') not in ('retired','deprecated','active','listed'):return False
+    if value['kind']=='alias' and (value.get('status') not in ('direct','none') or (value['status']=='direct' and (not isinstance(value.get('alias_of'),str) or canonical_id(value['alias_of'])!=value['alias_of']))):return False
+    if value['kind']=='alias' and (not isinstance(value.get('quote'),str) or not value['quote'] or type(value.get('line')) is not int or value['line']<1 or (value['status']=='none' and value.get('alias_of') is not None)):return False
     return True
 
 
@@ -61,11 +63,14 @@ def project(claims):
     channel=[x.get('status') for x in claims if x['kind']=='native_channel']
     statuses={x['status'] for x in claims if x['kind']=='lifecycle'}
     status_conflict=len(statuses)>1
+    alias_targets={x.get('alias_of') for x in claims if x['kind']=='alias' and x.get('status')=='direct'}
+    no_alias=any(x['kind']=='alias' and x.get('status')=='none' for x in claims)
+    alias_conflict=len(alias_targets)>1 or bool(alias_targets and no_alias)
     return dict(native_claims=claims,output_modalities=sorted(union) if outputs and not conflict else [],
         unknown_output_modalities=sorted(union or MODALITIES) if conflict or not outputs else [],output_conflict=conflict,
         channel_applicability='verified' if channel and set(channel)=={'verified'} else 'unknown',
         channel_unknown_reasons=sorted({x.get('reason','unspecified') for x in claims if x['kind']=='native_channel' and x.get('status')!='verified'}),
         lifecycle_status=next(iter(statuses)) if statuses and not status_conflict else 'unconfirmed',lifecycle_conflict=status_conflict,lifecycle_quote='\n'.join(dict.fromkeys(x['quote'] for x in claims if x['kind']=='lifecycle' and x.get('quote'))) or None,
-        alias_of=None,alias_status='unknown_snapshot_or_alias_role_not_a_direct_mapping')
+        alias_of=next(iter(alias_targets)) if len(alias_targets)==1 and not alias_conflict else None,alias_status='conflicting_explicit_alias_declarations' if alias_conflict else 'explicit_official_mapping' if alias_targets else 'explicit_no_aliases' if no_alias else 'unknown_snapshot_or_alias_role_not_a_direct_mapping')
 
 

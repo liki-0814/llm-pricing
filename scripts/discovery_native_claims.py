@@ -76,11 +76,15 @@ def openai_detail(doc,entity):
         else:claims.append(claim(doc,mid,'output',values=None,conflict=bool(output_claims),unbound_output_declarations=output_claims,reason='unique primary/output or closed ID enumeration missing'))
         for ident in roles:
             status=ident.get('status')
+            direct=re.fullmatch(r'Alias for `([^`]+)`',status or '')
+            if direct and c.canonical_id(direct[1])==direct[1]:claims.append(claim(doc,mid,'alias',status='direct',alias_of=direct[1],line=ident['line'],quote=ident['quote']))
             if status=='Shut down':claims.append(claim(doc,mid,'lifecycle',status='retired',line=ident['line'],quote=ident['quote']))
         if mid in primary:
             for section in parts:
                 if section['name'] is not None:continue
                 for number,line in section['lines']:
+                    if line=='Aliases: None':claims.append(claim(doc,mid,'alias',status='none',line=number,quote=line))
+                    if line in ('Status: Available','Status: Active'):claims.append(claim(doc,mid,'lifecycle',status='active',line=number,quote=line))
                     if line in ('Status: Shut down','Status: Deprecated'):claims.append(claim(doc,mid,'lifecycle',status='retired' if line.endswith('Shut down') else 'deprecated',line=number,quote=line))
         row=dict(model_id=mid,api_id_explicit=True,catalog_observation=False,identity_evidence={'claims':claims},**project(claims))
         row.update(id_enumeration_complete=not alias_errors,scope_status='native_channel_observed' if bound_channel else 'pending_native_channel_applicability',retired_at=None)
