@@ -27,6 +27,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Standard",
+          "source_table_start": 101412,
           "price_header": "Input price (text, image, video, audio, PDF)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "qualifier": "$0.10"
@@ -61,9 +62,10 @@
         "quote_sha256": "99b216562ed263021146a01407e9ad72e53faef6a0821e8df03dd2fc13f9d7e4",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-decision-1`](/docs/models/gemini-decision-1)"
+          "[`gemini-decision-1`](/docs/models/gemini-decision-1)",
+          "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "b89312e59003eaa7a4d9436a0c8799e1f38baafc3f5ee9873518848c59865f55"
+        "price_record_id": "c3e4c34dddd087dee7eb7f519b544fbe917b98183fe7a7db210ecedfe3dd4fb4"
       }
     ],
     "scope_complete": false,

@@ -27,6 +27,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Standard",
+          "source_table_start": 74630,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "qualifier": "$3.00"
@@ -61,9 +62,10 @@
         "quote_sha256": "14b78b0ededc09739a3f0181539cbae9c2321c32c93c3fcd8f8ff5fbe178edbd",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3-flash-preview`](/docs/models/gemini-3-flash-preview)"
+          "[`gemini-3-flash-preview`](/docs/models/gemini-3-flash-preview)",
+          "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "a30888ecdb6467464fb7804862543910bcaf2fd39f10c7c2a462a73b7bfcf6e7"
+        "price_record_id": "c4391274eff7a24af75e16f4d649f93ce2a82b1421bc6cac215ab18acd127cd3"
       },
       {
         "vendor": "Google Gemini",
@@ -77,6 +79,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Batch",
+          "source_table_start": 75688,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "qualifier": "$1.50"
@@ -111,9 +114,10 @@
         "quote_sha256": "e8c8a5ec69084f9ee0a74ccda0673ed4b00050477ac11741d44bee036db487dc",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3-flash-preview`](/docs/models/gemini-3-flash-preview)"
+          "[`gemini-3-flash-preview`](/docs/models/gemini-3-flash-preview)",
+          "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "0ce150327e752685bee1f0afc3b7732a83417fd6d1fdd8e7a3347b008faef2c5"
+        "price_record_id": "ac4afb49b120d7712dae0f7275fb504cfdae7c35fea57a07931c852fe9fe6f7d"
       },
       {
         "vendor": "Google Gemini",
@@ -127,6 +131,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Flex",
+          "source_table_start": 76767,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "qualifier": "$1.50"
@@ -161,9 +166,10 @@
         "quote_sha256": "e8c8a5ec69084f9ee0a74ccda0673ed4b00050477ac11741d44bee036db487dc",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3-flash-preview`](/docs/models/gemini-3-flash-preview)"
+          "[`gemini-3-flash-preview`](/docs/models/gemini-3-flash-preview)",
+          "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "acd859c20b11b16d2501949f933b761c0866cdb586cbe990d2f18bfded5bb988"
+        "price_record_id": "3db56d979df027d7efacf7805cfa1ee2a0c51887d2f0f38c9a356dcd670a6058"
       },
       {
         "vendor": "Google Gemini",
@@ -177,6 +183,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Priority",
+          "source_table_start": 77850,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "qualifier": "$5.40"
@@ -211,9 +218,10 @@
         "quote_sha256": "6e40e7a3138f6e3289d7e28cab3e151dda3f8f80722b37e798051e685224ba94",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3-flash-preview`](/docs/models/gemini-3-flash-preview)"
+          "[`gemini-3-flash-preview`](/docs/models/gemini-3-flash-preview)",
+          "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "640692642b1ebbb9ee5d7a5b5a94b9bc8cd6b8cb908f2982ea499e9997723178"
+        "price_record_id": "528aa638c5d7dfaad727e4df232eb6ca949faebd90d49a45c06080c80d3b540a"
       }
     ],
     "scope_complete": false,

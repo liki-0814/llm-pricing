@@ -214,3 +214,35 @@ old estimator models; its response shows selector completeness and missing field
 Discovery attaches the same normalized statements by exact vendor/channel/ID,
 without rewriting native output/alias/history/scope certificates. All 89 audited
 estimator records, SDK, M1 and the three universe-contract files remain unchanged.
+
+
+## Shared source-context correction (B36 review R1–R3)
+
+One pure `public_price_context` component owns Markdoc heading/container scopes,
+complete printed billing-unit recognition and literal atomic evidence claims. Both
+quote observations and normalized price records consume the same open-tab stack;
+`/tab`/`/tabs` terminate ownership. Missing tabs are null, never the preceding tier.
+Table source offsets/opening-tab quotes distinguish duplicate printed rows.
+Malformed scope is retained as unknown and not normalized. HTML tablepanel scope
+uses its existing enclosing-element stack with matching closure controls.
+
+A denominator alone is not a unit. Scalar, price-column header and scoped default
+are distinguished: unsupported dimensions/denominators and contradictory specific
+cell/header units remain candidates. A weaker source paragraph/table default may
+be overridden by a printed scalar unit (e.g. a minute-priced audio session); no
+character fee is relabelled as token billing. Strict facts and additional model
+records share the recognition gate, including mixed-output Qwen remainders.
+
+Fast availability, subscription-plan billing, public-API exclusion and free-Build
+exclusion now each carry a separately evaluated `claim_evidence` predicate and
+literal quote/hash. Missing exclusion is null/unknown, not false; other supported
+propositions survive. Existing real-original values remain unchanged. This is an
+additive nullable-unknown compatibility path, not a weakened `price_verified` or
+an inferred API ID/account entitlement. The source remains the ten archived06:31
+originals; all generated API/page products are rebuilt, not relabelled fresh.
+
+Controls: actual Google capture/archive five formerly contaminated tables/eleven
+observations, live/closed/nested tab controls; Atlas's53 token→character header
+variant and unknown/contradictory units through real assemblers/API/page/inventory;
+independently deleted Fast propositions and original Markdown positive control.
+The latter synthetic inputs are NOT claims of errors in official original rates.

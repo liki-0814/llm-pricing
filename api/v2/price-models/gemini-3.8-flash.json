@@ -27,6 +27,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Standard",
+          "source_table_start": 23595,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -67,9 +68,10 @@
         "quote_sha256": "5b37ec1bd07f5bf9763521d742e3606f1d5d4e265b84303df549a840fdcb1a0d",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "2d15497bd3abe3a2bacfbf83675aacfa72ed89e115d43893706a2a058073c6db"
+        "price_record_id": "5332c8e400021105e5fc6340453aff72d797221f50509db5e33ed89eba4db993"
       },
       {
         "vendor": "Google Gemini",
@@ -83,6 +85,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Standard",
+          "source_table_start": 23595,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -123,9 +126,10 @@
         "quote_sha256": "5b37ec1bd07f5bf9763521d742e3606f1d5d4e265b84303df549a840fdcb1a0d",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "94453bc22fe06d3ca5962e1ad2cf5437d0dde4f104b8315238d36015c2adcda4"
+        "price_record_id": "52870beea0ce89652e0f2c34c7a70cc6f18f4daa85783f9863a596a849e3f223"
       },
       {
         "vendor": "Google Gemini",
@@ -139,6 +143,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Standard",
+          "source_table_start": 23595,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -179,9 +184,10 @@
         "quote_sha256": "b98742140e3e2efcd5851881e5b66db58091abda607e0988a44282158201cc39",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "ecd89f8840b4e8b27f4d1217c737b8d48158ec507571ccc56724baadf592a03c"
+        "price_record_id": "cfb043f6d19a1dfd7a42f3a85f0845fed61e93949b249dff057a4bd8c04b9887"
       },
       {
         "vendor": "Google Gemini",
@@ -195,6 +201,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Standard",
+          "source_table_start": 23595,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -235,9 +242,10 @@
         "quote_sha256": "b98742140e3e2efcd5851881e5b66db58091abda607e0988a44282158201cc39",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "52fa0f2339451e24b34bc09b79f3e0fc1c283c8982d01b7c1f11ef2d0e104698"
+        "price_record_id": "c644511e5fdaba64aa5f15d34690310017a8799f4e84adce83311a83981784d3"
       },
       {
         "vendor": "Google Gemini",
@@ -251,6 +259,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Batch",
+          "source_table_start": 24805,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -291,9 +300,10 @@
         "quote_sha256": "80c91307966c0c766586c259929f0f4a8a3e7b5f4ee2b3f2da7a866a537733b8",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "635ddade8345cb75947cb808e49bce439f1660957c67a5d1876cae3a2e827f2c"
+        "price_record_id": "6c32c08f7c29c6f791af603063beda4df1e23dbb5c1c2f72ef500df33c9d997d"
       },
       {
         "vendor": "Google Gemini",
@@ -307,6 +317,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Batch",
+          "source_table_start": 24805,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -347,9 +358,10 @@
         "quote_sha256": "80c91307966c0c766586c259929f0f4a8a3e7b5f4ee2b3f2da7a866a537733b8",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "22dcb0d6b4877c981e2023a38ddb8e51f5aaccf35186885d3a81b992ad7a974e"
+        "price_record_id": "90d211fe7379da27c37f2e99fe92b69651c180dfd8eb0a5b2b8bfc67f9cb1f01"
       },
       {
         "vendor": "Google Gemini",
@@ -363,6 +375,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Batch",
+          "source_table_start": 24805,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -403,9 +416,10 @@
         "quote_sha256": "fb3d9475bec2b48340dd808de055d4f97f07c1543eb1123660eb3ba9233a94cd",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "75983c09ee3583f4bd7548c29b9a48faee982db23c15faa143f7d1e2a32a72cb"
+        "price_record_id": "ffde3da95a233ed60bfebbda4154d6097fb89ab6dde14924f0f719b948369161"
       },
       {
         "vendor": "Google Gemini",
@@ -419,6 +433,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Batch",
+          "source_table_start": 24805,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -459,9 +474,10 @@
         "quote_sha256": "fb3d9475bec2b48340dd808de055d4f97f07c1543eb1123660eb3ba9233a94cd",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "0ac4444ce9a02017e3534f73d18704951a251bd5d2d4d105841afd11602884dd"
+        "price_record_id": "064745576c523a33352f9142de367fd873ee1be98555905964edaa78117d4825"
       },
       {
         "vendor": "Google Gemini",
@@ -475,6 +491,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Flex",
+          "source_table_start": 25577,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -515,9 +532,10 @@
         "quote_sha256": "80c91307966c0c766586c259929f0f4a8a3e7b5f4ee2b3f2da7a866a537733b8",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "08efee84e6a273bb0774c1dc5b74513512713cf0c786cb141956f6ce210567b5"
+        "price_record_id": "4c9327e83df5f9a791bb73e14e0e90e388de2bdd9712d5bf42a3e1bcb2b7b69f"
       },
       {
         "vendor": "Google Gemini",
@@ -531,6 +549,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Flex",
+          "source_table_start": 25577,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -571,9 +590,10 @@
         "quote_sha256": "80c91307966c0c766586c259929f0f4a8a3e7b5f4ee2b3f2da7a866a537733b8",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "7df8cf37fd1550fd09e6bc85065857c88faa90ce07586fdc8a709a5a47db42d5"
+        "price_record_id": "e095f670c3a1b7f9d0dc55924e7e1f10ed1cb9befb92dcb984ca942a4635ff70"
       },
       {
         "vendor": "Google Gemini",
@@ -587,6 +607,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Flex",
+          "source_table_start": 25577,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -627,9 +648,10 @@
         "quote_sha256": "fb3d9475bec2b48340dd808de055d4f97f07c1543eb1123660eb3ba9233a94cd",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "45b12e3de37597b23a88521e388c56866a41207fe89c2483257091f0d29fb199"
+        "price_record_id": "fdd60b8fb93eac1d5d250b67270b359497dd7e7aafa178e44941d1e56e536fa4"
       },
       {
         "vendor": "Google Gemini",
@@ -643,6 +665,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Flex",
+          "source_table_start": 25577,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -683,9 +706,10 @@
         "quote_sha256": "fb3d9475bec2b48340dd808de055d4f97f07c1543eb1123660eb3ba9233a94cd",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "7346a39e3e55980841da84a13cbc5ea0261f2a503deff426f008cc0b6f9eeaf8"
+        "price_record_id": "cf75ba5f456c2d25dd0bf14ab39b2f32d13b6d549181892f90fac75a16f004ab"
       },
       {
         "vendor": "Google Gemini",
@@ -699,6 +723,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Priority",
+          "source_table_start": 26353,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -739,9 +764,10 @@
         "quote_sha256": "9bdd9c634d1cd14c96a99b4629fc9829f915a7e14564c0d5f895a5aa79a2d449",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "71cec230e53e7850acbf6b355176d5fc8ab54524b5cf4bc9ae6fdb7de2a600d2"
+        "price_record_id": "194791529da6b658dda642f1823fb40264c3bc41bde80973b5fff579026d414e"
       },
       {
         "vendor": "Google Gemini",
@@ -755,6 +781,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Priority",
+          "source_table_start": 26353,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -795,9 +822,10 @@
         "quote_sha256": "9bdd9c634d1cd14c96a99b4629fc9829f915a7e14564c0d5f895a5aa79a2d449",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "5415eca87324767e15fb526fb1bb1e1c4e6b01a0650b64800fea008aa482ddb4"
+        "price_record_id": "7d001fef42c9050ea283b2432ca4c2af6efae7bd4dedeff25222e69ae34ba625"
       },
       {
         "vendor": "Google Gemini",
@@ -811,6 +839,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Priority",
+          "source_table_start": 26353,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -851,9 +880,10 @@
         "quote_sha256": "2c53fdbe15b2fd98b2941448e7e1ff840bd4167389e0fffd7fb8c8d9cdb58bef",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "ca49c7339ec3f1214f31e4fca833338d6cde937ba4a5fa40545e06383f10b53b"
+        "price_record_id": "acd290c7e02ffd692599eb3c233f858c962a46623cef20c20b84b1bbb3088b20"
       },
       {
         "vendor": "Google Gemini",
@@ -867,6 +897,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Priority",
+          "source_table_start": 26353,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -907,9 +938,10 @@
         "quote_sha256": "2c53fdbe15b2fd98b2941448e7e1ff840bd4167389e0fffd7fb8c8d9cdb58bef",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)"
+          "[`gemini-3.8-flash`](/docs/models/gemini-3.8-flash)",
+          "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "d05b8871bc61419a763c72d7d75c9a1e35244a073ae5b56b45ea2005219cdd20"
+        "price_record_id": "aca84e26aaca72e4c9f38d4c86de108f14cf72cf1df0b22d2b0eafc29d6b50c9"
       }
     ],
     "scope_complete": false,

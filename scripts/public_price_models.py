@@ -9,6 +9,7 @@ import json
 import math
 import re
 from html import unescape
+from public_price_context import explicit_unit, markdoc_tables
 
 ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.-]*-[A-Za-z0-9_.-]+')
 
@@ -38,10 +39,15 @@ def scalar(s):
     return float(m[1]) if m else None
 
 def billing_unit(value,default):
-    """An explicit scalar-cell suffix overrides a table's default unit, never FX."""
+    """Compatibility helper: only a bare scalar may use an already-proven unit.
+
+    Production source parsers pass literal header/context to explicit_unit.
+    An unsupported printed suffix must not fall back to tokens.
+    """
     value=plain(re.sub(r'<sup>.*?</sup>','',value,flags=re.S))
-    m=re.fullmatch(r'\$\s*\d+(?:\.\d+)?\s*/\s*(MTok|1M tokens|image|sec|second|minute)',value)
-    return {'MTok':'per_1M_tokens','1M tokens':'per_1M_tokens','image':'per_image','sec':'per_second','second':'per_second','minute':'per_minute'}[m[1]] if m else default
+    if re.fullmatch(r'\$\s*\d+(?:\.\d+)?',value):return default
+    return explicit_unit(value)
+
 
 def component(header):
     h=header.lower()
@@ -92,14 +98,14 @@ def anthropic(out,doc,docs):
 
 def google(out,doc,docs):
     text=doc['text']
-    for match in re.finditer(r'{% table %}(.*?){% /table %}',text,re.S):
-        prefix=text[:match.start()];sections=list(re.finditer(r'^## .*$',prefix,re.M))
-        if not sections:continue
-        section=prefix[sections[-1].start():];ids=re.findall(r'\[`([^`]+)`\]\(/docs/models/[^)]+\)',section)
+    for match in markdoc_tables(text):
+        heading=match['headings'].get(2)
+        if not heading or match['scope_errors'] or match['tab'] is None:continue
+        prefix=text[:match['start']];position=prefix.rfind(heading)
+        section=prefix[position:];ids=re.findall(r'\[`([^`]+)`\]\(/docs/models/[^)]+\)',section)
         if len(set(ids))!=1:continue
-        mid=ids[0];tabs=re.findall(r'{% tab title="([^"]+)" %}',section)
-        if not tabs:continue
-        blocks=re.split(r'^\s*---\s*$',match[1],flags=re.M)
+        mid=ids[0]
+        blocks=re.split(r'^\s*---\s*$',match['body'],flags=re.M)
         headers=re.findall(r'^\s*\*\s+(.*)$',blocks[0],re.M)
         if len(headers)!=3 or 'USD' not in headers[2] or '1M tokens' not in headers[2]:continue
         identity=next(re.finditer(r'\[`[^`]+`\]\(/docs/models/[^)]+\)',section))[0]
@@ -111,13 +117,13 @@ def google(out,doc,docs):
             if charge is None or 'storage' in label.lower():continue
             amounts=list(re.finditer(r'\$(\d+(?:\.\d+)?)',paid))
             if len(amounts)==1 and scalar(paid) is not None:
-                emit(out,doc,mid,float(amounts[0][1]),'USD',billing_unit(paid,'per_1M_tokens'),charge,billing,block,[blocks[0],identity],dict(service_tier=tabs[-1],price_header=label,paid_tier=headers[2],qualifier=paid))
+                emit(out,doc,mid,float(amounts[0][1]),'USD',explicit_unit(paid,context=headers[2]),charge,billing,block,[blocks[0],identity,match['tab_quote']],dict(service_tier=match['tab'],source_table_start=match['start'],price_header=label,paid_tier=headers[2],qualifier=paid))
             elif amounts:
                 # Only the complete, explicit through/starting date-pair grammar.
                 schedule=re.fullmatch(r'\$(\d+(?:\.\d+)?)\s+through\s+([A-Za-z]+ \d{1,2}, \d{4})\.\s*\$(\d+(?:\.\d+)?)\s+starting\s+([A-Za-z]+ \d{1,2}, \d{4})\.',paid)
                 if not schedule:continue
                 for amount,op,date in ((schedule[1],'through_inclusive',schedule[2]),(schedule[3],'starting_inclusive',schedule[4])):
-                    emit(out,doc,mid,float(amount),'USD','per_1M_tokens',charge,billing,block,[blocks[0],identity],dict(service_tier=tabs[-1],price_header=label,paid_tier=headers[2],date_condition=dict(operator=op,date=dt.datetime.strptime(date,'%B %d, %Y').date().isoformat(),timezone=None,precision='date_only'),qualifier=paid))
+                    emit(out,doc,mid,float(amount),'USD','per_1M_tokens',charge,billing,block,[blocks[0],identity,match['tab_quote']],dict(service_tier=match['tab'],source_table_start=match['start'],price_header=label,paid_tier=headers[2],date_condition=dict(operator=op,date=dt.datetime.strptime(date,'%B %d, %Y').date().isoformat(),timezone=None,precision='date_only'),qualifier=paid))
 
 def markdown_prices(out,doc):
     text=doc['text'];vendor=doc['meta']['vendor'];usd=re.search(r'All prices are in USD\.',text)
@@ -129,21 +135,20 @@ def markdown_prices(out,doc):
         local=prefix[boundaries[-1].start():] if boundaries else prefix
         tiers=re.findall(r'^(Standard|Batch|Flex|Priority)\s*$',local,re.M);tier=tiers[-1] if tiers else None
         # Source section states token units; an explicit per-minute cell overrides.
-        units=re.findall(r'Prices per 1M tokens[^\n]*\.',prefix)
-        default_unit='per_1M_tokens' if units or (vendor=='xAI' and heading=='### Text API Pricing') else None
+        unit_sections=list(re.finditer(r'^(?:Flagship models|Multimodal models|Specialized models|Fine-tuning)\s*$',prefix,re.M))
+        unit_scope=prefix[unit_sections[-1].start():] if unit_sections else prefix
+        units=re.findall(r'Prices per 1M tokens[^\n]*\.',unit_scope)
         for raw,cells in table['rows']:
             if len(cells)!=len(headers):continue
             m=re.match(r'([A-Za-z0-9][A-Za-z0-9_.-]*-[A-Za-z0-9_.-]+)(?=\s|$)',cells[0])
             if not m:continue
             mid=m[1];billing=cells[headers.index('Modality')].lower() if 'Modality' in headers else 'token_modality_not_separately_priced'
             for h,value in zip(headers[1:],cells[1:]):
-                charge=component(h);unit=default_unit
+                charge=component(h);unit=explicit_unit(value,h,units[-1] if units else '')
                 if vendor=='xAI' and heading=='### Image & Video Pricing' and h=='Cost':
                     unit='per_image' if re.fullmatch(r'\$[\d.]+ / image',value) else 'per_second' if re.fullmatch(r'\$[\d.]+ / sec',value) else None
                     billing='image' if unit=='per_image' else 'video';charge='output'
-                if h=='Price per minute':unit='per_minute';charge='session';billing='audio'
-                if '/ 1M tokens' in h:unit='per_1M_tokens'
-                unit=billing_unit(value,unit)
+                if h=='Price per minute':charge='session';billing='audio'
                 if not unit or charge is None:continue
                 context=[table['header_quote']]+([usd[0]] if usd else [])+([units[-1]] if units else [])
                 note=re.search(r'^\*Prices shown per million tokens\..+\*$',text,re.M) if vendor=='xAI' and heading=='### Text API Pricing' else None
@@ -179,6 +184,7 @@ def minimax(out,doc,table_reader,expand_rows):
                 if 'per second' in h:unit='per_second'
                 if 'per image' in h:unit='per_image'
                 if h=='Price' and re.fullmatch(r'\$[\d.]+ per image',cell['text']):unit='per_image';charge='output';billing='image'
+                if not bundled:unit=explicit_unit(cell['text'],h)
                 if not unit or charge is None:continue
                 dims={hh:cc['text'] for hh,cc in zip(headers,cells) if hh not in ('Model','Model / API') and component(hh) is None and hh!='Price'}
                 if bundled:dims.update(output_resolution=bundled[2],duration_seconds=int(bundled[3]))

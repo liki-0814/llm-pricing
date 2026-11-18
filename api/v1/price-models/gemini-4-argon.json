@@ -27,6 +27,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Standard",
+          "source_table_start": 8818,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -67,9 +68,10 @@
         "quote_sha256": "b2eb702ef0dcaa36c704eb38f6be11973e6423c0f6b0b550e17c3693a37e54c0",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "10548754376bfa54c766c1a75fe9679b452c3e5d0fb39dca916c96b7b95e4575"
+        "price_record_id": "ff925638a3d3383a6194b84e50d3f7aa06c998d014bad3cc4f3471f3ee5dde89"
       },
       {
         "vendor": "Google Gemini",
@@ -83,6 +85,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Standard",
+          "source_table_start": 8818,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -123,9 +126,10 @@
         "quote_sha256": "b2eb702ef0dcaa36c704eb38f6be11973e6423c0f6b0b550e17c3693a37e54c0",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "d3e0fab527d30010a42152ca5ada7a2e1bd487b00a67144703a9242a2a86802e"
+        "price_record_id": "2edb8da9412cb9828cb0310b7270be33ef3f8deacaa5cf258f898a84b897a564"
       },
       {
         "vendor": "Google Gemini",
@@ -139,6 +143,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Standard",
+          "source_table_start": 8818,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -179,9 +184,10 @@
         "quote_sha256": "3d05aa899f015942c7554b661448d9d9c329564452b0eba03913546a9e02583c",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "d7e7682c6d363fcee3944c5e83e8fd519eb5fc04d99273b589e9eba2956a29fa"
+        "price_record_id": "0a4bb97af3aaaeabd402e0d89fffdcb4bba9478a820bbf5365161c87224c2816"
       },
       {
         "vendor": "Google Gemini",
@@ -195,6 +201,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Standard",
+          "source_table_start": 8818,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -235,9 +242,10 @@
         "quote_sha256": "3d05aa899f015942c7554b661448d9d9c329564452b0eba03913546a9e02583c",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "f88ff20d4861569e9a5897dc5f8d688b9d6e0433e689212b137c660bef2937c0"
+        "price_record_id": "5d1ccc63e34b3946fefb13b7d18b767eafae5001be7473bc7d98b2655175cb6c"
       },
       {
         "vendor": "Google Gemini",
@@ -251,6 +259,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Batch",
+          "source_table_start": 10137,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -291,9 +300,10 @@
         "quote_sha256": "6c8d66c5976818c61bd3a7a16fdfcb77a0383135a04b6323eb7231be249ff13e",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "e8e1d89d1b3cd26e01f4de89eb8227a0651dbf3aa5e78c90daf94be27f6808e2"
+        "price_record_id": "29032a60fd26945aa2aa66ca86c39d79c6a3f38d476e498f7c763220359ae1e4"
       },
       {
         "vendor": "Google Gemini",
@@ -307,6 +317,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Batch",
+          "source_table_start": 10137,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -347,9 +358,10 @@
         "quote_sha256": "6c8d66c5976818c61bd3a7a16fdfcb77a0383135a04b6323eb7231be249ff13e",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "13cce6615e56b7a6a6d260106864847653f4b0afa0f9ff7a2a9f43165552136e"
+        "price_record_id": "debb1635c155b8e44a71d21219990a122c5b556805084acc9a5cd3ac18b1b3d9"
       },
       {
         "vendor": "Google Gemini",
@@ -363,6 +375,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Batch",
+          "source_table_start": 10137,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -403,9 +416,10 @@
         "quote_sha256": "a40a4b38642bd3e0b67353733a10afd7d5459f9dbcc0e3fd06b66e058545394b",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "9f747fa8c0bee73f93fa6d83481030889b76a26f8fced108eb74bd955f1426bb"
+        "price_record_id": "ab884514d589f3852a66e1d0a1002ecc0371115293c8bc95d30467375bf4f380"
       },
       {
         "vendor": "Google Gemini",
@@ -419,6 +433,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Batch",
+          "source_table_start": 10137,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -459,9 +474,10 @@
         "quote_sha256": "a40a4b38642bd3e0b67353733a10afd7d5459f9dbcc0e3fd06b66e058545394b",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "286206b548248d738c6cd4e602594e174c483b565064959015c1b1bc593cf656"
+        "price_record_id": "87a45876f84a735a31c921655003fde4bc2a79aad3b2a613f4249c42804f551f"
       },
       {
         "vendor": "Google Gemini",
@@ -475,6 +491,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Flex",
+          "source_table_start": 10804,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -515,9 +532,10 @@
         "quote_sha256": "6c8d66c5976818c61bd3a7a16fdfcb77a0383135a04b6323eb7231be249ff13e",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "3a57415a47e17d06eb1eaa4c58dbc222c8b24f7c0a832c96d69aa137d9bd6b01"
+        "price_record_id": "217764adb69530f4f479bbb242b326db4cb6e21db7b3b8704693aa8c78324ce7"
       },
       {
         "vendor": "Google Gemini",
@@ -531,6 +549,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Flex",
+          "source_table_start": 10804,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -571,9 +590,10 @@
         "quote_sha256": "6c8d66c5976818c61bd3a7a16fdfcb77a0383135a04b6323eb7231be249ff13e",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "a368bc834eb0f792bbd31e59069b40c13507196bf1e28a452bb52c5bd99d712b"
+        "price_record_id": "53fe160d222bbd26a6c00241b2bd786a9a85dc2dfc772b87a1952aabddf6f58d"
       },
       {
         "vendor": "Google Gemini",
@@ -587,6 +607,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Flex",
+          "source_table_start": 10804,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -627,9 +648,10 @@
         "quote_sha256": "a40a4b38642bd3e0b67353733a10afd7d5459f9dbcc0e3fd06b66e058545394b",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "ee68108ad9926c47b6408304c654709b31efb84ec9dfe669e989bfce8d897ca1"
+        "price_record_id": "d579a25e9060012fbed53ea04304272bd44b766c913ec8c24f8152d5485fe96d"
       },
       {
         "vendor": "Google Gemini",
@@ -643,6 +665,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Flex",
+          "source_table_start": 10804,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -683,9 +706,10 @@
         "quote_sha256": "a40a4b38642bd3e0b67353733a10afd7d5459f9dbcc0e3fd06b66e058545394b",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "0afd95411fee692a09aa9e083c15076651c56015619fdec710a5c042d41b7290"
+        "price_record_id": "8da080d2b07ef3411d889335050727e329f0f7e6a9db3d9b61af1155a8b1a2f5"
       },
       {
         "vendor": "Google Gemini",
@@ -699,6 +723,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Priority",
+          "source_table_start": 11475,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -739,9 +764,10 @@
         "quote_sha256": "68673177fcad28f83852e0672f702918883df454e802eb21339b374d239ba9e4",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "fe844b25bbdcd2f0ebdf7175c7efe0e213621f3ea4cf2443c0927d7dc825aa9d"
+        "price_record_id": "40f1276a5ced33acc95e19da817b367fd7f9b53133282e6b44d3ac380e16660d"
       },
       {
         "vendor": "Google Gemini",
@@ -755,6 +781,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Priority",
+          "source_table_start": 11475,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -795,9 +822,10 @@
         "quote_sha256": "68673177fcad28f83852e0672f702918883df454e802eb21339b374d239ba9e4",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "b133be585aced5247907f8d0d455ab61c49a23335cf931aaad15acc3b4224cf5"
+        "price_record_id": "8700c78d08caf5d68efaefa611d1d095df3795277c88d1d3c64aee282c43ee1a"
       },
       {
         "vendor": "Google Gemini",
@@ -811,6 +839,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Priority",
+          "source_table_start": 11475,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -851,9 +880,10 @@
         "quote_sha256": "3685e118348c0965e21793e6c5ae00edafe13285d6be36caa7649f4a95b70578",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "0fedd45609a52dc758a059571356dd587b8b69b649f9080bdd4f93604fb8adc3"
+        "price_record_id": "38cfe9e8ba8e9bf1e998cbf2c0ddf3f7b6ee62a5b0e055ff033acecac38b3353"
       },
       {
         "vendor": "Google Gemini",
@@ -867,6 +897,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Priority",
+          "source_table_start": 11475,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD",
           "date_condition": {
@@ -907,9 +938,10 @@
         "quote_sha256": "3685e118348c0965e21793e6c5ae00edafe13285d6be36caa7649f4a95b70578",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "bf6e2f4067f2133d296c74f355cb1f8e2cb068c1484a5c1ba52b1b48a6b3acbe"
+        "price_record_id": "bdb96f233669f7a40e02cf4677d8e59e4b56826f6a72156d34bf8c0d72940d7f"
       },
       {
         "vendor": "Google Gemini",
@@ -923,6 +955,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Contributor",
+          "source_table_start": 13115,
           "price_header": "Input price",
           "paid_tier": "Paid Tier, per 1M tokens in USD{% sup %}*{% /sup %}",
           "qualifier": "$1.00"
@@ -957,9 +990,10 @@
         "quote_sha256": "ec55a95687445dcd10f02f14dd0a1ab2d005f53e708617a32114d7ac0d1acf86",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD{% sup %}*{% /sup %}\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Contributor\" %}"
         ],
-        "price_record_id": "da230ca24372c640288b2836f2f8918878aeb1a7defd4e3fc1cdfdd8f5d9d24e"
+        "price_record_id": "d74b48b22e4a96ab9fc8d251fcdcdf894cf1ca76989bebe872c2ef3f6f293b9d"
       },
       {
         "vendor": "Google Gemini",
@@ -973,6 +1007,7 @@
         "billing_modality": "token_modality_not_separately_priced",
         "conditions": {
           "service_tier": "Contributor",
+          "source_table_start": 13115,
           "price_header": "Output price (including thinking tokens)",
           "paid_tier": "Paid Tier, per 1M tokens in USD{% sup %}*{% /sup %}",
           "qualifier": "$5.00"
@@ -1007,9 +1042,10 @@
         "quote_sha256": "a2fb76f469e2760f270ce37c90e5593ee957d4e2208e005f756c7e05abcad123",
         "context_quotes": [
           "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD{% sup %}*{% /sup %}\n",
-          "[`gemini-4-argon`](/docs/models/gemini-4-argon)"
+          "[`gemini-4-argon`](/docs/models/gemini-4-argon)",
+          "{% tab title=\"Contributor\" %}"
         ],
-        "price_record_id": "27ebdacd1ce43d132cdfc1067fab9ab9d8063d59c163aeba44f828ec7b994378"
+        "price_record_id": "339538f947654b5103a923109ce6c386339b518e396c03a930094d4ff15e0d96"
       }
     ],
     "scope_complete": false,

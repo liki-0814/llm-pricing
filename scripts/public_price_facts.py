@@ -11,6 +11,7 @@ import math
 import re
 from html.parser import HTMLParser
 from pathlib import Path
+from public_price_context import explicit_unit, markdoc_tables, atomic_claim, entity_prose, readable as literal_text
 
 ROOT=Path(__file__).resolve().parent.parent
 QWEN_REGION_LABELS={'华北2（北京）','新加坡','美国（弗吉尼亚）','德国（法兰克福）','日本（东京）','中国香港'}
@@ -118,7 +119,7 @@ def cny_rate(value,header):
     rate_text=list_price[1]+'元'+(list_price[2] or '') if list_price else value
     m=re.fullmatch(r'([0-9]+(?:\.[0-9]+)?)\s*元(?:/(张|秒))?',rate_text)
     if not m:return None
-    unit='per_image' if m[2]=='张' else 'per_second' if m[2]=='秒' else 'per_1M_tokens' if '每百万' in header else None
+    unit=explicit_unit(rate_text,header)
     return (float(m[1]),unit,bool(list_price)) if unit else None
 
 def qwen(meta,text,tables):
@@ -175,10 +176,7 @@ FAST_SENTENCE="Grok 4.7 Fast is the same Grok 4.7 model served on faster infrast
 
 def xai_fast(meta,text,tables):
     facts=[];pending=[]
-    def readable(s):return clean(re.sub(r'\[([^]]+)\]\([^)]*\)',r'\1',re.sub('<[^>]+>',' ',s)))
-    plain=readable(text)
-    required=('available only in','Cursor and Grok Build','billed through your plan','not available on the public xAI API')
-    if not all(t in plain for t in required):return [],[dict(reason='plan_channel_declaration_missing')]
+    def readable(s):return literal_text(re.sub(r'\[([^]]+)\]\([^)]*\)',r'\1',s))
     prepared=[]
     for table in tables:
         h=table['headings'].get(2,{})
@@ -194,7 +192,19 @@ def xai_fast(meta,text,tables):
             prepared.append((rows,text[start:stop]))
     for rows,section in prepared:
         if not rows or [c['text'] for c in rows[0][1]]!=['Prompt tokens','Input','Cached input','Output']:raise ValueError('Fast price header changed')
-        if not all(t in readable(section) for t in required):raise ValueError('Fast plan declaration outside entity section')
+        entity_quote,subject_quote=entity_prose(section,FAST_SENTENCE)
+        predicates={
+            'available_in':(['Cursor','Grok Build'],lambda q:'available only in Cursor and Grok Build' in readable(q)),
+            'billing_channel':('subscription',lambda q:'billed through your plan there' in readable(q)),
+            'public_xai_API':(False,lambda q:'not available on the public xAI API' in readable(q)),
+            'free_build_tier_included':(False,lambda q:bool(re.search(r"Grok Build(?:'s|’s) free tier does not include it\.",readable(q)))),
+        }
+        claims={key:atomic_claim(text,entity_quote,value,predicate) for key,(value,predicate) in predicates.items()}
+        channel=claims['billing_channel']['value']
+        offering=dict(offering_name='Grok 4.7 Fast',model_id=None,channel=channel,channel_verified=claims['billing_channel']['state']=='verified',
+            available_in=claims['available_in']['value'],public_xai_API=claims['public_xai_API']['value'],free_build_tier_included=claims['free_build_tier_included']['value'],
+            claim_evidence=claims,subject_quote=subject_quote,subject_quote_sha256=digest(subject_quote.encode()) if subject_quote else None,account_entitlement='not_assessed',scope_complete=False,
+            source_url=meta['source_url'],source_sha256=meta['source_sha256'],observed_at=meta['observed_at'],quote=section,quote_sha256=digest(section.encode()))
         for row,cells in rows[1:]:
             vals=[c['text'] for c in cells]
             if len(vals)!=4 or vals[0] not in ('Below 200k','Above 200k'):
@@ -203,12 +213,10 @@ def xai_fast(meta,text,tables):
                 m=re.fullmatch(r'\$([0-9]+(?:\.[0-9]+)?) / 1M',vals[i])
                 if not m:pending.append(dict(reason='unparsed_fast_rate',quote=row['quote']));continue
                 pending.append(dict(reason='price_region_not_stated_NOT_verified',vendor='xAI',model_id=None,offering_name='Grok 4.7 Fast',
-                    channel='subscription',region=None,modality='text',component=component,amount=float(m[1]),currency='USD',unit='per_1M_tokens',
+                    channel=channel,region=None,modality='text',component=component,amount=float(m[1]),currency='USD' if 'All prices are in USD.' in text else None,unit=explicit_unit(vals[i],context=readable(entity_quote)),
                     tier=vals[0]+' prompt tokens (boundary not inferred)',price_verified=False,scope_complete=False,
                     source_url=meta['source_url'],source_sha256=meta['source_sha256'],observed_at=meta['observed_at'],quote=row['quote'],quote_sha256=digest(row['quote'].encode()),
-                    offering_channel_observation=dict(offering_name='Grok 4.7 Fast',model_id=None,channel='subscription',channel_verified=True,
-                    available_in=['Cursor','Grok Build'],public_xai_API=False,free_build_tier_included=False,account_entitlement='not_assessed',
-                    scope_complete=False,source_url=meta['source_url'],source_sha256=meta['source_sha256'],observed_at=meta['observed_at'],quote=section,quote_sha256=digest(section.encode()))))
+                    offering_channel_observation=offering))
     return facts,pending
 
 def quoted_document_rows(meta,text):
@@ -241,10 +249,9 @@ def quoted_document_rows(meta,text):
             if line.lstrip().startswith('#'):heading=line.rstrip()
             if line.lstrip().startswith('|'):add(line,heading=heading)
         # Google public Markdown uses Markdoc tables rather than pipe syntax.
-        for match in re.finditer(r'{% table %}(.*?){% /table %}',text,re.S):
-            prefix=text[:match.start()];heads=re.findall(r'^## .*$',prefix,re.M);tabs=re.findall(r'{% tab title="([^"]+)" %}',prefix)
-            pieces=re.split(r'^\s*---\s*$',match.group(1),flags=re.M)
-            for piece in pieces[1:]:add(piece,headers=pieces[0],heading=dict(model_section=heads[-1] if heads else None,tab=tabs[-1] if tabs else None))
+        for match in markdoc_tables(text):
+            pieces=re.split(r'^\s*---\s*$',match['body'],flags=re.M)
+            for piece in pieces[1:]:add(piece,headers=pieces[0],heading=dict(model_section=match['headings'].get(2),tab=match['tab'],tab_quote=match['tab_quote'],table_start=match['start'],scope_errors=match['scope_errors']))
         if role=='catalog':
             for line in text.splitlines(keepends=True):
                 if not line.lstrip().startswith('|') and '`' in line:add(line)
