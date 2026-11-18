@@ -8,14 +8,43 @@ ROOT='https://platform.claude.com/docs/en/models/overview.md'
 STATUS='https://platform.claude.com/docs/en/about-claude/model-deprecations.md'
 NOTES='https://platform.claude.com/docs/en/release-notes/overview.md'
 
+def markdown_lines(text):
+ # CommonMark line endings are CR, LF or CRLF, not Python's Unicode splitlines.
+ lines=re.split(r'\r\n|\r|\n',text)
+ if text.endswith(('\r','\n')):lines.pop()
+ return lines
+
+def prose_lines(text):
+ """Top-level CommonMark 4.5 fences; yield original 1-based prose positions.
+ 0..3 ASCII spaces; >=3 identical ` or ~; backtick info cannot contain `.
+ Only same-character runs >= opening length plus spaces/tabs can close.
+ Tabs before a fence indent to column4+, so are not top-level fence markers.
+ An unclosed code block consumes the remaining document, per CommonMark.
+ """
+ marker=None;length=0
+ for number,line in enumerate(markdown_lines(text),1):
+  if marker:
+   if re.fullmatch(r' {0,3}'+re.escape(marker)+'{'+str(length)+r',}[ \t]*',line):marker=None;length=0
+   continue
+  opening=re.fullmatch(r' {0,3}(`{3,}|~{3,})(.*)',line)
+  if opening and not (opening[1][0]=='`' and '`' in opening[2]):
+   marker=opening[1][0];length=len(opening[1]);continue
+  yield number,line
+
+def unfenced(text):
+ if not isinstance(text,str):raise ValueError('document must be text')
+ visible=dict(prose_lines(text));lines=markdown_lines(text)
+ return '\n'.join(visible.get(i,'') for i in range(1,len(lines)+1))+('\n' if text.endswith(('\r','\n')) else '')
+
 def section(text,start,end):
+ text=unfenced(text)
  if not isinstance(text,str) or text.count(start+'\n')!=1 or text.count(end+'\n')!=1:raise ValueError('missing/duplicate section boundary: '+start+' -> '+end)
  before,tail=text.split(start+'\n',1)
  if end+'\n' not in tail:raise ValueError('reversed section boundary')
  return tail.split(end+'\n',1)[0]
 
 def tables(text):
- lines=text.splitlines();out=[];i=0
+ lines=markdown_lines(unfenced(text));out=[];i=0
  while i<len(lines):
   if not lines[i].startswith('|'):i+=1;continue
   block=[]
@@ -37,8 +66,9 @@ def literal(value):
  if not m or not c.canonical_id(m[1]):raise ValueError('not an explicit literal API ID')
  return m[1]
 
-def witness(doc,quote,**fields):
- return dict(fields,source_url=doc['source_url'],source_sha256=doc['source_sha256'],observed_at=doc['observed_at'],capture_path=doc.get('capture_path'),line=doc['text'].splitlines().index(quote)+1 if quote in doc['text'].splitlines() else None,quote=quote)
+def witness(doc,quote,line_number=None,**fields):
+ if line_number is None:line_number=next((i for i,line in prose_lines(doc['text']) if line==quote),None)
+ return dict(fields,source_url=doc['source_url'],source_sha256=doc['source_sha256'],observed_at=doc['observed_at'],capture_path=doc.get('capture_path'),line=line_number,quote=quote)
 
 def validate_doc(doc,url=None):
  if not isinstance(doc,dict) or not isinstance(doc.get('text'),str):raise ValueError('missing captured document')
@@ -63,31 +93,46 @@ def directory(doc):
  return entities
 
 def detail_claims(doc,strict=True):
- text=doc['text']
+ text=unfenced(doc['text'])
  part=section(text,'### Model IDs','### Pricing') if strict else text.split('### Model IDs\n',1)[-1].split('### Pricing',1)[0]
  ts=tables(part)
  if len(ts)!=1 or ts[0][0]!=['Platform','Model ID']:raise ValueError('unknown native identity table')
- native=[];aliases=[]
+ native=[];aliases=[];unclassified=[]
  for cells,line in ts[0][1]:
   label,value=cells
   linked=re.fullmatch(r'\[([^]]+)\]\(https://platform\.claude\.com/[^)]+\)',label)
   if linked:label=linked[1]
   if label=='Claude API':native.append((literal(value),line))
   elif label=='Claude API alias':aliases.append((literal(value),line))
-  elif not label.startswith(('Amazon Bedrock','Claude Models on Google Cloud','Microsoft Foundry','Claude Platform on AWS')):raise ValueError('unknown platform identity role: '+label)
+  elif not re.fullmatch(r'(?:Amazon Bedrock(?: \(bedrock-runtime\))?|Claude Models on Google Cloud \((?:Anthropic|Google) managed\)|Microsoft Foundry|Claude Platform on AWS)(?: ID)?',label):unclassified.append(witness(doc,line,model_id=None,kind='unclassified_identity_role',identity_role=label,raw_identifier=value))
  if len({mid for mid,_ in native})!=1:raise ValueError('ambiguous canonical identity')
- canonical=native[0][0];outputs=None
+ canonical=native[0][0];declarations=[]
  if strict:
   caps=tables(section(text,'### Capabilities','### Availability'))
   if len(caps)!=1 or caps[0][0]!=['Feature','Value']:raise ValueError('unknown capabilities table')
-  declarations=[cells[1].split('→')[-1].strip().lower() for cells,_ in caps[0][1] if cells[0]=='Input → output']
-  if len(declarations)==1:outputs=[declarations[0]]
- claims=[witness(doc,line,model_id=mid,kind='canonical',output_modalities=outputs) for mid,line in native]
- claims += [witness(doc,line,model_id=mid,kind='alias',alias_of=canonical,output_modalities=outputs) for mid,line in aliases]
- return claims
+  cap_start=next(i for i,line in prose_lines(doc['text']) if line=='### Capabilities')
+  cap_end=next(i for i,line in prose_lines(doc['text']) if line=='### Availability')
+  cap_positions={}
+  for number,line in prose_lines(doc['text']):
+   if cap_start<number<cap_end:cap_positions.setdefault(line,[]).append(number)
+  for cells,line in caps[0][1]:
+   if cells[0]!='Input → output':continue
+   raw=cells[1].split('→')[-1].strip().lower()
+   values=re.split(r'\s*(?:,| and |\+)\s*',raw)
+   known=bool(cells[1].count('→')==1 and values and set(values)<={'text','image','audio','video'})
+   declarations.append(dict(output_modalities=values if known else None,output_declaration_unknown=not known,output_evidence=witness(doc,line,line_number=cap_positions[line].pop(0),declared_output=raw)))
+ if not declarations:declarations=[dict(output_modalities=None,output_declaration_unknown=True)]
+ claims=[]
+ for kind,entries in [('canonical',native),('alias',aliases)]:
+  for mid,line in entries:
+   for declaration in declarations:
+    fields=dict(model_id=mid,kind=kind,**declaration)
+    if kind=='alias':fields['alias_of']=canonical
+    claims.append(witness(doc,line,**fields))
+ return claims+unclassified
 
 def status_claims(doc,strict=True):
- text=doc['text'];claims=[]
+ text=unfenced(doc['text']);claims=[]
  part=section(text,'## Model status','## Deprecation history') if strict else text.split('## Model status\n',1)[-1].split('## Deprecation history',1)[0]
  ts=tables(part)
  if len(ts)!=1 or ts[0][0]!=['API model name','Current state','Deprecated','Tentative retirement date']:raise ValueError('unknown status table')
@@ -114,15 +159,27 @@ def status_claims(doc,strict=True):
  return claims
 
 def release_claims(doc):
- claims=[];fenced=False
- for line in doc['text'].splitlines():
-  if line.lstrip().startswith('```'):fenced=not fenced;continue
-  if fenced or 'Claude API' not in line or not re.match(r"^\* We(?:[’']ve retired| announced the deprecation of) ",line):continue
-  subject=line.split('. ',1)[0]
-  for name,mid in re.findall(r'\bthe (Claude [A-Za-z0-9. -]+?) model \(`([^`]+)`\)',subject):
-   if ' and ' in name or name.count('Claude')!=1 or not c.canonical_id(mid):continue
+ """Bind lifecycle predicates to a contiguous coordinated subject noun-list.
+ A recommendation/relative/complement clause cannot inherit that predicate.
+ """
+ claims=[]
+ prefix=re.compile(r"^\* We(?:[’']ve retired| announced the deprecation of) ")
+ entity=re.compile(r'the (Claude [A-Za-z0-9. -]+?) model \(`([^`]+)`\)')
+ conjunction=re.compile(r'(?:,\s+(?:and\s+)?|\s+and\s+)(?=the\s+)')
+ for number,line in prose_lines(doc['text']):
+  start=prefix.match(line)
+  if not start or 'Claude API' not in line:continue
+  subject=line.split('. ',1)[0];position=start.end()
+  while True:
+   match=entity.match(subject,position)
+   if not match:break
+   name,mid=match.groups()
+   if ' and ' in name or name.count('Claude')!=1 or not c.canonical_id(mid):break
    retired=bool(re.search(r'We[’\']ve retired',line) and 'will now return an error' in line)
-   claims.append(witness(doc,line,model_id=mid,display_name=name,kind='explicit_entity_parenthetical',lifecycle_status='retired' if retired else None))
+   claims.append(witness(doc,line,line_number=number,model_id=mid,display_name=name,kind='explicit_entity_parenthetical',lifecycle_status='retired' if retired else None))
+   following=conjunction.match(subject,match.end())
+   if not following:break
+   position=following.end()
  return claims
 
 def aggregate(claims):
@@ -133,10 +190,13 @@ def aggregate(claims):
   aliases={x['alias_of'] for x in items if x.get('alias_of')};bad_alias=len(aliases)>1 or bool(aliases and any(x['kind']=='canonical' for x in items) and aliases!={mid})
   if len(states)>1 or bad_alias:conflicts.append(mid)
   outputs=[set(x['output_modalities']) for x in items if x.get('output_modalities') is not None]
-  certain=set.intersection(*outputs) if outputs else set();union=set.union(*outputs) if outputs else set()
+  unresolved=any(x.get('output_declaration_unknown') for x in items)
+  output_conflict=len({frozenset(v) for v in outputs})>1
+  if output_conflict or unresolved:conflicts.append('output:'+mid)
+  certain=set.intersection(*outputs) if outputs and not unresolved else set();union=set.union(*outputs) if outputs else set()
   dates={x['retirement_date_original'] for x in items if x.get('lifecycle_status')=='retired' and x.get('retirement_date_original')}
   status='unknown_conflict' if len(states)>1 else next(iter(states)) if states else 'unconfirmed'
-  rows.append(dict(model_id=mid,literal_id=mid,api_id_explicit=True,catalog_observation=False,alias_of=next(iter(aliases)) if len(aliases)==1 and not bad_alias else None,lifecycle_status=status,lifecycle_quote=' | '.join(sorted({x['quote'] for x in items if x.get('lifecycle_status')=='retired'})) or None,retired_at=None,retirement_timezone=None,retirement_date_original=next(iter(dates)) if len(dates)==1 else None,output_modalities=sorted(certain),unknown_output_modalities=['text'] if not outputs or ('text' in union and 'text' not in certain) else [],identity_conflict=bad_alias,identity_evidence={'kind':'all_native_literal_claims','claims':items}))
+  rows.append(dict(model_id=mid,literal_id=mid,api_id_explicit=True,catalog_observation=False,alias_of=next(iter(aliases)) if len(aliases)==1 and not bad_alias else None,lifecycle_status=status,lifecycle_quote=' | '.join(sorted({x['quote'] for x in items if x.get('lifecycle_status')=='retired'})) or None,retired_at=None,retirement_timezone=None,retirement_date_original=next(iter(dates)) if len(dates)==1 else None,output_modalities=sorted(certain),unknown_output_modalities=['text'] if unresolved or not outputs or ('text' in union and 'text' not in certain) else [],identity_conflict=bad_alias,identity_evidence={'kind':'all_native_literal_claims','claims':items}))
  return rows,conflicts
 
 def observe(root,docs,status,release=None):
@@ -160,6 +220,9 @@ def observe(root,docs,status,release=None):
  for claim in claims:
   if claim.get('display_name'):names.setdefault(claim['display_name'],set()).add(claim.get('alias_of') or claim['model_id'])
  pending=[x['display_name'] for x in entities if len(names.get(x['display_name'],set()))!=1]
+ unclassified=[x for x in claims if x['kind']=='unclassified_identity_role']
+ claims=[x for x in claims if x['kind']!='unclassified_identity_role']
+ errors+=['unknown platform identity role: '+x['identity_role'] for x in unclassified]
  rows,conflicts=aggregate(claims)
  conflicts+=['display:'+name for name,mids in names.items() if len(mids)>1]
  unknown=[r['model_id'] for r in rows if r['lifecycle_status']!='retired' and 'text' in r['unknown_output_modalities']]
@@ -167,5 +230,9 @@ def observe(root,docs,status,release=None):
  for entity in entities:
   if entity['display_name'] in pending:
    rows.append(dict(model_id=None,api_id_explicit=False,catalog_observation=True,display_name=entity['display_name'],retired_at=None,lifecycle_status='unconfirmed',identity_evidence={'kind':'pending_directory_entity','claims':[witness(root,entity['quote'])]}))
+ for claim in unclassified:
+  rows.append(dict(model_id=None,api_id_explicit=False,catalog_observation=True,display_name='Unclassified identity role: '+claim['identity_role'],raw_identifier=claim['raw_identifier'],lifecycle_status='unconfirmed',retired_at=None,identity_evidence={'kind':'unclassified_identity_role','claims':[claim]}))
+ proof['unclassified_identity_observations']=unclassified
+ proof['unclassified_identity_record_count']=len(unclassified)
  proof['pending_record_count']=len(pending)
  return rows,proof
