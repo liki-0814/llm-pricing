@@ -38,3 +38,7 @@ class BridgeTests(unittest.TestCase):
  def test_status_deprecated_is_not_retired_and_no_midnight_invention(self):
   text='## Model status\n| API model name | Current state | Deprecated | Tentative retirement date |\n| --- | --- | --- | --- |\n| future.Native/9 | Deprecated | Oct 1, 2026 | November 30, 2026 |\n## Deprecation history\n'
   rows=b.anthropic_status(text);self.assertEqual(rows[0]['lifecycle_status'],'deprecated');self.assertIsNone(rows[0]['retired_at']);self.assertIsNone(rows[0]['retirement_timezone'])
+
+ def test_inline_literal_id_retains_pricing_href_for_front_union(self):
+  rows=b.openai_directory('- [Future restricted model](/api/docs/pricing#specialized-models): Model ID: `future.Native/9`.')
+  self.assertEqual(rows[0]['model_id'],'future.Native/9');self.assertEqual(rows[0]['detail_url'],'https://developers.openai.com/api/docs/pricing#specialized-models');self.assertFalse(b.allowed_detail(rows[0]['detail_url'],'OpenAI'))

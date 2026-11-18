@@ -27,7 +27,7 @@ def openai_directory(text):
   if not m:continue
   href=urljoin('https://developers.openai.com',m[2]);inline=re.search(r'Model ID:\s*`([^`]+)`',m[3])
   if not (allowed_detail(href,'OpenAI') or inline):continue
-  row=pending(m[1],i,href if allowed_detail(href,'OpenAI') else None,section,line)
+  row=pending(m[1],i,href,section,line)
   if inline and c.canonical_id(inline[1]):row.update(model_id=inline[1],api_id_explicit=True,catalog_observation=False,id_evidence='directory literal Model ID')
   rows.append(row)
  return rows
