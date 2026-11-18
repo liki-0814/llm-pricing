@@ -5,7 +5,7 @@ class BridgeTests(unittest.TestCase):
  def test_zai_closed_request_enums_ignore_response_and_keep_unpriced_future_ids(self):
   spec={'paths':{},'components':{'schemas':{}},'servers':[{'url':'https://api.z.ai/api'}]}
   for route,ids in [('/paas/v4/chat/completions',['future.Native/9']),('/paas/v4/images/generations',['new-image']),('/paas/v4/async/images/generations',['new-image'])]:
-   spec['paths'][route]={'post':{'requestBody':{'content':{'application/json':{'schema':{'properties':{'model':{'type':'string','enum':ids}}}}}}}}
+   spec['paths'][route]={'post':{'requestBody':{'content':{'application/json':{'schema':{'type':'object','properties':{'model':{'type':'string','enum':ids}}}}}}}}
   spec['components']['schemas']['Response']={'properties':{'model':{'enum':['not-an-input-model']}}}
   rows,proof=b.zai_request_models(json.dumps(spec));self.assertTrue(proof['verified']);self.assertEqual({x['model_id'] for x in rows},{'future.Native/9','new-image'})
   del spec['paths']['/paas/v4/chat/completions']['post']['requestBody']['content']['application/json']['schema']['properties']['model']['enum']

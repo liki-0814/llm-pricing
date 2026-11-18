@@ -273,6 +273,16 @@ cyclic refs, unsupported mixed semantic compositions and contradictory enum
 types fail closed. Each required route and each claimed text/image modality must
 have its own nonempty model set; image results cannot fill an empty text branch.
 Proof output records the effective server level/list per request and independent
-modality record counts. Unknown future legal IDs remain allowed. This narrow fix
+modality record counts. Unknown future legal IDs remain allowed.
+A closed model enum is not enough by itself. Every resolved request branch,
+including local refs and nested compositions, must first be a supported object
+schema: `type` is exactly `object` or `["object"]`, and `properties.model` then
+applies to that object. Missing type, non-object types, mixed type lists,
+contradictory combinator types, and `$ref`/keyword combinations that would let a
+non-object instance ignore `properties` all fail closed. This is a general
+object-applicability proof, not a blacklist of a few type literals. Annotation
+keywords may appear; unknown or unreviewed keywords fail closed. The original
+public object schemas and unknown future legal IDs remain valid.
+ This narrow fix
 does not change the monitoring scope, pricing/billing bytes or routine state;
 Z.ai robustness and the complete-discovery decision await new independent review.

@@ -103,10 +103,15 @@ def zai_request_models(text):
  try:
   spec=json.loads(text)
   schemas=spec.get('components',{}).get('schemas',{})
+  annotations={'title','description','example','default','deprecated'}
+  def object_only(value):
+   return value=='object' or value==['object']
+  def string_only(value):
+   return value=='string' or value==['string']
   def local_ref(node,seen):
    ref=node['$ref'];prefix='#/components/schemas/'
    if not isinstance(ref,str) or not ref.startswith(prefix) or ref in seen:raise ValueError('unresolved/cyclic request ref')
-   if any(key in node for key in ('properties','enum','oneOf','anyOf','allOf','not')):raise ValueError('unsupported semantic siblings of request ref')
+   if set(node)-{'$ref'}-annotations:raise ValueError('unsupported semantic siblings of request ref')
    resolved=schemas[ref[len(prefix):]]
    if not isinstance(resolved,dict) or not resolved:raise ValueError('request ref does not resolve to a nonempty schema')
    return resolved,seen+(ref,)
@@ -117,7 +122,8 @@ def zai_request_models(text):
     resolved,next_seen=local_ref(node,seen);return models(resolved,next_seen)
    combinations=[key for key in ('oneOf','anyOf') if key in node]
    if combinations:
-    if 'properties' in node:raise ValueError('unsupported mixed request properties/composition')
+    if set(node)-set(combinations)-annotations-{'type'}:raise ValueError('unsupported mixed request composition keywords')
+    if 'type' in node and not object_only(node['type']):raise ValueError('request composition is not an object request')
     if len(combinations)!=1:raise ValueError('ambiguous multiple request compositions')
     branches=node[combinations[0]]
     if not isinstance(branches,list) or not branches:raise ValueError('request composition has no nonempty branch list')
@@ -127,12 +133,20 @@ def zai_request_models(text):
      if not branch_ids:raise ValueError('request composition contains an empty model branch')
      ids.extend(branch_ids)
     return ids
-   field=node.get('properties',{}).get('model',{})
+   # properties.model only constrains object instances; the branch itself must
+   # prove it is an object request before the enum can close the model set.
+   if set(node)-annotations-{'type','properties','required'}:raise ValueError('unsupported request schema keywords')
+   if 'type' not in node or not object_only(node['type']):raise ValueError('request branch is not a supported object schema')
+   if 'required' in node and (not isinstance(node['required'],list) or any(not isinstance(x,str) for x in node['required'])):raise ValueError('invalid object required list')
+   props=node.get('properties')
+   if not isinstance(props,dict) or not props:raise ValueError('object request has no property map')
+   field=props.get('model',{})
    if not isinstance(field,dict):raise ValueError('request model field is not a schema')
    while '$ref' in field:field,seen=local_ref(field,seen)
    if any(key in field for key in ('oneOf','anyOf','allOf','not','if','then','else')):raise ValueError('unsupported model-field composition')
+   if 'type' in field and not string_only(field['type']):raise ValueError('request model enum not closed/valid')
    values=field.get('enum')
-   if field.get('type','string')!='string' or not isinstance(values,list) or not values or any(not isinstance(x,str) or c.canonical_id(x)!=x for x in values):raise ValueError('request model enum not closed/valid')
+   if not isinstance(values,list) or not values or any(not isinstance(x,str) or c.canonical_id(x)!=x for x in values):raise ValueError('request model enum not closed/valid')
    return values
   def effective_servers(path_item,operation):
    # OpenAPI precedence is operation > path > root. Presence of an invalid/empty

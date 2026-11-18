@@ -8,7 +8,7 @@ CHAT='/paas/v4/chat/completions'
 IMAGE='/paas/v4/images/generations'
 ASYNC_IMAGE='/paas/v4/async/images/generations'
 ROUTES=(CHAT,IMAGE,ASYNC_IMAGE)
-def leaf(ids):return {'properties':{'model':{'type':'string','enum':ids}}}
+def leaf(ids):return {'type':'object','properties':{'model':{'type':'string','enum':ids}}}
 def fixture():
  spec={'servers':[{'url':NATIVE}],'components':{'schemas':{'Text':leaf(['future.Native/9']),'Vision':leaf(['future.Vision/9']),'Image':leaf(['future.Image/9'])}},'paths':{}}
  for route,ref in [(CHAT,None),(IMAGE,'Image'),(ASYNC_IMAGE,'Image')]:
@@ -63,4 +63,37 @@ class ZaiProofContractTests(unittest.TestCase):
   for extra in ({'oneOf':[]},{'anyOf':[]},{'not':{}}):
    spec=fixture();request(spec)['schema']=leaf(['future.Native/9']);request(spec)['schema']['properties']['model'].update(extra);self.assertFalse(proof(spec)['verified'])
  def test_model_field_local_enum_ref_can_be_closed_and_valid(self):
-  spec=fixture();spec['components']['schemas']['ModelNames']={'type':'string','enum':['future.Ref/9']};request(spec)['schema']={'properties':{'model':{'$ref':'#/components/schemas/ModelNames'}}};self.assertTrue(proof(spec)['verified'])
+  spec=fixture();spec['components']['schemas']['ModelNames']={'type':'string','enum':['future.Ref/9']};request(spec)['schema']={'type':'object','properties':{'model':{'$ref':'#/components/schemas/ModelNames'}}};self.assertTrue(proof(spec)['verified'])
+
+ def test_vera_nonobject_text_request_types_fail_closed(self):
+  for typ,extra in (('array',{'items':{'type':'string'}}),('string',{}),('integer',{})):
+   with self.subTest(typ=typ):
+    spec=fixture();spec['components']['schemas']['Text']['type']=typ;spec['components']['schemas']['Text'].update(extra)
+    self.assertFalse(proof(spec)['verified'])
+ def test_unproven_or_nonobject_types_fail_on_routes_refs_and_compositions(self):
+  invalid=('boolean','number','null','file','Object','object ',['string'],['integer'],['object','string'],['object','null'],[],None,1,{'object':True})
+  for typ in invalid:
+   for name in ('Text','Vision','Image'):
+    with self.subTest(typ=typ,name=name):
+     spec=fixture();spec['components']['schemas'][name]['type']=typ;self.assertFalse(proof(spec)['verified'])
+  spec=fixture();del spec['components']['schemas']['Text']['type'];self.assertFalse(proof(spec)['verified'])
+  for route in ROUTES:
+   with self.subTest(route=route,kind='typeless-inline'):
+    spec=fixture();request(spec,route)['schema']={'properties':{'model':{'type':'string','enum':['future.Native/9']}}};self.assertFalse(proof(spec)['verified'])
+   with self.subTest(route=route,kind='boolean-inline'):
+    spec=fixture();request(spec,route)['schema']={'type':'boolean','properties':{'model':{'type':'string','enum':['future.Native/9']}}};self.assertFalse(proof(spec)['verified'])
+  spec=fixture();spec['components']['schemas']['Vision']={'anyOf':[leaf(['future.New.Family/9']),{'type':'string','properties':{'model':{'type':'string','enum':['future.Second/9']}}}]};self.assertFalse(proof(spec)['verified'])
+  spec=fixture();request(spec)['schema']={'type':'array','items':{'type':'object'},'oneOf':[{'$ref':'#/components/schemas/Text'},{'$ref':'#/components/schemas/Vision'}]};self.assertFalse(proof(spec)['verified'])
+  spec=fixture();request(spec)['schema']={'type':'string','oneOf':[{'$ref':'#/components/schemas/Text'},{'$ref':'#/components/schemas/Vision'}]};self.assertFalse(proof(spec)['verified'])
+ def test_supported_object_requests_remain_closed_and_keep_future_ids(self):
+  self.assertTrue(proof(fixture())['verified'])
+  spec=fixture()
+  for name in ('Text','Vision','Image'):spec['components']['schemas'][name]['type']=['object']
+  self.assertTrue(proof(spec)['verified'])
+  spec=fixture();request(spec)['schema']={'type':'object','oneOf':[{'$ref':'#/components/schemas/Text'},{'$ref':'#/components/schemas/Vision'}]};self.assertTrue(proof(spec)['verified'])
+  rows,result=zai_request_models(json.dumps(spec));self.assertEqual(result['modality_record_counts'],{'text':2,'image':1});self.assertIn('future.Native/9',[x['model_id'] for x in rows])
+ def test_ref_and_mixed_keywords_cannot_bypass_object_proof(self):
+  spec=fixture();request(spec)['schema']={'$ref':'#/components/schemas/Text','type':'array'};self.assertFalse(proof(spec)['verified'])
+  spec=fixture();request(spec)['schema']={'$ref':'#/components/schemas/Text','items':{'type':'string'}};self.assertFalse(proof(spec)['verified'])
+  spec=fixture();spec['components']['schemas']['Text']['items']={'type':'string'};self.assertFalse(proof(spec)['verified'])
+  spec=fixture();del spec['components']['schemas']['Image']['type'];self.assertFalse(proof(spec)['verified'])
