@@ -43,20 +43,23 @@ def section(text,start,end):
  if end+'\n' not in tail:raise ValueError('reversed section boundary')
  return tail.split(end+'\n',1)[0]
 
-def tables(text):
+def tables(text,errors=None):
+ def reject(message):
+  if errors is None:raise ValueError(message)
+  errors.append(message)
  lines=markdown_lines(unfenced(text));out=[];i=0
  while i<len(lines):
   if not lines[i].startswith('|'):i+=1;continue
   block=[]
   while i<len(lines) and lines[i].startswith('|'):block.append(lines[i]);i+=1
   cells=lambda l:[x.strip() for x in l.strip('|').split('|')]
-  if len(block)<2:raise ValueError('truncated table')
+  if len(block)<2:reject('truncated table');continue
   header=cells(block[0]);sep=cells(block[1])
-  if len(header)!=len(sep) or not all(re.fullmatch(r'[: -]+',v) for v in sep):raise ValueError('unknown table separator')
+  if len(header)!=len(sep) or not all(re.fullmatch(r'[: -]+',v) for v in sep):reject('unknown table separator')
   rows=[]
   for line in block[2:]:
    row=cells(line)
-   if len(row)!=len(header):raise ValueError('table row width changed')
+   if len(row)!=len(header):reject('table row width changed');continue
    rows.append((row,line))
   out.append((header,rows))
  return out
@@ -92,20 +95,49 @@ def directory(doc):
  if not entities:raise ValueError('empty directory')
  return entities
 
+class DetailClaimsError(ValueError):
+ """Validation failed; independent nonliteral row observations survive rejection."""
+ def __init__(self,message,observations):
+  super().__init__(message);self.observations=observations
+
 def detail_claims(doc,strict=True):
+ observations=[]
+ try:return _detail_claims(doc,strict,observations)
+ except (ValueError,KeyError,TypeError) as error:
+  raise DetailClaimsError(str(error),observations) from error
+
+def _detail_claims(doc,strict,observations):
  text=unfenced(doc['text'])
  part=section(text,'### Model IDs','### Pricing') if strict else text.split('### Model IDs\n',1)[-1].split('### Pricing',1)[0]
- ts=tables(part)
- if len(ts)!=1 or ts[0][0]!=['Platform','Model ID']:raise ValueError('unknown native identity table')
- native=[];aliases=[];unclassified=[]
- for cells,line in ts[0][1]:
-  label,value=cells
-  linked=re.fullmatch(r'\[([^]]+)\]\(https://platform\.claude\.com/[^)]+\)',label)
-  if linked:label=linked[1]
-  if label=='Claude API':native.append((literal(value),line))
-  elif label=='Claude API alias':aliases.append((literal(value),line))
-  elif not re.fullmatch(r'(?:Amazon Bedrock(?: \(bedrock-runtime\))?|Claude Models on Google Cloud \((?:Anthropic|Google) managed\)|Microsoft Foundry|Claude Platform on AWS)(?: ID)?',label):unclassified.append(witness(doc,line,model_id=None,kind='unclassified_identity_role',identity_role=label,raw_identifier=value))
- if len({mid for mid,_ in native})!=1:raise ValueError('ambiguous canonical identity')
+ table_errors=[];ts=tables(part,errors=table_errors)
+ if len(ts)!=1 or ts[0][0]!=['Platform','Model ID']:table_errors.append('unknown native identity table')
+ # Capture every classifiable row before literal/canonical/capability validation.
+ # Never infer row roles from an unknown header or outside the bounded section.
+ positions={};identity_start=text.find('### Model IDs\n');identity_end=text.find('### Pricing',identity_start)
+ first=text[:identity_start].count('\n')+1 if identity_start>=0 else 0
+ last=text[:identity_end].count('\n')+1 if identity_end>=0 else len(markdown_lines(text))+1
+ for number,line in prose_lines(doc['text']):
+  if first<number<last:positions.setdefault(line,[]).append(number)
+ known_rows=[];unclassified=[]
+ for header,entries in ts:
+  if header!=['Platform','Model ID']:continue
+  for cells,line in entries:
+   label,value=cells
+   linked=re.fullmatch(r'\[([^]]+)\]\(https://platform\.claude\.com/[^)]+\)',label)
+   if linked:label=linked[1]
+   foreign=bool(re.fullmatch(r'(?:Amazon Bedrock(?: \(bedrock-runtime\))?|Claude Models on Google Cloud \((?:Anthropic|Google) managed\)|Microsoft Foundry|Claude Platform on AWS)(?: ID)?',label))
+   known=label in ('Claude API','Claude API alias') or foreign
+   raw=witness(doc,line,line_number=positions[line].pop(0),model_id=None,kind='unclassified_identity_role',identity_role=label,raw_identifier=value,identity_error='dependent_detail_unproven' if known else 'unknown_role')
+   observations.append(raw)
+   if label in ('Claude API','Claude API alias'):known_rows.append((label,value,line))
+   elif not foreign:unclassified.append(raw)
+ native=[];aliases=[]
+ for label,value,line in known_rows:
+  try:mid=literal(value)
+  except ValueError as error:table_errors.append(str(error));continue
+  (native if label=='Claude API' else aliases).append((mid,line))
+ if len({mid for mid,_ in native})!=1:table_errors.append('ambiguous canonical identity')
+ if table_errors:raise ValueError('; '.join(table_errors))
  canonical=native[0][0];declarations=[]
  if strict:
   caps=tables(section(text,'### Capabilities','### Availability'))
@@ -205,6 +237,8 @@ def observe(root,docs,status,release=None):
  except (ValueError,KeyError,TypeError) as e:errors.append('directory: '+str(e))
  for doc in sorted(docs,key=lambda x:x.get('source_url','')):
   try:validate_doc(doc);claims+=detail_claims(doc)
+  except DetailClaimsError as e:
+   claims+=e.observations;errors.append('detail: '+str(e))
   except (ValueError,KeyError,TypeError) as e:errors.append('detail: '+str(e))
  try:validate_doc(status,STATUS);claims+=status_claims(status)
  except (ValueError,KeyError,TypeError) as e:errors.append('lifecycle: '+str(e))
@@ -222,7 +256,7 @@ def observe(root,docs,status,release=None):
  pending=[x['display_name'] for x in entities if len(names.get(x['display_name'],set()))!=1]
  unclassified=[x for x in claims if x['kind']=='unclassified_identity_role']
  claims=[x for x in claims if x['kind']!='unclassified_identity_role']
- errors+=['unknown platform identity role: '+x['identity_role'] for x in unclassified]
+ errors+=[('unknown platform identity role: ' if x.get('identity_error')=='unknown_role' else 'unproven identity row after detail error: ')+x['identity_role'] for x in unclassified]
  rows,conflicts=aggregate(claims)
  conflicts+=['display:'+name for name,mids in names.items() if len(mids)>1]
  unknown=[r['model_id'] for r in rows if r['lifecycle_status']!='retired' and 'text' in r['unknown_output_modalities']]

@@ -57,7 +57,11 @@ def anthropic_directory(text):
 def anthropic_ids(text):
  import discovery_anthropic_contracts as native
  doc=dict(text=text,source_url=native.ROOT,source_sha256=None,observed_at=None)
- return list(dict.fromkeys(x['model_id'] for x in native.detail_claims(doc,strict=False)))
+ # ID projection is not capture validation: an unproven identity must not
+ # turn a hash-checked child body into a fetch failure before observation union.
+ try:claims=native.detail_claims(doc,strict=False)
+ except native.DetailClaimsError:return []
+ return list(dict.fromkeys(x['model_id'] for x in claims if x['kind'] in ('canonical','alias')))
 
 def anthropic_status(text):
  import discovery_anthropic_contracts as native
