@@ -402,7 +402,7 @@ def apply_public_catalog_observations(inventories,capture_dir,replay_dir=None):
         elif snap is qwen:
             proof=qwen['published_catalog_proof'];snap['scope_certificates']=[universe.scope_certificate(snap['vendor'],snap['channel'],m,snap['records'],population=universe.unknown('published categories do not assert complete native/legacy provider universe'),pagination=universe.unknown('published linked pages read, but Model Plaza/API regional terminal remains unproved',read=proof['unique_detail_documents'],failures=proof['failures']),alias_enumeration=universe.unknown('no complete direct alias declaration'),lifecycle=universe.unknown('historical lifecycle set not declared')) for m in ('text','image','video')]
 
-def execute(config,manifest,database,capture_dir,replay_dir=None):
+def execute(config,manifest,database,capture_dir,replay_dir=None,public_price_ledger=None):
     validate_sources(config,manifest)
     capture_dir.mkdir(parents=True,exist_ok=False);inventories=[]
     for source in config['sources']:
@@ -452,7 +452,7 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
     from discovery_scope_projection import attach_scope_certificates
     attach_scope_certificates(inventories,manifest)
     import public_price_facts
-    public_price_facts.attach(inventories,public_price_facts.load())
+    public_price_facts.attach(inventories,public_price_ledger if public_price_ledger is not None else public_price_facts.load())
     c.atomic_json(capture_dir/'inventory.json',inventories)
     return inventories
 
@@ -464,6 +464,7 @@ def main():
     p.add_argument('--scopes',default=str(c.DEFAULT_SCOPES))
     p.add_argument('--replay-dir',type=pathlib.Path,help='Offline verification only; never advances successful monitoring baseline')
     p.add_argument('--replay-database',type=pathlib.Path)
+    p.add_argument('--public-price-capture-dir',type=pathlib.Path,help='Reviewed independent HTTP price captures; not a full-discovery fresh proof')
     p.add_argument('--catalog-export-dir',type=pathlib.Path,help='Offline-only original documented Qwen/xAI model catalog HTTP exports; never credentials or a fresh/global universe proof')
     args=p.parse_args();attempt=None
     try:
@@ -479,7 +480,9 @@ def main():
             body=args.replay_database.read_bytes();database=json.loads(body);main_sha=None;baseline_digest=digest(body)
         else:database,main_sha,baseline_digest=remote_main()
         captures=pathlib.Path(args.state_dir)/'captures'/attempt['run_id']
-        inventories=execute(config,manifest,database,captures,args.replay_dir)
+        import public_price_facts
+        public_ledger=public_price_facts.load_capture(args.public_price_capture_dir) if args.public_price_capture_dir else public_price_facts.load()
+        inventories=execute(config,manifest,database,captures,args.replay_dir,public_price_ledger=public_ledger)
         catalog_exports=None
         if args.catalog_export_dir:
             if not args.replay_dir:raise ValueError('offline catalog exports cannot participate in a fresh success baseline')
@@ -498,7 +501,7 @@ def main():
         previous=c.previous_success(args.state_dir)
         result=c.compare_catalogs(database,inventories,previous,scopes=manifest)
         import public_price_facts
-        ledger=public_price_facts.load()
+        ledger=public_ledger
         public_price_facts.attach(inventories,ledger)
         c.atomic_json(captures/'inventory.json',inventories)
         c.atomic_json(captures/'public-price-evidence.json',ledger)

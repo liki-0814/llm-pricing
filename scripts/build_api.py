@@ -698,7 +698,7 @@ def availability_for(models, at):
     return json.loads(result.stdout)
 
 
-def build(d, mixed=False):
+def build(d, mixed=False, public_price_ledger=None):
     """Return {relative path under api/v1: python object}."""
     missing = [v for v in d["vendors"] if v not in VENDOR_SLUGS]
     if missing:
@@ -762,7 +762,7 @@ def build(d, mixed=False):
     for o in all_objs:
         out["models/%s.json" % o["id"]] = {"api_version": API_VERSION, "meta": base_meta(d), "data": o}
     import public_price_facts
-    out["price-facts.json"] = {"api_version": API_VERSION, "meta": base_meta(d), "data": public_price_facts.view(public_price_facts.load(), mixed=mixed)}
+    out["price-facts.json"] = {"api_version": API_VERSION, "meta": base_meta(d), "data": public_price_facts.view(public_price_ledger if public_price_ledger is not None else public_price_facts.load(), mixed=mixed)}
     out["openapi.json"] = openapi(d, [v["slug"] for v in vendors], [o["id"] for o in all_objs])
     # v1 remains USD-only for existing consumers. v2 is the explicit mixed-currency capability.
     for rel, value in out.items():
@@ -807,16 +807,18 @@ def check(d=None, mixed=False):
     return problems
 
 
-def page_data(d):
+def page_data(d, public_price_ledger=None):
     at = d["meta"].get("availability_as_of", d["meta"]["last_updated"] + "T00:00:00+08:00")
     decisions = availability_for(d["models"], at)
     result = copy.deepcopy(d)
     result["meta"].update(base_meta(d))
     import public_price_facts
-    ledger=public_price_facts.load()
+    ledger=public_price_ledger if public_price_ledger is not None else public_price_facts.load()
     result["public_price_evidence"]={"price_verified_count":len(ledger["facts"]),"scope_complete":False,"history_complete":False,
         "observed_at":sorted({x["observed_at"] for x in ledger["sources"]}),"url":"api/v2/price-facts.json",
         "offering_channel_observation_count":len(ledger["offering_channel_observations"]),
+        "quoted_price_statement_count":ledger.get("quoted_price_statement_count",0),"catalog_reference_quote_count":ledger.get("catalog_reference_quote_count",0),
+        "evidence_kind":ledger["evidence_kind"],"price_HTTP_all_ok":ledger.get("refresh_run",{}).get("all_sources_http_ok",False),
         "meaning":"archival source observations; audited estimator rates unchanged; not exhaustive directory, current availability or user entitlement"}
     result["models"] = [m for m, a in zip(result["models"], decisions) if a["estimable"]]
     return result

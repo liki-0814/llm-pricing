@@ -10154,15 +10154,27 @@
     }
   ],
   "public_price_evidence": {
-    "price_verified_count": 1146,
+    "price_verified_count": 1319,
     "scope_complete": false,
     "history_complete": false,
     "observed_at": [
+      "2026-11-19T05:55:29.678482+08:00",
       "2026-11-19T05:55:29.750030+08:00",
+      "2026-11-19T05:55:29.769043+08:00",
+      "2026-11-19T05:55:29.771381+08:00",
+      "2026-11-19T05:55:29.963181+08:00",
+      "2026-11-19T05:55:30.017389+08:00",
+      "2026-11-19T05:55:30.211803+08:00",
+      "2026-11-19T05:55:31.523214+08:00",
+      "2026-11-19T05:55:31.656147+08:00",
       "2026-11-19T05:55:31.721067+08:00"
     ],
     "url": "api/v2/price-facts.json",
     "offering_channel_observation_count": 1,
+    "quoted_price_statement_count": 522,
+    "catalog_reference_quote_count": 83,
+    "evidence_kind": "archival_public_HTTP_observations_NOT_live_discovery",
+    "price_HTTP_all_ok": false,
     "meaning": "archival source observations; audited estimator rates unchanged; not exhaustive directory, current availability or user entitlement"
   }
 }

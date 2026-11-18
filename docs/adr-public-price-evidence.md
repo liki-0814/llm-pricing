@@ -59,3 +59,43 @@ three shared unparsed/modality/direct-alias rules remain untouched. Jevis dual
 review, full-discovery acceptance, existing UI/operational release checks and
 separately authorized merge/deployment remain required. Previously captured
 468fc67 fresh evidence cannot be relabeled as this code's fresh run.
+
+## Follow-up: independent HTTP capture and bounded reference consumption
+
+`refresh_public_prices.py` performs only ordinary unauthenticated GETs of the ten
+exact reviewed URLs. It has no URL crawling or API/key input. Every attempt gets
+new source-bound bytes/time/hash and a manifest. A source is tried once. Failure
+records `failed_NOT_fresh`; last-known cache metadata stays separate and old
+bodies never enter this attempt's successfully fetched source list. Injected test
+transports are explicitly NOT network. `full_discovery_fresh` is always false.
+`build_site.py --public-price-capture-dir DIR` and the same runner option consume
+the capture through the same validator/parser, not a separate price rule set.
+
+The other eight originals are now consumed as exact quoted price-condition rows
+and catalog literal references, including Google Markdoc tables. Time schedules,
+service tabs, mixed media units and discounted/old price cells are retained as
+conditions, not flattened into a scalar or silently matched to invented API IDs.
+A `quote_verified` statement is a verified original statement, **not** approval
+of unparsed quote selectors. They appear in the real v2 evidence API. v1 omits
+untyped-currency candidate rows. No existing 89-row calculator rate is changed.
+
+Qwen multi-level headers now bind explicit text components to literal Model ID
+rows, keeping audio-only charges out of text facts. Explicit `原价X元（限时Y折）`
+can evidence the **list price** only (`rate_kind` marks it); payable discount and
+effective terms remain candidates. Nested cache/API tables without their own
+literal Model ID remain unbound. No nearby-heading or price-name ID inference.
+
+### Region semantics decision — proposal, NOT a relaxed acceptance rule
+
+Known stated region, explicitly global default, and region not stated/unparsed
+must be distinct. Unspecified is not global, is not a specific account's region,
+and does not disprove that a public source states a price. Proposed shared rule:
+verify the quoted price statement independently; require region-specific binding
+only for regional applicability/executable quotations. Missing currency, unit,
+channel, identity or conditional interpretation remains unresolved separately.
+For backward compatibility, until architecture/product approve changing the
+meaning of `price_verified`, that field keeps its strict complete-selector gate;
+`quote_verified` exposes the already-confirmed public statement without pretending
+it has complete regional applicability. A later alternative is to redefine
+`price_verified` as statement verification and add `selector_complete` as the
+strict executable quote gate. That alternative is NOT enacted in this batch.
