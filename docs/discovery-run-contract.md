@@ -256,3 +256,23 @@ sections/rows/footer, unclassified sections, duplicates, display-only names or
 pagination continuation fail closed. Unknown future literal IDs are retained.
 This proof is independent of prices and never turns eligibility restrictions or
 Deprecated into global Retired status.
+
+## Z.ai proof-contract repair after c8d4 review
+
+The review counterexamples are mutations of saved schema copies, not a claim that
+the original public schema contained an external server or empty text branch.
+For every required route, effective servers follow OpenAPI operation > path >
+root precedence. The nearest present override must be a nonempty list, with every
+server exactly the reviewed `https://api.z.ai/api` boundary. Empty, malformed,
+relative/templated or external effective overrides fail closed; they never fall
+back to an ancestor. A valid closer override may supersede an unapproved ancestor.
+
+Each oneOf/anyOf must have a nonempty list of nonempty valid schemas and every
+branch must yield a closed nonempty legal string model enum. Missing/external/
+cyclic refs, unsupported mixed semantic compositions and contradictory enum
+types fail closed. Each required route and each claimed text/image modality must
+have its own nonempty model set; image results cannot fill an empty text branch.
+Proof output records the effective server level/list per request and independent
+modality record counts. Unknown future legal IDs remain allowed. This narrow fix
+does not change the monitoring scope, pricing/billing bytes or routine state;
+Z.ai robustness and the complete-discovery decision await new independent review.

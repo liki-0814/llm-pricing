@@ -102,30 +102,68 @@ def zai_request_models(text):
  rows={};proof={'verified':False,'method':'closed_public_OpenAPI_request_model_enums','scope':'documented Z.ai PAYG text/image API, not account entitlement'}
  try:
   spec=json.loads(text)
-  if not any(x.get('url')=='https://api.z.ai/api' for x in spec.get('servers',[])):raise ValueError('native public API server missing')
   schemas=spec.get('components',{}).get('schemas',{})
+  def local_ref(node,seen):
+   ref=node['$ref'];prefix='#/components/schemas/'
+   if not isinstance(ref,str) or not ref.startswith(prefix) or ref in seen:raise ValueError('unresolved/cyclic request ref')
+   if any(key in node for key in ('properties','enum','oneOf','anyOf','allOf','not')):raise ValueError('unsupported semantic siblings of request ref')
+   resolved=schemas[ref[len(prefix):]]
+   if not isinstance(resolved,dict) or not resolved:raise ValueError('request ref does not resolve to a nonempty schema')
+   return resolved,seen+(ref,)
   def models(node,seen=()):
+   if not isinstance(node,dict) or not node:raise ValueError('request branch is not a nonempty schema')
+   if any(key in node for key in ('allOf','not','if','then','else')):raise ValueError('unsupported request composition')
    if '$ref' in node:
-    ref=node['$ref'];prefix='#/components/schemas/'
-    if not ref.startswith(prefix) or ref in seen:raise ValueError('unresolved/cyclic request ref')
-    return models(schemas[ref[len(prefix):]],seen+(ref,))
-   if 'oneOf' in node or 'anyOf' in node:
-    branches=node.get('oneOf',node.get('anyOf'));return sum((models(x,seen) for x in branches),[])
+    resolved,next_seen=local_ref(node,seen);return models(resolved,next_seen)
+   combinations=[key for key in ('oneOf','anyOf') if key in node]
+   if combinations:
+    if 'properties' in node:raise ValueError('unsupported mixed request properties/composition')
+    if len(combinations)!=1:raise ValueError('ambiguous multiple request compositions')
+    branches=node[combinations[0]]
+    if not isinstance(branches,list) or not branches:raise ValueError('request composition has no nonempty branch list')
+    ids=[]
+    for branch in branches:
+     branch_ids=models(branch,seen)
+     if not branch_ids:raise ValueError('request composition contains an empty model branch')
+     ids.extend(branch_ids)
+    return ids
    field=node.get('properties',{}).get('model',{})
+   if not isinstance(field,dict):raise ValueError('request model field is not a schema')
+   while '$ref' in field:field,seen=local_ref(field,seen)
+   if any(key in field for key in ('oneOf','anyOf','allOf','not','if','then','else')):raise ValueError('unsupported model-field composition')
    values=field.get('enum')
-   if not isinstance(values,list) or not values or any(not isinstance(x,str) or c.canonical_id(x)!=x for x in values):raise ValueError('request model enum not closed/valid')
+   if field.get('type','string')!='string' or not isinstance(values,list) or not values or any(not isinstance(x,str) or c.canonical_id(x)!=x for x in values):raise ValueError('request model enum not closed/valid')
    return values
+  def effective_servers(path_item,operation):
+   # OpenAPI precedence is operation > path > root. Presence of an invalid/empty
+   # override is not permission to fall back to a less-specific native server.
+   for level,node in (('operation',operation),('path',path_item),('root',spec)):
+    if 'servers' not in node:continue
+    servers=node['servers']
+    if not isinstance(servers,list) or not servers:raise ValueError('empty/invalid effective '+level+' servers')
+    urls=[]
+    for server in servers:
+     if not isinstance(server,dict) or server.get('url')!='https://api.z.ai/api':raise ValueError('unapproved effective '+level+' server')
+     urls.append(server['url'])
+    return level,urls
+   raise ValueError('no explicitly approved effective request server')
   routes={'/paas/v4/chat/completions':'text','/paas/v4/images/generations':'image','/paas/v4/async/images/generations':'image'}
   unexpected=[path for path,node in spec.get('paths',{}).items() if 'post' in node and any(marker in path for marker in ('/images/','/chat/','/responses')) and path not in routes]
   if unexpected:raise ValueError('unreviewed text/image request routes: '+str(unexpected))
-  evidence=[]
+  evidence=[];modality_ids={'text':set(),'image':set()}
   for route,modality in routes.items():
-   node=spec['paths'][route]['post']['requestBody']['content']['application/json']['schema']
-   ids=models(node);evidence.append({'request_path':route,'literal_ids':ids})
+   path_item=spec['paths'][route];operation=path_item['post']
+   level,servers=effective_servers(path_item,operation)
+   node=operation['requestBody']['content']['application/json']['schema']
+   ids=models(node)
+   if not ids:raise ValueError('required request route has no model IDs: '+route)
+   modality_ids[modality].update(ids)
+   evidence.append({'request_path':route,'modality':modality,'literal_ids':ids,'effective_server_level':level,'effective_servers':servers})
    for mid in ids:
     rows.setdefault(mid,dict(model_id=mid,api_id_explicit=True,origin_vendor='智谱 Z.ai',modality=modality,
      id_evidence='OpenAPI request model enum',line_basis='JSON pointer paths/'+route+'/post/requestBody'))
-  proof.update(verified=True,expected_record_count=len(rows),requests=evidence,pagination_termination='one complete JSON document and closed enum for every text/image request branch')
+  if any(not ids for ids in modality_ids.values()):raise ValueError('claimed modality has no legal model enum')
+  proof.update(verified=True,expected_record_count=len(rows),requests=evidence,modality_record_counts={key:len(ids) for key,ids in modality_ids.items()},pagination_termination='one complete JSON document and closed enum for every text/image request branch')
  except (ValueError,KeyError,TypeError,AttributeError) as e:proof['error']=str(e)
  return list(rows.values()),proof
 
