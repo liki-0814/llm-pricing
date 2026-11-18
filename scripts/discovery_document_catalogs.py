@@ -49,7 +49,13 @@ def qwen_detail(doc,entity):
     for number,line in enumerate(text.splitlines(),1):
         m=re.fullmatch(r'Model ID(?: \(the value of the `model` parameter\))?: `([^`]+)`',line)
         if m:matches.append((number,line,m[1]))
-    if len(matches)!=1 or canonical_id(matches[0][2])!=matches[0][2]:raise ValueError('unique literal model parameter declaration missing')
+    request_id_explicit=bool(matches)
+    service_declarations=[]
+    if not matches:
+        for number,line in enumerate(text.splitlines(),1):
+            m=re.fullmatch(r'The inference service provider for `([^`]+)` is ([^.]+)\.',line)
+            if m:service_declarations.append(dict(line=number,quote=line,provider=m[2]));matches.append((number,line,m[1]))
+    if len(matches)!=1 or canonical_id(matches[0][2])!=matches[0][2]:raise ValueError('unique formal model parameter/service declaration missing')
     number,identity_quote,mid=matches[0];outputs=[];provider=[];evidence=[]
     for ln,line in enumerate(text.splitlines(),1):
         if 'Output Modality' not in line and 'Model Provider' not in line:continue
@@ -65,8 +71,8 @@ def qwen_detail(doc,entity):
     proof=dict(qualified(dict(doc,vendor='阿里云 Qwen',channel='pay_as_you_go',catalog_source_url=QWEN+'models')),identity_quote=identity_quote,identity_line=number,output_declarations=evidence,model_provider_declarations=provider)
     # A documented Model Studio invocation ID is NOT automatically an Alibaba-origin model.
     # Without explicit provider evidence retain a nonformal observation, never native certify.
-    native=bool(provider and set(provider)<={'Alibaba Cloud','Qwen','Tongyi Qianwen','Wan','HappyHorse'})
-    return dict(model_id=mid if native else None,observed_model_id=mid,api_id_explicit=native,catalog_observation=not native,display_name=entity['display_name'],identity_evidence=proof,output_modalities=sorted(agreed),unknown_output_modalities=sorted(possible-agreed) if outputs else ['text','image','audio','video'],native_vendor_status='verified_explicit_provider' if native else 'unknown_provider_not_explicit',channel_applicability='unknown',channel_unknown_reasons=['platform request declaration does not establish native-author global catalog or account entitlement'],lifecycle_status='unconfirmed',alias_status='unknown_no_direct_mapping',scope_status='pending_catalog_provider_and_universe',line=number)
+    native=bool(request_id_explicit and provider and set(provider)<={'Alibaba Cloud','Qwen','Tongyi Qianwen','Wan','HappyHorse'})
+    return dict(model_id=mid if native else None,observed_model_id=mid,api_id_explicit=native,catalog_observation=not native,display_name=entity['display_name'],identity_evidence=proof,request_parameter_ID_explicit=request_id_explicit,inference_service_provider_evidence=service_declarations,output_modalities=sorted(agreed),unknown_output_modalities=sorted(possible-agreed) if outputs else ['text','image','audio','video'],native_vendor_status='verified_explicit_provider' if native else 'unknown_provider_not_explicit',channel_applicability='unknown',channel_unknown_reasons=['platform request declaration does not establish native-author global catalog or account entitlement'],lifecycle_status='unconfirmed',alias_status='unknown_no_direct_mapping',scope_status='pending_catalog_provider_and_universe',line=number)
 
 def xai_subscription_urls(text):
     if access_gate(text):raise ValueError('blocked official documentation index')

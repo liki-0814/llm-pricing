@@ -55,6 +55,9 @@ class PublishedDocuments(unittest.TestCase):
  def test_qwen_model_parameter_and_output_not_provider_or_input_guess(self):
   body='# Candidate\nModel ID (the value of the `model` parameter): `native.ID`\n<table><tr><td>Input Modality</td><td>Image</td><td>Output Modality</td><td>Text</td></tr></table>'
   source=doc(body,d.QWEN+'native.md');r=d.qwen_detail(source,{'display_name':'Candidate'});self.assertEqual(r['observed_model_id'],'native.ID');self.assertEqual(r['output_modalities'],['text']);self.assertIsNone(r['model_id']);self.assertFalse(r['api_id_explicit']);self.assertEqual(r['channel_applicability'],'unknown')
+ def test_service_provider_literal_is_observed_not_native_author_or_request_id(self):
+  source=doc('# qwen-source\n\nThe inference service provider for `qwen-source` is Alibaba Cloud Model Studio.\n<table><tr><td>Output Modality</td><td>Text</td></tr></table>\n',url='https://www.alibabacloud.com/help/en/model-studio/qwen-source.md')
+  row=d.qwen_detail(source,{'display_name':'qwen-source'});self.assertEqual(row['observed_model_id'],'qwen-source');self.assertEqual(row['output_modalities'],['text']);self.assertIsNone(row['model_id']);self.assertFalse(row['api_id_explicit']);self.assertFalse(row['request_parameter_ID_explicit'])
  def test_subscription_config_examples_never_model_membership(self):
   source=doc('# Reference\n```toml\n[models]\ndefault="grok-build"\n```\n| `model` | for example `grok-4.7` |', 'https://docs.x.ai/build/settings/reference.md');self.assertEqual(d.xai_subscription_catalog(source),[])
  def test_formal_subscription_native_model_positive_not_complete_universe(self):
