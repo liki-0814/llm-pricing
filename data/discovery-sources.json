@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "adapter_version": "discovery-adapters/5-google-typed-output",
+  "adapter_version": "discovery-adapters/6-anthropic-native-observations",
   "scope_manifest_sha256": "b02d759e7af4d376b0a9d4a74f8a650ce04f0df636a246e9862ebf21763b40d8",
   "sources": [
     {
@@ -206,6 +206,18 @@
       "role": "lifecycle",
       "adapter": "anthropic_status_ids",
       "gap": "Literal API model names/status and historical notice IDs; original dates retained without invented timezone or exact T."
+    },
+    {
+      "id": "anthropic-release-notes",
+      "vendor": "Anthropic",
+      "channel": "pay_as_you_go",
+      "url": "https://platform.claude.com/docs/en/release-notes/overview.md",
+      "modalities": [
+        "text"
+      ],
+      "role": "detail",
+      "adapter": "anthropic_release_notes",
+      "gap": "Only explicit per-entity parenthetical native IDs; same-attempt capture, never an exhaustive model directory."
     }
   ]
 }

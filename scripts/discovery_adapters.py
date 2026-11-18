@@ -335,6 +335,7 @@ ADAPTERS = {
     'anthropic_markdown_bridged': bridged_directory,
     'zai_openapi_models': zai_openapi_models,
     'anthropic_status_ids': anthropic_status_ids,
+    'anthropic_release_notes': lambda body,source: ([],[],['entity-bound native notices only; not a directory enumeration']),
     'explicit_id_labels_partial': explicit_id_labels,
     'openai_cards_partial': openai_cards,
     'hunyuan_invocation_tables': hunyuan_invocation_tables,

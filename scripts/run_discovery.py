@@ -12,7 +12,7 @@ import discovery_adapters as adapters
 import discovery_bridges as bridges
 from concurrent.futures import ThreadPoolExecutor
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-ADAPTER_VERSION='discovery-adapters/5-google-typed-output'
+ADAPTER_VERSION='discovery-adapters/6-anthropic-native-observations'
 OpenAICards=adapters.OpenAICards
 class LimitedPublicRedirect(urllib.request.HTTPRedirectHandler):
     """Follow a short chain of public official documentation redirects only."""
@@ -189,6 +189,45 @@ def bridge_catalog(snapshot,source,capture_dir,replay_dir=None):
     # Bridging alone is not a proof of channel attribution or exhaustive scoped enumeration.
     return snapshot
 
+def apply_anthropic_observations(inventories,capture_dir):
+    """Consume only this attempt's hash-checked native captures, never an old sidecar.
+    Partial observations are useful; they do not certify exhaustive scope coverage.
+    """
+    import discovery_anthropic_contracts as native
+    root=next((s for s in inventories if s.get('source_url')==native.ROOT),None)
+    if not root:return
+    def captured(snap):
+        if not snap or snap.get('fetch_status')!='ok':raise ValueError('same-attempt source absent/failed')
+        path=pathlib.Path(snap['capture_path'])
+        if path.resolve().parent!=capture_dir.resolve():raise ValueError('capture is outside current attempt')
+        body=path.read_bytes()
+        if digest(body)!=snap['source_sha256']:raise ValueError('capture hash changed')
+        _,text=adapters.decode_body(body)
+        return dict(text=text,source_url=snap['source_url'],source_sha256=snap['source_sha256'],observed_at=snap['observed_at'],capture_path=str(path))
+    def source(url):
+        snap=next((s for s in inventories if s.get('source_url')==url),None)
+        try:return captured(snap)
+        except (ValueError,KeyError,OSError):return None
+    docs=[];capture_errors=[]
+    for child in root.get('detail_captures',[]):
+        try:
+            if child.get('error'):raise ValueError(child['error'])
+            docs.append(captured(dict(child,fetch_status='ok')))
+        except (ValueError,KeyError,OSError) as e:capture_errors.append(str(e))
+    root_doc=source(native.ROOT);status=source(native.STATUS);release=source(native.NOTES)
+    rows,proof=native.observe(root_doc,docs,status,release)
+    if status:
+        try:
+            status_rows,_=native.aggregate(native.status_claims(status))
+            next(s for s in inventories if s.get('source_url')==native.STATUS)['records']=status_rows
+        except (ValueError,KeyError,TypeError):pass  # The partial source failure is recorded in proof.
+    proof['errors']+=capture_errors
+    if capture_errors:proof['structures_verified']=False
+    # Missing/failed pieces are never interpreted as evidence of absence.
+    root.update(records=rows,complete=False,extraction_status='partial')
+    root['coverage_evidence'].update(proof=proof,enumeration_verified=False,pagination_complete=False,native_identity_verified=False,expected_record_count=None)
+    root['errors'].append('native observation union retained; scope completeness remains unproven')
+
 def execute(config,manifest,database,capture_dir,replay_dir=None):
     validate_sources(config,manifest)
     capture_dir.mkdir(parents=True,exist_ok=False);inventories=[]
@@ -232,21 +271,7 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
             kept=[row for row in snap.get('records') or [] if (row.get('detail_url') or '').removesuffix('.md') not in all_urls]
             snap['records']=kept
             snap.setdefault('errors',[]).append('front_page_union_only_cards_absent_from_all:%d' % len(kept))
-    # Same-attempt explicit lifecycle bridge only; never guess retired display
-    # IDs from their typography or consume a sidecar from a different live run.
-    anthro=next((snap for snap in inventories if snap.get('source_url')=='https://platform.claude.com/docs/en/models/overview.md'),None)
-    status=next((snap for snap in inventories if snap.get('source_url')=='https://platform.claude.com/docs/en/about-claude/model-deprecations.md' and snap.get('fetch_status')=='ok' and snap.get('extraction_path') and snap.get('source_sha256')),None)
-    if anthro and status and anthro.get('fetch_status')=='ok':
-        lifecycle_text=pathlib.Path(status['extraction_path']).read_text()
-        anthro['records']=adapters.text_contracts.anthropic_retired_bridges(anthro['records'],lifecycle_text)
-        for row in anthro['records']:
-            evidence=row.get('identity_evidence',{})
-            if evidence.get('kind')=='explicit_single_entity_Claude_API_retirement_notice':
-                evidence.update(source_url=status['source_url'],source_sha256=status['source_sha256'],capture_path=status['capture_path'],observed_at=status['observed_at'])
-        pending=[row.get('display_name') for row in anthro['records'] if row.get('api_id_explicit') is not True]
-        anthro['coverage_evidence']['proof']={'verified':False,'method':'explicit_directory_entity_bridges','pending_display_entities':pending,
-            'error':'directory completeness not promoted: grouped notices do not establish one-to-one display/API-ID mapping'}
-        anthro['errors'].append('explicit_retirement_bridges_applied; remaining_pending:'+str(len(pending)))
+    apply_anthropic_observations(inventories,capture_dir)
     c.atomic_json(capture_dir/'inventory.json',inventories)
     return inventories
 

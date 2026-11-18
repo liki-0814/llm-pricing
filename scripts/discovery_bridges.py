@@ -55,35 +55,15 @@ def anthropic_directory(text):
  return rows
 
 def anthropic_ids(text):
- ids=[]
- for line in text.splitlines():
-  cells=[x.strip() for x in line.strip('|').split('|')]
-  if line.startswith('|') and cells[0]=='Claude API':ids+=re.findall(r'`([^`]+)`',' '.join(cells[1:]))
- return list(dict.fromkeys(x for x in ids if c.canonical_id(x)))
+ import discovery_anthropic_contracts as native
+ doc=dict(text=text,source_url=native.ROOT,source_sha256=None,observed_at=None)
+ return list(dict.fromkeys(x['model_id'] for x in native.detail_claims(doc,strict=False)))
 
 def anthropic_status(text):
- rows=[];active=False
- for i,line in enumerate(text.splitlines(),1):
-  if line.startswith('## Model status'):active=True;continue
-  if active and line.startswith('## '):break
-  if not active or not line.startswith('|'):continue
-  cells=[x.strip() for x in line.strip('|').split('|')]
-  mid=c.canonical_id(cells[0].strip('`'))
-  if not mid or len(cells)<4 or cells[1] not in ('Active','Deprecated','Retired'):continue
-  rows.append(dict(model_id=mid,api_id_explicit=True,line=i,lifecycle_status=cells[1].lower(),
-   lifecycle_quote=line,retired_at=None,retirement_date_original=cells[3],retirement_timezone=None))
- # Older retired IDs are explicitly enumerated in the history tables; never take replacement column.
- active=False
- for i,line in enumerate(text.splitlines(),1):
-  if line.startswith('## Deprecation history'):active=True;continue
-  if active and line.startswith('## API parameter'):break
-  if not active or not line.startswith('|'):continue
-  cells=[x.strip() for x in line.strip('|').split('|')]
-  if len(cells)!=3:continue
-  m=re.fullmatch(r'`([^`]+)`',cells[1])
-  if m and c.canonical_id(m[1]) and not any(x['model_id']==m[1] for x in rows):
-   rows.append(dict(model_id=m[1],api_id_explicit=True,line=i,lifecycle_status='unconfirmed_historical_notice',
-    lifecycle_quote=line,retired_at=None,retirement_date_original=cells[0],retirement_timezone=None))
+ import discovery_anthropic_contracts as native
+ doc=dict(text=text,source_url=native.STATUS,source_sha256=None,observed_at=None)
+ rows,_=native.aggregate(native.status_claims(doc,strict=False))
+ for row in rows:row.pop('identity_evidence',None)  # Capture provenance is attached by the runner, not fabricated here.
  return rows
 
 def minimax_ids(text):
