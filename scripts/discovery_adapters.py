@@ -8,6 +8,7 @@ import gzip,re,html
 from html.parser import HTMLParser
 import catalog_diff as c
 import discovery_bridges as bridges
+import discovery_text_contracts as text_contracts
 
 NATIVE_QWEN = re.compile(r'^(?:qwen|wan|wanx|happyhorse|happyoyster|tongyi|z-image|text-embedding-v|decision-model|qwen-audio)', re.I)
 THIRD_QWEN = re.compile(r'^(?:deepseek|glm|kimi|minimax|moonshot|claude|gpt-|o1|o3|grok|mistral|llama|gemini|yi-|doubao|hunyuan|hy\d|zhupu|zhipu)/?', re.I)
@@ -147,7 +148,9 @@ def deepseek_model_row(body, source=None):
             mid=c.canonical_id(token)
             if mid: official.append({'model_id':mid,'api_id_explicit':True,'display_name':cell,'line':table['line']})
         break
-    return official, [], ['model_row_parsed_aliases_and_media_not_fully_classified']
+    enriched,proof=text_contracts.deepseek_contract(text,source)
+    if proof['verified']:return enriched,[],['accepted_legacy_aliases_are_routed_not_retired_invocation_IDs']
+    return official, [], ['deepseek_text_contract_incomplete:'+proof.get('error','unknown')]
 
 
 def kimi_model_tables(body, source=None):

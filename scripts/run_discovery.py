@@ -79,6 +79,20 @@ def parse_source(body,source,observed_at):
     if source['adapter']=='zai_openapi_models':
         _,proof=bridges.zai_request_models(text)
         if (source.get('vendor'),source.get('channel'),source.get('url'),source.get('role'),source.get('modalities'))!=('智谱 Z.ai','pay_as_you_go','https://docs.z.ai/openapi.json','catalog',['text','image']):proof['verified']=False
+    if source['adapter']=='deepseek_model_row':
+        _,proof=adapters.text_contracts.deepseek_contract(text,source)
+    if source['adapter']=='hunyuan_invocation_tables':
+        scoped,resold,proof=adapters.text_contracts.hunyuan_text_contract(text,source)
+        text_ids={row['model_id'] for row in scoped}
+        if proof['verified'] and not text_ids.issubset({row.get('model_id') for row in records}):
+            proof.update(verified=False,error='native text ID missing from full retained invocation extraction')
+        if proof['verified'] and any(not adapters.text_contracts.native_hunyuan_identity(row) for row in records):
+            proof.update(verified=False,error='retained native observation lacks paired native brand/invocation evidence')
+        for row in records:row['text_scope_member']=row.get('model_id') in text_ids
+        proof['text_record_count']=len(scoped)
+        # Preserve all pre-existing non-text raw observations; this proof covers
+        # only the two explicit text-output sections, not extra monitored scopes.
+        if proof['verified']:proof['expected_record_count']=len(records)
     complete=proof['verified']
     errors=[] if complete else ['adapter_partial_not_full_enumeration']+list(notes)
 
@@ -174,6 +188,21 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
             kept=[row for row in snap.get('records') or [] if (row.get('detail_url') or '').removesuffix('.md') not in all_urls]
             snap['records']=kept
             snap.setdefault('errors',[]).append('front_page_union_only_cards_absent_from_all:%d' % len(kept))
+    # Same-attempt explicit lifecycle bridge only; never guess retired display
+    # IDs from their typography or consume a sidecar from a different live run.
+    anthro=next((snap for snap in inventories if snap.get('source_url')=='https://platform.claude.com/docs/en/models/overview.md'),None)
+    status=next((snap for snap in inventories if snap.get('source_url')=='https://platform.claude.com/docs/en/about-claude/model-deprecations.md' and snap.get('fetch_status')=='ok' and snap.get('extraction_path') and snap.get('source_sha256')),None)
+    if anthro and status and anthro.get('fetch_status')=='ok':
+        lifecycle_text=pathlib.Path(status['extraction_path']).read_text()
+        anthro['records']=adapters.text_contracts.anthropic_retired_bridges(anthro['records'],lifecycle_text)
+        for row in anthro['records']:
+            evidence=row.get('identity_evidence',{})
+            if evidence.get('kind')=='explicit_single_entity_Claude_API_retirement_notice':
+                evidence.update(source_url=status['source_url'],source_sha256=status['source_sha256'],capture_path=status['capture_path'],observed_at=status['observed_at'])
+        pending=[row.get('display_name') for row in anthro['records'] if row.get('api_id_explicit') is not True]
+        anthro['coverage_evidence']['proof']={'verified':False,'method':'explicit_directory_entity_bridges','pending_display_entities':pending,
+            'error':'directory completeness not promoted: grouped notices do not establish one-to-one display/API-ID mapping'}
+        anthro['errors'].append('explicit_retirement_bridges_applied; remaining_pending:'+str(len(pending)))
     c.atomic_json(capture_dir/'inventory.json',inventories)
     return inventories
 
