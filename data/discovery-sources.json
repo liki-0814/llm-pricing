@@ -1,19 +1,19 @@
 {
   "version": 1,
-  "adapter_version": "discovery-adapters/3-counted-catalog-evidence",
+  "adapter_version": "discovery-adapters/4-literal-detail-bridges",
   "scope_manifest_sha256": "b02d759e7af4d376b0a9d4a74f8a650ce04f0df636a246e9862ebf21763b40d8",
   "sources": [
     {
       "id": "anthropic-models",
       "vendor": "Anthropic",
       "channel": "pay_as_you_go",
-      "url": "https://platform.claude.com/docs/en/models/overview",
+      "url": "https://platform.claude.com/docs/en/models/overview.md",
       "modalities": [
         "text"
       ],
       "role": "catalog",
-      "adapter": "anthropic_claude_api_id",
-      "gap": "Official 307 to /docs/en/models/overview followed as public same-host navigation. First-party Claude API ID row parsed; older/Mythos names pending ID; partner IDs excluded. Not a complete All-models proof."
+      "adapter": "anthropic_markdown_bridged",
+      "gap": "All-models linked pages provide native Claude API IDs; retired unlinked display rows require direct entity bridge; status source separately retains literal native legacy IDs."
     },
     {
       "id": "deepseek-models",
@@ -83,14 +83,14 @@
       "id": "openai-models",
       "vendor": "OpenAI",
       "channel": "pay_as_you_go",
-      "url": "https://developers.openai.com/api/docs/models/all",
+      "url": "https://developers.openai.com/api/docs/models/all.md",
       "modalities": [
         "text",
         "image"
       ],
       "role": "catalog",
-      "adapter": "openai_cards_partial",
-      "gap": "Public /all directory cards + restricted union from the homepage; slugs/alts are not API IDs. Pending official API-ID bridges."
+      "adapter": "openai_markdown_bridged",
+      "gap": "All Markdown directory cards bridged by literal Model ID/Model IDs on bounded linked pages; channel attribution of open-weight and exhaustive scoped proof remain pending."
     },
     {
       "id": "xai-models",
@@ -127,9 +127,9 @@
         "text",
         "image"
       ],
-      "role": "catalog",
+      "role": "detail",
       "adapter": "zai_overview_tables",
-      "gap": "Featured and quoted Other Models/image table rows retained as pending display observations; no guessed lowercase invocation IDs."
+      "gap": "Overview is supplementary feature/display context; authoritative current text/image request model enumeration is the public OpenAPI schema, not this display list."
     },
     {
       "id": "qwen-models",
@@ -181,6 +181,31 @@
       "role": "catalog",
       "adapter": "openai_cards_partial",
       "gap": "Homepage restricted/front cards; union only retains cards absent from /all."
+    },
+    {
+      "id": "zai-openapi",
+      "vendor": "智谱 Z.ai",
+      "channel": "pay_as_you_go",
+      "url": "https://docs.z.ai/openapi.json",
+      "modalities": [
+        "text",
+        "image"
+      ],
+      "role": "catalog",
+      "adapter": "zai_openapi_models",
+      "gap": "Closed request model enums for all documented text/image request branches; no price or account entitlement inference."
+    },
+    {
+      "id": "anthropic-status",
+      "vendor": "Anthropic",
+      "channel": "pay_as_you_go",
+      "url": "https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
+      "modalities": [
+        "text"
+      ],
+      "role": "lifecycle",
+      "adapter": "anthropic_status_ids",
+      "gap": "Literal API model names/status and historical notice IDs; original dates retained without invented timezone or exact T."
     }
   ]
 }

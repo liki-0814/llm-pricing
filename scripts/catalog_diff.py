@@ -209,7 +209,7 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
                 rec["observed_ids"].append(mid)
             rec["price_public"] |= row.get("price_public") is True
             rec["sources"].append({"source_url": snap["source_url"], "observed_at": snap["observed_at"], "line": row.get("line"), "line_basis": row.get("line_basis"),
-                "source_sha256": snap.get("source_sha256"), "capture_path": snap.get("capture_path"), "extraction_path": snap.get("extraction_path")})
+                "source_sha256": snap.get("source_sha256"), "capture_path": snap.get("capture_path"), "extraction_path": snap.get("extraction_path"), "identity_evidence": row.get("identity_evidence")})
     # Official entity notices survive even without proven invocation IDs. They are
     # review items, not invented model identities or automatic historical boundaries.
     retirement_notices = []

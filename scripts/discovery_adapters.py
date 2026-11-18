@@ -7,6 +7,7 @@ must keep snapshots partial unless independent full-enumeration evidence exists.
 import gzip,re,html
 from html.parser import HTMLParser
 import catalog_diff as c
+import discovery_bridges as bridges
 
 NATIVE_QWEN = re.compile(r'^(?:qwen|wan|wanx|happyhorse|happyoyster|tongyi|z-image|text-embedding-v|decision-model|qwen-audio)', re.I)
 THIRD_QWEN = re.compile(r'^(?:deepseek|glm|kimi|minimax|moonshot|claude|gpt-|o1|o3|grok|mistral|llama|gemini|yi-|doubao|hunyuan|hy\d|zhupu|zhipu)/?', re.I)
@@ -301,7 +302,26 @@ def explicit_id_labels(body, source=None):
     return c.extract_explicit_ids(text), [], []
 
 
+def bridged_directory(body,source):
+ raw,text=decode_body(body)
+ if source['vendor']=='OpenAI':rows=bridges.openai_directory(text)
+ else:rows=bridges.anthropic_directory(text)
+ return rows,[],['literal_ID_bridge_required; channel_and_full_coverage_review_pending']
+
+def zai_openapi_models(body,source=None):
+ raw,text=decode_body(body);rows,proof=bridges.zai_request_models(text)
+ return rows,[],[] if proof['verified'] else ['request_enum_proof_failed:'+str(proof.get('error'))]
+
+def anthropic_status_ids(body,source=None):
+ raw,text=decode_body(body)
+ return bridges.anthropic_status(text),[],['official_API_status_and_history; original_dates_not_invented_instants']
+
+
 ADAPTERS = {
+    'openai_markdown_bridged': bridged_directory,
+    'anthropic_markdown_bridged': bridged_directory,
+    'zai_openapi_models': zai_openapi_models,
+    'anthropic_status_ids': anthropic_status_ids,
     'explicit_id_labels_partial': explicit_id_labels,
     'openai_cards_partial': openai_cards,
     'hunyuan_invocation_tables': hunyuan_invocation_tables,

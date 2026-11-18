@@ -67,7 +67,7 @@ SHA and raw database hash identify the actual main baseline.
 
 `data/discovery-sources.json` is version1 with:
 
-- `adapter_version`: `discovery-adapters/3-counted-catalog-evidence` (strictly checked).
+- `adapter_version`: `discovery-adapters/4-literal-detail-bridges` (strictly checked).
 - `scope_manifest_sha256`: SHA256 of Python `json.dumps(manifest, sort_keys=True).encode()`.
 - `sources`: unique safe IDs plus original `vendor`, `channel`, HTTPS `url`,
   explicit `modalities`, `role` (`catalog`/`price`/`detail`/`lifecycle`), and `adapter`.
@@ -77,12 +77,20 @@ SHA and raw database hash identify the actual main baseline.
   `minimax_model_list`, `kimi_code_catalog`, `xai_markdown_models`,
   `zai_overview_tables`. Unknown adapter/config versions fail before requests.
 - No input `complete=true` flag or supplied pagination assertion can promote these
-  adapters. Only the bounded Kimi Code current subscription directory can prove
+  adapters. The bounded Kimi Code current subscription directory can prove
   completeness: the exact official source states an independent offering count,
   all literal Model-ID cells match that count without duplicates or invalid cells,
   the closing switch-model section is present, and no pagination continuation is
   found. A missing count/ID/closing section or changed source scope fails closed.
   This does not prove account entitlement, PAYG prices, or the full Kimi vendor.
+  The Z.ai public OpenAPI request-enum adapter also proves the documented PAYG
+  text/image request-model set: resolve all oneOf/anyOf branches of the three
+  documented chat, synchronous-image and asynchronous-image requests, require
+  nonempty closed literal model enums and the native API server, parse the whole
+  JSON, and fail on unresolved refs, malformed enums or unreviewed text/image
+  routes. Response-example enums, audio/video/tools and account entitlement are
+  not used as this proof. No price filter is applied. Z.ai overview is supplemental
+  display context (role=detail), not the authoritative request-model catalog.
   All other adapters remain partial. Do not edit partial to true to make a run green. OpenAI directory cards without an
   official API ID are `catalog_entries_pending_api_id`, not unresolved identity
   rows; the snapshot remains incomplete.
@@ -204,3 +212,38 @@ fingerprint, immutable ledger, matching stdout/exit file and latest-attempt. A
 manual fresh incomplete run proves the runner's fail-closed path only. A complete
 successful baseline still requires every scope, not just a successful shell or
 one source. Do not silence incomplete alerts or overwrite last-successful.
+
+## Bounded detail bridges (2026-11-18 second discovery delivery)
+
+OpenAI's public `models/all.md` explicitly documents Markdown equivalents. Its
+108 directory entities include inline literal Model ID and 107 model-page links.
+Follow only same-origin `/api/docs/models/*.md` links, maximum150 per source,
+six concurrent workers, one attempt/no retries. Primary `Model ID:` and fenced
+`Model IDs`/`Snapshots` lists are invocation evidence; href slugs and display
+labels never become IDs. Preserve all variants and shut-down entity notices,
+including unknown/unpriced future IDs. All-body capture is independent of API
+channel classification; Open-weight/ChatGPT/restricted entity attribution and the
+full scoped enumeration proof are still explicit remaining review work, so this
+adapter does NOT mark OpenAI complete merely because every card has an ID.
+
+Anthropic overview Markdown all-models rows are bridged only through per-model
+`Claude API` cells, never Bedrock/Google/Foundry IDs. A separate lifecycle source
+retains literal `API model name` rows and original status/date wording; Deprecated
+is not Retired, lower-bound retirement commitments are not exact instants, and
+historical scheduled notices are not upgraded to current retirement by our clock.
+Three unlinked retired overview entities still require an explicit display-to-ID
+bridge; they remain pending rather than being punctuation-guessed.
+
+MiniMax current labels can be bridged by exact literal request `model` examples
+or the supported-models table explicitly referenced by the `model` request field.
+Unlinked retired entities remain notices with unknown precise retirement T.
+Speech pages are outside the existing text/image/video monitoring requirement and
+are not fetched as additional scope work. The root catalog remains partial.
+
+Each child has its own body/provenance/text capture and hash. Missing files in
+replay do not trigger network fallback. Failed fetch/shell/no literal ID leaves
+the parent entity pending. Ledger observation sources include nested
+`identity_evidence` with the child URL, hash, observation time and capture path.
+Routine execution-code pin and runtime remote-main baseline are distinct: the
+runner always resolves remote main and reads prices.json at that returned commit;
+read failure propagates, with no local-ref, code-pin or snapshot fallback.

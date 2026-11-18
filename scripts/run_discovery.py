@@ -9,8 +9,10 @@ import urllib.request,urllib.error
 from urllib.parse import urljoin,urlparse
 import catalog_diff as c
 import discovery_adapters as adapters
+import discovery_bridges as bridges
+from concurrent.futures import ThreadPoolExecutor
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-ADAPTER_VERSION='discovery-adapters/3-counted-catalog-evidence'
+ADAPTER_VERSION='discovery-adapters/4-literal-detail-bridges'
 OpenAICards=adapters.OpenAICards
 class LimitedPublicRedirect(urllib.request.HTTPRedirectHandler):
     """Follow a short chain of public official documentation redirects only."""
@@ -73,6 +75,9 @@ def parse_source(body,source,observed_at):
     records,reseller,notes=adapters.parse(source['adapter'], raw, source)
     for row in records+reseller:row['line_basis']='adapter:'+source['adapter']
     proof=adapters.kimi_code_proof(raw,source,records) if source['adapter']=='kimi_code_catalog' else {'verified':False}
+    if source['adapter']=='zai_openapi_models':
+        _,proof=bridges.zai_request_models(text)
+        if (source.get('vendor'),source.get('channel'),source.get('url'),source.get('role'),source.get('modalities'))!=('智谱 Z.ai','pay_as_you_go','https://docs.z.ai/openapi.json','catalog',['text','image']):proof['verified']=False
     complete=proof['verified']
     errors=[] if complete else ['adapter_partial_not_full_enumeration']+list(notes)
 
@@ -83,6 +88,47 @@ def parse_source(body,source,observed_at):
         coverage_evidence=dict(source_url=source['url'],modalities=source['modalities'],
             enumeration_verified=complete,pagination_complete=complete,expected_record_count=proof.get('expected_record_count'),
             native_identity_verified=complete,proof=proof))
+
+def bridge_catalog(snapshot,source,capture_dir,replay_dir=None):
+    """One bounded fetch per official linked Markdown page. Every child is captured.
+    Missing child/ID leaves its entity pending; no saved-body fallback in live mode.
+    """
+    if source['adapter'] not in ('openai_markdown_bridged','anthropic_markdown_bridged','minimax_model_list'):return snapshot
+    urls=sorted({row.get('detail_url') for row in snapshot['records'] if row.get('detail_url')
+                 and bridges.allowed_detail(row['detail_url'],source['vendor'])
+                 and not (source['vendor']=='MiniMax' and '/speech-' in row['detail_url'])})
+    if len(urls)>150:
+        snapshot['errors'].append('detail_budget_exceeded_150');return snapshot
+    def child(url):
+        sid=source['id']+'-detail-'+digest(url.encode())[:16]
+        try:
+            if replay_dir is None:
+                body,at,extra=fetch_source({'url':url},{urlparse(url).hostname})
+                meta=dict(url=url,observed_at=at,sha256=digest(body),http_status=200,capture_kind='http_body',mode='fresh',**extra)
+            else:
+                meta=json.loads((replay_dir/(sid+'.json')).read_text());body=(replay_dir/(sid+'.body')).read_bytes()
+                if meta['url']!=url or meta['sha256']!=digest(body) or meta.get('http_status')!=200:raise ValueError('detail replay provenance invalid')
+                meta=dict(meta,mode='replay')
+            (capture_dir/(sid+'.body')).write_bytes(body);c.atomic_json(capture_dir/(sid+'.json'),meta)
+            raw,text=adapters.decode_body(body);(capture_dir/(sid+'.txt')).write_text(text)
+            fn={'OpenAI':bridges.openai_ids,'Anthropic':bridges.anthropic_ids,'MiniMax':bridges.minimax_ids}[source['vendor']]
+            return url,dict(ids=fn(text),source_url=url,observed_at=meta['observed_at'],source_sha256=meta['sha256'],capture_path=str(capture_dir/(sid+'.body')))
+        except Exception as error:
+            failed=dict(url=url,error=type(error).__name__+': '+str(error));c.atomic_json(capture_dir/(sid+'.json'),failed);return url,dict(ids=[],**failed)
+    docs=dict(ThreadPoolExecutor(max_workers=6).map(child,urls))
+    snapshot['detail_captures']=list(docs.values());expanded=[]
+    for row in snapshot['records']:
+        detail=docs.get(row.get('detail_url'));ids=detail.get('ids',[]) if detail else []
+        if source['vendor']=='MiniMax':ids=[mid for mid in ids if mid==row.get('display_name')]
+        if row.get('api_id_explicit') or not ids:expanded.append(row);continue
+        for mid in ids:
+            expanded.append(dict(row,model_id=mid,literal_id=mid,api_id_explicit=True,catalog_observation=False,
+                identity_error=None,scope_status='explicit_official_detail_id; directory_channel_review_pending',
+                identity_evidence={k:v for k,v in detail.items() if k!='ids'}))
+    snapshot['records']=expanded
+    snapshot['errors'].append('bridged_literal_IDs:%d; remaining_pending:%d' % (sum(x.get('api_id_explicit') is True for x in expanded),sum(x.get('api_id_explicit') is not True for x in expanded)))
+    # Bridging alone is not a proof of channel attribution or exhaustive scoped enumeration.
+    return snapshot
 
 def execute(config,manifest,database,capture_dir,replay_dir=None):
     validate_sources(config,manifest)
@@ -108,6 +154,7 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
             c.atomic_json(capture_dir/(sid+'.json'),meta)
             stage='extract'
             snapshot=parse_source(body,source,observed)
+            snapshot=bridge_catalog(snapshot,source,capture_dir,replay_dir)
             extracted=snapshot.pop('_extraction_text');(capture_dir/(sid+'.txt')).write_text(extracted)
             snapshot['extraction_path']=str(capture_dir/(sid+'.txt'))
             snapshot['extraction_sha256']=digest(extracted.encode())
@@ -120,10 +167,10 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
                 errors=[stage+': '+type(error).__name__+': '+str(error)])
             c.atomic_json(capture_dir/(sid+'.json'),snapshot)
         inventories.append(snapshot)
-    all_urls={row.get('detail_url') for snap in inventories if snap.get('source_url')=='https://developers.openai.com/api/docs/models/all' for row in snap.get('records') or []}
+    all_urls={(row.get('detail_url') or '').removesuffix('.md') for snap in inventories if snap.get('source_url') in ('https://developers.openai.com/api/docs/models/all','https://developers.openai.com/api/docs/models/all.md') for row in snap.get('records') or []}
     for snap in inventories:
         if snap.get('source_url')=='https://developers.openai.com/api/docs/models' and all_urls:
-            kept=[row for row in snap.get('records') or [] if row.get('detail_url') not in all_urls]
+            kept=[row for row in snap.get('records') or [] if (row.get('detail_url') or '').removesuffix('.md') not in all_urls]
             snap['records']=kept
             snap.setdefault('errors',[]).append('front_page_union_only_cards_absent_from_all:%d' % len(kept))
     c.atomic_json(capture_dir/'inventory.json',inventories)
