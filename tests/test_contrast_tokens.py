@@ -42,7 +42,7 @@ class ContrastTokens(unittest.TestCase):
  def test_table_row_hover_currency_na_dates_and_detail(self):
   self.assertEqual(rule('tbody tr:hover')['background'],'var(--row-hover)')
   for selector in ('.price .cur','.na','.src .date'):self.assertEqual(rule(selector)['color'],'var(--faint)')
-  self.assertEqual(rule('.dblock')['background'],'var(--surface-2)');self.assertEqual(rule('.dblock h4')['color'],'var(--muted)');self.assertEqual(rule('.dnote')['color'],'var(--muted)')
+  self.assertEqual(rule('.dblock')['background'],'var(--surface-2)');self.assertEqual(rule('.dblock h3')['color'],'var(--muted)');self.assertEqual(rule('.dnote')['color'],'var(--muted)')
   for t in THEMES.values():
    for bg in ('--surface','--row-hover','--surface-2','--surface-3'):
     for fg in ('--faint','--muted','--ink-2'):self.assertGreaterEqual(ratio(t[fg],t[bg]),4.5)

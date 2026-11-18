@@ -101,7 +101,7 @@
   function srcLinks(arr) {
     return (arr || []).map(function (u) { return '<a class="rsrc" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(u.replace(/^https?:\/\//, "")) + "</a>"; }).join("");
   }
-  function block(title, body, wide) { return '<section class="dblock' + (wide ? " wide" : "") + '"><h4>' + title + "</h4>" + body + "</section>"; }
+  function block(title, body, wide) { return '<section class="dblock' + (wide ? " wide" : "") + '"><h3>' + title + "</h3>" + body + "</section>"; }
   function detailHtml(m) {
     var out = [], x, L = m.limits || {};
     // 1 tiers

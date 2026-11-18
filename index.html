@@ -46,7 +46,8 @@
     </div>
   </section>
 
-  <section class="wrap" aria-label="价格表">
+  <section class="wrap" aria-labelledby="pricesHeading">
+    <h2 class="sr-only" id="pricesHeading">价格表</h2>
     <div class="toolbar" role="search">
       <div class="modality-tabs" id="modalityTabs" role="tablist" aria-label="按模态筛选"></div>
       <div class="toolbar-row">
@@ -147,13 +148,13 @@
 <footer class="site-footer">
   <div class="wrap">
     <div>
-      <h3>关于数据</h3>
+      <h2>关于数据</h2>
       <p>官方价格取自各厂商定价页；用户确认的参照价单独标注依据，按USD / CNY分别显示，不做汇率转换；文本模型每 100 万 token，图像 / 视频模型按张（尺寸 × 质量）、按秒（分辨率 × 是否含音频）或分模态 token 计价；表中主价格为标准价（有闲时价时为高峰价）。长上下文分档价、服务档费用规则（Batch / Fast 等）、缓存细分价与来源请点每行“详情”展开，促销等见“备注”；以上数据均同步提供于 JSON 接口。</p>
       <p>价格可能随时调整，下单前请以官方页面为准。数据更新：<span id="footUpdated">—</span>。</p>
       <p>页面快照 <a href="data/page-models.json">data/page-models.json</a> · JSON 接口 <a href="api.html">接口文档</a> · <a href="api/v2/openapi.json">OpenAPI</a></p>
     </div>
     <div>
-      <h3>数据来源（官方定价页）</h3>
+      <h2>数据来源（官方定价页）</h2>
       <ul class="sources" id="sources"></ul>
     </div>
   </div>
