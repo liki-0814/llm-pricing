@@ -16,6 +16,22 @@ XAI_INDEX='https://docs.x.ai/llms.txt'
 def access_gate(text):
     return any(token in text.lower() for token in ('waf_block_deny','gateway-diagnostic','request rejected at client classification gate','captcha challenge','sessionstorage.x5referer','_____tmd_____/punish','x5secdata='))
 
+def heading_label(text):
+    """Strip official self-closing and paired heading anchors; do not invent titles."""
+    return re.sub(r'\s*<span\b[^>]*?(?:/>|>.*?</span>)','',text,flags=re.I).strip()
+
+def service_provider_declaration(line):
+    """Only reviewed official sentence layouts. Provider names may contain periods."""
+    patterns=(
+        r'The inference service provider for `([^`]+)` is (.+)\.',
+        r'The inference service provider for the `([^`]+)` model is (.+)\.',
+        r'The inference service for the `([^`]+)` model is provided by (.+)\.',
+    )
+    for pattern in patterns:
+        m=re.fullmatch(pattern,line)
+        if m:return m[1],m[2],line
+    return None
+
 def qwen_index(text,url):
     if url not in QWEN_INDEXES or access_gate(text):raise ValueError('unapproved/blocked Qwen published category')
     clean=formal_text(text);lines=clean.splitlines()
@@ -55,7 +71,7 @@ def qwen_details(doc,entity):
     for i,line in enumerate(lines):
         heading=re.match(r'^(#{1,6}) (.*)',line)
         if not heading:continue
-        level=len(heading[1]);label=re.sub(r'\s*<span[^>]*>.*?</span>','',heading[2]).strip()
+        level=len(heading[1]);label=heading_label(heading[2])
         if level==1:starts.append(i);snapshots=False
         elif level==2:
             if snapshots or label=='Snapshot Versions':stops.append(i)
@@ -70,13 +86,13 @@ def qwen_details(doc,entity):
         for local,line in enumerate(block,start+1):
             m=re.fullmatch(r'Model ID(?: \(the value of the `model` parameter\))?: `([^`]+)`',line)
             if m:parameters.append((local,line,m[1]));declarations.append(dict(kind='explicit_model_parameter',line=local,quote=line,literal=m[1]))
-            m=re.fullmatch(r'The inference service provider for `([^`]+)` is ([^.]+)\.',line)
-            if m:services.append((local,line,m[1]));declarations.append(dict(kind='service_provider_NOT_origin',line=local,quote=line,literal=m[1],provider=m[2]))
-            if 'Output Modality' not in line and 'Model Provider' not in line:continue
+            m=service_provider_declaration(line)
+            if m:services.append((local,line,m[0]));declarations.append(dict(kind='service_provider_NOT_origin',line=local,quote=line,literal=m[0],provider=m[1]))
+            if 'Output Modality' not in line and 'Output modalities' not in line and 'Model Provider' not in line:continue
             parser=CapabilityRows();parser.feed(line);parser.close()
             for cells in parser.rows:
                 for index,label in enumerate(cells[:-1]):
-                    if label=='Output Modality':
+                    if label in ('Output Modality','Output modalities'):
                         values=cells[index+1].split();known={'Text':'text','Image':'image','Video':'video','Audio':'audio'}
                         if not values or any(v not in known for v in values):raise ValueError('unreviewed explicit output modality')
                         outputs.append(set(known[v] for v in values));evidence.append(dict(line=local,quote=line))
@@ -85,7 +101,7 @@ def qwen_details(doc,entity):
         valid_literal=bool(mid and canonical_id(mid)==mid);explicit=bool(parameters and valid_literal and len({p[2] for p in parameters})==1)
         native=bool(explicit and provider and set(provider)<={'Alibaba Cloud','Qwen','Tongyi Qianwen','Wan','HappyHorse'})
         header=re.sub(r'^#{1,6} ','',block[0]) if block and block[0].startswith('#') else entity['display_name']
-        header=re.sub(r'\s*<span[^>]*>.*?</span>','',header).strip()
+        header=heading_label(header)
         agreed=set.intersection(*outputs) if outputs else set();possible=set.union(*outputs) if outputs else set()
         first=(parameters or services or [(start+1,block[0] if block else '',None)])[0]
         proof=dict(qualified(dict(doc,vendor='阿里云 Qwen',channel='pay_as_you_go',catalog_source_url=QWEN+'models')),identity_quote=first[1],identity_line=first[0],formal_declarations=declarations,output_declarations=evidence,model_provider_declarations=provider,entity_heading=header,entity_start_line=start+1,entity_end_line=end)

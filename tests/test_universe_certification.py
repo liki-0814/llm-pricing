@@ -118,4 +118,45 @@ class AtlasCertificateContracts(unittest.TestCase):
   with self.assertRaises(ValueError) as err:d.qwen_details(doc('sessionStorage.x5referer = 1; _____tmd_____/punish x5secdata=abc',url='https://www.alibabacloud.com/help/en/model-studio/qwen-source.md'),{'display_name':'x'})
   self.assertIn('access_blocked',str(err.exception))
 
+ def test_self_closing_snapshot_spans_and_reviewed_provider_sentences(self):
+  cap='<table><tr><td>Output Modality</td><td>Text</td></tr></table>'
+  img='<table><tr><td>Output Modality</td><td>Image</td></tr></table>'
+  vid='<table><tr><td>Output modalities</td><td>Video</td></tr></table>'
+  body='\n'.join([
+   '# qwen-source <span id="h-title" />',
+   'The inference service provider for `qwen-source` is Alibaba Cloud Model Studio.',
+   cap,
+   '## Snapshot Versions <span id="h-snap" />',
+   '### qwen-source-2026-01-01 <span id="h-a" />',
+   'The inference service provider for `qwen-source-2026-01-01` is Alibaba Cloud Model Studio.',
+   img,
+  ])
+  rows=d.qwen_details(doc(body,url='https://www.alibabacloud.com/help/en/model-studio/qwen-source.md'),{'display_name':'qwen-source'})
+  self.assertEqual([r['observed_model_id'] for r in rows],['qwen-source','qwen-source-2026-01-01'])
+  self.assertEqual(rows[0]['output_modalities'],['text']);self.assertEqual(rows[1]['output_modalities'],['image'])
+  self.assertTrue(all(r['model_id'] is None and r['native_vendor_status']=='unknown_provider_not_explicit' for r in rows))
+  body='\n'.join([
+   '# qwen-image-source',
+   'The inference service provider for the `qwen-image-source` model is Alibaba Cloud Model Studio.',
+   img,
+  ])
+  rows=d.qwen_details(doc(body,url='https://www.alibabacloud.com/help/en/model-studio/qwen-image-source.md'),{'display_name':'qwen-image-source'})
+  self.assertEqual(rows[0]['observed_model_id'],'qwen-image-source');self.assertEqual(rows[0]['output_modalities'],['image']);self.assertIsNone(rows[0]['model_id'])
+  body='\n'.join([
+   '# ZHIPU/GLM-source',
+   'The inference service provider for `ZHIPU/GLM-source` is Z.AI.',
+   cap,
+  ])
+  rows=d.qwen_details(doc(body,url='https://www.alibabacloud.com/help/en/model-studio/glm-source.md'),{'display_name':'ZHIPU/GLM-source'})
+  self.assertEqual(rows[0]['observed_model_id'],'ZHIPU/GLM-source')
+  self.assertEqual(rows[0]['inference_service_provider_evidence'][0]['provider'],'Z.AI')
+  self.assertIsNone(rows[0]['model_id'])
+  body='\n'.join([
+   '# wan-source',
+   'The inference service for the `wan-source` model is provided by Alibaba Cloud Model Studio.',
+   vid,
+  ])
+  rows=d.qwen_details(doc(body,url='https://www.alibabacloud.com/help/en/model-studio/wan-source.md'),{'display_name':'wan-source'})
+  self.assertEqual(rows[0]['observed_model_id'],'wan-source');self.assertEqual(rows[0]['output_modalities'],['video']);self.assertIsNone(rows[0]['model_id'])
+
 if __name__=='__main__':unittest.main()
