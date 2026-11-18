@@ -108,17 +108,18 @@
       }
     }
   };
-  var vendors = [], modelIds = [], modalities = [];
+  var vendors = [], modelIds = [], priceModelIds = [], modalities = [];
   function fillParam() {
     var v = $("tryPreset").value, p = $("tryParam");
-    var list = v === "vendor" ? vendors : v === "model" ? modelIds : v === "modality" ? modalities : null;
+    var list = v === "price-model" ? priceModelIds : v === "vendor" ? vendors : v === "model" ? modelIds : v === "modality" ? modalities : null;
     p.hidden = !list;
     if (list) p.innerHTML = list.map(function (x) { return '<option value="' + esc(x) + '">' + esc(x) + "</option>"; }).join("");
     updateUrl();
   }
   function updateUrl() {
     var v = $("tryPreset").value, path = v;
-    if (v === "vendor") path = "vendors/" + ($("tryParam").value || "openai") + ".json";
+    if (v === "price-model") path = "price-models/" + encodeURIComponent($("tryParam").value || "qwen4-max") + ".json";
+    else if (v === "vendor") path = "vendors/" + ($("tryParam").value || "openai") + ".json";
     else if (v === "modality") path = "modalities/" + ($("tryParam").value || "image") + ".json";
     else if (v === "model") path = "models/" + ($("tryParam").value || "deepseek-flash") + ".json";
     var sn = v.indexOf("snippet:") === 0 ? SNIPPETS[v.slice(8)] : null;
@@ -209,6 +210,11 @@
       $("costOut").textContent = "";
     }
   });
+
+  fetch(BASE + "price-models.json").then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(function (d) {
+    priceModelIds = d.data.models.map(function (m) { return m.model_id; });
+    if ($("tryPreset").value === "price-model") fillParam();
+  }).catch(function (e) { $("tryStatus").textContent = "原文价格索引加载失败：" + e.message; });
 
   client.listVendors().then(function (d) {
     $("footUpdated").textContent = d.meta.updated_at;

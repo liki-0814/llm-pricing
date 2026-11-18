@@ -459,7 +459,7 @@ def validate_api(d, files=None):
     for rel, response in files.items():
         if rel == 'openapi.json':
             continue
-        path = ('/models/{model_id}.json' if rel.startswith('models/') else '/vendors/{vendor}.json' if rel.startswith('vendors/')
+        path = ('/price-models/{model_id}.json' if rel.startswith('price-models/') else '/models/{model_id}.json' if rel.startswith('models/') else '/vendors/{vendor}.json' if rel.startswith('vendors/')
                 else '/modalities/{modality}.json' if rel.startswith('modalities/') else '/' + rel)
         schema = copy.deepcopy(spec['paths'][path]['get']['responses']['200']['content']['application/json']['schema'])
         schema['components'] = spec['components']

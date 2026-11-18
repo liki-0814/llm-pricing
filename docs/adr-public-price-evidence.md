@@ -99,3 +99,118 @@ meaning of `price_verified`, that field keeps its strict complete-selector gate;
 it has complete regional applicability. A later alternative is to redefine
 `price_verified` as statement verification and add `selector_complete` as the
 strict executable quote gate. That alternative is NOT enacted in this batch.
+
+## Model-level normalization batch (2026-11-19 06:37 Asia/Shanghai)
+
+Decision (compatible path approved by coordinator): retain strict `price_verified`
+and all old estimator/SDK semantics. A source-bound, normalized model price is a
+separate queryable record, NOT an executable offer, native identity passport or
+scope/history certificate. `quote_verified` verifies only the literal original.
+`selector_completeness` explicitly distinguishes known, missing, unparsed and
+not-applicable dimensions. `region=not_stated` never means global; the user's
+region is never inferred. All records remain `eligible_for_estimation=false`.
+
+### One complete evidence rule for all vendors
+
+1. Use only the ten approved source-bound HTTP-200 originals (06:31 capture for
+   this execution), validated hash, aware observation, vendor/channel and literal
+   quote/context. No fetch retry, challenged URL, secret, inferred FX or replay
+   freshness. Catalog documents can bridge a display label ONLY through an
+   explicit platform Model-ID row, not by slugification or URL-name invention.
+2. A queryable model-price record requires a literal official model identifier,
+   scalar finite nonnegative amount, explicit currency and billing unit, exact
+   charge component, source channel and preserved rate conditions. Identity here
+   means the price-table identifier, NOT independently certified invocation/
+   provider/alias/lifecycle/output eligibility. Unbindable rows remain candidates.
+3. Keep service tier, short/long-context/range, modality/billing basis, resolution,
+   price kind and effective conditions separate. A tab's explicit enclosing label
+   is binding, not a nearby guessed heading. Multi-amount cells cannot be reduced
+   to their first/last number. Deleted list prices and an explicit permanent
+   replacement can be separate records; unresolved timed discounts are not a
+   payable charge. Date-only schedules retain literal inclusive/exclusive date
+   wording and missing timezone precision, never an invented timestamp.
+4. Preserve per-million token, image, audio, second and minute units separately;
+   an image-input token charge is NOT image-output certification. Currency `$`
+   alone is not proof of USD without a source declaration/qualified header.
+5. Missing region gives `price_verified=false`, but does not prevent querying a
+   correctly normalized price statement. Strict verification is allowed only
+   when every applicable selector has source evidence, including explicitly
+   stated region/global scope. Native scope/history/entitlement remain unassessed.
+6. One parser/validator supplies discovery, v1/v2 API and the existing website API
+   query playground. v1 only USD; v2 keeps CNY distinct. Do not alter 89 audited
+   calculator rows or SDK. Individual model lookup never silently selects a
+   region/date/tier or treats absence of full catalog as an empty model list.
+
+### Positive / negative controls
+
+- Google Carbon: input USD2 through 2026-11-30 and USD4 starting 2026-12-01
+  are two conditional records; timezone unknown, never flattened/default-picked.
+- MiniMax: M3.1-Flash USD0.15/M input tokens and image-01 USD0.0035/image
+  are model prices. M3's deleted/discounted pair cannot become an unqualified
+  scalar. PAYG retirement and plan routing remain separate lifecycle evidence.
+- OpenAI: gpt-6.2-sol Standard short input USD2/M vs Batch USD1/M remain
+  distinct; an Image token input row cannot be charged as output image count.
+- xAI: grok-4.7 PAYG threshold rows are separate. Fast offering prose has no
+  invocation ID and cannot invent a subscription model or user entitlement.
+- Qwen: CNY regional prices remain regional; explicit list price with an undated
+  promotion is NOT payable discounted price; ID-less subtable stays unbound.
+- Removing literal ID, currency/unit, source body/hash, channel binding or a
+  required conditional header prevents normalized/strict approval. Region absent
+  stays queryable only with selector incompleteness, never `global`/executable.
+
+### Root-cause blocker matrix (start-of-batch, not completion claims)
+
+| Root class | Existing evidence / internal work | Genuine evidence limit |
+|---|---|---|
+| Anthropic text | Price table + explicit Claude API Model-ID row bridge; parse/cache/output components | Unbridged historical labels; no inferred historical universe |
+| Google text | Literal Model codes + Markdoc price tables; parse service tabs and date schedules | Date-only timezone; region not stated; whole catalog/retirement independent |
+| MiniMax text/image/video | LLM/media tables + literal model list; span-aware headers and condition units | Missing region, unsupported mixed cells/expired promos remain unresolved |
+| OpenAI text/image/audio | Literal model column + tier headings + per-unit context | USD must be evidenced, not guessed from `$`; generic context threshold may remain literal |
+| xAI PAYG/plan | PAYG price-table IDs/units; Fast positive offering-channel prose | Region unstated; no Fast invocation ID or exhaustive native subscription table |
+| Qwen four classes | Shared multiheaders, per-ID output components, list-price extraction | 8 ID-less subtables cannot be bound; promotion time absent; unmapped mixed units/cells remain candidates |
+| Public prices vs full scopes | Queryable model prices are an internal consumer gap, not login need | Native identity/alias/history/output universe gates unchanged |
+
+All later increments must report normalized model records, actual per-ID HTTP
+queries and remaining causes, not merely a larger count of raw paragraphs.
+
+### Implemented batch result and residual matrix (06:57 Asia/Shanghai)
+
+The 06:31 originals now produce **2303 model-price records / 240 literal price
+IDs**: Anthropic 25/4, Google 109/14, MiniMax 76/16, xAI PAYG 53/13,
+OpenAI 625/54 (currency unresolved), Qwen 1415/139. Counts are conditional records,
+not unique invocable models, offers, newly completed scopes or a mutation score.
+
+- **263 USD records / 47 literal IDs** from Anthropic/Google/MiniMax/xAI now enter
+  real v1/v2 per-ID lookup. Region/conditions remain explicitly incomplete except
+  Anthropic's literal first-party global-default statement (not user region).
+- OpenAI's captured Markdown states `$` and units but has no USD declaration.
+  Its **625 scalar model records** retain `currency=null`, symbol `$`, distinct
+  Standard/Batch/Flex/Priority, short/long, text/image/audio token and minute
+  fields; v2 exposes them as currency-unresolved candidates. They are not silently
+  changed to USD and are omitted entirely from USD-only v1. Resolving currency is
+  a precise additional official declaration need, not a login/export prerequisite.
+- Qwen strict price facts are 1319 -> **1337 (+18 media list prices)** when both
+  versions use the same 06:31 capture. Another **78 component statements** are
+  queryable without certifying native output modality. CNY never replaces USD.
+- Qwen residual source causes: 3 free/quota-only or nonscalar price rows; 34
+  promotion-term rows (18 newly parsed list-price rows still retain their unknown
+  discount dates); 32 partial component rows (20 previously omitted audio/other
+  component remainders now explicitly retained); 8 ID-less subtable headers.
+  This mixed row/table count is NOT comparable to a directory coverage fraction.
+- Google date-only pairs remain two records per priced component/tier; no
+  timezone or current/future default is invented. MiniMax permanent deleted/
+  replacement prices are separate kinds; timed deleted promotions are not
+  accepted as a charge. A quoted 768P/6s video fee stays `per_video`, never divided
+  into an invented second rate. Explicit scalar-cell unit overrides table default.
+- Existing partial/scalar quote rows remain independently archived. Other
+  historical display labels without a literal ID bridge, unparsed mixed/range
+  prices, source-only applicability notes and whole-catalog/lifecycle evidence
+  are still real residual work/evidence limits. No blanket completion claim.
+
+Production consumers: additive `price-models.json` index and
+`price-models/{literal_id}.json`, linked from static index/OpenAPI and the existing
+website API playground. Dropdown IDs come from this real price index, not the 89
+old estimator models; its response shows selector completeness and missing fields.
+Discovery attaches the same normalized statements by exact vendor/channel/ID,
+without rewriting native output/alias/history/scope certificates. All 89 audited
+estimator records, SDK, M1 and the three universe-contract files remain unchanged.

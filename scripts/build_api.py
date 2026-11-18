@@ -619,8 +619,8 @@ def openapi(d, vendor_slugs, model_ids):
     modality_env["properties"]["modality"] = {"$ref": "#/components/schemas/Modality"}
     index_schema = {"type": "object", "required": ["endpoints", "models", "vendors", "modalities"], "additionalProperties": False,
                     "properties": {
-                        "endpoints": {"type": "object", "required": ["models", "vendors", "modalities", "openapi", "price-facts"], "additionalProperties": False,
-                                      "properties": {k: {"const": k + ".json"} for k in ("models", "vendors", "modalities", "openapi", "price-facts")}},
+                        "endpoints": {"type": "object", "required": ["models", "vendors", "modalities", "openapi", "price-facts", "price-models"], "additionalProperties": False,
+                                      "properties": {k: {"const": k + ".json"} for k in ("models", "vendors", "modalities", "openapi", "price-facts", "price-models")}},
                         "models": {"type": "array", "items": {"type": "object", "required": ["id", "name", "vendor", "modality", "links"],
                             "additionalProperties": False,
                             "properties": {k: model["properties"][k] for k in ("id", "name", "vendor", "modality", "links")}}},
@@ -646,6 +646,8 @@ def openapi(d, vendor_slugs, model_ids):
                     {"url": "https://{user}.github.io/{repo}/api/v1",
                      "variables": {"user": {"default": "your-user"}, "repo": {"default": "llm-pricing"}}}],
         "paths": {
+            "/price-models.json": {"get": {"operationId": "listPublicPriceModels", "summary": "Queryable literal price-table IDs; NOT estimator models or universe", "responses": ok("Price model index", "#/components/schemas/PriceModelIndex")}},
+            "/price-models/{model_id}.json": {"get": {"operationId": "getPublicModelPrices", "summary": "All conditional statements for literal ID; never auto-select region/date/tier", "parameters": [{"name":"model_id","in":"path","required":True,"schema":{"type":"string"}}], "responses": ok("Model price statements", "#/components/schemas/PriceModelItem")}},
             "/price-facts.json": {"get": {"operationId": "getPublicPriceObservations", "summary": "Archival official price facts, NOT universe or availability certification", "responses": ok("Source-bound price observations", "#/components/schemas/PublicPriceEvidence")}},
             "/index.json": {"get": {"operationId": "getIndex", "summary": "Discover endpoint paths and model IDs",
                                      "responses": ok("API index", "#/components/schemas/Index")}},
@@ -672,9 +674,13 @@ def openapi(d, vendor_slugs, model_ids):
                 "responses": ok("Modality with its models", "#/components/schemas/ModalityModels")}},
         },
         "components": {"schemas": {
+            "PublicModelPrice": {"type":"object","required":["model_id","vendor","channel","amount","currency","unit","component","price_record_id","source_url","source_sha256","quote","quote_sha256","context_quotes","selector_complete","selector_completeness","price_verified","quote_verified","scope_complete","eligible_for_estimation"],"properties":{
+                "model_id":{"type":"string","minLength":1},"amount":{"type":"number","minimum":0},"currency":{"enum":["USD","CNY",None]},"price_record_id":{"type":"string","pattern":"^[a-f0-9]{64}$"},"quote_verified":{"const":True},"eligible_for_estimation":{"const":False},"scope_complete":{"const":False},"source_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"quote_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"selector_completeness":{"type":"object"},"price_verified":{"type":"boolean"},"selector_complete":{"type":"boolean"}}},
+            "PriceModelIndex": env({"type":"object","required":["models","record_count","currency_resolved_record_count","scope_complete"],"properties":{"scope_complete":{"const":False},"models":{"type":"array","items":{"type":"object","required":["model_id","url","record_count"]}}}}),
+            "PriceModelItem": env({"type":"object","required":["model_id","prices","scope_complete","eligible_for_estimation"],"properties":{"scope_complete":{"const":False},"eligible_for_estimation":{"const":False},"prices":{"type":"array","items":{"$ref":"#/components/schemas/PublicModelPrice"}}}}),
             "PublicPriceEvidence": env({"type":"object", "required":["facts","price_verified_count","scope_complete","history_complete","evidence_version"], "properties":{
                 "scope_complete":{"const":False},"history_complete":{"const":False},"price_verified_count":{"type":"integer","minimum":0},
-                "evidence_version":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+                "evidence_version":{"type":"string","pattern":"^[a-f0-9]{64}$"},"model_prices":{"type":"array","items":{"$ref":"#/components/schemas/PublicModelPrice"}},
                 "facts":{"type":"array","items":{"type":"object","required":["model_id","offering_name","identity_kind","component","amount","source_url","source_sha256","quote","quote_sha256","context_quotes","channel","region","currency","unit","tier","observed_at","price_verified","scope_complete","history_complete","eligible_for_estimation","availability"],"properties":{
                     "currency":{"enum":["USD","CNY"]},"price_verified":{"const":True},"scope_complete":{"const":False},"history_complete":{"const":False},"eligible_for_estimation":{"const":False},"availability":{"const":"not_assessed"},"region":{"type":"string","minLength":1},"quote":{"type":"string","minLength":1},"source_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"quote_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"amount":{"type":"number","minimum":0}}}}}}),
             "Meta": meta, "Model": model, "Vendor": vendor, "CachePricing": cache_pricing,
@@ -755,20 +761,32 @@ def build(d, mixed=False, public_price_ledger=None):
     imeta = base_meta(d, len(objs))
     imeta["modality_counts"] = modality_counts
     out["index.json"] = {"api_version": API_VERSION, "meta": imeta, "data": {
-        "endpoints": {"models": "models.json", "vendors": "vendors.json", "modalities": "modalities.json", "openapi": "openapi.json", "price-facts": "price-facts.json"},
+        "endpoints": {"models": "models.json", "vendors": "vendors.json", "modalities": "modalities.json", "openapi": "openapi.json", "price-facts": "price-facts.json", "price-models": "price-models.json"},
         "models": [{k: o[k] for k in ("id", "name", "vendor", "modality", "links")} for o in objs],
         "modalities": modalities,
         "vendors": [{k: v[k] for k in ("slug", "name", "links")} for v in vendors]}}
     for o in all_objs:
         out["models/%s.json" % o["id"]] = {"api_version": API_VERSION, "meta": base_meta(d), "data": o}
     import public_price_facts
-    out["price-facts.json"] = {"api_version": API_VERSION, "meta": base_meta(d), "data": public_price_facts.view(public_price_ledger if public_price_ledger is not None else public_price_facts.load(), mixed=mixed)}
+    ledger=public_price_ledger if public_price_ledger is not None else public_price_facts.load()
+    evidence=public_price_facts.view(ledger,mixed=mixed)
+    out["price-facts.json"] = {"api_version": API_VERSION, "meta": base_meta(d), "data": evidence}
+    from urllib.parse import quote
+    grouped={}
+    for r in evidence.get("model_prices",[]):grouped.setdefault(r["model_id"],[]).append(r)
+    price_models=[]
+    for mid,records in sorted(grouped.items()):
+        path="price-models/"+quote(mid,safe="")+".json"
+        out[path]={"api_version":API_VERSION,"meta":base_meta(d,len(records)),"data":dict(model_id=mid,prices=records,scope_complete=False,history_complete=False,eligible_for_estimation=False,selector_policy="no_default_region_tier_or_date_selection")}
+        price_models.append(dict(model_id=mid,url=path,record_count=len(records),currencies=sorted({r["currency"] for r in records if r.get("currency")})))
+    out["price-models.json"]={"api_version":API_VERSION,"meta":base_meta(d,len(price_models)),"data":dict(models=price_models,record_count=sum(len(rs) for rs in grouped.values()),currency_resolved_record_count=sum(bool(r.get("currency")) for rs in grouped.values() for r in rs),scope_complete=False,history_complete=False,eligible_for_estimation=False,evidence_version=evidence["evidence_version"])}
     out["openapi.json"] = openapi(d, [v["slug"] for v in vendors], [o["id"] for o in all_objs])
     # v1 remains USD-only for existing consumers. v2 is the explicit mixed-currency capability.
     for rel, value in out.items():
         if rel == "openapi.json":
             value["info"]["description"] = ("Explicit mixed-currency v2. " if mixed else "USD-only v1 compatibility endpoint. ") + value["info"]["description"]
             value["components"]["schemas"]["PublicPriceEvidence"]["properties"]["data"]["properties"]["facts"]["items"]["properties"]["currency"]["enum"] = ["USD", "CNY"] if mixed else ["USD"]
+            value["components"]["schemas"]["PublicModelPrice"]["properties"]["currency"]["enum"] = ["USD", "CNY", None] if mixed else ["USD"]
             value["components"]["schemas"]["Model"]["properties"]["currency"]["enum"] = ["USD", "CNY"] if mixed else ["USD"]
             value["components"]["schemas"]["Meta"]["properties"]["currency"]["enum"] = ["mixed"] if mixed else ["USD"]
             if mixed:
@@ -815,7 +833,7 @@ def page_data(d, public_price_ledger=None):
     import public_price_facts
     ledger=public_price_ledger if public_price_ledger is not None else public_price_facts.load()
     result["public_price_evidence"]={"price_verified_count":len(ledger["facts"]),"scope_complete":False,"history_complete":False,
-        "observed_at":sorted({x["observed_at"] for x in ledger["sources"]}),"url":"api/v2/price-facts.json",
+        "observed_at":sorted({x["observed_at"] for x in ledger["sources"]}),"url":"api/v2/price-facts.json","model_price_query_url":"api.html#try","model_price_record_count":len(ledger.get("model_prices",[])),"model_price_id_count":len({r["model_id"] for r in ledger.get("model_prices",[])}),
         "offering_channel_observation_count":len(ledger["offering_channel_observations"]),
         "quoted_price_statement_count":ledger.get("quoted_price_statement_count",0),"catalog_reference_quote_count":ledger.get("catalog_reference_quote_count",0),
         "evidence_kind":ledger["evidence_kind"],"price_HTTP_all_ok":ledger.get("refresh_run",{}).get("all_sources_http_ok",False),

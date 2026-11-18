@@ -38,29 +38,35 @@ class Tables(HTMLParser):
     """Literal table/heading reader; rowspans carry their original source row."""
     def __init__(self,text):
         super().__init__(convert_charrefs=True)
-        self.text=text;self.offsets=[0];self.tables=[];self.headings={};self.heading=None;self.table=None;self.row=None;self.cell=None
+        self.text=text;self.offsets=[0];self.tables=[];self.headings={};self.heading=None;self.table=None;self.row=None;self.cell=None;self.elements=[]
         for match in re.finditer('\n',text):self.offsets.append(match.end())
     def pos(self):
         line,col=self.getpos();return self.offsets[line-1]+col
     def handle_starttag(self,tag,attrs):
         attrs=dict(attrs)
+        if tag not in ('area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'):self.elements.append((tag,attrs,self.get_starttag_text()))
         if re.fullmatch('h[1-6]',tag) and self.table is None:self.heading=dict(level=int(tag[1]),start=self.pos(),parts=[])
         if tag=='table':
             if self.table is not None:raise ValueError('nested price tables unsupported')
-            self.table=dict(start=self.pos(),headings=dict(self.headings),rows=[])
+            panel=next(((a,q) for _,a,q in reversed(self.elements) if a.get('role')=='tabpanel'),None)
+            self.table=dict(start=self.pos(),headings=dict(self.headings),rows=[],tab_label=panel[0].get('aria-labelledby') if panel else None,tab_quote=panel[1] if panel else None)
         if tag=='tr' and self.table is not None:self.row=dict(start=self.pos(),cells=[])
         if tag in ('td','th') and self.row is not None:
-            self.cell=dict(parts=[],rowspan=int(attrs.get('rowspan','1')),colspan=int(attrs.get('colspan','1')),header=tag=='th')
+            self.cell=dict(start=self.pos(),parts=[],rowspan=int(attrs.get('rowspan','1')),colspan=int(attrs.get('colspan','1')),header=tag=='th')
         if tag in ('p','br','div','blockquote') and self.cell is not None:self.cell['parts'].append(' ')
     def handle_data(self,data):
         if self.heading is not None:self.heading['parts'].append(data)
         if self.cell is not None:self.cell['parts'].append(data)
     def handle_endtag(self,tag):
         end=self.pos()+len('</'+tag+'>')
+        for i in range(len(self.elements)-1,-1,-1):
+            if self.elements[i][0]==tag:
+                del self.elements[i:];break
         if self.heading is not None and tag=='h'+str(self.heading['level']):
             h=self.heading;h.update(text=clean(''.join(h['parts'])),quote=self.text[h['start']:end]);self.heading=None
             self.headings={k:v for k,v in self.headings.items() if k<h['level']};self.headings[h['level']]=h
         if tag in ('td','th') and self.cell is not None:
+            self.cell['raw']=self.text[self.cell['start']:end]
             self.cell['text']=clean(''.join(self.cell.pop('parts')));self.row['cells'].append(self.cell);self.cell=None
         if tag=='tr' and self.row is not None:
             self.row.update(quote=self.text[self.row['start']:end]);self.table['rows'].append(self.row);self.row=None
@@ -107,6 +113,14 @@ def fact(meta,text,*,model_id,offering_name,channel,region,modality,component,am
     value['fact_id']=digest(json.dumps(value,sort_keys=True,ensure_ascii=False).encode())[:24]
     return value
 
+def cny_rate(value,header):
+    list_price=re.fullmatch(r'原价([0-9]+(?:\.[0-9]+)?)元(/(?:张|秒))?（限时[0-9]+(?:\.[0-9]+)?折）',value)
+    rate_text=list_price[1]+'元'+(list_price[2] or '') if list_price else value
+    m=re.fullmatch(r'([0-9]+(?:\.[0-9]+)?)\s*元(?:/(张|秒))?',rate_text)
+    if not m:return None
+    unit='per_image' if m[2]=='张' else 'per_second' if m[2]=='秒' else 'per_1M_tokens' if '每百万' in header else None
+    return (float(m[1]),unit,bool(list_price)) if unit else None
+
 def qwen(meta,text,tables):
     billing='模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。'
     if billing not in text:raise ValueError('Qwen PAYG billing declaration missing')
@@ -140,41 +154,47 @@ def qwen(meta,text,tables):
             count=0
             for i,h in enumerate(header):
                 if not ('单价' in h and ('输入' in h or '输出' in h)):continue
+                parsed=cny_rate(vals[i],h)
+                if not parsed:continue
+                amount,unit,list_price=parsed
                 if mixed_output:
-                    # Only a literal component-level text declaration, never the
-                    # text-section heading or an image/audio input declaration.
                     leaf=h.split(' / ')[-1] if ' / ' in h else ''
-                    if '文本' not in leaf or any(x in leaf for x in ('音频','图片','视频')):continue
-                list_price=re.fullmatch(r'原价([0-9]+(?:\.[0-9]+)?)元（限时[0-9]+(?:\.[0-9]+)?折）',vals[i])
-                rate_text=list_price[1]+'元' if list_price else vals[i]
-                m=re.fullmatch(r'([0-9]+(?:\.[0-9]+)?)\s*元(?:/(张|秒))?',rate_text)
-                if not m:continue
-                unit='per_image' if m[2]=='张' else 'per_second' if m[2]=='秒' else 'per_1M_tokens' if '每百万' in h else None
-                if not unit:continue
+                    if '文本' not in leaf or any(x in leaf for x in ('音频','图片','视频')):
+                        candidate.setdefault('unbound_billing_components',[]).append(dict(model_id=mid,amount=amount,unit=unit,price_header=h,dimensions=tiers,model_qualifier=vals[0],component='cached_input' if '缓存' in h.split(' / ')[0] and '命中' in h.split(' / ')[0] else 'input' if '输入' in h.split(' / ')[0] else 'output',billing_modality='audio' if '音频' in leaf and '文本' not in leaf else 'not_stated',region=region,quote=row['quote'],context=[billing,*header_rows,cells[0]['origin_quote']]+[v['quote'] for v in hs.values()],rate_kind='explicit_list_price_NOT_discounted_charge' if list_price else 'quoted_table_rate'))
+                        continue
                 if mode=='text' and unit!='per_1M_tokens':continue
                 if mode!='text' and unit=='per_1M_tokens':continue
                 contexts=[billing,*header_rows,cells[0]['origin_quote']]+[v['quote'] for v in hs.values()]
-                facts.append(fact(meta,text,model_id=mid,offering_name=None,channel='pay_as_you_go',region=region,modality=mode,component='cached_input' if '缓存' in h.split(' / ')[0] and '命中' in h.split(' / ')[0] else 'input' if '输入' in h.split(' / ')[0] else 'output',amount=float(m[1]),currency='CNY',unit=unit,tier=json.dumps(dict(dimensions=tiers,price_header=h),ensure_ascii=False,sort_keys=True),quote=row['quote'],context=contexts));facts[-1]['rate_kind']='explicit_list_price_NOT_discounted_charge' if list_price else 'quoted_table_rate';count+=1
+                facts.append(fact(meta,text,model_id=mid,offering_name=None,channel='pay_as_you_go',region=region,modality=mode,component='cached_input' if '缓存' in h.split(' / ')[0] and '命中' in h.split(' / ')[0] else 'input' if '输入' in h.split(' / ')[0] else 'output',amount=amount,currency='CNY',unit=unit,tier=json.dumps(dict(dimensions=tiers,price_header=h),ensure_ascii=False,sort_keys=True),quote=row['quote'],context=contexts));facts[-1]['rate_kind']='explicit_list_price_NOT_discounted_charge' if list_price else 'quoted_table_rate';count+=1
                 if list_price:
                     pending.append(dict(candidate,reason='promotion_terms_not_inferred_list_price_only_verified'))
-            if not count:pending.append(dict(candidate,reason='missing_literal_component_output_binding' if mixed_output else candidate['reason']))
+            if not count or candidate.get('unbound_billing_components'):pending.append(dict(candidate,reason='missing_literal_component_output_binding' if mixed_output else candidate['reason']))
     return facts,pending
 
 FAST_SENTENCE="Grok 4.7 Fast is the same Grok 4.7 model served on faster infrastructure."
 
 def xai_fast(meta,text,tables):
     facts=[];pending=[]
-    plain=clean(re.sub('<[^>]+>',' ',text))
+    def readable(s):return clean(re.sub(r'\[([^]]+)\]\([^)]*\)',r'\1',re.sub('<[^>]+>',' ',s)))
+    plain=readable(text)
     required=('available only in','Cursor and Grok Build','billed through your plan','not available on the public xAI API')
     if not all(t in plain for t in required):return [],[dict(reason='plan_channel_declaration_missing')]
+    prepared=[]
     for table in tables:
         h=table['headings'].get(2,{})
         if h.get('text')!='Grok 4.7 Fast pricing (Cursor and Grok Build only)':continue
-        rows=expanded(table)
+        start=h['start'];stop=text.find('<h2',start+1);prepared.append((expanded(table),text[start:stop if stop>=0 else len(text)]))
+    if not tables:
+        from public_price_models import pipes
+        for table in pipes(text):
+            heads=list(re.finditer(r'^## .*$',table['prefix'],re.M))
+            if not heads or heads[-1][0]!='## Grok 4.7 Fast pricing (Cursor and Grok Build only)':continue
+            start=heads[-1].start();next_head=re.search(r'^## ',text[table['start']:],re.M);stop=table['start']+next_head.start() if next_head else len(text)
+            rows=[(dict(quote=table['header_quote']),[dict(text=h) for h in table['headers']])]+[(dict(quote=q),[dict(text=c) for c in cs]) for q,cs in table['rows']]
+            prepared.append((rows,text[start:stop]))
+    for rows,section in prepared:
         if not rows or [c['text'] for c in rows[0][1]]!=['Prompt tokens','Input','Cached input','Output']:raise ValueError('Fast price header changed')
-        # Bound prose to this heading and the next heading, not an unrelated example.
-        start=h['start'];stop=text.find('<h2',start+1);stop=stop if stop>=0 else len(text);section=text[start:stop]
-        if not all(t in clean(re.sub('<[^>]+>',' ',section)) for t in required):raise ValueError('Fast plan declaration outside entity section')
+        if not all(t in readable(section) for t in required):raise ValueError('Fast plan declaration outside entity section')
         for row,cells in rows[1:]:
             vals=[c['text'] for c in cells]
             if len(vals)!=4 or vals[0] not in ('Below 200k','Above 200k'):
@@ -241,14 +261,17 @@ def parse(meta,raw):
 
 
 def assemble(sources,read_body,evidence_kind='archival_public_HTTP_observations_NOT_live_discovery'):
-    facts=[];pending=[];offerings={}
+    facts=[];pending=[];offerings={};documents=[]
     for meta in sources:
-        result=parse(meta,read_body(meta));facts.extend(result['facts']);pending.extend(dict(p,source_url=meta['source_url'],vendor=meta['vendor'],source_channel=meta['channel']) for p in result['pending'])
+        raw=read_body(meta);documents.append(dict(meta=meta,text=verified_document(meta,raw)))
+        result=parse(meta,raw);facts.extend(result['facts']);pending.extend(dict(p,source_url=meta['source_url'],vendor=meta['vendor'],source_channel=meta['channel']) for p in result['pending'])
         for candidate in result['pending']:
             offering=candidate.get('offering_channel_observation')
             if offering:offerings[(offering['offering_name'],offering['channel'],offering['source_sha256'])]=offering
     pending=list({json.dumps(p,sort_keys=True,ensure_ascii=False):p for p in pending}.values())
-    return dict(quoted_price_statement_count=sum(bool(c.get('quote_verified')) and c.get('source_role')=='pricing' for c in pending),catalog_reference_quote_count=sum(bool(c.get('quote_verified')) and c.get('source_role')=='catalog' for c in pending),schema_version=1,evidence_kind=evidence_kind,price_verified_count=len(facts),scope_complete=False,history_complete=False,account_entitlement='not_assessed',compatibility='additive_evidence_only; audited rates and calculators unchanged; observation is not current availability',sources=sources,facts=facts,pending=pending,offering_channel_observations=list(offerings.values()))
+    from public_price_models import normalize
+    model_prices=normalize(documents,Tables,expanded,facts,pending)
+    return dict(model_prices=model_prices,model_price_record_count=len(model_prices),model_price_id_count=len({r['model_id'] for r in model_prices}),quoted_price_statement_count=sum(bool(c.get('quote_verified')) and c.get('source_role')=='pricing' for c in pending),catalog_reference_quote_count=sum(bool(c.get('quote_verified')) and c.get('source_role')=='catalog' for c in pending),schema_version=1,evidence_kind=evidence_kind,price_verified_count=len(facts),scope_complete=False,history_complete=False,account_entitlement='not_assessed',compatibility='additive_evidence_only; audited rates and calculators unchanged; observation is not current availability',sources=sources,facts=facts,pending=pending,offering_channel_observations=list(offerings.values()))
 
 
 def load(root=None):
@@ -283,14 +306,16 @@ def load_capture(capture_dir):
 
 def view(ledger,mixed=True):
     """Versioned API view; v1 never leaks CNY prices, including pending cells."""
-    result={k:v for k,v in ledger.items() if k not in ('facts','pending','sources')}
+    result={k:v for k,v in ledger.items() if k not in ('facts','pending','sources','model_prices')}
+    result['model_prices']=[r for r in ledger.get('model_prices',[]) if mixed or r.get('currency')=='USD']
+    result['model_price_record_count']=len(result['model_prices']);result['model_price_id_count']=len({r['model_id'] for r in result['model_prices']})
     result['facts']=[f for f in ledger['facts'] if mixed or f['currency']=='USD']
     result['price_verified_count']=len(result['facts'])
     result['pending_candidates']=[{k:v for k,v in p.items() if k!='offering_channel_observation'} for p in ledger['pending'] if mixed or p.get('currency')=='USD']
     result['pending_count']=len(result['pending_candidates'])
     result['price_candidates']=[{k:v for k,v in p.items() if k!='offering_channel_observation'} for p in ledger['pending'] if p.get('currency') and (mixed or p['currency']=='USD')]
     result['sources']=[s for s in ledger['sources'] if mixed or s['vendor']!='阿里云 Qwen']
-    result['evidence_version']=digest(json.dumps([result['facts'],result['pending_candidates'],result['sources'],result['offering_channel_observations'],result.get('refresh_run')],sort_keys=True,ensure_ascii=False).encode())
+    result['evidence_version']=digest(json.dumps([result['model_prices'],result['facts'],result['pending_candidates'],result['sources'],result['offering_channel_observations'],result.get('refresh_run')],sort_keys=True,ensure_ascii=False).encode())
     return result
 
 
@@ -304,6 +329,8 @@ def attach(inventories,ledger):
     by_key={}
     for f in ledger['facts']:
         if f['model_id'] is not None:by_key.setdefault((f['vendor'],f['channel'],f['model_id']),[]).append(f)
+    normalized={}
+    for r in ledger.get('model_prices',[]):normalized.setdefault((r['vendor'],r['channel'],r['model_id']),[]).append(r)
     for snapshot in inventories:
         snapshot['public_offering_channel_observations']=[o for o in ledger['offering_channel_observations'] if snapshot['vendor']=='xAI' and snapshot['channel']==o['channel']]
         snapshot['unparsed_public_price_candidates']=[{k:v for k,v in p.items() if k!='offering_channel_observation'} for p in ledger['pending'] if p['vendor']==snapshot['vendor'] and p.get('channel',p['source_channel'])==snapshot['channel']]
@@ -311,6 +338,7 @@ def attach(inventories,ledger):
         for row in snapshot.get('records',[]):
             mid=row.get('model_id') or row.get('observed_model_id')
             found=by_key.get((snapshot['vendor'],snapshot['channel'],mid),[])
+            row['public_model_price_statements']=normalized.get((snapshot['vendor'],snapshot['channel'],mid),[])
             row['public_price_observations']=found
             row['price_observation_status']='price_verified_at_source_observation' if found else 'unknown_no_bound_public_price_observation'
             matched.update(f['fact_id'] for f in found)

@@ -1,0 +1,76 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 1
+  },
+  "data": {
+    "model_id": "gpt-live-1",
+    "prices": [
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-live-1",
+        "amount": 0.05,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_minute",
+        "component": "session",
+        "billing_modality": "audio",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Pricing Table data",
+          "model_qualifier": "gpt-live-1",
+          "price_header": "Price per minute",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-live-1 | $0.05 |\n",
+        "quote_sha256": "d6aa8711d7ee543f6ef46b1b76bcb703339b307eced154924a44e427912c5c54",
+        "context_quotes": [
+          "| Model | Price per minute |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "5412ae036940b21d0475c085fb9599df9dde3adefad0e9fddf5e9bf626adc237"
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

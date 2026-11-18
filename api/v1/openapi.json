@@ -23,6 +23,58 @@
     }
   ],
   "paths": {
+    "/price-models.json": {
+      "get": {
+        "operationId": "listPublicPriceModels",
+        "summary": "Queryable literal price-table IDs; NOT estimator models or universe",
+        "responses": {
+          "200": {
+            "description": "Price model index",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceModelIndex"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    },
+    "/price-models/{model_id}.json": {
+      "get": {
+        "operationId": "getPublicModelPrices",
+        "summary": "All conditional statements for literal ID; never auto-select region/date/tier",
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Model price statements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceModelItem"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    },
     "/price-facts.json": {
       "get": {
         "operationId": "getPublicPriceObservations",
@@ -328,6 +380,161 @@
   },
   "components": {
     "schemas": {
+      "PublicModelPrice": {
+        "type": "object",
+        "required": [
+          "model_id",
+          "vendor",
+          "channel",
+          "amount",
+          "currency",
+          "unit",
+          "component",
+          "price_record_id",
+          "source_url",
+          "source_sha256",
+          "quote",
+          "quote_sha256",
+          "context_quotes",
+          "selector_complete",
+          "selector_completeness",
+          "price_verified",
+          "quote_verified",
+          "scope_complete",
+          "eligible_for_estimation"
+        ],
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "currency": {
+            "enum": [
+              "USD"
+            ]
+          },
+          "price_record_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "quote_verified": {
+            "const": true
+          },
+          "eligible_for_estimation": {
+            "const": false
+          },
+          "scope_complete": {
+            "const": false
+          },
+          "source_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "quote_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "selector_completeness": {
+            "type": "object"
+          },
+          "price_verified": {
+            "type": "boolean"
+          },
+          "selector_complete": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PriceModelIndex": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "models",
+              "record_count",
+              "currency_resolved_record_count",
+              "scope_complete"
+            ],
+            "properties": {
+              "scope_complete": {
+                "const": false
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "model_id",
+                    "url",
+                    "record_count"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "PriceModelItem": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "model_id",
+              "prices",
+              "scope_complete",
+              "eligible_for_estimation"
+            ],
+            "properties": {
+              "scope_complete": {
+                "const": false
+              },
+              "eligible_for_estimation": {
+                "const": false
+              },
+              "prices": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PublicModelPrice"
+                }
+              }
+            }
+          }
+        }
+      },
       "PublicPriceEvidence": {
         "type": "object",
         "required": [
@@ -368,6 +575,12 @@
               "evidence_version": {
                 "type": "string",
                 "pattern": "^[a-f0-9]{64}$"
+              },
+              "model_prices": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PublicModelPrice"
+                }
               },
               "facts": {
                 "type": "array",
@@ -2975,7 +3188,8 @@
                   "vendors",
                   "modalities",
                   "openapi",
-                  "price-facts"
+                  "price-facts",
+                  "price-models"
                 ],
                 "additionalProperties": false,
                 "properties": {
@@ -2993,6 +3207,9 @@
                   },
                   "price-facts": {
                     "const": "price-facts.json"
+                  },
+                  "price-models": {
+                    "const": "price-models.json"
                   }
                 }
               },
