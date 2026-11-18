@@ -12,7 +12,7 @@ import discovery_adapters as adapters
 import discovery_bridges as bridges
 from concurrent.futures import ThreadPoolExecutor
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-ADAPTER_VERSION='discovery-adapters/6-anthropic-native-observations'
+ADAPTER_VERSION='discovery-adapters/7-finite-native-request-claims'
 OpenAICards=adapters.OpenAICards
 class LimitedPublicRedirect(urllib.request.HTTPRedirectHandler):
     """Follow a short chain of public official documentation redirects only."""
@@ -228,6 +228,45 @@ def apply_anthropic_observations(inventories,capture_dir):
     root['coverage_evidence'].update(proof=proof,enumeration_verified=False,pagination_complete=False,native_identity_verified=False,expected_record_count=None)
     root['errors'].append('native observation union retained; scope completeness remains unproven')
 
+def apply_minimax_observations(inventories,capture_dir,replay_dir=None):
+    """Same-attempt native directory + finite indexed request schemas; replay is offline."""
+    import discovery_minimax_contracts as native
+    root=next((x for x in inventories if (x.get('vendor'),x.get('channel'),x.get('source_url'),x.get('role'))==('MiniMax','pay_as_you_go',native.ROOT,'catalog')),None)
+    if not root:return
+    docs={}
+    def child(url):
+        sid='minimax-contract-'+digest(url.encode())[:16]
+        try:
+            if replay_dir is None:
+                body,at,extra=fetch_source({'url':url},{'platform.minimax.io'})
+                meta=dict(url=url,observed_at=at,sha256=digest(body),http_status=200,capture_kind='http_body',mode='fresh',**extra)
+            else:
+                meta=json.loads((replay_dir/(sid+'.json')).read_text());body=(replay_dir/(sid+'.body')).read_bytes()
+                if meta['url']!=url or meta['sha256']!=digest(body) or meta.get('http_status')!=200:raise ValueError('request schema replay provenance invalid')
+                c.parse_time(meta['observed_at']);meta=dict(meta,mode='replay')
+            (capture_dir/(sid+'.body')).write_bytes(body);c.atomic_json(capture_dir/(sid+'.json'),meta)
+            _,text=adapters.decode_body(body);(capture_dir/(sid+'.txt')).write_text(text)
+            return url,dict(text=text,source_url=url,observed_at=meta['observed_at'],source_sha256=meta['sha256'],capture_path=str(capture_dir/(sid+'.body')))
+        except Exception as error:
+            failed=dict(source_url=url,error=type(error).__name__+': '+str(error));c.atomic_json(capture_dir/(sid+'.json'),failed)
+            return url,failed
+    try:
+        path=pathlib.Path(root['capture_path']);body=path.read_bytes()
+        if path.resolve().parent!=capture_dir.resolve() or digest(body)!=root['source_sha256'] or root['fetch_status']!='ok':raise ValueError('directory same-attempt hash invalid')
+        _,text=adapters.decode_body(body)
+        docs[native.ROOT]=dict(text=text,source_url=native.ROOT,source_sha256=root['source_sha256'],capture_path=str(path),observed_at=root['observed_at'])
+        key,index=child(native.INDEX);docs[key]=index
+        urls=native.indexed_specs(index['text'])
+        if len(urls)>16:raise ValueError('native request schema budget exceeded16')
+        docs.update(ThreadPoolExecutor(max_workers=6).map(child,urls))
+        scoped=native.prove(root,docs)
+        for snap in scoped:snap['contract_captures']=[{k:v for k,v in doc.items() if k!='text'} for doc in docs.values()]
+        position=inventories.index(root);inventories[position:position+1]=scoped
+    except (ValueError,KeyError,TypeError,OSError) as error:
+        root.setdefault('errors',[]).append('MiniMax scoped request contract: '+str(error))
+        root['contract_captures']=[{k:v for k,v in doc.items() if k!='text'} for doc in docs.values()]
+
+
 def execute(config,manifest,database,capture_dir,replay_dir=None):
     validate_sources(config,manifest)
     capture_dir.mkdir(parents=True,exist_ok=False);inventories=[]
@@ -272,6 +311,7 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
             snap['records']=kept
             snap.setdefault('errors',[]).append('front_page_union_only_cards_absent_from_all:%d' % len(kept))
     apply_anthropic_observations(inventories,capture_dir)
+    apply_minimax_observations(inventories,capture_dir,replay_dir)
     c.atomic_json(capture_dir/'inventory.json',inventories)
     return inventories
 

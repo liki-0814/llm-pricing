@@ -107,3 +107,23 @@ Moonshot Kimi 同时有收写入费的 K3 系列和官方页未列写入价的 K
 ## 固定目录发现入口
 
 执行契约、版本、sources格式、错误码、成功/失败账本及逐厂适配缺口见[discovery-run-contract](../docs/discovery-run-contract.md)。`run_discovery.py`提供真实抓取/快照/比较/账本入口；当前通用适配器明确partial，不是全目录验收，也没有自行修改或接通routine。旧Sage临时归一化脚本不能作为前置输入。
+
+
+### Finite native request claims and scoped projection
+
+`discovery_request_contracts.py` reads only native-server-bound request `model`
+string enums, all declared request media types and all union branches. Responses
+and examples are not invocation identity proof. Unknown composition, server
+overrides, local-ref cycles, new indexed generation units or unreviewed routes
+fail closed. Claims retain route, source hash and capture identity; scope
+projection never cross-multiplies directory subjects and unrelated model IDs.
+
+MiniMax consumes the full Model List and a bounded official documentation index
+plus its request schemas in the same attempt. Text/image/video inventories keep
+separate proof and unknown reasons. A finite enum does not certify a full model
+universe when IDs disagree with the claimed-full directory, or historical
+entities lack literal invocation bridges. Pricing, aliases, retirement instants
+and channel entitlements are not inferred. Original directory observations and
+all raw bodies remain auditable. Replay never falls back to HTTP. The saved H3
+constant-to-request chain is statically parsed, never executed or refetched for
+this integration replay. Anthropic and Google contracts are unchanged.

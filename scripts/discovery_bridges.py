@@ -1,5 +1,5 @@
 """Literal official model-ID bridges. No slug/name canonicalization or price writes."""
-import json,re
+import ast,json,re
 from urllib.parse import urlsplit,urljoin,unquote
 import catalog_diff as c
 
@@ -73,6 +73,22 @@ def anthropic_status(text):
 def minimax_ids(text):
  ids=re.findall(r'["\']model["\']\s*:\s*["\']([^"\']+)["\']|\bmodel\s*=\s*["\']([^"\']+)["\']',text)
  found=[a or b for a,b in ids]
+ # Static, single-assignment def/use only. Never execute documentation examples,
+ # import their modules, read environment variables, or resolve expressions.
+ for block in re.finditer(r'(?m)^(`{3,}|~{3,})python[^\n]*\n(.*?)(?=^\1[ \t]*$)',text,re.S):
+  try:tree=ast.parse(block[2])
+  except SyntaxError:continue
+  constants={}
+  for stmt in tree.body:
+   if isinstance(stmt,ast.Assign) and len(stmt.targets)==1 and isinstance(stmt.targets[0],ast.Name) and isinstance(stmt.value,ast.Constant) and isinstance(stmt.value.value,str):
+    name=stmt.targets[0].id
+    writes=sum(isinstance(n,ast.Name) and isinstance(n.ctx,(ast.Store,ast.Del)) and n.id==name for n in ast.walk(tree))
+    shadows=any((isinstance(n,ast.arg) and n.arg==name) or (isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef,ast.ClassDef)) and n.name==name) or (isinstance(n,ast.alias) and (n.asname or n.name.split('.')[0])==name) or (isinstance(n,ast.ExceptHandler) and n.name==name) for n in ast.walk(tree))
+    if writes==1 and not shadows:constants[name]=stmt.value.value
+  for node in ast.walk(tree):
+   if isinstance(node,ast.Dict):
+    for key,value in zip(node.keys,node.values):
+     if isinstance(key,ast.Constant) and key.value=='model' and isinstance(value,ast.Name) and value.id in constants:found.append(constants[value.id])
  if '| `model` | See [Supported Models](#supported-models) above |' in text:
   section=re.search(r'### Supported Models(.*?)(?=^### |\Z)',text,re.S|re.M)
   if section:

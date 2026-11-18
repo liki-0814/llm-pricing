@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "adapter_version": "discovery-adapters/6-anthropic-native-observations",
+  "adapter_version": "discovery-adapters/7-finite-native-request-claims",
   "scope_manifest_sha256": "b02d759e7af4d376b0a9d4a74f8a650ce04f0df636a246e9862ebf21763b40d8",
   "sources": [
     {
@@ -53,7 +53,7 @@
       ],
       "role": "catalog",
       "adapter": "minimax_model_list",
-      "gap": "Unlinked retired rows preserved with official status and unknown T; current display names need invocation-ID proof, no guessed exact IDs."
+      "gap": "Same-attempt full directory + finite official schema index + native request enums, projected by output scope. Retired LLM invocation bridges and directory/schema disagreement remain unknown; finite request enum alone is not full lifecycle coverage. No price, alias or retirement inference."
     },
     {
       "id": "kimi-models",
