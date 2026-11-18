@@ -44,8 +44,9 @@ printf 'discovery exit=%s\n' "$rc"
 Sage must create its own output parent directories before redirecting; redirection
 failure is a shell failure before Python can record an attempt. Capture stderr too
 when actually connecting the routine. A missing/nonzero result must be handed off,
-not treated as "quiet/no changes". This bot did not create those directories or run
-this live command, and did not update the routine.
+not treated as "quiet/no changes". The implementation delivery does not create Sage state/output directories or
+update the routine. Manual fresh runs in Alfred work directories are separate
+from scheduler integration evidence.
 
 The command validates clean committed discovery code against EXPECTED_SHA and the
 scope/config fingerprint (live inputs must match the reviewed committed files), reserves a durable run BEFORE reading configuration,
@@ -66,17 +67,23 @@ SHA and raw database hash identify the actual main baseline.
 
 `data/discovery-sources.json` is version1 with:
 
-- `adapter_version`: `discovery-adapters/2-catalog-parsers` (strictly checked).
+- `adapter_version`: `discovery-adapters/3-counted-catalog-evidence` (strictly checked).
 - `scope_manifest_sha256`: SHA256 of Python `json.dumps(manifest, sort_keys=True).encode()`.
 - `sources`: unique safe IDs plus original `vendor`, `channel`, HTTPS `url`,
   explicit `modalities`, `role` (`catalog`/`price`/`detail`/`lifecycle`), and `adapter`.
 - Current adapters: `explicit_id_labels_partial`, `openai_cards_partial`,
   `hunyuan_invocation_tables`, `qwen_recommended_lists`, `deepseek_model_row`,
   `kimi_model_tables`, `google_endpoint_tables`, `anthropic_claude_api_id`,
-  `minimax_model_list`. Unknown adapter/config versions fail before requests.
+  `minimax_model_list`, `kimi_code_catalog`, `xai_markdown_models`,
+  `zai_overview_tables`. Unknown adapter/config versions fail before requests.
 - No input `complete=true` flag or supplied pagination assertion can promote these
-  adapters. Every current adapter still emits `complete=false` / partial. Do not
-  edit partial to true to make the run green. OpenAI directory cards without an
+  adapters. Only the bounded Kimi Code current subscription directory can prove
+  completeness: the exact official source states an independent offering count,
+  all literal Model-ID cells match that count without duplicates or invalid cells,
+  the closing switch-model section is present, and no pagination continuation is
+  found. A missing count/ID/closing section or changed source scope fails closed.
+  This does not prove account entitlement, PAYG prices, or the full Kimi vendor.
+  All other adapters remain partial. Do not edit partial to true to make a run green. OpenAI directory cards without an
   official API ID are `catalog_entries_pending_api_id`, not unresolved identity
   rows; the snapshot remains incomplete.
 
@@ -103,7 +110,10 @@ Under STATE_DIR:
 - `sequence.json`, `.lock`: durable monotonic start sequence and POSIX flock.
 - `reservations/RUN_ID.json`: immutable identity of the started run.
 - `RUN_ID.json`: immutable result (code/config/main versions, coverage, differences,
-  unresolved rows, source evidence, run identity and `baseline_update`).
+  unresolved rows, source evidence, run identity and `baseline_update`). Official
+  `retirement_notices` retain display names, raw source references and observation
+  times even when invocation IDs or precise retirement instants are unknown.
+  They do not auto-remove price rows or fabricate midnight retirement boundaries.
 - `captures/RUN_ID/SOURCE_ID.body`, `.json`, `.txt`: raw body, provenance and exact
   extraction text; `inventory.json` is the actual parser input to the comparator.
 - `latest-attempt.json`: highest **started** run result, including errors.
@@ -163,11 +173,11 @@ that a network request or scheduler invocation happened.
 | Anthropic | First-party Claude API ID rows are parsed from the canonical overview; older/Mythos display names still pending ID; All-models count and legacy coverage are not proved; partner/Bedrock IDs stay excluded. |
 | DeepSeek | MODEL-row official IDs are parsed and footnotes stripped; aliases, media, and entity-routing are still not fully classified; whole-table/count proof remains. |
 | Google | Endpoint backtick IDs and Model-code labels are parsed; card href slugs are not treated as API IDs. Full section/count/pagination proof remains. |
-| MiniMax | Markdown list labels are extracted; invocation IDs and media-row inheritance are not fully confirmed; retirement conflicts are not auto-applied. |
-| Kimi | Backticked model tables are parsed, including the deprecated section, without treating eligibility limits as global retirement. Code subscription coverage and currency/region remain unconfirmed. |
+| MiniMax | All 32 current/retired table rows are retained, including 17 unlinked retired rows missed by the old parser. Model display labels remain pending invocation-ID proof; notices keep unknown retirement instants null. Media inheritance/full coverage still pending. |
+| Kimi | Backticked model tables are parsed, including the deprecated section, without treating eligibility limits as global retirement. Code current six-ID subscription directory now has count-backed coverage; no prices or account entitlement inferred. PAYG full enumeration, currency/region remain unconfirmed. |
 | OpenAI | Public /all directory cards are retained as catalog observations (pending official API-ID bridges, not unresolved identity). Slugs and alts are still not API IDs. Homepage restricted cards stay in the union only when absent from /all. Card extraction does not prove every callable ID or variant. |
-| xAI | Full model catalog adapter AND actual subscription entitlement catalog; the saved public models HTML is still a shell with almost no explicit catalog table. The Build price page does not enumerate the subscription catalog. |
-| Z.ai | Featured+Other Models+image full adapter still missing; Legal exact Model Code is extracted. Unverified billing conditions remain separate. |
+| xAI | Public models HTML shell links to `/developers/models.md`; that canonical public Markdown now yields 13 distinct priced API IDs (8 text, 5 image/video). Unpriced/retired completeness and actual subscription API-ID catalog remain unproved. The Build price page does not enumerate subscription IDs. |
+| Z.ai | Featured+quoted Other Models+image tables now retain 10 display observations with official detail links; invocation-ID bridges and enumeration proof remain pending. Legal exact Model Code is extracted. Unverified billing conditions remain separate. |
 | Qwen | The recommended-page adapter now extracts official-looking IDs including `qwen4-max` and splits third-party IDs. This is not the Singapore Model Plaza complete catalog; that body was not in the Sage captures and is not claimed here. Prior browser card counts (86/76/49/10) are not this run's extracted inventory. Skeleton details are not full-variant proof. |
 | Hunyuan | Official 调用参数 IDs are parsed after gzip decode, including `hy4`, `hy4-flash`, and `hy4-preview`. TokenHub third-party rows are split out and are not treated as native Hunyuan. Required scope is still text only; pagination and full directory count are not proved. Not marked complete. |
 
@@ -178,3 +188,19 @@ labels do not provide that proof. The current production config therefore honest
 returns incomplete. Improved catalog parsers extract more official IDs from saved bodies, but the
 production config still honestly returns incomplete. This delivery does **not**
 claim full catalog adapters, daily routine integration, merge or release.
+
+## 2026-11-18 daily hookup preparation
+
+Keep the saved research/price-verification prompt, timezone and schedule. Add a
+mandatory fixed-runner prerequisite, not a replacement claiming price checks are
+performed by the discovery runner. Use an exact reviewed commit and durable
+per-attempt stdout, stderr and **actual process exit-code file**, including exit 2.
+Run with no `--replay-*` flags. Compare the result against the remote-main SHA
+recorded by that run, never the PR branch's 89-row database.
+
+After the owner-approved routine prompt change, integration acceptance needs a
+real scheduled execution with code/config fingerprints, HTTP captures, remote-main
+fingerprint, immutable ledger, matching stdout/exit file and latest-attempt. A
+manual fresh incomplete run proves the runner's fail-closed path only. A complete
+successful baseline still requires every scope, not just a successful shell or
+one source. Do not silence incomplete alerts or overwrite last-successful.

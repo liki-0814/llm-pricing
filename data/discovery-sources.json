@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "adapter_version": "discovery-adapters/2-catalog-parsers",
+  "adapter_version": "discovery-adapters/3-counted-catalog-evidence",
   "scope_manifest_sha256": "b02d759e7af4d376b0a9d4a74f8a650ce04f0df636a246e9862ebf21763b40d8",
   "sources": [
     {
@@ -53,7 +53,7 @@
       ],
       "role": "catalog",
       "adapter": "minimax_model_list",
-      "gap": "Markdown list labels extracted; invocation IDs and media-row inheritance not fully confirmed; retirement conflict not auto-applied."
+      "gap": "Unlinked retired rows preserved with official status and unknown T; current display names need invocation-ID proof, no guessed exact IDs."
     },
     {
       "id": "kimi-models",
@@ -76,8 +76,8 @@
         "text"
       ],
       "role": "catalog",
-      "adapter": "explicit_id_labels_partial",
-      "gap": "Subscription entitlement catalog adapter not complete."
+      "adapter": "kimi_code_catalog",
+      "gap": "Current offering count and literal Model ID row with terminal section cross-checked; no price/eligibility entitlement proof for a specific account."
     },
     {
       "id": "openai-models",
@@ -96,15 +96,15 @@
       "id": "xai-models",
       "vendor": "xAI",
       "channel": "pay_as_you_go",
-      "url": "https://docs.x.ai/developers/models",
+      "url": "https://docs.x.ai/developers/models.md",
       "modalities": [
         "text",
         "image",
         "video"
       ],
       "role": "catalog",
-      "adapter": "explicit_id_labels_partial",
-      "gap": "Public models page currently yields almost no explicit catalog table in the saved HTML shell."
+      "adapter": "xai_markdown_models",
+      "gap": "Official View as Markdown contains priced Model cells unlike HTML; unpriced/retired models and full subscription catalog still unproved."
     },
     {
       "id": "xai-build",
@@ -128,8 +128,8 @@
         "image"
       ],
       "role": "catalog",
-      "adapter": "explicit_id_labels_partial",
-      "gap": "Overview still lacks explicit invocation IDs for Featured/Other Models; remains partial."
+      "adapter": "zai_overview_tables",
+      "gap": "Featured and quoted Other Models/image table rows retained as pending display observations; no guessed lowercase invocation IDs."
     },
     {
       "id": "qwen-models",

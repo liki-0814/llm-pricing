@@ -214,21 +214,86 @@ def anthropic_claude_api_id(body, source=None):
     return official+pending, [], ['partner_ids_excluded; older_display_names_pending_api_id']
 
 
+def markdown_model_rows(text):
+    """All explicit Model-column rows, including quoted accordion tables."""
+    active=False
+    for number,line in enumerate(text.splitlines(),1):
+        line=re.sub(r'^\s*(?:>\s*)+', '', line).strip()
+        if not line.startswith('|'):
+            active=False; continue
+        cells=[x.strip() for x in line.strip('|').split('|')]
+        if cells[0].lower()=='model':
+            active=True; continue
+        if not active or re.fullmatch(r'[: -]+',cells[0]): continue
+        yield number,cells
+
+
 def minimax_model_list(body, source=None):
-    raw, text = decode_body(body)
-    official=[]
-    section='available'
-    for number, line in enumerate(text.splitlines(), 1):
-        if re.search(r'^##\s+.*retir', line, re.I) or re.search(r'retired models', line, re.I):
-            section='retired_notice'
-        if not line.lstrip().startswith('|'):
-            continue
-        for label in re.findall(r'\[([^\]]+)\]\([^)]+\)', line):
-            token=label.strip()
-            if ID_TOKEN.fullmatch(token) or re.fullmatch(r'MiniMax-[A-Za-z0-9][A-Za-z0-9._-]*', token):
-                official.append({'model_id':token,'api_id_explicit':True,'line':number,'catalog_section':section,
-                                 'origin_note':'list_label_not_always_invocation_id'})
-    return official, [], ['list_labels_need_invocation_id_confirmation; retirement_conflict_not_auto_applied']
+    raw,text=decode_body(body);rows=[]
+    for number,cells in markdown_model_rows(text):
+        label=cells[0];match=re.fullmatch(r'\[([^]]+)\]\(([^)]+)\)',label)
+        name=match[1] if match else label.strip('`')
+        retired=len(cells)>=3 and cells[-1].strip().lower()=='retired'
+        # A Model display column is not independent invocation-ID proof.
+        rows.append({'model_id':None,'api_id_explicit':False,'catalog_observation':True,
+            'display_name':name,'line':number,'detail_url':match[2] if match else None,
+            'catalog_section':'retired' if retired else 'listed',
+            'lifecycle_status':'retired' if retired else 'unconfirmed',
+            'lifecycle_quote':' | '.join(cells) if retired else None,
+            'retired_at':None,'scope_status':'pending_official_api_id'})
+    return rows,[],['model_names_retained_pending_invocation_ids; retired_status_is_not_a_retirement_instant']
+
+
+def kimi_code_catalog(body, source=None):
+    raw,text=decode_body(body);rows=[]
+    for table in _html_tables(text):
+        for cells in table['rows']:
+            if cells[0].strip().lower()!='model id':continue
+            for token in cells[1:]:
+                mid=c.canonical_id(token)
+                rows.append({'model_id':mid,'api_id_explicit':bool(mid),'catalog_observation':not bool(mid),
+                    'display_name':token,'line':table['line'],'id_row':'Model ID',
+                    'origin_vendor':'Moonshot Kimi','catalog_section':'current_subscription'})
+    return rows,[],[]
+
+
+def kimi_code_proof(body, source, records):
+    raw,text=decode_body(body)
+    visible=re.sub(r'<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>',' ',text,flags=re.I|re.S)
+    visible=html.unescape(re.sub(r'<[^>]+>',' ',visible));visible=re.sub(r'\s+',' ',visible)
+    match=re.search(r'Kimi Code currently offers (\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve) model IDs',visible,re.I)
+    words=dict(zip('one two three four five six seven eight nine ten eleven twelve'.split(),range(1,13)))
+    count=(int(match[1]) if match[1].isdigit() else words[match[1].lower()]) if match else None
+    exact_source=(source.get('vendor'),source.get('channel'),source.get('url'),source.get('modalities'),source.get('role'))==('Moonshot Kimi','subscription','https://www.kimi.com/code/docs/en/kimi-code/models',['text'],'catalog')
+    ids=[r.get('model_id') for r in records]
+    terminal=bool(re.search(r'How to Switch Models',visible))
+    continuation=bool(re.search(r'(?:[?&]page=|rel=["\']next["\'])',text,re.I))
+    ok=bool(exact_source and count and count==len(ids)==len(set(ids)) and all(ids) and terminal and not continuation)
+    return {'verified':ok,'expected_record_count':count,'count_quote':match[0] if match else None,
+        'terminal_section_present':terminal,'pagination_continuation_found':continuation,
+        'method':'explicit_current-offering_count_vs_literal_Model-ID_row; scope=current_Kimi-Code_subscription_catalog'}
+
+
+def xai_markdown_models(body, source=None):
+    raw,text=decode_body(body);rows=[];seen=set()
+    for number,cells in markdown_model_rows(text):
+        # Only the Model column, not sidebar/aliases, and only a published price row.
+        token=re.sub(r'\s+\([^)]*prompt tokens\)$','',cells[0]).strip('` ')
+        mid=c.canonical_id(token)
+        if not mid or mid in seen or not any('$' in x for x in cells[1:]):continue
+        seen.add(mid);rows.append({'model_id':mid,'api_id_explicit':True,'line':number,'price_public':True,
+            'catalog_section':'public_priced_models','origin_vendor':'xAI'})
+    return rows,[],['public_pricing_tables_not_proof_of_unpriced_retired_or_subscription_catalog']
+
+
+def zai_overview_tables(body, source=None):
+    raw,text=decode_body(body);rows=[]
+    for number,cells in markdown_model_rows(text):
+        urls=re.findall(r'\]\((https://docs\.z\.ai/guides/[^)]+)\)', ' '.join(cells[1:]))
+        rows.append({'model_id':None,'api_id_explicit':False,'catalog_observation':True,
+            'display_name':cells[0],'line':number,'detail_urls':list(dict.fromkeys(urls)),
+            'scope_status':'pending_official_api_id','catalog_section':'overview_including_quoted_other_models'})
+    return rows,[],['model_display_names_require_official_invocation_ID_bridges']
 
 
 def explicit_id_labels(body, source=None):
@@ -246,6 +311,9 @@ ADAPTERS = {
     'google_endpoint_tables': google_endpoint_tables,
     'anthropic_claude_api_id': anthropic_claude_api_id,
     'minimax_model_list': minimax_model_list,
+    'kimi_code_catalog': kimi_code_catalog,
+    'xai_markdown_models': xai_markdown_models,
+    'zai_overview_tables': zai_overview_tables,
 }
 
 

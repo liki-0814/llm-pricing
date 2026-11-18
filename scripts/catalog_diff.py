@@ -210,6 +210,19 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
             rec["price_public"] |= row.get("price_public") is True
             rec["sources"].append({"source_url": snap["source_url"], "observed_at": snap["observed_at"], "line": row.get("line"), "line_basis": row.get("line_basis"),
                 "source_sha256": snap.get("source_sha256"), "capture_path": snap.get("capture_path"), "extraction_path": snap.get("extraction_path")})
+    # Official entity notices survive even without proven invocation IDs. They are
+    # review items, not invented model identities or automatic historical boundaries.
+    retirement_notices = []
+    for snap in inventories:
+        for row in snap.get("records", []):
+            if not isinstance(row, dict) or row.get("lifecycle_status") != "retired": continue
+            retirement_notices.append({"vendor": snap["vendor"], "channel": snap["channel"],
+                "model_id": row.get("model_id") if row.get("api_id_explicit") else None,
+                "display_name": row.get("display_name"), "status": "retired", "retired_at": None,
+                "observed_at": snap.get("observed_at"), "source_url": snap["source_url"],
+                "line": row.get("line"), "quote": row.get("lifecycle_quote"),
+                "capture_path": snap.get("capture_path"), "source_sha256": snap.get("source_sha256"),
+                "note": "Official entity status; invocation identity and exact retirement instant are not inferred."})
     prior = {(x["vendor"], x["channel"], x["model_id"]) for x in (previous or {}).get("observations", [])}
     # All tracked scopes must be represented; a successful subset is not a full run.
     declared = {(c["vendor"], c["channel"], m) for c in coverage if c["role"] == "catalog" for m in c["modalities"]}
@@ -230,7 +243,7 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
     if database_outside: complete = False
     differences = [r for r in observations.values() if r["database_status"] != "present" and r.get("scope_status") != "excluded_by_user"]
     return {"status": "complete" if complete else "incomplete",
-            "vendor_coverage": vendor_coverage, "missing_scopes": missing,
+            "vendor_coverage": vendor_coverage, "missing_scopes": missing, "retirement_notices": retirement_notices,
             "scope_manifest_sha256": hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest(),
             "undeclared_scopes": sorted(declared - required),
             "database_scopes_outside_manifest": database_outside,

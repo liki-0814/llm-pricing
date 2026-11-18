@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fixed fetch -> raw capture -> literal-ID extraction -> diff -> durable ledger.
 
-Current adapters are explicitly PARTIAL. This is executable plumbing, NOT proof
+The full monitored directory remains PARTIAL. This is executable plumbing, NOT proof
 of full directory coverage or a connected routine. No automatic data/PR writes.
 """
 import argparse,base64,datetime as dt,hashlib,json,pathlib,re,subprocess,sys
@@ -10,7 +10,7 @@ from urllib.parse import urljoin,urlparse
 import catalog_diff as c
 import discovery_adapters as adapters
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-ADAPTER_VERSION='discovery-adapters/2-catalog-parsers'
+ADAPTER_VERSION='discovery-adapters/3-counted-catalog-evidence'
 OpenAICards=adapters.OpenAICards
 class LimitedPublicRedirect(urllib.request.HTTPRedirectHandler):
     """Follow a short chain of public official documentation redirects only."""
@@ -72,15 +72,17 @@ def parse_source(body,source,observed_at):
     raw,text=adapters.decode_body(body)
     records,reseller,notes=adapters.parse(source['adapter'], raw, source)
     for row in records+reseller:row['line_basis']='adapter:'+source['adapter']
-    # Adapters here improve extraction; they do not, by themselves, prove a complete official directory.
-    errors=['adapter_partial_not_full_enumeration']+list(notes)
+    proof=adapters.kimi_code_proof(raw,source,records) if source['adapter']=='kimi_code_catalog' else {'verified':False}
+    complete=proof['verified']
+    errors=[] if complete else ['adapter_partial_not_full_enumeration']+list(notes)
+
     return dict(_extraction_text=text,vendor=source['vendor'],channel=source['channel'],role=source['role'],
-        source_url=source['url'],observed_at=observed_at,complete=False,
-        fetch_status='ok',extraction_status='partial',
+        source_url=source['url'],observed_at=observed_at,complete=complete,
+        fetch_status='ok',extraction_status='ok' if complete else 'partial',
         errors=errors,records=records,reseller_records=reseller,
         coverage_evidence=dict(source_url=source['url'],modalities=source['modalities'],
-            enumeration_verified=False,pagination_complete=False,expected_record_count=None,
-            native_identity_verified=False))
+            enumeration_verified=complete,pagination_complete=complete,expected_record_count=proof.get('expected_record_count'),
+            native_identity_verified=complete,proof=proof))
 
 def execute(config,manifest,database,capture_dir,replay_dir=None):
     validate_sources(config,manifest)
