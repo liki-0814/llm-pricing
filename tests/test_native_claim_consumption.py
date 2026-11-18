@@ -8,7 +8,7 @@ import catalog_diff as diff
 FIX=pathlib.Path(__file__).parent/'fixtures/native-claims'
 AT='2026-11-18T08:00:00Z'
 def doc(text,url='https://developers.openai.com/api/docs/models/future.md'):
- return dict(text=text,source_url=url,source_sha256=hashlib.sha256(text.encode()).hexdigest(),capture_path='/synthetic/raw.body',observed_at=AT)
+ return dict(vendor='xAI' if url==n.XAI else 'OpenAI',channel='pay_as_you_go',catalog_source_url=n.XAI if url==n.XAI else n.OA,text=text,source_url=url,source_sha256=hashlib.sha256(text.encode()).hexdigest(),capture_path='/synthetic/raw.body',observed_at=AT)
 def text(outputs='text',suffix='',support='Supported'):
  return f'Model ID: `future.Native/9`\n## Model details\n- Input modalities: image\n- Output modalities: {outputs}\n## Endpoints\n| Endpoint | Route | Support |\n| --- | --- | --- |\n| Responses | `v1/responses` | {support} |\n## Snapshots\n- `future.Native/9-2026`{suffix}'
 def byid(rows,mid):return next(x for x in rows if x['model_id']==mid)

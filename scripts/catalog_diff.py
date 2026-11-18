@@ -20,14 +20,8 @@ from urllib.parse import urlparse
 
 DEFAULT_SCOPES = pathlib.Path(__file__).resolve().parents[1] / "data/discovery-scopes.json"
 
-ID = re.compile(r"^[a-z0-9][a-z0-9._/-]*$", re.I)
-
-
-def canonical_id(value):
-    if not isinstance(value, str):
-        return None
-    value = value.strip()
-    return value if ID.fullmatch(value) else None
+from discovery_claim_contract import canonical_id,parse_time
+import discovery_claim_contract as native
 
 
 def extract_explicit_ids(text):
@@ -209,14 +203,13 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
                 rec["observed_ids"].append(mid)
             rec["price_public"] |= row.get("price_public") is True
             if row.get("native_claims"):
-                import discovery_native_claims as native
                 qualified_claims=[]
                 supplied=row['native_claims']
                 if not isinstance(supplied,list):
                     rec.setdefault('native_claim_errors',[]).append('native claims must be a list');supplied=[]
                 for claim in supplied:
-                    if not native.valid_claim(claim) or claim.get('model_id')!=mid or not official_url(claim.get('source_url'),snap['vendor'],snap['channel'],manifest) or not re.fullmatch('[0-9a-f]{64}',str(claim.get('source_sha256',''))):
-                        rec.setdefault('native_claim_errors',[]).append('unqualified/mismatched native claim');continue
+                    if not native.valid_claim(claim,vendor=snap['vendor'],channel=snap['channel'],source_url=snap['source_url']) or claim.get('model_id')!=mid or not official_url(claim.get('source_url'),snap['vendor'],snap['channel'],manifest) or not re.fullmatch('[0-9a-f]{64}',str(claim.get('source_sha256',''))):
+                        rec.setdefault('native_claim_errors',[]).append('unqualified/mismatched native claim context');rec.setdefault('rejected_native_claims',[]).append(claim);continue
                     if canonical!=mid:
                         claim=dict(claim,model_id=canonical,observed_model_id=mid,identity_projection='validated_explicit_official_alias_map')
                     qualified_claims.append(claim)
@@ -272,12 +265,6 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
             "not_observed_this_run_not_retired": [list(k) for k in sorted(prior - observations.keys())],
             "historical_comparison": "no_previous_successful_snapshot" if previous is None else "observation_diff_only",
             "note": "Not-in-database is not newly released; absence is never proof of retirement. No automatic writes."}
-
-
-def parse_time(value):
-    value = dt.datetime.fromisoformat(value.replace("Z", "+00:00"))
-    if value.tzinfo is None: raise ValueError("Timezone required")
-    return value.astimezone(dt.timezone.utc)
 
 
 def atomic_json(path, payload):

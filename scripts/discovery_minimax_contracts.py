@@ -4,6 +4,7 @@ No display-name canonicalization, inherited input modality, subscription borrowi
 price inference, or missing->retired conversion. Unknowns remain explicit.
 """
 import json,re
+from discovery_markdown import formal_text
 from urllib.parse import urljoin
 from discovery_request_contracts import request_models,scoped_snapshot
 ROOT='https://platform.minimax.io/docs/faq/models.md'
@@ -32,6 +33,7 @@ def indexed_specs(text):
     return sorted(BASE+p for p in SPECS)
 
 def directory(text):
+    text=formal_text(text)
     if '# Model List' not in text or 'those that have been retired' not in text or '## Available Models' not in text or '## Retired Models' not in text:
         raise ValueError('full available/retired directory boundary missing')
     if re.search(r'(?i)\b(next page|load more|has_more|next_cursor)\b',text):raise ValueError('unresolved directory continuation')
@@ -53,7 +55,9 @@ def directory(text):
     return rows
 
 def prove(root,docs):
-    entities=directory(docs[ROOT]['text']);index=docs[INDEX];urls=indexed_specs(index['text'])
+    entities=directory(docs[ROOT]['text'])
+    for entity in entities:entity.update({k:v for k,v in docs[ROOT].items() if k!='text'})
+    index=docs[INDEX];urls=indexed_specs(index['text'])
     claims={m:[] for m in ('text','image','video')};failures={m:[] for m in claims}
     for url in urls:
         modality,route=SPECS[url[len(BASE):]]
@@ -72,7 +76,7 @@ def prove(root,docs):
             for requested_route in routes:entries.extend(request_models(spec,requested_route,'https://api.minimax.io'))
             for entry in entries:entry.update(source_url=url,source_sha256=doc['source_sha256'],capture_path=doc['capture_path'],observed_at=doc['observed_at'])
             claims[modality].extend(entries)
-        except (ValueError,KeyError,TypeError) as error:failures[modality].append(dict(source_url=url,error=str(error)))
+        except (ValueError,KeyError,TypeError) as error:failures[modality].append(dict({k:v for k,v in doc.items() if k!='text'},source_url=url,error=str(error),eligibility='unknown_not_certified'))
     result=[]
     for modality,items in claims.items():
         ids={r['model_id'] for r in items};scope_entities=[r for r in entities if r['modality']==modality]
@@ -93,7 +97,8 @@ def prove(root,docs):
         for row in out['records']:
             same=[r for r in scope_entities if r['display_name']==row.get('model_id')]
             if same:row['directory_evidence']=same
-            if any(r['lifecycle_status']=='retired' for r in same):row.update(lifecycle_status='retired',lifecycle_quote=same[0]['quote'])
+            retired=[r for r in same if r['lifecycle_status']=='retired']
+            if retired:row.update(lifecycle_status='retired',lifecycle_quote='\n'.join(dict.fromkeys(r['quote'] for r in retired)),line=retired[0]['line'],lifecycle_evidence=retired)
         out['original_directory_observations']=root.get('records',[])
         result.append(out)
     return result

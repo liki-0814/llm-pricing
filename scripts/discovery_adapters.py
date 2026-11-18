@@ -5,6 +5,7 @@ Each adapter returns records plus optional reseller_records and notes. Callers
 must keep snapshots partial unless independent full-enumeration evidence exists.
 """
 import gzip,re,html
+from discovery_markdown import formal_text
 from html.parser import HTMLParser
 import catalog_diff as c
 import discovery_bridges as bridges
@@ -244,7 +245,7 @@ def markdown_model_rows(text):
 
 def minimax_model_list(body, source=None):
     raw,text=decode_body(body);rows=[]
-    for number,cells in markdown_model_rows(text):
+    for number,cells in markdown_model_rows(formal_text(text)):
         label=cells[0];match=re.fullmatch(r'\[([^]]+)\]\(([^)]+)\)',label)
         name=match[1] if match else label.strip('`')
         retired=len(cells)>=3 and cells[-1].strip().lower()=='retired'

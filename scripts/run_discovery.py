@@ -12,7 +12,7 @@ import discovery_adapters as adapters
 import discovery_bridges as bridges
 from concurrent.futures import ThreadPoolExecutor
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-ADAPTER_VERSION='discovery-adapters/8-source-qualified-native-consumption'
+ADAPTER_VERSION='discovery-adapters/9-context-bound-schema-witnesses'
 OpenAICards=adapters.OpenAICards
 class LimitedPublicRedirect(urllib.request.HTTPRedirectHandler):
     """Follow a short chain of public official documentation redirects only."""
@@ -274,7 +274,7 @@ def apply_native_claims(inventories,capture_dir):
         path=pathlib.Path(meta['capture_path']);body=path.read_bytes()
         if path.resolve().parent!=capture_dir.resolve() or digest(body)!=meta['source_sha256']:raise ValueError('native claim capture hash/path invalid')
         c.parse_time(meta['observed_at']);_,text=adapters.decode_body(body)
-        return dict(text=text,source_url=meta['source_url'],source_sha256=meta['source_sha256'],capture_path=str(path),observed_at=meta['observed_at'])
+        return dict(text=text,source_url=meta['source_url'],source_sha256=meta['source_sha256'],capture_path=str(path),observed_at=meta['observed_at'],vendor=meta.get('vendor'),channel=meta.get('channel'),catalog_source_url=meta['source_url'])
     for snap in inventories:
         key=(snap['vendor'],snap['channel'],snap['source_url'],snap['role'])
         if key not in (('OpenAI','pay_as_you_go',native.OA,'catalog'),('xAI','pay_as_you_go',native.XAI,'catalog')):continue
