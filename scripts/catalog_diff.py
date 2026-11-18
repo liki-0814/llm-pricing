@@ -214,7 +214,8 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
     # review items, not invented model identities or automatic historical boundaries.
     retirement_notices = []
     for snap in inventories:
-        for row in snap.get("records", []):
+        records = snap.get("records", [])
+        for row in records if isinstance(records, list) else []:
             if not isinstance(row, dict) or row.get("lifecycle_status") != "retired": continue
             retirement_notices.append({"vendor": snap["vendor"], "channel": snap["channel"],
                 "model_id": row.get("model_id") if row.get("api_id_explicit") else None,

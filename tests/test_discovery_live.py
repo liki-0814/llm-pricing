@@ -46,3 +46,10 @@ class LiveDiscoveryTests(unittest.TestCase):
   self.assertIsNone(result['retirement_notices'][0]['retired_at'])
   self.assertEqual(result['retirement_notices'][0]['observed_at'],'2026-11-18T03:40:00Z')
   self.assertEqual(result['status'],'incomplete')
+
+ def test_invalid_record_shape_does_not_break_retirement_notice_export(self):
+  manifest={'version':1,'scopes':[{'vendor':'MiniMax','channel':'pay_as_you_go','modalities':['text'],'official_hosts':['platform.minimax.io']}]}
+  snap={'vendor':'MiniMax','channel':'pay_as_you_go','source_url':'https://platform.minimax.io/docs/faq/models.md','observed_at':'2026-11-18T03:40:00Z','records':None}
+  result=c.compare_catalogs({'models':[]},[snap],scopes=manifest)
+  self.assertEqual(result['status'],'incomplete')
+  self.assertEqual(result['retirement_notices'],[])
