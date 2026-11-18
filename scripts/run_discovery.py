@@ -12,7 +12,7 @@ import discovery_adapters as adapters
 import discovery_bridges as bridges
 from concurrent.futures import ThreadPoolExecutor
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-ADAPTER_VERSION='discovery-adapters/4-literal-detail-bridges'
+ADAPTER_VERSION='discovery-adapters/5-google-typed-output'
 OpenAICards=adapters.OpenAICards
 class LimitedPublicRedirect(urllib.request.HTTPRedirectHandler):
     """Follow a short chain of public official documentation redirects only."""
@@ -104,10 +104,54 @@ def parse_source(body,source,observed_at):
             enumeration_verified=complete,pagination_complete=complete,expected_record_count=proof.get('expected_record_count'),
             native_identity_verified=complete,proof=proof))
 
+def bridge_google(snapshot,source,capture_dir,replay_dir=None):
+    """At most64 native detail bodies, root links plus one direct Versions wave.
+    Replay never falls back to HTTP; absent/invalid bodies leave scoped proof closed.
+    """
+    g=adapters.google_contracts;docs={}
+    try:
+        _,directory=g.directory(snapshot['_extraction_text'])
+        urls=directory['required_detail_urls']
+        def child(url):
+            sid=source['id']+'-detail-'+digest(url.encode())[:16]
+            try:
+                if not g.allowed_detail(url):raise ValueError('unapproved native detail URL')
+                if replay_dir is None:
+                    body,at,extra=fetch_source({'url':url},{'aistudio.google.com'})
+                    meta=dict(url=url,observed_at=at,sha256=digest(body),http_status=200,capture_kind='http_body',mode='fresh',**extra)
+                else:
+                    meta=json.loads((replay_dir/(sid+'.json')).read_text());body=(replay_dir/(sid+'.body')).read_bytes()
+                    if meta['url']!=url or meta['sha256']!=digest(body) or meta.get('http_status')!=200:raise ValueError('Google detail replay provenance invalid')
+                    meta=dict(meta,mode='replay')
+                (capture_dir/(sid+'.body')).write_bytes(body);c.atomic_json(capture_dir/(sid+'.json'),meta)
+                _,text=adapters.decode_body(body)
+                return url,dict(text=text,source_url=url,source_sha256=meta['sha256'],observed_at=meta['observed_at'],capture_path=str(capture_dir/(sid+'.body')))
+            except Exception as error:
+                failure=dict(url=url,error=type(error).__name__+': '+str(error));c.atomic_json(capture_dir/(sid+'.json'),failure)
+                return url,dict(source_url=url,**failure)
+        if len(urls)>64:raise ValueError('Google native detail budget exceeded64')
+        docs.update(ThreadPoolExecutor(max_workers=6).map(child,urls))
+        refs=set().union(*(g.version_links(doc['text']) for doc in docs.values()))
+        additional=sorted(refs-set(docs))
+        if len(docs)+len(additional)>64:raise ValueError('Google total detail budget exceeded64')
+        docs.update(ThreadPoolExecutor(max_workers=6).map(child,additional))
+        records,proof=g.prove(snapshot['_extraction_text'],source,docs)
+        if proof['verified']:
+            snapshot.update(records=records,complete=True,extraction_status='ok',errors=[])
+            snapshot['coverage_evidence'].update(modalities=proof['modalities'],enumeration_verified=True,pagination_complete=True,native_identity_verified=True,expected_record_count=proof['expected_record_count'],proof=proof)
+        else:snapshot['coverage_evidence']['proof']=proof;snapshot['errors'].append('Google scoped proof: '+proof.get('error','unverified'))
+    except (ValueError,KeyError,TypeError,AttributeError,StopIteration) as error:
+        snapshot['coverage_evidence']['proof']={'verified':False,'error':str(error)}
+        snapshot['errors'].append('Google scoped proof: '+str(error))
+    snapshot['detail_captures']=[{k:v for k,v in doc.items() if k!='text'} for doc in docs.values()]
+    return snapshot
+
+
 def bridge_catalog(snapshot,source,capture_dir,replay_dir=None):
     """One bounded fetch per official linked Markdown page. Every child is captured.
     Missing child/ID leaves its entity pending; no saved-body fallback in live mode.
     """
+    if source['adapter']=='google_endpoint_tables':return bridge_google(snapshot,source,capture_dir,replay_dir)
     if source['adapter'] not in ('openai_markdown_bridged','anthropic_markdown_bridged','minimax_model_list'):return snapshot
     urls=sorted({row.get('detail_url') for row in snapshot['records'] if row.get('detail_url')
                  and bridges.allowed_detail(row['detail_url'],source['vendor'])

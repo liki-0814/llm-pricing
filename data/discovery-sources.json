@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "adapter_version": "discovery-adapters/4-literal-detail-bridges",
+  "adapter_version": "discovery-adapters/5-google-typed-output",
   "scope_manifest_sha256": "b02d759e7af4d376b0a9d4a74f8a650ce04f0df636a246e9862ebf21763b40d8",
   "sources": [
     {
@@ -39,7 +39,7 @@
       ],
       "role": "catalog",
       "adapter": "google_endpoint_tables",
-      "gap": "Endpoint backtick IDs and Model code labels parsed; card href slugs are not API IDs. Full section/count/pagination proof still required."
+      "gap": "Native full-table literal endpoints plus bounded model-property/Versions output proofs; missing detail captures, ambiguous modality or unknown grammar remain unverified per scope. Not account entitlement."
     },
     {
       "id": "minimax-models",

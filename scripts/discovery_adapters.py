@@ -9,6 +9,7 @@ from html.parser import HTMLParser
 import catalog_diff as c
 import discovery_bridges as bridges
 import discovery_text_contracts as text_contracts
+import discovery_google_contracts as google_contracts
 
 NATIVE_QWEN = re.compile(r'^(?:qwen|wan|wanx|happyhorse|happyoyster|tongyi|z-image|text-embedding-v|decision-model|qwen-audio)', re.I)
 THIRD_QWEN = re.compile(r'^(?:deepseek|glm|kimi|minimax|moonshot|claude|gpt-|o1|o3|grok|mistral|llama|gemini|yi-|doubao|hunyuan|hy\d|zhupu|zhipu)/?', re.I)
@@ -170,6 +171,15 @@ def kimi_model_tables(body, source=None):
 
 
 def google_endpoint_tables(body, source=None):
+    raw,text=decode_body(body)
+    try:
+        rows,_=google_contracts.directory(text)
+        return rows,[],['native_literal_endpoints_retained; output_detail_proof_required']
+    except (ValueError,TypeError,KeyError,StopIteration):
+        return _google_partial_literals(body,source)
+
+
+def _google_partial_literals(body, source=None):
     raw, text = decode_body(body)
     official=[]; seen=set()
     # Official "Endpoint" backtick IDs in model tables, plus explicit Model code labels.
