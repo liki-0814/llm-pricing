@@ -92,7 +92,10 @@ def deepseek_contract(text,source):
   if any(level>2 for level,value in doc.headings):raise ValueError('unreviewed DeepSeek subsection')
   if [value for level,value in doc.headings if level==1]!=['Models & Pricing']:raise ValueError('unknown DeepSeek article title')
   expected=['Model Details','Web Search & Fetch Pricing','File Parsing & OCR Pricing','Speech Pricing','Deduction Rules']
-  if [v for level,v in doc.headings if level==2]!=expected:raise ValueError('unknown/missing DeepSeek article sections')
+  # Official 2026-11-18 renamed this non-model API pricing section. Both
+  # complete reviewed layouts retain the same MODEL/alias/terminal checks.
+  renamed=['Model Details','Search & Fetch API Pricing','File Parsing & OCR Pricing','Speech Pricing','Deduction Rules']
+  if [v for level,v in doc.headings if level==2] not in (expected,renamed):raise ValueError('unknown/missing DeepSeek article sections')
   tables=[x for x in doc.tables if x['path'].get(2)=='Model Details']
   if len(tables)!=1 or not tables[0]['rows'] or tables[0]['rows'][0][0]!='MODEL':raise ValueError('one complete MODEL table required')
   if any(x is not tables[0] and x['rows'] and x['rows'][0][0]=='MODEL' for x in doc.tables):raise ValueError('unreviewed additional model table')

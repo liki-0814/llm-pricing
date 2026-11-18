@@ -17,6 +17,11 @@ class TextScopeContracts(unittest.TestCase):
   rows,p=t.deepseek_contract(ds(),DS_SOURCE);self.assertTrue(p['verified']);self.assertEqual(len(rows),4)
   aliases=[r for r in rows if r.get('alias_of')];self.assertEqual(len(aliases),2)
   self.assertTrue(all(r['alias_of']=='future-flash' and r['lifecycle_status']=='accepted_alias' and r['retired_at'] is None for r in aliases));self.assertTrue(all(r['previous_entity_retired'] for r in aliases))
+ def test_deepseek_official_search_api_heading_variant_is_bounded(self):
+  body=ds().replace('Web Search &amp; Fetch Pricing','Search &amp; Fetch API Pricing')
+  rows,proof=t.deepseek_contract(body,DS_SOURCE);self.assertTrue(proof['verified']);self.assertEqual(len(rows),4)
+  for replacement in ('Other Models','Search & Fetch Future Pricing'):
+   self.assertFalse(t.deepseek_contract(body.replace('Search &amp; Fetch API Pricing',replacement),DS_SOURCE)[1]['verified'])
  def test_deepseek_future_legal_unpriced_column_is_retained(self):
   rows,p=t.deepseek_contract(ds(('future-flash','future-pro','future-unpriced-99')),DS_SOURCE);self.assertTrue(p['verified']);self.assertIn('future-unpriced-99',[r['model_id'] for r in rows])
  def test_deepseek_rejects_wrong_types_truncation_alias_drift_and_unknown_sections(self):
