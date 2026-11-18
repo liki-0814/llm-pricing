@@ -65,6 +65,12 @@ def openai_detail(doc,entity):
     open_weight=entity.get('catalog_section')=='Open-weight models' or 'open-weight' in '\n'.join(line for s in parts if s['name'] is None for _,line in s['lines']).lower()
     channel_ok=bool(len(primary)==1 and endpoints and not open_weight)
     channel_reason='native API directory + this model supported endpoint; documented usage, not account entitlement' if channel_ok else ('open-weight native PAYG attribution not proven' if open_weight else 'no bound native supported endpoint or unique primary ID')
+    unrecognized={'alias':[],'lifecycle':[]}
+    for number,line in enumerate(doc['text'].splitlines(),1):
+        if line.startswith('Aliases:') and line!='Aliases: None' and not re.fullmatch(r'Aliases: None',line):
+            unrecognized['alias'].append(dict(line=number,quote=line))
+        if line.startswith('Status:') and line not in ('Status: Available','Status: Active','Status: Shut down','Status: Deprecated'):
+            unrecognized['lifecycle'].append(dict(line=number,quote=line))
     rows=[]
     for mid in dict.fromkeys(x['model_id'] for x in identities):
         bound_channel=channel_ok and (mid in primary or not alias_errors)
@@ -88,6 +94,9 @@ def openai_detail(doc,entity):
                     if line in ('Status: Shut down','Status: Deprecated'):claims.append(claim(doc,mid,'lifecycle',status='retired' if line.endswith('Shut down') else 'deprecated',line=number,quote=line))
         row=dict(model_id=mid,api_id_explicit=True,catalog_observation=False,identity_evidence={'claims':claims},**project(claims))
         row.update(id_enumeration_complete=not alias_errors,scope_status='native_channel_observed' if bound_channel else 'pending_native_channel_applicability',retired_at=None)
+        if mid in primary:
+            row['unrecognized_alias_declarations']=[d for d in unrecognized['alias']]
+            row['unrecognized_lifecycle_declarations']=[d for d in unrecognized['lifecycle']]
         rows.append(row)
     for observed in invalid:
         rows.append(dict(observed,api_id_explicit=False,catalog_observation=True,display_name=observed['raw_token'],id_enumeration_complete=False,scope_status='unclassified_identity_candidate',identity_evidence=dict(qualified(doc),**observed),output_modalities=[],channel_applicability='unknown'))

@@ -50,11 +50,47 @@ def valid_claim(value, *, vendor=None, channel=None, source_url=None):
     return True
 
 
+def direct_alias_map(pairs,known_ids=None,aliases_distinct_from_canonicals=False):
+    """Direct aliases only: no chains, cycles, conflicts, self-targets or dangling IDs."""
+    mapping={}
+    for alias,target in pairs:
+        if not isinstance(alias,str) or not isinstance(target,str) or canonical_id(alias)!=alias or canonical_id(target)!=target or not alias or not target:raise ValueError('nonliteral alias or target')
+        if alias==target:raise ValueError('alias cannot target itself')
+        if alias in mapping and mapping[alias]!=target:raise ValueError('conflicting literal alias targets')
+        mapping[alias]=target
+    keys,values=set(mapping),set(mapping.values())
+    if keys&values:raise ValueError('alias chain or cycle is not a direct mapping')
+    if known_ids is not None:
+        known=set(known_ids);dangling=values-known
+        if dangling:raise ValueError('dangling alias target')
+        if aliases_distinct_from_canonicals and keys&known:raise ValueError('alias identity coincides with a catalog model identity')
+    return mapping
+
+
 def project(claims):
     """Sticky conflicts, exact per-ID provenance; unknown never disappears by order."""
     if len({x['model_id'] for x in claims})>1:raise ValueError('cannot project claims for different literal IDs')
     if any(not valid_claim(x) for x in claims):raise ValueError('unqualified native projection')
     if len({(x['vendor'],x['channel'],x['catalog_source_url']) for x in claims})>1:raise ValueError('cross-context native projection')
+    return _project_values(claims)
+
+
+def combine_validated_contexts(claims):
+    """Consumer-only fusion AFTER every claim was bound to its own snapshot.
+
+    Different official catalog URLs may independently support the same literal ID;
+    vendor/channel/ID remain indivisible and each original context is retained.
+    """
+    contexts={}
+    for value in claims:
+        if not valid_claim(value):raise ValueError('unqualified fused native claim')
+        contexts.setdefault(value['catalog_source_url'],[]).append(value)
+    if len({(x['vendor'],x['channel'],x['model_id']) for x in claims})>1:raise ValueError('cannot fuse vendor/channel/ID contexts')
+    for group in contexts.values():project(group)
+    return _project_values(claims)
+
+
+def _project_values(claims):
     claims=sorted(claims,key=lambda x:json.dumps(x,sort_keys=True,ensure_ascii=False))
     outputs=[tuple(sorted(x['values'])) for x in claims if x['kind']=='output' and x.get('values') is not None]
     conflict=len(set(outputs))>1 or any(x.get('conflict') for x in claims if x['kind']=='output')

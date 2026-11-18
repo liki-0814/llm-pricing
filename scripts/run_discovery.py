@@ -322,6 +322,14 @@ def apply_public_catalog_observations(inventories,capture_dir,replay_dir=None):
     import discovery_document_catalogs as public
     import discovery_universe_contracts as universe
     docs={};blocked_hosts=set()
+    for snapshot in inventories:
+        path=pathlib.Path(snapshot.get('capture_path','/nonexistent'))
+        if path.is_file():
+            _,root_text=adapters.decode_body(path.read_bytes())
+            if public.access_gate(root_text):
+                blocked_hosts.add(urlparse(snapshot['source_url']).hostname)
+                snapshot['access_state']='HTTP_200_access_gate_NOT_catalog'
+                snapshot.setdefault('errors',[]).append('captured_access_gate_not_an_empty_directory')
     def child(url):
         sid='published-catalog-'+digest(url.encode())[:16];doc={};meta={}
         try:
@@ -357,9 +365,9 @@ def apply_public_catalog_observations(inventories,capture_dir,replay_dir=None):
         docs.update(ThreadPoolExecutor(max_workers=6).map(child,urls));observed=[]
         for entity in entities:
             doc=docs[entity['detail_url']]
-            try:observed.append(public.qwen_detail(doc,entity))
+            try:observed.extend(public.qwen_details(doc,entity))
             except (ValueError,KeyError,TypeError) as error:
-                failures.append(dict(source_url=entity['detail_url'],error=str(error)));observed.append(dict(model_id=None,api_id_explicit=False,catalog_observation=True,display_name=entity['display_name'],detail_url=entity['detail_url'],catalog_quote=entity['quote'],scope_status='pending_qualified_detail'))
+                failures.append(dict(source_url=entity['detail_url'],error=str(error)));observed.append(dict(model_id=None,api_id_explicit=False,catalog_observation=True,display_name=entity['display_name'],detail_url=entity['detail_url'],catalog_quote=entity['quote'],scope_status='pending_qualified_detail',observation_status='access_blocked' if 'access_blocked' in str(error) else 'unsupported_document',source_error=str(error)))
         qwen['records'].extend(observed)
         qwen['published_catalog_proof']=dict(method='official_published_category_indexes_and_literal_request_output_details',index_proofs=index_proofs,category_rows=len(entities),unique_detail_documents=len(urls),observations=len(observed),known_output_observations=sum(bool(r.get('output_modalities')) for r in observed),failures=failures,population='published_categories_not_a_claimed_global_native_universe',native_provider_unknown=sum(r.get('native_vendor_status')!='verified_explicit_provider' for r in observed),aliases='unknown: no direct map inferred from snapshots/model-name patterns',lifecycle='unknown where not declared',api_alternative='https://www.alibabacloud.com/help/en/model-studio/list-models; authenticated account/region/filter only, never automatically global')
         qwen['public_catalog_captures']=[{k:v for k,v in d.items() if k!='text'} for d in docs.values()]
@@ -386,10 +394,11 @@ def apply_public_catalog_observations(inventories,capture_dir,replay_dir=None):
             _,text=adapters.decode_body(raw);root_document=dict(text=text,**{k:snap[k] for k in ('source_url','source_sha256','capture_path','observed_at')})
             extra=[s for s in inventories if s is not snap and s['vendor']==snap['vendor'] and s['channel']==snap['channel'] and s.get('role')=='catalog']
             snap['scope_certificates']=universe.native_observation_certificates(snap,root_document,extra)
+            required=list(snap.get('coverage_evidence',{}).get('modalities') or [])
             certified=[r['modality'] for r in snap['scope_certificates'] if r['complete']]
-            if certified:
+            if required and set(certified)==set(required):
                 snap.update(complete=True,extraction_status='ok',errors=[])
-                snap['coverage_evidence'].update(modalities=certified,enumeration_verified=True,pagination_complete=True,native_identity_verified=True,expected_record_count=len(snap['records']))
+                snap['coverage_evidence'].update(modalities=required,enumeration_verified=True,pagination_complete=True,native_identity_verified=True,expected_record_count=len(snap['records']))
         elif snap is qwen:
             proof=qwen['published_catalog_proof'];snap['scope_certificates']=[universe.scope_certificate(snap['vendor'],snap['channel'],m,snap['records'],population=universe.unknown('published categories do not assert complete native/legacy provider universe'),pagination=universe.unknown('published linked pages read, but Model Plaza/API regional terminal remains unproved',read=proof['unique_detail_documents'],failures=proof['failures']),alias_enumeration=universe.unknown('no complete direct alias declaration'),lifecycle=universe.unknown('historical lifecycle set not declared')) for m in ('text','image','video')]
 
@@ -440,6 +449,8 @@ def execute(config,manifest,database,capture_dir,replay_dir=None):
     apply_minimax_observations(inventories,capture_dir,replay_dir)
     apply_native_claims(inventories,capture_dir)
     apply_public_catalog_observations(inventories,capture_dir,replay_dir)
+    from discovery_scope_projection import attach_scope_certificates
+    attach_scope_certificates(inventories,manifest)
     c.atomic_json(capture_dir/'inventory.json',inventories)
     return inventories
 
@@ -477,6 +488,11 @@ def main():
             qwen_pages=[d for d in pages if urlparse(d.get('url','')).hostname!='api.x.ai']
             xai_pages=[d for d in pages if urlparse(d.get('url','')).hostname=='api.x.ai']
             catalog_exports=dict(qwen=universe.qwen_catalog_pages(qwen_pages) if qwen_pages else None,xai=universe.xai_catalog_exports(xai_pages) if xai_pages else None)
+            import discovery_export_contracts as exports
+            inventories.extend(exports.catalog_snapshots(pages,captures))
+            from discovery_scope_projection import attach_scope_certificates
+            attach_scope_certificates(inventories,manifest)
+            c.atomic_json(captures/'inventory.json',inventories)
         previous=c.previous_success(args.state_dir)
         result=c.compare_catalogs(database,inventories,previous,scopes=manifest)
         result['scope_certificates']=[certificate for snapshot in inventories for certificate in snapshot.get('scope_certificates',[])]

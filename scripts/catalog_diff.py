@@ -109,10 +109,13 @@ def scope_manifest(value=None):
     return data, triples
 
 
+from discovery_export_contracts import documented_export_url
+
 def official_url(url, vendor, channel, manifest):
     parsed = urlparse(url or "")
     hosts = {h for s in manifest["scopes"] if (s["vendor"], s["channel"]) == (vendor, channel) for h in s["official_hosts"]}
-    return parsed.scheme == "https" and not parsed.username and not parsed.password and parsed.hostname in hosts
+    declared=any((s['vendor'],s['channel'])==(vendor,channel) for s in manifest['scopes'])
+    return (parsed.scheme == "https" and not parsed.username and not parsed.password and parsed.hostname in hosts) or (declared and documented_export_url(url,vendor,channel))
 
 
 def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=None):
@@ -213,7 +216,7 @@ def compare_catalogs(database, inventories, previous=None, aliases=(), scopes=No
                     if canonical!=mid:
                         claim=dict(claim,model_id=canonical,observed_model_id=mid,identity_projection='validated_explicit_official_alias_map')
                     qualified_claims.append(claim)
-                projected=native.project(rec.get('native_claims',[])+qualified_claims)
+                projected=native.combine_validated_contexts(rec.get('native_claims',[])+qualified_claims)
                 rec.update(projected)
                 rec['scope_status']='native_channel_observed' if rec['channel_applicability']=='verified' else 'pending_native_channel_applicability'
                 rec['origin_status']='verified_per_ID_native_channel_claim' if rec['channel_applicability']=='verified' and not rec.get('native_claim_errors') else 'pending_confirmation'

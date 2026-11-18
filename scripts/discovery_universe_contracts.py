@@ -6,7 +6,7 @@ an empty/global population. Positive scope certificates require every obligation
 import copy,hashlib,json,re
 from urllib.parse import urlsplit,parse_qs
 from discovery_markdown import formal_text
-from discovery_claim_contract import canonical_id,valid_claim,project
+from discovery_claim_contract import canonical_id,valid_claim,project,direct_alias_map
 
 DIMENSIONS=('population','pagination','identity','native_channel','output','alias_enumeration','lifecycle')
 
@@ -18,8 +18,10 @@ def scope_certificate(vendor,channel,modality,records,*,population,pagination,al
     for mid in ids:
         claims=[c for r in rows if r.get('model_id')==mid for c in r.get('native_claims',[]) if valid_claim(c,vendor=vendor,channel=channel) and c.get('model_id')==mid]
         if not any(c['kind']=='identity' for c in claims):unqualified_ids.append(mid)
-    facts['identity']=dict(state='verified' if ids and not pending and not unqualified_ids else 'unknown',pending_count=len(pending),literal_ids=sorted(ids),unqualified_ids=sorted(unqualified_ids))
-    channel_unknown=[];output_unknown=[];alias_unknown=[];lifecycle_unknown=[]
+    unrecognized_alias=[dict(model_id=r.get('model_id'),declarations=r.get('unrecognized_alias_declarations')) for r in rows if r.get('unrecognized_alias_declarations')]
+    unrecognized_lifecycle=[dict(model_id=r.get('model_id'),declarations=r.get('unrecognized_lifecycle_declarations')) for r in rows if r.get('unrecognized_lifecycle_declarations')]
+    facts['identity']=dict(state='verified' if ids and not pending and not unqualified_ids else 'unknown',pending_count=len(pending),literal_ids=sorted(ids),unqualified_ids=sorted(unqualified_ids),unclassified_candidates=[r for r in pending])
+    channel_unknown=[];output_unknown=[];output_proven=[];output_conflicted=[];alias_unknown=[];lifecycle_unknown=[]
     for mid in sorted(ids):
         local=[r for r in rows if r.get('model_id')==mid]
         claims=[c for r in local for c in r.get('native_claims',[]) if valid_claim(c,vendor=vendor,channel=channel) and c.get('model_id')==mid]
@@ -28,11 +30,16 @@ def scope_certificate(vendor,channel,modality,records,*,population,pagination,al
         if proven.get('channel_applicability')!='verified':channel_unknown.append(mid)
         if proven.get('alias_status') not in ('explicit_official_mapping','explicit_no_aliases'):alias_unknown.append(mid)
         if proven.get('lifecycle_status') not in ('active','listed','retired','deprecated'):lifecycle_unknown.append(mid)
-        if modality in proven.get('unknown_output_modalities',[]) or not proven.get('output_modalities'):output_unknown.append(mid)
+        if modality not in (proven.get('output_modalities') or []):output_unknown.append(mid)
+        if modality in (proven.get('output_modalities') or []):output_proven.append(mid)
+        if modality in (proven.get('unknown_output_modalities') or []):output_conflicted.append(mid)
     facts['native_channel']=dict(state='unknown' if channel_unknown else 'verified',unknown_ids=channel_unknown)
-    facts['output']=dict(state='unknown' if output_unknown else 'verified',unknown_ids=output_unknown,modality=modality)
+    # Only the requested modality's per-ID proof can verify it; another modality's output cannot.
+    facts['output']=dict(state='verified' if output_proven and not output_conflicted else 'unknown',unknown_ids=output_unknown,proven_ids=output_proven,conflicted_ids=output_conflicted,modality=modality)
     for dimension,missing in (('alias_enumeration',alias_unknown),('lifecycle',lifecycle_unknown)):
         if missing:facts[dimension].update(state='unknown',per_ID_unproven=missing)
+    if unrecognized_alias:facts['alias_enumeration'].update(state='unknown',unrecognized_declarations=unrecognized_alias,reason='unrecognized alias declarations retained; not inferred and not ignored')
+    if unrecognized_lifecycle:facts['lifecycle'].update(state='unknown',unrecognized_declarations=unrecognized_lifecycle,reason='unrecognized lifecycle declarations retained; not inferred and not ignored')
     # A verified atom is source-backed and scoped; arbitrary complete=True is not an atom.
     for name in ('population','pagination','alias_enumeration','lifecycle'):
         atom=facts[name]
@@ -41,6 +48,25 @@ def scope_certificate(vendor,channel,modality,records,*,population,pagination,al
             atom.update(state='unknown',reason='missing/mismatched source-qualified obligation evidence')
     closed=bool(ids and not pending and all(facts[d].get('state')=='verified' for d in DIMENSIONS))
     return dict(contract='source_qualified_universe/1',vendor=vendor,channel=channel,modality=modality,complete=closed,population_state='enumerated' if closed else 'not_certified',empty_state='not_an_empty_population_proof' if not ids else 'nonempty_observed',obligations=facts,source_evidence=list(source_evidence),unmet=[d for d in DIMENSIONS if facts[d].get('state')!='verified'])
+
+
+def openai_directory_candidates(text):
+    """Every official-directory entity candidate is retained; only the hyphen grammar is formal."""
+    formal=[];unparsed=[]
+    for number,line in enumerate(formal_text(text).splitlines(),1):
+        if not line.strip() or line.startswith('#'):continue
+        m=re.fullmatch(r'- \[([^]]+)\]\(([^)]+)\):?(.*)',line)
+        if m:
+            path=m[2]
+            if re.fullmatch(r'/api/docs/models/[A-Za-z0-9._-]+(?:\.md)?',path) or re.search(r'Model ID:\s*`[^`]+`',m[3]):
+                formal.append(dict(line=number,quote=line,display_name=m[1],path=path,inline_id=bool(re.search(r'Model ID:\s*`[^`]+`',m[3]))))
+            else:unparsed.append(dict(line=number,quote=line,display_name=m[1],path=path,reason='unreviewed directory link grammar'))
+            continue
+        if re.search(r'\]\((?:https://developers\.openai\.com)?/api/docs/models/[^)]+\)',line):
+            name=re.search(r'\[([^]]+)\]',line);path=re.search(r'\(([^)]+)\)',line)
+            unparsed.append(dict(line=number,quote=line,display_name=name[1] if name else line,path=path[1] if path else None,reason='unparsed directory entity retained, not inferred as a native ID'))
+    return formal,unparsed
+
 
 def unknown(reason,**extra):return dict(state='unknown',reason=reason,**extra)
 
@@ -55,21 +81,19 @@ def native_observation_certificates(snapshot,root_document=None,supplementary=()
         if root_document:
             text=formal_text(root_document['text']);headings=re.findall(r'^## (.+)$',text,re.M)
             known={'Flagship models','Image','Realtime & audio','OpenAI Daybreak','Life sciences','Open-weight models','Embedding models','More models','ChatGPT models','Deprecated models'}
-            bullets=[line for line in text.splitlines() if line.startswith('- ')]
-            matched=[re.fullmatch(r'- \[([^]]+)\]\(([^)]+)\):?(.*)',line) for line in bullets]
+            formal,unparsed=openai_directory_candidates(root_document['text'])
             expected={}
-            bad=[]
-            for line,m in zip(bullets,matched):
-                if not m:bad.append(line);continue
-                path=m[2]
-                if re.fullmatch(r'/api/docs/models/[A-Za-z0-9._-]+\.md',path):expected['https://developers.openai.com'+path]=line
-                elif not re.search(r'Model ID:\s*`[^`]+`',m[3]):bad.append(line)
+            for item in formal:
+                path=item['path']
+                if re.fullmatch(r'/api/docs/models/[A-Za-z0-9._-]+\.md',path):expected['https://developers.openai.com'+path]=item['quote']
             acquired={p.get('source_url') for p in proofs};missing=sorted(set(expected)-acquired)
             extra=[dict(source_url=s.get('source_url'),model_id=r.get('model_id'),detail_url=r.get('detail_url'),display_name=r.get('display_name')) for s in supplementary for r in s.get('records',[]) if r.get('detail_url') or r.get('model_id')]
-            grammar=bool(text.startswith('# All models\n') and 'Deprecated models' in headings and len(headings)==len(set(headings)) and set(headings)<=known and bullets and not bad and not re.search(r'(?i)\b(next page|load more|next_cursor|has_more)\b',text))
+            grammar=bool(text.startswith('# All models\n') and 'Deprecated models' in headings and len(headings)==len(set(headings)) and set(headings)<=known and formal and not unparsed and not re.search(r'(?i)\b(next page|load more|next_cursor|has_more)\b',text))
             evidence=[dict({k:v for k,v in root_document.items() if k!='text'},quote='# All models',line=1,vendor=vendor,channel=channel)]
-            population=dict(state='verified' if grammar and not missing and not extra else 'unknown',reason='all advertised current/deprecated model entities accounted for' if grammar and not missing and not extra else 'directory grammar, missing entity or supplementary source disagreement',evidence=evidence,advertised_entity_count=len(bullets),required_child_urls=sorted(expected),missing_child_urls=missing,unparsed_candidate_lines=bad,supplementary_unreconciled_entities=extra,population_basis='advertised_all_models_current_and_deprecated_NOT_account_entitlement')
-            pagination=dict(state='verified' if grammar and not missing and not consumed.get('errors') else 'unknown',evidence=evidence,reason='formal finite root + every linked detail acquired; EOF, no cursor',required_details=len(expected),acquired_details=len(set(expected)&acquired),capture_failures=consumed.get('errors',[]))
+            for item in unparsed:
+                snapshot.setdefault('records',[]).append(dict(model_id=None,api_id_explicit=False,catalog_observation=True,display_name=item.get('display_name'),raw_token=item.get('display_name'),detail_url=('https://developers.openai.com'+item['path']) if item.get('path','').startswith('/') else item.get('path'),line=item['line'],quote=item['quote'],scope_status='unclassified_directory_candidate',identity_evidence=dict({k:v for k,v in root_document.items() if k!='text'},vendor=vendor,channel=channel,catalog_source_url=root_document.get('source_url'),**item)))
+            population=dict(state='verified' if grammar and not missing and not extra else 'unknown',reason='all advertised current/deprecated model entities accounted for' if grammar and not missing and not extra else 'directory grammar, unparsed retained candidate, missing entity or supplementary source disagreement',evidence=evidence,advertised_entity_count=len(formal)+len(unparsed),required_child_urls=sorted(expected),missing_child_urls=missing,unparsed_candidate_lines=unparsed,retained_unclassified_candidates=unparsed,supplementary_unreconciled_entities=extra,population_basis='advertised_all_models_current_and_deprecated_NOT_account_entitlement')
+            pagination=dict(state='verified' if grammar and not missing and not consumed.get('errors') else 'unknown',evidence=evidence,reason='formal finite root + every linked detail acquired; EOF, no cursor',required_details=len(expected),acquired_details=len(set(expected)&acquired),capture_failures=consumed.get('errors',[]),unparsed_candidate_count=len(unparsed))
     else:
         population=unknown('public usage-price table is not an exhaustive unpriced/retired native universe')
         pagination=unknown('priced table has EOF; no exhaustive catalog/retired termination claim')
@@ -80,11 +104,10 @@ def native_observation_certificates(snapshot,root_document=None,supplementary=()
     mapping_unknown=sorted({r['model_id'] for r in snapshot['records'] if r.get('model_id') and r.get('alias_status') not in ('explicit_official_mapping','explicit_no_aliases')})
     alias_evidence=[c for r in snapshot['records'] for c in r.get('native_claims',[]) if c.get('kind')=='alias']
     all_ids={r['model_id'] for r in snapshot['records'] if r.get('model_id')}
-    targets={r['model_id']:r['alias_of'] for r in snapshot['records'] if r.get('model_id') and r.get('alias_of')}
-    dangling=sorted({target for target in targets.values() if target not in all_ids})
-    chains=sorted(mid for mid,target in targets.items() if target!=mid and target in targets and targets[target]!=target)
-    mapping_unknown=sorted(set(mapping_unknown)|set(chains))
-    if dangling:mapping_unknown=sorted(set(mapping_unknown)|set(targets))
+    try:
+        direct_alias_map(((r['model_id'],r['alias_of']) for r in snapshot['records'] if r.get('model_id') and r.get('alias_of')),known_ids=all_ids)
+    except ValueError as error:
+        mapping_unknown=sorted(set(mapping_unknown)|all_ids);alias=unknown(str(error),mapping_unknown_ids=mapping_unknown) if not isinstance(alias,dict) else alias
     if not mapping_unknown and alias_evidence and not consumed.get('errors') and not any(p.get('id_enumeration_complete') is False for p in proofs):alias=dict(state='verified',evidence=alias_evidence,reason='complete literal lists plus per-ID explicit mapping/no-alias declarations')
     else:alias['mapping_unknown_ids']=mapping_unknown
     return [scope_certificate(vendor,channel,m,snapshot['records'],population=population,pagination=pagination,alias_enumeration=alias,lifecycle=lifecycle) for m in e.get('modalities',[])]
@@ -164,6 +187,7 @@ def xai_catalog_exports(documents):
             row['sources'].append(dict(source_url=doc['url'],source_sha256=doc['sha256'],capture_path=doc.get('capture_path')))
             for alias in aliases:
                 if alias in alias_targets and alias_targets[alias]!=mid:raise ValueError('conflicting literal alias targets')
+                if alias in alias_targets and alias_targets[alias]!=mid:raise ValueError('conflicting literal alias targets')
                 alias_targets[alias]=mid
         if url.path=='/v1/models':base_ids=endpoint_ids
         else:detail_ids.update(endpoint_ids)
@@ -174,4 +198,5 @@ def xai_catalog_exports(documents):
         row['output_modalities']=list(next(iter(declarations))) if len(declarations)==1 else []
         row['output_status']='verified' if len(declarations)==1 else 'unknown_or_conflicting'
         row['lifecycle_status']='account_listed_not_history_or_retirement_proof'
+    alias_targets=direct_alias_map(alias_targets.items(),known_ids=models,aliases_distinct_from_canonicals=True)
     return dict(models=list(models.values()),direct_alias_map=alias_targets,endpoints=endpoints,missing_typed_endpoints=sorted(set(allowed)-set(endpoints)),population='authenticating_API_key_available_models',global_universe_verified=False,subscription_verified=False,historical_lifecycle_verified=False)

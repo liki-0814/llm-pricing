@@ -32,3 +32,7 @@ This adapter adds production observations, not a release exception. The fixed
 These are explicit reviewed grammar subsets, not general HTML/JSON-schema,
 identity, alias or historical-universe solvers. Unknowns remain unknown. A
 public directory being read completely does not prove that directory exhaustive.
+
+* Unparsed directory entities and unrecognized alias/lifecycle declarations are retained as observations and keep the relevant obligation unknown; they never infer a legal ID/status and never close a certificate by omission.
+* A modality certificate is verified only when that modality is present in per-ID `output_modalities`. A proven text output cannot complete an image/audio/video certificate. A snapshot is complete only if every declared modality certificate is complete.
+* Offline xAI export `direct_alias_map` uses the same direct-alias invariant as shared projection: no chains, cycles, self-targets, conflicts or dangling targets. Successful maps remain account-visible evidence, never global, subscription or historical-universe proof.

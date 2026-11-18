@@ -14,7 +14,7 @@ QWEN_INDEXES={QWEN+'model-list-text-generation.md':'Text Generation',QWEN+'model
 XAI_INDEX='https://docs.x.ai/llms.txt'
 
 def access_gate(text):
-    return any(token in text.lower() for token in ('waf_block_deny','gateway-diagnostic','request rejected at client classification gate','captcha challenge'))
+    return any(token in text.lower() for token in ('waf_block_deny','gateway-diagnostic','request rejected at client classification gate','captcha challenge','sessionstorage.x5referer','_____tmd_____/punish','x5secdata='))
 
 def qwen_index(text,url):
     if url not in QWEN_INDEXES or access_gate(text):raise ValueError('unapproved/blocked Qwen published category')
@@ -42,37 +42,62 @@ class CapabilityRows(HTMLParser):
         if tag in ('td','th') and self.cell is not None:self.row.append(' '.join(' '.join(self.cell).split()));self.cell=None
         if tag=='tr' and self.row is not None:self.rows.append(self.row);self.row=None
 
-def qwen_detail(doc,entity):
+def qwen_details(doc,entity):
+    """Lossless per-H1 observations; no cross-version output/provider inheritance.
+
+    A service-provider sentence or heading is not an invocation-ID or authorship
+    declaration. Unsupported/blocked pages remain evidence, never empty catalogs.
+    """
     url=urlsplit(doc['source_url'])
-    if url.scheme!='https' or url.netloc!='www.alibabacloud.com' or not re.fullmatch(r'/help/en/model-studio/[A-Za-z0-9-]+\.md',url.path) or url.query or url.fragment or access_gate(doc['text']):raise ValueError('unapproved/blocked Qwen detail')
-    text=formal_text(doc['text']);matches=[]
-    for number,line in enumerate(text.splitlines(),1):
-        m=re.fullmatch(r'Model ID(?: \(the value of the `model` parameter\))?: `([^`]+)`',line)
-        if m:matches.append((number,line,m[1]))
-    request_id_explicit=bool(matches)
-    service_declarations=[]
-    if not matches:
-        for number,line in enumerate(text.splitlines(),1):
+    if url.scheme!='https' or url.netloc!='www.alibabacloud.com' or not re.fullmatch(r'/help/en/model-studio/[A-Za-z0-9-]+\.md',url.path) or url.query or url.fragment:raise ValueError('unapproved Qwen detail')
+    if access_gate(doc['text']):raise ValueError('access_blocked_HTTP_body_not_model_document')
+    lines=formal_text(doc['text']).splitlines();starts=[];stops=[];snapshots=False
+    for i,line in enumerate(lines):
+        heading=re.match(r'^(#{1,6}) (.*)',line)
+        if not heading:continue
+        level=len(heading[1]);label=re.sub(r'\s*<span[^>]*>.*?</span>','',heading[2]).strip()
+        if level==1:starts.append(i);snapshots=False
+        elif level==2:
+            if snapshots or label=='Snapshot Versions':stops.append(i)
+            snapshots=label=='Snapshot Versions'
+        elif level==3 and snapshots:starts.append(i)
+    if not starts:starts=[0]
+    elif any(line.strip() for line in lines[:starts[0]]):raise ValueError('unclassified preamble before model entities')
+    rows=[]
+    for start,next_start in zip(starts,starts[1:]+[len(lines)]):
+        end=min([next_start]+[i for i in stops if start<i<next_start])
+        block=lines[start:end];parameters=[];services=[];declarations=[];outputs=[];provider=[];evidence=[]
+        for local,line in enumerate(block,start+1):
+            m=re.fullmatch(r'Model ID(?: \(the value of the `model` parameter\))?: `([^`]+)`',line)
+            if m:parameters.append((local,line,m[1]));declarations.append(dict(kind='explicit_model_parameter',line=local,quote=line,literal=m[1]))
             m=re.fullmatch(r'The inference service provider for `([^`]+)` is ([^.]+)\.',line)
-            if m:service_declarations.append(dict(line=number,quote=line,provider=m[2]));matches.append((number,line,m[1]))
-    if len(matches)!=1 or canonical_id(matches[0][2])!=matches[0][2]:raise ValueError('unique formal model parameter/service declaration missing')
-    number,identity_quote,mid=matches[0];outputs=[];provider=[];evidence=[]
-    for ln,line in enumerate(text.splitlines(),1):
-        if 'Output Modality' not in line and 'Model Provider' not in line:continue
-        parser=CapabilityRows();parser.feed(line);parser.close()
-        for row in parser.rows:
-            for index,label in enumerate(row[:-1]):
-                if label=='Output Modality':
-                    values=row[index+1].split();known={'Text':'text','Image':'image','Video':'video','Audio':'audio'}
-                    if not values or any(v not in known for v in values):raise ValueError('unreviewed explicit output modality')
-                    outputs.append(set(known[v] for v in values));evidence.append(dict(line=ln,quote=line))
-                if label=='Model Provider':provider.append(row[index+1])
-    agreed=set.intersection(*outputs) if outputs else set();possible=set.union(*outputs) if outputs else set()
-    proof=dict(qualified(dict(doc,vendor='阿里云 Qwen',channel='pay_as_you_go',catalog_source_url=QWEN+'models')),identity_quote=identity_quote,identity_line=number,output_declarations=evidence,model_provider_declarations=provider)
-    # A documented Model Studio invocation ID is NOT automatically an Alibaba-origin model.
-    # Without explicit provider evidence retain a nonformal observation, never native certify.
-    native=bool(request_id_explicit and provider and set(provider)<={'Alibaba Cloud','Qwen','Tongyi Qianwen','Wan','HappyHorse'})
-    return dict(model_id=mid if native else None,observed_model_id=mid,api_id_explicit=native,catalog_observation=not native,display_name=entity['display_name'],identity_evidence=proof,request_parameter_ID_explicit=request_id_explicit,inference_service_provider_evidence=service_declarations,output_modalities=sorted(agreed),unknown_output_modalities=sorted(possible-agreed) if outputs else ['text','image','audio','video'],native_vendor_status='verified_explicit_provider' if native else 'unknown_provider_not_explicit',channel_applicability='unknown',channel_unknown_reasons=['platform request declaration does not establish native-author global catalog or account entitlement'],lifecycle_status='unconfirmed',alias_status='unknown_no_direct_mapping',scope_status='pending_catalog_provider_and_universe',line=number)
+            if m:services.append((local,line,m[1]));declarations.append(dict(kind='service_provider_NOT_origin',line=local,quote=line,literal=m[1],provider=m[2]))
+            if 'Output Modality' not in line and 'Model Provider' not in line:continue
+            parser=CapabilityRows();parser.feed(line);parser.close()
+            for cells in parser.rows:
+                for index,label in enumerate(cells[:-1]):
+                    if label=='Output Modality':
+                        values=cells[index+1].split();known={'Text':'text','Image':'image','Video':'video','Audio':'audio'}
+                        if not values or any(v not in known for v in values):raise ValueError('unreviewed explicit output modality')
+                        outputs.append(set(known[v] for v in values));evidence.append(dict(line=local,quote=line))
+                    if label=='Model Provider':provider.append(cells[index+1])
+        literals={x[2] for x in parameters or services};mid=next(iter(literals)) if len(literals)==1 else None
+        valid_literal=bool(mid and canonical_id(mid)==mid);explicit=bool(parameters and valid_literal and len({p[2] for p in parameters})==1)
+        native=bool(explicit and provider and set(provider)<={'Alibaba Cloud','Qwen','Tongyi Qianwen','Wan','HappyHorse'})
+        header=re.sub(r'^#{1,6} ','',block[0]) if block and block[0].startswith('#') else entity['display_name']
+        header=re.sub(r'\s*<span[^>]*>.*?</span>','',header).strip()
+        agreed=set.intersection(*outputs) if outputs else set();possible=set.union(*outputs) if outputs else set()
+        first=(parameters or services or [(start+1,block[0] if block else '',None)])[0]
+        proof=dict(qualified(dict(doc,vendor='阿里云 Qwen',channel='pay_as_you_go',catalog_source_url=QWEN+'models')),identity_quote=first[1],identity_line=first[0],formal_declarations=declarations,output_declarations=evidence,model_provider_declarations=provider,entity_heading=header,entity_start_line=start+1,entity_end_line=end)
+        rows.append(dict(model_id=mid if native else None,observed_model_id=mid if valid_literal else None,observed_entity_label=header,api_id_explicit=native,catalog_observation=not native,display_name=header,identity_evidence=proof,request_parameter_ID_explicit=explicit,inference_service_provider_evidence=[d for d in declarations if d['kind']=='service_provider_NOT_origin'],output_modalities=sorted(agreed),unknown_output_modalities=sorted(possible-agreed) if outputs else ['text','image','audio','video'],output_conflict=len({tuple(sorted(o)) for o in outputs})>1,native_vendor_status='verified_explicit_provider' if native else 'unknown_provider_not_explicit',channel_applicability='unknown',channel_unknown_reasons=['platform/service-provider declaration does not establish native author and PAYG entitlement'],lifecycle_status='unconfirmed',alias_status='unknown_no_direct_mapping',scope_status='pending_catalog_provider_and_universe',line=first[0],observation_status='literal_parameter_observed' if explicit else 'formal_service_entity_observed' if valid_literal else 'entity_heading_only_NOT_API_ID',unclassified_literal_declarations=declarations if len(literals)!=1 else []))
+    return rows
+
+
+def qwen_detail(doc,entity):
+    """Single-entity compatibility surface; multi-entity callers use qwen_details."""
+    rows=qwen_details(doc,entity)
+    if len(rows)!=1:raise ValueError('multiple model entities require qwen_details')
+    return rows[0]
 
 def xai_subscription_urls(text):
     if access_gate(text):raise ValueError('blocked official documentation index')

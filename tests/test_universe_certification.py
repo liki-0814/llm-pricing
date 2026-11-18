@@ -83,4 +83,39 @@ class XaiApiExportTests(unittest.TestCase):
   other=self.row();other['id']='grok-other'
   with self.assertRaises(ValueError):u.xai_catalog_exports([self.export('models',{'data':[self.row(),other]})])
 
+
+class AtlasCertificateContracts(unittest.TestCase):
+ def test_unparsed_directory_and_unrecognized_declarations_are_retained_and_not_closed(self):
+  snap=dict(vendor='OpenAI',channel='pay_as_you_go',source_url=n.OA,records=[],complete=False,coverage_evidence={'modalities':['text','image'],'native_claim_consumption':{'source_proofs':[{'source_url':'https://developers.openai.com/api/docs/models/a.md','id_enumeration_complete':True}],'errors':[]}})
+  root=doc('# All models\n## Flagship models\n- [A](/api/docs/models/a.md)\n## Deprecated models\n### Legacy models\n1. [B](/api/docs/models/b.md)\n',n.OA)
+  rows,proof=n.openai_detail(doc('Model ID: `A`\nAliases: None\nStatus: Active\n## Model details\n- Output modalities: text\n## Endpoints\n| Endpoint | Route | Support |\n| --- | --- | --- |\n| Responses | `v1/responses` | Supported |\n## Snapshots\n- `A`', 'https://developers.openai.com/api/docs/models/a.md'),{})
+  snap['records']=rows
+  certs=u.native_observation_certificates(snap,root)
+  self.assertTrue(any(r.get('scope_status')=='unclassified_directory_candidate' and r.get('display_name')=='B' and r.get('quote') for r in snap['records']))
+  self.assertTrue(all(c['complete'] is False for c in certs))
+ def test_text_proof_does_not_complete_image_certificate(self):
+  rows,_=n.openai_detail(doc('Model ID: `A`\nAliases: None\nStatus: Active\n## Model details\n- Output modalities: text\n## Endpoints\n| Endpoint | Route | Support |\n| --- | --- | --- |\n| Responses | `v1/responses` | Supported |\n## Snapshots\n- `A`','https://developers.openai.com/api/docs/models/a.md'),{})
+  atoms={k:dict(state='verified',evidence=[dict(doc('catalog'),vendor='OpenAI',channel='pay_as_you_go',quote='All documented models',line=1)]) for k in ('population','pagination','alias_enumeration','lifecycle')}
+  text=u.scope_certificate('OpenAI','pay_as_you_go','text',rows,**atoms);image=u.scope_certificate('OpenAI','pay_as_you_go','image',rows,**atoms)
+  self.assertTrue(text['complete']);self.assertFalse(image['complete']);self.assertIn('output',image['unmet'])
+ def test_unrecognized_alias_and_lifecycle_keep_positive_row_and_refuse_closure(self):
+  rows,_=n.openai_detail(doc('Model ID: `A`\nAliases: None\nStatus: Active\n## Model details\n- Output modalities: text\n## Endpoints\n| Endpoint | Route | Support |\n| --- | --- | --- |\n| Responses | `v1/responses` | Supported |\n## Snapshots\n- `A`\nAliases: `B`\nStatus: Unavailable','https://developers.openai.com/api/docs/models/a.md'),{})
+  self.assertEqual(rows[0]['model_id'],'A');self.assertTrue(rows[0]['unrecognized_alias_declarations']);self.assertTrue(rows[0]['unrecognized_lifecycle_declarations'])
+  atoms={k:dict(state='verified',evidence=[dict(doc('catalog'),vendor='OpenAI',channel='pay_as_you_go',quote='All documented models',line=1)]) for k in ('population','pagination','alias_enumeration','lifecycle')}
+  self.assertFalse(u.scope_certificate('OpenAI','pay_as_you_go','text',rows,**atoms)['complete'])
+ def test_xai_export_direct_aliases_reject_chains_and_cycles(self):
+  def export(rows):
+   raw=json.dumps({'data':rows}).encode();return dict(url='https://api.x.ai/v1/models',body=raw,sha256=hashlib.sha256(raw).hexdigest(),http_status=200,capture_kind='http_body',channel='pay_as_you_go')
+  def model(mid,aliases):return dict(id=mid,object='model',owned_by='xai',aliases=aliases)
+  ok=u.xai_catalog_exports([export([model('A',['alias-A'])])]);self.assertEqual(ok['direct_alias_map'],{'alias-A':'A'});self.assertFalse(ok['global_universe_verified'])
+  with self.assertRaises(ValueError):u.xai_catalog_exports([export([model('A',['B']),model('B',['C'])])])
+  with self.assertRaises(ValueError):u.xai_catalog_exports([export([model('A',['B']),model('B',['A'])])])
+ def test_qwen_snapshot_versions_are_separate_and_challenge_is_not_a_model(self):
+  body='# qwen-source\nThe inference service provider for `qwen-source` is Alibaba Cloud Model Studio.\n<table><tr><td>Output Modality</td><td>Text</td></tr></table>\n## Snapshot Versions\n### qwen-source-2026-01-01\nThe inference service provider for `qwen-source-2026-01-01` is Alibaba Cloud Model Studio.\n<table><tr><td>Output Modality</td><td>Image</td></tr></table>\n'
+  rows=d.qwen_details(doc(body,url='https://www.alibabacloud.com/help/en/model-studio/qwen-source.md'),{'display_name':'qwen-source'})
+  self.assertEqual([r['observed_model_id'] for r in rows],['qwen-source','qwen-source-2026-01-01'])
+  self.assertEqual(rows[0]['output_modalities'],['text']);self.assertEqual(rows[1]['output_modalities'],['image']);self.assertTrue(all(r['model_id'] is None for r in rows))
+  with self.assertRaises(ValueError) as err:d.qwen_details(doc('sessionStorage.x5referer = 1; _____tmd_____/punish x5secdata=abc',url='https://www.alibabacloud.com/help/en/model-studio/qwen-source.md'),{'display_name':'x'})
+  self.assertIn('access_blocked',str(err.exception))
+
 if __name__=='__main__':unittest.main()
