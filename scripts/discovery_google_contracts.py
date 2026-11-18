@@ -248,7 +248,7 @@ def detail_models(value,reference_models=None):
  return result
 
 def prove(value,source,docs):
- records=[];proof=dict(verified=False,method='native_Google_directory_tables_plus_literal_model_properties_and_versions',scope='all documented native directory model endpoints and explicit detail variants; text/video output, not account entitlement',modalities=['text','video'])
+ records=[];proof=dict(verified=False,method='native_Google_directory_tables_plus_literal_model_properties_and_versions',scope='all documented native directory model endpoints and explicit detail variants; text/image/video independently gated by explicit output, not account entitlement',modalities=['text','image','video'])
  try:
   if (source.get('vendor'),source.get('channel'),source.get('url'),source.get('role'),source.get('modalities'))!=('Google Gemini','pay_as_you_go',ROOT_URL,'catalog',['text','image','video']):raise ValueError('native source/channel contract mismatch')
   rows,evidence=directory(value)
