@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "deepseek-v4-pro",
@@ -86,6 +86,7 @@
     "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
     "extra_sources": [],
     "last_updated": "2026-10-11",
+    "price_observations": [],
     "notes": "表中价格为高峰价。最大输出 384K；官方页未列缓存写入价。",
     "reasoning_effort": {
       "supported": true,

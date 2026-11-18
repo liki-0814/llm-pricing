@@ -69,6 +69,24 @@
     if (!decision.estimable) throw error(decision.status === "history_unknown" ? "HISTORICAL_PRICE_UNAVAILABLE" : "MODEL_RETIRED", decision.status === "history_unknown" ? "Retirement instant is unknown; observation time is not a historical availability boundary" : "Model retired at this instant; routing aliases do not prove the old entity is available");
     return decision;
   }
+  // Observation is evidence, not the vendor's effective date. An explicit valid_from
+  // may authorize older history; otherwise only instants from observed_at are known.
+  function evidenceAt(e, at, rawAt) {
+    var start = Date.parse(e.valid_from || e.observed_at), end = e.valid_until ? Date.parse(e.valid_until) : Infinity;
+    if (!Number.isFinite(start) || (e.valid_until && !Number.isFinite(end)) || start >= end)
+      throw error("INVALID_DATA", "Invalid price evidence interval");
+    if (rawAt && rawAt.length === 10) throw error("TIME_REQUIRED", "Field evidence requires an explicit instant with timezone");
+    if (at.getTime() < start) throw error("HISTORICAL_PRICE_UNAVAILABLE", "Requested field has no verified history before " + (e.valid_from || e.observed_at));
+    if (at.getTime() >= end) throw error("PRICE_EXPIRED", "Field evidence interval ended at " + e.valid_until);
+  }
+  function priceEvidence(model, at, rawAt, inputTokens, usedFields, warnings) {
+    (model.price_observations || []).forEach(function (e) {
+      if (e.input_tokens_gt !== null && inputTokens <= e.input_tokens_gt) return;
+      if (e.fields.indexOf("*") < 0 && !e.fields.some(function (k) { return usedFields.indexOf(k) >= 0; })) return;
+      evidenceAt(e, at, rawAt);
+      warnings.push("Selected fields verified at " + e.observed_at + "; observed_at is not an official effective date.");
+    });
+  }
   var TOKEN_USAGE = { textInputTokens: "text_input", textCachedInputTokens: "text_cached_input", textOutputTokens: "text_output",
     imageInputTokens: "image_input", imageCachedInputTokens: "image_cached_input", imageOutputTokens: "image_output",
     videoInputTokens: "video_input", videoOutputTokens: "video_output", audioInputTokens: "audio_input" };
@@ -91,6 +109,7 @@
     function count(k, integer) { return usage[k] === undefined ? 0 : number(usage[k], k, integer); }
     function unavailable(what) { return error("PRICE_UNAVAILABLE", what + " has no verified price for tier " + tier); }
     var parts = {}, units = {}, warnings = [];
+    priceEvidence(model, quoteAt, options.at, 0, ["*"], warnings);
     function add(key, amount, rate, unit, what) {
       if (!amount) return;
       if (rate === null || rate === undefined) throw unavailable(what);
@@ -126,7 +145,15 @@
       if (row.basis === "approximate") warnings.push("Per-second price is approximate (vendor publishes only an approximate figure).");
     }
     var inputImages = count("inputImages", true);
-    add("input_images", inputImages, tier === "batch" && mp.input_image_price_batch !== null ? mp.input_image_price_batch : mp.input_image_price, "per_image", "input image");
+    var allowance = mp.input_image_allowance, billableImages = inputImages;
+    if (allowance) {
+      if (tier !== "standard" && mp.batch_supported !== true) throw unavailable("input-image allowance under undocumented Batch");
+      if (allowance.scope !== "per_task" || !Number.isSafeInteger(allowance.free_quantity) || allowance.free_quantity < 0)
+        throw error("INVALID_DATA", "Invalid per-task input image allowance");
+      billableImages = Math.max(0, inputImages - allowance.free_quantity);
+      warnings.push("One estimateMedia call represents one task; split separate tasks. First " + allowance.free_quantity + " input images per task are included.");
+    }
+    add("input_images", billableImages, tier === "batch" && mp.input_image_price_batch !== null ? mp.input_image_price_batch : mp.input_image_price, "per_image", "input image");
     Object.keys(TOKEN_USAGE).forEach(function (k) {
       var n = count(k, true); if (!n) return;
       var tp = mp.token_pricing && mp.token_pricing[tier];
@@ -137,7 +164,8 @@
     if (!Number.isFinite(total)) throw error("INVALID_ARGUMENT", "Usage is too large to estimate the total");
     return { model_id: model.id, modality: model.modality, currency: model.currency, unit: model.unit, region: model.billing.region, channel: model.billing.channel, availability: available, total: total, breakdown: parts, unit_prices: units,
       tier: tier, price_basis: model.price_basis, billing: model.billing, warnings: warnings,
-      excluded_costs: ["server_tools", "grounding", "taxes", "free_quota", "unrecorded_multimodal_rates"] };
+      billing_quantities: { input_images: {total: inputImages, included: inputImages - billableImages, billable: billableImages, scope: allowance ? "per_task" : "all_images"} },
+      excluded_costs: ["server_tools", "grounding", "taxes", "account_free_quota", "unrecorded_multimodal_rates"] };
   }
   function estimate(model, usage, options) {
     if (model && model.modality && model.modality !== "text")
@@ -169,7 +197,7 @@
       throw error("LIMIT_EXCEEDED", "outputTokens exceeds the documented maximum");
     if (model.context_length !== null && counts.inputTokens > model.context_length)
       throw error("LIMIT_EXCEEDED", "inputTokens exceeds the recorded context window");
-    if (day > model.last_updated) warnings.push("Prices are based on the " + model.last_updated + " snapshot and announced schedules; later unannounced changes are not known.");
+    if (day > model.last_updated) warnings.push("Base prices snapshot: " + model.last_updated + "; selected fields may have separate observation timestamps. Announced schedules apply; later unannounced changes are not known.");
     var cap = model.estimation_limits;
     if (cap && (counts.inputTokens > cap.max_input_tokens || counts.outputTokens > cap.max_output_tokens))
       throw error("LIMIT_EXCEEDED", "Usage exceeds the verified conservative estimation scope: " + cap.note);
@@ -180,6 +208,15 @@
         tier = t;
       }
     });
+    var used = [];
+    if (counts.inputTokens - counts.cachedInputTokens - counts.cacheWriteTokens - counts.cacheWrite1hTokens - counts.cacheWrite12hTokens) used.push("input");
+    if (counts.outputTokens) used.push("output");
+    if (counts.cachedInputTokens) used.push("cached_input", (options.cacheType || model.billing.cached_input_type) + "_read");
+    if (counts.cacheWriteTokens) used.push("cache_write", "explicit_write");
+    if (counts.cacheWrite1hTokens) used.push("explicit_write_1h");
+    if (counts.cacheWrite12hTokens) used.push("explicit_write_12h");
+    if (counts.storageTokenHours) used.push("storage_per_1M_tokens_hour");
+    priceEvidence(model, at, options.at, counts.inputTokens, used, warnings);
     if (tier) { PRICE.forEach(function (k) { prices[k] = tier[k]; }); if (tier.cache_pricing) cache = Object.assign(cache, tier.cache_pricing); }
     var schedule = model.off_peak_schedule;
     if (model.has_off_peak) {
@@ -223,15 +260,26 @@
     if (selected !== "standard" && !svc) throw error("UNSUPPORTED_SERVICE_TIER", "No documented price for service tier " + selected);
     var unknown = {};
     function applyService(s) {
+      var activeMultiplier = s.multiplier;
+      if ((s.multiplier_schedule || []).length && options.at && options.at.length === 10)
+        throw error("TIME_REQUIRED", "Scheduled service tier requires an explicit instant with timezone");
+      (s.multiplier_schedule || []).forEach(function (e) {
+        if (!Number.isFinite(Date.parse(e.effective_from))) throw error("INVALID_DATA", "Invalid service schedule instant");
+        if (at.getTime() >= Date.parse(e.effective_from)) activeMultiplier = e.multiplier;
+      });
+      var ratio = activeMultiplier / s.multiplier;
+      if (!Number.isFinite(ratio) || ratio <= 0) throw error("INVALID_DATA", "Invalid service multiplier");
+      if (s.status_observation && at.getTime() >= Date.parse(s.status_observation.observed_at))
+        warnings.push("Service tier " + s.name + " is " + s.status_observation.status + " (observed " + s.status_observation.observed_at + "); model availability is unchanged.");
       PRICE.forEach(function (k) {
         var explicit = Object.prototype.hasOwnProperty.call(s.pricing, k);
         if (explicit) { prices[k] = s.pricing[k]; unknown[k] = prices[k] === null; }
         else if (s.multipliers[k] === null) unknown[k] = true;
-        else if (prices[k] !== null) prices[k] *= s.multipliers[k];
+        else if (prices[k] !== null) prices[k] *= s.multipliers[k] * ratio;
       });
       CACHE.forEach(function (k) {
         if (s.multipliers[k] === null) unknown[k] = true;
-        else if (cache[k] !== null) cache[k] *= s.multipliers[k];
+        else if (cache[k] !== null) cache[k] *= s.multipliers[k] * ratio;
       });
     }
     if (svc) applyService(svc);

@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "minimax-h3-context-ir",
@@ -58,6 +58,21 @@
     "source_url": "https://platform.minimax.io/docs/pricing/overview",
     "extra_sources": [],
     "last_updated": "2026-11-18",
+    "price_observations": [
+      {
+        "observed_at": "2026-11-18T08:27:00+08:00",
+        "valid_from": null,
+        "valid_until": null,
+        "fields": [
+          "*"
+        ],
+        "input_tokens_gt": null,
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ],
+        "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+      }
+    ],
     "notes": "官方页面名称/调用写法为 MiniMax-H3-Context-IR。库存 ID 按库内小写连字符约定记录为 minimax-h3-context-ir，不与其他 H3 型号合并。官方定价页 Context-IR 表列出输入 $0.9 / 输出 $3.6 / 百万 token。缓存命中未公布；写入按 MiniMax 无独立 cache_write 计费记 n/a。上下文窗口本轮未核。",
     "reasoning_effort": {
       "supported": null,

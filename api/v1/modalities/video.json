@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "see_media_pricing",
     "unit_label": "model.currency; see each model's media_pricing (per image / per second of video / per 1M tokens)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 10
   },
   "modality": {
@@ -89,6 +89,7 @@
         "https://docs.x.ai/developers/models/grok-imagine-video-1.5"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：480p $0.08、720p $0.14、1080p $0.25；输入图片 $0.01/张；最长 15 秒。默认生成音频，generate_audio=false 为无声视频，官方未列单独的无声价格，故音频维度记 any。支持 Batch。别名 grok-imagine-video-1.5-preview、-2026-05-30。",
       "reasoning_effort": {
         "supported": false,
@@ -240,6 +241,7 @@
         "https://docs.x.ai/developers/models/grok-imagine-video-1.5-lite"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：480p $0.02、720p $0.03、1080p $0.14（由 720p 上采样）；输入图片 $0.01/张。支持 Batch。",
       "reasoning_effort": {
         "supported": false,
@@ -393,6 +395,7 @@
         "https://ai.google.dev/gemini-api/docs/video"
       ],
       "last_updated": "2026-11-06",
+      "price_observations": [],
       "notes": "Token 计价：输入 $1.50（文本/图像/视频/音频）、文本输出 $9.00、视频输出 $17.50 / 百万 token；按 720p 视频 5,792 token/秒计，官方称约 $0.10/秒（近似值）。官方未列 360p / 1080p / 4k 的单价，待核实。 Effective December 3, 2026, API requests to gemini-omni-1.1-flash automatically route to gemini-omni-1.2-flash and are billed at 1.2 rates (video output $12/1M tokens vs current 1.1 $17.50; ~$0.07/s @720p). Current 1.1 Standard prices still apply until then. Source: https://ai.google.dev/gemini-api/docs/pricing (changelog 2026-11-05). Schema note: media models cannot yet store price_schedule; route recorded in notes only.",
       "reasoning_effort": {
         "supported": false,
@@ -579,6 +582,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/wan3-video-generation-guide"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：480P $0.05、720P $0.10、1080P $0.20（原价，不含限时 7 折促销）。计费时长 = 输入视频秒数 + 输出视频秒数；2–30 秒、30 fps，原生音频可开关（价格不区分）。预览版；新用户免费额度 30 秒。",
       "reasoning_effort": {
         "supported": false,
@@ -737,6 +741,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/wan3-video-generation-guide"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：480P $0.068、720P $0.14、1080P $0.28。",
       "reasoning_effort": {
         "supported": false,
@@ -885,6 +890,7 @@
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：2K $0.13、768P $0.08；输入视频同价；输入图片 $0.04/张（每个任务前 5 张免费）。",
       "reasoning_effort": {
         "supported": false,
@@ -1020,6 +1026,7 @@
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
       "last_updated": "2026-10-31",
+      "price_observations": [],
       "notes": "按秒计价：768P $0.06、480P $0.04（输入视频同价）；输入图片 $0.03/张。",
       "reasoning_effort": {
         "supported": false,
@@ -1155,6 +1162,7 @@
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：768P $0.04、480P $0.025（输入视频同价）；输入图片 $0.02/张。",
       "reasoning_effort": {
         "supported": false,
@@ -1290,6 +1298,7 @@
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：768P 输出 $0.08、输入视频 $0.143；480P 输出 $0.05、输入视频 $0.0553；输入图片 $0.074/张（每个任务前 2 张免费）。属官方“扩展模型”（Extended Models）。",
       "reasoning_effort": {
         "supported": false,
@@ -1425,6 +1434,21 @@
       "source_url": "https://platform.minimax.io/docs/pricing/overview",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方页面名称/调用写法为 MiniMax-H3-Regeneration。库存 ID 按库内小写连字符约定记录为 minimax-h3-regeneration，不与其他 H3 型号合并。官方定价页：将 H3 的 768P 视频再生成到 2K。输出与输入视频均为 $0.05/秒；输入图 $0.025/张，前 5 张免费。",
       "reasoning_effort": {
         "supported": false,
@@ -1473,6 +1497,14 @@
         ],
         "input_image_price": 0.025,
         "input_image_price_batch": null,
+        "input_image_allowance": {
+          "free_quantity": 5,
+          "scope": "per_task",
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "每次 estimateMedia 代表一个再生成任务，inputImages 为原始总输入张数；前5张含在任务内，仅超额按张计费。不同任务请分别调用，不是账户免费余额。"
+        },
         "batch_supported": null,
         "promotion": null,
         "billing_note": "每个任务前 5 张输入图片免费，超出部分按 input_image_price 计价。",

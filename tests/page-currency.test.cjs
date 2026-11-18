@@ -42,3 +42,26 @@ test("page single-currency filter controls rows, symbols, cheapest and v2 detail
   assert.ok(el("tbody").innerHTML.includes("2026-12-07"));
   assert.ok(el("tbody").innerHTML.includes("具体时刻及时区待确认"));
 });
+
+
+test("page details disclose field observation, tier schedule, and per-task image basis (DOM harness only)", async () => {
+  for (const [query, checks] of [
+    ['?open=qwen4-max,gpt-6.2-astra,claude-opus-4.8', ['观察前未知历史拒绝估价','America/Los_Angeles','2027-03-01T00:00:00-08:00','基准×3','档状态 deprecated']],
+    ['?modality=video&open=minimax-h3-regeneration', ['每任务前 5 张输入图免费','传入总张数','不需手减']]
+  ]) {
+    const elements = new Map();
+    const el = id => {
+      if (!elements.has(id)) elements.set(id, {value:'',innerHTML:'',options:[],listeners:{},hidden:false,classList:{toggle(){}},setAttribute(){},addEventListener(t,f){this.listeners[t]=f;}});
+      return elements.get(id);
+    };
+    const page=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/page-models.json'),'utf8'));
+    const ctx={URLSearchParams,URL,console,location:{search:query,pathname:'/',hash:''},history:{replaceState(){}},
+      document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){},querySelector:()=>({clientWidth:1000,classList:{toggle(){}}}),documentElement:{style:{setProperty(){}}}},
+      window:{addEventListener(){}},setTimeout(){},LLMAvailability:availability,LP:{slug:x=>x,esc:x=>String(x??'')},fetch:async()=>({ok:true,json:async()=>page})};
+    vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../assets/app.js'),'utf8'),ctx);
+    await new Promise(setImmediate);
+    assert.equal(el('error').innerHTML,'');
+    const html=[...elements.values()].map(e=>e.innerHTML).join('');
+    for(const value of checks) assert.ok(html.includes(value),value);
+  }
+});

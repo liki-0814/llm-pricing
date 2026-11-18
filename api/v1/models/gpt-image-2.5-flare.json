@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "gpt-image-2.5-flare",
@@ -61,6 +61,7 @@
       "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
     ],
     "last_updated": "2026-10-29",
+    "price_observations": [],
     "notes": "Token 计价：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token；Batch 为标准价一半。官方定价页未列 2.5 的按张价格（按尺寸/质量），按 token 结算，按张价格待核实。",
     "reasoning_effort": {
       "supported": false,

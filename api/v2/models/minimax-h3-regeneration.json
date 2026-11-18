@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "minimax-h3-regeneration",
@@ -58,6 +58,21 @@
     "source_url": "https://platform.minimax.io/docs/pricing/overview",
     "extra_sources": [],
     "last_updated": "2026-11-18",
+    "price_observations": [
+      {
+        "observed_at": "2026-11-18T08:27:00+08:00",
+        "valid_from": null,
+        "valid_until": null,
+        "fields": [
+          "*"
+        ],
+        "input_tokens_gt": null,
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ],
+        "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+      }
+    ],
     "notes": "官方页面名称/调用写法为 MiniMax-H3-Regeneration。库存 ID 按库内小写连字符约定记录为 minimax-h3-regeneration，不与其他 H3 型号合并。官方定价页：将 H3 的 768P 视频再生成到 2K。输出与输入视频均为 $0.05/秒；输入图 $0.025/张，前 5 张免费。",
     "reasoning_effort": {
       "supported": false,
@@ -106,6 +121,14 @@
       ],
       "input_image_price": 0.025,
       "input_image_price_batch": null,
+      "input_image_allowance": {
+        "free_quantity": 5,
+        "scope": "per_task",
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ],
+        "note": "每次 estimateMedia 代表一个再生成任务，inputImages 为原始总输入张数；前5张含在任务内，仅超额按张计费。不同任务请分别调用，不是账户免费余额。"
+      },
       "batch_supported": null,
       "promotion": null,
       "billing_note": "每个任务前 5 张输入图片免费，超出部分按 input_image_price 计价。",

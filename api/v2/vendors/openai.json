@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 16
   },
   "vendor": {
@@ -97,6 +97,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-11-17",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价持续到 2026-11-30（原文 until November 30, 2026；具体时刻和时区未给出，不自动涨价）。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $10.0（长上下文 $20.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -328,6 +329,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $18.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -541,6 +543,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.4、缓存读取 $0.04、缓存写入 $0.5、输出 $1.8。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $0.5（长上下文 $1.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -754,6 +757,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $20.0、缓存读取 $2.0、缓存写入 $25.0、输出 $75.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $25.0（长上下文 $50.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -990,6 +994,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -1203,6 +1208,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.2、缓存读取 $0.02、缓存写入 $0.25、输出 $0.75。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $0.25（长上下文 $0.5），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -1416,6 +1422,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.2、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -1649,6 +1656,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-27",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $2.0、缓存读取 $0.1、缓存写入 $2.5、输出 $7.5。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍（官方定价页未列 Ultrafast）。数据驻留端点加收 10%（where available）。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $2.5（长上下文 $5.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。 2026-10-27 新增（OpenAI 新模型）。",
       "reasoning_effort": {
         "supported": true,
@@ -1859,6 +1867,21 @@
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [],
       "last_updated": "2026-11-01",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": 272000,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "OpenAI 定价页“Legal model configurations”法律场景配置（GPT-6 Astra for Law）。短上下文促销价输入 $10.00 / 输出 $50.00 / 缓存读取 $1.00（每百万 token），官方称至少持续到 2026-12-31；到期后价格未公布。长上下文官方已列出 $20 / $75 / $2；缓存写入短/长上下文原文均为“—”，不是 0，缺价字段估价须拒绝。未列 Batch/Flex/Fast；模型专页 /api/docs/models/gpt-6-astra-law 仍 404，不得据此推断退役；不借用 gpt-6-astra 或 gpt-6.2-astra-law 的未公布字段。",
       "reasoning_effort": {
         "supported": null,
@@ -2004,6 +2027,7 @@
         "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token；Batch 为标准价一半。官方定价页未列 2.5 的按张价格（按尺寸/质量），按 token 结算，按张价格待核实。",
       "reasoning_effort": {
         "supported": false,
@@ -2151,6 +2175,7 @@
         "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token；Batch 为标准价一半。官方定价页未列 2.5 的按张价格（按尺寸/质量），按 token 结算，按张价格待核实。",
       "reasoning_effort": {
         "supported": false,
@@ -2305,6 +2330,21 @@
         "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $16.0、缓存读取 $0.80、缓存写入 $20.0、输出 $60.0。Batch 为标准价 50%，Fast 为 2 倍。本轮 Flex 表未列出该型号，不编造 Flex 价。Ultrafast 当前为标准价 3 倍，至 2027-02-28；自 2027-03-01 起 6 倍（Pacific time）。数据驻留端点加收 10%。上下文窗口 1,050,000 tokens（最大输出 128K），来自官方模型页。相对昨日定价页快照新出现，不得写成官方发布日就是今天。不与 gpt-6-astra 合并。",
       "reasoning_effort": {
         "supported": null,
@@ -2400,7 +2440,7 @@
         {
           "name": "ultrafast",
           "multiplier": 3.0,
-          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。官方：3 times the Standard rate through February 28, 2027, and 6 times the Standard rate starting March 1, 2027 (Pacific time)。当前已生效倍数为 3；2027-03-01 起 6 倍的精确 Pacific 时刻边界后须再核，价格库 service_tiers 不能按日期自动切换倍数，到期后不得继续默认按 3 倍估价。",
+          "note": "Responses API service_tier=ultrafast：至 2027-02-28（Pacific time）3 倍；2027-03-01 Pacific 零点起 6 倍，已由 multiplier_schedule 执行；各上下文档和缓存同倍率。",
           "multipliers": {
             "input": 3.0,
             "output": 3.0,
@@ -2416,6 +2456,17 @@
           "pricing": {},
           "sources": [
             "https://developers.openai.com/api/docs/pricing"
+          ],
+          "multiplier_schedule": [
+            {
+              "effective_from": "2027-03-01T00:00:00-08:00",
+              "timezone": "America/Los_Angeles",
+              "multiplier": 6,
+              "sources": [
+                "https://developers.openai.com/api/docs/pricing"
+              ],
+              "note": "官方 Pacific time：2027-03-01 尚为 PST (UTC-08:00)，从当日零点起 6 倍；不是 UTC/北京时间零点。America/Los_Angeles 2027 夏令时从 3 月 14 日开始。"
+            }
           ]
         },
         {
@@ -2523,6 +2574,21 @@
         "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.20、缓存写入 $5.0、输出 $15.0。Batch 为标准价 50%，Fast 为 2 倍。本轮 Flex 表未列出该型号，不编造 Flex 价。Ultrafast 当前为标准价 3 倍，至 2027-02-28；自 2027-03-01 起 6 倍（Pacific time）。数据驻留端点加收 10%。上下文窗口 1,050,000 tokens（最大输出 128K），来自官方模型页。相对昨日定价页快照新出现，不得写成官方发布日就是今天。不与 gpt-6-sol 合并。",
       "reasoning_effort": {
         "supported": null,
@@ -2618,7 +2684,7 @@
         {
           "name": "ultrafast",
           "multiplier": 3.0,
-          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。官方：3 times the Standard rate through February 28, 2027, and 6 times the Standard rate starting March 1, 2027 (Pacific time)。当前已生效倍数为 3；2027-03-01 起 6 倍的精确 Pacific 时刻边界后须再核，价格库 service_tiers 不能按日期自动切换倍数，到期后不得继续默认按 3 倍估价。",
+          "note": "Responses API service_tier=ultrafast：至 2027-02-28（Pacific time）3 倍；2027-03-01 Pacific 零点起 6 倍，已由 multiplier_schedule 执行；各上下文档和缓存同倍率。",
           "multipliers": {
             "input": 3.0,
             "output": 3.0,
@@ -2634,6 +2700,17 @@
           "pricing": {},
           "sources": [
             "https://developers.openai.com/api/docs/pricing"
+          ],
+          "multiplier_schedule": [
+            {
+              "effective_from": "2027-03-01T00:00:00-08:00",
+              "timezone": "America/Los_Angeles",
+              "multiplier": 6,
+              "sources": [
+                "https://developers.openai.com/api/docs/pricing"
+              ],
+              "note": "官方 Pacific time：2027-03-01 尚为 PST (UTC-08:00)，从当日零点起 6 倍；不是 UTC/北京时间零点。America/Los_Angeles 2027 夏令时从 3 月 14 日开始。"
+            }
           ]
         },
         {
@@ -2731,6 +2808,21 @@
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "OpenAI 定价页 Legal model configurations 列出的 GPT-6.2 Astra for Law，不与 gpt-6-astra-law 合并。短上下文促销价输入 $8 / 输出 $40 / 缓存读取 $0.40 / 30 分钟写入 $10 / 12 小时写入 $20；长上下文 $16 / $60 / $0.80 / $20 / $40。官方称促销至少持续到 2026-12-31；到期后价未公布。Legal 表以 short/long context 分列，同页定义 Short ≤272K / Long >272K。未在 Legal 表列出 Batch/Flex/Fast，不编造。模型专页 404，定价页有价，不得推断退役。",
       "reasoning_effort": {
         "supported": null,
@@ -2875,6 +2967,21 @@
         "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "Token 计价与 2.5 同列：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token。官方按张（尺寸×质量）价仍未公布。定价页列出 Batch token 价，但模型专页写 Batch Not supported，冲突待确认，本轮不收录 Batch 价、不擅自取舍。",
       "reasoning_effort": {
         "supported": false,
@@ -3012,6 +3119,21 @@
         "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "Token 计价与 2.5 同列：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token。官方按张（尺寸×质量）价仍未公布。定价页列出 Batch token 价，但模型专页写 Batch Not supported，冲突待确认，本轮不收录 Batch 价、不擅自取舍。",
       "reasoning_effort": {
         "supported": false,

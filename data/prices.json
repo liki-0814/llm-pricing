@@ -1875,7 +1875,22 @@
         "cached_input_type": "unspecified",
         "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
       },
-      "off_peak_schedule": null
+      "off_peak_schedule": null,
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": 272000,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "Anthropic",
@@ -2715,7 +2730,15 @@
           "pricing": {},
           "sources": [
             "https://platform.claude.com/docs/en/about-claude/pricing"
-          ]
+          ],
+          "status_observation": {
+            "status": "deprecated",
+            "observed_at": "2026-11-18T08:27:00+08:00",
+            "sources": [
+              "https://platform.claude.com/docs/en/about-claude/pricing"
+            ],
+            "note": "观察到 Fast 档 deprecated，不推定更早已弃用，不表示模型退役或该档不可估价。"
+          }
         },
         {
           "name": "data_residency",
@@ -8012,7 +8035,27 @@
         "sources": [
           "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
         ]
-      }
+      },
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "cached_input",
+            "cache_write",
+            "implicit_read",
+            "explicit_read",
+            "explicit_write",
+            "explicit_write_1h"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "腾讯混元",
@@ -8421,7 +8464,7 @@
         {
           "name": "ultrafast",
           "multiplier": 3.0,
-          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。官方：3 times the Standard rate through February 28, 2027, and 6 times the Standard rate starting March 1, 2027 (Pacific time)。当前已生效倍数为 3；2027-03-01 起 6 倍的精确 Pacific 时刻边界后须再核，价格库 service_tiers 不能按日期自动切换倍数，到期后不得继续默认按 3 倍估价。",
+          "note": "Responses API service_tier=ultrafast：至 2027-02-28（Pacific time）3 倍；2027-03-01 Pacific 零点起 6 倍，已由 multiplier_schedule 执行；各上下文档和缓存同倍率。",
           "multipliers": {
             "input": 3.0,
             "output": 3.0,
@@ -8437,6 +8480,17 @@
           "pricing": {},
           "sources": [
             "https://developers.openai.com/api/docs/pricing"
+          ],
+          "multiplier_schedule": [
+            {
+              "effective_from": "2027-03-01T00:00:00-08:00",
+              "timezone": "America/Los_Angeles",
+              "multiplier": 6,
+              "sources": [
+                "https://developers.openai.com/api/docs/pricing"
+              ],
+              "note": "官方 Pacific time：2027-03-01 尚为 PST (UTC-08:00)，从当日零点起 6 倍；不是 UTC/北京时间零点。America/Los_Angeles 2027 夏令时从 3 月 14 日开始。"
+            }
           ]
         },
         {
@@ -8495,7 +8549,22 @@
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
         ]
-      }
+      },
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "OpenAI",
@@ -8609,7 +8678,7 @@
         {
           "name": "ultrafast",
           "multiplier": 3.0,
-          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。官方：3 times the Standard rate through February 28, 2027, and 6 times the Standard rate starting March 1, 2027 (Pacific time)。当前已生效倍数为 3；2027-03-01 起 6 倍的精确 Pacific 时刻边界后须再核，价格库 service_tiers 不能按日期自动切换倍数，到期后不得继续默认按 3 倍估价。",
+          "note": "Responses API service_tier=ultrafast：至 2027-02-28（Pacific time）3 倍；2027-03-01 Pacific 零点起 6 倍，已由 multiplier_schedule 执行；各上下文档和缓存同倍率。",
           "multipliers": {
             "input": 3.0,
             "output": 3.0,
@@ -8625,6 +8694,17 @@
           "pricing": {},
           "sources": [
             "https://developers.openai.com/api/docs/pricing"
+          ],
+          "multiplier_schedule": [
+            {
+              "effective_from": "2027-03-01T00:00:00-08:00",
+              "timezone": "America/Los_Angeles",
+              "multiplier": 6,
+              "sources": [
+                "https://developers.openai.com/api/docs/pricing"
+              ],
+              "note": "官方 Pacific time：2027-03-01 尚为 PST (UTC-08:00)，从当日零点起 6 倍；不是 UTC/北京时间零点。America/Los_Angeles 2027 夏令时从 3 月 14 日开始。"
+            }
           ]
         },
         {
@@ -8683,7 +8763,22 @@
         "sources": [
           "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
         ]
-      }
+      },
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "OpenAI",
@@ -8793,7 +8888,22 @@
         "cached_input_type": "unspecified",
         "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
       },
-      "off_peak_schedule": null
+      "off_peak_schedule": null,
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "Anthropic",
@@ -8936,7 +9046,22 @@
         "cached_input_type": "explicit",
         "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
       },
-      "off_peak_schedule": null
+      "off_peak_schedule": null,
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "Anthropic",
@@ -9079,7 +9204,22 @@
         "cached_input_type": "explicit",
         "note": "官方公开价按量；可用性仅限已验证组织。不包含工具、税费或订阅额度结算。"
       },
-      "off_peak_schedule": null
+      "off_peak_schedule": null,
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "Google Gemini",
@@ -9239,7 +9379,22 @@
         "cached_input_type": "implicit",
         "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
       },
-      "off_peak_schedule": null
+      "off_peak_schedule": null,
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "Google Gemini",
@@ -9380,7 +9535,22 @@
         "cached_input_type": "implicit",
         "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
       },
-      "off_peak_schedule": null
+      "off_peak_schedule": null,
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "智谱 Z.ai",
@@ -9472,7 +9642,22 @@
         "cached_input_type": "unspecified",
         "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
       },
-      "off_peak_schedule": null
+      "off_peak_schedule": null,
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://docs.z.ai/guides/overview/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "OpenAI",
@@ -9538,7 +9723,22 @@
           "https://developers.openai.com/api/docs/pricing",
           "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
         ]
-      }
+      },
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "OpenAI",
@@ -9604,7 +9804,22 @@
           "https://developers.openai.com/api/docs/pricing",
           "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
         ]
-      }
+      },
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "MiniMax",
@@ -9666,7 +9881,22 @@
         "sources": [
           "https://platform.minimax.io/docs/pricing/overview"
         ]
-      }
+      },
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "MiniMax",
@@ -9728,7 +9958,22 @@
         "sources": [
           "https://platform.minimax.io/docs/pricing/overview"
         ]
-      }
+      },
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "MiniMax",
@@ -9803,7 +10048,22 @@
         "cached_input_type": "unspecified",
         "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
       },
-      "off_peak_schedule": null
+      "off_peak_schedule": null,
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     },
     {
       "vendor": "MiniMax",
@@ -9858,8 +10118,31 @@
         "billing_note": "每个任务前 5 张输入图片免费，超出部分按 input_image_price 计价。",
         "sources": [
           "https://platform.minimax.io/docs/pricing/overview"
-        ]
-      }
+        ],
+        "input_image_allowance": {
+          "free_quantity": 5,
+          "scope": "per_task",
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "每次 estimateMedia 代表一个再生成任务，inputImages 为原始总输入张数；前5张含在任务内，仅超额按张计费。不同任务请分别调用，不是账户免费余额。"
+        }
+      },
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ]
     }
   ]
 }

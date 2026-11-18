@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "qwen3.7-plus",
@@ -60,6 +60,7 @@
       "https://www.alibabacloud.com/help/en/model-studio/context-cache"
     ],
     "last_updated": "2026-10-28",
+    "price_observations": [],
     "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤256K 输入档（非思考/思考输出价相同）；256K–1M 档：输入 $1.2、输出 $4.8。官方标注限时 8 折（表中为标价）。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-plus，Singapore，美元，标价口径，不含限时 8 折）：≤256K 档隐式 $0.08、显式创建 $0.5、显式命中 $0.04；>256K 档隐式 $0.24、显式创建 $1.5、显式命中 $0.12；cached_input=显式缓存命中价，cache_write=显式缓存创建价。结构化字段见 cache_pricing / pricing_tiers。",
     "reasoning_effort": {
       "supported": true,

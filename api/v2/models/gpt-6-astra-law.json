@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "gpt-6-astra-law",
@@ -58,6 +58,21 @@
     "source_url": "https://developers.openai.com/api/docs/pricing",
     "extra_sources": [],
     "last_updated": "2026-11-01",
+    "price_observations": [
+      {
+        "observed_at": "2026-11-18T08:27:00+08:00",
+        "valid_from": null,
+        "valid_until": null,
+        "fields": [
+          "*"
+        ],
+        "input_tokens_gt": 272000,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+      }
+    ],
     "notes": "OpenAI 定价页“Legal model configurations”法律场景配置（GPT-6 Astra for Law）。短上下文促销价输入 $10.00 / 输出 $50.00 / 缓存读取 $1.00（每百万 token），官方称至少持续到 2026-12-31；到期后价格未公布。长上下文官方已列出 $20 / $75 / $2；缓存写入短/长上下文原文均为“—”，不是 0，缺价字段估价须拒绝。未列 Batch/Flex/Fast；模型专页 /api/docs/models/gpt-6-astra-law 仍 404，不得据此推断退役；不借用 gpt-6-astra 或 gpt-6.2-astra-law 的未公布字段。",
     "reasoning_effort": {
       "supported": null,

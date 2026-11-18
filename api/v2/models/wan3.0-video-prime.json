@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "wan3.0-video-prime",
@@ -61,6 +61,7 @@
       "https://www.alibabacloud.com/help/en/model-studio/wan3-video-generation-guide"
     ],
     "last_updated": "2026-10-29",
+    "price_observations": [],
     "notes": "按秒计价：480P $0.068、720P $0.14、1080P $0.28。",
     "reasoning_effort": {
       "supported": false,

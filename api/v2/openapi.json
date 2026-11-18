@@ -1120,6 +1120,83 @@
                     "format": "uri",
                     "pattern": "^https?://"
                   }
+                },
+                "multiplier_schedule": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "effective_from": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "timezone": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "multiplier": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      },
+                      "sources": {
+                        "type": "array",
+                        "minItems": 1,
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "format": "uri",
+                          "pattern": "^https?://"
+                        }
+                      },
+                      "note": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "effective_from",
+                      "timezone",
+                      "multiplier",
+                      "sources",
+                      "note"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "status_observation": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "enum": [
+                        "deprecated"
+                      ]
+                    },
+                    "observed_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "sources": {
+                      "type": "array",
+                      "minItems": 1,
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^https?://"
+                      }
+                    },
+                    "note": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "observed_at",
+                    "sources",
+                    "note"
+                  ],
+                  "additionalProperties": false
                 }
               },
               "additionalProperties": false
@@ -1475,6 +1552,83 @@
                 "additionalProperties": false
               }
             ]
+          },
+          "price_observations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "observed_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "valid_from": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "valid_until": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "fields": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "enum": [
+                      "*",
+                      "input",
+                      "output",
+                      "cached_input",
+                      "cache_write",
+                      "implicit_read",
+                      "explicit_read",
+                      "explicit_write",
+                      "explicit_write_1h",
+                      "explicit_write_12h",
+                      "storage_per_1M_tokens_hour"
+                    ]
+                  }
+                },
+                "input_tokens_gt": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "sources": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://"
+                  }
+                },
+                "note": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "observed_at",
+                "valid_from",
+                "valid_until",
+                "fields",
+                "input_tokens_gt",
+                "sources",
+                "note"
+              ],
+              "additionalProperties": false
+            }
           },
           "lifecycle": {
             "type": [
@@ -2434,6 +2588,39 @@
             ],
             "minimum": 0,
             "description": "model.currency per input image under Batch when it differs from input_image_price; null = same / not listed"
+          },
+          "input_image_allowance": {
+            "type": "object",
+            "properties": {
+              "free_quantity": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "scope": {
+                "const": "per_task"
+              },
+              "sources": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https?://"
+                }
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "free_quantity",
+              "scope",
+              "sources",
+              "note"
+            ],
+            "additionalProperties": false
           },
           "batch_supported": {
             "type": [

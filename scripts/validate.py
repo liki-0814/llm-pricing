@@ -5,6 +5,7 @@ import datetime as dt
 import math
 import pathlib
 import sys
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 sys.dont_write_bytecode = True
 import build_api
@@ -48,7 +49,7 @@ def source_schema(d):
     props['limits']['properties']['max_output_tokens']['anyOf'] = [
         {'type': ['integer', 'null']}, {'const': 'n/a'}]
     props['unverified_fields']['uniqueItems'] = True
-    schema['required'] = [k for k in props if k not in ('offpeak', 'lifecycle', 'token_offer', 'estimation_limits')]
+    schema['required'] = [k for k in props if k not in ('offpeak', 'lifecycle', 'token_offer', 'estimation_limits', 'price_observations')]
     schema['components'] = spec['components']
     return schema
 
@@ -57,7 +58,7 @@ def media_source_schema(d):
     """Source contract for image / video models: no token-price, context, reasoning, limits or tier fields."""
     spec = build_api.openapi(d, list(build_api.VENDOR_SLUGS.values()), [])
     props = spec['components']['schemas']['Model']['properties']
-    keep = ('currency', 'source_url', 'extra_sources', 'last_updated', 'notes', 'unverified_fields', 'price_basis', 'billing')
+    keep = ('currency', 'source_url', 'extra_sources', 'last_updated', 'notes', 'unverified_fields', 'price_basis', 'billing', 'price_observations')
     out = {k: copy.deepcopy(props[k]) for k in keep}
     out['model_id'] = dict(copy.deepcopy(props['id']), pattern=build_api.SLUG_RE.pattern)
     out['id'] = {'type': 'string', 'minLength': 1}
@@ -67,7 +68,7 @@ def media_source_schema(d):
     out['media_pricing'] = {'$ref': '#/components/schemas/MediaPricing'}
     out['unverified_fields']['uniqueItems'] = True
     out['lifecycle'] = copy.deepcopy(props['lifecycle'])
-    return {'type': 'object', 'required': [k for k in out if k != 'lifecycle'], 'properties': out, 'additionalProperties': False,
+    return {'type': 'object', 'required': [k for k in out if k not in ('lifecycle', 'price_observations')], 'properties': out, 'additionalProperties': False,
             'components': spec['components']}
 
 
@@ -179,6 +180,53 @@ def validate_media(m, snapshot, fail):
         fail(where, 'expired promotion needs re-verification')
 
 
+def validate_temporal(m, fail):
+    """Evidence timestamps do not rewrite last_updated or assert vendor effective dates."""
+    def instant(value):
+        parsed = dt.datetime.fromisoformat(value.replace('Z', '+00:00'))
+        if 'T' not in value or parsed.tzinfo is None:
+            raise ValueError('exact timezone-aware instant required')
+        return parsed
+    where = m['model_id']
+    for evidence in m.get('price_observations', []):
+        try:
+            observed = instant(evidence['observed_at'])
+            start = instant(evidence['valid_from']) if evidence['valid_from'] else observed
+            end = instant(evidence['valid_until']) if evidence['valid_until'] else None
+            if end and end <= start:
+                raise ValueError('empty interval')
+            if '*' in evidence['fields'] and len(evidence['fields']) != 1:
+                raise ValueError('wildcard must stand alone')
+            if m['modality'] != 'text' and (evidence['input_tokens_gt'] is not None or evidence['fields'] != ['*']):
+                raise ValueError('media evidence must cover the whole model')
+        except (ValueError, TypeError):
+            fail(where, 'price_observations requires ordered exact timezone-aware instants and valid selectors')
+    for service in m.get('service_tiers', []):
+        state = service.get('status_observation')
+        if state:
+            try:
+                instant(state['observed_at'])
+            except (ValueError, TypeError):
+                fail(where, 'service status needs exact observed_at')
+        previous = None
+        for event in service.get('multiplier_schedule', []):
+            try:
+                point = instant(event['effective_from'])
+                local = point.astimezone(ZoneInfo(event['timezone']))
+                if point.utcoffset() != local.utcoffset():
+                    raise ValueError('offset does not match IANA timezone at this date')
+                if previous and point <= previous:
+                    raise ValueError('schedule must be unique and chronological')
+                if service['pricing']:
+                    raise ValueError('scalar schedule cannot overwrite explicit per-field service prices')
+                previous = point
+            except (ValueError, TypeError, ZoneInfoNotFoundError):
+                fail(where, 'service multiplier_schedule requires ordered exact instants with correct IANA timezone offsets and no explicit prices')
+    mp = m.get('media_pricing') or {}
+    if mp.get('input_image_allowance') and mp.get('input_image_price') is None:
+        fail(where, 'input_image_allowance requires published overage input_image_price')
+
+
 def validate_data(d):
     errors = []
     def fail(where, message):
@@ -233,6 +281,7 @@ def validate_data(d):
         if schema_errors:
             continue
         where = m['model_id']
+        validate_temporal(m, fail)
         life = m.get('lifecycle')
         if life:
             if life['status'] == 'scheduled' and not life['retired_at']:

@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "gemini-3.5-flash-lite",
@@ -60,6 +60,7 @@
       "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
     ],
     "last_updated": "2026-11-06",
+    "price_observations": [],
     "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。2026-11-06：Batch 档 Context caching 官方为 $0.015（此前 repo 误记 0.02）；Flex 仍为 $0.02，Priority $0.05。来源：https://ai.google.dev/gemini-api/docs/pricing",
     "reasoning_effort": {
       "supported": true,

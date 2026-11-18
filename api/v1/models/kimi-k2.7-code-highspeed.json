@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "kimi-k2.7-code-highspeed",
@@ -60,6 +60,7 @@
       "https://platform.kimi.ai/docs/models"
     ],
     "last_updated": "2026-10-25",
+    "price_observations": [],
     "notes": "高速版；官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
     "reasoning_effort": {
       "supported": false,

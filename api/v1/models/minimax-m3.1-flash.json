@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "minimax-m3.1-flash",
@@ -63,6 +63,7 @@
       "https://platform.minimax.io/docs/api-reference/text-chat-openai"
     ],
     "last_updated": "2026-10-20",
+    "price_observations": [],
     "notes": "已正式发布（GA，2026-10-19）。官方按量付费统一价（不分输入长度档）：输入 $0.15、输出 $0.60、缓存读取 $0.015 / 1M tokens。官方页未列缓存写入价，无 Priority 档。max_completion_tokens 建议 128K、上限 512K。",
     "reasoning_effort": {
       "supported": true,

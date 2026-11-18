@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "wan3.0-video",
@@ -63,6 +63,7 @@
       "https://www.alibabacloud.com/help/en/model-studio/wan3-video-generation-guide"
     ],
     "last_updated": "2026-10-29",
+    "price_observations": [],
     "notes": "按秒计价：480P $0.05、720P $0.10、1080P $0.20（原价，不含限时 7 折促销）。计费时长 = 输入视频秒数 + 输出视频秒数；2–30 秒、30 fps，原生音频可开关（价格不区分）。预览版；新用户免费额度 30 秒。",
     "reasoning_effort": {
       "supported": false,

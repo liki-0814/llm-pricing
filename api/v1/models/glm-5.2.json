@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "glm-5.2",
@@ -61,6 +61,7 @@
       "https://docs.bigmodel.cn/cn/guide/start/concept-param"
     ],
     "last_updated": "2026-10-14",
+    "price_observations": [],
     "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
     "reasoning_effort": {
       "supported": true,

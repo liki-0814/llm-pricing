@@ -2,7 +2,14 @@
 
 中文静态站点，直接部署到 GitHub Pages；运行时只有 HTML、CSS 和 JavaScript，无后端、数据库或第三方运行依赖。
 
-覆盖 10 个厂商、75 个模型（文本 54、图像生成 12、视频生成 9），按 USD / CNY 单币种隔离：文本模型按所示币种每百万 token（缓存存储另按百万 token·小时计价），图像按张 / 按 token，视频按秒 / 按 token。价格表支持“文本 / 图像 / 视频”分页签、主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
+覆盖 10 个厂商、89 个模型（文本 63、图像生成 16、视频生成 10），按 USD / CNY 单币种隔离：文本模型按所示币种每百万 token（缓存存储另按百万 token·小时计价），图像按张 / 按 token，视频按秒 / 按 token。价格表支持“文本 / 图像 / 视频”分页签、主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
+
+## 字段时间与任务计费契约（2026-11-18 修订，尚待独立复审）
+
+- 模型 `last_updated` 只保留原基础快照日期，不为今日新增字段提供历史许可。`price_observations[]` 在源数据、v1/v2、页面数据一致表达字段/输入档范围、`observed_at`、可选 `valid_from` / `valid_until`、来源；`fields=["*"]` 覆盖整个新增模型，`input_tokens_gt` 限定输入档。未证实生效期时 `valid_from=null`，观察前返回 `HISTORICAL_PRICE_UNAVAILABLE`，观察当刻起可用；不把观察时刻当官方生效时刻。已知有效期为左闭右开。选中这些字段必须传带时区的精确 `at`，仅日期返回 `TIME_REQUIRED`。旧 Qwen 普通短价与旧 Law 短价历史仍可用；新缓存/长档不倒灌历史。14 款本轮新增模型同样精确到观察时刻保护。
+- `service_tiers[].multiplier_schedule[]` 以精确 `effective_from` 与 IANA `timezone` 描述档级未来倍率。GPT-6.2 Astra/Sol Ultrafast 在 `2027-03-01T00:00:00-08:00`（America/Los_Angeles 当日为 PST；北京时间 2027-03-01 16:00）从 3 倍切 6 倍，含长上下文与缓存；不是 UTC/北京时间零点。`status_observation` 表达 Fast 弃用观察，不将状态倒推到此前或退役整个模型。
+- `media_pricing.input_image_allowance={free_quantity:5,scope:"per_task",...}` 由 `estimateMedia` 执行。一次调用代表单个任务，`inputImages` 传原始总数，不需手减；Regeneration 只收 `max(0,inputImages-5)` 张图片费。返回 `billing_quantities` 可核对含量/计费量；独立任务分别调用，非账户赠余额，其他模型不借用该含量。
+- 这些回归/同步测试不代表真实浏览器、完整目录发现、日常接通或发布放行。MiniMax M2 四款仅在库中缺席，不称新增保护代码；H3 仅目录估价，不声称实际结算已核。
 
 ## 本地预览
 

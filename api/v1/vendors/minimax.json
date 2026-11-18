@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 11
   },
   "vendor": {
@@ -93,6 +93,7 @@
         "https://platform.minimax.io/docs/api-reference/text-chat-openai"
       ],
       "last_updated": "2026-10-25",
+      "price_observations": [],
       "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方页标注“Permanent 50% off”，原价 $0.60 / $2.40 / 缓存 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12。>512K 原价 $1.20 / $4.80 / $0.24。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09，原价 $0.90 / $3.60 / $0.18），同样标注 Permanent 50% off。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
       "reasoning_effort": {
         "supported": false,
@@ -240,6 +241,7 @@
         "https://platform.minimax.io/docs/api-reference/text-chat-openai"
       ],
       "last_updated": "2026-10-20",
+      "price_observations": [],
       "notes": "已正式发布（GA，2026-10-19）。官方按量付费统一价（不分输入长度档）：输入 $0.15、输出 $0.60、缓存读取 $0.015 / 1M tokens。官方页未列缓存写入价，无 Priority 档。max_completion_tokens 建议 128K、上限 512K。",
       "reasoning_effort": {
         "supported": true,
@@ -346,6 +348,7 @@
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：2K $0.13、768P $0.08；输入视频同价；输入图片 $0.04/张（每个任务前 5 张免费）。",
       "reasoning_effort": {
         "supported": false,
@@ -481,6 +484,7 @@
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
       "last_updated": "2026-10-31",
+      "price_observations": [],
       "notes": "按秒计价：768P $0.06、480P $0.04（输入视频同价）；输入图片 $0.03/张。",
       "reasoning_effort": {
         "supported": false,
@@ -616,6 +620,7 @@
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：768P $0.04、480P $0.025（输入视频同价）；输入图片 $0.02/张。",
       "reasoning_effort": {
         "supported": false,
@@ -751,6 +756,7 @@
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：768P 输出 $0.08、输入视频 $0.143；480P 输出 $0.05、输入视频 $0.0553；输入图片 $0.074/张（每个任务前 2 张免费）。属官方“扩展模型”（Extended Models）。",
       "reasoning_effort": {
         "supported": false,
@@ -886,6 +892,7 @@
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价 $0.0035/张（不区分尺寸）。",
       "reasoning_effort": {
         "supported": false,
@@ -1010,6 +1017,21 @@
       "source_url": "https://platform.minimax.io/docs/pricing/overview",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方页面名称/调用写法为 MiniMax-H3-Image。库存 ID 按库内小写连字符约定记录为 minimax-h3-image，不与其他 H3 型号合并。官方定价页按 token 列出文本输入 $2.3、图像输入 $1.5、图像输出 $3.8 / 百万 token，并给出单张示例成本；完整按张价表未作为本轮核价表。4K（≥16,600,000 像素）五折官方截止 November 17, 2026 16:00 UTC（不含）= 2026-11-18 00:00:00+08:00；截止后不再把五折当当前价，不猜恢复价，按已公布目录/原价。今日页面若仍显示 From now until 与划线折扣示例，不等于优惠延长。",
       "reasoning_effort": {
         "supported": false,
@@ -1141,6 +1163,21 @@
       "source_url": "https://platform.minimax.io/docs/pricing/overview",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方页面名称/调用写法为 MiniMax-H3-Image-Highspeed。库存 ID 按库内小写连字符约定记录为 minimax-h3-image-highspeed，不与其他 H3 型号合并。官方定价页按 token 列出文本输入 $2.3、图像输入 $3.0、图像输出 $7.6 / 百万 token。faq Model List 的 Available Image 表未列入此 ID，与定价页口径不一致，已收录定价页调用 ID 与标价。4K 五折说明与 H3-Image 相同，官方截止后不再把五折当当前价。",
       "reasoning_effort": {
         "supported": false,
@@ -1272,6 +1309,21 @@
       "source_url": "https://platform.minimax.io/docs/pricing/overview",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方页面名称/调用写法为 MiniMax-H3-Context-IR。库存 ID 按库内小写连字符约定记录为 minimax-h3-context-ir，不与其他 H3 型号合并。官方定价页 Context-IR 表列出输入 $0.9 / 输出 $3.6 / 百万 token。缓存命中未公布；写入按 MiniMax 无独立 cache_write 计费记 n/a。上下文窗口本轮未核。",
       "reasoning_effort": {
         "supported": null,
@@ -1378,6 +1430,21 @@
       "source_url": "https://platform.minimax.io/docs/pricing/overview",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方页面名称/调用写法为 MiniMax-H3-Regeneration。库存 ID 按库内小写连字符约定记录为 minimax-h3-regeneration，不与其他 H3 型号合并。官方定价页：将 H3 的 768P 视频再生成到 2K。输出与输入视频均为 $0.05/秒；输入图 $0.025/张，前 5 张免费。",
       "reasoning_effort": {
         "supported": false,
@@ -1426,6 +1493,14 @@
         ],
         "input_image_price": 0.025,
         "input_image_price_batch": null,
+        "input_image_allowance": {
+          "free_quantity": 5,
+          "scope": "per_task",
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "每次 estimateMedia 代表一个再生成任务，inputImages 为原始总输入张数；前5张含在任务内，仅超额按张计费。不同任务请分别调用，不是账户免费余额。"
+        },
         "batch_supported": null,
         "promotion": null,
         "billing_note": "每个任务前 5 张输入图片免费，超出部分按 input_image_price 计价。",

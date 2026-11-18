@@ -147,6 +147,7 @@ def media_obj(mp):
                          for e in mp.get("video_prices") or []],
         "input_image_price": mp.get("input_image_price"),
         "input_image_price_batch": mp.get("input_image_price_batch"),
+        **({"input_image_allowance": copy.deepcopy(mp["input_image_allowance"])} if "input_image_allowance" in mp else {}),
         "batch_supported": mp.get("batch_supported"),
         "promotion": copy.deepcopy(mp.get("promotion")),
         "billing_note": mp["billing_note"],
@@ -209,6 +210,7 @@ def model_obj(m):
         "source_url": m["source_url"],
         "extra_sources": list(m.get("extra_sources") or []),
         "last_updated": m.get("last_updated"),
+        "price_observations": copy.deepcopy(m.get("price_observations", [])),
         "notes": m.get("notes"),
         "reasoning_effort": reasoning,
         "limits": limits,
@@ -233,6 +235,13 @@ def next_invalidation(d):
         for event in m.get("price_schedule", []):
             if event.get("effective_until_precision") == "date" and event.get("effective_until"):
                 candidates.append(dt.datetime.fromisoformat(event["effective_until"] + "T00:00:00+00:00") - dt.timedelta(hours=14))
+        for service in m.get("service_tiers", []):
+            for event in service.get("multiplier_schedule", []):
+                candidates.append(dt.datetime.fromisoformat(event["effective_from"].replace("Z", "+00:00")))
+        for evidence in m.get("price_observations", []):
+            for key in ("valid_until",):
+                if evidence.get(key):
+                    candidates.append(dt.datetime.fromisoformat(evidence[key].replace("Z", "+00:00")))
         if m.get("token_offer"):
             candidates.append(dt.datetime.fromisoformat(m["token_offer"]["valid_until"].replace("Z", "+00:00")) + dt.timedelta(milliseconds=1))
     future = [t for t in candidates if t > at]
@@ -317,6 +326,9 @@ def media_pricing_schema():
                              "note": {"type": ["string", "null"]}})},
         "input_image_price": dict(usd, description="model.currency per input / reference image (editing, image-to-video) when billed per image; null = not billed per image"),
         "input_image_price_batch": dict(usd, description="model.currency per input image under Batch when it differs from input_image_price; null = same / not listed"),
+        "input_image_allowance": obj({
+            "free_quantity": {"type": "integer", "minimum": 0}, "scope": {"const": "per_task"},
+            "sources": urls, "note": {"type": "string", "minLength": 1}}),
         "batch_supported": {"type": ["boolean", "null"], "description": "Whether the Batch API is documented for this model; null = 待核实"},
         "promotion": {"anyOf": [{"type": "null"}, obj({
             "discount_percent": {"type": ["number", "null"], "exclusiveMinimum": 0, "maximum": 100},
@@ -324,7 +336,7 @@ def media_pricing_schema():
             "note": {"type": "string", "minLength": 1}})],
             "description": "Vendor promotion on the recorded prices. Recorded prices are LIST prices before the discount."},
         "billing_note": {"type": "string", "minLength": 1},
-        "sources": urls})
+        "sources": urls}, required=["output_kind", "billing_methods", "token_pricing", "image_prices", "video_prices", "input_image_price", "input_image_price_batch", "batch_supported", "promotion", "billing_note", "sources"])
 
 
 def extend_schemas(model, cache_pricing, price):
@@ -365,12 +377,25 @@ def extend_schemas(model, cache_pricing, price):
     reasoning["properties"]["note"] = note
     model["properties"]["limits"]["sources"] = urls
     model["properties"]["limits"]["note"] = note
+    instant = {"type": "string", "format": "date-time"}
+    model["properties"]["price_observations"] = {"type": "array", "items": obj({
+        "observed_at": instant, "valid_from": {"type": ["string", "null"], "format": "date-time"},
+        "valid_until": {"type": ["string", "null"], "format": "date-time"},
+        "fields": {"type": "array", "minItems": 1, "uniqueItems": True,
+                   "items": {"enum": ["*"] + list(PRICE_FIELDS) + [k for k in CACHE_FIELDS if k not in PRICE_FIELDS and k != "note"]}},
+        "input_tokens_gt": {"type": ["integer", "null"], "minimum": 0},
+        "sources": urls, "note": note})}
     component_fields = list(PRICE_FIELDS) + [k for k in CACHE_FIELDS if k != "note"]
     svc = model["properties"]["service_tiers"]["items"]
     svc["properties"].update({
         "multipliers": obj({k: {"type": ["number", "null"], "exclusiveMinimum": 0} for k in component_fields}),
         "pricing": obj({k: price for k in PRICE_FIELDS}, []), "sources": urls})
     svc["required"] += ["multipliers", "pricing", "sources"]
+    svc["properties"]["multiplier_schedule"] = {"type": "array", "items": obj({
+        "effective_from": instant, "timezone": {"type": "string", "minLength": 1},
+        "multiplier": {"type": "number", "exclusiveMinimum": 0}, "sources": urls, "note": note})}
+    svc["properties"]["status_observation"] = obj({
+        "status": {"enum": ["deprecated"]}, "observed_at": instant, "sources": urls, "note": note})
     event = model["properties"]["price_schedule"]["items"]
     event["properties"].update({
         "multiplier": {"type": ["number", "null"], "exclusiveMinimum": 0},

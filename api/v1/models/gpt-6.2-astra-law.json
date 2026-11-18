@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "gpt-6.2-astra-law",
@@ -58,6 +58,21 @@
     "source_url": "https://developers.openai.com/api/docs/pricing",
     "extra_sources": [],
     "last_updated": "2026-11-18",
+    "price_observations": [
+      {
+        "observed_at": "2026-11-18T08:27:00+08:00",
+        "valid_from": null,
+        "valid_until": null,
+        "fields": [
+          "*"
+        ],
+        "input_tokens_gt": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+      }
+    ],
     "notes": "OpenAI 定价页 Legal model configurations 列出的 GPT-6.2 Astra for Law，不与 gpt-6-astra-law 合并。短上下文促销价输入 $8 / 输出 $40 / 缓存读取 $0.40 / 30 分钟写入 $10 / 12 小时写入 $20；长上下文 $16 / $60 / $0.80 / $20 / $40。官方称促销至少持续到 2026-12-31；到期后价未公布。Legal 表以 short/long context 分列，同页定义 Short ≤272K / Long >272K。未在 Legal 表列出 Batch/Flex/Fast，不编造。模型专页 404，定价页有价，不得推断退役。",
     "reasoning_effort": {
       "supported": null,

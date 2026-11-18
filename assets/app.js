@@ -116,12 +116,16 @@
     // 2 service tiers
     var sv = m.service_tiers || [];
     x = sv.length ? sv.map(function (t) {
-      return '<div class="svc" title="' + esc(t.note || "") + '"><span class="lv lv-def">' + esc(SVCLABEL[t.name] || t.name) + '</span><b>×' + t.multiplier + "</b></div>";
+      return '<div class="svc" title="' + esc(t.note || "") + '"><span class="lv lv-def">' + esc(SVCLABEL[t.name] || t.name) + '</span><b>' + ((t.multiplier_schedule || []).length ? '基准×' : '×') + t.multiplier + ((t.multiplier_schedule || []).length ? '（见时间排期）' : '') + "</b></div>";
     }).join("") + sv.map(function (t) { return t.note ? '<p class="dnote"><b>' + esc(SVCLABEL[t.name] || t.name) + "：</b>" + esc(t.note) + "</p>" : ""; }).join("")
       : '<span class="na">官方未列出服务档倍率</span>';
     if (sv.length) {
       x += '<p class="dnote">上述倍率用于输入与输出；缓存和存储按各费用项规则计费。</p>';
       sv.forEach(function (t) {
+        (t.multiplier_schedule || []).forEach(function (e) {
+          x += '<p class="dnote">' + esc(t.name) + '：自 ' + esc(e.effective_from) + '（' + esc(e.timezone) + '）×' + esc(e.multiplier) + '</p>';
+        });
+        if (t.status_observation) x += '<p class="dnote">档状态 ' + esc(t.status_observation.status) + '，观察时刻 ' + esc(t.status_observation.observed_at) + '；不倒推此前状态，不代表模型退役。</p>';
         var rules = [];
         ["cached_input", "cache_write"].forEach(function (k) {
           if (m[k] === "n/a" && !Object.prototype.hasOwnProperty.call(t.pricing || {}, k)) return;
@@ -276,6 +280,7 @@
     x += kv("计费方式", mp.billing_methods.map(function (k) { return { token: "按 token", per_image: "按张", per_second: "按秒" }[k] || k; }).join(" + "));
     x += kv("Batch", mp.batch_supported === true ? "支持" : mp.batch_supported === false ? "不支持" : "待核实");
     if (mp.promotion) x += '<p class="dnote"><b>促销：</b>' + esc(mp.promotion.note || "") + (mp.promotion.effective_until ? "（至 " + esc(mp.promotion.effective_until) + "）" : "（官方未给截止日期）") + "</p>";
+    if (mp.input_image_allowance) x += '<p class="dnote">每任务前 ' + esc(mp.input_image_allowance.free_quantity) + ' 张输入图免费，仅超额计费；一次估价代表一个任务，传入总张数，不需手减。</p>';
     if (mp.billing_note) x += '<p class="dnote">' + esc(mp.billing_note) + "</p>";
     out.push(block("计费口径", x, false));
     x = '<p class="dnote"><b>官方价格</b>：' + esc(basis.note || "") + "</p>" + (m.notes ? '<p class="dnote">' + esc(m.notes) + "</p>" : "");
@@ -414,6 +419,11 @@
           (life.precision !== "instant" || !life.timezone ? "（具体时刻及时区待确认）" : "（" + life.timezone + "）") + "；" : "";
         m.notes = (m.notes || "") + " 生命周期：" + announced + (life.note || "待确认");
       }
+      (m.price_observations || []).forEach(function (e) {
+        m.notes = (m.notes || "") + " 字段观察：" + e.fields.join(",") +
+          (e.input_tokens_gt !== null ? "（输入>" + e.input_tokens_gt + "）" : "") +
+          "，" + e.observed_at + "；" + (e.valid_from ? "已证生效自 " + e.valid_from : "非官方生效时刻，观察前未知历史拒绝估价") + "。";
+      });
       if (m.billing && m.billing.price_type === "list") m.notes = "表内为目录价；" + (m.notes || "");
       m._i = i; m._h = haystack(m);
       m.lim_out = m.limits ? m.limits.max_output_tokens : null;

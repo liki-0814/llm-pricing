@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "claude-fable-5.1",
@@ -58,6 +58,7 @@
     "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
     "extra_sources": [],
     "last_updated": "2026-10-11",
+    "price_observations": [],
     "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
     "reasoning_effort": {
       "supported": true,

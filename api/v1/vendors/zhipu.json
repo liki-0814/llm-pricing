@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 6
   },
   "vendor": {
@@ -87,6 +87,7 @@
         "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
       "last_updated": "2026-10-14",
+      "price_observations": [],
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "reasoning_effort": {
         "supported": true,
@@ -213,6 +214,7 @@
         "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
       "last_updated": "2026-10-14",
+      "price_observations": [],
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "reasoning_effort": {
         "supported": true,
@@ -339,6 +341,7 @@
         "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
       "last_updated": "2026-10-14",
+      "price_observations": [],
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "reasoning_effort": {
         "supported": true,
@@ -467,6 +470,7 @@
         "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
       "last_updated": "2026-10-14",
+      "price_observations": [],
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "reasoning_effort": {
         "supported": true,
@@ -593,6 +597,7 @@
       "source_url": "https://docs.z.ai/guides/overview/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价 $0.015/张（不区分尺寸）。",
       "reasoning_effort": {
         "supported": false,
@@ -717,6 +722,21 @@
       "source_url": "https://docs.z.ai/guides/overview/pricing",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://docs.z.ai/guides/overview/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方 Overview 与 Pricing 单独列出 GLM-5.3-FlashX-Legal，公开价与 GLM-5.3-FlashX 相同（输入 $0.37 / 输出 $1.25 / 缓存读取 $0.075），官方未声明为同一调用 ID，不得自行合并。调用 ID 按官方 Legal 页已核为 glm-5.3-flashx-legal。缓存存储官方写 Limited-time Free，无截止日期，不把限时免费当成永久 0。不加入 glm-5.3-prime。",
       "reasoning_effort": {
         "supported": null,

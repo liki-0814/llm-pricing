@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "qwen4-max",
@@ -70,6 +70,26 @@
       "https://www.alibabacloud.com/help/en/model-studio/explicit-cache-qwen4"
     ],
     "last_updated": "2026-11-17",
+    "price_observations": [
+      {
+        "observed_at": "2026-11-18T08:27:00+08:00",
+        "valid_from": null,
+        "valid_until": null,
+        "fields": [
+          "cached_input",
+          "cache_write",
+          "implicit_read",
+          "explicit_read",
+          "explicit_write",
+          "explicit_write_1h"
+        ],
+        "input_tokens_gt": null,
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+        ],
+        "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+      }
+    ],
     "notes": "百炼国际站新加坡普通文本美元价，0<Token≤1M；Non-Thinking 与 Thinking 同价。不覆盖图片、视频、工具费，不与国际站其他地域 USD 价混用，不换汇。新加坡缓存（同档）：显式与隐式读取 $0.075，5 分钟写入 $1.875，1 小时写入 $3 / 百万 token。输出/输入上限依思考模式而异，试算采用两种模式都安全的保守上限，见 estimation_limits。",
     "reasoning_effort": {
       "supported": true,

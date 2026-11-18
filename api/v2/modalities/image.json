@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "see_media_pricing",
     "unit_label": "model.currency; see each model's media_pricing (per image / per second of video / per 1M tokens)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 16
   },
   "modality": {
@@ -97,6 +97,7 @@
         "https://developers.openai.com/api/docs/models/gpt-image-2.5-flare"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token；Batch 为标准价一半。官方定价页未列 2.5 的按张价格（按尺寸/质量），按 token 结算，按张价格待核实。",
       "reasoning_effort": {
         "supported": false,
@@ -244,6 +245,7 @@
         "https://developers.openai.com/api/docs/models/gpt-image-2.5-sunburst"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token；Batch 为标准价一半。官方定价页未列 2.5 的按张价格（按尺寸/质量），按 token 结算，按张价格待核实。",
       "reasoning_effort": {
         "supported": false,
@@ -391,6 +393,7 @@
         "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价（1K/1.5K/2K × low/medium 质量）；输入图片 $0.01/张。quality=auto 时生成用 low、编辑用 medium。支持 Batch，按标准价计费；不支持 Priority。",
       "reasoning_effort": {
         "supported": false,
@@ -566,6 +569,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价并给出等价单张价：1K（1120 token）$0.0336、2K（1680）$0.0504、4K（3780）$0.113；Batch 为半价。联网检索 grounding 每月 5000 次免费，之后 $14/千次。",
       "reasoning_effort": {
         "supported": false,
@@ -767,6 +771,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价：输入 $0.25，图像输出 $30 / 百万 token；等价单张价仅列 1K：$0.0336（1120 token）；Batch 半价。",
       "reasoning_effort": {
         "supported": false,
@@ -932,6 +937,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价并给出等价单张价：1K/2K（1120 token）$0.134、4K（2000 token）$0.24；Batch/Flex 为 $0.067 / $0.12；输入图片 560 token ≈ $0.0011/张（Batch $0.0006）；Priority 另计。",
       "reasoning_effort": {
         "supported": false,
@@ -1140,6 +1146,7 @@
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价：1K $0.04、2K $0.075；输入图片 $0.003/张。新用户有 10 张免费额度。",
       "reasoning_effort": {
         "supported": false,
@@ -1273,6 +1280,7 @@
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价：1K $0.03、2K $0.03；输入图片 $0.003/张。",
       "reasoning_effort": {
         "supported": false,
@@ -1406,6 +1414,7 @@
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价 $0.075/张（不区分尺寸）；新用户有 50 张免费额度。",
       "reasoning_effort": {
         "supported": false,
@@ -1530,6 +1539,7 @@
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价 $0.03/张（不区分尺寸）；新用户有 50 张免费额度。",
       "reasoning_effort": {
         "supported": false,
@@ -1654,6 +1664,7 @@
       "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价 $0.0035/张（不区分尺寸）。",
       "reasoning_effort": {
         "supported": false,
@@ -1778,6 +1789,7 @@
       "source_url": "https://docs.z.ai/guides/overview/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价 $0.015/张（不区分尺寸）。",
       "reasoning_effort": {
         "supported": false,
@@ -1905,6 +1917,21 @@
         "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "Token 计价与 2.5 同列：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token。官方按张（尺寸×质量）价仍未公布。定价页列出 Batch token 价，但模型专页写 Batch Not supported，冲突待确认，本轮不收录 Batch 价、不擅自取舍。",
       "reasoning_effort": {
         "supported": false,
@@ -2042,6 +2069,21 @@
         "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "Token 计价与 2.5 同列：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token。官方按张（尺寸×质量）价仍未公布。定价页列出 Batch token 价，但模型专页写 Batch Not supported，冲突待确认，本轮不收录 Batch 价、不擅自取舍。",
       "reasoning_effort": {
         "supported": false,
@@ -2176,6 +2218,21 @@
       "source_url": "https://platform.minimax.io/docs/pricing/overview",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方页面名称/调用写法为 MiniMax-H3-Image。库存 ID 按库内小写连字符约定记录为 minimax-h3-image，不与其他 H3 型号合并。官方定价页按 token 列出文本输入 $2.3、图像输入 $1.5、图像输出 $3.8 / 百万 token，并给出单张示例成本；完整按张价表未作为本轮核价表。4K（≥16,600,000 像素）五折官方截止 November 17, 2026 16:00 UTC（不含）= 2026-11-18 00:00:00+08:00；截止后不再把五折当当前价，不猜恢复价，按已公布目录/原价。今日页面若仍显示 From now until 与划线折扣示例，不等于优惠延长。",
       "reasoning_effort": {
         "supported": false,
@@ -2307,6 +2364,21 @@
       "source_url": "https://platform.minimax.io/docs/pricing/overview",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方页面名称/调用写法为 MiniMax-H3-Image-Highspeed。库存 ID 按库内小写连字符约定记录为 minimax-h3-image-highspeed，不与其他 H3 型号合并。官方定价页按 token 列出文本输入 $2.3、图像输入 $3.0、图像输出 $7.6 / 百万 token。faq Model List 的 Available Image 表未列入此 ID，与定价页口径不一致，已收录定价页调用 ID 与标价。4K 五折说明与 H3-Image 相同，官方截止后不再把五折当当前价。",
       "reasoning_effort": {
         "supported": false,

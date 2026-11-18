@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "gpt-6.2-astra",
@@ -68,6 +68,21 @@
       "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
     ],
     "last_updated": "2026-11-18",
+    "price_observations": [
+      {
+        "observed_at": "2026-11-18T08:27:00+08:00",
+        "valid_from": null,
+        "valid_until": null,
+        "fields": [
+          "*"
+        ],
+        "input_tokens_gt": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+      }
+    ],
     "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $16.0、缓存读取 $0.80、缓存写入 $20.0、输出 $60.0。Batch 为标准价 50%，Fast 为 2 倍。本轮 Flex 表未列出该型号，不编造 Flex 价。Ultrafast 当前为标准价 3 倍，至 2027-02-28；自 2027-03-01 起 6 倍（Pacific time）。数据驻留端点加收 10%。上下文窗口 1,050,000 tokens（最大输出 128K），来自官方模型页。相对昨日定价页快照新出现，不得写成官方发布日就是今天。不与 gpt-6-astra 合并。",
     "reasoning_effort": {
       "supported": null,
@@ -163,7 +178,7 @@
       {
         "name": "ultrafast",
         "multiplier": 3.0,
-        "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。官方：3 times the Standard rate through February 28, 2027, and 6 times the Standard rate starting March 1, 2027 (Pacific time)。当前已生效倍数为 3；2027-03-01 起 6 倍的精确 Pacific 时刻边界后须再核，价格库 service_tiers 不能按日期自动切换倍数，到期后不得继续默认按 3 倍估价。",
+        "note": "Responses API service_tier=ultrafast：至 2027-02-28（Pacific time）3 倍；2027-03-01 Pacific 零点起 6 倍，已由 multiplier_schedule 执行；各上下文档和缓存同倍率。",
         "multipliers": {
           "input": 3.0,
           "output": 3.0,
@@ -179,6 +194,17 @@
         "pricing": {},
         "sources": [
           "https://developers.openai.com/api/docs/pricing"
+        ],
+        "multiplier_schedule": [
+          {
+            "effective_from": "2027-03-01T00:00:00-08:00",
+            "timezone": "America/Los_Angeles",
+            "multiplier": 6,
+            "sources": [
+              "https://developers.openai.com/api/docs/pricing"
+            ],
+            "note": "官方 Pacific time：2027-03-01 尚为 PST (UTC-08:00)，从当日零点起 6 倍；不是 UTC/北京时间零点。America/Los_Angeles 2027 夏令时从 3 月 14 日开始。"
+          }
         ]
       },
       {

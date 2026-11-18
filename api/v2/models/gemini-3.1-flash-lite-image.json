@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "gemini-3.1-flash-lite-image",
@@ -61,6 +61,7 @@
       "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
     ],
     "last_updated": "2026-10-29",
+    "price_observations": [],
     "notes": "Token 计价：输入 $0.25，图像输出 $30 / 百万 token；等价单张价仅列 1K：$0.0336（1120 token）；Batch 半价。",
     "reasoning_effort": {
       "supported": false,

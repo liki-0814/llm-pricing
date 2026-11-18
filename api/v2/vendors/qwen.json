@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 15
   },
   "vendor": {
@@ -98,6 +98,7 @@
         "https://www.qwencloud.com/models/qwen3.8-max"
       ],
       "last_updated": "2026-10-28",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
       "reasoning_effort": {
         "supported": true,
@@ -229,6 +230,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；别名当前指向 qwen3.7-max-2026-05-20。单档 0–1M。 缓存价取自官方模型页（https://www.qwencloud.com/models/qwen3.7-max，International，美元）：隐式缓存 Input(Implicit Cache) $0.5、显式缓存创建 $3.125、显式缓存命中 $0.25；cached_input=显式缓存命中价，cache_write=显式缓存创建价；三项均见结构化字段 cache_pricing。",
       "reasoning_effort": {
         "supported": true,
@@ -337,6 +339,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-28",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤256K 输入档（非思考/思考输出价相同）；256K–1M 档：输入 $1.2、输出 $4.8。官方标注限时 8 折（表中为标价）。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-plus，Singapore，美元，标价口径，不含限时 8 折）：≤256K 档隐式 $0.08、显式创建 $0.5、显式命中 $0.04；>256K 档隐式 $0.24、显式创建 $1.5、显式命中 $0.12；cached_input=显式缓存命中价，cache_write=显式缓存创建价。结构化字段见 cache_pricing / pricing_tiers。",
       "reasoning_effort": {
         "supported": true,
@@ -510,6 +513,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.016）；显式缓存创建（cache_write）$0.2；显式缓存命中价 $0.016。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
       "reasoning_effort": {
         "supported": true,
@@ -616,6 +620,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-28",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤32K 输入档；32K–256K：输入 $0.10、输出 $0.40；256K–1M：输入 $0.20、输出 $0.80。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-flash，Singapore，美元）：≤32K 档隐式 $0.006、显式创建 $0.038、显式命中 $0.003；32K–256K 与 >256K 档缓存价见 pricing_tiers；cached_input=显式缓存命中价，cache_write=显式缓存创建价（官方页四舍五入标 $0.038）。",
       "reasoning_effort": {
         "supported": true,
@@ -787,6 +792,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input (Cache Hit) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
       "reasoning_effort": {
         "supported": true,
@@ -893,6 +899,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价取自官方模型页（https://www.qwencloud.com/models/qwen3.8-27b，International，美元）：隐式缓存 $0.1、显式缓存创建 $0.625、显式缓存命中 $0.05；cached_input=显式缓存命中价，cache_write=显式缓存创建价；三项均见结构化字段 cache_pricing。",
       "reasoning_effort": {
         "supported": true,
@@ -999,6 +1006,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为文本价，音频等其他模态价格见官方页。 缓存命中价 $0.016 来自官方价格页；缓存写入价官方未列且该模型不在显式缓存支持列表，保持待核实。 2026-10-10 复核：官方 Context Cache 文档仅说明该模型隐式缓存命中按固定单价，显式缓存支持列表（Singapore）不含 qwen3.8-omni-flash，官方模型页未列缓存创建价，cache_write 仍待核实。",
       "reasoning_effort": {
         "supported": true,
@@ -1105,6 +1113,7 @@
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价：1K $0.04、2K $0.075；输入图片 $0.003/张。新用户有 10 张免费额度。",
       "reasoning_effort": {
         "supported": false,
@@ -1238,6 +1247,7 @@
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价：1K $0.03、2K $0.03；输入图片 $0.003/张。",
       "reasoning_effort": {
         "supported": false,
@@ -1371,6 +1381,7 @@
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价 $0.075/张（不区分尺寸）；新用户有 50 张免费额度。",
       "reasoning_effort": {
         "supported": false,
@@ -1495,6 +1506,7 @@
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
       "extra_sources": [],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价 $0.03/张（不区分尺寸）；新用户有 50 张免费额度。",
       "reasoning_effort": {
         "supported": false,
@@ -1624,6 +1636,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/wan3-video-generation-guide"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：480P $0.05、720P $0.10、1080P $0.20（原价，不含限时 7 折促销）。计费时长 = 输入视频秒数 + 输出视频秒数；2–30 秒、30 fps，原生音频可开关（价格不区分）。预览版；新用户免费额度 30 秒。",
       "reasoning_effort": {
         "supported": false,
@@ -1782,6 +1795,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/wan3-video-generation-guide"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：480P $0.068、720P $0.14、1080P $0.28。",
       "reasoning_effort": {
         "supported": false,
@@ -1942,6 +1956,26 @@
         "https://www.alibabacloud.com/help/en/model-studio/explicit-cache-qwen4"
       ],
       "last_updated": "2026-11-17",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "cached_input",
+            "cache_write",
+            "implicit_read",
+            "explicit_read",
+            "explicit_write",
+            "explicit_write_1h"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "百炼国际站新加坡普通文本美元价，0<Token≤1M；Non-Thinking 与 Thinking 同价。不覆盖图片、视频、工具费，不与国际站其他地域 USD 价混用，不换汇。新加坡缓存（同档）：显式与隐式读取 $0.075，5 分钟写入 $1.875，1 小时写入 $3 / 百万 token。输出/输入上限依思考模式而异，试算采用两种模式都安全的保守上限，见 estimation_limits。",
       "reasoning_effort": {
         "supported": true,

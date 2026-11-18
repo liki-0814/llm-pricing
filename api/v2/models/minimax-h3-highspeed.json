@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "minimax-h3-highspeed",
@@ -58,6 +58,7 @@
     "source_url": "https://platform.minimax.io/docs/guides/pricing-paygo",
     "extra_sources": [],
     "last_updated": "2026-10-31",
+    "price_observations": [],
     "notes": "按秒计价：768P $0.06、480P $0.04（输入视频同价）；输入图片 $0.03/张。",
     "reasoning_effort": {
       "supported": false,

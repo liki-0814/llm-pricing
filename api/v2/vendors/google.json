@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 10
   },
   "vendor": {
@@ -94,6 +94,7 @@
         "https://ai.google.dev/gemini-api/docs/changelog"
       ],
       "last_updated": "2026-10-19",
+      "price_observations": [],
       "notes": "Standard 付费档（2026-10-13 GA，Stable）；不提供免费档。仅支持隐式缓存（提示 ≥4,096 tokens 自动启用，命中价为输入价 5%），不支持显式缓存，故无缓存写入价与存储费。无长上下文分档。Batch/Flex 为标准价 50%（含缓存），Priority 为 1.8×。注意：该价格仅到 2026-11-30；2026-12-01 起输入 $4.00、输出 $20.00、缓存 $0.20（Batch/Flex/Priority 同比例上调）。",
       "reasoning_effort": {
         "supported": true,
@@ -285,6 +286,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "Standard 付费档。缓存存储费 $0.50/百万 token/小时（2027 起 $1.00）。价格已对照官方定价页复核无变化。 注意：该价格仅到 2026-12-31；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
       "reasoning_effort": {
         "supported": true,
@@ -473,6 +475,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
       ],
       "last_updated": "2026-11-06",
+      "price_observations": [],
       "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。2026-11-06：Batch 档 Context caching 官方为 $0.015（此前 repo 误记 0.02）；Flex 仍为 $0.02，Priority $0.05。来源：https://ai.google.dev/gemini-api/docs/pricing",
       "reasoning_effort": {
         "supported": true,
@@ -650,6 +653,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。价格已对照官方定价页复核无变化。",
       "reasoning_effort": {
         "supported": true,
@@ -841,6 +845,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价并给出等价单张价：1K（1120 token）$0.0336、2K（1680）$0.0504、4K（3780）$0.113；Batch 为半价。联网检索 grounding 每月 5000 次免费，之后 $14/千次。",
       "reasoning_effort": {
         "supported": false,
@@ -1042,6 +1047,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价：输入 $0.25，图像输出 $30 / 百万 token；等价单张价仅列 1K：$0.0336（1120 token）；Batch 半价。",
       "reasoning_effort": {
         "supported": false,
@@ -1207,6 +1213,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价并给出等价单张价：1K/2K（1120 token）$0.134、4K（2000 token）$0.24；Batch/Flex 为 $0.067 / $0.12；输入图片 560 token ≈ $0.0011/张（Batch $0.0006）；Priority 另计。",
       "reasoning_effort": {
         "supported": false,
@@ -1420,6 +1427,7 @@
         "https://ai.google.dev/gemini-api/docs/video"
       ],
       "last_updated": "2026-11-06",
+      "price_observations": [],
       "notes": "Token 计价：输入 $1.50（文本/图像/视频/音频）、文本输出 $9.00、视频输出 $17.50 / 百万 token；按 720p 视频 5,792 token/秒计，官方称约 $0.10/秒（近似值）。官方未列 360p / 1080p / 4k 的单价，待核实。 Effective December 3, 2026, API requests to gemini-omni-1.1-flash automatically route to gemini-omni-1.2-flash and are billed at 1.2 rates (video output $12/1M tokens vs current 1.1 $17.50; ~$0.07/s @720p). Current 1.1 Standard prices still apply until then. Source: https://ai.google.dev/gemini-api/docs/pricing (changelog 2026-11-05). Schema note: media models cannot yet store price_schedule; route recorded in notes only.",
       "reasoning_effort": {
         "supported": false,
@@ -1604,6 +1612,21 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方目录与定价页均列出。标准价当前输入 $2 / 输出 $10 / 隐式缓存 $0.10，至 2026-11-30；2026-12-01 起 $4 / $20 / $0.20。仅隐式缓存，无缓存写入，不提供免费档。不与 gemini-4-argon 合并为同一 ID。",
       "reasoning_effort": {
         "supported": true,
@@ -1795,6 +1818,21 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方目录与定价页均列出。标准价输入 $1.50 / 输出 $7.50 / 隐式缓存 $0.075，无涨价排期。另有邀请制 Contributor 价签（$0.75 / $3.75 / $0.0375），不是通用当前价，本轮不作为默认估价。仅隐式缓存。",
       "reasoning_effort": {
         "supported": true,

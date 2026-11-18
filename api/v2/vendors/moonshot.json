@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 6
   },
   "vendor": {
@@ -87,6 +87,7 @@
         "https://platform.kimi.ai/docs/pricing/batch"
       ],
       "last_updated": "2026-10-31",
+      "price_observations": [],
       "notes": "缓存写入按 TTL 计价：5 分钟 $3.00，1 小时 $6.00（表中为 5 分钟）。缓存命中自动续期、无额外写入费。",
       "reasoning_effort": {
         "supported": true,
@@ -220,6 +221,7 @@
         "https://platform.kimi.ai/docs/pricing/batch"
       ],
       "last_updated": "2026-10-31",
+      "price_observations": [],
       "notes": "K3 的后训练升级版，K3.1 系列首个模型；按量计费、无上下文长度分档。缓存写入按 TTL 计价：5 分钟 $2.00，1 小时 $4.00（表中为 5 分钟）。缓存命中 $0.20、自动续期、无额外写入费。",
       "reasoning_effort": {
         "supported": true,
@@ -351,6 +353,7 @@
         "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
       ],
       "last_updated": "2026-10-25",
+      "price_observations": [],
       "notes": "K3.1 Pro 高速版（同一模型，约 2–3× 输出速度）；按量计费、无上下文长度分档。缓存写入按 TTL 计价：5 分钟 $4.00，1 小时 $8.00（表中为 5 分钟）。缓存命中 $0.20、自动续期、无额外写入费。",
       "reasoning_effort": {
         "supported": true,
@@ -457,6 +460,7 @@
         "https://platform.kimi.ai/docs/models"
       ],
       "last_updated": "2026-10-25",
+      "price_observations": [],
       "notes": "官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
       "reasoning_effort": {
         "supported": false,
@@ -583,6 +587,7 @@
         "https://platform.kimi.ai/docs/models"
       ],
       "last_updated": "2026-10-25",
+      "price_observations": [],
       "notes": "高速版；官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
       "reasoning_effort": {
         "supported": false,
@@ -689,6 +694,7 @@
         "https://platform.kimi.ai/docs/models"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无官方 token 单价。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。 价格暂按 Kimi K2.7 Code 计价(用户确认,Kimi 官方暂未单独标价)",
       "reasoning_effort": {
         "supported": true,

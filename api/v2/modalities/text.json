@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 63
   },
   "modality": {
@@ -173,6 +173,7 @@
       "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "表中价格为高峰价。最大输出 384K；旧名 deepseek-v4-flash 已并入此模型计费。官方页未列缓存写入价。",
       "reasoning_effort": {
         "supported": true,
@@ -303,6 +304,7 @@
       "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "表中价格为高峰价。最大输出 384K；官方页未列缓存写入价。",
       "reasoning_effort": {
         "supported": true,
@@ -409,6 +411,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-11-17",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $8.0、缓存读取 $0.8、缓存写入 $10.0、输出 $30.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。官方注明 GPT-5.6 Sol 促销价持续到 2026-11-30（原文 until November 30, 2026；具体时刻和时区未给出，不自动涨价）。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $10.0（长上下文 $20.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -640,6 +643,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $18.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -853,6 +857,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.4、缓存读取 $0.04、缓存写入 $0.5、输出 $1.8。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $0.5（长上下文 $1.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -1066,6 +1071,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $20.0、缓存读取 $2.0、缓存写入 $25.0、输出 $75.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $25.0（长上下文 $50.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -1302,6 +1308,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.4、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -1515,6 +1522,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.2、缓存读取 $0.02、缓存写入 $0.25、输出 $0.75。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $0.25（长上下文 $0.5），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -1728,6 +1736,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-21",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.2、缓存写入 $5.0、输出 $15.0。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $5.0（长上下文 $10.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
       "reasoning_effort": {
         "supported": true,
@@ -1961,6 +1970,7 @@
         "https://developers.openai.com/api/docs/guides/prompt-caching"
       ],
       "last_updated": "2026-10-27",
+      "price_observations": [],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $2.0、缓存读取 $0.1、缓存写入 $2.5、输出 $7.5。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍（官方定价页未列 Ultrafast）。数据驻留端点加收 10%（where available）。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $2.5（长上下文 $5.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。 2026-10-27 新增（OpenAI 新模型）。",
       "reasoning_effort": {
         "supported": true,
@@ -2171,6 +2181,21 @@
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [],
       "last_updated": "2026-11-01",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": 272000,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "OpenAI 定价页“Legal model configurations”法律场景配置（GPT-6 Astra for Law）。短上下文促销价输入 $10.00 / 输出 $50.00 / 缓存读取 $1.00（每百万 token），官方称至少持续到 2026-12-31；到期后价格未公布。长上下文官方已列出 $20 / $75 / $2；缓存写入短/长上下文原文均为“—”，不是 0，缺价字段估价须拒绝。未列 Batch/Flex/Fast；模型专页 /api/docs/models/gpt-6-astra-law 仍 404，不得据此推断退役；不借用 gpt-6-astra 或 gpt-6.2-astra-law 的未公布字段。",
       "reasoning_effort": {
         "supported": null,
@@ -2313,6 +2338,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
       "reasoning_effort": {
         "supported": true,
@@ -2462,6 +2488,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
       "reasoning_effort": {
         "supported": true,
@@ -2611,6 +2638,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。",
       "reasoning_effort": {
         "supported": true,
@@ -2760,6 +2788,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $20。Batch API 5 折。限量开放（需通过 Anthropic 验证计划）。",
       "reasoning_effort": {
         "supported": true,
@@ -2909,6 +2938,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-20",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（已正式提供，不再是研究预览）输入 $8 / 输出 $40。",
       "reasoning_effort": {
         "supported": true,
@@ -3079,6 +3109,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
       "reasoning_effort": {
         "supported": true,
@@ -3249,6 +3280,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式价仍列出输入 $10 / 输出 $50，但官方现写 Fast mode 对 Claude Opus 4.8 为 deprecated（对 Opus 5 仍为 research preview）。不是模型退役。",
       "reasoning_effort": {
         "supported": true,
@@ -3327,7 +3359,15 @@
           "pricing": {},
           "sources": [
             "https://platform.claude.com/docs/en/about-claude/pricing"
-          ]
+          ],
+          "status_observation": {
+            "status": "deprecated",
+            "observed_at": "2026-11-18T08:27:00+08:00",
+            "sources": [
+              "https://platform.claude.com/docs/en/about-claude/pricing"
+            ],
+            "note": "观察到 Fast 档 deprecated，不推定更早已弃用，不表示模型退役或该档不可估价。"
+          }
         },
         {
           "name": "data_residency",
@@ -3419,6 +3459,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。新分词器，同样文本约多 30% token。",
       "reasoning_effort": {
         "supported": true,
@@ -3568,6 +3609,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。",
       "reasoning_effort": {
         "supported": true,
@@ -3716,6 +3758,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。",
       "reasoning_effort": {
         "supported": true,
@@ -3865,6 +3908,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $4。Batch API 5 折。$2/$10 已确认为标准价（原定 9 月 1 日涨价取消）。",
       "reasoning_effort": {
         "supported": true,
@@ -4014,6 +4058,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $6。Batch API 5 折。",
       "reasoning_effort": {
         "supported": true,
@@ -4164,6 +4209,7 @@
         "https://platform.claude.com/docs/en/about-claude/models/overview"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "按提示长度分档：表中为 ≤100K 提示价；>100K 提示：输入 $0.50、输出 $2.50、缓存读取 $0.05、缓存写入(5m) $0.625。1 小时 TTL 写入 $0.20（≤100K）/ $1（>100K）。Batch 5 折。 上下文窗口 1M tokens、最大输出 128K（Anthropic 模型总览页）。",
       "reasoning_effort": {
         "supported": true,
@@ -4336,6 +4382,7 @@
         "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
       "last_updated": "2026-10-14",
+      "price_observations": [],
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "reasoning_effort": {
         "supported": true,
@@ -4462,6 +4509,7 @@
         "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
       "last_updated": "2026-10-14",
+      "price_observations": [],
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "reasoning_effort": {
         "supported": true,
@@ -4588,6 +4636,7 @@
         "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
       "last_updated": "2026-10-14",
+      "price_observations": [],
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "reasoning_effort": {
         "supported": true,
@@ -4716,6 +4765,7 @@
         "https://docs.bigmodel.cn/cn/guide/start/concept-param"
       ],
       "last_updated": "2026-10-14",
+      "price_observations": [],
       "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
       "reasoning_effort": {
         "supported": true,
@@ -4844,6 +4894,7 @@
         "https://platform.kimi.ai/docs/pricing/batch"
       ],
       "last_updated": "2026-10-31",
+      "price_observations": [],
       "notes": "缓存写入按 TTL 计价：5 分钟 $3.00，1 小时 $6.00（表中为 5 分钟）。缓存命中自动续期、无额外写入费。",
       "reasoning_effort": {
         "supported": true,
@@ -4977,6 +5028,7 @@
         "https://platform.kimi.ai/docs/pricing/batch"
       ],
       "last_updated": "2026-10-31",
+      "price_observations": [],
       "notes": "K3 的后训练升级版，K3.1 系列首个模型；按量计费、无上下文长度分档。缓存写入按 TTL 计价：5 分钟 $2.00，1 小时 $4.00（表中为 5 分钟）。缓存命中 $0.20、自动续期、无额外写入费。",
       "reasoning_effort": {
         "supported": true,
@@ -5108,6 +5160,7 @@
         "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
       ],
       "last_updated": "2026-10-25",
+      "price_observations": [],
       "notes": "K3.1 Pro 高速版（同一模型，约 2–3× 输出速度）；按量计费、无上下文长度分档。缓存写入按 TTL 计价：5 分钟 $4.00，1 小时 $8.00（表中为 5 分钟）。缓存命中 $0.20、自动续期、无额外写入费。",
       "reasoning_effort": {
         "supported": true,
@@ -5214,6 +5267,7 @@
         "https://platform.kimi.ai/docs/models"
       ],
       "last_updated": "2026-10-25",
+      "price_observations": [],
       "notes": "官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
       "reasoning_effort": {
         "supported": false,
@@ -5340,6 +5394,7 @@
         "https://platform.kimi.ai/docs/models"
       ],
       "last_updated": "2026-10-25",
+      "price_observations": [],
       "notes": "高速版；官方页未列缓存写入价。 官方公告：2026-10-31 起 K2 系列模型不再向新注册用户开放（老用户不受影响），计划于 2026 年 12 月底下线全部 K2 系列模型。",
       "reasoning_effort": {
         "supported": false,
@@ -5446,6 +5501,7 @@
         "https://www.qwencloud.com/models/qwen3.8-max"
       ],
       "last_updated": "2026-10-28",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-max，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
       "reasoning_effort": {
         "supported": true,
@@ -5577,6 +5633,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；别名当前指向 qwen3.7-max-2026-05-20。单档 0–1M。 缓存价取自官方模型页（https://www.qwencloud.com/models/qwen3.7-max，International，美元）：隐式缓存 Input(Implicit Cache) $0.5、显式缓存创建 $3.125、显式缓存命中 $0.25；cached_input=显式缓存命中价，cache_write=显式缓存创建价；三项均见结构化字段 cache_pricing。",
       "reasoning_effort": {
         "supported": true,
@@ -5685,6 +5742,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-28",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤256K 输入档（非思考/思考输出价相同）；256K–1M 档：输入 $1.2、输出 $4.8。官方标注限时 8 折（表中为标价）。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-plus，Singapore，美元，标价口径，不含限时 8 折）：≤256K 档隐式 $0.08、显式创建 $0.5、显式命中 $0.04；>256K 档隐式 $0.24、显式创建 $1.5、显式命中 $0.12；cached_input=显式缓存命中价，cache_write=显式缓存创建价。结构化字段见 cache_pricing / pricing_tiers。",
       "reasoning_effort": {
         "supported": true,
@@ -5858,6 +5916,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-flash，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input(Implicit Cache) $0.016）；显式缓存创建（cache_write）$0.2；显式缓存命中价 $0.016。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
       "reasoning_effort": {
         "supported": true,
@@ -5964,6 +6023,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-28",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤32K 输入档；32K–256K：输入 $0.10、输出 $0.40；256K–1M：输入 $0.20、输出 $0.80。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-flash，Singapore，美元）：≤32K 档隐式 $0.006、显式创建 $0.038、显式命中 $0.003；32K–256K 与 >256K 档缓存价见 pricing_tiers；cached_input=显式缓存命中价，cache_write=显式缓存创建价（官方页四舍五入标 $0.038）。",
       "reasoning_effort": {
         "supported": true,
@@ -6135,6 +6195,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价来自官方模型页（https://www.alibabacloud.com/help/en/model-studio/qwen3-8-2-4t-a95b，新加坡/International 区，美元）：cached_input=隐式缓存命中价（Input (Cache Hit) $0.25）；显式缓存创建（cache_write）$2.5；显式缓存命中价 $0.17。官方 Context Cache 文档说明该模型缓存价不按通用 10%/20% 规则，故此处为模型页逐项列价，非推算。",
       "reasoning_effort": {
         "supported": true,
@@ -6241,6 +6302,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；单档 0–1M。 缓存价取自官方模型页（https://www.qwencloud.com/models/qwen3.8-27b，International，美元）：隐式缓存 $0.1、显式缓存创建 $0.625、显式缓存命中 $0.05；cached_input=显式缓存命中价，cache_write=显式缓存创建价；三项均见结构化字段 cache_pricing。",
       "reasoning_effort": {
         "supported": true,
@@ -6347,6 +6409,7 @@
         "https://www.alibabacloud.com/help/en/model-studio/context-cache"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "阿里云百炼国际站（新加坡）美元价；表中为文本价，音频等其他模态价格见官方页。 缓存命中价 $0.016 来自官方价格页；缓存写入价官方未列且该模型不在显式缓存支持列表，保持待核实。 2026-10-10 复核：官方 Context Cache 文档仅说明该模型隐式缓存命中按固定单价，显式缓存支持列表（Singapore）不含 qwen3.8-omni-flash，官方模型页未列缓存创建价，cache_write 仍待核实。",
       "reasoning_effort": {
         "supported": true,
@@ -6459,6 +6522,7 @@
         "https://ai.google.dev/gemini-api/docs/changelog"
       ],
       "last_updated": "2026-10-19",
+      "price_observations": [],
       "notes": "Standard 付费档（2026-10-13 GA，Stable）；不提供免费档。仅支持隐式缓存（提示 ≥4,096 tokens 自动启用，命中价为输入价 5%），不支持显式缓存，故无缓存写入价与存储费。无长上下文分档。Batch/Flex 为标准价 50%（含缓存），Priority 为 1.8×。注意：该价格仅到 2026-11-30；2026-12-01 起输入 $4.00、输出 $20.00、缓存 $0.20（Batch/Flex/Priority 同比例上调）。",
       "reasoning_effort": {
         "supported": true,
@@ -6650,6 +6714,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "Standard 付费档。缓存存储费 $0.50/百万 token/小时（2027 起 $1.00）。价格已对照官方定价页复核无变化。 注意：该价格仅到 2026-12-31；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
       "reasoning_effort": {
         "supported": true,
@@ -6838,6 +6903,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
       ],
       "last_updated": "2026-11-06",
+      "price_observations": [],
       "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。2026-11-06：Batch 档 Context caching 官方为 $0.015（此前 repo 误记 0.02）；Flex 仍为 $0.02，Priority $0.05。来源：https://ai.google.dev/gemini-api/docs/pricing",
       "reasoning_effort": {
         "supported": true,
@@ -7015,6 +7081,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。价格已对照官方定价页复核无变化。",
       "reasoning_effort": {
         "supported": true,
@@ -7206,6 +7273,7 @@
         "https://platform.minimax.io/docs/api-reference/text-chat-openai"
       ],
       "last_updated": "2026-10-25",
+      "price_observations": [],
       "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方页标注“Permanent 50% off”，原价 $0.60 / $2.40 / 缓存 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12。>512K 原价 $1.20 / $4.80 / $0.24。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09，原价 $0.90 / $3.60 / $0.18），同样标注 Permanent 50% off。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
       "reasoning_effort": {
         "supported": false,
@@ -7353,6 +7421,7 @@
         "https://platform.minimax.io/docs/api-reference/text-chat-openai"
       ],
       "last_updated": "2026-10-20",
+      "price_observations": [],
       "notes": "已正式发布（GA，2026-10-19）。官方按量付费统一价（不分输入长度档）：输入 $0.15、输出 $0.60、缓存读取 $0.015 / 1M tokens。官方页未列缓存写入价，无 Priority 档。max_completion_tokens 建议 128K、上限 512K。",
       "reasoning_effort": {
         "supported": true,
@@ -7463,6 +7532,7 @@
         "https://platform.kimi.ai/docs/models"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "K2.8 Preview 仅在 Kimi Code 订阅 API 中提供（API 模型 ID 为 kimi-for-coding，base URL https://api.kimi.ai/coding/v1，Andante/Plus 及以上会员），按会员订阅计费；Kimi 开放平台（platform.kimi.ai）按量付费模型列表与定价页未列出该模型，故无官方 token 单价。注意 Kimi Code 文档称 kimi-for-coding 为“原地升级”的移动标识。 价格暂按 Kimi K2.7 Code 计价(用户确认,Kimi 官方暂未单独标价)",
       "reasoning_effort": {
         "supported": true,
@@ -7577,6 +7647,7 @@
         "https://docs.x.ai/developers/rest-api-reference/inference/models"
       ],
       "last_updated": "2026-10-28",
+      "price_observations": [],
       "notes": "公共 xAI API 模型 ID：grok-4.7。全球接口 https://api.x.ai/v1；输入达到 200,000 tokens（含缓存）后，整次请求使用长上下文单价。美国区域接口 https://us.api.x.ai/v1 加价 10%；Priority 仅在响应确认 priority 时按 2 倍计价。Batch API 在 us-east-1 / us-west-2 / us-central-1 集群均支持，按标准价 8 折（批量折扣 20%，输入、输出、缓存与推理 token 同折扣）；2026-10-28 起官方模型数据显示美国区域加价集群（us-central-1）也支持 Batch（batchDiscountPercent=20），即美国区域 Batch 为 1.1×0.8；Grok 4.7 Fast 仅在 Cursor/Grok Build 提供，未作为公共 API 模型收录。工具费用不在本表范围内。 Grok Build 同名模型的渠道默认上下文为 256,000、可选 500,000；本条 500,000 为公共 API 文档口径。",
       "reasoning_effort": {
         "supported": true,
@@ -7774,6 +7845,7 @@
         "https://cli-chat-proxy.grok.com/v1/models"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "订阅渠道模型 ID 为 grok-4.7-build-fast（2026-10-11 上游模型列表实查 HTTP 200）。官方 Fast 价格表仅供订阅成本参照；不在公共 xAI API 上提供，不代表会员额度或实际扣费。短上下文输入/缓存/输出 4/1/12，总输入 >200,000 后 6/1.5/18 USD per 1M tokens。渠道默认上下文 256,000，可选 500,000；独立输出上限和能否关闭推理待核实。",
       "reasoning_effort": {
         "supported": true,
@@ -7913,6 +7985,26 @@
         "https://www.alibabacloud.com/help/en/model-studio/explicit-cache-qwen4"
       ],
       "last_updated": "2026-11-17",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "cached_input",
+            "cache_write",
+            "implicit_read",
+            "explicit_read",
+            "explicit_write",
+            "explicit_write_1h"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "百炼国际站新加坡普通文本美元价，0<Token≤1M；Non-Thinking 与 Thinking 同价。不覆盖图片、视频、工具费，不与国际站其他地域 USD 价混用，不换汇。新加坡缓存（同档）：显式与隐式读取 $0.075，5 分钟写入 $1.875，1 小时写入 $3 / 百万 token。输出/输入上限依思考模式而异，试算采用两种模式都安全的保守上限，见 estimation_limits。",
       "reasoning_effort": {
         "supported": true,
@@ -8040,6 +8132,7 @@
         "https://cloud.tencent.com/document/product/1823/130051"
       ],
       "last_updated": "2026-11-17",
+      "price_observations": [],
       "notes": "腾讯云TokenHub广州后付费目录价，人民币/百万token，不换汇。缓存写入表为“-”，未核实，不按零收费。官方明确五折，限本轮观测之后、精确截止前后按token_offer计算；表内保留目录价。",
       "reasoning_effort": {
         "supported": null,
@@ -8167,6 +8260,7 @@
         "https://cloud.tencent.com/document/product/1823/130051"
       ],
       "last_updated": "2026-11-17",
+      "price_observations": [],
       "notes": "腾讯云TokenHub广州后付费目录价，人民币/百万token，不换汇。缓存写入表为“-”，未核实，不按零收费。官方明确五折，限本轮观测之后、精确截止前后按token_offer计算；表内保留目录价。",
       "reasoning_effort": {
         "supported": null,
@@ -8295,6 +8389,7 @@
         "https://cloud.tencent.com/document/product/1823/130051"
       ],
       "last_updated": "2026-11-17",
+      "price_observations": [],
       "notes": "腾讯云TokenHub广州后付费目录价，人民币/百万token，不换汇。缓存写入表为“-”，未核实，不按零收费。不将Hy4或flash折扣套用到preview；官方退役仅给日期，时刻/时区待确认。",
       "reasoning_effort": {
         "supported": null,
@@ -8409,6 +8504,21 @@
         "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $16.0、缓存读取 $0.80、缓存写入 $20.0、输出 $60.0。Batch 为标准价 50%，Fast 为 2 倍。本轮 Flex 表未列出该型号，不编造 Flex 价。Ultrafast 当前为标准价 3 倍，至 2027-02-28；自 2027-03-01 起 6 倍（Pacific time）。数据驻留端点加收 10%。上下文窗口 1,050,000 tokens（最大输出 128K），来自官方模型页。相对昨日定价页快照新出现，不得写成官方发布日就是今天。不与 gpt-6-astra 合并。",
       "reasoning_effort": {
         "supported": null,
@@ -8504,7 +8614,7 @@
         {
           "name": "ultrafast",
           "multiplier": 3.0,
-          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。官方：3 times the Standard rate through February 28, 2027, and 6 times the Standard rate starting March 1, 2027 (Pacific time)。当前已生效倍数为 3；2027-03-01 起 6 倍的精确 Pacific 时刻边界后须再核，价格库 service_tiers 不能按日期自动切换倍数，到期后不得继续默认按 3 倍估价。",
+          "note": "Responses API service_tier=ultrafast：至 2027-02-28（Pacific time）3 倍；2027-03-01 Pacific 零点起 6 倍，已由 multiplier_schedule 执行；各上下文档和缓存同倍率。",
           "multipliers": {
             "input": 3.0,
             "output": 3.0,
@@ -8520,6 +8630,17 @@
           "pricing": {},
           "sources": [
             "https://developers.openai.com/api/docs/pricing"
+          ],
+          "multiplier_schedule": [
+            {
+              "effective_from": "2027-03-01T00:00:00-08:00",
+              "timezone": "America/Los_Angeles",
+              "multiplier": 6,
+              "sources": [
+                "https://developers.openai.com/api/docs/pricing"
+              ],
+              "note": "官方 Pacific time：2027-03-01 尚为 PST (UTC-08:00)，从当日零点起 6 倍；不是 UTC/北京时间零点。America/Los_Angeles 2027 夏令时从 3 月 14 日开始。"
+            }
           ]
         },
         {
@@ -8627,6 +8748,21 @@
         "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.20、缓存写入 $5.0、输出 $15.0。Batch 为标准价 50%，Fast 为 2 倍。本轮 Flex 表未列出该型号，不编造 Flex 价。Ultrafast 当前为标准价 3 倍，至 2027-02-28；自 2027-03-01 起 6 倍（Pacific time）。数据驻留端点加收 10%。上下文窗口 1,050,000 tokens（最大输出 128K），来自官方模型页。相对昨日定价页快照新出现，不得写成官方发布日就是今天。不与 gpt-6-sol 合并。",
       "reasoning_effort": {
         "supported": null,
@@ -8722,7 +8858,7 @@
         {
           "name": "ultrafast",
           "multiplier": 3.0,
-          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。官方：3 times the Standard rate through February 28, 2027, and 6 times the Standard rate starting March 1, 2027 (Pacific time)。当前已生效倍数为 3；2027-03-01 起 6 倍的精确 Pacific 时刻边界后须再核，价格库 service_tiers 不能按日期自动切换倍数，到期后不得继续默认按 3 倍估价。",
+          "note": "Responses API service_tier=ultrafast：至 2027-02-28（Pacific time）3 倍；2027-03-01 Pacific 零点起 6 倍，已由 multiplier_schedule 执行；各上下文档和缓存同倍率。",
           "multipliers": {
             "input": 3.0,
             "output": 3.0,
@@ -8738,6 +8874,17 @@
           "pricing": {},
           "sources": [
             "https://developers.openai.com/api/docs/pricing"
+          ],
+          "multiplier_schedule": [
+            {
+              "effective_from": "2027-03-01T00:00:00-08:00",
+              "timezone": "America/Los_Angeles",
+              "multiplier": 6,
+              "sources": [
+                "https://developers.openai.com/api/docs/pricing"
+              ],
+              "note": "官方 Pacific time：2027-03-01 尚为 PST (UTC-08:00)，从当日零点起 6 倍；不是 UTC/北京时间零点。America/Los_Angeles 2027 夏令时从 3 月 14 日开始。"
+            }
           ]
         },
         {
@@ -8835,6 +8982,21 @@
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "OpenAI 定价页 Legal model configurations 列出的 GPT-6.2 Astra for Law，不与 gpt-6-astra-law 合并。短上下文促销价输入 $8 / 输出 $40 / 缓存读取 $0.40 / 30 分钟写入 $10 / 12 小时写入 $20；长上下文 $16 / $60 / $0.80 / $20 / $40。官方称促销至少持续到 2026-12-31；到期后价未公布。Legal 表以 short/long context 分列，同页定义 Short ≤272K / Long >272K。未在 Legal 表列出 Batch/Flex/Fast，不编造。模型专页 404，定价页有价，不得推断退役。",
       "reasoning_effort": {
         "supported": null,
@@ -8979,6 +9141,21 @@
         "https://platform.claude.com/docs/en/models/fable-5-2/overview"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方 API ID 为连字符 claude-fable-5-2，不与点号库存约定或其他版本合并。发布日 2026-11-09，官方承诺不早于 2027-11-09 退役。标准价输入 $8 / 输出 $40 / 缓存命中 $0.20 / 5 分钟写入 $10 / 1 小时写入 $16；Batch 5 折；Fast $16 / $80。不是今日发布。",
       "reasoning_effort": {
         "supported": null,
@@ -9153,6 +9330,21 @@
         "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方 API ID 为连字符 claude-mythos-5-2。官方写与 Fable 5.2 规格和定价相同，但仅向通过 Anthropic 验证计划的组织提供（limited availability / verification required）。发布日 2026-11-09，官方承诺不早于 2027-11-09 退役。不自行与 Fable 5.2 合并为同一调用 ID。不是今日发布。",
       "reasoning_effort": {
         "supported": null,
@@ -9327,6 +9519,21 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方目录与定价页均列出。标准价当前输入 $2 / 输出 $10 / 隐式缓存 $0.10，至 2026-11-30；2026-12-01 起 $4 / $20 / $0.20。仅隐式缓存，无缓存写入，不提供免费档。不与 gemini-4-argon 合并为同一 ID。",
       "reasoning_effort": {
         "supported": true,
@@ -9518,6 +9725,21 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
       ],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方目录与定价页均列出。标准价输入 $1.50 / 输出 $7.50 / 隐式缓存 $0.075，无涨价排期。另有邀请制 Contributor 价签（$0.75 / $3.75 / $0.0375），不是通用当前价，本轮不作为默认估价。仅隐式缓存。",
       "reasoning_effort": {
         "supported": true,
@@ -9687,6 +9909,21 @@
       "source_url": "https://docs.z.ai/guides/overview/pricing",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://docs.z.ai/guides/overview/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方 Overview 与 Pricing 单独列出 GLM-5.3-FlashX-Legal，公开价与 GLM-5.3-FlashX 相同（输入 $0.37 / 输出 $1.25 / 缓存读取 $0.075），官方未声明为同一调用 ID，不得自行合并。调用 ID 按官方 Legal 页已核为 glm-5.3-flashx-legal。缓存存储官方写 Limited-time Free，无截止日期，不把限时免费当成永久 0。不加入 glm-5.3-prime。",
       "reasoning_effort": {
         "supported": null,
@@ -9810,6 +10047,21 @@
       "source_url": "https://platform.minimax.io/docs/pricing/overview",
       "extra_sources": [],
       "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://platform.minimax.io/docs/pricing/overview"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
       "notes": "官方页面名称/调用写法为 MiniMax-H3-Context-IR。库存 ID 按库内小写连字符约定记录为 minimax-h3-context-ir，不与其他 H3 型号合并。官方定价页 Context-IR 表列出输入 $0.9 / 输出 $3.6 / 百万 token。缓存命中未公布；写入按 MiniMax 无独立 cache_write 计费记 n/a。上下文窗口本轮未核。",
       "reasoning_effort": {
         "supported": null,

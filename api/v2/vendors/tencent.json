@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 3
   },
   "vendor": {
@@ -104,6 +104,7 @@
         "https://cloud.tencent.com/document/product/1823/130051"
       ],
       "last_updated": "2026-11-17",
+      "price_observations": [],
       "notes": "腾讯云TokenHub广州后付费目录价，人民币/百万token，不换汇。缓存写入表为“-”，未核实，不按零收费。官方明确五折，限本轮观测之后、精确截止前后按token_offer计算；表内保留目录价。",
       "reasoning_effort": {
         "supported": null,
@@ -231,6 +232,7 @@
         "https://cloud.tencent.com/document/product/1823/130051"
       ],
       "last_updated": "2026-11-17",
+      "price_observations": [],
       "notes": "腾讯云TokenHub广州后付费目录价，人民币/百万token，不换汇。缓存写入表为“-”，未核实，不按零收费。官方明确五折，限本轮观测之后、精确截止前后按token_offer计算；表内保留目录价。",
       "reasoning_effort": {
         "supported": null,
@@ -359,6 +361,7 @@
         "https://cloud.tencent.com/document/product/1823/130051"
       ],
       "last_updated": "2026-11-17",
+      "price_observations": [],
       "notes": "腾讯云TokenHub广州后付费目录价，人民币/百万token，不换汇。缓存写入表为“-”，未核实，不按零收费。不将Hy4或flash折扣套用到preview；官方退役仅给日期，时刻/时区待确认。",
       "reasoning_effort": {
         "supported": null,

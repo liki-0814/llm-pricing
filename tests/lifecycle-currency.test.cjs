@@ -19,7 +19,11 @@ test("shared lifecycle cases: exact >=T, timezone, uncertainty and routed entity
 
 test("ordinary Qwen4 quote is USD; Singapore cache rates are explicit and 12h/storage stay unpublished", () => {
   const m = model("qwen4-max");
-  const at = { at: "2026-11-17T21:00:00+08:00" };
+  const historic = { at: "2026-11-17T21:00:00+08:00" };
+  const at = { at: "2026-11-18T08:27:00+08:00" };
+  for (const key of ["cachedInputTokens", "cacheWriteTokens", "cacheWrite1hTokens"])
+    checkCode(() => estimate(m, { inputTokens: 1000, outputTokens: 0, [key]: 1000 }, historic), "HISTORICAL_PRICE_UNAVAILABLE");
+  assert.ok(Math.abs(estimate(m, usage, historic).total - 0.00195) < 1e-12);
   const q = estimate(m, usage, at);
   assert.equal(q.currency, "USD"); assert.equal(q.unit, "per_1M_tokens");
   assert.equal(q.region, "Singapore"); assert.equal(q.channel, "pay_as_you_go");

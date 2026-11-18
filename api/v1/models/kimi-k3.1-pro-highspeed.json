@@ -9,7 +9,7 @@
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "kimi-k3.1-pro-highspeed",
@@ -62,6 +62,7 @@
       "https://platform.kimi.ai/docs/guide/use-reasoning-effort"
     ],
     "last_updated": "2026-10-25",
+    "price_observations": [],
     "notes": "K3.1 Pro 高速版（同一模型，约 2–3× 输出速度）；按量计费、无上下文长度分档。缓存写入按 TTL 计价：5 分钟 $4.00，1 小时 $8.00（表中为 5 分钟）。缓存命中 $0.20、自动续期、无额外写入费。",
     "reasoning_effort": {
       "supported": true,

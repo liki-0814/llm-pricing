@@ -9,7 +9,7 @@
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "grok-imagine-video-1.5",
@@ -61,6 +61,7 @@
       "https://docs.x.ai/developers/models/grok-imagine-video-1.5"
     ],
     "last_updated": "2026-10-29",
+    "price_observations": [],
     "notes": "按秒计价：480p $0.08、720p $0.14、1080p $0.25；输入图片 $0.01/张；最长 15 秒。默认生成音频，generate_audio=false 为无声视频，官方未列单独的无声价格，故音频维度记 any。支持 Batch。别名 grok-imagine-video-1.5-preview、-2026-05-30。",
     "reasoning_effort": {
       "supported": false,
