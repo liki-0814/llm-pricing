@@ -42,6 +42,16 @@ class ContractBatch(unittest.TestCase):
    result=diff.compare_catalogs({'models':[]},[snap]);actual=result['observations'][0];self.assertEqual(actual['channel_applicability'],expected)
    if expected=='unknown':self.assertEqual(actual['rejected_native_claims'],row['native_claims'])
   with self.assertRaises(ValueError):native.xai_records(dict(doc(fixture.XaiClaims.BODY,native.XAI),channel='subscription'))
+ def test_same_catalog_url_only_outer_channel_changes(self):
+  evidence=doc(fixture.XaiClaims.BODY,native.XAI);row=native.xai_records(evidence)[0];original=copy.deepcopy(row)
+  for channel,expected in (('pay_as_you_go','verified'),('subscription','unknown')):
+   with self.subTest(channel=channel):
+    snap=dict(vendor='xAI',channel=channel,source_url=native.XAI,observed_at=evidence['observed_at'],records=[copy.deepcopy(row)],complete=False,coverage_evidence={'modalities':['text']})
+    self.assertEqual(snap['records'][0],original)
+    actual=diff.compare_catalogs({'models':[]},[snap])['observations'][0]
+    self.assertEqual(actual['channel_applicability'],expected)
+    if channel=='subscription':self.assertEqual(actual['rejected_native_claims'],original['native_claims'])
+    self.assertEqual(row,original)
  def test_candidates_preserved_before_validation_and_primary_remains_independent(self):
   for bad in ('bad identity','bad+identity'):
    rows,proof=native.openai_detail(doc(text()+'\n- `'+bad+'`'),{})
