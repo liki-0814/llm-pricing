@@ -1,0 +1,139 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+  },
+  "data": {
+    "id": "minimax-h3-regeneration",
+    "name": "MiniMax H3 Regeneration",
+    "vendor": "minimax",
+    "vendor_name": "MiniMax",
+    "modality": "video",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "see_media_pricing",
+    "pricing": {
+      "input": null,
+      "output": null,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "not_applicable",
+      "output": "not_applicable",
+      "cached_input": "not_applicable",
+      "cache_write": "not_applicable"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://platform.minimax.io/docs/pricing/overview"
+      ],
+      "note": "价格依据官方来源，美元；按秒价见 media_pricing。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅记录官方按量标价，不含税费或订阅额度。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://platform.minimax.io/docs/pricing/overview",
+    "extra_sources": [],
+    "last_updated": "2026-11-18",
+    "notes": "官方页面名称/调用写法为 MiniMax-H3-Regeneration。库存 ID 按库内小写连字符约定记录为 minimax-h3-regeneration，不与其他 H3 型号合并。官方定价页：将 H3 的 768P 视频再生成到 2K。输出与输入视频均为 $0.05/秒；输入图 $0.025/张，前 5 张免费。",
+    "reasoning_effort": {
+      "supported": false,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "not_applicable",
+      "field_status": {
+        "supported": "not_applicable",
+        "levels": "not_applicable",
+        "default": "not_applicable",
+        "can_disable": "not_applicable"
+      },
+      "note": "Not applicable: video generation model.",
+      "sources": [
+        "https://platform.minimax.io/docs/pricing/overview"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "not_applicable",
+      "note": "Not applicable: video generation model (no token context window).",
+      "sources": [
+        "https://platform.minimax.io/docs/pricing/overview"
+      ]
+    },
+    "media_pricing": {
+      "output_kind": "video",
+      "billing_methods": [
+        "per_second"
+      ],
+      "token_pricing": null,
+      "image_prices": [],
+      "video_prices": [
+        {
+          "tier": "standard",
+          "resolution": "2k",
+          "audio": "any",
+          "price_per_second": 0.05,
+          "tokens_per_second": null,
+          "input_video_price_per_second": 0.05,
+          "basis": "listed",
+          "note": "将 H3 768P 视频再生成到 2K；输出与输入视频官方均为 $0.05/秒。"
+        }
+      ],
+      "input_image_price": 0.025,
+      "input_image_price_batch": null,
+      "batch_supported": null,
+      "promotion": null,
+      "billing_note": "每个任务前 5 张输入图片免费，超出部分按 input_image_price 计价。",
+      "sources": [
+        "https://platform.minimax.io/docs/pricing/overview"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": null
+    },
+    "price_schedule": [],
+    "unverified_fields": [],
+    "links": {
+      "self": "models/minimax-h3-regeneration.json",
+      "vendor": "vendors/minimax.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

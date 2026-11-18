@@ -17,14 +17,21 @@ test("shared lifecycle cases: exact >=T, timezone, uncertainty and routed entity
   }
 });
 
-test("ordinary Qwen4 quote is USD; unknown cached reads/writes never fall back or become free", () => {
+test("ordinary Qwen4 quote is USD; Singapore cache rates are explicit and 12h/storage stay unpublished", () => {
   const m = model("qwen4-max");
-  const q = estimate(m, usage, { at: "2026-11-17T21:00:00+08:00" });
+  const at = { at: "2026-11-17T21:00:00+08:00" };
+  const q = estimate(m, usage, at);
   assert.equal(q.currency, "USD"); assert.equal(q.unit, "per_1M_tokens");
   assert.equal(q.region, "Singapore"); assert.equal(q.channel, "pay_as_you_go");
   assert.ok(Math.abs(q.total - 0.00195) < 1e-12);
-  for (const key of ["cachedInputTokens", "cacheWriteTokens", "cacheWrite1hTokens", "cacheWrite12hTokens", "storageTokenHours"])
-    checkCode(() => estimate(m, { ...usage, [key]: 1 }, { at: "2026-11-17T21:00:00+08:00" }), "PRICE_UNAVAILABLE");
+  const cached = estimate(m, { inputTokens: 1000, outputTokens: 0, cachedInputTokens: 1000 }, at);
+  assert.ok(Math.abs(cached.total - 0.000075) < 1e-15);
+  const write5m = estimate(m, { inputTokens: 1000, outputTokens: 0, cacheWriteTokens: 1000 }, at);
+  assert.ok(Math.abs(write5m.total - 0.001875) < 1e-15);
+  const write1h = estimate(m, { inputTokens: 1000, outputTokens: 0, cacheWrite1hTokens: 1000 }, at);
+  assert.ok(Math.abs(write1h.total - 0.003) < 1e-15);
+  for (const key of ["cacheWrite12hTokens", "storageTokenHours"])
+    checkCode(() => estimate(m, { ...usage, [key]: 1 }, at), "PRICE_UNAVAILABLE");
   checkCode(() => estimate(m, { inputTokens: 983617, outputTokens: 1 }), "LIMIT_EXCEEDED");
 });
 
@@ -68,7 +75,7 @@ test("v1 is USD-only; v2 requires a single-currency price sort and never silentl
   const cny = await client.listModels({ sort: "input", currency: "CNY" });
   assert.equal(cny.data.length, 3); assert.ok(cny.data.every(m => m.currency === "CNY"));
   assert.ok(load("api/v1/models.json").data.every(m => m.currency === "USD"));
-  assert.equal(load("api/v1/models.json").data.length, 72);
+  assert.equal(load("api/v1/models.json").data.length, 86);
 });
 
 test("Sol date-only cutoff is not an inferred instant or future price", () => {
@@ -90,8 +97,8 @@ test("real v2 HTTP list/vendor/modality/detail and direct quotes share currency/
   t.after(() => new Promise(resolve => server.close(resolve)));
   const client = createClient("http://127.0.0.1:" + server.address().port + "/api/v2/");
   const all = await client.listModels();
-  assert.equal(all.data.length, 75);
-  assert.equal((await client.getIndex()).data.models.length, 75);
+  assert.equal(all.data.length, 89);
+  assert.equal((await client.getIndex()).data.models.length, 89);
   const manifest = all.meta;
   for (const vendor of (await client.listVendors()).data) {
     const subset = await client.getVendor(vendor.slug);

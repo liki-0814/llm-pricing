@@ -1,15 +1,15 @@
 {
   "api_version": "v2",
   "meta": {
-    "updated_at": "2026-11-17",
-    "as_of": "2026-11-17T20:26:37+08:00",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
     "source_commit": null,
     "next_invalidation": "2026-11-29T10:00:00+00:00",
-    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2"
+    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
   },
   "data": {
     "id": "claude-opus-4.8",
@@ -58,7 +58,7 @@
     "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
     "extra_sources": [],
     "last_updated": "2026-10-11",
-    "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
+    "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式价仍列出输入 $10 / 输出 $50，但官方现写 Fast mode 对 Claude Opus 4.8 为 deprecated（对 Opus 5 仍为 research preview）。不是模型退役。",
     "reasoning_effort": {
       "supported": true,
       "levels": [
@@ -120,7 +120,7 @@
       {
         "name": "fast",
         "multiplier": 2.0,
-        "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+        "note": "Fast mode 价仍列出：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。官方：Fast mode is in research preview for Claude Opus 5 and deprecated for Claude Opus 4.8。不是模型退役。",
         "multipliers": {
           "input": 2.0,
           "output": 2.0,

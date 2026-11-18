@@ -1,0 +1,151 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+  },
+  "data": {
+    "id": "gpt-image-2.6-flare",
+    "name": "GPT Image 2.6 Flare",
+    "vendor": "openai",
+    "vendor_name": "OpenAI",
+    "modality": "image",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "see_media_pricing",
+    "pricing": {
+      "input": null,
+      "output": null,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "not_applicable",
+      "output": "not_applicable",
+      "cached_input": "not_applicable",
+      "cache_write": "not_applicable"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+      ],
+      "note": "价格依据官方来源，美元；图像价格见 media_pricing。Batch 因专页与定价页冲突未收录。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅记录官方已核且无冲突的按量标价；不含按张价、Batch、工具或税费。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://developers.openai.com/api/docs/pricing",
+    "extra_sources": [
+      "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+    ],
+    "last_updated": "2026-11-18",
+    "notes": "Token 计价与 2.5 同列：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token。官方按张（尺寸×质量）价仍未公布。定价页列出 Batch token 价，但模型专页写 Batch Not supported，冲突待确认，本轮不收录 Batch 价、不擅自取舍。",
+    "reasoning_effort": {
+      "supported": false,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "not_applicable",
+      "field_status": {
+        "supported": "not_applicable",
+        "levels": "not_applicable",
+        "default": "not_applicable",
+        "can_disable": "not_applicable"
+      },
+      "note": "Not applicable: image generation model.",
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "not_applicable",
+      "note": "Not applicable: image generation model (no token context window).",
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+      ]
+    },
+    "media_pricing": {
+      "output_kind": "image",
+      "billing_methods": [
+        "token"
+      ],
+      "token_pricing": {
+        "unit": "per_1M_tokens",
+        "standard": {
+          "text_input": 5,
+          "text_cached_input": 1.25,
+          "text_output": null,
+          "image_input": 8,
+          "image_cached_input": 2,
+          "image_output": 30,
+          "video_input": null,
+          "video_output": null,
+          "audio_input": null
+        },
+        "batch": null,
+        "priority": null
+      },
+      "image_prices": [],
+      "video_prices": [],
+      "input_image_price": null,
+      "input_image_price_batch": null,
+      "batch_supported": null,
+      "promotion": null,
+      "billing_note": "按 token 计费；按张价未公布（image_prices 为空）。Batch 因官方冲突未收录。",
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing",
+        "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+      ]
+    },
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": null
+    },
+    "price_schedule": [],
+    "unverified_fields": [
+      "media_pricing.image_prices"
+    ],
+    "links": {
+      "self": "models/gpt-image-2.6-flare.json",
+      "vendor": "vendors/openai.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

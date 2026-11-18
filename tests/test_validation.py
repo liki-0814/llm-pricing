@@ -160,7 +160,7 @@ class ValidationTests(unittest.TestCase):
         counts = {}
         for m in self.data['models']:
             counts[m['modality']] = counts.get(m['modality'], 0) + 1
-        self.assertEqual(counts, {'text': 54, 'image': 12, 'video': 9})
+        self.assertEqual(counts, {'text': 63, 'image': 16, 'video': 10})
         self.assertTrue(all(m.get('media_pricing') is None for m in self.data['models'] if m['modality'] == 'text'))
         self.assertTrue(self.invalid('grok-4.7', lambda m: m.pop('modality')))
         self.assertTrue(self.invalid('grok-4.7', lambda m: m.update(modality='audio')))
@@ -177,7 +177,7 @@ class ValidationTests(unittest.TestCase):
             self.assertTrue(all(v == 'not_applicable' for v in m['pricing_status'].values()))
             self.assertIsNotNone(m['media_pricing'])
         self.assertIsNone(files['models/grok-4.7.json']['data']['media_pricing'])
-        self.assertEqual(files['models.json']['meta']['modality_counts'], {'text': 51, 'image': 12, 'video': 9})
+        self.assertEqual(files['models.json']['meta']['modality_counts'], {'text': 60, 'image': 16, 'video': 10})
         for k in ('text', 'image', 'video'):
             self.assertTrue(all(o['modality'] == k for o in files['modalities/%s.json' % k]['data']))
 

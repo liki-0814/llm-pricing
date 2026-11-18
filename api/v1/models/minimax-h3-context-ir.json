@@ -1,0 +1,120 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+  },
+  "data": {
+    "id": "minimax-h3-context-ir",
+    "name": "MiniMax H3 Context-IR",
+    "vendor": "minimax",
+    "vendor_name": "MiniMax",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 0.9,
+      "output": 3.6,
+      "cached_input": null,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "unverified",
+      "cache_write": "not_listed"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://platform.minimax.io/docs/pricing/overview"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://platform.minimax.io/docs/pricing/overview",
+    "extra_sources": [],
+    "last_updated": "2026-11-18",
+    "notes": "官方页面名称/调用写法为 MiniMax-H3-Context-IR。库存 ID 按库内小写连字符约定记录为 minimax-h3-context-ir，不与其他 H3 型号合并。官方定价页 Context-IR 表列出输入 $0.9 / 输出 $3.6 / 百万 token。缓存命中未公布；写入按 MiniMax 无独立 cache_write 计费记 n/a。上下文窗口本轮未核。",
+    "reasoning_effort": {
+      "supported": null,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "unverified",
+      "field_status": {
+        "supported": "unverified",
+        "levels": "unverified",
+        "default": "unverified",
+        "can_disable": "unverified"
+      },
+      "note": "本轮定价页未列推理档位。",
+      "sources": [
+        "https://platform.minimax.io/docs/pricing/overview"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "unverified",
+      "note": "本轮定价页未列上下文与最大输出。",
+      "sources": [
+        "https://platform.minimax.io/docs/pricing/overview"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "缓存命中未公布；vendor cache_write_billed=false，cache_write 为 n/a。"
+    },
+    "price_schedule": [],
+    "unverified_fields": [
+      "cached_input",
+      "limits.context_length",
+      "limits.max_output_tokens",
+      "reasoning_effort.supported",
+      "reasoning_effort.levels",
+      "reasoning_effort.default",
+      "reasoning_effort.can_disable"
+    ],
+    "links": {
+      "self": "models/minimax-h3-context-ir.json",
+      "vendor": "vendors/minimax.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

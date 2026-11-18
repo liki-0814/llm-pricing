@@ -1,21 +1,21 @@
 {
   "api_version": "v2",
   "meta": {
-    "updated_at": "2026-11-17",
-    "as_of": "2026-11-17T20:26:37+08:00",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
     "source_commit": null,
     "next_invalidation": "2026-11-29T10:00:00+00:00",
-    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "mixed",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
-    "count": 54
+    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "count": 63
   },
   "modality": {
     "name": "text",
     "label": "文本生成（token 计价）",
-    "model_count": 54,
+    "model_count": 63,
     "model_ids": [
       "deepseek-flash",
       "deepseek-v4-pro",
@@ -70,7 +70,16 @@
       "qwen4-max",
       "hy4-flash",
       "hy4",
-      "hy4-preview"
+      "hy4-preview",
+      "gpt-6.2-astra",
+      "gpt-6.2-sol",
+      "gpt-6.2-astra-law",
+      "claude-fable-5-2",
+      "claude-mythos-5-2",
+      "gemini-4-carbon",
+      "gemini-4-hydrogen",
+      "glm-5.3-flashx-legal",
+      "minimax-h3-context-ir"
     ],
     "vendors": [
       "deepseek",
@@ -2162,7 +2171,7 @@
       "source_url": "https://developers.openai.com/api/docs/pricing",
       "extra_sources": [],
       "last_updated": "2026-11-01",
-      "notes": "OpenAI 定价页“Legal model configurations”一节的法律场景模型配置（GPT-6 Astra for Law），仅列输入 $10.00 / 输出 $50.00 / 缓存读取 $1.00（每百万 token）。官方注明 GPT-6 Astra for Law 促销价至少持续到 2026-12-31；到期后价格官方未公布（待核实）。官方定价页未列该配置的缓存写入价（cache_write 待核实）、长上下文（>272K）分档、Batch/Flex/Fast 服务档和数据驻留加价，OpenAI 模型页 /api/docs/models/gpt-6-astra-law 也尚不存在（HTTP 404），故上下文窗口、最大输出和推理强度均待核实；不借用 gpt-6-astra 的数值。 2026-11-01 新增（OpenAI 官方模型配置；liki 于 2026-11-01 批准入库）。",
+      "notes": "OpenAI 定价页“Legal model configurations”法律场景配置（GPT-6 Astra for Law）。短上下文促销价输入 $10.00 / 输出 $50.00 / 缓存读取 $1.00（每百万 token），官方称至少持续到 2026-12-31；到期后价格未公布。长上下文官方已列出 $20 / $75 / $2；缓存写入短/长上下文原文均为“—”，不是 0，缺价字段估价须拒绝。未列 Batch/Flex/Fast；模型专页 /api/docs/models/gpt-6-astra-law 仍 404，不得据此推断退役；不借用 gpt-6-astra 或 gpt-6.2-astra-law 的未公布字段。",
       "reasoning_effort": {
         "supported": null,
         "levels": null,
@@ -2190,7 +2199,27 @@
         ]
       },
       "media_pricing": null,
-      "pricing_tiers": [],
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 20.0,
+          "output": 75.0,
+          "cached_input": 2.0,
+          "cache_write": null,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": null,
+            "explicit_write_1h": null,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null,
+            "note": "官方 Legal 表长上下文仅列输入 $20 / 输出 $75 / 缓存读取 $2；缓存写入两列原文为“—”，不是 0，非零写入试算拒绝。"
+          },
+          "note": "官方定价页 Legal model configurations 已列出长上下文价。该表以 short/long context 分列；同页 Ultrafast 节定义 Short context ≤272K input tokens、Long context >272K input tokens。缓存写入仍未公布。"
+        }
+      ],
       "service_tiers": [],
       "cache_pricing": {
         "implicit_read": null,
@@ -2199,7 +2228,7 @@
         "explicit_write_1h": null,
         "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
-        "note": "官方定价页 Legal model configurations 仅列缓存读取价 $1.00，未列缓存写入价（30 分钟 / 12 小时 TTL）。"
+        "note": "官方定价页 Legal 表短/长上下文缓存写入均为“—”，不是 0。仅列缓存读取价。"
       },
       "price_schedule": [
         {
@@ -3220,7 +3249,7 @@
       "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
-      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
+      "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式价仍列出输入 $10 / 输出 $50，但官方现写 Fast mode 对 Claude Opus 4.8 为 deprecated（对 Opus 5 仍为 research preview）。不是模型退役。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -3282,7 +3311,7 @@
         {
           "name": "fast",
           "multiplier": 2.0,
-          "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+          "note": "Fast mode 价仍列出：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。官方：Fast mode is in research preview for Claude Opus 5 and deprecated for Claude Opus 4.8。不是模型退役。",
           "multipliers": {
             "input": 2.0,
             "output": 2.0,
@@ -7846,20 +7875,21 @@
       "pricing": {
         "input": 1.5,
         "output": 4.5,
-        "cached_input": null,
-        "cache_write": null
+        "cached_input": 0.075,
+        "cache_write": 1.875
       },
       "pricing_status": {
         "input": "verified",
         "output": "verified",
-        "cached_input": "unverified",
-        "cache_write": "unverified"
+        "cached_input": "verified",
+        "cache_write": "verified"
       },
       "price_basis": {
         "type": "official",
         "reference_model_id": null,
         "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max",
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
         ],
         "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
       },
@@ -7868,7 +7898,7 @@
         "price_type": "current",
         "region": "Singapore",
         "cached_input_type": "unspecified",
-        "note": "新加坡普通文本按量价；缓存、工具、媒体与Batch不在已核估价范围。"
+        "note": "新加坡普通文本按量价及已核缓存；工具、媒体与其他地域价不在已核估价范围。"
       },
       "off_peak_schedule": null,
       "has_off_peak": false,
@@ -7877,9 +7907,13 @@
       "context_length": 1000000,
       "context_length_label": "≤1M 输入（计费档位上限）",
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max",
-      "extra_sources": [],
+      "extra_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/context-cache",
+        "https://www.alibabacloud.com/help/en/model-studio/explicit-cache-qwen4"
+      ],
       "last_updated": "2026-11-17",
-      "notes": "百炼国际站新加坡普通文本输入/输出美元价，0<Token≤1M；不覆盖图片、视频、工具费。缓存表提取粘连，未确认的缓存价不填0、不套其它Qwen规则。输出/输入上限依思考模式而异，试算采用两种模式都安全的保守上限，见 estimation_limits。",
+      "notes": "百炼国际站新加坡普通文本美元价，0<Token≤1M；Non-Thinking 与 Thinking 同价。不覆盖图片、视频、工具费，不与国际站其他地域 USD 价混用，不换汇。新加坡缓存（同档）：显式与隐式读取 $0.075，5 分钟写入 $1.875，1 小时写入 $3 / 百万 token。输出/输入上限依思考模式而异，试算采用两种模式都安全的保守上限，见 estimation_limits。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -7914,18 +7948,16 @@
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
-        "implicit_read": null,
-        "explicit_read": null,
-        "explicit_write": null,
-        "explicit_write_1h": null,
+        "implicit_read": 0.075,
+        "explicit_read": 0.075,
+        "explicit_write": 1.875,
+        "explicit_write_1h": 3.0,
         "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
-        "note": "隐式/显式缓存命中和写入均待核实；非零缓存用量拒绝试算，不回退普通输入价。"
+        "note": "新加坡国际站 0<Token≤1M 档：官方定价页分地域子表列出隐式与显式缓存命中均为 $0.075，5 分钟写入 $1.875，1 小时写入 $3。不套用其他地域或通用百分比。"
       },
       "price_schedule": [],
       "unverified_fields": [
-        "cached_input",
-        "cache_write",
         "limits.max_output_tokens"
       ],
       "links": {
@@ -8318,6 +8350,1523 @@
         "status": "pending_confirmation",
         "estimable": true,
         "reason": "官方仅给退役日期；具体时刻/时区未明，不补零点，不自动下线，不视为确定可用。"
+      }
+    },
+    {
+      "id": "gpt-6.2-astra",
+      "name": "GPT-6.2 Astra",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": {
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "note": "官方模型页另列 max input 922,000、max output 128,000。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+        ]
+      },
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 8.0,
+        "output": 40.0,
+        "cached_input": 0.4,
+        "cache_write": 10.0
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+      ],
+      "last_updated": "2026-11-18",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $16.0、缓存读取 $0.80、缓存写入 $20.0、输出 $60.0。Batch 为标准价 50%，Fast 为 2 倍。本轮 Flex 表未列出该型号，不编造 Flex 价。Ultrafast 当前为标准价 3 倍，至 2027-02-28；自 2027-03-01 起 6 倍（Pacific time）。数据驻留端点加收 10%。上下文窗口 1,050,000 tokens（最大输出 128K），来自官方模型页。相对昨日定价页快照新出现，不得写成官方发布日就是今天。不与 gpt-6-astra 合并。",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "unverified",
+        "field_status": {
+          "supported": "unverified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "本轮模型专页摘录未列 reasoning.effort 档位，待核实，不借用其他型号。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+        ]
+      },
+      "limits": {
+        "context_length": 1050000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 16.0,
+          "output": 60.0,
+          "cached_input": 0.8,
+          "cache_write": 20.0,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 20.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 40.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $20.0、12 小时 TTL $40.0（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API 价，官方定价页与模型专页逐项列出（短/长上下文各档均为标准价 50%）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast 模式，官方：twice the Standard rate for the same context length。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "ultrafast",
+          "multiplier": 3.0,
+          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。官方：3 times the Standard rate through February 28, 2027, and 6 times the Standard rate starting March 1, 2027 (Pacific time)。当前已生效倍数为 3；2027-03-01 起 6 倍的精确 Pacific 时刻边界后须再核，价格库 service_tiers 不能按日期自动切换倍数，到期后不得继续默认按 3 倍估价。",
+          "multipliers": {
+            "input": 3.0,
+            "output": 3.0,
+            "cached_input": 3.0,
+            "cache_write": 3.0,
+            "implicit_read": 3.0,
+            "explicit_read": 3.0,
+            "explicit_write": 3.0,
+            "explicit_write_1h": 3.0,
+            "explicit_write_12h": 3.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "区域处理（数据驻留）端点加收 10%（官方：models released on or after March 5, 2026）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 10.0,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 20.0,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL 写入价。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价见 pricing_tiers[].cache_pricing。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "reasoning_effort.can_disable",
+        "reasoning_effort.default",
+        "reasoning_effort.levels",
+        "reasoning_effort.supported"
+      ],
+      "links": {
+        "self": "models/gpt-6.2-astra.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-6.2-sol",
+      "name": "GPT-6.2 Sol",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": {
+        "max_input_tokens": 922000,
+        "max_output_tokens": 128000,
+        "note": "官方模型页另列 max input 922,000、max output 128,000。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
+        ]
+      },
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cached_input": 0.1,
+        "cache_write": 2.5
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1050000,
+      "context_length_label": "1.05M",
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
+      ],
+      "last_updated": "2026-11-18",
+      "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $4.0、缓存读取 $0.20、缓存写入 $5.0、输出 $15.0。Batch 为标准价 50%，Fast 为 2 倍。本轮 Flex 表未列出该型号，不编造 Flex 价。Ultrafast 当前为标准价 3 倍，至 2027-02-28；自 2027-03-01 起 6 倍（Pacific time）。数据驻留端点加收 10%。上下文窗口 1,050,000 tokens（最大输出 128K），来自官方模型页。相对昨日定价页快照新出现，不得写成官方发布日就是今天。不与 gpt-6-sol 合并。",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "unverified",
+        "field_status": {
+          "supported": "unverified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "本轮模型专页摘录未列 reasoning.effort 档位，待核实，不借用其他型号。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
+        ]
+      },
+      "limits": {
+        "context_length": 1050000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "来自 OpenAI 模型页：1,050,000 context window / 128,000 max output tokens。",
+        "sources": [
+          "https://developers.openai.com/api/docs/models/gpt-6.2-sol"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 4.0,
+          "output": 15.0,
+          "cached_input": 0.2,
+          "cache_write": 5.0,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 5.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 10.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $5.0、12 小时 TTL $10.0（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API 价，官方定价页与模型专页逐项列出（短/长上下文各档均为标准价 50%）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": 0.5,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast 模式，官方：twice the Standard rate for the same context length。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": 2.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "ultrafast",
+          "multiplier": 3.0,
+          "note": "Ultrafast 模式：Responses API 中 service_tier: \"ultrafast\"。官方：3 times the Standard rate through February 28, 2027, and 6 times the Standard rate starting March 1, 2027 (Pacific time)。当前已生效倍数为 3；2027-03-01 起 6 倍的精确 Pacific 时刻边界后须再核，价格库 service_tiers 不能按日期自动切换倍数，到期后不得继续默认按 3 倍估价。",
+          "multipliers": {
+            "input": 3.0,
+            "output": 3.0,
+            "cached_input": 3.0,
+            "cache_write": 3.0,
+            "implicit_read": 3.0,
+            "explicit_read": 3.0,
+            "explicit_write": 3.0,
+            "explicit_write_1h": 3.0,
+            "explicit_write_12h": 3.0,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "区域处理（数据驻留）端点加收 10%（官方：models released on or after March 5, 2026）；FedRAMP 端点同样加收 10%。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": 1.1,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 2.5,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 5.0,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL 写入价。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价见 pricing_tiers[].cache_pricing。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "reasoning_effort.can_disable",
+        "reasoning_effort.default",
+        "reasoning_effort.levels",
+        "reasoning_effort.supported"
+      ],
+      "links": {
+        "self": "models/gpt-6.2-sol.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-6.2-astra-law",
+      "name": "GPT-6.2 Astra for Law",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 8.0,
+        "output": 40.0,
+        "cached_input": 0.4,
+        "cache_write": 10.0
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-11-18",
+      "notes": "OpenAI 定价页 Legal model configurations 列出的 GPT-6.2 Astra for Law，不与 gpt-6-astra-law 合并。短上下文促销价输入 $8 / 输出 $40 / 缓存读取 $0.40 / 30 分钟写入 $10 / 12 小时写入 $20；长上下文 $16 / $60 / $0.80 / $20 / $40。官方称促销至少持续到 2026-12-31；到期后价未公布。Legal 表以 short/long context 分列，同页定义 Short ≤272K / Long >272K。未在 Legal 表列出 Batch/Flex/Fast，不编造。模型专页 404，定价页有价，不得推断退役。",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "unverified",
+        "field_status": {
+          "supported": "unverified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "本轮模型专页摘录未列 reasoning.effort 档位，待核实，不借用其他型号。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "unverified",
+        "note": "官方模型专页 404，上下文窗口与最大输出待核实，不借用 gpt-6.2-astra。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [
+        {
+          "condition": "input_tokens>272000",
+          "input_tokens_gt": 272000,
+          "input_tokens_lte": null,
+          "input": 16.0,
+          "output": 60.0,
+          "cached_input": 0.8,
+          "cache_write": 20.0,
+          "cache_pricing": {
+            "implicit_read": null,
+            "explicit_read": null,
+            "explicit_write": 20.0,
+            "explicit_write_1h": null,
+            "explicit_write_12h": 40.0,
+            "storage_per_1M_tokens_hour": null,
+            "note": "长上下文档（>272K 输入）缓存写入：30 分钟 TTL $20.0、12 小时 TTL $40.0（官方定价页）。"
+          },
+          "note": "官方：输入超过 272K tokens 的请求，整个请求按长上下文价计费。"
+        }
+      ],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": 10.0,
+        "explicit_write_1h": null,
+        "explicit_write_12h": 20.0,
+        "storage_per_1M_tokens_hour": null,
+        "note": "OpenAI 提示缓存：pricing.cached_input 为缓存命中价，pricing.cache_write / cache_pricing.explicit_write 为默认 30 分钟 TTL 缓存写入价；cache_pricing.explicit_write_12h 为 Responses API 可选 12 小时最短 TTL 写入价。两者均为写入总价，不是叠加费用；缓存读价与 TTL 无关。长上下文档缓存价见 pricing_tiers[].cache_pricing。"
+      },
+      "price_schedule": [
+        {
+          "kind": "promotion",
+          "effective_from": null,
+          "effective_until": "2026-12-31",
+          "input": 8.0,
+          "output": 40.0,
+          "cached_input": 0.4,
+          "cache_write": 10.0,
+          "note": "GPT-6.2 Astra for Law 促销价官方称至少持续到 2026-12-31（与 GPT-6 Astra for Law、GPT-6 Rosalind 同句）；到期后价格未公布。表列为短上下文价。",
+          "multiplier": null,
+          "cache_pricing": {},
+          "sources": [
+            "https://developers.openai.com/api/docs/pricing"
+          ]
+        }
+      ],
+      "unverified_fields": [
+        "limits.context_length",
+        "limits.max_output_tokens",
+        "reasoning_effort.can_disable",
+        "reasoning_effort.default",
+        "reasoning_effort.levels",
+        "reasoning_effort.supported"
+      ],
+      "links": {
+        "self": "models/gpt-6.2-astra-law.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "claude-fable-5-2",
+      "name": "Claude Fable 5.2",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 8,
+        "output": 40,
+        "cached_input": 0.2,
+        "cache_write": 10
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing",
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [
+        "https://platform.claude.com/docs/en/models/fable-5-2/overview"
+      ],
+      "last_updated": "2026-11-18",
+      "notes": "官方 API ID 为连字符 claude-fable-5-2，不与点号库存约定或其他版本合并。发布日 2026-11-09，官方承诺不早于 2027-11-09 退役。标准价输入 $8 / 输出 $40 / 缓存命中 $0.20 / 5 分钟写入 $10 / 1 小时写入 $16；Batch 5 折；Fast $16 / $80。不是今日发布。",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "unverified",
+        "field_status": {
+          "supported": "unverified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "本轮模型概览未列 output_config.effort 档位，待核实，不借用 5.1。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview"
+        ]
+      },
+      "limits": {
+        "context_length": 1000000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "官方概览：Context window 1M tokens、Max output 128K tokens，按 1M=1,000,000、1K=1,000 记录。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出 $4 / $20）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast mode（官方定价页列出输入 $16 / 输出 $80，约 2×）；全上下文窗口适用，不可与 Batch 同用。官方明确 Fable/Mythos 5.2 提供 Fast mode。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {
+            "input": 16,
+            "output": 80
+          },
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。官方写 Fast 价可与 data residency 乘数叠加，不可与 Batch 同用。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.2,
+        "explicit_write": 10,
+        "explicit_write_1h": 16,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "官方：Fable/Mythos 5.2 缓存命中为基价 0.025×（$0.20）；cache_write 为 5 分钟 TTL $10，1 小时 TTL 见 explicit_write_1h $16。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "reasoning_effort.supported",
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "links": {
+        "self": "models/claude-fable-5-2.json",
+        "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "claude-mythos-5-2",
+      "name": "Claude Mythos 5.2",
+      "vendor": "anthropic",
+      "vendor_name": "Anthropic",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 8,
+        "output": 40,
+        "cached_input": 0.2,
+        "cache_write": 10
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "verified"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing",
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "explicit",
+        "note": "官方公开价按量；可用性仅限已验证组织。不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1000000,
+      "context_length_label": "1M",
+      "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "extra_sources": [
+        "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
+      ],
+      "last_updated": "2026-11-18",
+      "notes": "官方 API ID 为连字符 claude-mythos-5-2。官方写与 Fable 5.2 规格和定价相同，但仅向通过 Anthropic 验证计划的组织提供（limited availability / verification required）。发布日 2026-11-09，官方承诺不早于 2027-11-09 退役。不自行与 Fable 5.2 合并为同一调用 ID。不是今日发布。",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "unverified",
+        "field_status": {
+          "supported": "unverified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "本轮模型概览未列 output_config.effort 档位，待核实，不借用 5.1。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
+        ]
+      },
+      "limits": {
+        "context_length": 1000000,
+        "max_output_tokens": 128000,
+        "status": "verified",
+        "note": "官方概览：Context window 1M tokens、Max output 128K tokens，按 1M=1,000,000、1K=1,000 记录。",
+        "sources": [
+          "https://platform.claude.com/docs/en/models/mythos-5-2/overview",
+          "https://platform.claude.com/docs/en/about-claude/models/overview"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出 $4 / $20）。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
+        },
+        {
+          "name": "fast",
+          "multiplier": 2.0,
+          "note": "Fast mode（官方定价页列出输入 $16 / 输出 $80，约 2×）；全上下文窗口适用，不可与 Batch 同用。官方明确 Fable/Mythos 5.2 提供 Fast mode。",
+          "multipliers": {
+            "input": 2.0,
+            "output": 2.0,
+            "cached_input": 2.0,
+            "cache_write": 2.0,
+            "implicit_read": 2.0,
+            "explicit_read": 2.0,
+            "explicit_write": 2.0,
+            "explicit_write_1h": 2.0,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {
+            "input": 16,
+            "output": 80
+          },
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
+        },
+        {
+          "name": "data_residency",
+          "multiplier": 1.1,
+          "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。官方写 Fast 价可与 data residency 乘数叠加，不可与 Batch 同用。",
+          "multipliers": {
+            "input": 1.1,
+            "output": 1.1,
+            "cached_input": 1.1,
+            "cache_write": 1.1,
+            "implicit_read": 1.1,
+            "explicit_read": 1.1,
+            "explicit_write": 1.1,
+            "explicit_write_1h": 1.1,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": null
+          },
+          "pricing": {},
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": 0.2,
+        "explicit_write": 10,
+        "explicit_write_1h": 16,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "官方：Fable/Mythos 5.2 缓存命中为基价 0.025×（$0.20）；cache_write 为 5 分钟 TTL $10，1 小时 TTL 见 explicit_write_1h $16。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "reasoning_effort.supported",
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "links": {
+        "self": "models/claude-mythos-5-2.json",
+        "vendor": "vendors/anthropic.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gemini-4-carbon",
+      "name": "Gemini 4 Carbon",
+      "vendor": "google",
+      "vendor_name": "Google Gemini",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cached_input": 0.1,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1M",
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "extra_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+      ],
+      "last_updated": "2026-11-18",
+      "notes": "官方目录与定价页均列出。标准价当前输入 $2 / 输出 $10 / 隐式缓存 $0.10，至 2026-11-30；2026-12-01 起 $4 / $20 / $0.20。仅隐式缓存，无缓存写入，不提供免费档。不与 gemini-4-argon 合并为同一 ID。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "官方模型页将 Thinking 列为能力并称 reasoning model，但本轮未列出 effort 档位或默认值，待核实，不借用 Argon。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+        ]
+      },
+      "limits": {
+        "context_length": 1048576,
+        "max_output_tokens": 65536,
+        "status": "verified",
+        "note": "官方模型页：输入与输出共享 1,048,576 tokens 统一上下文窗口；Max output 65,536（默认同步请求上限）；开启 long decode 时最多可达 1,048,576 减去输入 tokens。此处按同步上限记录。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API：官方定价页列出，均为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 推理：官方定价页列出，与 Batch 同价，均为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+          ]
+        },
+        {
+          "name": "priority",
+          "multiplier": 1.8,
+          "note": "Priority 推理：官方定价页列出，均为标准价 1.8×。",
+          "multipliers": {
+            "input": 1.8,
+            "output": 1.8,
+            "cached_input": 1.8,
+            "cache_write": 1.8,
+            "implicit_read": 1.8,
+            "explicit_read": 1.8,
+            "explicit_write": 1.8,
+            "explicit_write_1h": 1.8,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": 0.1,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "仅隐式缓存：命中价即 pricing.cached_input；官方明确不支持显式缓存，故无显式读写价，也未列缓存存储费。cache_write 记 n/a。"
+      },
+      "price_schedule": [
+        {
+          "kind": "scheduled_increase",
+          "effective_from": "2026-12-01",
+          "effective_until": null,
+          "input": 4.0,
+          "output": 20.0,
+          "cached_input": 0.2,
+          "cache_write": null,
+          "note": "官方：当前介绍价仅到 2026-11-30；2026-12-01 起 Standard 输入 $4.00、输出 $20.00、缓存 $0.20；Batch/Flex（$2.00/$10.00/$0.10）与 Priority（$7.20/$36.00/$0.36）同比例上调。价与排期同官方对 gemini-4-argon 的公布，但是独立调用 ID。",
+          "multiplier": null,
+          "cache_pricing": {
+            "implicit_read": 0.2
+          },
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+          ]
+        }
+      ],
+      "unverified_fields": [
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "links": {
+        "self": "models/gemini-4-carbon.json",
+        "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gemini-4-hydrogen",
+      "name": "Gemini 4 Hydrogen",
+      "vendor": "google",
+      "vendor_name": "Google Gemini",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 1.5,
+        "output": 7.5,
+        "cached_input": 0.075,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1M",
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "extra_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+      ],
+      "last_updated": "2026-11-18",
+      "notes": "官方目录与定价页均列出。标准价输入 $1.50 / 输出 $7.50 / 隐式缓存 $0.075，无涨价排期。另有邀请制 Contributor 价签（$0.75 / $3.75 / $0.0375），不是通用当前价，本轮不作为默认估价。仅隐式缓存。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "官方模型页将 Thinking 列为能力并称 reasoning model，但本轮未列出 effort 档位或默认值，待核实，不借用 Argon。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+        ]
+      },
+      "limits": {
+        "context_length": 1048576,
+        "max_output_tokens": 65536,
+        "status": "verified",
+        "note": "官方模型页：输入与输出共享 1,048,576 tokens 统一上下文窗口；Max output 65,536（默认同步请求上限）；开启 long decode 时最多可达 1,048,576 减去输入 tokens。此处按同步上限记录。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API：官方定价页列出，均为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 推理：官方定价页列出，与 Batch 同价，均为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+          ]
+        },
+        {
+          "name": "priority",
+          "multiplier": 1.8,
+          "note": "Priority 推理：官方定价页列出，均为标准价 1.8×。",
+          "multipliers": {
+            "input": 1.8,
+            "output": 1.8,
+            "cached_input": 1.8,
+            "cache_write": 1.8,
+            "implicit_read": 1.8,
+            "explicit_read": 1.8,
+            "explicit_write": 1.8,
+            "explicit_write_1h": 1.8,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": 0.075,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "仅隐式缓存：命中价即 pricing.cached_input；官方明确不支持显式缓存，故无显式读写价，也未列缓存存储费。cache_write 记 n/a。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "links": {
+        "self": "models/gemini-4-hydrogen.json",
+        "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "glm-5.3-flashx-legal",
+      "name": "GLM-5.3-FlashX-Legal",
+      "vendor": "zhipu",
+      "vendor_name": "智谱 Z.ai",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.37,
+        "output": 1.25,
+        "cached_input": 0.075,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://docs.z.ai/guides/overview/pricing",
+      "extra_sources": [],
+      "last_updated": "2026-11-18",
+      "notes": "官方 Overview 与 Pricing 单独列出 GLM-5.3-FlashX-Legal，公开价与 GLM-5.3-FlashX 相同（输入 $0.37 / 输出 $1.25 / 缓存读取 $0.075），官方未声明为同一调用 ID，不得自行合并。调用 ID 按官方 Legal 页已核为 glm-5.3-flashx-legal。缓存存储官方写 Limited-time Free，无截止日期，不把限时免费当成永久 0。不加入 glm-5.3-prime。",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "unverified",
+        "field_status": {
+          "supported": "unverified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "官方单独列出该型号并给出与 FlashX 相同的公开价，但未声明为同一调用 ID，推理档位待单独核实，不合并。",
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "unverified",
+        "note": "本轮定价/概览摘录未单独给出该调用 ID 的上下文与最大输出，待核实，不借用 glm-5.3-flashx。",
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": 0.0,
+        "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
+      },
+      "price_schedule": [
+        {
+          "kind": "promotion",
+          "effective_from": null,
+          "effective_until": null,
+          "input": null,
+          "output": null,
+          "cached_input": null,
+          "cache_write": null,
+          "note": "缓存存储限时免费，官方未公布截止日期或到期后价格，后续费用需复核。",
+          "multiplier": null,
+          "cache_pricing": {
+            "storage_per_1M_tokens_hour": 0
+          },
+          "sources": [
+            "https://docs.z.ai/guides/overview/pricing"
+          ]
+        }
+      ],
+      "unverified_fields": [
+        "limits.context_length",
+        "limits.max_output_tokens",
+        "reasoning_effort.supported",
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "links": {
+        "self": "models/glm-5.3-flashx-legal.json",
+        "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "minimax-h3-context-ir",
+      "name": "MiniMax H3 Context-IR",
+      "vendor": "minimax",
+      "vendor_name": "MiniMax",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 0.9,
+        "output": 3.6,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "unverified",
+        "cache_write": "not_listed"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://platform.minimax.io/docs/pricing/overview",
+      "extra_sources": [],
+      "last_updated": "2026-11-18",
+      "notes": "官方页面名称/调用写法为 MiniMax-H3-Context-IR。库存 ID 按库内小写连字符约定记录为 minimax-h3-context-ir，不与其他 H3 型号合并。官方定价页 Context-IR 表列出输入 $0.9 / 输出 $3.6 / 百万 token。缓存命中未公布；写入按 MiniMax 无独立 cache_write 计费记 n/a。上下文窗口本轮未核。",
+      "reasoning_effort": {
+        "supported": null,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "unverified",
+        "field_status": {
+          "supported": "unverified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "本轮定价页未列推理档位。",
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "unverified",
+        "note": "本轮定价页未列上下文与最大输出。",
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "缓存命中未公布；vendor cache_write_billed=false，cache_write 为 n/a。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "cached_input",
+        "limits.context_length",
+        "limits.max_output_tokens",
+        "reasoning_effort.supported",
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "links": {
+        "self": "models/minimax-h3-context-ir.json",
+        "vendor": "vendors/minimax.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     }
   ]

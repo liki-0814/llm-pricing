@@ -1,21 +1,21 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-17",
-    "as_of": "2026-11-17T20:26:37+08:00",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
     "source_commit": null,
     "next_invalidation": "2026-11-29T10:00:00+00:00",
-    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "see_media_pricing",
     "unit_label": "model.currency; see each model's media_pricing (per image / per second of video / per 1M tokens)",
-    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
-    "count": 12
+    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
+    "count": 16
   },
   "modality": {
     "name": "image",
     "label": "图像生成",
-    "model_count": 12,
+    "model_count": 16,
     "model_ids": [
       "gpt-image-2.5-flare",
       "gpt-image-2.5-sunburst",
@@ -28,7 +28,11 @@
       "wan2.7-image-pro",
       "wan2.7-image",
       "minimax-image-01",
-      "glm-image"
+      "glm-image",
+      "gpt-image-2.6-sunburst",
+      "gpt-image-2.6-flare",
+      "minimax-h3-image",
+      "minimax-h3-image-highspeed"
     ],
     "vendors": [
       "openai",
@@ -1844,6 +1848,542 @@
       "links": {
         "self": "models/glm-image.json",
         "vendor": "vendors/zhipu.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-image-2.6-sunburst",
+      "name": "GPT Image 2.6 Sunburst",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+        ],
+        "note": "价格依据官方来源，美元；图像价格见 media_pricing。Batch 因专页与定价页冲突未收录。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方已核且无冲突的按量标价；不含按张价、Batch、工具或税费。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+      ],
+      "last_updated": "2026-11-18",
+      "notes": "Token 计价与 2.5 同列：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token。官方按张（尺寸×质量）价仍未公布。定价页列出 Batch token 价，但模型专页写 Batch Not supported，冲突待确认，本轮不收录 Batch 价、不擅自取舍。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 5,
+            "text_cached_input": 1.25,
+            "text_output": null,
+            "image_input": 8,
+            "image_cached_input": 2,
+            "image_output": 30,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": null,
+          "priority": null
+        },
+        "image_prices": [],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "按 token 计费；按张价未公布（image_prices 为空）。Batch 因官方冲突未收录。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.6-sunburst"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "media_pricing.image_prices"
+      ],
+      "links": {
+        "self": "models/gpt-image-2.6-sunburst.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gpt-image-2.6-flare",
+      "name": "GPT Image 2.6 Flare",
+      "vendor": "openai",
+      "vendor_name": "OpenAI",
+      "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+        ],
+        "note": "价格依据官方来源，美元；图像价格见 media_pricing。Batch 因专页与定价页冲突未收录。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方已核且无冲突的按量标价；不含按张价、Batch、工具或税费。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://developers.openai.com/api/docs/pricing",
+      "extra_sources": [
+        "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+      ],
+      "last_updated": "2026-11-18",
+      "notes": "Token 计价与 2.5 同列：图像输出 $30、图像输入 $8（缓存 $2）、文本输入 $5（缓存 $1.25）/ 百万 token。官方按张（尺寸×质量）价仍未公布。定价页列出 Batch token 价，但模型专页写 Batch Not supported，冲突待确认，本轮不收录 Batch 价、不擅自取舍。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 5,
+            "text_cached_input": 1.25,
+            "text_output": null,
+            "image_input": 8,
+            "image_cached_input": 2,
+            "image_output": 30,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": null,
+          "priority": null
+        },
+        "image_prices": [],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "按 token 计费；按张价未公布（image_prices 为空）。Batch 因官方冲突未收录。",
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing",
+          "https://developers.openai.com/api/docs/models/gpt-image-2.6-flare"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "media_pricing.image_prices"
+      ],
+      "links": {
+        "self": "models/gpt-image-2.6-flare.json",
+        "vendor": "vendors/openai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "minimax-h3-image",
+      "name": "MiniMax H3 Image",
+      "vendor": "minimax",
+      "vendor_name": "MiniMax",
+      "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ],
+        "note": "价格依据官方来源，美元；按 token 标价见 media_pricing。过期 4K 五折不是当前价。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方目录/原价；2026-11-17 16:00 UTC（不含）之后不以 4K 五折为当前价。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://platform.minimax.io/docs/pricing/overview",
+      "extra_sources": [],
+      "last_updated": "2026-11-18",
+      "notes": "官方页面名称/调用写法为 MiniMax-H3-Image。库存 ID 按库内小写连字符约定记录为 minimax-h3-image，不与其他 H3 型号合并。官方定价页按 token 列出文本输入 $2.3、图像输入 $1.5、图像输出 $3.8 / 百万 token，并给出单张示例成本；完整按张价表未作为本轮核价表。4K（≥16,600,000 像素）五折官方截止 November 17, 2026 16:00 UTC（不含）= 2026-11-18 00:00:00+08:00；截止后不再把五折当当前价，不猜恢复价，按已公布目录/原价。今日页面若仍显示 From now until 与划线折扣示例，不等于优惠延长。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 2.3,
+            "text_cached_input": null,
+            "text_output": null,
+            "image_input": 1.5,
+            "image_cached_input": null,
+            "image_output": 3.8,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": null,
+          "priority": null
+        },
+        "image_prices": [],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "官方按 token 列出文本输入/图像输入/图像输出价。未提供完整按张价表。4K 五折已过官方截止（2026-11-17 16:00 UTC 不含 = 2026-11-18 00:00:00+08:00），页面折扣示例残留不等于优惠延长，当前按目录/原价。",
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "media_pricing.image_prices"
+      ],
+      "links": {
+        "self": "models/minimax-h3-image.json",
+        "vendor": "vendors/minimax.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "minimax-h3-image-highspeed",
+      "name": "MiniMax H3 Image Highspeed",
+      "vendor": "minimax",
+      "vendor_name": "MiniMax",
+      "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "see_media_pricing",
+      "pricing": {
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "not_applicable",
+        "output": "not_applicable",
+        "cached_input": "not_applicable",
+        "cache_write": "not_applicable"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ],
+        "note": "价格依据官方来源，美元；按 token 标价见 media_pricing。过期 4K 五折不是当前价。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "list",
+        "region": null,
+        "cached_input_type": "unspecified",
+        "note": "仅记录官方目录/原价；2026-11-17 16:00 UTC（不含）之后不以 4K 五折为当前价。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": null,
+      "context_length_label": null,
+      "source_url": "https://platform.minimax.io/docs/pricing/overview",
+      "extra_sources": [],
+      "last_updated": "2026-11-18",
+      "notes": "官方页面名称/调用写法为 MiniMax-H3-Image-Highspeed。库存 ID 按库内小写连字符约定记录为 minimax-h3-image-highspeed，不与其他 H3 型号合并。官方定价页按 token 列出文本输入 $2.3、图像输入 $3.0、图像输出 $7.6 / 百万 token。faq Model List 的 Available Image 表未列入此 ID，与定价页口径不一致，已收录定价页调用 ID 与标价。4K 五折说明与 H3-Image 相同，官方截止后不再把五折当当前价。",
+      "reasoning_effort": {
+        "supported": false,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "not_applicable",
+        "field_status": {
+          "supported": "not_applicable",
+          "levels": "not_applicable",
+          "default": "not_applicable",
+          "can_disable": "not_applicable"
+        },
+        "note": "Not applicable: image generation model.",
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ]
+      },
+      "limits": {
+        "context_length": null,
+        "max_output_tokens": null,
+        "status": "not_applicable",
+        "note": "Not applicable: image generation model (no token context window).",
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ]
+      },
+      "media_pricing": {
+        "output_kind": "image",
+        "billing_methods": [
+          "token"
+        ],
+        "token_pricing": {
+          "unit": "per_1M_tokens",
+          "standard": {
+            "text_input": 2.3,
+            "text_cached_input": null,
+            "text_output": null,
+            "image_input": 3.0,
+            "image_cached_input": null,
+            "image_output": 7.6,
+            "video_input": null,
+            "video_output": null,
+            "audio_input": null
+          },
+          "batch": null,
+          "priority": null
+        },
+        "image_prices": [],
+        "video_prices": [],
+        "input_image_price": null,
+        "input_image_price_batch": null,
+        "batch_supported": null,
+        "promotion": null,
+        "billing_note": "官方按 token 列出文本输入/图像输入/图像输出价。未提供完整按张价表。4K 五折已过官方截止（2026-11-17 16:00 UTC 不含 = 2026-11-18 00:00:00+08:00），页面折扣示例残留不等于优惠延长，当前按目录/原价。",
+        "sources": [
+          "https://platform.minimax.io/docs/pricing/overview"
+        ]
+      },
+      "pricing_tiers": [],
+      "service_tiers": [],
+      "cache_pricing": {
+        "implicit_read": null,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": null
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "media_pricing.image_prices"
+      ],
+      "links": {
+        "self": "models/minimax-h3-image-highspeed.json",
+        "vendor": "vendors/minimax.json"
       },
       "availability": {
         "status": "active",

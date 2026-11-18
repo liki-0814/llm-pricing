@@ -49,7 +49,7 @@ class LifecycleCurrencyTests(unittest.TestCase):
     def test_v2_schema_and_snapshot_sync(self):
         files = build_api.build(self.data, mixed=True)
         self.assertEqual(validate.validate_api(self.data, files), [])
-        self.assertEqual(len(files["models.json"]["data"]), 75)
+        self.assertEqual(len(files["models.json"]["data"]), 89)
         self.assertEqual(len(files["vendors/tencent.json"]["data"]), 3)
         for rel, value in files.items():
             if rel != "openapi.json":

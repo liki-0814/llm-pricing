@@ -1,15 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-17",
-    "as_of": "2026-11-17T20:26:37+08:00",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
     "source_commit": null,
     "next_invalidation": "2026-11-29T10:00:00+00:00",
-    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
+    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
     "count": 9
   },
   "data": [
@@ -36,7 +36,7 @@
     {
       "slug": "openai",
       "name": "OpenAI",
-      "model_count": 11,
+      "model_count": 16,
       "model_ids": [
         "gpt-5.6-sol",
         "gpt-5.6-terra",
@@ -48,11 +48,16 @@
         "gpt-6.1-terra",
         "gpt-6-astra-law",
         "gpt-image-2.5-flare",
-        "gpt-image-2.5-sunburst"
+        "gpt-image-2.5-sunburst",
+        "gpt-6.2-astra",
+        "gpt-6.2-sol",
+        "gpt-6.2-astra-law",
+        "gpt-image-2.6-sunburst",
+        "gpt-image-2.6-flare"
       ],
       "modality_counts": {
-        "text": 9,
-        "image": 2,
+        "text": 12,
+        "image": 4,
         "video": 0
       },
       "source_urls": [
@@ -65,7 +70,7 @@
     {
       "slug": "anthropic",
       "name": "Anthropic",
-      "model_count": 13,
+      "model_count": 15,
       "model_ids": [
         "claude-fable-5.1",
         "claude-mythos-5.1",
@@ -79,10 +84,12 @@
         "claude-sonnet-5.5",
         "claude-sonnet-5",
         "claude-sonnet-4.6",
-        "claude-haiku-5.5"
+        "claude-haiku-5.5",
+        "claude-fable-5-2",
+        "claude-mythos-5-2"
       ],
       "modality_counts": {
-        "text": 13,
+        "text": 15,
         "image": 0,
         "video": 0
       },
@@ -96,16 +103,17 @@
     {
       "slug": "zhipu",
       "name": "智谱 Z.ai",
-      "model_count": 5,
+      "model_count": 6,
       "model_ids": [
         "glm-5.3",
         "glm-5.3-flash",
         "glm-5.3-flashx",
         "glm-5.2",
-        "glm-image"
+        "glm-image",
+        "glm-5.3-flashx-legal"
       ],
       "modality_counts": {
-        "text": 4,
+        "text": 5,
         "image": 1,
         "video": 0
       },
@@ -178,7 +186,7 @@
     {
       "slug": "google",
       "name": "Google Gemini",
-      "model_count": 8,
+      "model_count": 10,
       "model_ids": [
         "gemini-4-argon",
         "gemini-3.8-flash",
@@ -187,10 +195,12 @@
         "gemini-nano-banana-2.1",
         "gemini-3.1-flash-lite-image",
         "gemini-3-pro-image",
-        "gemini-omni-1.1-flash"
+        "gemini-omni-1.1-flash",
+        "gemini-4-carbon",
+        "gemini-4-hydrogen"
       ],
       "modality_counts": {
-        "text": 4,
+        "text": 6,
         "image": 3,
         "video": 1
       },
@@ -204,7 +214,7 @@
     {
       "slug": "minimax",
       "name": "MiniMax",
-      "model_count": 7,
+      "model_count": 11,
       "model_ids": [
         "minimax-m3",
         "minimax-m3.1-flash",
@@ -212,15 +222,20 @@
         "minimax-h3-highspeed",
         "minimax-h3-lite",
         "minimax-h3-max",
-        "minimax-image-01"
+        "minimax-image-01",
+        "minimax-h3-image",
+        "minimax-h3-image-highspeed",
+        "minimax-h3-context-ir",
+        "minimax-h3-regeneration"
       ],
       "modality_counts": {
-        "text": 2,
-        "image": 1,
-        "video": 4
+        "text": 3,
+        "image": 3,
+        "video": 5
       },
       "source_urls": [
-        "https://platform.minimax.io/docs/guides/pricing-paygo"
+        "https://platform.minimax.io/docs/guides/pricing-paygo",
+        "https://platform.minimax.io/docs/pricing/overview"
       ],
       "links": {
         "self": "vendors/minimax.json"

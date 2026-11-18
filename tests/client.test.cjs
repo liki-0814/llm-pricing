@@ -183,8 +183,8 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
   assert.deepEqual(index.data.models.map(m=>m.id),full.data.map(m=>m.id));
   for (const v of vendors.data) assert.deepEqual(v.model_ids,full.data.filter(m=>m.vendor===v.slug).map(m=>m.id));
   const cheapest=await client.listModels({vendor:'openai',sort:'input',limit:2,priceBasis:'official'});
-  assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,11); // 9 text + 2 image models
-  assert.equal((await client.listModels({vendor:'openai',modality:'text',sort:'input',priceBasis:'official'})).meta.matched_count,9);
+  assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,16); // 12 text + 4 image models
+  assert.equal((await client.listModels({vendor:'openai',modality:'text',sort:'input',priceBasis:'official'})).meta.matched_count,12);
   const search=await client.listModels({q:'gemini pro'});assert.equal(search.data[0].id,'gemini-3.1-pro-preview');
   const missingLast=await client.listModels({sort:'-cache_write'});assert.equal(missingLast.data.at(-1).pricing.cache_write,null);
   const current = full.data.find(m=>m.id==='gemini-3.1-pro-preview');
@@ -200,7 +200,7 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
 });
 
 test('OpenAI 12h TTL cache writes are a separate 2.5x field, tier-aware and service-tier scaled', () => {
-  const ids = ['gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-astra','gpt-6-sol','gpt-6-luna','gpt-6.1-sol','gpt-6.1-terra'];
+  const ids = ['gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-astra','gpt-6-sol','gpt-6-luna','gpt-6.1-sol','gpt-6.1-terra','gpt-6.2-astra','gpt-6.2-sol','gpt-6.2-astra-law'];
   for (const m of all.data) {
     if (!ids.includes(m.id)) { assert.equal(m.cache_pricing.explicit_write_12h, null, m.id); continue; }
     const c = m.cache_pricing, t = m.pricing_tiers[0];
@@ -214,7 +214,10 @@ test('OpenAI 12h TTL cache writes are a separate 2.5x field, tier-aware and serv
     close(short.total, c.explicit_write_12h / 1000);
     const long = estimate(m, usage(300000, 0, {cacheWrite12hTokens: 100000, cacheWriteTokens: 100000}), at);
     close(long.total, 0.1 * (t.input + t.cache_pricing.explicit_write_12h + t.cache_write));
-    close(estimate(m, usage(1000, 0, {cacheWrite12hTokens: 1000}), {...at, serviceTier: 'batch'}).total, c.explicit_write_12h / 2000);
+    if ((m.service_tiers || []).some(s => s.name === 'batch'))
+      close(estimate(m, usage(1000, 0, {cacheWrite12hTokens: 1000}), {...at, serviceTier: 'batch'}).total, c.explicit_write_12h / 2000);
+    else
+      code(() => estimate(m, usage(1000, 0, {cacheWrite12hTokens: 1000}), {...at, serviceTier: 'batch'}), 'UNSUPPORTED_SERVICE_TIER');
     code(() => estimate(m, usage(10, 0, {cacheWrite12hTokens: 6, cacheWriteTokens: 5}), at), 'INVALID_ARGUMENT');
   }
   code(() => estimate(model('claude-opus-5.5'), usage(1000, 0, {cacheWrite12hTokens: 1}), {at: '2026-10-20'}), 'PRICE_UNAVAILABLE');

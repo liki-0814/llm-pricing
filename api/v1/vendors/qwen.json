@@ -1,15 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-17",
-    "as_of": "2026-11-17T20:26:37+08:00",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
     "source_commit": null,
     "next_invalidation": "2026-11-29T10:00:00+00:00",
-    "availability_as_of": "2026-11-17T20:26:37+08:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
     "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
-    "data_version": "a69683008f3d34c907e3f9db41f24c42f56ba3e183181fc3643d0560708886d2",
+    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7",
     "count": 15
   },
   "vendor": {
@@ -1904,20 +1904,21 @@
       "pricing": {
         "input": 1.5,
         "output": 4.5,
-        "cached_input": null,
-        "cache_write": null
+        "cached_input": 0.075,
+        "cache_write": 1.875
       },
       "pricing_status": {
         "input": "verified",
         "output": "verified",
-        "cached_input": "unverified",
-        "cache_write": "unverified"
+        "cached_input": "verified",
+        "cache_write": "verified"
       },
       "price_basis": {
         "type": "official",
         "reference_model_id": null,
         "sources": [
-          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max"
+          "https://www.alibabacloud.com/help/en/model-studio/qwen4-max",
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
         ],
         "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
       },
@@ -1926,7 +1927,7 @@
         "price_type": "current",
         "region": "Singapore",
         "cached_input_type": "unspecified",
-        "note": "新加坡普通文本按量价；缓存、工具、媒体与Batch不在已核估价范围。"
+        "note": "新加坡普通文本按量价及已核缓存；工具、媒体与其他地域价不在已核估价范围。"
       },
       "off_peak_schedule": null,
       "has_off_peak": false,
@@ -1935,9 +1936,13 @@
       "context_length": 1000000,
       "context_length_label": "≤1M 输入（计费档位上限）",
       "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max",
-      "extra_sources": [],
+      "extra_sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+        "https://www.alibabacloud.com/help/en/model-studio/context-cache",
+        "https://www.alibabacloud.com/help/en/model-studio/explicit-cache-qwen4"
+      ],
       "last_updated": "2026-11-17",
-      "notes": "百炼国际站新加坡普通文本输入/输出美元价，0<Token≤1M；不覆盖图片、视频、工具费。缓存表提取粘连，未确认的缓存价不填0、不套其它Qwen规则。输出/输入上限依思考模式而异，试算采用两种模式都安全的保守上限，见 estimation_limits。",
+      "notes": "百炼国际站新加坡普通文本美元价，0<Token≤1M；Non-Thinking 与 Thinking 同价。不覆盖图片、视频、工具费，不与国际站其他地域 USD 价混用，不换汇。新加坡缓存（同档）：显式与隐式读取 $0.075，5 分钟写入 $1.875，1 小时写入 $3 / 百万 token。输出/输入上限依思考模式而异，试算采用两种模式都安全的保守上限，见 estimation_limits。",
       "reasoning_effort": {
         "supported": true,
         "levels": [
@@ -1972,18 +1977,16 @@
       "pricing_tiers": [],
       "service_tiers": [],
       "cache_pricing": {
-        "implicit_read": null,
-        "explicit_read": null,
-        "explicit_write": null,
-        "explicit_write_1h": null,
+        "implicit_read": 0.075,
+        "explicit_read": 0.075,
+        "explicit_write": 1.875,
+        "explicit_write_1h": 3.0,
         "explicit_write_12h": null,
         "storage_per_1M_tokens_hour": null,
-        "note": "隐式/显式缓存命中和写入均待核实；非零缓存用量拒绝试算，不回退普通输入价。"
+        "note": "新加坡国际站 0<Token≤1M 档：官方定价页分地域子表列出隐式与显式缓存命中均为 $0.075，5 分钟写入 $1.875，1 小时写入 $3。不套用其他地域或通用百分比。"
       },
       "price_schedule": [],
       "unverified_fields": [
-        "cached_input",
-        "cache_write",
         "limits.max_output_tokens"
       ],
       "links": {

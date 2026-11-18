@@ -1,0 +1,137 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "0a720591558b9c402e408bb491e20efbeb62d81ccb229f43b4c1e21eaca96ad7"
+  },
+  "data": {
+    "id": "glm-5.3-flashx-legal",
+    "name": "GLM-5.3-FlashX-Legal",
+    "vendor": "zhipu",
+    "vendor_name": "智谱 Z.ai",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 0.37,
+      "output": 1.25,
+      "cached_input": 0.075,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://docs.z.ai/guides/overview/pricing"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://docs.z.ai/guides/overview/pricing",
+    "extra_sources": [],
+    "last_updated": "2026-11-18",
+    "notes": "官方 Overview 与 Pricing 单独列出 GLM-5.3-FlashX-Legal，公开价与 GLM-5.3-FlashX 相同（输入 $0.37 / 输出 $1.25 / 缓存读取 $0.075），官方未声明为同一调用 ID，不得自行合并。调用 ID 按官方 Legal 页已核为 glm-5.3-flashx-legal。缓存存储官方写 Limited-time Free，无截止日期，不把限时免费当成永久 0。不加入 glm-5.3-prime。",
+    "reasoning_effort": {
+      "supported": null,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "unverified",
+      "field_status": {
+        "supported": "unverified",
+        "levels": "unverified",
+        "default": "unverified",
+        "can_disable": "unverified"
+      },
+      "note": "官方单独列出该型号并给出与 FlashX 相同的公开价，但未声明为同一调用 ID，推理档位待单独核实，不合并。",
+      "sources": [
+        "https://docs.z.ai/guides/overview/pricing"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "unverified",
+      "note": "本轮定价/概览摘录未单独给出该调用 ID 的上下文与最大输出，待核实，不借用 glm-5.3-flashx。",
+      "sources": [
+        "https://docs.z.ai/guides/overview/pricing"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": 0.0,
+      "note": "Z.ai 缓存命中价即 pricing.cached_input；“缓存存储费”官方标注 Limited-time Free（限时免费，当前 $0，到期后价格官方未公布）；无缓存写入价。"
+    },
+    "price_schedule": [
+      {
+        "kind": "promotion",
+        "effective_from": null,
+        "effective_until": null,
+        "input": null,
+        "output": null,
+        "cached_input": null,
+        "cache_write": null,
+        "note": "缓存存储限时免费，官方未公布截止日期或到期后价格，后续费用需复核。",
+        "multiplier": null,
+        "cache_pricing": {
+          "storage_per_1M_tokens_hour": 0
+        },
+        "sources": [
+          "https://docs.z.ai/guides/overview/pricing"
+        ]
+      }
+    ],
+    "unverified_fields": [
+      "limits.context_length",
+      "limits.max_output_tokens",
+      "reasoning_effort.supported",
+      "reasoning_effort.levels",
+      "reasoning_effort.default",
+      "reasoning_effort.can_disable"
+    ],
+    "links": {
+      "self": "models/glm-5.3-flashx-legal.json",
+      "vendor": "vendors/zhipu.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}
