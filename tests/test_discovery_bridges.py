@@ -42,3 +42,11 @@ class BridgeTests(unittest.TestCase):
  def test_inline_literal_id_retains_pricing_href_for_front_union(self):
   rows=b.openai_directory('- [Future restricted model](/api/docs/pricing#specialized-models): Model ID: `future.Native/9`.')
   self.assertEqual(rows[0]['model_id'],'future.Native/9');self.assertEqual(rows[0]['detail_url'],'https://developers.openai.com/api/docs/pricing#specialized-models');self.assertFalse(b.allowed_detail(rows[0]['detail_url'],'OpenAI'))
+
+ def test_kimi_payg_finite_native_current_and_deprecated_directory(self):
+  import run_discovery as r
+  src=dict(vendor='Moonshot Kimi',channel='pay_as_you_go',url='https://platform.kimi.ai/docs/models.md',adapter='kimi_model_tables',modalities=['text'],role='catalog')
+  body='# Model List\nReview currently available Kimi multimodal and coding models, plus migration guidance for discontinued models.\n## Multi-modal Model\n| Model Name | Description |\n| - | - |\n| `future.Native/9` | current |\n## Deprecated Models\n| Model Name | Description |\n| - | - |\n| `legacy.Native/9` | Deprecated, not retired |\nFor further assistance, please [contact sales](https://platform.kimi.ai/contact-sales).'
+  snap=r.parse_source(body.encode(),src,'2026-11-18T03:50:00Z');self.assertTrue(snap['complete']);self.assertEqual(len(snap['records']),2)
+  for broken in [body.replace('## Deprecated Models','## Unclassified other models'),body.replace('For further assistance','Missing terminal'),body.replace('`legacy.Native/9`','Unknown Display Name'),'<html>Loading</html>']:
+   self.assertFalse(r.parse_source(broken.encode(),src,'2026-11-18T03:50:00Z')['complete'])

@@ -128,3 +128,22 @@ def zai_request_models(text):
   proof.update(verified=True,expected_record_count=len(rows),requests=evidence,pagination_termination='one complete JSON document and closed enum for every text/image request branch')
  except (ValueError,KeyError,TypeError,AttributeError) as e:proof['error']=str(e)
  return list(rows.values()),proof
+
+
+def kimi_payg_proof(text,source,records):
+ """Finite official Model List, current plus deprecated, not a pricing proof."""
+ native=(source.get('vendor'),source.get('channel'),source.get('url'),source.get('modalities'),source.get('role'))==('Moonshot Kimi','pay_as_you_go','https://platform.kimi.ai/docs/models.md',['text'],'catalog')
+ rows=[];tables=0;in_table=False
+ for line in text.splitlines():
+  if line.startswith('| Model Name |'):tables+=1;in_table=True;continue
+  if not line.startswith('|'):in_table=False;continue
+  if in_table:
+   first=line.strip('|').split('|')[0].strip()
+   if re.fullmatch(r'[-: ]+',first):continue
+   m=re.fullmatch(r'`([^`]+)`',first);rows.append(m[1] if m and c.canonical_id(m[1]) else None)
+ heads=[line for line in text.splitlines() if line.startswith('## ')]
+ allowed=['## Multi-modal Model','## Deprecated Models']
+ terminal='For further assistance, please [contact sales](https://platform.kimi.ai/contact-sales).' in text
+ ids=[row.get('model_id') for row in records]
+ ok=bool(native and '# Model List' in text and 'currently available Kimi' in text and 'discontinued models' in text and heads==allowed and tables==2 and rows and all(rows) and len(rows)==len(set(rows)) and rows==ids and terminal and not re.search(r'(?:[?&]page=|rel=["\']next)',text,re.I))
+ return dict(verified=ok,expected_record_count=len(rows),method='official_native_Model-List_current_and_deprecated_tables_to_contact-sales_terminal',scope='documented PAYG text model directory; eligibility is per description, not global retirement',terminal_section_present=terminal)

@@ -75,6 +75,7 @@ def parse_source(body,source,observed_at):
     records,reseller,notes=adapters.parse(source['adapter'], raw, source)
     for row in records+reseller:row['line_basis']='adapter:'+source['adapter']
     proof=adapters.kimi_code_proof(raw,source,records) if source['adapter']=='kimi_code_catalog' else {'verified':False}
+    if source['adapter']=='kimi_model_tables':proof=bridges.kimi_payg_proof(text,source,records)
     if source['adapter']=='zai_openapi_models':
         _,proof=bridges.zai_request_models(text)
         if (source.get('vendor'),source.get('channel'),source.get('url'),source.get('role'),source.get('modalities'))!=('智谱 Z.ai','pay_as_you_go','https://docs.z.ai/openapi.json','catalog',['text','image']):proof['verified']=False

@@ -247,3 +247,12 @@ the parent entity pending. Ledger observation sources include nested
 Routine execution-code pin and runtime remote-main baseline are distinct: the
 runner always resolves remote main and reads prices.json at that returned commit;
 read failure propagates, with no local-ref, code-pin or snapshot fallback.
+
+The Kimi PAYG text Model List now also has a bounded proof: the exact native source
+explicitly covers current Kimi models plus discontinued-model migration, its two
+current/deprecated Model-Name tables consist solely of literal backticked IDs,
+every row is retained once, and the full page terminates at contact-sales. Missing
+sections/rows/footer, unclassified sections, duplicates, display-only names or
+pagination continuation fail closed. Unknown future literal IDs are retained.
+This proof is independent of prices and never turns eligibility restrictions or
+Deprecated into global Retired status.
