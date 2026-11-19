@@ -402,7 +402,7 @@ def apply_public_catalog_observations(inventories,capture_dir,replay_dir=None):
         elif snap is qwen:
             proof=qwen['published_catalog_proof'];snap['scope_certificates']=[universe.scope_certificate(snap['vendor'],snap['channel'],m,snap['records'],population=universe.unknown('published categories do not assert complete native/legacy provider universe'),pagination=universe.unknown('published linked pages read, but Model Plaza/API regional terminal remains unproved',read=proof['unique_detail_documents'],failures=proof['failures']),alias_enumeration=universe.unknown('no complete direct alias declaration'),lifecycle=universe.unknown('historical lifecycle set not declared')) for m in ('text','image','video')]
 
-def execute(config,manifest,database,capture_dir,replay_dir=None,public_price_ledger=None):
+def execute(config,manifest,database,capture_dir,replay_dir=None,public_price_ledger=None,public_price_root=None):
     validate_sources(config,manifest)
     capture_dir.mkdir(parents=True,exist_ok=False);inventories=[]
     for source in config['sources']:
@@ -449,10 +449,13 @@ def execute(config,manifest,database,capture_dir,replay_dir=None,public_price_le
     apply_minimax_observations(inventories,capture_dir,replay_dir)
     apply_native_claims(inventories,capture_dir)
     apply_public_catalog_observations(inventories,capture_dir,replay_dir)
+    import public_price_facts
+    from discovery_public_api_evidence import attach_api_evidence
+    public_ledger=public_price_ledger if public_price_ledger is not None else public_price_facts.load()
+    attach_api_evidence(inventories,public_ledger,public_price_root or public_price_facts.ROOT,manifest)
     from discovery_scope_projection import attach_scope_certificates
     attach_scope_certificates(inventories,manifest)
-    import public_price_facts
-    public_price_facts.attach(inventories,public_price_ledger if public_price_ledger is not None else public_price_facts.load())
+    public_price_facts.attach(inventories,public_ledger)
     c.atomic_json(capture_dir/'inventory.json',inventories)
     return inventories
 
@@ -482,7 +485,7 @@ def main():
         captures=pathlib.Path(args.state_dir)/'captures'/attempt['run_id']
         import public_price_facts
         public_ledger=public_price_facts.load_capture(args.public_price_capture_dir) if args.public_price_capture_dir else public_price_facts.load()
-        inventories=execute(config,manifest,database,captures,args.replay_dir,public_price_ledger=public_ledger)
+        inventories=execute(config,manifest,database,captures,args.replay_dir,public_price_ledger=public_ledger,public_price_root=args.public_price_capture_dir or public_price_facts.ROOT)
         catalog_exports=None
         if args.catalog_export_dir:
             if not args.replay_dir:raise ValueError('offline catalog exports cannot participate in a fresh success baseline')
