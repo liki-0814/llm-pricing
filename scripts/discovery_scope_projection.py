@@ -25,6 +25,34 @@ def source(snapshot,evidence,quote,manifest):
     return dict(source_url=evidence['source_url'],source_sha256=evidence['source_sha256'],capture_path=str(path),observed_at=evidence['observed_at'],vendor=snapshot['vendor'],channel=snapshot['channel'],catalog_source_url=snapshot['source_url'])
 
 
+def minimax_native_channel_eligible(snapshot,entry,spec,mid):
+    """Pure bounded channel predicate; caller must first verify raw capture provenance.
+
+    Re-use the producer's finite source/route map and strict satisfiable request
+    validator. This proves documented API channel only, never authorship, current
+    account entitlement, output, or a closed global population.
+    """
+    import discovery_minimax_contracts as native
+    if (snapshot.get('vendor'),snapshot.get('channel'),snapshot.get('source_url'))!=('MiniMax','pay_as_you_go',native.ROOT):return False
+    url=entry.get('source_url','')
+    if not url.startswith(native.BASE) or url[len(native.BASE):] not in native.SPECS:return False
+    modality,route=native.SPECS[url[len(native.BASE):]]
+    routes={route}
+    if url==native.BASE+'video/generation/api/v2-video-generation.json':routes.add('/v2/video_regeneration')
+    if snapshot.get('coverage_evidence',{}).get('modalities')!=[modality] or entry.get('server')!='https://api.minimax.io' or entry.get('route') not in routes:return False
+    try:return any(r.get('model_id')==mid for r in request_models(spec,entry['route'],entry['server']))
+    except (ValueError,KeyError,TypeError):return False
+
+
+def minimax_output_statement(snapshot,entry,spec,mid):
+    """Explicit operation output wording, after the same native request binding."""
+    if not minimax_native_channel_eligible(snapshot,entry,spec,mid):return None
+    summary=spec['paths'][entry['route']]['post'].get('summary')
+    declared={'Text Generation V2':'text','Image Generation':'image','Image Edit':'image','Text-to-Image':'image','Video Generation':'video','Create video generation task':'video','Create Video Regeneration Task':'video'}.get(summary)
+    if snapshot['coverage_evidence']['modalities']!=[declared]:return None
+    return summary
+
+
 def qualified_producer_claims(snapshot,row,manifest):
     mid=row.get('model_id');claims=[]
     if row.get('api_id_explicit') is not True or canonical_id(mid)!=mid:return claims
@@ -62,6 +90,12 @@ def qualified_producer_claims(snapshot,row,manifest):
             except (ValueError,KeyError,TypeError):continue
             if not any(r.get('model_id')==mid for r in eligible):continue
             claims.append(claim(scoped,mid,'identity',role='validated_request_model_enum',quote=quote,route=entry['route'],server=entry['server']))
+            if minimax_native_channel_eligible(snapshot,entry,json.loads(text),mid):
+                claims.append(claim(scoped,mid,'native_channel',status='verified',reason='literal ID accepted by the bound native generation request schema; not account entitlement or global population closure',quote=quote,route=entry['route'],server=entry['server'],evidence_role='validated_native_request_server_route_model_enum'))
+                statement=minimax_output_statement(snapshot,entry,json.loads(text),mid)
+                output_quote=json.dumps(statement,ensure_ascii=False) if statement else None
+                if output_quote and output_quote in text:
+                    claims.append(claim(scoped,mid,'output',values=list(snapshot['coverage_evidence']['modalities']),quote=output_quote,model_quote=quote,route=entry['route'],server=entry['server'],evidence_role='explicit_bound_generation_operation_summary'))
         for entry in row.get('directory_evidence',[]):
             quote=entry.get('quote');scoped=source(snapshot,entry,quote,manifest)
             status=entry.get('lifecycle_status')
