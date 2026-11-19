@@ -57,6 +57,7 @@ class TypedConsumerTests(unittest.TestCase):
         row='| probe-model | $2.00 |\n';m=dict(self.meta['xAI'],source_sha256=p.digest(text.encode()))
         evidence=prove_unit(m,text,cell='$2.00',columns=('Input / 1M tokens',),scope=text,row=row)
         self.assertIsInstance(evidence,UnitEvidence)
+        self.assertEqual(evidence.to_dict(),json.loads(json.dumps(evidence.to_dict())))
         for bad in ('per_1M_tokens',{'unit':'per_1M_tokens'},dataclasses.replace(evidence,unit='per_image')):
             with self.subTest(bad=bad),self.assertRaises(ValueError):
                 models.emit([],dict(meta=m,text=text),'probe-model',2,'USD',bad,'input','text',row,['Input / 1M tokens'],{})

@@ -65,7 +65,11 @@ class UnitEvidence:
     unit: str
 
     def to_dict(self):
-        return asdict(self)
+        value=asdict(self)
+        for key in ('scope_span','cell_span','row_span'):value[key]=list(value[key])
+        value['column_spans']=[list(span) for span in value['column_spans']]
+        value['default_span']=list(value['default_span']) if value['default_span'] else None
+        return value
 
 
 @lru_cache(maxsize=16)
