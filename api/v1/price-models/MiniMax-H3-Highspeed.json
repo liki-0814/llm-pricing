@@ -1,0 +1,513 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 6
+  },
+  "data": {
+    "model_id": "MiniMax-H3-Highspeed",
+    "prices": [
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Highspeed",
+        "amount": 0.06,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "output",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Highspeed Balances quality and speed, for everyday content creation.",
+          "price_header": "Output Video per second",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Highspeed</strong><br/><span class=\"mint-text-xs\">Balances quality and speed, for everyday content creation.</span></td><td>768P</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.03</td></tr>",
+        "quote_sha256": "aff90f27d31ca6fee47d303c0fbff9a084c32898d21570c59e6451a7e2bcb51a",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "8c5f3b1095c18a095c543403641e8d134db80bcc96e49e04a56a94d24c2c845a",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108101,
+            108140
+          ],
+          "row_span": [
+            107929,
+            108223
+          ],
+          "column_spans": [
+            [
+              107114,
+              107236
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Highspeed",
+        "amount": 0.06,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "input",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Highspeed Balances quality and speed, for everyday content creation.",
+          "price_header": "Input Video per second",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Highspeed</strong><br/><span class=\"mint-text-xs\">Balances quality and speed, for everyday content creation.</span></td><td>768P</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.03</td></tr>",
+        "quote_sha256": "aff90f27d31ca6fee47d303c0fbff9a084c32898d21570c59e6451a7e2bcb51a",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "2b95331d7b1b42fe256ddc26e966a4d8a876b5e2daf65a381bde5c12c4ddb070",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108140,
+            108179
+          ],
+          "row_span": [
+            107929,
+            108223
+          ],
+          "column_spans": [
+            [
+              107236,
+              107357
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Highspeed",
+        "amount": 0.03,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_image",
+        "component": "input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Highspeed Balances quality and speed, for everyday content creation.",
+          "price_header": "Input Image per image beyond free quota",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Highspeed</strong><br/><span class=\"mint-text-xs\">Balances quality and speed, for everyday content creation.</span></td><td>768P</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.03</td></tr>",
+        "quote_sha256": "aff90f27d31ca6fee47d303c0fbff9a084c32898d21570c59e6451a7e2bcb51a",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "f4eeec495f542eec18d39d8d4a0e65f03eff8fc9f2aab862d90e92d0736cafc7",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108179,
+            108218
+          ],
+          "row_span": [
+            107929,
+            108223
+          ],
+          "column_spans": [
+            [
+              107357,
+              107499
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Highspeed",
+        "amount": 0.04,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "output",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Highspeed Balances quality and speed, for everyday content creation.",
+          "price_header": "Output Video per second",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td>480P</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.03</td></tr>",
+        "quote_sha256": "97b3d389a3fc380f3880445767adacfb60645f9ff004aaf441aaa92a8a4fda98",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Highspeed</strong><br/><span class=\"mint-text-xs\">Balances quality and speed, for everyday content creation.</span></td><td>768P</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.03</td></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "571a9d65fd4b30fd1c198eb49dc7b0ae384008dd153c4f36fc973a037032e858",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108240,
+            108279
+          ],
+          "row_span": [
+            108223,
+            108362
+          ],
+          "column_spans": [
+            [
+              107114,
+              107236
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Highspeed",
+        "amount": 0.04,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "input",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Highspeed Balances quality and speed, for everyday content creation.",
+          "price_header": "Input Video per second",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td>480P</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.03</td></tr>",
+        "quote_sha256": "97b3d389a3fc380f3880445767adacfb60645f9ff004aaf441aaa92a8a4fda98",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Highspeed</strong><br/><span class=\"mint-text-xs\">Balances quality and speed, for everyday content creation.</span></td><td>768P</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.03</td></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "fbfef45f42302004ff7b681568c26b2173b42be6878a19c5957b8cd1b7bf9a92",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108279,
+            108318
+          ],
+          "row_span": [
+            108223,
+            108362
+          ],
+          "column_spans": [
+            [
+              107236,
+              107357
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Highspeed",
+        "amount": 0.03,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_image",
+        "component": "input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Highspeed Balances quality and speed, for everyday content creation.",
+          "price_header": "Input Image per image beyond free quota",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td>480P</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.03</td></tr>",
+        "quote_sha256": "97b3d389a3fc380f3880445767adacfb60645f9ff004aaf441aaa92a8a4fda98",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Highspeed</strong><br/><span class=\"mint-text-xs\">Balances quality and speed, for everyday content creation.</span></td><td>768P</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.06</td><td style=\"text-align:right\">$0.03</td></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "417f03437ccce2a2b001fad42c8f577da1f12238440b5ac4b8deecc9dd05b29b",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108318,
+            108357
+          ],
+          "row_span": [
+            108223,
+            108362
+          ],
+          "column_spans": [
+            [
+              107357,
+              107499
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

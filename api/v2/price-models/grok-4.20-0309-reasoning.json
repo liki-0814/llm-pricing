@@ -1,0 +1,510 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 6
+  },
+  "data": {
+    "model_id": "grok-4.20-0309-reasoning",
+    "prices": [
+      {
+        "vendor": "xAI",
+        "channel": "pay_as_you_go",
+        "model_id": "grok-4.20-0309-reasoning",
+        "amount": 1.25,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Text API Pricing",
+          "model_qualifier": "grok-4.20-0309-reasoning (< 200k prompt tokens)",
+          "price_header": "Input / 1M tokens",
+          "context_limit": "1M",
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://docs.x.ai/developers/pricing",
+        "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+        "observed_at": "2026-11-19T06:31:26.194068+08:00",
+        "quote": "| grok-4.20-0309-reasoning (< 200k prompt tokens) | 1M | $1.25 | $0.20 | $2.50 |\n",
+        "quote_sha256": "66c96d7ae0c7640107de2255e7ea2a107345daf9acdf447c1ab56899f6ddbc77",
+        "context_quotes": [
+          "| Model | Context | Input / 1M tokens | Cached input / 1M tokens | Output / 1M tokens |\n",
+          "All prices are in USD.",
+          "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
+        ],
+        "price_record_id": "dba9989288ede421665bd4348770ed0be3660abb01a5a58c6e1a237247e83d41",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            857,
+            862
+          ],
+          "row_span": [
+            800,
+            881
+          ],
+          "column_spans": [
+            [
+              165,
+              182
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "xAI",
+        "channel": "pay_as_you_go",
+        "model_id": "grok-4.20-0309-reasoning",
+        "amount": 0.2,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Text API Pricing",
+          "model_qualifier": "grok-4.20-0309-reasoning (< 200k prompt tokens)",
+          "price_header": "Cached input / 1M tokens",
+          "context_limit": "1M",
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://docs.x.ai/developers/pricing",
+        "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+        "observed_at": "2026-11-19T06:31:26.194068+08:00",
+        "quote": "| grok-4.20-0309-reasoning (< 200k prompt tokens) | 1M | $1.25 | $0.20 | $2.50 |\n",
+        "quote_sha256": "66c96d7ae0c7640107de2255e7ea2a107345daf9acdf447c1ab56899f6ddbc77",
+        "context_quotes": [
+          "| Model | Context | Input / 1M tokens | Cached input / 1M tokens | Output / 1M tokens |\n",
+          "All prices are in USD.",
+          "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
+        ],
+        "price_record_id": "83e5056f3c3c273e41b0a8d4d64814d0372da83e42af9451c5e667c1a82edf9a",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            865,
+            870
+          ],
+          "row_span": [
+            800,
+            881
+          ],
+          "column_spans": [
+            [
+              185,
+              209
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "xAI",
+        "channel": "pay_as_you_go",
+        "model_id": "grok-4.20-0309-reasoning",
+        "amount": 2.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Text API Pricing",
+          "model_qualifier": "grok-4.20-0309-reasoning (< 200k prompt tokens)",
+          "price_header": "Output / 1M tokens",
+          "context_limit": "1M",
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://docs.x.ai/developers/pricing",
+        "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+        "observed_at": "2026-11-19T06:31:26.194068+08:00",
+        "quote": "| grok-4.20-0309-reasoning (< 200k prompt tokens) | 1M | $1.25 | $0.20 | $2.50 |\n",
+        "quote_sha256": "66c96d7ae0c7640107de2255e7ea2a107345daf9acdf447c1ab56899f6ddbc77",
+        "context_quotes": [
+          "| Model | Context | Input / 1M tokens | Cached input / 1M tokens | Output / 1M tokens |\n",
+          "All prices are in USD.",
+          "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
+        ],
+        "price_record_id": "962da9a2971335613abf9d6891cc7d738b086b2fa15be242ad8fe0c82adb1ccb",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            873,
+            878
+          ],
+          "row_span": [
+            800,
+            881
+          ],
+          "column_spans": [
+            [
+              212,
+              230
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "xAI",
+        "channel": "pay_as_you_go",
+        "model_id": "grok-4.20-0309-reasoning",
+        "amount": 2.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Text API Pricing",
+          "model_qualifier": "grok-4.20-0309-reasoning (≥ 200k prompt tokens)",
+          "price_header": "Input / 1M tokens",
+          "context_limit": "1M",
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://docs.x.ai/developers/pricing",
+        "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+        "observed_at": "2026-11-19T06:31:26.194068+08:00",
+        "quote": "| grok-4.20-0309-reasoning (≥ 200k prompt tokens) | 1M | $2.50 | $0.40 | $5.00 |\n",
+        "quote_sha256": "621eb7329550c6235150a4ba7bc21afcbabe737627b30950179e7f93580718f0",
+        "context_quotes": [
+          "| Model | Context | Input / 1M tokens | Cached input / 1M tokens | Output / 1M tokens |\n",
+          "All prices are in USD.",
+          "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
+        ],
+        "price_record_id": "ed711f85c37547a7c67661023c549216fc433d654aa5d55e61d563cff3d5c365",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            938,
+            943
+          ],
+          "row_span": [
+            881,
+            962
+          ],
+          "column_spans": [
+            [
+              165,
+              182
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "xAI",
+        "channel": "pay_as_you_go",
+        "model_id": "grok-4.20-0309-reasoning",
+        "amount": 0.4,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Text API Pricing",
+          "model_qualifier": "grok-4.20-0309-reasoning (≥ 200k prompt tokens)",
+          "price_header": "Cached input / 1M tokens",
+          "context_limit": "1M",
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://docs.x.ai/developers/pricing",
+        "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+        "observed_at": "2026-11-19T06:31:26.194068+08:00",
+        "quote": "| grok-4.20-0309-reasoning (≥ 200k prompt tokens) | 1M | $2.50 | $0.40 | $5.00 |\n",
+        "quote_sha256": "621eb7329550c6235150a4ba7bc21afcbabe737627b30950179e7f93580718f0",
+        "context_quotes": [
+          "| Model | Context | Input / 1M tokens | Cached input / 1M tokens | Output / 1M tokens |\n",
+          "All prices are in USD.",
+          "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
+        ],
+        "price_record_id": "a26f77c5f9e2ce25cc612a090b4b58abc65d536b9f4c7016a9db6a9f62a07738",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            946,
+            951
+          ],
+          "row_span": [
+            881,
+            962
+          ],
+          "column_spans": [
+            [
+              185,
+              209
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "xAI",
+        "channel": "pay_as_you_go",
+        "model_id": "grok-4.20-0309-reasoning",
+        "amount": 5.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Text API Pricing",
+          "model_qualifier": "grok-4.20-0309-reasoning (≥ 200k prompt tokens)",
+          "price_header": "Output / 1M tokens",
+          "context_limit": "1M",
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://docs.x.ai/developers/pricing",
+        "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+        "observed_at": "2026-11-19T06:31:26.194068+08:00",
+        "quote": "| grok-4.20-0309-reasoning (≥ 200k prompt tokens) | 1M | $2.50 | $0.40 | $5.00 |\n",
+        "quote_sha256": "621eb7329550c6235150a4ba7bc21afcbabe737627b30950179e7f93580718f0",
+        "context_quotes": [
+          "| Model | Context | Input / 1M tokens | Cached input / 1M tokens | Output / 1M tokens |\n",
+          "All prices are in USD.",
+          "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
+        ],
+        "price_record_id": "38f5eb58740065ec52c57b7962c586bdca273a0304d18e3cf47a58a06b69286b",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            954,
+            959
+          ],
+          "row_span": [
+            881,
+            962
+          ],
+          "column_spans": [
+            [
+              212,
+              230
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

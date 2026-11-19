@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "kimi-k3",
@@ -13,6 +17,9 @@
     "vendor": "moonshot",
     "vendor_name": "Moonshot Kimi",
     "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
@@ -53,6 +60,7 @@
       "https://platform.kimi.ai/docs/pricing/batch"
     ],
     "last_updated": "2026-10-31",
+    "price_observations": [],
     "notes": "缓存写入按 TTL 计价：5 分钟 $3.00，1 小时 $6.00（表中为 5 分钟）。缓存命中自动续期、无额外写入费。",
     "reasoning_effort": {
       "supported": true,
@@ -127,6 +135,11 @@
     "links": {
       "self": "models/kimi-k3.json",
       "vendor": "vendors/moonshot.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
     }
   }
 }

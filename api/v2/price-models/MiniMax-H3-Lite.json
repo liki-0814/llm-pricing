@@ -1,0 +1,513 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 6
+  },
+  "data": {
+    "model_id": "MiniMax-H3-Lite",
+    "prices": [
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Lite",
+        "amount": 0.04,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "output",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Lite Lower cost, for creative exploration and batch generation.",
+          "price_header": "Output Video per second",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Lite</strong><br/><span class=\"mint-text-xs\">Lower cost, for creative exploration and batch generation.</span></td><td>768P</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.02</td></tr>",
+        "quote_sha256": "0acc87e16c3a40ba3fdcf49d16669a226d7b9e46abed43ac37089d32222460b1",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "352fa2f1158e5ba3b1984539a951f1238f7f8213e8b8b71b2e097082a22c72c4",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108529,
+            108568
+          ],
+          "row_span": [
+            108362,
+            108651
+          ],
+          "column_spans": [
+            [
+              107114,
+              107236
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Lite",
+        "amount": 0.04,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "input",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Lite Lower cost, for creative exploration and batch generation.",
+          "price_header": "Input Video per second",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Lite</strong><br/><span class=\"mint-text-xs\">Lower cost, for creative exploration and batch generation.</span></td><td>768P</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.02</td></tr>",
+        "quote_sha256": "0acc87e16c3a40ba3fdcf49d16669a226d7b9e46abed43ac37089d32222460b1",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "e3f9eb3e377f674c39399470c985b587d5622884e129bfa45f8dd895991b8e0f",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108568,
+            108607
+          ],
+          "row_span": [
+            108362,
+            108651
+          ],
+          "column_spans": [
+            [
+              107236,
+              107357
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Lite",
+        "amount": 0.02,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_image",
+        "component": "input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Lite Lower cost, for creative exploration and batch generation.",
+          "price_header": "Input Image per image beyond free quota",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Lite</strong><br/><span class=\"mint-text-xs\">Lower cost, for creative exploration and batch generation.</span></td><td>768P</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.02</td></tr>",
+        "quote_sha256": "0acc87e16c3a40ba3fdcf49d16669a226d7b9e46abed43ac37089d32222460b1",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "85eaeb222e5aafe4a2537f6624117e7daf1913a3293c039ed028be6f40fcfa50",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108607,
+            108646
+          ],
+          "row_span": [
+            108362,
+            108651
+          ],
+          "column_spans": [
+            [
+              107357,
+              107499
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Lite",
+        "amount": 0.025,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "output",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Lite Lower cost, for creative exploration and batch generation.",
+          "price_header": "Output Video per second",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td>480P</td><td style=\"text-align:right\">$0.025</td><td style=\"text-align:right\">$0.025</td><td style=\"text-align:right\">$0.02</td></tr>",
+        "quote_sha256": "f5146759c245c05d500963d3d266fcd7509811ac5a100427c1d519523fb9577e",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Lite</strong><br/><span class=\"mint-text-xs\">Lower cost, for creative exploration and batch generation.</span></td><td>768P</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.02</td></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "b8d9e63a3029bc4b3f8b94bb644851f44b8dd8c897943575ad46827053336e76",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108668,
+            108708
+          ],
+          "row_span": [
+            108651,
+            108792
+          ],
+          "column_spans": [
+            [
+              107114,
+              107236
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Lite",
+        "amount": 0.025,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "input",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Lite Lower cost, for creative exploration and batch generation.",
+          "price_header": "Input Video per second",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td>480P</td><td style=\"text-align:right\">$0.025</td><td style=\"text-align:right\">$0.025</td><td style=\"text-align:right\">$0.02</td></tr>",
+        "quote_sha256": "f5146759c245c05d500963d3d266fcd7509811ac5a100427c1d519523fb9577e",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Lite</strong><br/><span class=\"mint-text-xs\">Lower cost, for creative exploration and batch generation.</span></td><td>768P</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.02</td></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "b586b4e785eeddb66ccbba6e1611d9e8a7cd79ab04ef3aa331c668f0410fd932",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108708,
+            108748
+          ],
+          "row_span": [
+            108651,
+            108792
+          ],
+          "column_spans": [
+            [
+              107236,
+              107357
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Lite",
+        "amount": 0.02,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_image",
+        "component": "input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Lite Lower cost, for creative exploration and batch generation.",
+          "price_header": "Input Image per image beyond free quota",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td>480P</td><td style=\"text-align:right\">$0.025</td><td style=\"text-align:right\">$0.025</td><td style=\"text-align:right\">$0.02</td></tr>",
+        "quote_sha256": "f5146759c245c05d500963d3d266fcd7509811ac5a100427c1d519523fb9577e",
+        "context_quotes": [
+          "<tr><th style=\"width:31%\">Model</th><th style=\"width:17%\">Output Resolution</th><th style=\"width:17%;text-align:right\">Output Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:17%;text-align:right\">Input Video<br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"width:18%;text-align:right\">Input Image<br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "<tr><td rowSpan=\"2\"><strong>MiniMax-H3-Lite</strong><br/><span class=\"mint-text-xs\">Lower cost, for creative exploration and batch generation.</span></td><td>768P</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.04</td><td style=\"text-align:right\">$0.02</td></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "9ac0ba68de6585ec896b98f323426412d3806a0cdfe4bf4bb2394dc87bdc8892",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            106994,
+            108808
+          ],
+          "cell_span": [
+            108748,
+            108787
+          ],
+          "row_span": [
+            108651,
+            108792
+          ],
+          "column_spans": [
+            [
+              107357,
+              107499
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

@@ -1,0 +1,546 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 6
+  },
+  "data": {
+    "model_id": "qwen-image-2.1-turbo",
+    "prices": [
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen-image-2.1-turbo",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "image",
+        "component": "output",
+        "amount": 0.1,
+        "currency": "CNY",
+        "unit": "per_image",
+        "tier": "{\"dimensions\": {}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>0.1<span class=\"help-letter-space\"></span>元/张</p></td><td style=\"vertical-align:top\"><p>10<span class=\"help-letter-space\"></span>张</p></td></tr>",
+        "quote_sha256": "7ec6b4614da599133b2c7f0b87bf6b95d7bdf31691d9c56eeaf979a1dcb0e9d1",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th><th style=\"vertical-align:top\"><p><strong>免费额度</strong></p></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>0.1<span class=\"help-letter-space\"></span>元/张</p></td><td style=\"vertical-align:top\"><p>10<span class=\"help-letter-space\"></span>张</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"图像生成\">图像生成 <span id=\"26310bc5cf4do\"></span></h2>",
+          "<h3 id=\"千问图像生成与编辑\">千问图像生成与编辑 <span id=\"2e0ddf5c9edy0\"></span></h3>",
+          "<h4 id=\"华北2-北京-34-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "abb5404d20b62e88862f9473",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1094693,
+            1096859
+          ],
+          "cell_span": [
+            1095417,
+            1095505
+          ],
+          "row_span": [
+            1095350,
+            1095595
+          ],
+          "column_spans": [
+            [
+              1094958,
+              1095022
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "42af413cd248137653bd2363fc07fc1a4cfc9ffc751f8087cfa2c7e058852491",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "image",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen-image-2.1-turbo",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "image",
+        "component": "output",
+        "amount": 0.1,
+        "currency": "CNY",
+        "unit": "per_image",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0.1<span class=\"help-letter-space\"></span>元/张</p></td></tr>",
+        "quote_sha256": "4b04de3ea7152c00c212a3a00b79f999c58470e35623f92342f3da3597b99b0a",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0.1<span class=\"help-letter-space\"></span>元/张</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"图像生成\">图像生成 <span id=\"26310bc5cf4do\"></span></h2>",
+          "<h3 id=\"千问图像生成与编辑\">千问图像生成与编辑 <span id=\"2e0ddf5c9edy0\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-15-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "985ab611d31a342e8a3ba980",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1096946,
+            1097786
+          ],
+          "cell_span": [
+            1097677,
+            1097765
+          ],
+          "row_span": [
+            1097565,
+            1097770
+          ],
+          "column_spans": [
+            [
+              1097277,
+              1097341
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "baf8f82dd7772878c80799de930a3285b060cfda9e05b3f1f2ecf26ce24f1d98",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "image",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen-image-2.1-turbo",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "image",
+        "component": "output",
+        "amount": 0.113362,
+        "currency": "CNY",
+        "unit": "per_image",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"国际\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0.113362<span class=\"help-letter-space\"></span>元/张</p></td></tr>",
+        "quote_sha256": "b1adedf7166594afe15fefa46321bb1b588fc8dbf6afa3e62dcc898c3012b4d6",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0.113362<span class=\"help-letter-space\"></span>元/张</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"图像生成\">图像生成 <span id=\"26310bc5cf4do\"></span></h2>",
+          "<h3 id=\"千问图像生成与编辑\">千问图像生成与编辑 <span id=\"2e0ddf5c9edy0\"></span></h3>",
+          "<h4 id=\"新加坡-17-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "b713ba0f7e487619657d8c79",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1097860,
+            1099993
+          ],
+          "cell_span": [
+            1098595,
+            1098688
+          ],
+          "row_span": [
+            1098483,
+            1098693
+          ],
+          "column_spans": [
+            [
+              1098191,
+              1098255
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "793eb76d3724a4ce5b27fb1c9d7aa1ddcdd77cc5bd7d430e14251b6e7dabd140",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "image",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"国际\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen-image-2.1-turbo",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "image",
+        "component": "output",
+        "amount": 0.1,
+        "currency": "CNY",
+        "unit": "per_image",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0.1<span class=\"help-letter-space\"></span>元/张</p></td></tr>",
+        "quote_sha256": "4b04de3ea7152c00c212a3a00b79f999c58470e35623f92342f3da3597b99b0a",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0.1<span class=\"help-letter-space\"></span>元/张</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"图像生成\">图像生成 <span id=\"26310bc5cf4do\"></span></h2>",
+          "<h3 id=\"千问图像生成与编辑\">千问图像生成与编辑 <span id=\"2e0ddf5c9edy0\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-15-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "26a813124485b4f93941ad12",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1100080,
+            1100920
+          ],
+          "cell_span": [
+            1100811,
+            1100899
+          ],
+          "row_span": [
+            1100699,
+            1100904
+          ],
+          "column_spans": [
+            [
+              1100411,
+              1100475
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "44f1265599322adb4521f7544a2ddb6c99834ea80b5be836436c858efddc9787",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "image",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen-image-2.1-turbo",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "日本（东京）",
+        "modality": "image",
+        "component": "output",
+        "amount": 0.1,
+        "currency": "CNY",
+        "unit": "per_image",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0.1<span class=\"help-letter-space\"></span>元/张</p></td></tr>",
+        "quote_sha256": "4b04de3ea7152c00c212a3a00b79f999c58470e35623f92342f3da3597b99b0a",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0.1<span class=\"help-letter-space\"></span>元/张</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"图像生成\">图像生成 <span id=\"26310bc5cf4do\"></span></h2>",
+          "<h3 id=\"千问图像生成与编辑\">千问图像生成与编辑 <span id=\"2e0ddf5c9edy0\"></span></h3>",
+          "<h4 id=\"日本-东京-9-h4\">日本（东京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "1c16b819f3fffb2f6c6bc4d6",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1100999,
+            1101839
+          ],
+          "cell_span": [
+            1101730,
+            1101818
+          ],
+          "row_span": [
+            1101618,
+            1101823
+          ],
+          "column_spans": [
+            [
+              1101330,
+              1101394
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "eae92de9b8e3747d31588b064203938bde557c7947f5f55a5a2f5e3b32e243e3",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "image",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen-image-2.1-turbo",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "中国香港",
+        "modality": "image",
+        "component": "output",
+        "amount": 0.1,
+        "currency": "CNY",
+        "unit": "per_image",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0.1<span class=\"help-letter-space\"></span>元/张</p></td></tr>",
+        "quote_sha256": "4b04de3ea7152c00c212a3a00b79f999c58470e35623f92342f3da3597b99b0a",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen-image-2.1-turbo</p></td><td style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0.1<span class=\"help-letter-space\"></span>元/张</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"图像生成\">图像生成 <span id=\"26310bc5cf4do\"></span></h2>",
+          "<h3 id=\"千问图像生成与编辑\">千问图像生成与编辑 <span id=\"2e0ddf5c9edy0\"></span></h3>",
+          "<h4 id=\"中国香港-10-h4\">中国香港</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "921f5a2f9fa79fd09e3f66a5",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1101916,
+            1102756
+          ],
+          "cell_span": [
+            1102647,
+            1102735
+          ],
+          "row_span": [
+            1102535,
+            1102740
+          ],
+          "column_spans": [
+            [
+              1102247,
+              1102311
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "a719f807463661d9e444365199f3eeb746891b60c3d6a42ee810cc268cc12ea1",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "image",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

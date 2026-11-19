@@ -1,0 +1,201 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
+  },
+  "data": {
+    "id": "gemini-4-hydrogen",
+    "name": "Gemini 4 Hydrogen",
+    "vendor": "google",
+    "vendor_name": "Google Gemini",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 1.5,
+      "output": 7.5,
+      "cached_input": 0.075,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "not_listed"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/pricing",
+        "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "implicit",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1048576,
+    "context_length_label": "1M",
+    "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+    "extra_sources": [
+      "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+    ],
+    "last_updated": "2026-11-18",
+    "price_observations": [
+      {
+        "observed_at": "2026-11-18T08:27:00+08:00",
+        "valid_from": null,
+        "valid_until": null,
+        "fields": [
+          "*"
+        ],
+        "input_tokens_gt": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing"
+        ],
+        "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+      }
+    ],
+    "notes": "官方目录与定价页均列出。标准价输入 $1.50 / 输出 $7.50 / 隐式缓存 $0.075，无涨价排期。另有邀请制 Contributor 价签（$0.75 / $3.75 / $0.0375），不是通用当前价，本轮不作为默认估价。仅隐式缓存。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "partial",
+      "field_status": {
+        "supported": "verified",
+        "levels": "unverified",
+        "default": "unverified",
+        "can_disable": "unverified"
+      },
+      "note": "官方模型页将 Thinking 列为能力并称 reasoning model，但本轮未列出 effort 档位或默认值，待核实，不借用 Argon。",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+      ]
+    },
+    "limits": {
+      "context_length": 1048576,
+      "max_output_tokens": 65536,
+      "status": "verified",
+      "note": "官方模型页：输入与输出共享 1,048,576 tokens 统一上下文窗口；Max output 65,536（默认同步请求上限）；开启 long decode 时最多可达 1,048,576 减去输入 tokens。此处按同步上限记录。",
+      "sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [],
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "note": "Batch API：官方定价页列出，均为标准价 50%。",
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {},
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+        ]
+      },
+      {
+        "name": "flex",
+        "multiplier": 0.5,
+        "note": "Flex 推理：官方定价页列出，与 Batch 同价，均为标准价 50%。",
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {},
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+        ]
+      },
+      {
+        "name": "priority",
+        "multiplier": 1.8,
+        "note": "Priority 推理：官方定价页列出，均为标准价 1.8×。",
+        "multipliers": {
+          "input": 1.8,
+          "output": 1.8,
+          "cached_input": 1.8,
+          "cache_write": 1.8,
+          "implicit_read": 1.8,
+          "explicit_read": 1.8,
+          "explicit_write": 1.8,
+          "explicit_write_1h": 1.8,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": 1
+        },
+        "pricing": {},
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+        ]
+      }
+    ],
+    "cache_pricing": {
+      "implicit_read": 0.075,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "仅隐式缓存：命中价即 pricing.cached_input；官方明确不支持显式缓存，故无显式读写价，也未列缓存存储费。cache_write 记 n/a。"
+    },
+    "price_schedule": [],
+    "unverified_fields": [
+      "reasoning_effort.levels",
+      "reasoning_effort.default",
+      "reasoning_effort.can_disable"
+    ],
+    "links": {
+      "self": "models/gemini-4-hydrogen.json",
+      "vendor": "vendors/google.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

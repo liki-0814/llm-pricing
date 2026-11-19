@@ -1,0 +1,11 @@
+# Source-qualified native claim boundary
+
+The neutral leaf `discovery_claim_contract` owns literal-ID/time validation and claim schema/projection. Neither it nor the Markdown leaf imports an adapter or diff consumer. Compatibility imports remain public; no delayed import hides a dependency cycle. Claims bind vendor, billing channel, originating catalog URL, literal subject, kind and raw detail provenance. Consumer context must match all those outer bindings. Rejected claims remain evidence, never relabeled entitlements.
+
+Directory facts only use formal Markdown lines outside backtick/tilde fences (closing character/length matched); captures/hashes and original line numbers are preserved. Lifecycle state travels with its actual supporting retired row, not a previously listed row. Identity candidates are observed before canonical validation: invalid tokens remain nonformal, make enumeration unclosed, and never become guessed IDs.
+
+## Request-schema supported subset
+
+This is a bounded eligibility witness checker, NOT a general schema satisfiability solver. Mandatory string `model` selectors must have finite literal enums on every supported object branch; local component refs (without semantic siblings), anyOf and oneOf are supported. Each ID must have a constructed object that passes the complete request JSON Schema under Draft 2020-12 validation, including exact-one semantics. Repeated or overlapping branches are not deduplicated. Overlapping model IDs can only pass when a real request witness satisfies exactly one branch. All media types must qualify.
+
+Top-level allOf, conditionals/not, nonfinite model selectors, external/cyclic/dynamic refs and unreviewed dialects fail closed. Construction is bounded (depth 12; at most 128 witnesses/branch, eight values/property and eight array items); no witness means **unknown**, not logically impossible. Required-property constraints are validated, not ignored. Defaults/examples may help construct a witness but NEVER supply model identity. Reference audit prevents network resolution. Scope enumeration still requires the independently complete official directory/index and lifecycle/alias evidence; request eligibility alone cannot certify that universe. Prices are untouched.

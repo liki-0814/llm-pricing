@@ -31,6 +31,35 @@ class ValidationTests(unittest.TestCase):
             mutate(next(x for x in d['models'] if x['model_id'] == 'gpt-5.6-sol'))
             self.assertTrue(validate.validate_data(d))
 
+    def test_price_evidence_intervals_and_service_timezone(self):
+        for field, value in [('observed_at', '2026-11-18T08:27:00'),
+                             ('valid_until', '2026-11-18T08:26:59+08:00'),
+                             ('fields', ['*', 'input'])]:
+            d = copy.deepcopy(self.data)
+            m = next(m for m in d['models'] if m['model_id'] == 'qwen4-max')
+            m['price_observations'][0][field] = value
+            self.assertTrue(validate.validate_data(d), (field, value))
+        for timestamp in ['2027-03-01T00:00:00+00:00', '2027-03-01T00:00:00-07:00']:
+            d = copy.deepcopy(self.data)
+            m = next(m for m in d['models'] if m['model_id'] == 'gpt-6.2-astra')
+            tier = next(s for s in m['service_tiers'] if s['name'] == 'ultrafast')
+            tier['multiplier_schedule'][0]['effective_from'] = timestamp
+            self.assertTrue(validate.validate_data(d), timestamp)
+        from zoneinfo import ZoneInfo
+        import datetime as dt
+        zone = ZoneInfo('America/Los_Angeles')
+        self.assertEqual(dt.datetime(2027, 3, 1, tzinfo=zone).utcoffset(), dt.timedelta(hours=-8))
+        self.assertEqual(dt.datetime(2027, 7, 1, tzinfo=zone).utcoffset(), dt.timedelta(hours=-7))
+
+    def test_allowance_requires_published_overage_price_and_per_task_scope(self):
+        for field, value in [('free_quantity', -1), ('scope', 'account')]:
+            d = copy.deepcopy(self.data)
+            m = next(m for m in d['models'] if m['model_id'] == 'minimax-h3-regeneration')
+            m['media_pricing']['input_image_allowance'][field] = value
+            self.assertTrue(validate.validate_data(d))
+        self.model('minimax-h3-regeneration')['media_pricing']['input_image_price'] = None
+        self.assertTrue(validate.validate_data(self.data))
+
     def test_invalid_calendar_date(self):
         self.data['models'][0]['last_updated'] = '2026-02-31'
         self.assertTrue(validate.validate_data(self.data))
@@ -160,7 +189,7 @@ class ValidationTests(unittest.TestCase):
         counts = {}
         for m in self.data['models']:
             counts[m['modality']] = counts.get(m['modality'], 0) + 1
-        self.assertEqual(counts, {'text': 50, 'image': 12, 'video': 9})
+        self.assertEqual(counts, {'text': 63, 'image': 16, 'video': 10})
         self.assertTrue(all(m.get('media_pricing') is None for m in self.data['models'] if m['modality'] == 'text'))
         self.assertTrue(self.invalid('grok-4.7', lambda m: m.pop('modality')))
         self.assertTrue(self.invalid('grok-4.7', lambda m: m.update(modality='audio')))
@@ -177,7 +206,7 @@ class ValidationTests(unittest.TestCase):
             self.assertTrue(all(v == 'not_applicable' for v in m['pricing_status'].values()))
             self.assertIsNotNone(m['media_pricing'])
         self.assertIsNone(files['models/grok-4.7.json']['data']['media_pricing'])
-        self.assertEqual(files['models.json']['meta']['modality_counts'], {'text': 50, 'image': 12, 'video': 9})
+        self.assertEqual(files['models.json']['meta']['modality_counts'], {'text': 60, 'image': 16, 'video': 10})
         for k in ('text', 'image', 'video'):
             self.assertTrue(all(o['modality'] == k for o in files['modalities/%s.json' % k]['data']))
 

@@ -1,0 +1,2514 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 30
+  },
+  "data": {
+    "model_id": "gpt-6.2-sol",
+    "prices": [
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 2.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Standard pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $2.00 | $10.00 | $0.10 | $2.50 | $5.00 | $4.00 | $15.00 | $0.20 | $5.00 | $10.00 |\n",
+        "quote_sha256": "81ab336b719cba3b64ad43fbf11e789beb8a97d7202a9531f5ec82b7300d2b97",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "06e68122cc252b4487eba2cbc06502b13fe3b2e2ef160f668a6fa54a92add6c8",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            786,
+            791
+          ],
+          "row_span": [
+            770,
+            869
+          ],
+          "column_spans": [
+            [
+              350,
+              369
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 10.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Standard pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $2.00 | $10.00 | $0.10 | $2.50 | $5.00 | $4.00 | $15.00 | $0.20 | $5.00 | $10.00 |\n",
+        "quote_sha256": "81ab336b719cba3b64ad43fbf11e789beb8a97d7202a9531f5ec82b7300d2b97",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "beee99ac425a44aed67c81963d1064c9f2ae49d931c36ae0c6bee377957542a4",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            794,
+            800
+          ],
+          "row_span": [
+            770,
+            869
+          ],
+          "column_spans": [
+            [
+              372,
+              392
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 0.1,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Standard pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $2.00 | $10.00 | $0.10 | $2.50 | $5.00 | $4.00 | $15.00 | $0.20 | $5.00 | $10.00 |\n",
+        "quote_sha256": "81ab336b719cba3b64ad43fbf11e789beb8a97d7202a9531f5ec82b7300d2b97",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "fcb6b5378958d7b8b2ede0e982946df7985ebee0857656314bedf25a407ea047",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            803,
+            808
+          ],
+          "row_span": [
+            770,
+            869
+          ],
+          "column_spans": [
+            [
+              395,
+              421
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 4.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Standard pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $2.00 | $10.00 | $0.10 | $2.50 | $5.00 | $4.00 | $15.00 | $0.20 | $5.00 | $10.00 |\n",
+        "quote_sha256": "81ab336b719cba3b64ad43fbf11e789beb8a97d7202a9531f5ec82b7300d2b97",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "baec9fc99a10fce590b705c59cd5c72b6b454775b90ca0c212cf6854af02bb46",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            827,
+            832
+          ],
+          "row_span": [
+            770,
+            869
+          ],
+          "column_spans": [
+            [
+              476,
+              494
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 15.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Standard pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $2.00 | $10.00 | $0.10 | $2.50 | $5.00 | $4.00 | $15.00 | $0.20 | $5.00 | $10.00 |\n",
+        "quote_sha256": "81ab336b719cba3b64ad43fbf11e789beb8a97d7202a9531f5ec82b7300d2b97",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "dba6893d4fa87833b5e3512c4a52b1237b98d405e4b71687751d97eda32d4d8c",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            835,
+            841
+          ],
+          "row_span": [
+            770,
+            869
+          ],
+          "column_spans": [
+            [
+              497,
+              516
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 0.2,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Standard pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $2.00 | $10.00 | $0.10 | $2.50 | $5.00 | $4.00 | $15.00 | $0.20 | $5.00 | $10.00 |\n",
+        "quote_sha256": "81ab336b719cba3b64ad43fbf11e789beb8a97d7202a9531f5ec82b7300d2b97",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "04d0a80684fd013cd966465aad028d7498195b932f4aa5cee9299c5522746276",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            844,
+            849
+          ],
+          "row_span": [
+            770,
+            869
+          ],
+          "column_spans": [
+            [
+              519,
+              544
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 1.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Batch pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $1.00 | $5.00 | $0.05 | $1.25 | $2.50 | $2.00 | $7.50 | $0.10 | $2.50 | $5.00 |\n",
+        "quote_sha256": "34bace30689467efac6c54a3a95fae63421d2170b8a066445f84e31df8052ae5",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "e7df6c2fa1594f23ae7579a746456ed4bde36decc6f3154d4c05435ade4bc3b6",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3208,
+            3213
+          ],
+          "row_span": [
+            3192,
+            3288
+          ],
+          "column_spans": [
+            [
+              2774,
+              2793
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 5.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Batch pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $1.00 | $5.00 | $0.05 | $1.25 | $2.50 | $2.00 | $7.50 | $0.10 | $2.50 | $5.00 |\n",
+        "quote_sha256": "34bace30689467efac6c54a3a95fae63421d2170b8a066445f84e31df8052ae5",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "1ba046d204391be67061f67238774a66afa3fcad470d721c3992e70a06e46281",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3216,
+            3221
+          ],
+          "row_span": [
+            3192,
+            3288
+          ],
+          "column_spans": [
+            [
+              2796,
+              2816
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 0.05,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Batch pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $1.00 | $5.00 | $0.05 | $1.25 | $2.50 | $2.00 | $7.50 | $0.10 | $2.50 | $5.00 |\n",
+        "quote_sha256": "34bace30689467efac6c54a3a95fae63421d2170b8a066445f84e31df8052ae5",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "eca74eee86dcd95b5e1068482aa2945a2c7ebefc02884ddf93f9e019be7d5bcc",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3224,
+            3229
+          ],
+          "row_span": [
+            3192,
+            3288
+          ],
+          "column_spans": [
+            [
+              2819,
+              2845
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 2.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Batch pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $1.00 | $5.00 | $0.05 | $1.25 | $2.50 | $2.00 | $7.50 | $0.10 | $2.50 | $5.00 |\n",
+        "quote_sha256": "34bace30689467efac6c54a3a95fae63421d2170b8a066445f84e31df8052ae5",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "b4d78b6d9b613390b43741d6193d23b4f400013c932aaf66a76711c047cb4070",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3248,
+            3253
+          ],
+          "row_span": [
+            3192,
+            3288
+          ],
+          "column_spans": [
+            [
+              2900,
+              2918
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 7.5,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Batch pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $1.00 | $5.00 | $0.05 | $1.25 | $2.50 | $2.00 | $7.50 | $0.10 | $2.50 | $5.00 |\n",
+        "quote_sha256": "34bace30689467efac6c54a3a95fae63421d2170b8a066445f84e31df8052ae5",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "af1c127cf1718fb182174761cd9a71c5d4db822e2f20494c3aeb1ad1bb5c179a",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3256,
+            3261
+          ],
+          "row_span": [
+            3192,
+            3288
+          ],
+          "column_spans": [
+            [
+              2921,
+              2940
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 0.1,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Batch pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $1.00 | $5.00 | $0.05 | $1.25 | $2.50 | $2.00 | $7.50 | $0.10 | $2.50 | $5.00 |\n",
+        "quote_sha256": "34bace30689467efac6c54a3a95fae63421d2170b8a066445f84e31df8052ae5",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "de7e5d46a61e7bf5822135e2e3efb4a3f608b111d211c33a1c85655e8aa7ed61",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3264,
+            3269
+          ],
+          "row_span": [
+            3192,
+            3288
+          ],
+          "column_spans": [
+            [
+              2943,
+              2968
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 4.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Fast pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $4.00 | $20.00 | $0.20 | $5.00 | $10.00 | $8.00 | $30.00 | $0.40 | $10.00 | $20.00 |\n",
+        "quote_sha256": "ab76a74b6d03f4df11d9d5acfadc177302743f66cb4bedd34355894362d5552b",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "9a70e13a7ded2f3bf2d1f49621901b1a59d513c81ef85438bf4b902d12ac6e77",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            7540,
+            7545
+          ],
+          "row_span": [
+            7524,
+            7625
+          ],
+          "column_spans": [
+            [
+              7102,
+              7121
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 20.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Fast pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $4.00 | $20.00 | $0.20 | $5.00 | $10.00 | $8.00 | $30.00 | $0.40 | $10.00 | $20.00 |\n",
+        "quote_sha256": "ab76a74b6d03f4df11d9d5acfadc177302743f66cb4bedd34355894362d5552b",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "c9cc1469e96b9379dedbfa837b36dc58c1a08c0a8d87c5cd67b9e7a3e3625130",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            7548,
+            7554
+          ],
+          "row_span": [
+            7524,
+            7625
+          ],
+          "column_spans": [
+            [
+              7124,
+              7144
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 0.2,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Fast pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $4.00 | $20.00 | $0.20 | $5.00 | $10.00 | $8.00 | $30.00 | $0.40 | $10.00 | $20.00 |\n",
+        "quote_sha256": "ab76a74b6d03f4df11d9d5acfadc177302743f66cb4bedd34355894362d5552b",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "a934129436cda5fd83439db523f5e5a7e6afa33ae295c763ceec6d4d22dee1e3",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            7557,
+            7562
+          ],
+          "row_span": [
+            7524,
+            7625
+          ],
+          "column_spans": [
+            [
+              7147,
+              7173
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 8.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Fast pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $4.00 | $20.00 | $0.20 | $5.00 | $10.00 | $8.00 | $30.00 | $0.40 | $10.00 | $20.00 |\n",
+        "quote_sha256": "ab76a74b6d03f4df11d9d5acfadc177302743f66cb4bedd34355894362d5552b",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "d27c1ef424254b01c950073144a453c3de86cfe6f68fc650cc48bdff6486cbc6",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            7582,
+            7587
+          ],
+          "row_span": [
+            7524,
+            7625
+          ],
+          "column_spans": [
+            [
+              7228,
+              7246
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 30.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Fast pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $4.00 | $20.00 | $0.20 | $5.00 | $10.00 | $8.00 | $30.00 | $0.40 | $10.00 | $20.00 |\n",
+        "quote_sha256": "ab76a74b6d03f4df11d9d5acfadc177302743f66cb4bedd34355894362d5552b",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "3ecbb515f6d8e848a6376db5e547f0932f88766f84241ae59733c43dad14a632",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            7590,
+            7596
+          ],
+          "row_span": [
+            7524,
+            7625
+          ],
+          "column_spans": [
+            [
+              7249,
+              7268
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 0.4,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Fast pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $4.00 | $20.00 | $0.20 | $5.00 | $10.00 | $8.00 | $30.00 | $0.40 | $10.00 | $20.00 |\n",
+        "quote_sha256": "ab76a74b6d03f4df11d9d5acfadc177302743f66cb4bedd34355894362d5552b",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "ea438adbe3237c000bfdd8919c767f064bf91bcc045acc268dfd1b2e11b65586",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            7599,
+            7604
+          ],
+          "row_span": [
+            7524,
+            7625
+          ],
+          "column_spans": [
+            [
+              7271,
+              7296
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 6.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast promotion pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $6.00 | $30.00 | $0.30 | $7.50 | $15.00 | $12.00 | $45.00 | $0.60 | $15.00 | $30.00 |\n",
+        "quote_sha256": "07873f452cc692c3e6e91659f0d8686edc999d213b32bc392d59f94034b3fc94",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "4a233ac76a90235bdfb5fed84084c18f34049ada90c1cefd68d8c958212e333b",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            9955,
+            10491
+          ],
+          "cell_span": [
+            10405,
+            10410
+          ],
+          "row_span": [
+            10389,
+            10491
+          ],
+          "column_spans": [
+            [
+              9965,
+              9984
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 30.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast promotion pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $6.00 | $30.00 | $0.30 | $7.50 | $15.00 | $12.00 | $45.00 | $0.60 | $15.00 | $30.00 |\n",
+        "quote_sha256": "07873f452cc692c3e6e91659f0d8686edc999d213b32bc392d59f94034b3fc94",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "9c31a0f4869c1eacef8c1c20457f9d8964002a3d372a6692a5057d6a3bf6f25c",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            9955,
+            10491
+          ],
+          "cell_span": [
+            10413,
+            10419
+          ],
+          "row_span": [
+            10389,
+            10491
+          ],
+          "column_spans": [
+            [
+              9987,
+              10007
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 0.3,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast promotion pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $6.00 | $30.00 | $0.30 | $7.50 | $15.00 | $12.00 | $45.00 | $0.60 | $15.00 | $30.00 |\n",
+        "quote_sha256": "07873f452cc692c3e6e91659f0d8686edc999d213b32bc392d59f94034b3fc94",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "bf4fd2da905fcb8a5bca0815d82585c720828693537e619ac346204b89e5f2e9",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            9955,
+            10491
+          ],
+          "cell_span": [
+            10422,
+            10427
+          ],
+          "row_span": [
+            10389,
+            10491
+          ],
+          "column_spans": [
+            [
+              10010,
+              10036
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 12.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast promotion pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $6.00 | $30.00 | $0.30 | $7.50 | $15.00 | $12.00 | $45.00 | $0.60 | $15.00 | $30.00 |\n",
+        "quote_sha256": "07873f452cc692c3e6e91659f0d8686edc999d213b32bc392d59f94034b3fc94",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "95761f5d1239c7c034f544519061c547fa20c5c88be43856f7574a307ba44883",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            9955,
+            10491
+          ],
+          "cell_span": [
+            10447,
+            10453
+          ],
+          "row_span": [
+            10389,
+            10491
+          ],
+          "column_spans": [
+            [
+              10091,
+              10109
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 45.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast promotion pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $6.00 | $30.00 | $0.30 | $7.50 | $15.00 | $12.00 | $45.00 | $0.60 | $15.00 | $30.00 |\n",
+        "quote_sha256": "07873f452cc692c3e6e91659f0d8686edc999d213b32bc392d59f94034b3fc94",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "44898e460ca1afdc733a19795aa69a7767030ceff624ee4a14ff1e0985d17747",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            9955,
+            10491
+          ],
+          "cell_span": [
+            10456,
+            10462
+          ],
+          "row_span": [
+            10389,
+            10491
+          ],
+          "column_spans": [
+            [
+              10112,
+              10131
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 0.6,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast promotion pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $6.00 | $30.00 | $0.30 | $7.50 | $15.00 | $12.00 | $45.00 | $0.60 | $15.00 | $30.00 |\n",
+        "quote_sha256": "07873f452cc692c3e6e91659f0d8686edc999d213b32bc392d59f94034b3fc94",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "1d82b39fbac2fe3b8be1f2132c6779b5bd679151085246a428968aefe25ec3f7",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            9955,
+            10491
+          ],
+          "cell_span": [
+            10465,
+            10470
+          ],
+          "row_span": [
+            10389,
+            10491
+          ],
+          "column_spans": [
+            [
+              10134,
+              10159
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 12.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast list pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $12.00 | $60.00 | $0.60 | $15.00 | $30.00 | $24.00 | $90.00 | $1.20 | $30.00 | $60.00 |\n",
+        "quote_sha256": "c87dde6e2a7de55208e0e7ed9af24176666bce32a1b4cf6041d8d08214e266fe",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "78ffa6809e3f0527897b1e015bdb29db2e56c512d7b6b29334780afe062229ef",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            10533,
+            11073
+          ],
+          "cell_span": [
+            10985,
+            10991
+          ],
+          "row_span": [
+            10969,
+            11073
+          ],
+          "column_spans": [
+            [
+              10543,
+              10562
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 60.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast list pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $12.00 | $60.00 | $0.60 | $15.00 | $30.00 | $24.00 | $90.00 | $1.20 | $30.00 | $60.00 |\n",
+        "quote_sha256": "c87dde6e2a7de55208e0e7ed9af24176666bce32a1b4cf6041d8d08214e266fe",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "32fe566357930e022a5df490273939d3e2c190fa8eaa9f4e9dc8f7fa77a3fcff",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            10533,
+            11073
+          ],
+          "cell_span": [
+            10994,
+            11000
+          ],
+          "row_span": [
+            10969,
+            11073
+          ],
+          "column_spans": [
+            [
+              10565,
+              10585
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 0.6,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast list pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Short context cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $12.00 | $60.00 | $0.60 | $15.00 | $30.00 | $24.00 | $90.00 | $1.20 | $30.00 | $60.00 |\n",
+        "quote_sha256": "c87dde6e2a7de55208e0e7ed9af24176666bce32a1b4cf6041d8d08214e266fe",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "b96c746a6a6e8c6f9c38bb6bc047661df1234667cbdd0b9c14e52653a73ba42c",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            10533,
+            11073
+          ],
+          "cell_span": [
+            11003,
+            11008
+          ],
+          "row_span": [
+            10969,
+            11073
+          ],
+          "column_spans": [
+            [
+              10588,
+              10614
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 24.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast list pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $12.00 | $60.00 | $0.60 | $15.00 | $30.00 | $24.00 | $90.00 | $1.20 | $30.00 | $60.00 |\n",
+        "quote_sha256": "c87dde6e2a7de55208e0e7ed9af24176666bce32a1b4cf6041d8d08214e266fe",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "c8fecb353304a3d66b6f1d6dd14adaf0a940a48ec32ae1038b68ef2726e22695",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            10533,
+            11073
+          ],
+          "cell_span": [
+            11029,
+            11035
+          ],
+          "row_span": [
+            10969,
+            11073
+          ],
+          "column_spans": [
+            [
+              10669,
+              10687
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 90.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast list pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $12.00 | $60.00 | $0.60 | $15.00 | $30.00 | $24.00 | $90.00 | $1.20 | $30.00 | $60.00 |\n",
+        "quote_sha256": "c87dde6e2a7de55208e0e7ed9af24176666bce32a1b4cf6041d8d08214e266fe",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "fbe1d494eeab93b3c70cfa25165dcd2683e627c4f604ac9e04114842c716220c",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            10533,
+            11073
+          ],
+          "cell_span": [
+            11038,
+            11044
+          ],
+          "row_span": [
+            10969,
+            11073
+          ],
+          "column_spans": [
+            [
+              10690,
+              10709
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-6.2-sol",
+        "amount": 1.2,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "section": "### Ultrafast list pricing data",
+          "model_qualifier": "gpt-6.2-sol",
+          "price_header": "Long context cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-6.2-sol | $12.00 | $60.00 | $0.60 | $15.00 | $30.00 | $24.00 | $90.00 | $1.20 | $30.00 | $60.00 |\n",
+        "quote_sha256": "c87dde6e2a7de55208e0e7ed9af24176666bce32a1b4cf6041d8d08214e266fe",
+        "context_quotes": [
+          "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "3698a163c660976b7552ae6f70669c8da2236505c59a37ba9da5ddf91dfa37ca",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            10533,
+            11073
+          ],
+          "cell_span": [
+            11047,
+            11052
+          ],
+          "row_span": [
+            10969,
+            11073
+          ],
+          "column_spans": [
+            [
+              10712,
+              10737
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

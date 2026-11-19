@@ -1,0 +1,105 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 1
+  },
+  "data": {
+    "model_id": "image-01-live",
+    "prices": [
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "image-01-live",
+        "amount": 0.0035,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_image",
+        "component": "output",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": null,
+          "section": "Image",
+          "model_qualifier": "image-01 image-01-live",
+          "price_header": "Price",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td style=\"text-align:left\">image-01<br/>image-01-live</td><td style=\"text-align:left\">$0.0035 per image</td></tr>",
+        "quote_sha256": "2db213f4a4006e14ef6ecf29643bcc759bf0156d487c66846aa91f5bf9b6d5c6",
+        "context_quotes": [
+          "<tr><th style=\"text-align:left\">Model</th><th style=\"text-align:left\">Price</th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "a0eb23eb5e684e96a1007263fcc11c154801408dc29627eff1cb4b25bf8f92a1",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            140833,
+            141212
+          ],
+          "cell_span": [
+            141141,
+            141191
+          ],
+          "row_span": [
+            141078,
+            141196
+          ],
+          "column_spans": [
+            [
+              141020,
+              141058
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

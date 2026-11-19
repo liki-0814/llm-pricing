@@ -1,0 +1,401 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 47
+  },
+  "data": {
+    "models": [
+      {
+        "model_id": "H3-Image-Context-IR",
+        "url": "price-models/H3-Image-Context-IR.json",
+        "record_count": 1,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-H3",
+        "url": "price-models/MiniMax-H3.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-H3-Context-IR",
+        "url": "price-models/MiniMax-H3-Context-IR.json",
+        "record_count": 2,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-H3-Highspeed",
+        "url": "price-models/MiniMax-H3-Highspeed.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-H3-Image",
+        "url": "price-models/MiniMax-H3-Image.json",
+        "record_count": 3,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-H3-Image-Highspeed",
+        "url": "price-models/MiniMax-H3-Image-Highspeed.json",
+        "record_count": 3,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-H3-Lite",
+        "url": "price-models/MiniMax-H3-Lite.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-H3-Max",
+        "url": "price-models/MiniMax-H3-Max.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-H3-Regeneration",
+        "url": "price-models/MiniMax-H3-Regeneration.json",
+        "record_count": 3,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-Hailuo-02",
+        "url": "price-models/MiniMax-Hailuo-02.json",
+        "record_count": 5,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-Hailuo-2.3",
+        "url": "price-models/MiniMax-Hailuo-2.3.json",
+        "record_count": 3,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-Hailuo-2.3-Fast",
+        "url": "price-models/MiniMax-Hailuo-2.3-Fast.json",
+        "record_count": 3,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-M3",
+        "url": "price-models/MiniMax-M3.json",
+        "record_count": 24,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "MiniMax-M3.1-Flash",
+        "url": "price-models/MiniMax-M3.1-Flash.json",
+        "record_count": 3,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "claude-fable-5-2",
+        "url": "price-models/claude-fable-5-2.json",
+        "record_count": 5,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "claude-haiku-5-5",
+        "url": "price-models/claude-haiku-5-5.json",
+        "record_count": 10,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "claude-opus-5-5",
+        "url": "price-models/claude-opus-5-5.json",
+        "record_count": 5,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "claude-sonnet-5-5",
+        "url": "price-models/claude-sonnet-5-5.json",
+        "record_count": 5,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-2.5-flash",
+        "url": "price-models/gemini-2.5-flash.json",
+        "record_count": 4,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-2.5-flash-lite",
+        "url": "price-models/gemini-2.5-flash-lite.json",
+        "record_count": 4,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-3-flash-preview",
+        "url": "price-models/gemini-3-flash-preview.json",
+        "record_count": 4,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-3.1-flash-lite",
+        "url": "price-models/gemini-3.1-flash-lite.json",
+        "record_count": 4,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-3.5-flash-lite",
+        "url": "price-models/gemini-3.5-flash-lite.json",
+        "record_count": 4,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-3.6-flash",
+        "url": "price-models/gemini-3.6-flash.json",
+        "record_count": 16,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-3.8-flash",
+        "url": "price-models/gemini-3.8-flash.json",
+        "record_count": 16,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-4-argon",
+        "url": "price-models/gemini-4-argon.json",
+        "record_count": 18,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-4-carbon",
+        "url": "price-models/gemini-4-carbon.json",
+        "record_count": 16,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-4-hydrogen",
+        "url": "price-models/gemini-4-hydrogen.json",
+        "record_count": 10,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-4-neon",
+        "url": "price-models/gemini-4-neon.json",
+        "record_count": 8,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-decision-1",
+        "url": "price-models/gemini-decision-1.json",
+        "record_count": 1,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-embedding-001",
+        "url": "price-models/gemini-embedding-001.json",
+        "record_count": 2,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "gemini-embedding-2",
+        "url": "price-models/gemini-embedding-2.json",
+        "record_count": 2,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-4.20-0309-non-reasoning",
+        "url": "price-models/grok-4.20-0309-non-reasoning.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-4.20-0309-reasoning",
+        "url": "price-models/grok-4.20-0309-reasoning.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-4.20-multi-agent-0309",
+        "url": "price-models/grok-4.20-multi-agent-0309.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-4.3",
+        "url": "price-models/grok-4.3.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-4.5",
+        "url": "price-models/grok-4.5.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-4.6",
+        "url": "price-models/grok-4.6.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-4.7",
+        "url": "price-models/grok-4.7.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-build-0.1",
+        "url": "price-models/grok-build-0.1.json",
+        "record_count": 6,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-imagine-image",
+        "url": "price-models/grok-imagine-image.json",
+        "record_count": 1,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-imagine-image-2.0",
+        "url": "price-models/grok-imagine-image-2.0.json",
+        "record_count": 1,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-imagine-video",
+        "url": "price-models/grok-imagine-video.json",
+        "record_count": 1,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-imagine-video-1.5",
+        "url": "price-models/grok-imagine-video-1.5.json",
+        "record_count": 1,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "grok-imagine-video-1.5-lite",
+        "url": "price-models/grok-imagine-video-1.5-lite.json",
+        "record_count": 1,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "image-01",
+        "url": "price-models/image-01.json",
+        "record_count": 1,
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "model_id": "image-01-live",
+        "url": "price-models/image-01-live.json",
+        "record_count": 1,
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "record_count": 263,
+    "currency_resolved_record_count": 263,
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "evidence_version": "6244cbf2adb4a3273896fca19933e982fc8b1b630c2de085cfa9314f7fbeea14"
+  }
+}

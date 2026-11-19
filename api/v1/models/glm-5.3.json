@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "glm-5.3",
@@ -13,6 +17,9 @@
     "vendor": "zhipu",
     "vendor_name": "智谱 Z.ai",
     "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
@@ -54,6 +61,7 @@
       "https://docs.bigmodel.cn/cn/guide/start/concept-param"
     ],
     "last_updated": "2026-10-14",
+    "price_observations": [],
     "notes": "Z.ai 国际站美元价。缓存存储费目前限时免费。上下文长度来自智谱开放平台模型概览；最大输出 131,072（128K）来自智谱开放平台核心参数页 max_tokens 表。国内 bigmodel.cn 的人民币定价页需前端渲染，未能抓取。",
     "reasoning_effort": {
       "supported": true,
@@ -123,6 +131,11 @@
     "links": {
       "self": "models/glm-5.3.json",
       "vendor": "vendors/zhipu.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
     }
   }
 }

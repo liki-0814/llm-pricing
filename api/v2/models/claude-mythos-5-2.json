@@ -1,0 +1,203 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
+  },
+  "data": {
+    "id": "claude-mythos-5-2",
+    "name": "Claude Mythos 5.2",
+    "vendor": "anthropic",
+    "vendor_name": "Anthropic",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 8,
+      "output": 40,
+      "cached_input": 0.2,
+      "cache_write": 10
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "explicit",
+      "note": "官方公开价按量；可用性仅限已验证组织。不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1000000,
+    "context_length_label": "1M",
+    "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "extra_sources": [
+      "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
+    ],
+    "last_updated": "2026-11-18",
+    "price_observations": [
+      {
+        "observed_at": "2026-11-18T08:27:00+08:00",
+        "valid_from": null,
+        "valid_until": null,
+        "fields": [
+          "*"
+        ],
+        "input_tokens_gt": null,
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ],
+        "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+      }
+    ],
+    "notes": "官方 API ID 为连字符 claude-mythos-5-2。官方写与 Fable 5.2 规格和定价相同，但仅向通过 Anthropic 验证计划的组织提供（limited availability / verification required）。发布日 2026-11-09，官方承诺不早于 2027-11-09 退役。不自行与 Fable 5.2 合并为同一调用 ID。不是今日发布。",
+    "reasoning_effort": {
+      "supported": null,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "unverified",
+      "field_status": {
+        "supported": "unverified",
+        "levels": "unverified",
+        "default": "unverified",
+        "can_disable": "unverified"
+      },
+      "note": "本轮模型概览未列 output_config.effort 档位，待核实，不借用 5.1。",
+      "sources": [
+        "https://platform.claude.com/docs/en/models/mythos-5-2/overview"
+      ]
+    },
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": 128000,
+      "status": "verified",
+      "note": "官方概览：Context window 1M tokens、Max output 128K tokens，按 1M=1,000,000、1K=1,000 记录。",
+      "sources": [
+        "https://platform.claude.com/docs/en/models/mythos-5-2/overview",
+        "https://platform.claude.com/docs/en/about-claude/models/overview"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [],
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出 $4 / $20）。",
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {},
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      {
+        "name": "fast",
+        "multiplier": 2.0,
+        "note": "Fast mode（官方定价页列出输入 $16 / 输出 $80，约 2×）；全上下文窗口适用，不可与 Batch 同用。官方明确 Fable/Mythos 5.2 提供 Fast mode。",
+        "multipliers": {
+          "input": 2.0,
+          "output": 2.0,
+          "cached_input": 2.0,
+          "cache_write": 2.0,
+          "implicit_read": 2.0,
+          "explicit_read": 2.0,
+          "explicit_write": 2.0,
+          "explicit_write_1h": 2.0,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {
+          "input": 16,
+          "output": 80
+        },
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      {
+        "name": "data_residency",
+        "multiplier": 1.1,
+        "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。官方写 Fast 价可与 data residency 乘数叠加，不可与 Batch 同用。",
+        "multipliers": {
+          "input": 1.1,
+          "output": 1.1,
+          "cached_input": 1.1,
+          "cache_write": 1.1,
+          "implicit_read": 1.1,
+          "explicit_read": 1.1,
+          "explicit_write": 1.1,
+          "explicit_write_1h": 1.1,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {},
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      }
+    ],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": 0.2,
+      "explicit_write": 10,
+      "explicit_write_1h": 16,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "官方：Fable/Mythos 5.2 缓存命中为基价 0.025×（$0.20）；cache_write 为 5 分钟 TTL $10，1 小时 TTL 见 explicit_write_1h $16。"
+    },
+    "price_schedule": [],
+    "unverified_fields": [
+      "reasoning_effort.supported",
+      "reasoning_effort.levels",
+      "reasoning_effort.default",
+      "reasoning_effort.can_disable"
+    ],
+    "links": {
+      "self": "models/claude-mythos-5-2.json",
+      "vendor": "vendors/anthropic.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

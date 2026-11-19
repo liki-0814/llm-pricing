@@ -175,16 +175,39 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
     assert.deepEqual(env.data,full.data.filter(m=>m.modality===x.name));
     assert.equal(env.meta.count,x.model_count);assert.equal(env.meta.data_version,full.meta.data_version);
   }
-  const spec=await client.getOpenAPI();assert.equal(Object.keys(spec.paths).length,7);
+  const spec=await client.getOpenAPI();assert.equal(Object.keys(spec.paths).length,10);
+  assert.ok(spec.paths['/price-facts.json']);
+  const priceEvidence=await (await fetch(new URL(index.data.endpoints['price-facts'],base))).json();
+  assert.equal(priceEvidence.data.scope_complete,false);
+  assert.ok(priceEvidence.data.facts.every(f=>f.currency==='USD'));
+  assert.ok(priceEvidence.data.price_candidates.every(f=>f.currency==='USD' && f.price_verified===false));
+  assert.equal(priceEvidence.data.offering_channel_observations[0].channel,'subscription');
+  assert.equal(priceEvidence.data.offering_channel_observations[0].model_id,null);
+  const priceModels=await (await fetch(new URL(index.data.endpoints['price-models'],base))).json();
+  assert.ok(priceModels.data.currency_resolved_record_count > 0);
+  for(const pm of priceModels.data.models) {
+    const body=await (await fetch(new URL(pm.url,base))).json();
+    assert.equal(body.data.model_id,pm.model_id);assert.equal(body.meta.count,body.data.prices.length);
+    assert.ok(body.data.prices.every(r=>r.currency==='USD' && r.eligible_for_estimation===false && r.scope_complete===false));
+  }
   const staticPaths=new Set(requests);
-  const expected=['index.json','models.json','vendors.json','modalities.json','openapi.json',...modalities.data.map(x=>`modalities/${x.name}.json`),...full.data.map(m=>`models/${m.id}.json`),...vendors.data.map(v=>`vendors/${v.slug}.json`)];
-  assert.equal(expected.length,5+modalities.data.length+all.data.length+vendors.data.length);
+  const expected=['index.json','models.json','vendors.json','modalities.json','openapi.json','price-facts.json','price-models.json',...priceModels.data.models.map(m=>m.url),...modalities.data.map(x=>`modalities/${x.name}.json`),...full.data.map(m=>`models/${m.id}.json`),...vendors.data.map(v=>`vendors/${v.slug}.json`)];
+  assert.equal(expected.length,7+priceModels.data.models.length+modalities.data.length+all.data.length+vendors.data.length);
   assert.deepEqual([...staticPaths].sort(),expected.map(p=>'/api/v1/'+p).sort());
+  const mixedFacts=await (await fetch(new URL('../v2/price-facts.json',base))).json();
+  assert.ok(mixedFacts.data.facts.some(f=>f.currency==='CNY' && f.model_id==='qwen4-max' && f.region==='华北2（北京）' && f.amount===10));
+  assert.ok(mixedFacts.data.facts.every(f=>f.scope_complete===false));
+  for(const mid of ['gemini-4-carbon','MiniMax-M3.1-Flash','image-01','grok-4.7','gpt-6.2-sol','qwen3.8-omni-flash']) {
+    const body=await (await fetch(new URL('../v2/price-models/'+encodeURIComponent(mid)+'.json',base))).json();
+    assert.equal(body.data.model_id,mid);assert.ok(body.data.prices.length>0);
+    assert.ok(body.data.prices.every(r=>r.eligible_for_estimation===false && r.scope_complete===false));
+    if(mid==='gpt-6.2-sol')assert.ok(body.data.prices.every(r=>r.currency===null && r.price_verified===false));
+  }
   assert.deepEqual(index.data.models.map(m=>m.id),full.data.map(m=>m.id));
   for (const v of vendors.data) assert.deepEqual(v.model_ids,full.data.filter(m=>m.vendor===v.slug).map(m=>m.id));
   const cheapest=await client.listModels({vendor:'openai',sort:'input',limit:2,priceBasis:'official'});
-  assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,11); // 9 text + 2 image models
-  assert.equal((await client.listModels({vendor:'openai',modality:'text',sort:'input',priceBasis:'official'})).meta.matched_count,9);
+  assert.equal(cheapest.data[0].id,'gpt-6-luna');assert.equal(cheapest.meta.matched_count,16); // 12 text + 4 image models
+  assert.equal((await client.listModels({vendor:'openai',modality:'text',sort:'input',priceBasis:'official'})).meta.matched_count,12);
   const search=await client.listModels({q:'gemini pro'});assert.equal(search.data[0].id,'gemini-3.1-pro-preview');
   const missingLast=await client.listModels({sort:'-cache_write'});assert.equal(missingLast.data.at(-1).pricing.cache_write,null);
   const current = full.data.find(m=>m.id==='gemini-3.1-pro-preview');
@@ -200,7 +223,7 @@ test('real HTTP queries cover every static endpoint, IDs, filters and errors', a
 });
 
 test('OpenAI 12h TTL cache writes are a separate 2.5x field, tier-aware and service-tier scaled', () => {
-  const ids = ['gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-astra','gpt-6-sol','gpt-6-luna','gpt-6.1-sol','gpt-6.1-terra'];
+  const ids = ['gpt-5.6-sol','gpt-5.6-terra','gpt-5.6-luna','gpt-6-astra','gpt-6-sol','gpt-6-luna','gpt-6.1-sol','gpt-6.1-terra','gpt-6.2-astra','gpt-6.2-sol','gpt-6.2-astra-law'];
   for (const m of all.data) {
     if (!ids.includes(m.id)) { assert.equal(m.cache_pricing.explicit_write_12h, null, m.id); continue; }
     const c = m.cache_pricing, t = m.pricing_tiers[0];
@@ -214,7 +237,10 @@ test('OpenAI 12h TTL cache writes are a separate 2.5x field, tier-aware and serv
     close(short.total, c.explicit_write_12h / 1000);
     const long = estimate(m, usage(300000, 0, {cacheWrite12hTokens: 100000, cacheWriteTokens: 100000}), at);
     close(long.total, 0.1 * (t.input + t.cache_pricing.explicit_write_12h + t.cache_write));
-    close(estimate(m, usage(1000, 0, {cacheWrite12hTokens: 1000}), {...at, serviceTier: 'batch'}).total, c.explicit_write_12h / 2000);
+    if ((m.service_tiers || []).some(s => s.name === 'batch'))
+      close(estimate(m, usage(1000, 0, {cacheWrite12hTokens: 1000}), {...at, serviceTier: 'batch'}).total, c.explicit_write_12h / 2000);
+    else
+      code(() => estimate(m, usage(1000, 0, {cacheWrite12hTokens: 1000}), {...at, serviceTier: 'batch'}), 'UNSUPPORTED_SERVICE_TIER');
     code(() => estimate(m, usage(10, 0, {cacheWrite12hTokens: 6, cacheWriteTokens: 5}), at), 'INVALID_ARGUMENT');
   }
   code(() => estimate(model('claude-opus-5.5'), usage(1000, 0, {cacheWrite12hTokens: 1}), {at: '2026-10-20'}), 'PRICE_UNAVAILABLE');

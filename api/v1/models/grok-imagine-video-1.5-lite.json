@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "grok-imagine-video-1.5-lite",
@@ -13,6 +17,9 @@
     "vendor": "xai",
     "vendor_name": "xAI",
     "modality": "video",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
     "currency": "USD",
     "unit": "see_media_pricing",
     "pricing": {
@@ -54,6 +61,7 @@
       "https://docs.x.ai/developers/models/grok-imagine-video-1.5-lite"
     ],
     "last_updated": "2026-10-29",
+    "price_observations": [],
     "notes": "按秒计价：480p $0.02、720p $0.03、1080p $0.14（由 720p 上采样）；输入图片 $0.01/张。支持 Batch。",
     "reasoning_effort": {
       "supported": false,
@@ -148,6 +156,11 @@
     "links": {
       "self": "models/grok-imagine-video-1.5-lite.json",
       "vendor": "vendors/xai.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
     }
   }
 }

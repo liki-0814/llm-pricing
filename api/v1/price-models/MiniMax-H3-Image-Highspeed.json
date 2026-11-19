@@ -1,0 +1,267 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 3
+  },
+  "data": {
+    "model_id": "MiniMax-H3-Image-Highspeed",
+    "prices": [
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Image-Highspeed",
+        "amount": 2.3,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": null,
+          "section": "Image",
+          "model_qualifier": "MiniMax-H3-Image-Highspeed Highspeed",
+          "price_header": "Input Text $ / M tokens",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td style=\"text-align:left\"><strong>MiniMax-H3-Image-Highspeed</strong><br/>Highspeed</td><td data-numeric=\"true\" style=\"text-align:center\">$2.30</td><td data-numeric=\"true\" style=\"text-align:center\">$3.00</td><td data-numeric=\"true\" style=\"text-align:center\">$7.60</td></tr>",
+        "quote_sha256": "589eb02bd0862d63f4f502fb95beb7771a71dce117fd26f6124e53124564a74c",
+        "context_quotes": [
+          "<tr><th style=\"text-align:left\"><strong>Model</strong></th><th style=\"text-align:center\"><strong>Input Text</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Input Image</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Output Image</strong><br/>$ / M tokens</th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "700ef15b44935b516550886d0c3708b7ec3170fbd9fc9a6e20711deb61e7b7e0",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            125999,
+            127026
+          ],
+          "cell_span": [
+            126825,
+            126885
+          ],
+          "row_span": [
+            126731,
+            127010
+          ],
+          "column_spans": [
+            [
+              126203,
+              126282
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Image-Highspeed",
+        "amount": 3.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": null,
+          "section": "Image",
+          "model_qualifier": "MiniMax-H3-Image-Highspeed Highspeed",
+          "price_header": "Input Image $ / M tokens",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td style=\"text-align:left\"><strong>MiniMax-H3-Image-Highspeed</strong><br/>Highspeed</td><td data-numeric=\"true\" style=\"text-align:center\">$2.30</td><td data-numeric=\"true\" style=\"text-align:center\">$3.00</td><td data-numeric=\"true\" style=\"text-align:center\">$7.60</td></tr>",
+        "quote_sha256": "589eb02bd0862d63f4f502fb95beb7771a71dce117fd26f6124e53124564a74c",
+        "context_quotes": [
+          "<tr><th style=\"text-align:left\"><strong>Model</strong></th><th style=\"text-align:center\"><strong>Input Text</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Input Image</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Output Image</strong><br/>$ / M tokens</th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "a54a333336b169804919727bd05b0dd4203c254abcb88ef6b5abf0554c49f5a8",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            125999,
+            127026
+          ],
+          "cell_span": [
+            126885,
+            126945
+          ],
+          "row_span": [
+            126731,
+            127010
+          ],
+          "column_spans": [
+            [
+              126282,
+              126362
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Image-Highspeed",
+        "amount": 7.6,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": null,
+          "section": "Image",
+          "model_qualifier": "MiniMax-H3-Image-Highspeed Highspeed",
+          "price_header": "Output Image $ / M tokens",
+          "dimensions": {},
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td style=\"text-align:left\"><strong>MiniMax-H3-Image-Highspeed</strong><br/>Highspeed</td><td data-numeric=\"true\" style=\"text-align:center\">$2.30</td><td data-numeric=\"true\" style=\"text-align:center\">$3.00</td><td data-numeric=\"true\" style=\"text-align:center\">$7.60</td></tr>",
+        "quote_sha256": "589eb02bd0862d63f4f502fb95beb7771a71dce117fd26f6124e53124564a74c",
+        "context_quotes": [
+          "<tr><th style=\"text-align:left\"><strong>Model</strong></th><th style=\"text-align:center\"><strong>Input Text</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Input Image</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Output Image</strong><br/>$ / M tokens</th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "17c8e7391284027e53fdb807002bff5d1c1a8a43695748f308062e70e2f7cc6d",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            125999,
+            127026
+          ],
+          "cell_span": [
+            126945,
+            127005
+          ],
+          "row_span": [
+            126731,
+            127010
+          ],
+          "column_spans": [
+            [
+              126362,
+              126443
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

@@ -1,0 +1,3016 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 33
+  },
+  "data": {
+    "model_id": "qwen3.5-plus",
+    "prices": [
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "input",
+        "amount": 0.8,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "ceae32e09c4eb5395809bb0558df01077c7d1b83606e16a790006e6afb8ec476",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"华北2-北京-2-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "0851f3b9d3125dd0ee565b65",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            768727,
+            782395
+          ],
+          "cell_span": [
+            774671,
+            774757
+          ],
+          "row_span": [
+            774439,
+            774990
+          ],
+          "column_spans": [
+            [
+              769234,
+              769352
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "128df4aad7a16bed53241215d6926e24cac6815a38e7b59479c7c5b2230e0bcf",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "output",
+        "amount": 4.8,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "ceae32e09c4eb5395809bb0558df01077c7d1b83606e16a790006e6afb8ec476",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"华北2-北京-2-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "8fe00bf7c0ac457aef9a74f8",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            768727,
+            782395
+          ],
+          "cell_span": [
+            774757,
+            774843
+          ],
+          "row_span": [
+            774439,
+            774990
+          ],
+          "column_spans": [
+            [
+              769352,
+              769470
+            ],
+            [
+              769741,
+              769799
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "48b670b27b4cc6a1e44548f1e907cc6fbc685eac45aff23ba9f53d1e1b8d391b",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "output",
+        "amount": 4.8,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "ceae32e09c4eb5395809bb0558df01077c7d1b83606e16a790006e6afb8ec476",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"华北2-北京-2-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "552cb9513e08b741ec48ae37",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            768727,
+            782395
+          ],
+          "cell_span": [
+            774843,
+            774929
+          ],
+          "row_span": [
+            774439,
+            774990
+          ],
+          "column_spans": [
+            [
+              769352,
+              769470
+            ],
+            [
+              769799,
+              769864
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "ee2a560580f4eee847b5043ce489fb99fd7e385f92f8a2fe7e5785c45d159409",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "input",
+        "amount": 2.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>128K&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "1c8f96f989f1ff1991e3cae17cdce1ae1a75ac5fdffbf0aa275bea50168c1302",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"华北2-北京-2-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "9a9f1d7f7f60fcd8c3b044e2",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            768727,
+            782395
+          ],
+          "cell_span": [
+            775055,
+            775139
+          ],
+          "row_span": [
+            774990,
+            775314
+          ],
+          "column_spans": [
+            [
+              769234,
+              769352
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "13bd708b3643c4ff405a5ad5ec3f607ce2151057917ee32fdc620eb9622b65c2",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "output",
+        "amount": 12.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>128K&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "1c8f96f989f1ff1991e3cae17cdce1ae1a75ac5fdffbf0aa275bea50168c1302",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"华北2-北京-2-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "cc769fec467f5aeb3d57ef03",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            768727,
+            782395
+          ],
+          "cell_span": [
+            775139,
+            775224
+          ],
+          "row_span": [
+            774990,
+            775314
+          ],
+          "column_spans": [
+            [
+              769352,
+              769470
+            ],
+            [
+              769741,
+              769799
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "231086793d0aa0b79783b94a294fa5bd30db401b03c9b3f0a3a2d6a4c00f5994",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "output",
+        "amount": 12.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>128K&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "1c8f96f989f1ff1991e3cae17cdce1ae1a75ac5fdffbf0aa275bea50168c1302",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"华北2-北京-2-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "08cd521bb822fc98fb185be8",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            768727,
+            782395
+          ],
+          "cell_span": [
+            775224,
+            775309
+          ],
+          "row_span": [
+            774990,
+            775314
+          ],
+          "column_spans": [
+            [
+              769352,
+              769470
+            ],
+            [
+              769799,
+              769864
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "8e8d183c137a6da6de69d7bc05aa61fe54abe97d23032a6ea11a2de65aa0c9c1",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "input",
+        "amount": 4.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>4<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b7c499bb06ab54691b2a421c5b659d0918cb7a8c747668cf070bb33a24c452cc",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"华北2-北京-2-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "4c8c2f1f4f6620339ae6ceeb",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            768727,
+            782395
+          ],
+          "cell_span": [
+            775377,
+            775461
+          ],
+          "row_span": [
+            775314,
+            775636
+          ],
+          "column_spans": [
+            [
+              769234,
+              769352
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "4c1908b9e1ce7ece1433ee367803383e5632baf9f1911c3e64bab9cdaa11b558",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "output",
+        "amount": 24.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>4<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b7c499bb06ab54691b2a421c5b659d0918cb7a8c747668cf070bb33a24c452cc",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"华北2-北京-2-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "d8c8edc29c33d445ce528766",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            768727,
+            782395
+          ],
+          "cell_span": [
+            775461,
+            775546
+          ],
+          "row_span": [
+            775314,
+            775636
+          ],
+          "column_spans": [
+            [
+              769352,
+              769470
+            ],
+            [
+              769741,
+              769799
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "4c376186d3fbdf8c6ac5514e013aabd6334be5d91b2897d6d5db4244ee540f51",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "output",
+        "amount": 24.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>4<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b7c499bb06ab54691b2a421c5b659d0918cb7a8c747668cf070bb33a24c452cc",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"华北2-北京-2-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "c2ef4afa32acec3dfe3e1596",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            768727,
+            782395
+          ],
+          "cell_span": [
+            775546,
+            775631
+          ],
+          "row_span": [
+            775314,
+            775636
+          ],
+          "column_spans": [
+            [
+              769352,
+              769470
+            ],
+            [
+              769799,
+              769864
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "957014fa7a2fef272432b623230b6d610209f6b0275f3fc74ef2bb941c30068d",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "text",
+        "component": "input",
+        "amount": 0.8,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b968180c99d4d5f5ba9aa9772d61924ad172f23f95cef776088df13ddc842c70",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-2-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "828a5ee47f9f9aeccf3adafb",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            784678,
+            797985
+          ],
+          "cell_span": [
+            791986,
+            792072
+          ],
+          "row_span": [
+            791697,
+            792249
+          ],
+          "column_spans": [
+            [
+              785256,
+              785375
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "ac7487791668bedc5b8566b798e914ce058b755e7f37f5a8991683fb04c149d8",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "text",
+        "component": "output",
+        "amount": 4.8,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b968180c99d4d5f5ba9aa9772d61924ad172f23f95cef776088df13ddc842c70",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-2-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "9e97d0728d9da978de766cfd",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            784678,
+            797985
+          ],
+          "cell_span": [
+            792072,
+            792158
+          ],
+          "row_span": [
+            791697,
+            792249
+          ],
+          "column_spans": [
+            [
+              785375,
+              785494
+            ],
+            [
+              785503,
+              785561
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "174830969d15233d67f0a2fa1619dc3ad44e28ac71a8d0e64c1dd4b1a1d48c7c",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "text",
+        "component": "output",
+        "amount": 4.8,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b968180c99d4d5f5ba9aa9772d61924ad172f23f95cef776088df13ddc842c70",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-2-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "7d51ab66b4c63a21eeb2896c",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            784678,
+            797985
+          ],
+          "cell_span": [
+            792158,
+            792244
+          ],
+          "row_span": [
+            791697,
+            792249
+          ],
+          "column_spans": [
+            [
+              785375,
+              785494
+            ],
+            [
+              785561,
+              785626
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "35a48997c14699e3bfd16b3d8f46f4075a0e6112d48f3a74e20b3c13e29250dd",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "text",
+        "component": "input",
+        "amount": 2.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>128K&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "1c8f96f989f1ff1991e3cae17cdce1ae1a75ac5fdffbf0aa275bea50168c1302",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-2-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "94c3579327972e5d96d01bce",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            784678,
+            797985
+          ],
+          "cell_span": [
+            792314,
+            792398
+          ],
+          "row_span": [
+            792249,
+            792573
+          ],
+          "column_spans": [
+            [
+              785256,
+              785375
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "27a9cba6afd69c1a48705a5a4a24f8b203521dee7a02b625c4734fb38dca1036",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "text",
+        "component": "output",
+        "amount": 12.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>128K&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "1c8f96f989f1ff1991e3cae17cdce1ae1a75ac5fdffbf0aa275bea50168c1302",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-2-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "961521a5547ed8df485ca3c7",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            784678,
+            797985
+          ],
+          "cell_span": [
+            792398,
+            792483
+          ],
+          "row_span": [
+            792249,
+            792573
+          ],
+          "column_spans": [
+            [
+              785375,
+              785494
+            ],
+            [
+              785503,
+              785561
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "026f91ec50a55631be205d91ba87647c02a9b380e63fb3c1d469950887c76ffe",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "text",
+        "component": "output",
+        "amount": 12.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>128K&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "1c8f96f989f1ff1991e3cae17cdce1ae1a75ac5fdffbf0aa275bea50168c1302",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-2-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "9d6e3907247b9c5046f69e95",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            784678,
+            797985
+          ],
+          "cell_span": [
+            792483,
+            792568
+          ],
+          "row_span": [
+            792249,
+            792573
+          ],
+          "column_spans": [
+            [
+              785375,
+              785494
+            ],
+            [
+              785561,
+              785626
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "b0f8b681f4f8446b1a9f89274bc96963dd8790598d466a20822761d571e21ce6",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "text",
+        "component": "input",
+        "amount": 4.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>4<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b7c499bb06ab54691b2a421c5b659d0918cb7a8c747668cf070bb33a24c452cc",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-2-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "ab27a88684c5f1048af2b74f",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            784678,
+            797985
+          ],
+          "cell_span": [
+            792636,
+            792720
+          ],
+          "row_span": [
+            792573,
+            792895
+          ],
+          "column_spans": [
+            [
+              785256,
+              785375
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "c13761123f386336790426b1da35e6c48fa69cd28c785535838be7a9e2628338",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "text",
+        "component": "output",
+        "amount": 24.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>4<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b7c499bb06ab54691b2a421c5b659d0918cb7a8c747668cf070bb33a24c452cc",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-2-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "c82e504fc0bdeb755cd846c7",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            784678,
+            797985
+          ],
+          "cell_span": [
+            792720,
+            792805
+          ],
+          "row_span": [
+            792573,
+            792895
+          ],
+          "column_spans": [
+            [
+              785375,
+              785494
+            ],
+            [
+              785503,
+              785561
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "e2be0504c886f8f7a7b71bd0752c523ea9ce3f8230afc5b8158759416c3d9d49",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "text",
+        "component": "output",
+        "amount": 24.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>4<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b7c499bb06ab54691b2a421c5b659d0918cb7a8c747668cf070bb33a24c452cc",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-2-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "3709ad671ce853f68cbb1916",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            784678,
+            797985
+          ],
+          "cell_span": [
+            792805,
+            792890
+          ],
+          "row_span": [
+            792573,
+            792895
+          ],
+          "column_spans": [
+            [
+              785375,
+              785494
+            ],
+            [
+              785561,
+              785626
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "9054fb54c0fed78a781fe394a96b6fcf203aa45d1fe203c5750bb2929d550a1d",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "text",
+        "component": "input",
+        "amount": 2.936,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤256K\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2.936<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "540dfd9d6225bd8422df03c7526443f9440d41dac923f9bee86232f11b07b30f",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2.936<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"新加坡-2-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "9fcf33bc089bce7f3305af49",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            798057,
+            809305
+          ],
+          "cell_span": [
+            803744,
+            803832
+          ],
+          "row_span": [
+            803455,
+            804015
+          ],
+          "column_spans": [
+            [
+              798635,
+              798754
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "d1c44d18c2570c893fb6cfe97f049034edd261dbbab98be6266f6953d774990e",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤256K\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "text",
+        "component": "output",
+        "amount": 17.614,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤256K\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2.936<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "540dfd9d6225bd8422df03c7526443f9440d41dac923f9bee86232f11b07b30f",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2.936<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"新加坡-2-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "f825c13c2ab0f8e17ec96e9f",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            798057,
+            809305
+          ],
+          "cell_span": [
+            803832,
+            803921
+          ],
+          "row_span": [
+            803455,
+            804015
+          ],
+          "column_spans": [
+            [
+              798754,
+              798873
+            ],
+            [
+              798882,
+              798940
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "1ae75ddc2f25e0cb5db34571cbd290260a979e0e4d1891a96a17d923bea8b579",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤256K\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "text",
+        "component": "output",
+        "amount": 17.614,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤256K\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2.936<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "540dfd9d6225bd8422df03c7526443f9440d41dac923f9bee86232f11b07b30f",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2.936<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"新加坡-2-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "26d81e534a3b2315bdb35c03",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            798057,
+            809305
+          ],
+          "cell_span": [
+            803921,
+            804010
+          ],
+          "row_span": [
+            803455,
+            804015
+          ],
+          "column_spans": [
+            [
+              798754,
+              798873
+            ],
+            [
+              798940,
+              799005
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "b8ce28ac318d4e6be728eb631adbe5a5eac1438d549cee79955a6afcd12732ac",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤256K\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "text",
+        "component": "input",
+        "amount": 3.67,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>3.67<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.018<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.018<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "079fb682fe2ae3a6ce4d77755537a2f01c28ae7fc8ff543bca930c359c547548",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2.936<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"新加坡-2-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "b5c0cef907cd0de3948321eb",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            798057,
+            809305
+          ],
+          "cell_span": [
+            804078,
+            804165
+          ],
+          "row_span": [
+            804015,
+            804348
+          ],
+          "column_spans": [
+            [
+              798635,
+              798754
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "64adba1fe2a3075137d7eedcf6d7cb58572bed222bb8d480746a7ce13a4037c2",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "text",
+        "component": "output",
+        "amount": 22.018,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>3.67<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.018<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.018<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "079fb682fe2ae3a6ce4d77755537a2f01c28ae7fc8ff543bca930c359c547548",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2.936<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"新加坡-2-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "e99063df808c1bc0b2e45d04",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            798057,
+            809305
+          ],
+          "cell_span": [
+            804165,
+            804254
+          ],
+          "row_span": [
+            804015,
+            804348
+          ],
+          "column_spans": [
+            [
+              798754,
+              798873
+            ],
+            [
+              798882,
+              798940
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "dd9ab53e0a3c6daf489f551168d750b49174fe88d8775e31d44dd57ac61ec89e",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "text",
+        "component": "output",
+        "amount": 22.018,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>3.67<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.018<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.018<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "079fb682fe2ae3a6ce4d77755537a2f01c28ae7fc8ff543bca930c359c547548",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2.936<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>17.614<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"新加坡-2-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "e265ce3001b0ffe3030b67ff",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            798057,
+            809305
+          ],
+          "cell_span": [
+            804254,
+            804343
+          ],
+          "row_span": [
+            804015,
+            804348
+          ],
+          "column_spans": [
+            [
+              798754,
+              798873
+            ],
+            [
+              798940,
+              799005
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "3ae383e0a6f8d396db3eaf64c77b4c7993ec012c4043c7bfb1e7dda6e8d04262",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"国际\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "text",
+        "component": "input",
+        "amount": 0.8,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b968180c99d4d5f5ba9aa9772d61924ad172f23f95cef776088df13ddc842c70",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-2-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "9f44a5f3e7ad700835cda87a",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            810563,
+            822149
+          ],
+          "cell_span": [
+            816140,
+            816226
+          ],
+          "row_span": [
+            815851,
+            816403
+          ],
+          "column_spans": [
+            [
+              811141,
+              811260
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "d66b7f376b4eb939c5ccc1579d23785b00d9ae0743d46bad831dcb42e1894acc",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "text",
+        "component": "output",
+        "amount": 4.8,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b968180c99d4d5f5ba9aa9772d61924ad172f23f95cef776088df13ddc842c70",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-2-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "340088f0c2eec5afbcd26ddf",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            810563,
+            822149
+          ],
+          "cell_span": [
+            816226,
+            816312
+          ],
+          "row_span": [
+            815851,
+            816403
+          ],
+          "column_spans": [
+            [
+              811260,
+              811379
+            ],
+            [
+              811388,
+              811446
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "a01bf2bfda69eba743107c1e46918d7a09c2d7158d666ccea7df3735f48e18c3",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "text",
+        "component": "output",
+        "amount": 4.8,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b968180c99d4d5f5ba9aa9772d61924ad172f23f95cef776088df13ddc842c70",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-2-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "1ed351353c895e2e860f7627",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            810563,
+            822149
+          ],
+          "cell_span": [
+            816312,
+            816398
+          ],
+          "row_span": [
+            815851,
+            816403
+          ],
+          "column_spans": [
+            [
+              811260,
+              811379
+            ],
+            [
+              811446,
+              811511
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "0250a06b508ed739c7c3191289497de5a237eefe105f2fee17e01bfcfaf85f75",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"0<Token≤128K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "text",
+        "component": "input",
+        "amount": 2.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>128K&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "1c8f96f989f1ff1991e3cae17cdce1ae1a75ac5fdffbf0aa275bea50168c1302",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-2-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "fabf2f9fa29b11fa7c962216",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            810563,
+            822149
+          ],
+          "cell_span": [
+            816468,
+            816552
+          ],
+          "row_span": [
+            816403,
+            816727
+          ],
+          "column_spans": [
+            [
+              811141,
+              811260
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "40ef3bff995a46213d88c37609baf77113d0ab564163ca9addea10c6533b9b38",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "text",
+        "component": "output",
+        "amount": 12.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>128K&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "1c8f96f989f1ff1991e3cae17cdce1ae1a75ac5fdffbf0aa275bea50168c1302",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-2-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "3eace36b794b3bad4e2324b0",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            810563,
+            822149
+          ],
+          "cell_span": [
+            816552,
+            816637
+          ],
+          "row_span": [
+            816403,
+            816727
+          ],
+          "column_spans": [
+            [
+              811260,
+              811379
+            ],
+            [
+              811388,
+              811446
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "1e7e9afc56bb538f1ac28c0c75d1b44df66ed3c5d533bc2acbb6cd6be749affa",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "text",
+        "component": "output",
+        "amount": 12.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>128K&lt;Token≤256K</p></td><td style=\"vertical-align:top\"><p>2<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "1c8f96f989f1ff1991e3cae17cdce1ae1a75ac5fdffbf0aa275bea50168c1302",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-2-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "a13bc530f45754310a4592cc",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            810563,
+            822149
+          ],
+          "cell_span": [
+            816637,
+            816722
+          ],
+          "row_span": [
+            816403,
+            816727
+          ],
+          "column_spans": [
+            [
+              811260,
+              811379
+            ],
+            [
+              811446,
+              811511
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "1c4def3041b1b1358dd5883ef13bfa30e2b8931ae8f24f0b5b0496996e47bb4a",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"128K<Token≤256K\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "text",
+        "component": "input",
+        "amount": 4.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>4<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b7c499bb06ab54691b2a421c5b659d0918cb7a8c747668cf070bb33a24c452cc",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-2-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "95201f95bc391615241a88eb",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            810563,
+            822149
+          ],
+          "cell_span": [
+            816790,
+            816874
+          ],
+          "row_span": [
+            816727,
+            817049
+          ],
+          "column_spans": [
+            [
+              811141,
+              811260
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "a5c4addba0a35113ff12350be22d15f2615944d00f7d3502412ba1e852a87f02",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输入单价（每百万Token）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "text",
+        "component": "output",
+        "amount": 24.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>4<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b7c499bb06ab54691b2a421c5b659d0918cb7a8c747668cf070bb33a24c452cc",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-2-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "b08128e95608b6a4191ae927",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            810563,
+            822149
+          ],
+          "cell_span": [
+            816874,
+            816959
+          ],
+          "row_span": [
+            816727,
+            817049
+          ],
+          "column_spans": [
+            [
+              811260,
+              811379
+            ],
+            [
+              811388,
+              811446
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "3048ac14af849b1328f15f85a6127e2c2ad14d03cd353183b977e0c74e68eb2c",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 非思考模式\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3.5-plus",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "text",
+        "component": "output",
+        "amount": 24.0,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>256K&lt;Token≤1M</p></td><td style=\"vertical-align:top\"><p>4<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>24<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "b7c499bb06ab54691b2a421c5b659d0918cb7a8c747668cf070bb33a24c452cc",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>单次请求的输入<span class=\"help-letter-space\"></span>Token<span class=\"help-letter-space\"></span>范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>输入单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"2\" style=\"vertical-align:top\"><strong>输出单价 （每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>非思考模式</strong></th><th style=\"vertical-align:top\"><strong>思考模式（思维链+回答）</strong></th></tr>",
+          "<tr><td rowspan=\"3\" style=\"vertical-align:top\"><p>qwen3.5-plus</p><blockquote>\n<p>当前能力等同于<span class=\"help-letter-space\"></span>qwen3.5-plus-2026-02-15</p>\n</blockquote></td><td rowspan=\"3\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>0&lt;Token≤128K</p></td><td style=\"vertical-align:top\"><p>0.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>4.8<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问plus\">千问<span class=\"help-letter-space\"></span>Plus <span id=\"baa85ffef6dyz\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-2-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "7f56c52d21f50be8b36a97b8",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            810563,
+            822149
+          ],
+          "cell_span": [
+            816959,
+            817044
+          ],
+          "row_span": [
+            816727,
+            817049
+          ],
+          "column_spans": [
+            [
+              811260,
+              811379
+            ],
+            [
+              811446,
+              811511
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "1731de47479f2e74d48847e2e074b0257cd1f4bd36b34d850bf0e7b834090a04",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"单次请求的输入Token范围\": \"256K<Token≤1M\", \"服务部署范围\": \"全球\"}, \"price_header\": \"输出单价（每百万Token） / 思考模式（思维链+回答）\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

@@ -1,16 +1,20 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
-    "count": 71,
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 86,
     "modality_counts": {
-      "text": 50,
-      "image": 12,
-      "video": 9
+      "text": 60,
+      "image": 16,
+      "video": 10
     }
   },
   "data": {
@@ -18,7 +22,9 @@
       "models": "models.json",
       "vendors": "vendors.json",
       "modalities": "modalities.json",
-      "openapi": "openapi.json"
+      "openapi": "openapi.json",
+      "price-facts": "price-facts.json",
+      "price-models": "price-models.json"
     },
     "models": [
       {
@@ -730,13 +736,163 @@
           "self": "models/glm-image.json",
           "vendor": "vendors/zhipu.json"
         }
+      },
+      {
+        "id": "qwen4-max",
+        "name": "Qwen4-Max",
+        "vendor": "qwen",
+        "modality": "text",
+        "links": {
+          "self": "models/qwen4-max.json",
+          "vendor": "vendors/qwen.json"
+        }
+      },
+      {
+        "id": "gpt-6.2-astra",
+        "name": "GPT-6.2 Astra",
+        "vendor": "openai",
+        "modality": "text",
+        "links": {
+          "self": "models/gpt-6.2-astra.json",
+          "vendor": "vendors/openai.json"
+        }
+      },
+      {
+        "id": "gpt-6.2-sol",
+        "name": "GPT-6.2 Sol",
+        "vendor": "openai",
+        "modality": "text",
+        "links": {
+          "self": "models/gpt-6.2-sol.json",
+          "vendor": "vendors/openai.json"
+        }
+      },
+      {
+        "id": "gpt-6.2-astra-law",
+        "name": "GPT-6.2 Astra for Law",
+        "vendor": "openai",
+        "modality": "text",
+        "links": {
+          "self": "models/gpt-6.2-astra-law.json",
+          "vendor": "vendors/openai.json"
+        }
+      },
+      {
+        "id": "claude-fable-5-2",
+        "name": "Claude Fable 5.2",
+        "vendor": "anthropic",
+        "modality": "text",
+        "links": {
+          "self": "models/claude-fable-5-2.json",
+          "vendor": "vendors/anthropic.json"
+        }
+      },
+      {
+        "id": "claude-mythos-5-2",
+        "name": "Claude Mythos 5.2",
+        "vendor": "anthropic",
+        "modality": "text",
+        "links": {
+          "self": "models/claude-mythos-5-2.json",
+          "vendor": "vendors/anthropic.json"
+        }
+      },
+      {
+        "id": "gemini-4-carbon",
+        "name": "Gemini 4 Carbon",
+        "vendor": "google",
+        "modality": "text",
+        "links": {
+          "self": "models/gemini-4-carbon.json",
+          "vendor": "vendors/google.json"
+        }
+      },
+      {
+        "id": "gemini-4-hydrogen",
+        "name": "Gemini 4 Hydrogen",
+        "vendor": "google",
+        "modality": "text",
+        "links": {
+          "self": "models/gemini-4-hydrogen.json",
+          "vendor": "vendors/google.json"
+        }
+      },
+      {
+        "id": "glm-5.3-flashx-legal",
+        "name": "GLM-5.3-FlashX-Legal",
+        "vendor": "zhipu",
+        "modality": "text",
+        "links": {
+          "self": "models/glm-5.3-flashx-legal.json",
+          "vendor": "vendors/zhipu.json"
+        }
+      },
+      {
+        "id": "gpt-image-2.6-sunburst",
+        "name": "GPT Image 2.6 Sunburst",
+        "vendor": "openai",
+        "modality": "image",
+        "links": {
+          "self": "models/gpt-image-2.6-sunburst.json",
+          "vendor": "vendors/openai.json"
+        }
+      },
+      {
+        "id": "gpt-image-2.6-flare",
+        "name": "GPT Image 2.6 Flare",
+        "vendor": "openai",
+        "modality": "image",
+        "links": {
+          "self": "models/gpt-image-2.6-flare.json",
+          "vendor": "vendors/openai.json"
+        }
+      },
+      {
+        "id": "minimax-h3-image",
+        "name": "MiniMax H3 Image",
+        "vendor": "minimax",
+        "modality": "image",
+        "links": {
+          "self": "models/minimax-h3-image.json",
+          "vendor": "vendors/minimax.json"
+        }
+      },
+      {
+        "id": "minimax-h3-image-highspeed",
+        "name": "MiniMax H3 Image Highspeed",
+        "vendor": "minimax",
+        "modality": "image",
+        "links": {
+          "self": "models/minimax-h3-image-highspeed.json",
+          "vendor": "vendors/minimax.json"
+        }
+      },
+      {
+        "id": "minimax-h3-context-ir",
+        "name": "MiniMax H3 Context-IR",
+        "vendor": "minimax",
+        "modality": "text",
+        "links": {
+          "self": "models/minimax-h3-context-ir.json",
+          "vendor": "vendors/minimax.json"
+        }
+      },
+      {
+        "id": "minimax-h3-regeneration",
+        "name": "MiniMax H3 Regeneration",
+        "vendor": "minimax",
+        "modality": "video",
+        "links": {
+          "self": "models/minimax-h3-regeneration.json",
+          "vendor": "vendors/minimax.json"
+        }
       }
     ],
     "modalities": [
       {
         "name": "text",
         "label": "文本生成（token 计价）",
-        "model_count": 50,
+        "model_count": 60,
         "model_ids": [
           "deepseek-flash",
           "deepseek-v4-pro",
@@ -787,7 +943,17 @@
           "minimax-m3.1-flash",
           "kimi-for-coding",
           "grok-4.7",
-          "grok-4.7-build-fast"
+          "grok-4.7-build-fast",
+          "qwen4-max",
+          "gpt-6.2-astra",
+          "gpt-6.2-sol",
+          "gpt-6.2-astra-law",
+          "claude-fable-5-2",
+          "claude-mythos-5-2",
+          "gemini-4-carbon",
+          "gemini-4-hydrogen",
+          "glm-5.3-flashx-legal",
+          "minimax-h3-context-ir"
         ],
         "vendors": [
           "deepseek",
@@ -807,7 +973,7 @@
       {
         "name": "image",
         "label": "图像生成",
-        "model_count": 12,
+        "model_count": 16,
         "model_ids": [
           "gpt-image-2.5-flare",
           "gpt-image-2.5-sunburst",
@@ -820,7 +986,11 @@
           "wan2.7-image-pro",
           "wan2.7-image",
           "minimax-image-01",
-          "glm-image"
+          "glm-image",
+          "gpt-image-2.6-sunburst",
+          "gpt-image-2.6-flare",
+          "minimax-h3-image",
+          "minimax-h3-image-highspeed"
         ],
         "vendors": [
           "openai",
@@ -837,7 +1007,7 @@
       {
         "name": "video",
         "label": "视频生成",
-        "model_count": 9,
+        "model_count": 10,
         "model_ids": [
           "grok-imagine-video-1.5",
           "grok-imagine-video-1.5-lite",
@@ -847,7 +1017,8 @@
           "minimax-h3",
           "minimax-h3-highspeed",
           "minimax-h3-lite",
-          "minimax-h3-max"
+          "minimax-h3-max",
+          "minimax-h3-regeneration"
         ],
         "vendors": [
           "qwen",

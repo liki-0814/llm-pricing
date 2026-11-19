@@ -1,0 +1,854 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 10
+  },
+  "data": {
+    "model_id": "gpt-image-2.5-flare",
+    "prices": [
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-image-2.5-flare",
+        "amount": 8.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-image-2.5-flare",
+          "price_header": "Input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-image-2.5-flare | Image | $8.00 | $30.00 | $2.00 |\n",
+        "quote_sha256": "782276c5366dac83b33705b8607846add0ba09bbe133fd90cf934f1ae4708d83",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "41e0c4305b8c2e7756aa9d0fe5454c64006f87617117e7b50d0162984f404217",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            11867,
+            12805
+          ],
+          "cell_span": [
+            12320,
+            12325
+          ],
+          "row_span": [
+            12288,
+            12345
+          ],
+          "column_spans": [
+            [
+              11888,
+              11893
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-image-2.5-flare",
+        "amount": 30.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-image-2.5-flare",
+          "price_header": "Output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-image-2.5-flare | Image | $8.00 | $30.00 | $2.00 |\n",
+        "quote_sha256": "782276c5366dac83b33705b8607846add0ba09bbe133fd90cf934f1ae4708d83",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "a6a289d9541cca76c5cd4a26cb5aa7a1b86bbe2e386e481af349c34a34aa6df1",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            11867,
+            12805
+          ],
+          "cell_span": [
+            12328,
+            12334
+          ],
+          "row_span": [
+            12288,
+            12345
+          ],
+          "column_spans": [
+            [
+              11896,
+              11902
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-image-2.5-flare",
+        "amount": 2.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-image-2.5-flare",
+          "price_header": "Cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-image-2.5-flare | Image | $8.00 | $30.00 | $2.00 |\n",
+        "quote_sha256": "782276c5366dac83b33705b8607846add0ba09bbe133fd90cf934f1ae4708d83",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "3fd866b518830ac1fcdf0227c5dff0b460407afc0c95783e7e810f4fa1d17c5c",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            11867,
+            12805
+          ],
+          "cell_span": [
+            12337,
+            12342
+          ],
+          "row_span": [
+            12288,
+            12345
+          ],
+          "column_spans": [
+            [
+              11905,
+              11917
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-image-2.5-flare",
+        "amount": 5.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "text",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-image-2.5-flare",
+          "price_header": "Input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-image-2.5-flare | Text | $5.00 | - | $1.25 |\n",
+        "quote_sha256": "133e72807ef5fb732cbb942279e19164fac2cda8b509ab41d87c7d6bb965c9fa",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "117eaf60881922d90bb9a406a78b44a9bb8e34b5ad356cb60c65377ce74e9108",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            11867,
+            12805
+          ],
+          "cell_span": [
+            12376,
+            12381
+          ],
+          "row_span": [
+            12345,
+            12396
+          ],
+          "column_spans": [
+            [
+              11888,
+              11893
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-image-2.5-flare",
+        "amount": 1.25,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "text",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-image-2.5-flare",
+          "price_header": "Cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-image-2.5-flare | Text | $5.00 | - | $1.25 |\n",
+        "quote_sha256": "133e72807ef5fb732cbb942279e19164fac2cda8b509ab41d87c7d6bb965c9fa",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "9451b4b28da5147f4bfcbecc06837d56e04866a7f46a0a7a771b2a73cd09d4e1",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            11867,
+            12805
+          ],
+          "cell_span": [
+            12388,
+            12393
+          ],
+          "row_span": [
+            12345,
+            12396
+          ],
+          "column_spans": [
+            [
+              11905,
+              11917
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-image-2.5-flare",
+        "amount": 4.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-image-2.5-flare",
+          "price_header": "Input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-image-2.5-flare | Image | $4.00 | $15.00 | $1.00 |\n",
+        "quote_sha256": "9c34f8fa42aac802524d65899b281ff98bad1434da23f65b4b23f40d66f8c8a6",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "57b333824236c0c27912440fd35c8b761abf4bcaa6fce5560ddbce9af7efee0d",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            13080,
+            14021
+          ],
+          "cell_span": [
+            13536,
+            13541
+          ],
+          "row_span": [
+            13504,
+            13561
+          ],
+          "column_spans": [
+            [
+              13101,
+              13106
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-image-2.5-flare",
+        "amount": 15.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-image-2.5-flare",
+          "price_header": "Output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-image-2.5-flare | Image | $4.00 | $15.00 | $1.00 |\n",
+        "quote_sha256": "9c34f8fa42aac802524d65899b281ff98bad1434da23f65b4b23f40d66f8c8a6",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "1ec85a1684d6a4c125588c5244259ff740d6336b14d856e078d43aeb24a26b8a",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            13080,
+            14021
+          ],
+          "cell_span": [
+            13544,
+            13550
+          ],
+          "row_span": [
+            13504,
+            13561
+          ],
+          "column_spans": [
+            [
+              13109,
+              13115
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-image-2.5-flare",
+        "amount": 1.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-image-2.5-flare",
+          "price_header": "Cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-image-2.5-flare | Image | $4.00 | $15.00 | $1.00 |\n",
+        "quote_sha256": "9c34f8fa42aac802524d65899b281ff98bad1434da23f65b4b23f40d66f8c8a6",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "16344af1b28e826890a29068ab401e87e4d6710be2bf3931fb365ce23d8685da",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            13080,
+            14021
+          ],
+          "cell_span": [
+            13553,
+            13558
+          ],
+          "row_span": [
+            13504,
+            13561
+          ],
+          "column_spans": [
+            [
+              13118,
+              13130
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-image-2.5-flare",
+        "amount": 2.5,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "text",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-image-2.5-flare",
+          "price_header": "Input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-image-2.5-flare | Text | $2.50 | - | $0.625 |\n",
+        "quote_sha256": "56064fbff8bceb770dd5ddfef909bcffa9fbb523a929985c5be730f6ad379459",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "d699325eed0c924c9ca184b5c2d2d54e31064b39c1b8408f9a661f1223a8519f",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            13080,
+            14021
+          ],
+          "cell_span": [
+            13592,
+            13597
+          ],
+          "row_span": [
+            13561,
+            13613
+          ],
+          "column_spans": [
+            [
+              13101,
+              13106
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-image-2.5-flare",
+        "amount": 0.625,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "text",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-image-2.5-flare",
+          "price_header": "Cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-image-2.5-flare | Text | $2.50 | - | $0.625 |\n",
+        "quote_sha256": "56064fbff8bceb770dd5ddfef909bcffa9fbb523a929985c5be730f6ad379459",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "60c16b3f076a00a8db329a0d1bef01b20dfe0485f6221e2648d95ae843f41284",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            13080,
+            14021
+          ],
+          "cell_span": [
+            13604,
+            13610
+          ],
+          "row_span": [
+            13561,
+            13613
+          ],
+          "column_spans": [
+            [
+              13118,
+              13130
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

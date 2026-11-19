@@ -1,0 +1,372 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 4
+  },
+  "data": {
+    "model_id": "wan2.7-r2v",
+    "prices": [
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "wan2.7-r2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "video",
+        "component": "input",
+        "amount": 0.6,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"输出视频分辨率\": \"720P\", \"输出视频类型\": \"有声视频\"}, \"price_header\": \"输入和输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>wan2.7-r2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>有声视频</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.6<span class=\"help-letter-space\"></span>元/秒</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "962819358e4171235187d981d26c364c0ecf3cd37dd40472e683733e2545d453",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频类型</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输入和输出单价</strong></p></th><th style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>wan2.7-r2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>有声视频</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.6<span class=\"help-letter-space\"></span>元/秒</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"万相-参考生视频\">万相-参考生视频 <span id=\"5c3d28ad8a4x8\"></span></h3>",
+          "<h4 id=\"华北2-北京-82-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "254fa2821d1eba1a0e8b684a",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1287454,
+            1290549
+          ],
+          "cell_span": [
+            1288888,
+            1288976
+          ],
+          "row_span": [
+            1288713,
+            1289037
+          ],
+          "column_spans": [
+            [
+              1287891,
+              1287958
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "fe07da6639969b2d95a5687e6173b8eb3501ef33b240ae247ac93ae7bdcddb04",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"输出视频分辨率\": \"720P\", \"输出视频类型\": \"有声视频\"}, \"price_header\": \"输入和输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "wan2.7-r2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "video",
+        "component": "input",
+        "amount": 1.0,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"输出视频分辨率\": \"1080P\", \"输出视频类型\": \"有声视频\"}, \"price_header\": \"输入和输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>1080P</p></td><td style=\"vertical-align:top\"><p>1<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+        "quote_sha256": "6d8db60458b39add90781d0b5621ac169ff08c294a5655f38ae2a48202b61ff8",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频类型</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输入和输出单价</strong></p></th><th style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>wan2.7-r2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>有声视频</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.6<span class=\"help-letter-space\"></span>元/秒</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"万相-参考生视频\">万相-参考生视频 <span id=\"5c3d28ad8a4x8\"></span></h3>",
+          "<h4 id=\"华北2-北京-82-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "2b5bae4d9796315000599e59",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1287454,
+            1290549
+          ],
+          "cell_span": [
+            1288622,
+            1288708
+          ],
+          "row_span": [
+            1288570,
+            1288713
+          ],
+          "column_spans": [
+            [
+              1287891,
+              1287958
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "e395283a09baf3b5ff349d89147c2fb7695440ae9d2baf0250c58d1a259ba29c",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"输出视频分辨率\": \"1080P\", \"输出视频类型\": \"有声视频\"}, \"price_header\": \"输入和输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "wan2.7-r2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "video",
+        "component": "input",
+        "amount": 0.733924,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"输出视频分辨率\": \"720P\", \"输出视频类型\": \"有声视频\"}, \"price_header\": \"输入和输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>wan2.7-r2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>有声视频</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.733924<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+        "quote_sha256": "e8a73f3c7f8f7081897dc4cb7cde061ad44e583ea5f5e6bd626c3bbc104f5ef7",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频类型</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输入和输出单价</strong></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>wan2.7-r2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>有声视频</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.733924<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"万相-参考生视频\">万相-参考生视频 <span id=\"5c3d28ad8a4x8\"></span></h3>",
+          "<h4 id=\"新加坡-49-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "69333fbfc39e272dcd80c4b9",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1291784,
+            1294746
+          ],
+          "cell_span": [
+            1293097,
+            1293190
+          ],
+          "row_span": [
+            1292865,
+            1293195
+          ],
+          "column_spans": [
+            [
+              1292287,
+              1292354
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "517a062b7e37b952a768dfa4b1a3143ed2e3e14f6c77c980a69a85b57657cfa7",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"输出视频分辨率\": \"720P\", \"输出视频类型\": \"有声视频\"}, \"price_header\": \"输入和输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "wan2.7-r2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "video",
+        "component": "input",
+        "amount": 1.100886,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"输出视频分辨率\": \"1080P\", \"输出视频类型\": \"有声视频\"}, \"price_header\": \"输入和输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>1080P</p></td><td style=\"vertical-align:top\"><p>1.100886<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+        "quote_sha256": "7f6bc07492ea49b52d8731fe71129295f2a7ad57d5b23ac6f1887fb2009f351a",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频类型</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输入和输出单价</strong></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>wan2.7-r2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>有声视频</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.733924<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"万相-参考生视频\">万相-参考生视频 <span id=\"5c3d28ad8a4x8\"></span></h3>",
+          "<h4 id=\"新加坡-49-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "d3eab378d85c906df1d59be2",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1291784,
+            1294746
+          ],
+          "cell_span": [
+            1292767,
+            1292860
+          ],
+          "row_span": [
+            1292715,
+            1292865
+          ],
+          "column_spans": [
+            [
+              1292287,
+              1292354
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "8b2549ef82fafb2a04199b3c14740095645ad4bed4b06da16fe9517ec4c69ff2",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"输出视频分辨率\": \"1080P\", \"输出视频类型\": \"有声视频\"}, \"price_header\": \"输入和输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

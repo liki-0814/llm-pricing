@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "minimax-m3.1-flash",
@@ -13,6 +17,9 @@
     "vendor": "minimax",
     "vendor_name": "MiniMax",
     "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
@@ -56,6 +63,7 @@
       "https://platform.minimax.io/docs/api-reference/text-chat-openai"
     ],
     "last_updated": "2026-10-20",
+    "price_observations": [],
     "notes": "已正式发布（GA，2026-10-19）。官方按量付费统一价（不分输入长度档）：输入 $0.15、输出 $0.60、缓存读取 $0.015 / 1M tokens。官方页未列缓存写入价，无 Priority 档。max_completion_tokens 建议 128K、上限 512K。",
     "reasoning_effort": {
       "supported": true,
@@ -108,6 +116,11 @@
     "links": {
       "self": "models/minimax-m3.1-flash.json",
       "vendor": "vendors/minimax.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
     }
   }
 }

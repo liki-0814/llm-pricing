@@ -1,0 +1,344 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 4
+  },
+  "data": {
+    "model_id": "gemini-3.5-flash-lite",
+    "prices": [
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-3.5-flash-lite",
+        "amount": 2.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "source_table_start": 36778,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$2.50"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Free of charge\n  * $2.50\n",
+        "quote_sha256": "030c78ab9d3ee3fde2f6f8cf9717d7a5de6e697fd1832a214a091b376303504f",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-3.5-flash-lite`](/docs/models/gemini-3.5-flash-lite)",
+          "{% tab title=\"Standard\" %}"
+        ],
+        "price_record_id": "7a8c4559c8320c6361027d4f04311ef7be69fbc4688be11f642fa576ed8b2438",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            36778,
+            37736
+          ],
+          "cell_span": [
+            37012,
+            37017
+          ],
+          "row_span": [
+            36943,
+            37018
+          ],
+          "column_spans": [
+            [
+              36820,
+              36851
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-3.5-flash-lite",
+        "amount": 1.25,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "source_table_start": 38032,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$1.25"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Free of charge\n  * $1.25\n",
+        "quote_sha256": "acb2f843957f8e9a18b51cd89519bd9a2222c14d8d16aa89d49fde2cdc399b1f",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-3.5-flash-lite`](/docs/models/gemini-3.5-flash-lite)",
+          "{% tab title=\"Batch\" %}"
+        ],
+        "price_record_id": "44a106ecc52416f6fc590b556cc5a1d111b0092105a883750cecff3cad44be30",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            38032,
+            38991
+          ],
+          "cell_span": [
+            38266,
+            38271
+          ],
+          "row_span": [
+            38197,
+            38272
+          ],
+          "column_spans": [
+            [
+              38074,
+              38105
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-3.5-flash-lite",
+        "amount": 1.25,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "source_table_start": 39286,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$1.25"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $1.25\n",
+        "quote_sha256": "1c82ed7ba52afe1fdab1afde3bad282103fb8255fcfbd5fd3b28afc48fc105f4",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-3.5-flash-lite`](/docs/models/gemini-3.5-flash-lite)",
+          "{% tab title=\"Flex\" %}"
+        ],
+        "price_record_id": "a8fdd0882cc9ea063576ca49337a26afaaf901bfec6862c75d0aa5670214a1dc",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            39286,
+            40242
+          ],
+          "cell_span": [
+            39518,
+            39523
+          ],
+          "row_span": [
+            39450,
+            39524
+          ],
+          "column_spans": [
+            [
+              39328,
+              39359
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-3.5-flash-lite",
+        "amount": 4.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Priority",
+          "source_table_start": 40541,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$4.50"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Free of charge\n  * $4.50\n",
+        "quote_sha256": "6afefbe7f7d6c31304fd6f92ca047bce10fd90c10a569593cdbf8b08f3970ac5",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-3.5-flash-lite`](/docs/models/gemini-3.5-flash-lite)",
+          "{% tab title=\"Priority\" %}"
+        ],
+        "price_record_id": "df636e9401ed669c90674630bc263baaacd272bf6e8a30db17d59745800abdce",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            40541,
+            41499
+          ],
+          "cell_span": [
+            40775,
+            40780
+          ],
+          "row_span": [
+            40706,
+            40781
+          ],
+          "column_spans": [
+            [
+              40583,
+              40614
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

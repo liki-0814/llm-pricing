@@ -1,0 +1,1125 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 12
+  },
+  "data": {
+    "model_id": "qwen3-omni-flash",
+    "prices": [
+      {
+        "vendor": "阿里云 Qwen",
+        "channel": "pay_as_you_go",
+        "model_id": "qwen3-omni-flash",
+        "amount": 15.8,
+        "currency": "CNY",
+        "currency_symbol": "元",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "audio",
+        "conditions": {
+          "price_header": "输入单价（每百万Token） / 音频",
+          "dimensions": {
+            "模式": "非思考和思考模式"
+          },
+          "model_qualifier": "qwen3-omni-flash",
+          "rate_kind": "quoted_table_rate",
+          "unresolved": "per_ID_output_modality_NOT_certified"
+        },
+        "region": "华北2（北京）",
+        "region_scope": "explicit_source_region",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_CNY_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "explicit_source_region",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "d731147b399986b9824430fcbddf396e0ab5300c351391a7a08f8c77bae66727",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"华北2-北京-5-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_record_id": "b4f8ec6cb65bec008172be3f82e26d83fdf9e55e395a0fa995ba8762ae500876",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            895624,
+            897798
+          ],
+          "cell_span": [
+            897300,
+            897387
+          ],
+          "row_span": [
+            897100,
+            897782
+          ],
+          "column_spans": [
+            [
+              896119,
+              896237
+            ],
+            [
+              896681,
+              896736
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "channel": "pay_as_you_go",
+        "model_id": "qwen3-omni-flash",
+        "amount": 3.3,
+        "currency": "CNY",
+        "currency_symbol": "元",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "not_stated",
+        "conditions": {
+          "price_header": "输入单价（每百万Token） / 图片/视频",
+          "dimensions": {
+            "模式": "非思考和思考模式"
+          },
+          "model_qualifier": "qwen3-omni-flash",
+          "rate_kind": "quoted_table_rate",
+          "unresolved": "per_ID_output_modality_NOT_certified"
+        },
+        "region": "华北2（北京）",
+        "region_scope": "explicit_source_region",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_CNY_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "explicit_source_region",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "d731147b399986b9824430fcbddf396e0ab5300c351391a7a08f8c77bae66727",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"华北2-北京-5-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_record_id": "fdad7ec72f856ad2e423d96d4a20fe592828037fcaa3fa7b28d82d066f71b979",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            895624,
+            897798
+          ],
+          "cell_span": [
+            897387,
+            897473
+          ],
+          "row_span": [
+            897100,
+            897782
+          ],
+          "column_spans": [
+            [
+              896119,
+              896237
+            ],
+            [
+              896736,
+              896794
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "channel": "pay_as_you_go",
+        "model_id": "qwen3-omni-flash",
+        "amount": 62.6,
+        "currency": "CNY",
+        "currency_symbol": "元",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "not_stated",
+        "conditions": {
+          "price_header": "输出单价（每百万Token） / 文本+音频仅音频计费",
+          "dimensions": {
+            "模式": "非思考和思考模式"
+          },
+          "model_qualifier": "qwen3-omni-flash",
+          "rate_kind": "quoted_table_rate",
+          "unresolved": "per_ID_output_modality_NOT_certified"
+        },
+        "region": "华北2（北京）",
+        "region_scope": "explicit_source_region",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_CNY_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "explicit_source_region",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "d731147b399986b9824430fcbddf396e0ab5300c351391a7a08f8c77bae66727",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"华北2-北京-5-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_record_id": "a0214c51b933d6179fd39a4e76598af00f1ca031136eff8d50eadc5b635bd743",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            895624,
+            897798
+          ],
+          "cell_span": [
+            897646,
+            897733
+          ],
+          "row_span": [
+            897100,
+            897782
+          ],
+          "column_spans": [
+            [
+              896237,
+              896355
+            ],
+            [
+              896983,
+              897080
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "channel": "pay_as_you_go",
+        "model_id": "qwen3-omni-flash",
+        "amount": 27.962,
+        "currency": "CNY",
+        "currency_symbol": "元",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "audio",
+        "conditions": {
+          "price_header": "输入单价（每百万Token） / 音频",
+          "dimensions": {
+            "服务部署范围": "国际",
+            "模式": "非思考和思考模式"
+          },
+          "model_qualifier": "qwen3-omni-flash",
+          "rate_kind": "quoted_table_rate",
+          "unresolved": "per_ID_output_modality_NOT_certified"
+        },
+        "region": "新加坡",
+        "region_scope": "explicit_source_region",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_CNY_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "explicit_source_region",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "d7207ab751372b6fe35676f65113d5ae166fb2b4d34769a7a67082b8926ec2d8",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"新加坡-4-h4\">新加坡</h4>"
+        ],
+        "price_record_id": "be8dc3906a310e311260652b96c9161e46b928c16a4d2019245b771c9523ad04",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            901670,
+            903704
+          ],
+          "cell_span": [
+            903238,
+            903327
+          ],
+          "row_span": [
+            902991,
+            903688
+          ],
+          "column_spans": [
+            [
+              902272,
+              902390
+            ],
+            [
+              902572,
+              902627
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "channel": "pay_as_you_go",
+        "model_id": "qwen3-omni-flash",
+        "amount": 5.725,
+        "currency": "CNY",
+        "currency_symbol": "元",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "not_stated",
+        "conditions": {
+          "price_header": "输入单价（每百万Token） / 图片/视频",
+          "dimensions": {
+            "服务部署范围": "国际",
+            "模式": "非思考和思考模式"
+          },
+          "model_qualifier": "qwen3-omni-flash",
+          "rate_kind": "quoted_table_rate",
+          "unresolved": "per_ID_output_modality_NOT_certified"
+        },
+        "region": "新加坡",
+        "region_scope": "explicit_source_region",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_CNY_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "explicit_source_region",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "d7207ab751372b6fe35676f65113d5ae166fb2b4d34769a7a67082b8926ec2d8",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"新加坡-4-h4\">新加坡</h4>"
+        ],
+        "price_record_id": "fab658cca644ecdf5bb65e85bbf35e170966ecd6891808a666b4874651d4a5a2",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            901670,
+            903704
+          ],
+          "cell_span": [
+            903327,
+            903415
+          ],
+          "row_span": [
+            902991,
+            903688
+          ],
+          "column_spans": [
+            [
+              902272,
+              902390
+            ],
+            [
+              902627,
+              902685
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "channel": "pay_as_you_go",
+        "model_id": "qwen3-omni-flash",
+        "amount": 110.896,
+        "currency": "CNY",
+        "currency_symbol": "元",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "not_stated",
+        "conditions": {
+          "price_header": "输出单价（每百万Token） / 文本+音频仅音频计费",
+          "dimensions": {
+            "服务部署范围": "国际",
+            "模式": "非思考和思考模式"
+          },
+          "model_qualifier": "qwen3-omni-flash",
+          "rate_kind": "quoted_table_rate",
+          "unresolved": "per_ID_output_modality_NOT_certified"
+        },
+        "region": "新加坡",
+        "region_scope": "explicit_source_region",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_CNY_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "explicit_source_region",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "d7207ab751372b6fe35676f65113d5ae166fb2b4d34769a7a67082b8926ec2d8",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"新加坡-4-h4\">新加坡</h4>"
+        ],
+        "price_record_id": "9567eb926cbe45d6d42fb55f55ecaf67eb582fa69cf80da6a79d10f77ff70da9",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            901670,
+            903704
+          ],
+          "cell_span": [
+            903593,
+            903683
+          ],
+          "row_span": [
+            902991,
+            903688
+          ],
+          "column_spans": [
+            [
+              902390,
+              902508
+            ],
+            [
+              902874,
+              902971
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3-omni-flash",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "input",
+        "amount": 1.8,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"模式\": \"非思考和思考模式\"}, \"price_header\": \"输入单价（每百万Token） / 文本\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "d731147b399986b9824430fcbddf396e0ab5300c351391a7a08f8c77bae66727",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"华北2-北京-5-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "b8deda29b51aea067f7c8b02",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            895624,
+            897798
+          ],
+          "cell_span": [
+            897214,
+            897300
+          ],
+          "row_span": [
+            897100,
+            897782
+          ],
+          "column_spans": [
+            [
+              896119,
+              896237
+            ],
+            [
+              896626,
+              896681
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "745f8f13f55fae72b1c351444691c90ff861d1f3c76b47eaf5e6f0244f9e1850",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"模式\": \"非思考和思考模式\"}, \"price_header\": \"输入单价（每百万Token） / 文本\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3-omni-flash",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "output",
+        "amount": 6.9,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"模式\": \"非思考和思考模式\"}, \"price_header\": \"输出单价（每百万Token） / 文本仅纯文本输入\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "d731147b399986b9824430fcbddf396e0ab5300c351391a7a08f8c77bae66727",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"华北2-北京-5-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "07fd5cc2b4242576719cb9bd",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            895624,
+            897798
+          ],
+          "cell_span": [
+            897473,
+            897559
+          ],
+          "row_span": [
+            897100,
+            897782
+          ],
+          "column_spans": [
+            [
+              896237,
+              896355
+            ],
+            [
+              896794,
+              896889
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "a2fa3746fde88085ddcd001d83e0a7d51829be4c933070646dd17b716197ff63",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"模式\": \"非思考和思考模式\"}, \"price_header\": \"输出单价（每百万Token） / 文本仅纯文本输入\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3-omni-flash",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "text",
+        "component": "output",
+        "amount": 12.7,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"模式\": \"非思考和思考模式\"}, \"price_header\": \"输出单价（每百万Token） / 文本多模态输入\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "d731147b399986b9824430fcbddf396e0ab5300c351391a7a08f8c77bae66727",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>1.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>15.8<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>3.3<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>6.9<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.7<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>62.6<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"华北2-北京-5-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "9d1f74b49cc7319dd53fe4d2",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            895624,
+            897798
+          ],
+          "cell_span": [
+            897559,
+            897646
+          ],
+          "row_span": [
+            897100,
+            897782
+          ],
+          "column_spans": [
+            [
+              896237,
+              896355
+            ],
+            [
+              896889,
+              896983
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "c86a60c2b352b4afe0381602a61b519b087a02bca6117892432b8ba134b110de",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"模式\": \"非思考和思考模式\"}, \"price_header\": \"输出单价（每百万Token） / 文本多模态输入\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3-omni-flash",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "text",
+        "component": "input",
+        "amount": 3.156,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"模式\": \"非思考和思考模式\"}, \"price_header\": \"输入单价（每百万Token） / 文本\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "d7207ab751372b6fe35676f65113d5ae166fb2b4d34769a7a67082b8926ec2d8",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"新加坡-4-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "1d7403d572fc379ca51ec95c",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            901670,
+            903704
+          ],
+          "cell_span": [
+            903150,
+            903238
+          ],
+          "row_span": [
+            902991,
+            903688
+          ],
+          "column_spans": [
+            [
+              902272,
+              902390
+            ],
+            [
+              902517,
+              902572
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "e1662b7549936654df0c07a2acb302f6b816865c5ae1751b9bb245d5e27d5ca9",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"模式\": \"非思考和思考模式\"}, \"price_header\": \"输入单价（每百万Token） / 文本\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3-omni-flash",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "text",
+        "component": "output",
+        "amount": 12.183,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"模式\": \"非思考和思考模式\"}, \"price_header\": \"输出单价（每百万Token） / 文本仅纯文本输入\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "d7207ab751372b6fe35676f65113d5ae166fb2b4d34769a7a67082b8926ec2d8",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"新加坡-4-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "a9a2f4291f7ef68368f2b121",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            901670,
+            903704
+          ],
+          "cell_span": [
+            903415,
+            903504
+          ],
+          "row_span": [
+            902991,
+            903688
+          ],
+          "column_spans": [
+            [
+              902390,
+              902508
+            ],
+            [
+              902685,
+              902780
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "be440870fd5f2eebb6f48cb73be2bd2f0a78f066c1fb3e8d6fe32bafc9cde022",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"模式\": \"非思考和思考模式\"}, \"price_header\": \"输出单价（每百万Token） / 文本仅纯文本输入\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "qwen3-omni-flash",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "text",
+        "component": "output",
+        "amount": 22.458,
+        "currency": "CNY",
+        "unit": "per_1M_tokens",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"模式\": \"非思考和思考模式\"}, \"price_header\": \"输出单价（每百万Token） / 文本多模态输入\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+        "quote_sha256": "d7207ab751372b6fe35676f65113d5ae166fb2b4d34769a7a67082b8926ec2d8",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模型 ID（Model ID）</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>服务部署范围</strong></th><th rowspan=\"2\" style=\"vertical-align:top\"><strong>模式</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输入单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th><th colspan=\"3\" style=\"vertical-align:top\"><strong>输出单价（每百万<span class=\"help-letter-space\"></span>Token）</strong></th></tr>",
+          "<tr><th style=\"vertical-align:top\"><strong>文本</strong></th><th style=\"vertical-align:top\"><strong>音频</strong></th><th style=\"vertical-align:top\"><strong>图片/视频</strong></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>仅纯文本输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本</strong><blockquote>\n<p>多模态输入</p>\n</blockquote></th><th style=\"vertical-align:top\"><strong>文本+音频</strong><blockquote>\n<p>仅音频计费</p>\n</blockquote></th></tr>",
+          "<tr><td style=\"vertical-align:top\"><p>qwen3-omni-flash</p></td><td style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>非思考和思考模式</p></td><td style=\"vertical-align:top\"><p>3.156<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>27.962<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>5.725<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>12.183<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>22.458<span class=\"help-letter-space\"></span>元</p></td><td style=\"vertical-align:top\"><p>110.896<span class=\"help-letter-space\"></span>元</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"文本生成-千问\">文本生成-千问 <span id=\"e90fd1458c2vm\"></span></h2>",
+          "<h3 id=\"千问omni\">千问<span class=\"help-letter-space\"></span>Omni <span id=\"4c2e910ce4pcq\"></span></h3>",
+          "<h4 id=\"新加坡-4-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "3505cffdcf2d6534e7147f82",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            901670,
+            903704
+          ],
+          "cell_span": [
+            903504,
+            903593
+          ],
+          "row_span": [
+            902991,
+            903688
+          ],
+          "column_spans": [
+            [
+              902390,
+              902508
+            ],
+            [
+              902780,
+              902874
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "ccb3f42e82a7f8049e688b87ab0fabff94645904a39ce0605e9a8625ebfaf7b6",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "text",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"模式\": \"非思考和思考模式\"}, \"price_header\": \"输出单价（每百万Token） / 文本多模态输入\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

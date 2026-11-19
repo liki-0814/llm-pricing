@@ -2,7 +2,14 @@
 
 中文静态站点，直接部署到 GitHub Pages；运行时只有 HTML、CSS 和 JavaScript，无后端、数据库或第三方运行依赖。
 
-覆盖 9 个厂商、71 个模型（文本 50、图像生成 12、视频生成 9），统一美元：文本模型按每百万 token（缓存存储另按百万 token·小时计价），图像按张 / 按 token，视频按秒 / 按 token。价格表支持“文本 / 图像 / 视频”分页签、主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
+覆盖 10 个厂商、89 个模型（文本 63、图像生成 16、视频生成 10），按 USD / CNY 单币种隔离：文本模型按所示币种每百万 token（缓存存储另按百万 token·小时计价），图像按张 / 按 token，视频按秒 / 按 token。价格表支持“文本 / 图像 / 视频”分页签、主题、厂商筛选、多关键词搜索、排序、URL 分享、移动端卡片和价格详情。官方报价和用户确认的参照价均保留，参照价会显式标注依据。
+
+## 字段时间与任务计费契约（2026-11-18 修订，尚待独立复审）
+
+- 模型 `last_updated` 只保留原基础快照日期，不为今日新增字段提供历史许可。`price_observations[]` 在源数据、v1/v2、页面数据一致表达字段/输入档范围、`observed_at`、可选 `valid_from` / `valid_until`、来源；`fields=["*"]` 覆盖整个新增模型，`input_tokens_gt` 限定输入档。未证实生效期时 `valid_from=null`，观察前返回 `HISTORICAL_PRICE_UNAVAILABLE`，观察当刻起可用；不把观察时刻当官方生效时刻。已知有效期为左闭右开。选中这些字段必须传带时区的精确 `at`，仅日期返回 `TIME_REQUIRED`。旧 Qwen 普通短价与旧 Law 短价历史仍可用；新缓存/长档不倒灌历史。14 款本轮新增模型同样精确到观察时刻保护。
+- `service_tiers[].multiplier_schedule[]` 以精确 `effective_from` 与 IANA `timezone` 描述档级未来倍率。GPT-6.2 Astra/Sol Ultrafast 在 `2027-03-01T00:00:00-08:00`（America/Los_Angeles 当日为 PST；北京时间 2027-03-01 16:00）从 3 倍切 6 倍，含长上下文与缓存；不是 UTC/北京时间零点。`status_observation` 表达 Fast 弃用观察，不将状态倒推到此前或退役整个模型。
+- `media_pricing.input_image_allowance={free_quantity:5,scope:"per_task",...}` 由 `estimateMedia` 执行。一次调用代表单个任务，`inputImages` 传原始总数，不需手减；Regeneration 只收 `max(0,inputImages-5)` 张图片费。返回 `billing_quantities` 可核对含量/计费量；独立任务分别调用，非账户赠余额，其他模型不借用该含量。
+- 这些回归/同步测试不代表真实浏览器、完整目录发现、日常接通或发布放行。MiniMax M2 四款仅在库中缺席，不称新增保护代码；H3 仅目录估价，不声称实际结算已核。
 
 ## 本地预览
 
@@ -48,7 +55,7 @@ GitHub Pages 当前返回 `Access-Control-Allow-Origin: *`，支持跨域 fetch�
 
 ## 自然调用：轻量 JavaScript 客户端
 
-HTML 加载 `assets/client.js`，全局对象为 `LLMPrice`。Node.js 18+ 可通过 `require` 使用同一文件，无 npm 安装步骤。
+HTML **只需加载 `assets/client.js` 一个文件**，全局对象为 `LLMPrice`，不做隐式网络加载。Node.js 18+ 可复制同一单文件并 `require`，不依赖相邻脚本。发布物由 `python3 scripts/build_sdk.py` 从唯一生命周期源码 `assets/availability.js` 和 `src/client-core.js` 生成；不要手改生成文件。CI、校验器和完整产物构建均检查生成物同步。
 
 ```js
 const { createClient, estimate, estimateMedia } = require('./assets/client.js');
@@ -147,9 +154,9 @@ const r = await api.estimate('gemini-3.5-flash-lite', {
 
 ## 数据范围与状态
 
-`data/prices.json` 为唯一数据源；`api/v1/` 由脚本生成，勿手改。
+`data/prices.json` 为唯一数据源；`api/v1/`（USD兼容）、`api/v2/`（显式多币种）与 `data/page-models.json` 由脚本生成，勿手改。
 
-模型字段仍限于价格、推理强度、上下文与最大输出、分档、服务档、缓存、生效日期及来源，另有 `modality` 和图像 / 视频的 `media_pricing`（见上节）。未恢复最大输入、思考子上限、输入输出模态列表（`modalities`）、功能、知识截止、思考预算、可用性、快照和别名。新增的 `price_basis`、`billing`、`off_peak_schedule` 只表达价格依据和计费口径。
+模型字段仍限于价格、推理强度、上下文与最大输出、分档、服务档、缓存、生效日期及来源，另有 `modality` 和图像 / 视频的 `media_pricing`（见上节）。未恢复最大输入、思考子上限、输入输出模态列表（`modalities`）、功能、知识截止、思考预算及任意别名自动合并。当前新增生命周期证据 `lifecycle` / 派生 `availability`、精确文本促销 `token_offer` 和保守试算范围 `estimation_limits`，详见ADR。新增的 `price_basis`、`billing`、`off_peak_schedule` 只表达价格依据和计费口径。
 
 - `pricing_status`：verified 官方价；reference 用户确认参照价；unverified 待核实；not_listed 官方未列。
 - `price_basis`：official/reference，参照模型 ID、来源 URL 与说明。可选 `reference_multiplier` 表示基础档相对参照模型的已公布倍率，省略为 1；单价已经展开，分档使用 `pricing_tiers` 中的单价，计算时不再乘此值。原参照数值保留。
@@ -167,6 +174,8 @@ const r = await api.estimate('gemini-3.5-flash-lite', {
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements-dev.txt
 .venv/bin/python scripts/build_api.py
+.venv/bin/python scripts/build_api.py --v2
+.venv/bin/python scripts/build_api.py --page
 .venv/bin/python scripts/validate.py
 .venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
 node --test tests/*.test.cjs
@@ -174,11 +183,11 @@ node --test tests/*.test.cjs
 
 只有开发校验使用 jsonschema；部署站点和客户端无第三方运行依赖。校验检查真实日期、非负有限价格、唯一标识、缺失标记、缓存口径、参照关系、分档范围、时段、价格生效日期及所有响应的 OpenAPI Schema，并逐文件核对生成结果。
 
-GitHub Actions 在 push、pull request 和手动运行时执行同样的校验、回归测试、全部静态数据接口的 HTTP 查询及 JavaScript 语法检查。CI 只验证，不自动部署或改写数据。
+GitHub Actions 在 push、pull request 和手动运行时执行同样的校验、回归测试、全部静态数据接口的 HTTP 查询及 JavaScript 语法检查。验证工作流只验证；独立 Pages 工作流在main推送/定时/手动时构建完整快照并发布，不改写源数据。发布前必须完成审核并协调Pages模式切换。
 
 ## 部署到 GitHub Pages
 
-将网站文件、`data/` 和生成的 `api/` 一起提交到仓库根目录。在仓库 Settings → Pages 中选择 Deploy from a branch，分支为 `main`、目录为 `/ (root)`。发布后使用站点地址访问页面和 `api/v1/`；更新数据时先完成上述校验，再按现有发布流程推送。`.nojekyll` 保留在根目录。
+发布切换为 **GitHub Actions**，由 `.github/workflows/pages.yml` 从单个冻结as_of构建完整产物、校验后整包部署（本次尚未激活或上线）。旧Pages配置为main/root，需在合并前由发布协调切换，避免legacy构建竞争。定时每15分钟最佳努力重建，不保证准点；客户端在退役时刻拒绝陈旧估价。`deployment.json`可核对源SHA、版本、as_of、下一失效点及构建链接；失败保留旧完整发布。
 
 ## 数据来源与本次修复
 
@@ -196,3 +205,12 @@ GitHub Actions 在 push、pull request 和手动运行时执行同样的校验�
 - 图像与视频生成：[OpenAI 定价](https://developers.openai.com/api/docs/pricing)（GPT Image 2.5）、[xAI 定价](https://docs.x.ai/developers/pricing)（Grok Imagine）、[Gemini 定价](https://ai.google.dev/gemini-api/docs/pricing)（Nano Banana / Gemini Omni）、[阿里云百炼定价](https://www.alibabacloud.com/help/en/model-studio/model-pricing)（Qwen-Image / Wan）、[MiniMax 按量定价](https://platform.minimax.io/docs/guides/pricing-paygo)和[智谱定价](https://docs.z.ai/guides/overview/pricing)；仅收录最新一代、官方按量美元价。
 
 本次针对已发现问题核实相关规则，没有声称重新核实所有已收录模型的全部价格。每个模型的 `source_url`、`extra_sources` 和结构化 `sources` 可追溯具体依据。未知数值保留未知，不用其他模型的值冒充官方确认。
+
+## 2026-11-17 增量更新（待审核、未上线）
+
+- v1保持USD 72项；`api/v2/`显式支持USD/CNY共75项。页面默认USD；选择CNY后只比较该币种。不做汇率转换。SDK混币价格排序会抛`CURRENCY_MISMATCH`，使用`listModels({currency: "CNY", sort: "input"})`。
+- 新增Qwen4-Max与广州TokenHub Hy4三款；Sol促销日期改11-30，数值不变。未知缓存用量拒绝报价，Hy4目录价与折扣分开。
+- `availability.js`为浏览器/SDK/Python生成器共用判定。精确退役T按`as_of>=T`；未来日期/时区不明及冲突保留待确认；确认已退役但精确T未知须记录证据 `observed_at`，观察时点及以后不可估价，更早历史边界未知也拒绝估价。退役详情不提供现价；显式历史估价需合适的历史快照。
+- 本轮没有完成全厂商完整发现验收，也没有重新核完原71项。未改模型保留各自原核实日。媒体PR4未混入。
+- 冻结产物：`python3 scripts/build_site.py --output /tmp/pricing-review-UNIQUE --as-of 2026-11-17T20:26:37+08:00`。失败演练加`--fail-before-publish`；输出路径必须未存在，旧完整产物不会被覆盖。用HTTP服务该目录预览。
+- 详见[架构取舍/发布前提](docs/adr-currency-lifecycle.md)、[本轮来源/哈希](docs/update-evidence-2026-11-17.md)。

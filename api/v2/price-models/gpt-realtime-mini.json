@@ -1,0 +1,688 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 8
+  },
+  "data": {
+    "model_id": "gpt-realtime-mini",
+    "prices": [
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-realtime-mini",
+        "amount": 10.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "audio",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-realtime-mini",
+          "price_header": "Input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-realtime-mini | Audio | $10.00 | $20.00 | $0.30 |\n",
+        "quote_sha256": "76cce2c0cbc57a3f26b4cf49c53bf2d86496c0be16819f7c0e9f6465ae2fdc7d",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "9695efd5a2543edb2de25b508492b4c680aaaf12a257e32d33b2885120176dbe",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15554,
+            15560
+          ],
+          "row_span": [
+            15524,
+            15580
+          ],
+          "column_spans": [
+            [
+              14824,
+              14829
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-realtime-mini",
+        "amount": 20.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "audio",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-realtime-mini",
+          "price_header": "Output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-realtime-mini | Audio | $10.00 | $20.00 | $0.30 |\n",
+        "quote_sha256": "76cce2c0cbc57a3f26b4cf49c53bf2d86496c0be16819f7c0e9f6465ae2fdc7d",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "136de739c4976c3e2cc3f696d3fec4562c13aa808044d8ecb7f4610b7e0dc89d",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15563,
+            15569
+          ],
+          "row_span": [
+            15524,
+            15580
+          ],
+          "column_spans": [
+            [
+              14832,
+              14838
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-realtime-mini",
+        "amount": 0.3,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "audio",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-realtime-mini",
+          "price_header": "Cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-realtime-mini | Audio | $10.00 | $20.00 | $0.30 |\n",
+        "quote_sha256": "76cce2c0cbc57a3f26b4cf49c53bf2d86496c0be16819f7c0e9f6465ae2fdc7d",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "5d5732d755372cbe7632e8cb5736505b46144950b93e80325d3ef4c9d65034f0",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15572,
+            15577
+          ],
+          "row_span": [
+            15524,
+            15580
+          ],
+          "column_spans": [
+            [
+              14841,
+              14853
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-realtime-mini",
+        "amount": 0.6,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "text",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-realtime-mini",
+          "price_header": "Input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-realtime-mini | Text | $0.60 | $2.40 | $0.06 |\n",
+        "quote_sha256": "e343796a5164a9134b756b8c1d70b3d3a63b3fb26695ff91c247b859823f0f38",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "6f5b3fdf4b62273f92714165cec141f191c167f57fa8e7d88e67a3af37d8dae5",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15609,
+            15614
+          ],
+          "row_span": [
+            15580,
+            15633
+          ],
+          "column_spans": [
+            [
+              14824,
+              14829
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-realtime-mini",
+        "amount": 2.4,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "text",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-realtime-mini",
+          "price_header": "Output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-realtime-mini | Text | $0.60 | $2.40 | $0.06 |\n",
+        "quote_sha256": "e343796a5164a9134b756b8c1d70b3d3a63b3fb26695ff91c247b859823f0f38",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "bb3a0a29ca215137a045fdc5354842e975336ffc8f6581119d96ea238f20a386",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15617,
+            15622
+          ],
+          "row_span": [
+            15580,
+            15633
+          ],
+          "column_spans": [
+            [
+              14832,
+              14838
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-realtime-mini",
+        "amount": 0.06,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "text",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-realtime-mini",
+          "price_header": "Cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-realtime-mini | Text | $0.60 | $2.40 | $0.06 |\n",
+        "quote_sha256": "e343796a5164a9134b756b8c1d70b3d3a63b3fb26695ff91c247b859823f0f38",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "eb1d46247fc582699c9837402c1d15d12d54e673f393ca3d324ddfd5df6753e3",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15625,
+            15630
+          ],
+          "row_span": [
+            15580,
+            15633
+          ],
+          "column_spans": [
+            [
+              14841,
+              14853
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-realtime-mini",
+        "amount": 0.8,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-realtime-mini",
+          "price_header": "Input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-realtime-mini | Image | $0.80 | - | $0.08 |\n",
+        "quote_sha256": "6146103725d84c00cce990a0e25428625ecbadc4f68baa9e5d5455dd68848317",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "b411435a5fcc27aa423140f213afe2b6957d8bb00de94cfcaaf928b0243f69dc",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15663,
+            15668
+          ],
+          "row_span": [
+            15633,
+            15683
+          ],
+          "column_spans": [
+            [
+              14824,
+              14829
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-realtime-mini",
+        "amount": 0.08,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Grouped Pricing Table data",
+          "model_qualifier": "gpt-realtime-mini",
+          "price_header": "Cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-realtime-mini | Image | $0.80 | - | $0.08 |\n",
+        "quote_sha256": "6146103725d84c00cce990a0e25428625ecbadc4f68baa9e5d5455dd68848317",
+        "context_quotes": [
+          "| Model | Modality | Input | Output | Cached input |\n",
+          "Prices per 1M tokens unless noted."
+        ],
+        "price_record_id": "07409038b39d45d43c181beed32c18227b3e705a52986141a7abbbfdd5c46cbd",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15675,
+            15680
+          ],
+          "row_span": [
+            15633,
+            15683
+          ],
+          "column_spans": [
+            [
+              14841,
+              14853
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

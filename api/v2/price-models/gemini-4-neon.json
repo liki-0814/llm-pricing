@@ -1,0 +1,664 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 8
+  },
+  "data": {
+    "model_id": "gemini-4-neon",
+    "prices": [
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-neon",
+        "amount": 3.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "source_table_start": 14695,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$3.00"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $3.00\n",
+        "quote_sha256": "4525d5fa6447f6593c7af3256d257c82ba65c91649e2bdfbdf508adadeb30727",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
+          "{% tab title=\"Standard\" %}"
+        ],
+        "price_record_id": "3e99e77a12f6bc43a426077193c798493e56dc6e119ee73883861dbb53cce0b4",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14695,
+            15582
+          ],
+          "cell_span": [
+            14815,
+            14820
+          ],
+          "row_span": [
+            14776,
+            14821
+          ],
+          "column_spans": [
+            [
+              14737,
+              14768
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-neon",
+        "amount": 15.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "source_table_start": 14695,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$15.00"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $15.00\n",
+        "quote_sha256": "1feadb4d4da68c3aaa8b98e1e531e53819b8bd0503de48d25ffe85e7997ea865",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
+          "{% tab title=\"Standard\" %}"
+        ],
+        "price_record_id": "930af83064138e6868dab74619dd2c8a8efd61b603b12d06cc185c474cbd3ef7",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14695,
+            15582
+          ],
+          "cell_span": [
+            14896,
+            14902
+          ],
+          "row_span": [
+            14828,
+            14903
+          ],
+          "column_spans": [
+            [
+              14737,
+              14768
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-neon",
+        "amount": 1.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "source_table_start": 15818,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$1.50"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $1.50\n",
+        "quote_sha256": "115a99160e0ea8f7a20be9c815bf20438cebad6e16961232ca36fb5ab3533722",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
+          "{% tab title=\"Batch\" %}"
+        ],
+        "price_record_id": "31c1c64155a90f5f4737c66e44e1479507ba727b8a93cf511abc30b21de93634",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            15818,
+            16247
+          ],
+          "cell_span": [
+            15938,
+            15943
+          ],
+          "row_span": [
+            15899,
+            15944
+          ],
+          "column_spans": [
+            [
+              15860,
+              15891
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-neon",
+        "amount": 7.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "source_table_start": 15818,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$7.50"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $7.50\n",
+        "quote_sha256": "2eaad56c08b5169d8dce0675fb0f8da1c27c730a69cba5460665bf0baa6d98c0",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
+          "{% tab title=\"Batch\" %}"
+        ],
+        "price_record_id": "e8b71fb115dcd87015612677308ad6bf67f738801378ea00b4fa002a85e408c8",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            15818,
+            16247
+          ],
+          "cell_span": [
+            16019,
+            16024
+          ],
+          "row_span": [
+            15951,
+            16025
+          ],
+          "column_spans": [
+            [
+              15860,
+              15891
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-neon",
+        "amount": 1.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "source_table_start": 16290,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$1.50"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $1.50\n",
+        "quote_sha256": "115a99160e0ea8f7a20be9c815bf20438cebad6e16961232ca36fb5ab3533722",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
+          "{% tab title=\"Flex\" %}"
+        ],
+        "price_record_id": "92912950bd509e039f284c075a36405ccde6726fd9f231909b64200c32954164",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            16290,
+            16719
+          ],
+          "cell_span": [
+            16410,
+            16415
+          ],
+          "row_span": [
+            16371,
+            16416
+          ],
+          "column_spans": [
+            [
+              16332,
+              16363
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-neon",
+        "amount": 7.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "source_table_start": 16290,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$7.50"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $7.50\n",
+        "quote_sha256": "2eaad56c08b5169d8dce0675fb0f8da1c27c730a69cba5460665bf0baa6d98c0",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
+          "{% tab title=\"Flex\" %}"
+        ],
+        "price_record_id": "f29a7856fc8527a301d9720735675a0b29538ff1630a09fabf1769ac1ae69200",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            16290,
+            16719
+          ],
+          "cell_span": [
+            16491,
+            16496
+          ],
+          "row_span": [
+            16423,
+            16497
+          ],
+          "column_spans": [
+            [
+              16332,
+              16363
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-neon",
+        "amount": 5.4,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Priority",
+          "source_table_start": 16766,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$5.40"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $5.40\n",
+        "quote_sha256": "acc2071db24eff338bca6eb282a92915430df0b0ae67a01ac4850f9727c244ae",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
+          "{% tab title=\"Priority\" %}"
+        ],
+        "price_record_id": "c2f911d3d03e872c2f8ab8d08facbc9215985cdb94bd7935490667fe6f953277",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            16766,
+            17653
+          ],
+          "cell_span": [
+            16886,
+            16891
+          ],
+          "row_span": [
+            16847,
+            16892
+          ],
+          "column_spans": [
+            [
+              16808,
+              16839
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-neon",
+        "amount": 27.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Priority",
+          "source_table_start": 16766,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$27.00"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $27.00\n",
+        "quote_sha256": "9fa6b6e782debe13e4bb2842e1b458cf900b59372205b6176e4ebce3567a5de3",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
+          "{% tab title=\"Priority\" %}"
+        ],
+        "price_record_id": "2492f29ccbb8aad6d70cd7e61d68f97079e2d130f87cc0cddd2627c218375558",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            16766,
+            17653
+          ],
+          "cell_span": [
+            16967,
+            16973
+          ],
+          "row_span": [
+            16899,
+            16974
+          ],
+          "column_spans": [
+            [
+              16808,
+              16839
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

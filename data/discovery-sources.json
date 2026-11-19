@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "adapter_version": "discovery-adapters/10-published-catalog-certification",
+  "scope_manifest_sha256": "b02d759e7af4d376b0a9d4a74f8a650ce04f0df636a246e9862ebf21763b40d8",
+  "sources": [
+    {
+      "id": "anthropic-models",
+      "vendor": "Anthropic",
+      "channel": "pay_as_you_go",
+      "url": "https://platform.claude.com/docs/en/models/overview.md",
+      "modalities": [
+        "text"
+      ],
+      "role": "catalog",
+      "adapter": "anthropic_markdown_bridged",
+      "gap": "All-models linked pages provide native Claude API IDs; retired unlinked display rows require direct entity bridge; status source separately retains literal native legacy IDs."
+    },
+    {
+      "id": "deepseek-models",
+      "vendor": "DeepSeek",
+      "channel": "pay_as_you_go",
+      "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "modalities": [
+        "text"
+      ],
+      "role": "catalog",
+      "adapter": "deepseek_model_row",
+      "gap": "MODEL row official IDs parsed; aliases/media/entity-routing still not fully classified. Not complete."
+    },
+    {
+      "id": "google-models",
+      "vendor": "Google Gemini",
+      "channel": "pay_as_you_go",
+      "url": "https://aistudio.google.com/docs/models",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "role": "catalog",
+      "adapter": "google_endpoint_tables",
+      "gap": "Native full-table literal endpoints plus bounded model-property/Versions output proofs; missing detail captures, ambiguous modality or unknown grammar remain unverified per scope. Not account entitlement."
+    },
+    {
+      "id": "minimax-models",
+      "vendor": "MiniMax",
+      "channel": "pay_as_you_go",
+      "url": "https://platform.minimax.io/docs/faq/models.md",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "role": "catalog",
+      "adapter": "minimax_model_list",
+      "gap": "Same-attempt full directory + finite official schema index + native request enums, projected by output scope. Retired LLM invocation bridges and directory/schema disagreement remain unknown; finite request enum alone is not full lifecycle coverage. No price, alias or retirement inference."
+    },
+    {
+      "id": "kimi-models",
+      "vendor": "Moonshot Kimi",
+      "channel": "pay_as_you_go",
+      "url": "https://platform.kimi.ai/docs/models.md",
+      "modalities": [
+        "text"
+      ],
+      "role": "catalog",
+      "adapter": "kimi_model_tables",
+      "gap": "Official native Model List current/deprecated tables fully parsed to contact-sales terminal; count/table-row/section/ID checks fail closed. Eligibility wording is not a global retirement or price proof."
+    },
+    {
+      "id": "kimi-code",
+      "vendor": "Moonshot Kimi",
+      "channel": "subscription",
+      "url": "https://www.kimi.com/code/docs/en/kimi-code/models",
+      "modalities": [
+        "text"
+      ],
+      "role": "catalog",
+      "adapter": "kimi_code_catalog",
+      "gap": "Current offering count and literal Model ID row with terminal section cross-checked; no price/eligibility entitlement proof for a specific account."
+    },
+    {
+      "id": "openai-models",
+      "vendor": "OpenAI",
+      "channel": "pay_as_you_go",
+      "url": "https://developers.openai.com/api/docs/models/all.md",
+      "modalities": [
+        "text",
+        "image"
+      ],
+      "role": "catalog",
+      "adapter": "openai_markdown_bridged",
+      "gap": "Source-qualified primary/explicit ID enumeration, output and native channel claims consumed from all same-attempt detail captures. Legal EOF accepted. Inline Rosalind output/channel and open-weight PAYG remain unknown; observation consumption is not exhaustive official catalog proof."
+    },
+    {
+      "id": "xai-models",
+      "vendor": "xAI",
+      "channel": "pay_as_you_go",
+      "url": "https://docs.x.ai/developers/models.md",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "role": "catalog",
+      "adapter": "xai_markdown_models",
+      "gap": "Source-qualified per-ID native API usage pricing, output units and native channel claims consumed. Only public priced subset; unpriced/retired/full literal alias and subscription universes remain unproved. Generic alias templates never expanded."
+    },
+    {
+      "id": "xai-build",
+      "vendor": "xAI",
+      "channel": "subscription",
+      "url": "https://docs.x.ai/developers/pricing",
+      "modalities": [
+        "text"
+      ],
+      "role": "price",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Price source, not a subscription catalog."
+    },
+    {
+      "id": "zai-models",
+      "vendor": "智谱 Z.ai",
+      "channel": "pay_as_you_go",
+      "url": "https://docs.z.ai/guides/overview/overview.md",
+      "modalities": [
+        "text",
+        "image"
+      ],
+      "role": "detail",
+      "adapter": "zai_overview_tables",
+      "gap": "Overview is supplementary feature/display context; authoritative current text/image request model enumeration is the public OpenAPI schema, not this display list."
+    },
+    {
+      "id": "qwen-models",
+      "vendor": "阿里云 Qwen",
+      "channel": "pay_as_you_go",
+      "url": "https://www.alibabacloud.com/help/en/model-studio/models",
+      "modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "role": "catalog",
+      "adapter": "qwen_recommended_lists",
+      "gap": "Recommended-page official-looking IDs parsed, qwen4-max included; third-party split. This is not Model Plaza complete catalog."
+    },
+    {
+      "id": "hunyuan-models",
+      "vendor": "腾讯混元",
+      "channel": "pay_as_you_go",
+      "url": "https://cloud.tencent.com/document/product/1823/130051",
+      "modalities": [
+        "text"
+      ],
+      "role": "catalog",
+      "adapter": "hunyuan_invocation_tables",
+      "gap": "Official 调用参数 column parsed after gzip decode. Native hy*/hunyuan* kept; TokenHub third-party split out and not treated as Hunyuan. Text scope only; other modalities retained as extra native IDs without expanding required scope. Not marked complete."
+    },
+    {
+      "id": "zai-legal-id",
+      "vendor": "智谱 Z.ai",
+      "channel": "pay_as_you_go",
+      "url": "https://docs.z.ai/guides/vlm/glm-5.3-flash.md",
+      "modalities": [
+        "text"
+      ],
+      "role": "detail",
+      "adapter": "explicit_id_labels_partial",
+      "gap": "Model Code labels; detail source, not a full catalog."
+    },
+    {
+      "id": "openai-front",
+      "vendor": "OpenAI",
+      "channel": "pay_as_you_go",
+      "url": "https://developers.openai.com/api/docs/models",
+      "modalities": [
+        "text",
+        "image"
+      ],
+      "role": "catalog",
+      "adapter": "openai_cards_partial",
+      "gap": "Homepage restricted/front cards; union only retains cards absent from /all."
+    },
+    {
+      "id": "zai-openapi",
+      "vendor": "智谱 Z.ai",
+      "channel": "pay_as_you_go",
+      "url": "https://docs.z.ai/openapi.json",
+      "modalities": [
+        "text",
+        "image"
+      ],
+      "role": "catalog",
+      "adapter": "zai_openapi_models",
+      "gap": "Closed request model enums for all documented text/image request branches; no price or account entitlement inference."
+    },
+    {
+      "id": "anthropic-status",
+      "vendor": "Anthropic",
+      "channel": "pay_as_you_go",
+      "url": "https://platform.claude.com/docs/en/about-claude/model-deprecations.md",
+      "modalities": [
+        "text"
+      ],
+      "role": "lifecycle",
+      "adapter": "anthropic_status_ids",
+      "gap": "Literal API model names/status and historical notice IDs; original dates retained without invented timezone or exact T."
+    },
+    {
+      "id": "anthropic-release-notes",
+      "vendor": "Anthropic",
+      "channel": "pay_as_you_go",
+      "url": "https://platform.claude.com/docs/en/release-notes/overview.md",
+      "modalities": [
+        "text"
+      ],
+      "role": "detail",
+      "adapter": "anthropic_release_notes",
+      "gap": "Only explicit per-entity parenthetical native IDs; same-attempt capture, never an exhaustive model directory."
+    }
+  ]
+}

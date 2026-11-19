@@ -1,0 +1,171 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
+  },
+  "data": {
+    "id": "gpt-6-astra-law",
+    "name": "GPT-6 Astra for Law",
+    "vendor": "openai",
+    "vendor_name": "OpenAI",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 10.0,
+      "output": 50.0,
+      "cached_input": 1.0,
+      "cache_write": null
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "unverified"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "unspecified",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": null,
+    "context_length_label": null,
+    "source_url": "https://developers.openai.com/api/docs/pricing",
+    "extra_sources": [],
+    "last_updated": "2026-11-01",
+    "price_observations": [
+      {
+        "observed_at": "2026-11-18T08:27:00+08:00",
+        "valid_from": null,
+        "valid_until": null,
+        "fields": [
+          "*"
+        ],
+        "input_tokens_gt": 272000,
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ],
+        "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+      }
+    ],
+    "notes": "OpenAI 定价页“Legal model configurations”法律场景配置（GPT-6 Astra for Law）。短上下文促销价输入 $10.00 / 输出 $50.00 / 缓存读取 $1.00（每百万 token），官方称至少持续到 2026-12-31；到期后价格未公布。长上下文官方已列出 $20 / $75 / $2；缓存写入短/长上下文原文均为“—”，不是 0，缺价字段估价须拒绝。未列 Batch/Flex/Fast；模型专页 /api/docs/models/gpt-6-astra-law 仍 404，不得据此推断退役；不借用 gpt-6-astra 或 gpt-6.2-astra-law 的未公布字段。",
+    "reasoning_effort": {
+      "supported": null,
+      "levels": null,
+      "default": null,
+      "can_disable": null,
+      "status": "unverified",
+      "field_status": {
+        "supported": "unverified",
+        "levels": "unverified",
+        "default": "unverified",
+        "can_disable": "unverified"
+      },
+      "note": "官方定价页未列该配置的推理强度，OpenAI 模型页尚不存在（404），待核实。",
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    "limits": {
+      "context_length": null,
+      "max_output_tokens": null,
+      "status": "unverified",
+      "note": "官方定价页未列上下文窗口与最大输出，OpenAI 模型页 /api/docs/models/gpt-6-astra-law 尚不存在（404），待核实。",
+      "sources": [
+        "https://developers.openai.com/api/docs/pricing"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [
+      {
+        "condition": "input_tokens>272000",
+        "input_tokens_gt": 272000,
+        "input_tokens_lte": null,
+        "input": 20.0,
+        "output": 75.0,
+        "cached_input": 2.0,
+        "cache_write": null,
+        "cache_pricing": {
+          "implicit_read": null,
+          "explicit_read": null,
+          "explicit_write": null,
+          "explicit_write_1h": null,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": null,
+          "note": "官方 Legal 表长上下文仅列输入 $20 / 输出 $75 / 缓存读取 $2；缓存写入两列原文为“—”，不是 0，非零写入试算拒绝。"
+        },
+        "note": "官方定价页 Legal model configurations 已列出长上下文价。该表以 short/long context 分列；同页 Ultrafast 节定义 Short context ≤272K input tokens、Long context >272K input tokens。缓存写入仍未公布。"
+      }
+    ],
+    "service_tiers": [],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": null,
+      "explicit_write": null,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "官方定价页 Legal 表短/长上下文缓存写入均为“—”，不是 0。仅列缓存读取价。"
+    },
+    "price_schedule": [
+      {
+        "kind": "promotion",
+        "effective_from": null,
+        "effective_until": "2026-12-31",
+        "input": 10.0,
+        "output": 50.0,
+        "cached_input": 1.0,
+        "cache_write": null,
+        "note": "GPT-6 Astra for Law 促销价（输入 $10 / 输出 $50 / 缓存读取 $1）官方称“至少持续到 2026-12-31”；到期后价格官方未公布（待核实）。",
+        "multiplier": null,
+        "cache_pricing": {},
+        "sources": [
+          "https://developers.openai.com/api/docs/pricing"
+        ]
+      }
+    ],
+    "unverified_fields": [
+      "cache_write",
+      "limits.context_length",
+      "limits.max_output_tokens",
+      "reasoning_effort.supported",
+      "reasoning_effort.levels",
+      "reasoning_effort.default",
+      "reasoning_effort.can_disable"
+    ],
+    "links": {
+      "self": "models/gpt-6-astra-law.json",
+      "vendor": "vendors/openai.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

@@ -1,0 +1,824 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 10
+  },
+  "data": {
+    "model_id": "gemini-4-hydrogen",
+    "prices": [
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-hydrogen",
+        "amount": 1.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "source_table_start": 18806,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$1.50"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Free of charge\n  * $1.50\n",
+        "quote_sha256": "dc2b85c4fe154cd519e9e8821f596403a11dbfe6f6eca1f6a536994eae2f2fb6",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-hydrogen`](/docs/models/gemini-4-hydrogen)",
+          "{% tab title=\"Standard\" %}"
+        ],
+        "price_record_id": "f09c452331b2f41f9e796a0ae6982ed6b353f06c1d4232e98c6a48c0f4d508ce",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            18806,
+            19701
+          ],
+          "cell_span": [
+            18927,
+            18932
+          ],
+          "row_span": [
+            18887,
+            18933
+          ],
+          "column_spans": [
+            [
+              18848,
+              18879
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-hydrogen",
+        "amount": 7.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "source_table_start": 18806,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$7.50"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Free of charge\n  * $7.50\n",
+        "quote_sha256": "3582417746ae6027f2e1682fa9586f7c52878df7655a2343ed278b4ab8c105d2",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-hydrogen`](/docs/models/gemini-4-hydrogen)",
+          "{% tab title=\"Standard\" %}"
+        ],
+        "price_record_id": "772686c166fce52164ff5ab3f618299179f4249c64301e61e4028acbc8f5e741",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            18806,
+            19701
+          ],
+          "cell_span": [
+            19009,
+            19014
+          ],
+          "row_span": [
+            18940,
+            19015
+          ],
+          "column_spans": [
+            [
+              18848,
+              18879
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-hydrogen",
+        "amount": 0.75,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "source_table_start": 19937,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$0.75"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $0.75\n",
+        "quote_sha256": "6cbb866cf7f84477c9b583489f6045bb69339142b5520d0a7258b06a034d63a2",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-hydrogen`](/docs/models/gemini-4-hydrogen)",
+          "{% tab title=\"Batch\" %}"
+        ],
+        "price_record_id": "2c2152eec8020c7b07e51d80268ab383d5a6d08d24e5699ab126ea67cbd71ed7",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            19937,
+            20372
+          ],
+          "cell_span": [
+            20057,
+            20062
+          ],
+          "row_span": [
+            20018,
+            20063
+          ],
+          "column_spans": [
+            [
+              19979,
+              20010
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-hydrogen",
+        "amount": 3.75,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "source_table_start": 19937,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$3.75"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $3.75\n",
+        "quote_sha256": "91a02f76a2c748d0bc1442e3196e2935cb911e69a3a09c68dd7366e39f00a9f3",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-hydrogen`](/docs/models/gemini-4-hydrogen)",
+          "{% tab title=\"Batch\" %}"
+        ],
+        "price_record_id": "515a1fe0bfb5b11e431cf64e3b31b3c6d291ec2fbe4603869aac74bd6aae8959",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            19937,
+            20372
+          ],
+          "cell_span": [
+            20138,
+            20143
+          ],
+          "row_span": [
+            20070,
+            20144
+          ],
+          "column_spans": [
+            [
+              19979,
+              20010
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-hydrogen",
+        "amount": 0.75,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "source_table_start": 20415,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$0.75"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $0.75\n",
+        "quote_sha256": "6cbb866cf7f84477c9b583489f6045bb69339142b5520d0a7258b06a034d63a2",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-hydrogen`](/docs/models/gemini-4-hydrogen)",
+          "{% tab title=\"Flex\" %}"
+        ],
+        "price_record_id": "2a1db3a7d36406a1f01d1304c661b835e8032307a7ce16db615840304c042d01",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            20415,
+            20850
+          ],
+          "cell_span": [
+            20535,
+            20540
+          ],
+          "row_span": [
+            20496,
+            20541
+          ],
+          "column_spans": [
+            [
+              20457,
+              20488
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-hydrogen",
+        "amount": 3.75,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "source_table_start": 20415,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$3.75"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $3.75\n",
+        "quote_sha256": "91a02f76a2c748d0bc1442e3196e2935cb911e69a3a09c68dd7366e39f00a9f3",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-hydrogen`](/docs/models/gemini-4-hydrogen)",
+          "{% tab title=\"Flex\" %}"
+        ],
+        "price_record_id": "0b970161caf86c703d20fb8b582c337ed9c6b4f4e05b0dc60f21f5c202dd473a",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            20415,
+            20850
+          ],
+          "cell_span": [
+            20616,
+            20621
+          ],
+          "row_span": [
+            20548,
+            20622
+          ],
+          "column_spans": [
+            [
+              20457,
+              20488
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-hydrogen",
+        "amount": 2.7,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Priority",
+          "source_table_start": 20897,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$2.70"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Free of charge\n  * $2.70\n",
+        "quote_sha256": "fc1f04bc2912a0ce613a521b9869fd57840a0626058c1ac8ea5347799f2bf554",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-hydrogen`](/docs/models/gemini-4-hydrogen)",
+          "{% tab title=\"Priority\" %}"
+        ],
+        "price_record_id": "e6b0f3920e3dcdb93b169d34efa88470dcd3da0f9b8802318d47fb899f4264ec",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            20897,
+            21793
+          ],
+          "cell_span": [
+            21018,
+            21023
+          ],
+          "row_span": [
+            20978,
+            21024
+          ],
+          "column_spans": [
+            [
+              20939,
+              20970
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-hydrogen",
+        "amount": 13.5,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Priority",
+          "source_table_start": 20897,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "qualifier": "$13.50"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Free of charge\n  * $13.50\n",
+        "quote_sha256": "1cbefaa3b567a152dcc84fddbc7a5c6ddb5d306ea6c5080491d7b3b8a88fa064",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-hydrogen`](/docs/models/gemini-4-hydrogen)",
+          "{% tab title=\"Priority\" %}"
+        ],
+        "price_record_id": "ece33ee7c668cb0ce180a029b5e00aab48cab2b3b8b2545a2566d4e1038fae63",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            20897,
+            21793
+          ],
+          "cell_span": [
+            21100,
+            21106
+          ],
+          "row_span": [
+            21031,
+            21107
+          ],
+          "column_spans": [
+            [
+              20939,
+              20970
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-hydrogen",
+        "amount": 0.75,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Contributor",
+          "source_table_start": 22350,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD{% sup %}*{% /sup %}",
+          "qualifier": "$0.75"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Free of charge\n  * $0.75\n",
+        "quote_sha256": "cec30def9e1128b74c5773c0c132be29cb539b58fee83dd71ad296ad4745cb43",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD{% sup %}*{% /sup %}\n",
+          "[`gemini-4-hydrogen`](/docs/models/gemini-4-hydrogen)",
+          "{% tab title=\"Contributor\" %}"
+        ],
+        "price_record_id": "d041804dcf89269bbca6ae1b554f37be266073f2e5b8aafdb8d7575140cc3702",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            22350,
+            22832
+          ],
+          "cell_span": [
+            22491,
+            22496
+          ],
+          "row_span": [
+            22451,
+            22497
+          ],
+          "column_spans": [
+            [
+              22392,
+              22443
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-hydrogen",
+        "amount": 3.75,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Contributor",
+          "source_table_start": 22350,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD{% sup %}*{% /sup %}",
+          "qualifier": "$3.75"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Free of charge\n  * $3.75\n",
+        "quote_sha256": "7fd12c8fcd98ffe8ca7c0ccb0d3366c248aec9eb7c2cee48dc50d24bb70eb798",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD{% sup %}*{% /sup %}\n",
+          "[`gemini-4-hydrogen`](/docs/models/gemini-4-hydrogen)",
+          "{% tab title=\"Contributor\" %}"
+        ],
+        "price_record_id": "5a917095a24845a5d2cca6e006aa04c77940763632607d154ce10f2833d064ef",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            22350,
+            22832
+          ],
+          "cell_span": [
+            22573,
+            22578
+          ],
+          "row_span": [
+            22504,
+            22579
+          ],
+          "column_spans": [
+            [
+              22392,
+              22443
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 3
+  },
+  "data": [
+    {
+      "name": "text",
+      "label": "文本生成（token 计价）",
+      "model_count": 63,
+      "model_ids": [
+        "deepseek-flash",
+        "deepseek-v4-pro",
+        "gpt-5.6-sol",
+        "gpt-5.6-terra",
+        "gpt-5.6-luna",
+        "gpt-6-astra",
+        "gpt-6-sol",
+        "gpt-6-luna",
+        "gpt-6.1-sol",
+        "gpt-6.1-terra",
+        "gpt-6-astra-law",
+        "claude-fable-5.1",
+        "claude-mythos-5.1",
+        "claude-fable-5",
+        "claude-mythos-5",
+        "claude-opus-5.5",
+        "claude-opus-5",
+        "claude-opus-4.8",
+        "claude-opus-4.7",
+        "claude-opus-4.6",
+        "claude-sonnet-5.5",
+        "claude-sonnet-5",
+        "claude-sonnet-4.6",
+        "claude-haiku-5.5",
+        "glm-5.3",
+        "glm-5.3-flash",
+        "glm-5.3-flashx",
+        "glm-5.2",
+        "kimi-k3",
+        "kimi-k3.1-pro",
+        "kimi-k3.1-pro-highspeed",
+        "kimi-k2.7-code",
+        "kimi-k2.7-code-highspeed",
+        "qwen3.8-max",
+        "qwen3.7-max",
+        "qwen3.7-plus",
+        "qwen3.8-flash",
+        "qwen3.7-flash",
+        "qwen3.8-2.4t-a95b",
+        "qwen3.8-27b",
+        "qwen3.8-omni-flash",
+        "gemini-4-argon",
+        "gemini-3.8-flash",
+        "gemini-3.5-flash-lite",
+        "gemini-3.1-pro-preview",
+        "minimax-m3",
+        "minimax-m3.1-flash",
+        "kimi-for-coding",
+        "grok-4.7",
+        "grok-4.7-build-fast",
+        "qwen4-max",
+        "hy4-flash",
+        "hy4",
+        "hy4-preview",
+        "gpt-6.2-astra",
+        "gpt-6.2-sol",
+        "gpt-6.2-astra-law",
+        "claude-fable-5-2",
+        "claude-mythos-5-2",
+        "gemini-4-carbon",
+        "gemini-4-hydrogen",
+        "glm-5.3-flashx-legal",
+        "minimax-h3-context-ir"
+      ],
+      "vendors": [
+        "deepseek",
+        "openai",
+        "anthropic",
+        "zhipu",
+        "moonshot",
+        "qwen",
+        "google",
+        "minimax",
+        "xai",
+        "tencent"
+      ],
+      "links": {
+        "self": "modalities/text.json"
+      }
+    },
+    {
+      "name": "image",
+      "label": "图像生成",
+      "model_count": 16,
+      "model_ids": [
+        "gpt-image-2.5-flare",
+        "gpt-image-2.5-sunburst",
+        "grok-imagine-image-2.0",
+        "gemini-nano-banana-2.1",
+        "gemini-3.1-flash-lite-image",
+        "gemini-3-pro-image",
+        "qwen-image-3.0-pro",
+        "qwen-image-3.0",
+        "wan2.7-image-pro",
+        "wan2.7-image",
+        "minimax-image-01",
+        "glm-image",
+        "gpt-image-2.6-sunburst",
+        "gpt-image-2.6-flare",
+        "minimax-h3-image",
+        "minimax-h3-image-highspeed"
+      ],
+      "vendors": [
+        "openai",
+        "zhipu",
+        "qwen",
+        "google",
+        "minimax",
+        "xai"
+      ],
+      "links": {
+        "self": "modalities/image.json"
+      }
+    },
+    {
+      "name": "video",
+      "label": "视频生成",
+      "model_count": 10,
+      "model_ids": [
+        "grok-imagine-video-1.5",
+        "grok-imagine-video-1.5-lite",
+        "gemini-omni-1.1-flash",
+        "wan3.0-video",
+        "wan3.0-video-prime",
+        "minimax-h3",
+        "minimax-h3-highspeed",
+        "minimax-h3-lite",
+        "minimax-h3-max",
+        "minimax-h3-regeneration"
+      ],
+      "vendors": [
+        "qwen",
+        "google",
+        "minimax",
+        "xai"
+      ],
+      "links": {
+        "self": "modalities/video.json"
+      }
+    }
+  ]
+}

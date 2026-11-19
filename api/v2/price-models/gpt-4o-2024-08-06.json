@@ -1,0 +1,522 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 6
+  },
+  "data": {
+    "model_id": "gpt-4o-2024-08-06",
+    "prices": [
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-4o-2024-08-06",
+        "amount": 3.75,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Pricing Table data",
+          "model_qualifier": "gpt-4o-2024-08-06",
+          "price_header": "Input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-4o-2024-08-06 | $25.00 | $3.75 | $15.00 | $1.875 |\n",
+        "quote_sha256": "5318e7352131c7df9e9c0177c651dc8dbd6e8ecd7113084c21e2cbc89c7e921b",
+        "context_quotes": [
+          "| Model | Training | Input | Output | Cached input |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "71ecd5c70a5723f8d9da33ab7d14d6c32986a1913533550be165ef8fcc3e0194",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            23309,
+            23627
+          ],
+          "cell_span": [
+            23542,
+            23547
+          ],
+          "row_span": [
+            23511,
+            23568
+          ],
+          "column_spans": [
+            [
+              23330,
+              23335
+            ]
+          ],
+          "default_span": [
+            22912,
+            22933
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-4o-2024-08-06",
+        "amount": 15.0,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Pricing Table data",
+          "model_qualifier": "gpt-4o-2024-08-06",
+          "price_header": "Output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-4o-2024-08-06 | $25.00 | $3.75 | $15.00 | $1.875 |\n",
+        "quote_sha256": "5318e7352131c7df9e9c0177c651dc8dbd6e8ecd7113084c21e2cbc89c7e921b",
+        "context_quotes": [
+          "| Model | Training | Input | Output | Cached input |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "d850eb3aa812bef5b35674904f31d40114f915f277eac0a0fb23b8874f8b1421",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            23309,
+            23627
+          ],
+          "cell_span": [
+            23550,
+            23556
+          ],
+          "row_span": [
+            23511,
+            23568
+          ],
+          "column_spans": [
+            [
+              23338,
+              23344
+            ]
+          ],
+          "default_span": [
+            22912,
+            22933
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-4o-2024-08-06",
+        "amount": 1.875,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "section": "### Pricing Table data",
+          "model_qualifier": "gpt-4o-2024-08-06",
+          "price_header": "Cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-4o-2024-08-06 | $25.00 | $3.75 | $15.00 | $1.875 |\n",
+        "quote_sha256": "5318e7352131c7df9e9c0177c651dc8dbd6e8ecd7113084c21e2cbc89c7e921b",
+        "context_quotes": [
+          "| Model | Training | Input | Output | Cached input |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "e8b8d04bcb00a928933f861dfd2b5cf90c4b28e18a56c499179abd2a28b4cd86",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            23309,
+            23627
+          ],
+          "cell_span": [
+            23559,
+            23565
+          ],
+          "row_span": [
+            23511,
+            23568
+          ],
+          "column_spans": [
+            [
+              23347,
+              23359
+            ]
+          ],
+          "default_span": [
+            22912,
+            22933
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-4o-2024-08-06",
+        "amount": 2.225,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Pricing Table data",
+          "model_qualifier": "gpt-4o-2024-08-06",
+          "price_header": "Input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-4o-2024-08-06 | $25.00 | $2.225 | $12.50 | $0.90 |\n",
+        "quote_sha256": "40770b0dcdbb5c5b3664e61362edd9788708b6832ba8437f6af26a67f66d07ad",
+        "context_quotes": [
+          "| Model | Training | Input | Output | Cached input |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "9d43c1f80b94fc44cb66e96ad614c59adb19dee231352acc89dd461e70b3dce6",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            23686,
+            24003
+          ],
+          "cell_span": [
+            23918,
+            23924
+          ],
+          "row_span": [
+            23887,
+            23944
+          ],
+          "column_spans": [
+            [
+              23707,
+              23712
+            ]
+          ],
+          "default_span": [
+            22912,
+            22933
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-4o-2024-08-06",
+        "amount": 12.5,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Pricing Table data",
+          "model_qualifier": "gpt-4o-2024-08-06",
+          "price_header": "Output",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-4o-2024-08-06 | $25.00 | $2.225 | $12.50 | $0.90 |\n",
+        "quote_sha256": "40770b0dcdbb5c5b3664e61362edd9788708b6832ba8437f6af26a67f66d07ad",
+        "context_quotes": [
+          "| Model | Training | Input | Output | Cached input |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "c0eb98aa3174d61f13c2c379ca0a58394ceadde19eb537c788b7f1e9f8c1ca33",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            23686,
+            24003
+          ],
+          "cell_span": [
+            23927,
+            23933
+          ],
+          "row_span": [
+            23887,
+            23944
+          ],
+          "column_spans": [
+            [
+              23715,
+              23721
+            ]
+          ],
+          "default_span": [
+            22912,
+            22933
+          ],
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "OpenAI",
+        "channel": "pay_as_you_go",
+        "model_id": "gpt-4o-2024-08-06",
+        "amount": 0.9,
+        "currency": null,
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "cached_input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "section": "### Pricing Table data",
+          "model_qualifier": "gpt-4o-2024-08-06",
+          "price_header": "Cached input",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "not_stated_dollar_symbol_only",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "model_price_candidate_currency_not_stated",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://developers.openai.com/api/docs/pricing",
+        "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+        "observed_at": "2026-11-19T06:31:26.591543+08:00",
+        "quote": "| gpt-4o-2024-08-06 | $25.00 | $2.225 | $12.50 | $0.90 |\n",
+        "quote_sha256": "40770b0dcdbb5c5b3664e61362edd9788708b6832ba8437f6af26a67f66d07ad",
+        "context_quotes": [
+          "| Model | Training | Input | Output | Cached input |\n",
+          "Prices per 1M tokens."
+        ],
+        "price_record_id": "8be387100814f2db0d42a0e6027852779bce80439ca51b0f671d45f1acd8611d",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            23686,
+            24003
+          ],
+          "cell_span": [
+            23936,
+            23941
+          ],
+          "row_span": [
+            23887,
+            23944
+          ],
+          "column_spans": [
+            [
+              23724,
+              23736
+            ]
+          ],
+          "default_span": [
+            22912,
+            22933
+          ],
+          "unit": "per_1M_tokens"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

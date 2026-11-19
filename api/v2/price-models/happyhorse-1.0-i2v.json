@@ -1,0 +1,720 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 8
+  },
+  "data": {
+    "model_id": "happyhorse-1.0-i2v",
+    "prices": [
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "happyhorse-1.0-i2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "video",
+        "component": "output",
+        "amount": 0.9,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"输出视频分辨率\": \"720P\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.9<span class=\"help-letter-space\"></span>元/秒</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+        "quote_sha256": "183719c99d18847cd0a47ddf3b884e5f02ff06f92341718894d43dbc10fb7304",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th><th style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.9<span class=\"help-letter-space\"></span>元/秒</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"happyhorse-图生视频-基于首帧\">HappyHorse-图生视频-基于首帧 <span id=\"hh0067\"></span></h3>",
+          "<h4 id=\"华北2-北京-74-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "2ad468e8440ca84df0c5079e",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1220926,
+            1222653
+          ],
+          "cell_span": [
+            1222343,
+            1222431
+          ],
+          "row_span": [
+            1222219,
+            1222492
+          ],
+          "column_spans": [
+            [
+              1221274,
+              1221338
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "cfa5cd8371c910ab01c8513c257fbb251f76e4efd01aa2360c1c97c27e85a044",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"输出视频分辨率\": \"720P\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "happyhorse-1.0-i2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "华北2（北京）",
+        "modality": "video",
+        "component": "output",
+        "amount": 1.6,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"输出视频分辨率\": \"1080P\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>1080P</p></td><td style=\"vertical-align:top\"><p>1.6<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+        "quote_sha256": "141538b9660dffbfd14fccff20113c8d761f8bd141898d02a5123f659c8b930a",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th><th style=\"vertical-align:top\"><p><strong>免费额度</strong><a href=\"/zh/model-studio/new-free-quota#977b13081ab56\">（注）</a></p><p><sup>有效期：自开通百炼/模型发布/申请通过之日起<span class=\"help-letter-space\"></span>90<span class=\"help-letter-space\"></span>天内（以较晚者为准）</sup></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.9<span class=\"help-letter-space\"></span>元/秒</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>无</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"happyhorse-图生视频-基于首帧\">HappyHorse-图生视频-基于首帧 <span id=\"hh0067\"></span></h3>",
+          "<h4 id=\"华北2-北京-74-h4\">华北<span class=\"help-letter-space\"></span>2（北京）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "52fbea318ac6b8951508abb4",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1220926,
+            1222653
+          ],
+          "cell_span": [
+            1222544,
+            1222632
+          ],
+          "row_span": [
+            1222492,
+            1222637
+          ],
+          "column_spans": [
+            [
+              1221274,
+              1221338
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "55ac6741800cdbc9969e536afa84da44bcfcd2e3de40d4474b24ad8b2571a046",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"输出视频分辨率\": \"1080P\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "happyhorse-1.0-i2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "video",
+        "component": "output",
+        "amount": 0.9,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"全球\", \"输出视频分辨率\": \"720P\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.9<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+        "quote_sha256": "84ce1d94779df4448de9ffa6a1848c02be76d20db03cbbfd32d207de3027be98",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.9<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"happyhorse-图生视频-基于首帧\">HappyHorse-图生视频-基于首帧 <span id=\"hh0067\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-20-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "8586ff92a46a952fbfc7e217",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1222740,
+            1224237
+          ],
+          "cell_span": [
+            1223983,
+            1224071
+          ],
+          "row_span": [
+            1223802,
+            1224076
+          ],
+          "column_spans": [
+            [
+              1223154,
+              1223218
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "31a3c7f320b18fc9298f86d95f142c550f6371d1f8fc93967286df33d8f04b40",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"全球\", \"输出视频分辨率\": \"720P\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "happyhorse-1.0-i2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "美国（弗吉尼亚）",
+        "modality": "video",
+        "component": "output",
+        "amount": 1.6,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"全球\", \"输出视频分辨率\": \"1080P\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>1080P</p></td><td style=\"vertical-align:top\"><p>1.6<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+        "quote_sha256": "141538b9660dffbfd14fccff20113c8d761f8bd141898d02a5123f659c8b930a",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.9<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"happyhorse-图生视频-基于首帧\">HappyHorse-图生视频-基于首帧 <span id=\"hh0067\"></span></h3>",
+          "<h4 id=\"美国-弗吉尼亚-20-h4\">美国（弗吉尼亚）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "70674e328679d9a6d0199cb2",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1222740,
+            1224237
+          ],
+          "cell_span": [
+            1224128,
+            1224216
+          ],
+          "row_span": [
+            1224076,
+            1224221
+          ],
+          "column_spans": [
+            [
+              1223154,
+              1223218
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "c7ec03174626d4e0072785b2427955dd1c97a10df892abcdf5a372cda2f4c3cf",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"全球\", \"输出视频分辨率\": \"1080P\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "happyhorse-1.0-i2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "video",
+        "component": "output",
+        "amount": 1.049188,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"输出视频分辨率\": \"720P\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>1.049188<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+        "quote_sha256": "657e2582a0b35ecc236416627a6d28902d240488af4e3965424e45ed6f7f073a",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>1.049188<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"happyhorse-图生视频-基于首帧\">HappyHorse-图生视频-基于首帧 <span id=\"hh0067\"></span></h3>",
+          "<h4 id=\"新加坡-41-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "842b74bc6df5e1e072ba9b0d",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1224311,
+            1225832
+          ],
+          "cell_span": [
+            1225568,
+            1225661
+          ],
+          "row_span": [
+            1225387,
+            1225666
+          ],
+          "column_spans": [
+            [
+              1224725,
+              1224789
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "715ea3e9e23429dabab23c37e1e59445416f88041d3ff425d76462aaf5d11b00",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"输出视频分辨率\": \"720P\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "happyhorse-1.0-i2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "新加坡",
+        "modality": "video",
+        "component": "output",
+        "amount": 1.798608,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"输出视频分辨率\": \"1080P\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>1080P</p></td><td style=\"vertical-align:top\"><p>1.798608<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+        "quote_sha256": "6929cdfa4b53636753fef46f25691ee40b8690a4eecb8d2cebaeb263092208dc",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>国际</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>1.049188<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"happyhorse-图生视频-基于首帧\">HappyHorse-图生视频-基于首帧 <span id=\"hh0067\"></span></h3>",
+          "<h4 id=\"新加坡-41-h4\">新加坡</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "31a55639a941f7e10cb7065e",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1224311,
+            1225832
+          ],
+          "cell_span": [
+            1225718,
+            1225811
+          ],
+          "row_span": [
+            1225666,
+            1225816
+          ],
+          "column_spans": [
+            [
+              1224725,
+              1224789
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "6a71566f6cfd42f0b21d9002eb506b31882a658e061103a5cf1e16583c0dd7f0",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"国际\", \"输出视频分辨率\": \"1080P\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "happyhorse-1.0-i2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "video",
+        "component": "output",
+        "amount": 0.9,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"全球\", \"输出视频分辨率\": \"720P\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.9<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+        "quote_sha256": "84ce1d94779df4448de9ffa6a1848c02be76d20db03cbbfd32d207de3027be98",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.9<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"happyhorse-图生视频-基于首帧\">HappyHorse-图生视频-基于首帧 <span id=\"hh0067\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-19-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "2ce1c4f98b5f7fe68550c189",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1225919,
+            1227416
+          ],
+          "cell_span": [
+            1227162,
+            1227250
+          ],
+          "row_span": [
+            1226981,
+            1227255
+          ],
+          "column_spans": [
+            [
+              1226333,
+              1226397
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "ca7edc79ce1c7887f5b403ad4526fd9e4028d8a1e5548e69b27dd9eabb1f3c83",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"全球\", \"输出视频分辨率\": \"720P\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      },
+      {
+        "vendor": "阿里云 Qwen",
+        "model_id": "happyhorse-1.0-i2v",
+        "offering_name": null,
+        "identity_kind": "literal_model_id",
+        "channel": "pay_as_you_go",
+        "region": "德国（法兰克福）",
+        "modality": "video",
+        "component": "output",
+        "amount": 1.6,
+        "currency": "CNY",
+        "unit": "per_second",
+        "tier": "{\"dimensions\": {\"服务部署范围\": \"全球\", \"输出视频分辨率\": \"1080P\"}, \"price_header\": \"输出单价\"}",
+        "observed_at": "2026-11-19T06:31:29.796776+08:00",
+        "effective_from": null,
+        "effective_until": null,
+        "time_basis": "observed_at_NOT_inferred_effective_start",
+        "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+        "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+        "quote": "<tr><td style=\"vertical-align:top\"><p>1080P</p></td><td style=\"vertical-align:top\"><p>1.6<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+        "quote_sha256": "141538b9660dffbfd14fccff20113c8d761f8bd141898d02a5123f659c8b930a",
+        "context_quotes": [
+          "模型调用默认 按量计费 ，涵盖各类模型的计费规则与价格。",
+          "<tr><th style=\"vertical-align:top\"><p><strong>模型 ID（Model ID）</strong></p></th><th style=\"vertical-align:top\"><p><strong>服务部署范围</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出视频分辨率</strong></p></th><th style=\"vertical-align:top\"><p><strong>输出单价</strong></p></th></tr>",
+          "<tr><td rowspan=\"2\" style=\"vertical-align:top\"><p>happyhorse-1.0-i2v</p></td><td rowspan=\"2\" style=\"vertical-align:top\"><p>全球</p></td><td style=\"vertical-align:top\"><p>720P</p></td><td style=\"vertical-align:top\"><p>0.9<span class=\"help-letter-space\"></span>元/秒</p></td></tr>",
+          "<h1>模型调用价格</h1>",
+          "<h2 id=\"视频生成\">视频生成 <span id=\"d809366847gza\"></span></h2>",
+          "<h3 id=\"happyhorse-图生视频-基于首帧\">HappyHorse-图生视频-基于首帧 <span id=\"hh0067\"></span></h3>",
+          "<h4 id=\"德国-法兰克福-19-h4\">德国（法兰克福）</h4>"
+        ],
+        "price_verified": true,
+        "region_scope": "explicit_source_region",
+        "price_basis": "quoted_public_table_NOT_account_or_promotion_quote",
+        "eligible_for_estimation": false,
+        "availability": "not_assessed",
+        "scope_complete": false,
+        "history_complete": false,
+        "account_entitlement": "not_assessed",
+        "fact_id": "43537114163f596332102a37",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1225919,
+            1227416
+          ],
+          "cell_span": [
+            1227307,
+            1227395
+          ],
+          "row_span": [
+            1227255,
+            1227400
+          ],
+          "column_spans": [
+            [
+              1226333,
+              1226397
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
+        "rate_kind": "quoted_table_rate",
+        "price_record_id": "cae719d3c81bbf0623c2ba8e1ed4e3797baea4f7ee51c92d781cd5d10146323c",
+        "quote_verified": true,
+        "record_status": "existing_strict_source_fact_NOT_executable_quote",
+        "billing_modality": "video",
+        "selector_complete": true,
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "region": "explicit_source_region",
+          "currency": "explicit_CNY",
+          "unit": "explicit_source_header",
+          "component": "explicit_source_header",
+          "conditions": "existing_source_tier_literal",
+          "channel": "source_bound_pay_as_you_go"
+        },
+        "conditions": {
+          "source_tier": "{\"dimensions\": {\"服务部署范围\": \"全球\", \"输出视频分辨率\": \"1080P\"}, \"price_header\": \"输出单价\"}",
+          "rate_kind": "quoted_table_rate"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

@@ -1,0 +1,1400 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 16
+  },
+  "data": {
+    "model_id": "gemini-4-carbon",
+    "prices": [
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 2.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "source_table_start": 3839,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "through_inclusive",
+            "date": "2026-11-30",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$2.00 through November 30, 2026.   \n  $4.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $2.00 through November 30, 2026.   \n  $4.00 starting December 1, 2026.\n",
+        "quote_sha256": "b2eb702ef0dcaa36c704eb38f6be11973e6423c0f6b0b550e17c3693a37e54c0",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Standard\" %}"
+        ],
+        "price_record_id": "b5f3fbe4cb61432052bfb72eb09496376be49aacd147e60cc650197ed06c06ef",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            3839,
+            4922
+          ],
+          "cell_span": [
+            3959,
+            4029
+          ],
+          "row_span": [
+            3920,
+            4030
+          ],
+          "column_spans": [
+            [
+              3881,
+              3912
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 4.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "source_table_start": 3839,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "starting_inclusive",
+            "date": "2026-12-01",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$2.00 through November 30, 2026.   \n  $4.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $2.00 through November 30, 2026.   \n  $4.00 starting December 1, 2026.\n",
+        "quote_sha256": "b2eb702ef0dcaa36c704eb38f6be11973e6423c0f6b0b550e17c3693a37e54c0",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Standard\" %}"
+        ],
+        "price_record_id": "48a80e3b0bececdf2ce2d38a544d9357ebd7e51c30321457d9ad989181523f62",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            3839,
+            4922
+          ],
+          "cell_span": [
+            3959,
+            4029
+          ],
+          "row_span": [
+            3920,
+            4030
+          ],
+          "column_spans": [
+            [
+              3881,
+              3912
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 10.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "source_table_start": 3839,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "through_inclusive",
+            "date": "2026-11-30",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$10.00 through November 30, 2026.   \n  $20.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $10.00 through November 30, 2026.   \n  $20.00 starting December 1, 2026.\n",
+        "quote_sha256": "3d05aa899f015942c7554b661448d9d9c329564452b0eba03913546a9e02583c",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Standard\" %}"
+        ],
+        "price_record_id": "2545419af02b9112c7135a422289f67ae89dbd00fdf65c7e419ab8cfcc8add16",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            3839,
+            4922
+          ],
+          "cell_span": [
+            4105,
+            4177
+          ],
+          "row_span": [
+            4037,
+            4178
+          ],
+          "column_spans": [
+            [
+              3881,
+              3912
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 20.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Standard",
+          "source_table_start": 3839,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "starting_inclusive",
+            "date": "2026-12-01",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$10.00 through November 30, 2026.   \n  $20.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $10.00 through November 30, 2026.   \n  $20.00 starting December 1, 2026.\n",
+        "quote_sha256": "3d05aa899f015942c7554b661448d9d9c329564452b0eba03913546a9e02583c",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Standard\" %}"
+        ],
+        "price_record_id": "427b54a731033efdd8d6b1760a23e5ae3e5d9dd945b85801067be2a9c44f9658",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            3839,
+            4922
+          ],
+          "cell_span": [
+            4105,
+            4177
+          ],
+          "row_span": [
+            4037,
+            4178
+          ],
+          "column_spans": [
+            [
+              3881,
+              3912
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 1.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "source_table_start": 5158,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "through_inclusive",
+            "date": "2026-11-30",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$1.00 through November 30, 2026.   \n  $2.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $1.00 through November 30, 2026.   \n  $2.00 starting December 1, 2026.\n",
+        "quote_sha256": "6c8d66c5976818c61bd3a7a16fdfcb77a0383135a04b6323eb7231be249ff13e",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Batch\" %}"
+        ],
+        "price_record_id": "2b6c6dcbb54a024b1819aa33212c67e27c5c27c52b8560f94a613eaa839287c0",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5158,
+            5782
+          ],
+          "cell_span": [
+            5278,
+            5348
+          ],
+          "row_span": [
+            5239,
+            5349
+          ],
+          "column_spans": [
+            [
+              5200,
+              5231
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 2.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "source_table_start": 5158,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "starting_inclusive",
+            "date": "2026-12-01",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$1.00 through November 30, 2026.   \n  $2.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $1.00 through November 30, 2026.   \n  $2.00 starting December 1, 2026.\n",
+        "quote_sha256": "6c8d66c5976818c61bd3a7a16fdfcb77a0383135a04b6323eb7231be249ff13e",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Batch\" %}"
+        ],
+        "price_record_id": "0477fba5cd6322ee7b2decb5e7b30c1f9c7c45556f401fae4bdafe77bf0a6f99",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5158,
+            5782
+          ],
+          "cell_span": [
+            5278,
+            5348
+          ],
+          "row_span": [
+            5239,
+            5349
+          ],
+          "column_spans": [
+            [
+              5200,
+              5231
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 5.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "source_table_start": 5158,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "through_inclusive",
+            "date": "2026-11-30",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$5.00 through November 30, 2026.   \n  $10.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $5.00 through November 30, 2026.   \n  $10.00 starting December 1, 2026.\n",
+        "quote_sha256": "a40a4b38642bd3e0b67353733a10afd7d5459f9dbcc0e3fd06b66e058545394b",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Batch\" %}"
+        ],
+        "price_record_id": "1587ceda03fe98d55f1d97ff4aafcf3b63caf01fa3cf450099c8f381330e224a",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5158,
+            5782
+          ],
+          "cell_span": [
+            5424,
+            5495
+          ],
+          "row_span": [
+            5356,
+            5496
+          ],
+          "column_spans": [
+            [
+              5200,
+              5231
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 10.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Batch",
+          "source_table_start": 5158,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "starting_inclusive",
+            "date": "2026-12-01",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$5.00 through November 30, 2026.   \n  $10.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $5.00 through November 30, 2026.   \n  $10.00 starting December 1, 2026.\n",
+        "quote_sha256": "a40a4b38642bd3e0b67353733a10afd7d5459f9dbcc0e3fd06b66e058545394b",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Batch\" %}"
+        ],
+        "price_record_id": "4235bc45ee0d9ecdae693ce2f64c67c6e1db0dc1f2e564c14bad7547200ffb01",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5158,
+            5782
+          ],
+          "cell_span": [
+            5424,
+            5495
+          ],
+          "row_span": [
+            5356,
+            5496
+          ],
+          "column_spans": [
+            [
+              5200,
+              5231
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 1.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "source_table_start": 5825,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "through_inclusive",
+            "date": "2026-11-30",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$1.00 through November 30, 2026.   \n  $2.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $1.00 through November 30, 2026.   \n  $2.00 starting December 1, 2026.\n",
+        "quote_sha256": "6c8d66c5976818c61bd3a7a16fdfcb77a0383135a04b6323eb7231be249ff13e",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Flex\" %}"
+        ],
+        "price_record_id": "51e40c4f82caccfc792eea8954cb0ad603a9b151b39c689a22bfb8f21068a8f2",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5825,
+            6449
+          ],
+          "cell_span": [
+            5945,
+            6015
+          ],
+          "row_span": [
+            5906,
+            6016
+          ],
+          "column_spans": [
+            [
+              5867,
+              5898
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 2.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "source_table_start": 5825,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "starting_inclusive",
+            "date": "2026-12-01",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$1.00 through November 30, 2026.   \n  $2.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $1.00 through November 30, 2026.   \n  $2.00 starting December 1, 2026.\n",
+        "quote_sha256": "6c8d66c5976818c61bd3a7a16fdfcb77a0383135a04b6323eb7231be249ff13e",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Flex\" %}"
+        ],
+        "price_record_id": "aa296111197a4503b0adfd6463b79691b59dd8510a2e2d0609db7fa74e2108b9",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5825,
+            6449
+          ],
+          "cell_span": [
+            5945,
+            6015
+          ],
+          "row_span": [
+            5906,
+            6016
+          ],
+          "column_spans": [
+            [
+              5867,
+              5898
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 5.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "source_table_start": 5825,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "through_inclusive",
+            "date": "2026-11-30",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$5.00 through November 30, 2026.   \n  $10.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $5.00 through November 30, 2026.   \n  $10.00 starting December 1, 2026.\n",
+        "quote_sha256": "a40a4b38642bd3e0b67353733a10afd7d5459f9dbcc0e3fd06b66e058545394b",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Flex\" %}"
+        ],
+        "price_record_id": "4c5724989a2b49989cf4dea67f34affe840d84bf41b4824a63883f65c3e0c750",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5825,
+            6449
+          ],
+          "cell_span": [
+            6091,
+            6162
+          ],
+          "row_span": [
+            6023,
+            6163
+          ],
+          "column_spans": [
+            [
+              5867,
+              5898
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 10.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Flex",
+          "source_table_start": 5825,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "starting_inclusive",
+            "date": "2026-12-01",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$5.00 through November 30, 2026.   \n  $10.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $5.00 through November 30, 2026.   \n  $10.00 starting December 1, 2026.\n",
+        "quote_sha256": "a40a4b38642bd3e0b67353733a10afd7d5459f9dbcc0e3fd06b66e058545394b",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Flex\" %}"
+        ],
+        "price_record_id": "0259fa3b8d6ea750f33d2197f8deb37b052a204b0d29b5c18de6e4786285f302",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5825,
+            6449
+          ],
+          "cell_span": [
+            6091,
+            6162
+          ],
+          "row_span": [
+            6023,
+            6163
+          ],
+          "column_spans": [
+            [
+              5867,
+              5898
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 3.6,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Priority",
+          "source_table_start": 6496,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "through_inclusive",
+            "date": "2026-11-30",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$3.60 through November 30, 2026.   \n  $7.20 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $3.60 through November 30, 2026.   \n  $7.20 starting December 1, 2026.\n",
+        "quote_sha256": "68673177fcad28f83852e0672f702918883df454e802eb21339b374d239ba9e4",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Priority\" %}"
+        ],
+        "price_record_id": "0b4f5e2a169099657543f83fd195b5412a716fab93b569d9d177df952923e8a2",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            6496,
+            7579
+          ],
+          "cell_span": [
+            6616,
+            6686
+          ],
+          "row_span": [
+            6577,
+            6687
+          ],
+          "column_spans": [
+            [
+              6538,
+              6569
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 7.2,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "input",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Priority",
+          "source_table_start": 6496,
+          "price_header": "Input price",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "starting_inclusive",
+            "date": "2026-12-01",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$3.60 through November 30, 2026.   \n  $7.20 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Input price\n  * Not available\n  * $3.60 through November 30, 2026.   \n  $7.20 starting December 1, 2026.\n",
+        "quote_sha256": "68673177fcad28f83852e0672f702918883df454e802eb21339b374d239ba9e4",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Priority\" %}"
+        ],
+        "price_record_id": "dd9787fd0e83e91188fb2b10ee51a101a05c702ee772b20750f0d727e25ebad9",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            6496,
+            7579
+          ],
+          "cell_span": [
+            6616,
+            6686
+          ],
+          "row_span": [
+            6577,
+            6687
+          ],
+          "column_spans": [
+            [
+              6538,
+              6569
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 18.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Priority",
+          "source_table_start": 6496,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "through_inclusive",
+            "date": "2026-11-30",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$18.00 through November 30, 2026.   \n  $36.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $18.00 through November 30, 2026.   \n  $36.00 starting December 1, 2026.\n",
+        "quote_sha256": "3685e118348c0965e21793e6c5ae00edafe13285d6be36caa7649f4a95b70578",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Priority\" %}"
+        ],
+        "price_record_id": "4b645f888a7010516916bb83fb0093495a328a6205d1085e4d4237c6cf95df20",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            6496,
+            7579
+          ],
+          "cell_span": [
+            6762,
+            6834
+          ],
+          "row_span": [
+            6694,
+            6835
+          ],
+          "column_spans": [
+            [
+              6538,
+              6569
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      },
+      {
+        "vendor": "Google Gemini",
+        "channel": "pay_as_you_go",
+        "model_id": "gemini-4-carbon",
+        "amount": 36.0,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_1M_tokens",
+        "component": "output",
+        "billing_modality": "token_modality_not_separately_priced",
+        "conditions": {
+          "service_tier": "Priority",
+          "source_table_start": 6496,
+          "price_header": "Output price (including thinking tokens)",
+          "paid_tier": "Paid Tier, per 1M tokens in USD",
+          "date_condition": {
+            "operator": "starting_inclusive",
+            "date": "2026-12-01",
+            "timezone": null,
+            "precision": "date_only"
+          },
+          "qualifier": "$18.00 through November 30, 2026.   \n  $36.00 starting December 1, 2026."
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "not_stated",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "date_only_timezone_not_stated"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://aistudio.google.com/docs/pricing",
+        "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+        "observed_at": "2026-11-19T06:31:26.390049+08:00",
+        "quote": "\n  * Output price (including thinking tokens)\n  * Not available\n  * $18.00 through November 30, 2026.   \n  $36.00 starting December 1, 2026.\n",
+        "quote_sha256": "3685e118348c0965e21793e6c5ae00edafe13285d6be36caa7649f4a95b70578",
+        "context_quotes": [
+          "\n  * Feature\n  * Free Tier\n  * Paid Tier, per 1M tokens in USD\n",
+          "[`gemini-4-carbon`](/docs/models/gemini-4-carbon)",
+          "{% tab title=\"Priority\" %}"
+        ],
+        "price_record_id": "afdd73a5fa07c547748b72fdd7e31b37ca9811b54dffc7e251f73301d204f204",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            6496,
+            7579
+          ],
+          "cell_span": [
+            6762,
+            6834
+          ],
+          "row_span": [
+            6694,
+            6835
+          ],
+          "column_spans": [
+            [
+              6538,
+              6569
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

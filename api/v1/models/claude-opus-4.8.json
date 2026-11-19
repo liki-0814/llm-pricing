@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "claude-opus-4.8",
@@ -13,6 +17,9 @@
     "vendor": "anthropic",
     "vendor_name": "Anthropic",
     "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
@@ -51,7 +58,8 @@
     "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
     "extra_sources": [],
     "last_updated": "2026-10-11",
-    "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式（研究预览）输入 $10 / 输出 $50。",
+    "price_observations": [],
+    "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $10。Batch API 5 折。Fast 模式价仍列出输入 $10 / 输出 $50，但官方现写 Fast mode 对 Claude Opus 4.8 为 deprecated（对 Opus 5 仍为 research preview）。不是模型退役。",
     "reasoning_effort": {
       "supported": true,
       "levels": [
@@ -113,7 +121,7 @@
       {
         "name": "fast",
         "multiplier": 2.0,
-        "note": "Fast mode（研究预览，仅 Claude API 一方）：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+        "note": "Fast mode 价仍列出：输入 $10 / 输出 $50，约 2×；全上下文窗口适用，不可与 Batch 同用。官方：Fast mode is in research preview for Claude Opus 5 and deprecated for Claude Opus 4.8。不是模型退役。",
         "multipliers": {
           "input": 2.0,
           "output": 2.0,
@@ -129,7 +137,15 @@
         "pricing": {},
         "sources": [
           "https://platform.claude.com/docs/en/about-claude/pricing"
-        ]
+        ],
+        "status_observation": {
+          "status": "deprecated",
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "sources": [
+            "https://platform.claude.com/docs/en/about-claude/pricing"
+          ],
+          "note": "观察到 Fast 档 deprecated，不推定更早已弃用，不表示模型退役或该档不可估价。"
+        }
       },
       {
         "name": "data_residency",
@@ -167,6 +183,11 @@
     "links": {
       "self": "models/claude-opus-4.8.json",
       "vendor": "vendors/anthropic.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
     }
   }
 }

@@ -1,0 +1,185 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
+  },
+  "data": {
+    "id": "claude-opus-5.5",
+    "name": "Claude Opus 5.5",
+    "vendor": "anthropic",
+    "vendor_name": "Anthropic",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 4,
+      "output": 20,
+      "cached_input": 0.2,
+      "cache_write": 5
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "current",
+      "region": null,
+      "cached_input_type": "explicit",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1000000,
+    "context_length_label": "1M",
+    "source_url": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "extra_sources": [],
+    "last_updated": "2026-10-20",
+    "price_observations": [],
+    "notes": "缓存写入价为 5 分钟 TTL；1 小时 TTL 写入 $8。Batch API 5 折。Fast 模式（已正式提供，不再是研究预览）输入 $8 / 输出 $40。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "default": "medium",
+      "can_disable": false,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      },
+      "note": "output_config.effort 支持 low/medium/high/xhigh/max。默认 medium（其余多数模型默认 high）；自适应思考恒开，thinking:disabled 在所有档位都会 400。",
+      "sources": [
+        "https://platform.claude.com/docs/en/build-with-claude/effort",
+        "https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting"
+      ]
+    },
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": 128000,
+      "status": "verified",
+      "note": "官方：Context window 1M tokens、Max output 128K tokens（同步 Messages API 上限），按 1M=1,000,000、1K=1,000 记录。",
+      "sources": [
+        "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "https://platform.claude.com/docs/en/about-claude/models/overview"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [],
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "note": "Message Batches API：输入、输出均 5 折（官方定价页逐项列出）。",
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 0.5,
+          "cache_write": 0.5,
+          "implicit_read": 0.5,
+          "explicit_read": 0.5,
+          "explicit_write": 0.5,
+          "explicit_write_1h": 0.5,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {},
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      {
+        "name": "fast",
+        "multiplier": 2.0,
+        "note": "Fast mode（Opus 5.5 已非研究预览；Claude API 一方及 Microsoft Foundry Azure 部署）：输入 $8 / 输出 $40，约 2×；全上下文窗口适用，不可与 Batch 同用。",
+        "multipliers": {
+          "input": 2.0,
+          "output": 2.0,
+          "cached_input": 2.0,
+          "cache_write": 2.0,
+          "implicit_read": 2.0,
+          "explicit_read": 2.0,
+          "explicit_write": 2.0,
+          "explicit_write_1h": 2.0,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {},
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      },
+      {
+        "name": "data_residency",
+        "multiplier": 1.1,
+        "note": "通过 inference_geo 指定仅美国推理时，所有 token 价格类别（输入/输出/缓存写/缓存读）×1.1；默认全球路由为标准价。",
+        "multipliers": {
+          "input": 1.1,
+          "output": 1.1,
+          "cached_input": 1.1,
+          "cache_write": 1.1,
+          "implicit_read": 1.1,
+          "explicit_read": 1.1,
+          "explicit_write": 1.1,
+          "explicit_write_1h": 1.1,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {},
+        "sources": [
+          "https://platform.claude.com/docs/en/about-claude/pricing"
+        ]
+      }
+    ],
+    "cache_pricing": {
+      "implicit_read": null,
+      "explicit_read": 0.2,
+      "explicit_write": 5,
+      "explicit_write_1h": 8,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "缓存读取价=基础输入价×倍数（Fable/Mythos 5.1 为 0.025×，Opus/Sonnet 5.5 为 0.05×，其余 0.1×）；cache_write 为 5 分钟 TTL 写入价，1 小时 TTL 写入价见 explicit_write_1h。"
+    },
+    "price_schedule": [],
+    "unverified_fields": [],
+    "links": {
+      "self": "models/claude-opus-5.5.json",
+      "vendor": "vendors/anthropic.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

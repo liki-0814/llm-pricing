@@ -1,9 +1,9 @@
 (function () {
   "use strict";
-  var DATA_URL = "data/prices.json";
+  var DATA_URL = "data/page-models.json";
   var PRICE_KEYS = ["input", "output", "cached_input", "cache_write"];
   var esc = LP.esc;
-  var state = { models: [], vendors: [], vendor: "", q: "", sortKey: "_i", sortDir: 1, open: {}, modality: "text" };
+  var state = { models: [], vendors: [], vendor: "", q: "", sortKey: "_i", sortDir: 1, open: {}, modality: "text", currency: "USD" };
   var MODS = ["text", "image", "video"];
   var MODLABEL = { text: "文本", image: "图像", video: "视频" };
   var TOKLABEL = { text_input: "文本输入", text_cached_input: "文本缓存输入", text_output: "文本输出", image_input: "图像输入", image_cached_input: "图像缓存输入",
@@ -18,7 +18,7 @@
     if (/\.$/.test(s)) s += "00"; else if (/\.\d$/.test(s)) s += "0";
     return s;
   }
-  function money(v) { return '<span class="cur">$</span>' + fmtNum(v); }
+  function money(v) { return '<span class="cur">' + (state.currency === 'CNY' ? '¥' : '$') + '</span>' + fmtNum(v); }
   function isNum(v) { return typeof v === "number" && isFinite(v); }
   function priceCell(v, best) {
     if (v === null || v === undefined) return '<span class="tbd" title="未能从官方来源核实">待核实</span>';
@@ -67,7 +67,7 @@
     return '<div class="re">' + out + (meta.length ? '<div class="re-meta">' + meta.join(" · ") + "</div>" : "") + note + "</div>";
   }
 
-  // ---- structured specs: tiers / service tiers / cache / sources (same data as api/v1/models/<id>.json) ----
+  // ---- structured specs: tiers / service tiers / cache / sources (same data as api/v2/models/<id>.json) ----
   var SVCLABEL = { batch: "Batch", flex: "Flex", fast: "Fast", priority: "Priority", ultrafast: "Ultrafast", data_residency: "数据驻留加价" };
   function fmtTok(n) {
     if (!isNum(n)) return null;
@@ -101,7 +101,7 @@
   function srcLinks(arr) {
     return (arr || []).map(function (u) { return '<a class="rsrc" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(u.replace(/^https?:\/\//, "")) + "</a>"; }).join("");
   }
-  function block(title, body, wide) { return '<section class="dblock' + (wide ? " wide" : "") + '"><h4>' + title + "</h4>" + body + "</section>"; }
+  function block(title, body, wide) { return '<section class="dblock' + (wide ? " wide" : "") + '"><h3>' + title + "</h3>" + body + "</section>"; }
   function detailHtml(m) {
     var out = [], x, L = m.limits || {};
     // 1 tiers
@@ -116,12 +116,16 @@
     // 2 service tiers
     var sv = m.service_tiers || [];
     x = sv.length ? sv.map(function (t) {
-      return '<div class="svc" title="' + esc(t.note || "") + '"><span class="lv lv-def">' + esc(SVCLABEL[t.name] || t.name) + '</span><b>×' + t.multiplier + "</b></div>";
+      return '<div class="svc" title="' + esc(t.note || "") + '"><span class="lv lv-def">' + esc(SVCLABEL[t.name] || t.name) + '</span><b>' + ((t.multiplier_schedule || []).length ? '基准×' : '×') + t.multiplier + ((t.multiplier_schedule || []).length ? '（见时间排期）' : '') + "</b></div>";
     }).join("") + sv.map(function (t) { return t.note ? '<p class="dnote"><b>' + esc(SVCLABEL[t.name] || t.name) + "：</b>" + esc(t.note) + "</p>" : ""; }).join("")
       : '<span class="na">官方未列出服务档倍率</span>';
     if (sv.length) {
       x += '<p class="dnote">上述倍率用于输入与输出；缓存和存储按各费用项规则计费。</p>';
       sv.forEach(function (t) {
+        (t.multiplier_schedule || []).forEach(function (e) {
+          x += '<p class="dnote">' + esc(t.name) + '：自 ' + esc(e.effective_from) + '（' + esc(e.timezone) + '）×' + esc(e.multiplier) + '</p>';
+        });
+        if (t.status_observation) x += '<p class="dnote">档状态 ' + esc(t.status_observation.status) + '，观察时刻 ' + esc(t.status_observation.observed_at) + '；不倒推此前状态，不代表模型退役。</p>';
         var rules = [];
         ["cached_input", "cache_write"].forEach(function (k) {
           if (m[k] === "n/a" && !Object.prototype.hasOwnProperty.call(t.pricing || {}, k)) return;
@@ -151,7 +155,7 @@
     // 4 provenance and billing (reference prices remain visible).
     var basis = m.price_basis || {}, billing = m.billing || {};
     x = '<p class="dnote"><b>' + (basis.type === "reference" ? "用户确认参照价" : "官方价格") + '</b>：' + esc(basis.note || "") + '</p>';
-    if (basis.reference_model_id) x += '<p class="dnote">参照模型：<a href="api/v1/models/' + encodeURIComponent(basis.reference_model_id) + '.json">' + esc(basis.reference_model_id) + '</a></p>';
+    if (basis.reference_model_id) x += '<p class="dnote">参照模型：<a href="api/v2/models/' + encodeURIComponent(basis.reference_model_id) + '.json">' + esc(basis.reference_model_id) + '</a></p>';
     x += '<p class="dnote">计费渠道：' + (billing.channel === "subscription" ? "订阅" : "按量付费") + (billing.region ? " · 地区：" + esc(billing.region) : "") +
       ' · 主价格口径：' + esc(billing.price_type || "current") + ' · 缓存类型：' + esc(billing.cached_input_type || "unspecified") + '</p>';
     out.push(block("价格依据与计费口径", x, true));
@@ -168,7 +172,7 @@
       var when = e.effective_from ? "自 " + esc(e.effective_from) : (e.effective_until ? "至 " + esc(e.effective_until) : "时间未明确");
       x += '<p class="dnote"><b>' + (e.kind === "promotion" ? "促销" : "价格调整") + "（" + when + "）：</b>" + esc(e.note || "") + "</p>";
     });
-    x += '<p class="dnote">更新于 ' + esc(m.last_updated || "") + ' · <a href="api/v1/models/' + encodeURIComponent(m.model_id) + '.json">JSON</a></p>';
+    x += '<p class="dnote">更新于 ' + esc(m.last_updated || "") + ' · <a href="api/v2/models/' + encodeURIComponent(m.model_id) + '.json">JSON</a></p>';
     out.push(block("来源", x, true));
     return '<div class="detail">' + out.join("") + "</div>";
   }
@@ -197,7 +201,7 @@
       return '<td class="' + c[0] + '" data-label="' + c[1] + '">' + c[2] + "</td>";
     }).join("") + "</tr>" + (open ? detailRow(m, slug) : "");
   }
-  // ---- image / video models: structured media_pricing (same data as api/v1/models/<id>.json) ----
+  // ---- image / video models: structured media_pricing (same data as api/v2/models/<id>.json) ----
   function imgLabel(e) { return e.size === "any" ? "任意尺寸" : e.size; }
   function priceRows(m, tier) {
     var mp = m.media_pricing, out = [];
@@ -259,7 +263,7 @@
         }).join("") + "</tbody></table>" +
         std.concat(bat).filter(function (r) { return r.note; }).map(function (r) { return '<p class="dnote"><b>' + esc(r.label) + "：</b>" + esc(r.note) + "</p>"; }).join("");
     } else x = '<span class="tbd">官方未公布按张 / 按秒单价（待核实）</span>';
-    out.push(block(m.modality === "image" ? "按张价格（USD）" : "按秒价格（USD）", x, true));
+    out.push(block((m.modality === "image" ? "按张价格（" : "按秒价格（") + esc(m.currency) + "）", x, true));
     var tp = mp.token_pricing;
     if (tp) {
       var tiers = ["standard", "batch", "priority"].filter(function (t) { return tp[t]; });
@@ -276,13 +280,14 @@
     x += kv("计费方式", mp.billing_methods.map(function (k) { return { token: "按 token", per_image: "按张", per_second: "按秒" }[k] || k; }).join(" + "));
     x += kv("Batch", mp.batch_supported === true ? "支持" : mp.batch_supported === false ? "不支持" : "待核实");
     if (mp.promotion) x += '<p class="dnote"><b>促销：</b>' + esc(mp.promotion.note || "") + (mp.promotion.effective_until ? "（至 " + esc(mp.promotion.effective_until) + "）" : "（官方未给截止日期）") + "</p>";
+    if (mp.input_image_allowance) x += '<p class="dnote">每任务前 ' + esc(mp.input_image_allowance.free_quantity) + ' 张输入图免费，仅超额计费；一次估价代表一个任务，传入总张数，不需手减。</p>';
     if (mp.billing_note) x += '<p class="dnote">' + esc(mp.billing_note) + "</p>";
     out.push(block("计费口径", x, false));
     x = '<p class="dnote"><b>官方价格</b>：' + esc(basis.note || "") + "</p>" + (m.notes ? '<p class="dnote">' + esc(m.notes) + "</p>" : "");
     var urls = [];
     [m.source_url].concat(m.extra_sources || [], mp.sources || []).forEach(function (u) { if (u && urls.indexOf(u) < 0) urls.push(u); });
     x += srcLinks(urls) + '<p class="dnote">更新于 ' + esc(m.last_updated || "") + (billing.region ? " · 地区：" + esc(billing.region) : "") +
-      ' · <a href="api/v1/models/' + encodeURIComponent(m.model_id) + '.json">JSON</a></p>';
+      ' · <a href="api/v2/models/' + encodeURIComponent(m.model_id) + '.json">JSON</a></p>';
     if ((m.unverified_fields || []).length) x += '<p class="dnote"><span class="tbd">待核实</span> ' + m.unverified_fields.map(function (f) { return "<code>" + esc(f) + "</code>"; }).join(" ") + "</p>";
     out.push(block("来源", x, false));
     return '<div class="detail">' + out.join("") + "</div>";
@@ -320,6 +325,7 @@
     var q = state.q.trim().toLowerCase();
     var terms = q ? q.split(/\s+/) : [];
     return state.models.filter(function (m) {
+      if (m.currency !== state.currency) return false;
       if (m.modality !== state.modality) return false;
       if (state.vendor && m.vendor !== state.vendor) return false;
       var h = m._h;
@@ -329,7 +335,8 @@
   }
   function syncUrl() {
     var p = new URLSearchParams(location.search);
-    ["vendor", "q", "sort", "modality"].forEach(function (k) { p.delete(k); });
+    ["vendor", "q", "sort", "modality", "currency"].forEach(function (k) { p.delete(k); });
+    if (state.currency !== "USD") p.set("currency", state.currency);
     if (state.modality !== "text") p.set("modality", state.modality);
     if (state.vendor) p.set("vendor", LP.slug(state.vendor));
     if (state.q.trim()) p.set("q", state.q.trim());
@@ -344,6 +351,10 @@
   window.addEventListener("resize", fitDetail);
 
   function render() {
+    state.models = state.allModels.filter(function (m) { return LLMAvailability.availability(m, new Date().toISOString()).estimable; });
+    var cheapest = state.models.filter(function (m) { return m.currency === state.currency && m.modality === "text" && isNum(m.input); }).sort(function (a,b) { return a.input - b.input; })[0];
+    $("statCheapest").innerHTML = cheapest ? (state.currency === "CNY" ? "¥" : "$") + fmtNum(cheapest.input) + "<small>" + esc(cheapest.model) + "（" + state.currency + "）</small>" : "—";
+    $("currencySelect").value = state.currency;
     var list = filtered();
     list.sort(function (a, b) { return cmp(a, b) || a._i - b._i; });
     var best = {}, media = state.modality !== "text";
@@ -358,7 +369,7 @@
     document.querySelector(".table-card").classList.toggle("media", media);
     fitDetail();
     $("empty").hidden = list.length > 0;
-    var inMod = state.models.filter(function (m) { return m.modality === state.modality; }).length;
+    var inMod = state.models.filter(function (m) { return m.currency === state.currency && m.modality === state.modality; }).length;
     $("count").innerHTML = "显示 <b>" + list.length + "</b> / " + inMod + " 个" + MODLABEL[state.modality] + "模型（共 " + state.models.length + "）";
     $("textLegend").hidden = media; $("mediaLegend").hidden = !media;
     Array.prototype.forEach.call(document.querySelectorAll("#modalityTabs .tab"), function (t) {
@@ -366,7 +377,7 @@
     });
     $("sortText").hidden = media; $("sortMedia").hidden = !media;
     // vendor chips: only vendors that have models in this modality
-    var cnt = {}; state.models.forEach(function (m) { if (m.modality === state.modality) cnt[m.vendor] = (cnt[m.vendor] || 0) + 1; });
+    var cnt = {}; state.models.forEach(function (m) { if (m.currency === state.currency && m.modality === state.modality) cnt[m.vendor] = (cnt[m.vendor] || 0) + 1; });
     Array.prototype.forEach.call(document.querySelectorAll("#vendorChips .chip"), function (c) {
       var v = c.dataset.vendor, n = v ? (cnt[v] || 0) : inMod;
       c.querySelector(".n").textContent = n; c.hidden = !!v && !n;
@@ -389,7 +400,7 @@
       (slug ? '<span class="vdot" aria-hidden="true"></span>' : "") + esc(label) + ' <span class="n">' + n + "</span></button>";
   }
   function setSort(k, dir) { state.sortKey = k; state.sortDir = dir; render(); }
-  function reset() { state.vendor = ""; state.q = ""; $("searchBox").value = ""; setSort("_i", 1); }
+  function reset() { state.currency = "USD"; state.vendor = ""; state.q = ""; $("searchBox").value = ""; setSort("_i", 1); }
   function setModality(mod) {
     if (MODS.indexOf(mod) < 0) mod = "text";
     state.modality = mod; state.vendor = "";
@@ -400,7 +411,20 @@
 
   function init(data) {
     var models = data.models;
+    state.currency = new URLSearchParams(location.search).get("currency") === "CNY" ? "CNY" : "USD";
     state.models = models.map(function (m, i) {
+      if (m.lifecycle) {
+        var life = m.lifecycle;
+        var announced = life.retirement_date ? "官方退役日期 " + life.retirement_date +
+          (life.precision !== "instant" || !life.timezone ? "（具体时刻及时区待确认）" : "（" + life.timezone + "）") + "；" : "";
+        m.notes = (m.notes || "") + " 生命周期：" + announced + (life.note || "待确认");
+      }
+      (m.price_observations || []).forEach(function (e) {
+        m.notes = (m.notes || "") + " 字段观察：" + e.fields.join(",") +
+          (e.input_tokens_gt !== null ? "（输入>" + e.input_tokens_gt + "）" : "") +
+          "，" + e.observed_at + "；" + (e.valid_from ? "已证生效自 " + e.valid_from : "非官方生效时刻，观察前未知历史拒绝估价") + "。";
+      });
+      if (m.billing && m.billing.price_type === "list") m.notes = "表内为目录价；" + (m.notes || "");
       m._i = i; m._h = haystack(m);
       m.lim_out = m.limits ? m.limits.max_output_tokens : null;
       m.media_price = null;
@@ -412,10 +436,23 @@
       m.re_sort = (r && r.supported === false) ? 0 : (r && r.levels ? r.levels.length : null);
       return m;
     });
+    state.allModels = state.models.slice();
     state.vendors = data.vendors;
+    $("currencySelect").addEventListener("change", function () { state.currency = this.value; state.vendor = ""; render(); });
+    var nearest = models.map(function (m) { return m.lifecycle && m.lifecycle.retired_at ? Date.parse(m.lifecycle.retired_at) : Infinity; }).filter(function (t) { return t > Date.now(); });
+    if (nearest.length) setTimeout(function () { render(); }, Math.min(2147483647, Math.min.apply(null, nearest) - Date.now() + 1));
     (new URLSearchParams(location.search).get("open") || "").split(",").forEach(function (id) { if (id) state.open[id] = true; });
     $("statUpdated").textContent = data.meta.last_updated;
-    $("footUpdated").textContent = data.meta.last_updated;
+    var snapshot = data.meta.as_of || data.meta.availability_as_of;
+    var instant = snapshot && Date.parse(snapshot);
+    var snapshotLabel = Number.isFinite(instant) ? new Date(instant + 8 * 3600000).toISOString().slice(0, 19).replace("T", " ") + " 北京时间（UTC+08:00）" : "时点待核实";
+    $("statAsOf").textContent = "快照：" + snapshotLabel;
+    $("footUpdated").textContent = data.meta.last_updated + "；快照时点：" + snapshotLabel;
+    var priceEvidence = data.public_price_evidence;
+    if (priceEvidence) {
+      $("footUpdated").textContent += "；公开原文价格事实 " + priceEvidence.price_verified_count + " 条、公开计划渠道声明 " + (priceEvidence.offering_channel_observation_count || 0) + " 项、公开价条件原文 " + (priceEvidence.quoted_price_statement_count || 0) + " 行（按来源取证，非目录全集/当前可用性认证；估算费率不变）";
+      $("footUpdated").innerHTML = esc($("footUpdated").textContent) + ' <a href="api/v2/price-facts.json">查看逐项价格原文证据</a> · <a href="api.html#try">按 Model ID 查询原文价格（非估价）</a>';
+    }
     var mc = { text: 0, image: 0, video: 0 };
     models.forEach(function (m) { mc[m.modality]++; });
     $("statModels").innerHTML = models.length + "<small>个</small>";

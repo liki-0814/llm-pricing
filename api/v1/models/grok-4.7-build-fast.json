@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "grok-4.7-build-fast",
@@ -13,6 +17,9 @@
     "vendor": "xai",
     "vendor_name": "xAI",
     "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
@@ -56,6 +63,7 @@
       "https://cli-chat-proxy.grok.com/v1/models"
     ],
     "last_updated": "2026-10-11",
+    "price_observations": [],
     "notes": "订阅渠道模型 ID 为 grok-4.7-build-fast（2026-10-11 上游模型列表实查 HTTP 200）。官方 Fast 价格表仅供订阅成本参照；不在公共 xAI API 上提供，不代表会员额度或实际扣费。短上下文输入/缓存/输出 4/1/12，总输入 >200,000 后 6/1.5/18 USD per 1M tokens。渠道默认上下文 256,000，可选 500,000；独立输出上限和能否关闭推理待核实。",
     "reasoning_effort": {
       "supported": true,
@@ -129,6 +137,11 @@
     "links": {
       "self": "models/grok-4.7-build-fast.json",
       "vendor": "vendors/xai.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
     }
   }
 }

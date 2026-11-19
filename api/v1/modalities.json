@@ -1,18 +1,22 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 3
   },
   "data": [
     {
       "name": "text",
       "label": "文本生成（token 计价）",
-      "model_count": 50,
+      "model_count": 60,
       "model_ids": [
         "deepseek-flash",
         "deepseek-v4-pro",
@@ -63,7 +67,17 @@
         "minimax-m3.1-flash",
         "kimi-for-coding",
         "grok-4.7",
-        "grok-4.7-build-fast"
+        "grok-4.7-build-fast",
+        "qwen4-max",
+        "gpt-6.2-astra",
+        "gpt-6.2-sol",
+        "gpt-6.2-astra-law",
+        "claude-fable-5-2",
+        "claude-mythos-5-2",
+        "gemini-4-carbon",
+        "gemini-4-hydrogen",
+        "glm-5.3-flashx-legal",
+        "minimax-h3-context-ir"
       ],
       "vendors": [
         "deepseek",
@@ -83,7 +97,7 @@
     {
       "name": "image",
       "label": "图像生成",
-      "model_count": 12,
+      "model_count": 16,
       "model_ids": [
         "gpt-image-2.5-flare",
         "gpt-image-2.5-sunburst",
@@ -96,7 +110,11 @@
         "wan2.7-image-pro",
         "wan2.7-image",
         "minimax-image-01",
-        "glm-image"
+        "glm-image",
+        "gpt-image-2.6-sunburst",
+        "gpt-image-2.6-flare",
+        "minimax-h3-image",
+        "minimax-h3-image-highspeed"
       ],
       "vendors": [
         "openai",
@@ -113,7 +131,7 @@
     {
       "name": "video",
       "label": "视频生成",
-      "model_count": 9,
+      "model_count": 10,
       "model_ids": [
         "grok-imagine-video-1.5",
         "grok-imagine-video-1.5-lite",
@@ -123,7 +141,8 @@
         "minimax-h3",
         "minimax-h3-highspeed",
         "minimax-h3-lite",
-        "minimax-h3-max"
+        "minimax-h3-max",
+        "minimax-h3-regeneration"
       ],
       "vendors": [
         "qwen",

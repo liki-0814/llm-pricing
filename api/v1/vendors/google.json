@@ -1,17 +1,21 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
-    "count": 8
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 10
   },
   "vendor": {
     "slug": "google",
     "name": "Google Gemini",
-    "model_count": 8,
+    "model_count": 10,
     "model_ids": [
       "gemini-4-argon",
       "gemini-3.8-flash",
@@ -20,10 +24,12 @@
       "gemini-nano-banana-2.1",
       "gemini-3.1-flash-lite-image",
       "gemini-3-pro-image",
-      "gemini-omni-1.1-flash"
+      "gemini-omni-1.1-flash",
+      "gemini-4-carbon",
+      "gemini-4-hydrogen"
     ],
     "modality_counts": {
-      "text": 4,
+      "text": 6,
       "image": 3,
       "video": 1
     },
@@ -41,6 +47,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -85,6 +94,7 @@
         "https://ai.google.dev/gemini-api/docs/changelog"
       ],
       "last_updated": "2026-10-19",
+      "price_observations": [],
       "notes": "Standard 付费档（2026-10-13 GA，Stable）；不提供免费档。仅支持隐式缓存（提示 ≥4,096 tokens 自动启用，命中价为输入价 5%），不支持显式缓存，故无缓存写入价与存储费。无长上下文分档。Batch/Flex 为标准价 50%（含缓存），Priority 为 1.8×。注意：该价格仅到 2026-11-30；2026-12-01 起输入 $4.00、输出 $20.00、缓存 $0.20（Batch/Flex/Priority 同比例上调）。",
       "reasoning_effort": {
         "supported": true,
@@ -220,6 +230,11 @@
       "links": {
         "self": "models/gemini-4-argon.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -228,6 +243,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -268,6 +286,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "Standard 付费档。缓存存储费 $0.50/百万 token/小时（2027 起 $1.00）。价格已对照官方定价页复核无变化。 注意：该价格仅到 2026-12-31；2027-01-01 起输入 $1.50、输出 $7.50、缓存 $0.15。",
       "reasoning_effort": {
         "supported": true,
@@ -400,6 +419,11 @@
       "links": {
         "self": "models/gemini-3.8-flash.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -408,6 +432,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -448,6 +475,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite"
       ],
       "last_updated": "2026-11-06",
+      "price_observations": [],
       "notes": "Standard 付费档（文本/图像/视频/音频同价）。缓存存储费 $1.00/百万 token/小时。2026-11-06：Batch 档 Context caching 官方为 $0.015（此前 repo 误记 0.02）；Flex 仍为 $0.02，Priority $0.05。来源：https://ai.google.dev/gemini-api/docs/pricing",
       "reasoning_effort": {
         "supported": true,
@@ -569,6 +597,11 @@
       "links": {
         "self": "models/gemini-3.5-flash-lite.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -577,6 +610,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -617,6 +653,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "表中为提示 ≤200K 的价格；>200K：输入 $4.00、输出 $18.00、缓存 $0.40。缓存存储费 $4.50/百万 token/小时。价格已对照官方定价页复核无变化。",
       "reasoning_effort": {
         "supported": true,
@@ -751,6 +788,11 @@
       "links": {
         "self": "models/gemini-3.1-pro-preview.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -759,6 +801,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -800,6 +845,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价并给出等价单张价：1K（1120 token）$0.0336、2K（1680）$0.0504、4K（3780）$0.113；Batch 为半价。联网检索 grounding 每月 5000 次免费，之后 $14/千次。",
       "reasoning_effort": {
         "supported": false,
@@ -944,6 +990,11 @@
       "links": {
         "self": "models/gemini-nano-banana-2.1.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -952,6 +1003,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -993,6 +1047,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价：输入 $0.25，图像输出 $30 / 百万 token；等价单张价仅列 1K：$0.0336（1120 token）；Batch 半价。",
       "reasoning_effort": {
         "supported": false,
@@ -1101,6 +1156,11 @@
       "links": {
         "self": "models/gemini-3.1-flash-lite-image.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1109,6 +1169,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -1150,6 +1213,7 @@
         "https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "Token 计价并给出等价单张价：1K/2K（1120 token）$0.134、4K（2000 token）$0.24；Batch/Flex 为 $0.067 / $0.12；输入图片 560 token ≈ $0.0011/张（Batch $0.0006）；Priority 另计。",
       "reasoning_effort": {
         "supported": false,
@@ -1304,6 +1368,11 @@
       "links": {
         "self": "models/gemini-3-pro-image.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -1312,6 +1381,9 @@
       "vendor": "google",
       "vendor_name": "Google Gemini",
       "modality": "video",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -1355,6 +1427,7 @@
         "https://ai.google.dev/gemini-api/docs/video"
       ],
       "last_updated": "2026-11-06",
+      "price_observations": [],
       "notes": "Token 计价：输入 $1.50（文本/图像/视频/音频）、文本输出 $9.00、视频输出 $17.50 / 百万 token；按 720p 视频 5,792 token/秒计，官方称约 $0.10/秒（近似值）。官方未列 360p / 1080p / 4k 的单价，待核实。 Effective December 3, 2026, API requests to gemini-omni-1.1-flash automatically route to gemini-omni-1.2-flash and are billed at 1.2 rates (video output $12/1M tokens vs current 1.1 $17.50; ~$0.07/s @720p). Current 1.1 Standard prices still apply until then. Source: https://ai.google.dev/gemini-api/docs/pricing (changelog 2026-11-05). Schema note: media models cannot yet store price_schedule; route recorded in notes only.",
       "reasoning_effort": {
         "supported": false,
@@ -1482,6 +1555,404 @@
       "links": {
         "self": "models/gemini-omni-1.1-flash.json",
         "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gemini-4-carbon",
+      "name": "Gemini 4 Carbon",
+      "vendor": "google",
+      "vendor_name": "Google Gemini",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cached_input": 0.1,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1M",
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "extra_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+      ],
+      "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
+      "notes": "官方目录与定价页均列出。标准价当前输入 $2 / 输出 $10 / 隐式缓存 $0.10，至 2026-11-30；2026-12-01 起 $4 / $20 / $0.20。仅隐式缓存，无缓存写入，不提供免费档。不与 gemini-4-argon 合并为同一 ID。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "官方模型页将 Thinking 列为能力并称 reasoning model，但本轮未列出 effort 档位或默认值，待核实，不借用 Argon。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+        ]
+      },
+      "limits": {
+        "context_length": 1048576,
+        "max_output_tokens": 65536,
+        "status": "verified",
+        "note": "官方模型页：输入与输出共享 1,048,576 tokens 统一上下文窗口；Max output 65,536（默认同步请求上限）；开启 long decode 时最多可达 1,048,576 减去输入 tokens。此处按同步上限记录。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API：官方定价页列出，均为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 推理：官方定价页列出，与 Batch 同价，均为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+          ]
+        },
+        {
+          "name": "priority",
+          "multiplier": 1.8,
+          "note": "Priority 推理：官方定价页列出，均为标准价 1.8×。",
+          "multipliers": {
+            "input": 1.8,
+            "output": 1.8,
+            "cached_input": 1.8,
+            "cache_write": 1.8,
+            "implicit_read": 1.8,
+            "explicit_read": 1.8,
+            "explicit_write": 1.8,
+            "explicit_write_1h": 1.8,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": 0.1,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "仅隐式缓存：命中价即 pricing.cached_input；官方明确不支持显式缓存，故无显式读写价，也未列缓存存储费。cache_write 记 n/a。"
+      },
+      "price_schedule": [
+        {
+          "kind": "scheduled_increase",
+          "effective_from": "2026-12-01",
+          "effective_until": null,
+          "input": 4.0,
+          "output": 20.0,
+          "cached_input": 0.2,
+          "cache_write": null,
+          "note": "官方：当前介绍价仅到 2026-11-30；2026-12-01 起 Standard 输入 $4.00、输出 $20.00、缓存 $0.20；Batch/Flex（$2.00/$10.00/$0.10）与 Priority（$7.20/$36.00/$0.36）同比例上调。价与排期同官方对 gemini-4-argon 的公布，但是独立调用 ID。",
+          "multiplier": null,
+          "cache_pricing": {
+            "implicit_read": 0.2
+          },
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-carbon"
+          ]
+        }
+      ],
+      "unverified_fields": [
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "links": {
+        "self": "models/gemini-4-carbon.json",
+        "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
+      }
+    },
+    {
+      "id": "gemini-4-hydrogen",
+      "name": "Gemini 4 Hydrogen",
+      "vendor": "google",
+      "vendor_name": "Google Gemini",
+      "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
+      "currency": "USD",
+      "unit": "per_1M_tokens",
+      "pricing": {
+        "input": 1.5,
+        "output": 7.5,
+        "cached_input": 0.075,
+        "cache_write": null
+      },
+      "pricing_status": {
+        "input": "verified",
+        "output": "verified",
+        "cached_input": "verified",
+        "cache_write": "not_listed"
+      },
+      "price_basis": {
+        "type": "official",
+        "reference_model_id": null,
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/pricing",
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+        ],
+        "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+      },
+      "billing": {
+        "channel": "pay_as_you_go",
+        "price_type": "current",
+        "region": null,
+        "cached_input_type": "implicit",
+        "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+      },
+      "off_peak_schedule": null,
+      "has_off_peak": false,
+      "off_peak_pricing": null,
+      "peak_note": null,
+      "context_length": 1048576,
+      "context_length_label": "1M",
+      "source_url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "extra_sources": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+      ],
+      "last_updated": "2026-11-18",
+      "price_observations": [
+        {
+          "observed_at": "2026-11-18T08:27:00+08:00",
+          "valid_from": null,
+          "valid_until": null,
+          "fields": [
+            "*"
+          ],
+          "input_tokens_gt": null,
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing"
+          ],
+          "note": "本轮仅在此观察时刻核实；未证实更早生效时间，观察前不得使用这些新增字段估价；observed_at不是官方生效时刻。"
+        }
+      ],
+      "notes": "官方目录与定价页均列出。标准价输入 $1.50 / 输出 $7.50 / 隐式缓存 $0.075，无涨价排期。另有邀请制 Contributor 价签（$0.75 / $3.75 / $0.0375），不是通用当前价，本轮不作为默认估价。仅隐式缓存。",
+      "reasoning_effort": {
+        "supported": true,
+        "levels": null,
+        "default": null,
+        "can_disable": null,
+        "status": "partial",
+        "field_status": {
+          "supported": "verified",
+          "levels": "unverified",
+          "default": "unverified",
+          "can_disable": "unverified"
+        },
+        "note": "官方模型页将 Thinking 列为能力并称 reasoning model，但本轮未列出 effort 档位或默认值，待核实，不借用 Argon。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+        ]
+      },
+      "limits": {
+        "context_length": 1048576,
+        "max_output_tokens": 65536,
+        "status": "verified",
+        "note": "官方模型页：输入与输出共享 1,048,576 tokens 统一上下文窗口；Max output 65,536（默认同步请求上限）；开启 long decode 时最多可达 1,048,576 减去输入 tokens。此处按同步上限记录。",
+        "sources": [
+          "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+        ]
+      },
+      "media_pricing": null,
+      "pricing_tiers": [],
+      "service_tiers": [
+        {
+          "name": "batch",
+          "multiplier": 0.5,
+          "note": "Batch API：官方定价页列出，均为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+          ]
+        },
+        {
+          "name": "flex",
+          "multiplier": 0.5,
+          "note": "Flex 推理：官方定价页列出，与 Batch 同价，均为标准价 50%。",
+          "multipliers": {
+            "input": 0.5,
+            "output": 0.5,
+            "cached_input": 0.5,
+            "cache_write": 0.5,
+            "implicit_read": 0.5,
+            "explicit_read": 0.5,
+            "explicit_write": 0.5,
+            "explicit_write_1h": 0.5,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+          ]
+        },
+        {
+          "name": "priority",
+          "multiplier": 1.8,
+          "note": "Priority 推理：官方定价页列出，均为标准价 1.8×。",
+          "multipliers": {
+            "input": 1.8,
+            "output": 1.8,
+            "cached_input": 1.8,
+            "cache_write": 1.8,
+            "implicit_read": 1.8,
+            "explicit_read": 1.8,
+            "explicit_write": 1.8,
+            "explicit_write_1h": 1.8,
+            "explicit_write_12h": null,
+            "storage_per_1M_tokens_hour": 1
+          },
+          "pricing": {},
+          "sources": [
+            "https://ai.google.dev/gemini-api/docs/pricing",
+            "https://ai.google.dev/gemini-api/docs/models/gemini-4-hydrogen"
+          ]
+        }
+      ],
+      "cache_pricing": {
+        "implicit_read": 0.075,
+        "explicit_read": null,
+        "explicit_write": null,
+        "explicit_write_1h": null,
+        "explicit_write_12h": null,
+        "storage_per_1M_tokens_hour": null,
+        "note": "仅隐式缓存：命中价即 pricing.cached_input；官方明确不支持显式缓存，故无显式读写价，也未列缓存存储费。cache_write 记 n/a。"
+      },
+      "price_schedule": [],
+      "unverified_fields": [
+        "reasoning_effort.levels",
+        "reasoning_effort.default",
+        "reasoning_effort.can_disable"
+      ],
+      "links": {
+        "self": "models/gemini-4-hydrogen.json",
+        "vendor": "vendors/google.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     }
   ]

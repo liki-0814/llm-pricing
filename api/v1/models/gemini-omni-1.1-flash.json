@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "gemini-omni-1.1-flash",
@@ -13,6 +17,9 @@
     "vendor": "google",
     "vendor_name": "Google Gemini",
     "modality": "video",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
     "currency": "USD",
     "unit": "see_media_pricing",
     "pricing": {
@@ -56,6 +63,7 @@
       "https://ai.google.dev/gemini-api/docs/video"
     ],
     "last_updated": "2026-11-06",
+    "price_observations": [],
     "notes": "Token 计价：输入 $1.50（文本/图像/视频/音频）、文本输出 $9.00、视频输出 $17.50 / 百万 token；按 720p 视频 5,792 token/秒计，官方称约 $0.10/秒（近似值）。官方未列 360p / 1080p / 4k 的单价，待核实。 Effective December 3, 2026, API requests to gemini-omni-1.1-flash automatically route to gemini-omni-1.2-flash and are billed at 1.2 rates (video output $12/1M tokens vs current 1.1 $17.50; ~$0.07/s @720p). Current 1.1 Standard prices still apply until then. Source: https://ai.google.dev/gemini-api/docs/pricing (changelog 2026-11-05). Schema note: media models cannot yet store price_schedule; route recorded in notes only.",
     "reasoning_effort": {
       "supported": false,
@@ -183,6 +191,11 @@
     "links": {
       "self": "models/gemini-omni-1.1-flash.json",
       "vendor": "vendors/google.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
     }
   }
 }

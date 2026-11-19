@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 5
   },
   "vendor": {
@@ -38,6 +42,9 @@
       "vendor": "xai",
       "vendor_name": "xAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -85,6 +92,7 @@
         "https://docs.x.ai/developers/rest-api-reference/inference/models"
       ],
       "last_updated": "2026-10-28",
+      "price_observations": [],
       "notes": "公共 xAI API 模型 ID：grok-4.7。全球接口 https://api.x.ai/v1；输入达到 200,000 tokens（含缓存）后，整次请求使用长上下文单价。美国区域接口 https://us.api.x.ai/v1 加价 10%；Priority 仅在响应确认 priority 时按 2 倍计价。Batch API 在 us-east-1 / us-west-2 / us-central-1 集群均支持，按标准价 8 折（批量折扣 20%，输入、输出、缓存与推理 token 同折扣）；2026-10-28 起官方模型数据显示美国区域加价集群（us-central-1）也支持 Batch（batchDiscountPercent=20），即美国区域 Batch 为 1.1×0.8；Grok 4.7 Fast 仅在 Cursor/Grok Build 提供，未作为公共 API 模型收录。工具费用不在本表范围内。 Grok Build 同名模型的渠道默认上下文为 256,000、可选 500,000；本条 500,000 为公共 API 文档口径。",
       "reasoning_effort": {
         "supported": true,
@@ -223,6 +231,11 @@
       "links": {
         "self": "models/grok-4.7.json",
         "vendor": "vendors/xai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -231,6 +244,9 @@
       "vendor": "xai",
       "vendor_name": "xAI",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -274,6 +290,7 @@
         "https://cli-chat-proxy.grok.com/v1/models"
       ],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "订阅渠道模型 ID 为 grok-4.7-build-fast（2026-10-11 上游模型列表实查 HTTP 200）。官方 Fast 价格表仅供订阅成本参照；不在公共 xAI API 上提供，不代表会员额度或实际扣费。短上下文输入/缓存/输出 4/1/12，总输入 >200,000 后 6/1.5/18 USD per 1M tokens。渠道默认上下文 256,000，可选 500,000；独立输出上限和能否关闭推理待核实。",
       "reasoning_effort": {
         "supported": true,
@@ -347,6 +364,11 @@
       "links": {
         "self": "models/grok-4.7-build-fast.json",
         "vendor": "vendors/xai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -355,6 +377,9 @@
       "vendor": "xai",
       "vendor_name": "xAI",
       "modality": "image",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -396,6 +421,7 @@
         "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按张计价（1K/1.5K/2K × low/medium 质量）；输入图片 $0.01/张。quality=auto 时生成用 low、编辑用 medium。支持 Batch，按标准价计费；不支持 Priority。",
       "reasoning_effort": {
         "supported": false,
@@ -514,6 +540,11 @@
       "links": {
         "self": "models/grok-imagine-image-2.0.json",
         "vendor": "vendors/xai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -522,6 +553,9 @@
       "vendor": "xai",
       "vendor_name": "xAI",
       "modality": "video",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -563,6 +597,7 @@
         "https://docs.x.ai/developers/models/grok-imagine-video-1.5"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：480p $0.08、720p $0.14、1080p $0.25；输入图片 $0.01/张；最长 15 秒。默认生成音频，generate_audio=false 为无声视频，官方未列单独的无声价格，故音频维度记 any。支持 Batch。别名 grok-imagine-video-1.5-preview、-2026-05-30。",
       "reasoning_effort": {
         "supported": false,
@@ -657,6 +692,11 @@
       "links": {
         "self": "models/grok-imagine-video-1.5.json",
         "vendor": "vendors/xai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -665,6 +705,9 @@
       "vendor": "xai",
       "vendor_name": "xAI",
       "modality": "video",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "see_media_pricing",
       "pricing": {
@@ -706,6 +749,7 @@
         "https://docs.x.ai/developers/models/grok-imagine-video-1.5-lite"
       ],
       "last_updated": "2026-10-29",
+      "price_observations": [],
       "notes": "按秒计价：480p $0.02、720p $0.03、1080p $0.14（由 720p 上采样）；输入图片 $0.01/张。支持 Batch。",
       "reasoning_effort": {
         "supported": false,
@@ -800,6 +844,11 @@
       "links": {
         "self": "models/grok-imagine-video-1.5-lite.json",
         "vendor": "vendors/xai.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     }
   ]

@@ -1,0 +1,104 @@
+{
+  "api_version": "v1",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 1
+  },
+  "data": {
+    "model_id": "grok-imagine-video-1.5",
+    "prices": [
+      {
+        "vendor": "xAI",
+        "channel": "pay_as_you_go",
+        "model_id": "grok-imagine-video-1.5",
+        "amount": 0.08,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "output",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "### Image & Video Pricing",
+          "model_qualifier": "grok-imagine-video-1.5",
+          "price_header": "Cost",
+          "context_limit": null,
+          "source_conditions": "source model/header literals; full applicability not inferred"
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://docs.x.ai/developers/pricing",
+        "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+        "observed_at": "2026-11-19T06:31:26.194068+08:00",
+        "quote": "| grok-imagine-video-1.5 | $0.080 / sec |\n",
+        "quote_sha256": "a1d5dbf84e927ad6ca3ca0d4e6fbbae1c1ee0ff0edf1b264913caf124168ee84",
+        "context_quotes": [
+          "| Model | Cost |\n",
+          "All prices are in USD."
+        ],
+        "price_record_id": "28b5990f129b581488b4365545fb4c9cebdb553d8ccfdfc829d63aedea4fd695",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1680,
+            1920
+          ],
+          "cell_span": [
+            1858,
+            1870
+          ],
+          "row_span": [
+            1831,
+            1873
+          ],
+          "column_spans": [
+            [
+              1690,
+              1694
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

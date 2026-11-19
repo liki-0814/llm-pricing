@@ -5,9 +5,11 @@ import datetime as dt
 import math
 import pathlib
 import sys
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 sys.dont_write_bytecode = True
 import build_api
+import build_sdk
 try:
     from jsonschema import Draft202012Validator, FormatChecker
 except ImportError:
@@ -23,7 +25,7 @@ def source_schema(d):
     schema = copy.deepcopy(spec['components']['schemas']['Model'])
     props = schema['properties']
     for field in ('api_version', 'unit', 'vendor_name', 'pricing', 'pricing_status', 'has_off_peak',
-                  'off_peak_pricing', 'links', 'context_length_label', 'media_pricing'):
+                  'off_peak_pricing', 'links', 'context_length_label', 'media_pricing', 'availability'):
         props.pop(field, None)
     props['modality'] = {'const': 'text'}
     props['model_id'] = props.pop('id')
@@ -47,7 +49,7 @@ def source_schema(d):
     props['limits']['properties']['max_output_tokens']['anyOf'] = [
         {'type': ['integer', 'null']}, {'const': 'n/a'}]
     props['unverified_fields']['uniqueItems'] = True
-    schema['required'] = [k for k in props if k != 'offpeak']
+    schema['required'] = [k for k in props if k not in ('offpeak', 'lifecycle', 'token_offer', 'estimation_limits', 'price_observations')]
     schema['components'] = spec['components']
     return schema
 
@@ -56,7 +58,7 @@ def media_source_schema(d):
     """Source contract for image / video models: no token-price, context, reasoning, limits or tier fields."""
     spec = build_api.openapi(d, list(build_api.VENDOR_SLUGS.values()), [])
     props = spec['components']['schemas']['Model']['properties']
-    keep = ('currency', 'source_url', 'extra_sources', 'last_updated', 'notes', 'unverified_fields', 'price_basis', 'billing')
+    keep = ('currency', 'source_url', 'extra_sources', 'last_updated', 'notes', 'unverified_fields', 'price_basis', 'billing', 'price_observations')
     out = {k: copy.deepcopy(props[k]) for k in keep}
     out['model_id'] = dict(copy.deepcopy(props['id']), pattern=build_api.SLUG_RE.pattern)
     out['id'] = {'type': 'string', 'minLength': 1}
@@ -65,7 +67,8 @@ def media_source_schema(d):
     out['modality'] = {'enum': ['image', 'video']}
     out['media_pricing'] = {'$ref': '#/components/schemas/MediaPricing'}
     out['unverified_fields']['uniqueItems'] = True
-    return {'type': 'object', 'required': list(out), 'properties': out, 'additionalProperties': False,
+    out['lifecycle'] = copy.deepcopy(props['lifecycle'])
+    return {'type': 'object', 'required': [k for k in out if k not in ('lifecycle', 'price_observations')], 'properties': out, 'additionalProperties': False,
             'components': spec['components']}
 
 
@@ -177,6 +180,53 @@ def validate_media(m, snapshot, fail):
         fail(where, 'expired promotion needs re-verification')
 
 
+def validate_temporal(m, fail):
+    """Evidence timestamps do not rewrite last_updated or assert vendor effective dates."""
+    def instant(value):
+        parsed = dt.datetime.fromisoformat(value.replace('Z', '+00:00'))
+        if 'T' not in value or parsed.tzinfo is None:
+            raise ValueError('exact timezone-aware instant required')
+        return parsed
+    where = m['model_id']
+    for evidence in m.get('price_observations', []):
+        try:
+            observed = instant(evidence['observed_at'])
+            start = instant(evidence['valid_from']) if evidence['valid_from'] else observed
+            end = instant(evidence['valid_until']) if evidence['valid_until'] else None
+            if end and end <= start:
+                raise ValueError('empty interval')
+            if '*' in evidence['fields'] and len(evidence['fields']) != 1:
+                raise ValueError('wildcard must stand alone')
+            if m['modality'] != 'text' and (evidence['input_tokens_gt'] is not None or evidence['fields'] != ['*']):
+                raise ValueError('media evidence must cover the whole model')
+        except (ValueError, TypeError):
+            fail(where, 'price_observations requires ordered exact timezone-aware instants and valid selectors')
+    for service in m.get('service_tiers', []):
+        state = service.get('status_observation')
+        if state:
+            try:
+                instant(state['observed_at'])
+            except (ValueError, TypeError):
+                fail(where, 'service status needs exact observed_at')
+        previous = None
+        for event in service.get('multiplier_schedule', []):
+            try:
+                point = instant(event['effective_from'])
+                local = point.astimezone(ZoneInfo(event['timezone']))
+                if point.utcoffset() != local.utcoffset():
+                    raise ValueError('offset does not match IANA timezone at this date')
+                if previous and point <= previous:
+                    raise ValueError('schedule must be unique and chronological')
+                if service['pricing']:
+                    raise ValueError('scalar schedule cannot overwrite explicit per-field service prices')
+                previous = point
+            except (ValueError, TypeError, ZoneInfoNotFoundError):
+                fail(where, 'service multiplier_schedule requires ordered exact instants with correct IANA timezone offsets and no explicit prices')
+    mp = m.get('media_pricing') or {}
+    if mp.get('input_image_allowance') and mp.get('input_image_price') is None:
+        fail(where, 'input_image_allowance requires published overage input_image_price')
+
+
 def validate_data(d):
     errors = []
     def fail(where, message):
@@ -231,6 +281,38 @@ def validate_data(d):
         if schema_errors:
             continue
         where = m['model_id']
+        validate_temporal(m, fail)
+        life = m.get('lifecycle')
+        if life:
+            if life['status'] == 'scheduled' and not life['retired_at']:
+                fail(where, 'scheduled retirement requires exact official retired_at')
+            if life['retired_at'] and (life['precision'] != 'instant' or not life['timezone']):
+                fail(where, 'exact retirement requires precision=instant and official timezone')
+            if life['retired_at']:
+                try:
+                    instant = dt.datetime.fromisoformat(life['retired_at'].replace('Z', '+00:00'))
+                    if instant.tzinfo is None or 'T' not in life['retired_at']:
+                        raise ValueError()
+                except ValueError:
+                    fail(where, 'retired_at requires precise official time and timezone')
+            if life['status'] == 'retired' and not life['retired_at'] and not life['conflict']:
+                try:
+                    observed = life.get('observed_at')
+                    instant = dt.datetime.fromisoformat((observed or '').replace('Z', '+00:00'))
+                    if instant.tzinfo is None or 'T' not in observed:
+                        raise ValueError()
+                except ValueError:
+                    fail(where, 'confirmed retired without exact T requires precise evidence observed_at, not an invented retirement time')
+        offer = m.get('token_offer')
+        if offer:
+            try:
+                start, end = [dt.datetime.fromisoformat(offer[k].replace('Z', '+00:00')) for k in ('observed_at', 'valid_until')]
+                if start.tzinfo is None or end.tzinfo is None or start > end:
+                    raise ValueError()
+            except ValueError:
+                fail(where, 'token_offer needs ordered exact timezone-aware instants')
+            if m['billing']['price_type'] != 'list':
+                fail(where, 'token_offer requires undiscounted list prices')
         for k in REMOVED:
             if k in m:
                 fail(where, 'removed field ' + k)
@@ -355,6 +437,8 @@ def validate_data(d):
             if not target or ref == mid or target['price_basis']['type'] != 'official':
                 fail(mid, 'reference model must exist and have official prices')
             else:
+                if m['currency'] != target['currency']:
+                    fail(mid, 'cross-currency reference pricing is forbidden')
                 multiplier = m['price_basis'].get('reference_multiplier', 1)
                 if any(not math.isclose(m[k], target[k] * multiplier, rel_tol=1e-12)
                        if numeric(m[k]) and numeric(target[k]) else m[k] != target[k]
@@ -375,7 +459,7 @@ def validate_api(d, files=None):
     for rel, response in files.items():
         if rel == 'openapi.json':
             continue
-        path = ('/models/{model_id}.json' if rel.startswith('models/') else '/vendors/{vendor}.json' if rel.startswith('vendors/')
+        path = ('/price-models/{model_id}.json' if rel.startswith('price-models/') else '/models/{model_id}.json' if rel.startswith('models/') else '/vendors/{vendor}.json' if rel.startswith('vendors/')
                 else '/modalities/{modality}.json' if rel.startswith('modalities/') else '/' + rel)
         schema = copy.deepcopy(spec['paths'][path]['get']['responses']['200']['content']['application/json']['schema'])
         schema['components'] = spec['components']
@@ -400,8 +484,11 @@ def validate_api(d, files=None):
 def main():
     d = build_api.load()
     problems = validate_data(d)
+    if not build_sdk.check():
+        problems.append("SDK bundle stale; run python3 scripts/build_sdk.py")
     if not problems:
         problems += validate_api(d)
+        problems += validate_api(d, build_api.build(d, mixed=True))
         problems += build_api.check(d)
     for problem in problems:
         print('BAD', problem)

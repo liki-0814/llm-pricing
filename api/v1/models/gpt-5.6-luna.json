@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "gpt-5.6-luna",
@@ -13,6 +17,9 @@
     "vendor": "openai",
     "vendor_name": "OpenAI",
     "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
@@ -54,6 +61,7 @@
       "https://developers.openai.com/api/docs/guides/prompt-caching"
     ],
     "last_updated": "2026-10-21",
+    "price_observations": [],
     "notes": "表中为短上下文（≤272K 输入）标准价；长上下文（>272K）：输入 $0.4、缓存读取 $0.04、缓存写入 $0.5、输出 $1.8。Batch/Flex 约为标准价 50%，Fast 模式约 2 倍。数据驻留端点加收 10%。 上下文窗口 1,050,000 tokens（最大输出 128K），来自 OpenAI 模型页。 Responses API 可选 12 小时缓存 TTL：缓存写入 $0.5（长上下文 $1.0），即输入价 ×2.5；默认 30 分钟 TTL 写入价见 cache_write。",
     "reasoning_effort": {
       "supported": true,
@@ -210,6 +218,11 @@
     "links": {
       "self": "models/gpt-5.6-luna.json",
       "vendor": "vendors/openai.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
     }
   }
 }

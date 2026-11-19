@@ -1,0 +1,187 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
+  },
+  "data": {
+    "id": "qwen3.7-plus",
+    "name": "Qwen3.7-Plus",
+    "vendor": "qwen",
+    "vendor_name": "阿里云 Qwen",
+    "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
+    "currency": "USD",
+    "unit": "per_1M_tokens",
+    "pricing": {
+      "input": 0.4,
+      "output": 1.6,
+      "cached_input": 0.04,
+      "cache_write": 0.5
+    },
+    "pricing_status": {
+      "input": "verified",
+      "output": "verified",
+      "cached_input": "verified",
+      "cache_write": "verified"
+    },
+    "price_basis": {
+      "type": "official",
+      "reference_model_id": null,
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+      ],
+      "note": "价格依据官方来源；具体分档、促销与地区见计费说明。"
+    },
+    "billing": {
+      "channel": "pay_as_you_go",
+      "price_type": "list",
+      "region": "Singapore",
+      "cached_input_type": "explicit",
+      "note": "仅估算记录范围内的 token 与缓存费用，不包含工具、税费或订阅额度结算。"
+    },
+    "off_peak_schedule": null,
+    "has_off_peak": false,
+    "off_peak_pricing": null,
+    "peak_note": null,
+    "context_length": 1000000,
+    "context_length_label": "≤1M 输入（计费档位上限）",
+    "source_url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+    "extra_sources": [
+      "https://www.alibabacloud.com/help/en/model-studio/context-cache"
+    ],
+    "last_updated": "2026-10-28",
+    "price_observations": [],
+    "notes": "阿里云百炼国际站（新加坡）美元价；表中为 ≤256K 输入档（非思考/思考输出价相同）；256K–1M 档：输入 $1.2、输出 $4.8。官方标注限时 8 折（表中为标价）。 缓存价取自官方模型页（Alibaba Cloud qwen3-7-plus，Singapore，美元，标价口径，不含限时 8 折）：≤256K 档隐式 $0.08、显式创建 $0.5、显式命中 $0.04；>256K 档隐式 $0.24、显式创建 $1.5、显式命中 $0.12；cached_input=显式缓存命中价，cache_write=显式缓存创建价。结构化字段见 cache_pricing / pricing_tiers。",
+    "reasoning_effort": {
+      "supported": true,
+      "levels": [
+        "low",
+        "medium",
+        "xhigh"
+      ],
+      "default": "xhigh",
+      "can_disable": true,
+      "status": "verified",
+      "field_status": {
+        "supported": "verified",
+        "levels": "verified",
+        "default": "verified",
+        "can_disable": "verified"
+      },
+      "note": "Qwen3.7 Plus 为混合思考模型，思考默认开启（官方 deep-thinking 页：“Qwen3.7 Plus series (Hybrid thinking mode, thinking mode enabled by default)”），enable_thinking=false 可关闭；thinking_budget 适用于 Qwen3.7（1–32768，控制台缺省 4000）。reasoning_effort 档位/默认值：官方 Chat Completions 参数文档只为 qwen3.8 系列（low/medium/xhigh，默认 xhigh）及 DeepSeek/GLM/Kimi 列出，未列 Qwen3.7；Responses API 页仅泛称“For the Qwen3.8 series, Qwen3.7, Qwen3.6, … use reasoning.effort to control thinking strength”，其档位表同样不含 Qwen3.7，故具体档位与默认值仍待核实，不做推测。 档位和默认值暂参照 Qwen3.8(用户确认,官方文档暂未单独列出 Qwen3.7 的 reasoning_effort 档位)",
+      "sources": [
+        "https://www.alibabacloud.com/help/en/model-studio/deep-thinking",
+        "https://docs.qwencloud.com/api-reference/chat/openai-chat",
+        "https://www.alibabacloud.com/help/en/model-studio/qwen-api-via-openai-responses",
+        "https://docs.qwencloud.com/developer-guides/text-generation/thinking"
+      ]
+    },
+    "limits": {
+      "context_length": 1000000,
+      "max_output_tokens": 131072,
+      "status": "verified",
+      "note": "官方 Alibaba Cloud Model Studio 模型页：Context Window 1,000,000、Max Output 131,072（qwencloud 模型页标 1M / 131K）。",
+      "sources": [
+        "https://www.qwencloud.com/models/qwen3.7-plus",
+        "https://www.alibabacloud.com/help/en/model-studio/qwen3-7-plus"
+      ]
+    },
+    "media_pricing": null,
+    "pricing_tiers": [
+      {
+        "condition": "input_tokens>256000 and input_tokens<=1000000",
+        "input_tokens_gt": 256000,
+        "input_tokens_lte": 1000000,
+        "input": 1.2,
+        "output": 4.8,
+        "cached_input": 0.12,
+        "cache_write": 1.5,
+        "cache_pricing": {
+          "implicit_read": 0.24,
+          "explicit_read": 0.12,
+          "explicit_write": 1.5,
+          "explicit_write_1h": null,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": null,
+          "note": null
+        },
+        "note": "官方（Singapore/International）：256K<输入≤1M 档，全部 token 按此档单价；输出价思考/非思考相同。限时 8 折前的标价。"
+      }
+    ],
+    "service_tiers": [
+      {
+        "name": "batch",
+        "multiplier": 0.5,
+        "note": "官方 qwencloud 模型页（https://www.qwencloud.com/models/qwen3.7-plus，2026-10-28 复核）：Batch File 输入 $0.2 / 输出 $0.8（为标价 50%，标价口径 ≤256K 档）。官方定价页（Qwen-Max/Flash 小节）原文：“If the model supports batch calls, the unit price for both input and output tokens is 50% of the real-time inference price. If the model supports context cache, only input tokens receive a discount. These two discounts cannot apply simultaneously.”；Context Cache 文档：“Calls made using the OpenAI-compatible - Batch (file input) method are not eligible for cache discounts.” 因此 Batch 档只对输入、输出打 5 折，缓存相关价（命中/创建）不再叠加 Batch 折扣，倍率取 1（保持各档标准缓存价）；Batch 调用中缓存 token 的实际结算价官方未单独列出，待核实。（该原文位于定价页 Qwen-Max/Qwen-Flash 小节，Qwen-Plus 小节未重复该句，此处按 Context Cache 文档及同一计费规则处理。）",
+        "multipliers": {
+          "input": 0.5,
+          "output": 0.5,
+          "cached_input": 1,
+          "cache_write": 1,
+          "implicit_read": 1,
+          "explicit_read": 1,
+          "explicit_write": 1,
+          "explicit_write_1h": 1,
+          "explicit_write_12h": null,
+          "storage_per_1M_tokens_hour": null
+        },
+        "pricing": {},
+        "sources": [
+          "https://www.qwencloud.com/models/qwen3.7-plus",
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+          "https://www.alibabacloud.com/help/en/model-studio/context-cache"
+        ]
+      }
+    ],
+    "cache_pricing": {
+      "implicit_read": 0.08,
+      "explicit_read": 0.04,
+      "explicit_write": 0.5,
+      "explicit_write_1h": null,
+      "explicit_write_12h": null,
+      "storage_per_1M_tokens_hour": null,
+      "note": "Qwen 缓存三档价（官方模型页逐项列出，Singapore/International 区，USD）：implicit_read=隐式缓存命中价，explicit_read=显式缓存命中价，explicit_write=显式缓存创建价。pricing.cached_input 与 pricing.cache_write 的含义保持不变：qwen3.8-max / 3.8-flash / 3.8-2.4t / 3.8-omni 的 cached_input 为隐式命中价，qwen3.7-max/plus/flash 与 qwen3.8-27b 的 cached_input 为显式命中价；cache_write 为显式创建价。"
+    },
+    "price_schedule": [
+      {
+        "kind": "promotion",
+        "effective_from": null,
+        "effective_until": null,
+        "input": 0.32,
+        "output": 1.28,
+        "cached_input": 0.032,
+        "cache_write": 0.4,
+        "note": "官方标注“限时 8 折”（≤256K 档：输入 $0.32 / 输出 $1.28 / 隐式缓存 $0.064 / 显式命中 $0.032 / 显式创建 $0.40）；截止日期官方未公布；表中为标价。",
+        "multiplier": 0.8,
+        "cache_pricing": {
+          "implicit_read": 0.064,
+          "explicit_read": 0.032,
+          "explicit_write": 0.4
+        },
+        "sources": [
+          "https://www.alibabacloud.com/help/en/model-studio/model-pricing"
+        ]
+      }
+    ],
+    "unverified_fields": [],
+    "links": {
+      "self": "models/qwen3.7-plus.json",
+      "vendor": "vendors/qwen.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
+    }
+  }
+}

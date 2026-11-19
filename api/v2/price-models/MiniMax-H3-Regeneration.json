@@ -1,0 +1,273 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 3
+  },
+  "data": {
+    "model_id": "MiniMax-H3-Regeneration",
+    "prices": [
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Regeneration",
+        "amount": 0.05,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "output",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Regeneration",
+          "price_header": "Output Video per second",
+          "dimensions": {
+            "Spec": "768P → 2K"
+          },
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td style=\"text-align:left\"><div>MiniMax-H3-Regeneration</div></td><td style=\"text-align:left\">768P → 2K</td><td data-numeric=\"true\" style=\"text-align:right\">$0.05</td><td data-numeric=\"true\" style=\"text-align:right\">$0.05</td><td data-numeric=\"true\" style=\"text-align:right\">$0.025</td></tr>",
+        "quote_sha256": "cb7568bce48ca82cbc34243a60d9a18052c3c7aae53898473e2e632908c41937",
+        "context_quotes": [
+          "<tr><th style=\"text-align:left\"><strong>Model / API</strong></th><th style=\"text-align:left\"><strong>Spec</strong></th><th style=\"text-align:right\"><strong>Output Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Image</strong><br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "3750ce84e4247ea035f6fc22487ccda2daddfeb29b4f6002679134902440487a",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            116202,
+            117204
+          ],
+          "cell_span": [
+            117005,
+            117064
+          ],
+          "row_span": [
+            116892,
+            117188
+          ],
+          "column_spans": [
+            [
+              116466,
+              116595
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Regeneration",
+        "amount": 0.05,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_second",
+        "component": "input",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Regeneration",
+          "price_header": "Input Video per second",
+          "dimensions": {
+            "Spec": "768P → 2K"
+          },
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td style=\"text-align:left\"><div>MiniMax-H3-Regeneration</div></td><td style=\"text-align:left\">768P → 2K</td><td data-numeric=\"true\" style=\"text-align:right\">$0.05</td><td data-numeric=\"true\" style=\"text-align:right\">$0.05</td><td data-numeric=\"true\" style=\"text-align:right\">$0.025</td></tr>",
+        "quote_sha256": "cb7568bce48ca82cbc34243a60d9a18052c3c7aae53898473e2e632908c41937",
+        "context_quotes": [
+          "<tr><th style=\"text-align:left\"><strong>Model / API</strong></th><th style=\"text-align:left\"><strong>Spec</strong></th><th style=\"text-align:right\"><strong>Output Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Image</strong><br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "88799773b029d63546d856692278067ac40db52f1cff3178e4ef51ff71ded00a",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            116202,
+            117204
+          ],
+          "cell_span": [
+            117064,
+            117123
+          ],
+          "row_span": [
+            116892,
+            117188
+          ],
+          "column_spans": [
+            [
+              116595,
+              116723
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-H3-Regeneration",
+        "amount": 0.025,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_image",
+        "component": "input",
+        "billing_modality": "image",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-H3-Regeneration",
+          "price_header": "Input Image per image beyond free quota",
+          "dimensions": {
+            "Spec": "768P → 2K"
+          },
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td style=\"text-align:left\"><div>MiniMax-H3-Regeneration</div></td><td style=\"text-align:left\">768P → 2K</td><td data-numeric=\"true\" style=\"text-align:right\">$0.05</td><td data-numeric=\"true\" style=\"text-align:right\">$0.05</td><td data-numeric=\"true\" style=\"text-align:right\">$0.025</td></tr>",
+        "quote_sha256": "cb7568bce48ca82cbc34243a60d9a18052c3c7aae53898473e2e632908c41937",
+        "context_quotes": [
+          "<tr><th style=\"text-align:left\"><strong>Model / API</strong></th><th style=\"text-align:left\"><strong>Spec</strong></th><th style=\"text-align:right\"><strong>Output Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Image</strong><br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "2aa19be29a13b811c0daa10bbaa429034ba1cd64179071f5a581672bf9bf1ca9",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            116202,
+            117204
+          ],
+          "cell_span": [
+            117123,
+            117183
+          ],
+          "row_span": [
+            116892,
+            117188
+          ],
+          "column_spans": [
+            [
+              116723,
+              116872
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}

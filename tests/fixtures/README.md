@@ -23,3 +23,5 @@ copied from `api/v1/models/*.json` when image and video models were added (2026-
 on top of commit `5ca2d568a131522ce93c75ddbea97fa0d7eb22c2`). They drive the deterministic `estimateMedia` arithmetic tests
 (per image, per second, per token, batch tier, null prices, promotion and approximate-price warnings).
 Do not regenerate them during routine price updates.
+
+2026-11-17：原有冻结样本只补显式 `currency: USD` / `unit`（媒体样本缺省渠道信息补为按量/地域未知），不改冻结价格或测试日期；禁止以运行时缺省USD来掩盖缺失币种。生命周期边界为 `lifecycle-cases.json`，由Python生成链路与JS估价链路共用。

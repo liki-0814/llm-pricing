@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "gemini-4-argon",
@@ -13,6 +17,9 @@
     "vendor": "google",
     "vendor_name": "Google Gemini",
     "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
@@ -57,6 +64,7 @@
       "https://ai.google.dev/gemini-api/docs/changelog"
     ],
     "last_updated": "2026-10-19",
+    "price_observations": [],
     "notes": "Standard 付费档（2026-10-13 GA，Stable）；不提供免费档。仅支持隐式缓存（提示 ≥4,096 tokens 自动启用，命中价为输入价 5%），不支持显式缓存，故无缓存写入价与存储费。无长上下文分档。Batch/Flex 为标准价 50%（含缓存），Priority 为 1.8×。注意：该价格仅到 2026-11-30；2026-12-01 起输入 $4.00、输出 $20.00、缓存 $0.20（Batch/Flex/Priority 同比例上调）。",
     "reasoning_effort": {
       "supported": true,
@@ -192,6 +200,11 @@
     "links": {
       "self": "models/gemini-4-argon.json",
       "vendor": "vendors/google.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
     }
   }
 }

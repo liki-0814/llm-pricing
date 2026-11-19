@@ -3,7 +3,7 @@
   "info": {
     "title": "LLM API Pricing (static JSON API)",
     "version": "1.2.0",
-    "description": "Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. All prices are USD. Text models are priced per 1M tokens (top-level pricing); image and video generation models (modality image / video) carry pricing_status not_applicable and express prices in media_pricing (per image by size and quality, per second of video by resolution and audio, and per-modality token prices). Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-11-06."
+    "description": "USD-only v1 compatibility endpoint. Read-only static JSON files generated from data/prices.json by scripts/build_api.py and served by GitHub Pages. Prices use each model.currency (USD or CNY); never compare or sum across currencies. Text models are priced per 1M tokens (top-level pricing); image and video generation models (modality image / video) carry pricing_status not_applicable and express prices in media_pricing (per image by size and quality, per second of video by resolution and audio, and per-modality token prices). Only GET is supported; there is no server-side filtering or query parameters, filter on the client. CORS: GitHub Pages sends Access-Control-Allow-Origin: * so files can be fetched from any origin. Dataset updated_at: 2026-11-18."
   },
   "servers": [
     {
@@ -23,6 +23,79 @@
     }
   ],
   "paths": {
+    "/price-models.json": {
+      "get": {
+        "operationId": "listPublicPriceModels",
+        "summary": "Queryable literal price-table IDs; NOT estimator models or universe",
+        "responses": {
+          "200": {
+            "description": "Price model index",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceModelIndex"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    },
+    "/price-models/{model_id}.json": {
+      "get": {
+        "operationId": "getPublicModelPrices",
+        "summary": "All conditional statements for literal ID; never auto-select region/date/tier",
+        "parameters": [
+          {
+            "name": "model_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Model price statements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriceModelItem"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    },
+    "/price-facts.json": {
+      "get": {
+        "operationId": "getPublicPriceObservations",
+        "summary": "Archival official price facts, NOT universe or availability certification",
+        "responses": {
+          "200": {
+            "description": "Source-bound price observations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicPriceEvidence"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown vendor / model (GitHub Pages 404 page, not JSON)"
+          }
+        }
+      }
+    },
     "/index.json": {
       "get": {
         "operationId": "getIndex",
@@ -147,7 +220,22 @@
                 "minimax-h3-lite",
                 "minimax-h3-max",
                 "minimax-image-01",
-                "glm-image"
+                "glm-image",
+                "qwen4-max",
+                "gpt-6.2-astra",
+                "gpt-6.2-sol",
+                "gpt-6.2-astra-law",
+                "claude-fable-5-2",
+                "claude-mythos-5-2",
+                "gemini-4-carbon",
+                "gemini-4-hydrogen",
+                "glm-5.3-flashx-legal",
+                "gpt-image-2.6-sunburst",
+                "gpt-image-2.6-flare",
+                "minimax-h3-image",
+                "minimax-h3-image-highspeed",
+                "minimax-h3-context-ir",
+                "minimax-h3-regeneration"
               ]
             }
           }
@@ -292,6 +380,283 @@
   },
   "components": {
     "schemas": {
+      "PublicModelPrice": {
+        "type": "object",
+        "required": [
+          "model_id",
+          "vendor",
+          "channel",
+          "amount",
+          "currency",
+          "unit",
+          "component",
+          "price_record_id",
+          "source_url",
+          "source_sha256",
+          "quote",
+          "quote_sha256",
+          "context_quotes",
+          "selector_complete",
+          "selector_completeness",
+          "price_verified",
+          "quote_verified",
+          "scope_complete",
+          "eligible_for_estimation"
+        ],
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "amount": {
+            "type": "number",
+            "minimum": 0
+          },
+          "currency": {
+            "enum": [
+              "USD"
+            ]
+          },
+          "price_record_id": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "quote_verified": {
+            "const": true
+          },
+          "eligible_for_estimation": {
+            "const": false
+          },
+          "scope_complete": {
+            "const": false
+          },
+          "source_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "quote_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "selector_completeness": {
+            "type": "object"
+          },
+          "price_verified": {
+            "type": "boolean"
+          },
+          "selector_complete": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PriceModelIndex": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "models",
+              "record_count",
+              "currency_resolved_record_count",
+              "scope_complete"
+            ],
+            "properties": {
+              "scope_complete": {
+                "const": false
+              },
+              "models": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "model_id",
+                    "url",
+                    "record_count"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "PriceModelItem": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "model_id",
+              "prices",
+              "scope_complete",
+              "eligible_for_estimation"
+            ],
+            "properties": {
+              "scope_complete": {
+                "const": false
+              },
+              "eligible_for_estimation": {
+                "const": false
+              },
+              "prices": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PublicModelPrice"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PublicPriceEvidence": {
+        "type": "object",
+        "required": [
+          "api_version",
+          "meta",
+          "data"
+        ],
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "enum": [
+              "v1"
+            ]
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          },
+          "data": {
+            "type": "object",
+            "required": [
+              "facts",
+              "price_verified_count",
+              "scope_complete",
+              "history_complete",
+              "evidence_version"
+            ],
+            "properties": {
+              "scope_complete": {
+                "const": false
+              },
+              "history_complete": {
+                "const": false
+              },
+              "price_verified_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "evidence_version": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "model_prices": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PublicModelPrice"
+                }
+              },
+              "facts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "model_id",
+                    "offering_name",
+                    "identity_kind",
+                    "component",
+                    "amount",
+                    "source_url",
+                    "source_sha256",
+                    "quote",
+                    "quote_sha256",
+                    "context_quotes",
+                    "channel",
+                    "region",
+                    "currency",
+                    "unit",
+                    "tier",
+                    "observed_at",
+                    "price_verified",
+                    "scope_complete",
+                    "history_complete",
+                    "eligible_for_estimation",
+                    "availability"
+                  ],
+                  "properties": {
+                    "currency": {
+                      "enum": [
+                        "USD"
+                      ]
+                    },
+                    "price_verified": {
+                      "const": true
+                    },
+                    "scope_complete": {
+                      "const": false
+                    },
+                    "history_complete": {
+                      "const": false
+                    },
+                    "eligible_for_estimation": {
+                      "const": false
+                    },
+                    "availability": {
+                      "const": "not_assessed"
+                    },
+                    "region": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "quote": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "source_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "quote_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "Meta": {
         "type": "object",
         "required": [
@@ -306,6 +671,27 @@
             "type": "string",
             "format": "date",
             "description": "Dataset last-verified date"
+          },
+          "availability_as_of": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "as_of": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "source_commit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "next_invalidation": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
           },
           "currency": {
             "type": "string",
@@ -472,7 +858,7 @@
                   "null"
                 ],
                 "minimum": 0,
-                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
               },
               "output": {
                 "type": [
@@ -480,7 +866,7 @@
                   "null"
                 ],
                 "minimum": 0,
-                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
               },
               "cached_input": {
                 "type": [
@@ -517,7 +903,8 @@
                   "reference",
                   "unverified",
                   "not_listed",
-                  "not_applicable"
+                  "not_applicable",
+                  "not_available"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               },
@@ -528,7 +915,8 @@
                   "reference",
                   "unverified",
                   "not_listed",
-                  "not_applicable"
+                  "not_applicable",
+                  "not_available"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               },
@@ -539,7 +927,8 @@
                   "reference",
                   "unverified",
                   "not_listed",
-                  "not_applicable"
+                  "not_applicable",
+                  "not_available"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               },
@@ -550,7 +939,8 @@
                   "reference",
                   "unverified",
                   "not_listed",
-                  "not_applicable"
+                  "not_applicable",
+                  "not_available"
                 ],
                 "description": "verified = official price; reference = user-approved reference price, see price_basis; unverified = 待核实; not_listed = 未列出"
               }
@@ -573,7 +963,7 @@
                   "null"
                 ],
                 "minimum": 0,
-                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
               },
               "output": {
                 "type": [
@@ -581,7 +971,7 @@
                   "null"
                 ],
                 "minimum": 0,
-                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
               },
               "cached_input": {
                 "type": [
@@ -589,7 +979,7 @@
                   "null"
                 ],
                 "minimum": 0,
-                "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
               }
             },
             "additionalProperties": false
@@ -855,7 +1245,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "output": {
                   "type": [
@@ -863,7 +1253,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "cached_input": {
                   "type": [
@@ -1035,7 +1425,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "output": {
                       "type": [
@@ -1043,7 +1433,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "cached_input": {
                       "type": [
@@ -1051,7 +1441,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "cache_write": {
                       "type": [
@@ -1059,7 +1449,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     }
                   },
                   "required": [],
@@ -1074,6 +1464,83 @@
                     "format": "uri",
                     "pattern": "^https?://"
                   }
+                },
+                "multiplier_schedule": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "effective_from": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "timezone": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "multiplier": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      },
+                      "sources": {
+                        "type": "array",
+                        "minItems": 1,
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "format": "uri",
+                          "pattern": "^https?://"
+                        }
+                      },
+                      "note": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "required": [
+                      "effective_from",
+                      "timezone",
+                      "multiplier",
+                      "sources",
+                      "note"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "status_observation": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "enum": [
+                        "deprecated"
+                      ]
+                    },
+                    "observed_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "sources": {
+                      "type": "array",
+                      "minItems": 1,
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^https?://"
+                      }
+                    },
+                    "note": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "observed_at",
+                    "sources",
+                    "note"
+                  ],
+                  "additionalProperties": false
                 }
               },
               "additionalProperties": false
@@ -1129,7 +1596,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "output": {
                   "type": [
@@ -1137,7 +1604,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "cached_input": {
                   "type": [
@@ -1145,7 +1612,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "cache_write": {
                   "type": [
@@ -1153,7 +1620,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                  "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                 },
                 "note": {
                   "type": [
@@ -1177,7 +1644,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "explicit_read": {
                       "type": [
@@ -1185,7 +1652,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "explicit_write": {
                       "type": [
@@ -1193,7 +1660,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "explicit_write_1h": {
                       "type": [
@@ -1201,7 +1668,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "explicit_write_12h": {
                       "type": [
@@ -1209,7 +1676,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     },
                     "storage_per_1M_tokens_hour": {
                       "type": [
@@ -1217,7 +1684,7 @@
                         "null"
                       ],
                       "minimum": 0,
-                      "description": "USD per 1M tokens; null when not listed or unverified (see pricing_status)"
+                      "description": "model.currency per 1M tokens; null when not listed or unverified (see pricing_status)"
                     }
                   },
                   "required": [],
@@ -1232,6 +1699,18 @@
                     "format": "uri",
                     "pattern": "^https?://"
                   }
+                },
+                "effective_until_precision": {
+                  "enum": [
+                    "date",
+                    "instant"
+                  ]
+                },
+                "effective_until_timezone": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "additionalProperties": false
@@ -1417,6 +1896,303 @@
                 "additionalProperties": false
               }
             ]
+          },
+          "price_observations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "observed_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "valid_from": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "valid_until": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "fields": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "enum": [
+                      "*",
+                      "input",
+                      "output",
+                      "cached_input",
+                      "cache_write",
+                      "implicit_read",
+                      "explicit_read",
+                      "explicit_write",
+                      "explicit_write_1h",
+                      "explicit_write_12h",
+                      "storage_per_1M_tokens_hour"
+                    ]
+                  }
+                },
+                "input_tokens_gt": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "sources": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https?://"
+                  }
+                },
+                "note": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "observed_at",
+                "valid_from",
+                "valid_until",
+                "fields",
+                "input_tokens_gt",
+                "sources",
+                "note"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "lifecycle": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "active",
+                  "scheduled",
+                  "pending_confirmation",
+                  "retired"
+                ]
+              },
+              "retired_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "observed_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "retirement_date": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "timezone": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "precision": {
+                "enum": [
+                  "instant",
+                  "date",
+                  "unknown"
+                ]
+              },
+              "original_text": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "scope": {
+                "enum": [
+                  "entity",
+                  "endpoint"
+                ]
+              },
+              "routes_to": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "conflict": {
+                "type": "boolean"
+              },
+              "note": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "status",
+              "retired_at",
+              "retirement_date",
+              "timezone",
+              "precision",
+              "original_text",
+              "scope",
+              "routes_to",
+              "conflict",
+              "note",
+              "sources"
+            ],
+            "additionalProperties": false
+          },
+          "availability": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "enum": [
+                  "active",
+                  "scheduled",
+                  "pending_confirmation",
+                  "retired",
+                  "history_unknown"
+                ]
+              },
+              "estimable": {
+                "type": "boolean"
+              },
+              "reason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "status",
+              "estimable",
+              "reason"
+            ],
+            "additionalProperties": false
+          },
+          "token_offer": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "observed_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "valid_until": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "multiplier": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 1
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "input",
+                    "output",
+                    "cached_input",
+                    "cache_write"
+                  ]
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "sources": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "minItems": 1
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "observed_at",
+              "valid_until",
+              "multiplier",
+              "fields",
+              "sources",
+              "note"
+            ],
+            "additionalProperties": false
+          },
+          "estimation_limits": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "max_input_tokens": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "max_output_tokens": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sources": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https?://"
+                }
+              }
+            },
+            "required": [
+              "max_input_tokens",
+              "max_output_tokens",
+              "note",
+              "sources"
+            ],
+            "additionalProperties": false
           }
         },
         "additionalProperties": false
@@ -1507,7 +2283,7 @@
           "storage_per_1M_tokens_hour",
           "note"
         ],
-        "description": "Cache price breakdown where documented (USD per 1M tokens; null = not documented / 待核实). pricing.cached_input and pricing.cache_write keep their meaning; this object adds the finer split. Qwen: implicit_read / explicit_read / explicit_write are the three official cache prices.",
+        "description": "Cache price breakdown where documented (model.currency per 1M tokens; null = not documented / 待核实). pricing.cached_input and pricing.cache_write keep their meaning; this object adds the finer split. Qwen: implicit_read / explicit_read / explicit_write are the three official cache prices.",
         "properties": {
           "implicit_read": {
             "type": [
@@ -1555,7 +2331,7 @@
               "null"
             ],
             "minimum": 0,
-            "description": "Cache storage fee per 1M tokens per hour (USD, not per 1M tokens; 0 = currently free)"
+            "description": "Cache storage fee per 1M tokens per hour (model.currency, not per 1M tokens; 0 = currently free)"
           },
           "note": {
             "type": [
@@ -1711,7 +2487,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "text_cached_input": {
                         "type": [
@@ -1719,7 +2495,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "text_output": {
                         "type": [
@@ -1727,7 +2503,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "image_input": {
                         "type": [
@@ -1735,7 +2511,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "image_cached_input": {
                         "type": [
@@ -1743,7 +2519,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "image_output": {
                         "type": [
@@ -1751,7 +2527,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "video_input": {
                         "type": [
@@ -1759,7 +2535,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "video_output": {
                         "type": [
@@ -1767,7 +2543,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       },
                       "audio_input": {
                         "type": [
@@ -1775,7 +2551,7 @@
                           "null"
                         ],
                         "minimum": 0,
-                        "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                        "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                       }
                     },
                     "required": [
@@ -1805,7 +2581,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "text_cached_input": {
                             "type": [
@@ -1813,7 +2589,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "text_output": {
                             "type": [
@@ -1821,7 +2597,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_input": {
                             "type": [
@@ -1829,7 +2605,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_cached_input": {
                             "type": [
@@ -1837,7 +2613,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_output": {
                             "type": [
@@ -1845,7 +2621,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "video_input": {
                             "type": [
@@ -1853,7 +2629,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "video_output": {
                             "type": [
@@ -1861,7 +2637,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "audio_input": {
                             "type": [
@@ -1869,7 +2645,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           }
                         },
                         "required": [
@@ -1901,7 +2677,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "text_cached_input": {
                             "type": [
@@ -1909,7 +2685,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "text_output": {
                             "type": [
@@ -1917,7 +2693,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_input": {
                             "type": [
@@ -1925,7 +2701,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_cached_input": {
                             "type": [
@@ -1933,7 +2709,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "image_output": {
                             "type": [
@@ -1941,7 +2717,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "video_input": {
                             "type": [
@@ -1949,7 +2725,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "video_output": {
                             "type": [
@@ -1957,7 +2733,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           },
                           "audio_input": {
                             "type": [
@@ -1965,7 +2741,7 @@
                               "null"
                             ],
                             "minimum": 0,
-                            "description": "USD per 1M tokens; null = not billed separately / not applicable for this model"
+                            "description": "model.currency per 1M tokens; null = not billed separately / not applicable for this model"
                           }
                         },
                         "required": [
@@ -1997,7 +2773,7 @@
           },
           "image_prices": {
             "type": "array",
-            "description": "USD per generated image by size x quality x tier. Empty + listed in unverified_fields = per-image price 待核实.",
+            "description": "model.currency per generated image by size x quality x tier. Empty + listed in unverified_fields = per-image price 待核实.",
             "items": {
               "type": "object",
               "properties": {
@@ -2026,7 +2802,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per image; null = 待核实 (listed in unverified_fields)"
+                  "description": "model.currency per image; null = 待核实 (listed in unverified_fields)"
                 },
                 "tokens": {
                   "type": [
@@ -2064,7 +2840,7 @@
           },
           "video_prices": {
             "type": "array",
-            "description": "USD per second of generated video by resolution x audio x tier. Empty + listed in unverified_fields = 待核实.",
+            "description": "model.currency per second of generated video by resolution x audio x tier. Empty + listed in unverified_fields = 待核实.",
             "items": {
               "type": "object",
               "properties": {
@@ -2094,7 +2870,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per second of output video; null = 待核实"
+                  "description": "model.currency per second of output video; null = 待核实"
                 },
                 "tokens_per_second": {
                   "type": [
@@ -2110,7 +2886,7 @@
                     "null"
                   ],
                   "minimum": 0,
-                  "description": "USD per second of input (source) video at this output resolution when the vendor bills input video; null = not billed"
+                  "description": "model.currency per second of input (source) video at this output resolution when the vendor bills input video; null = not billed"
                 },
                 "basis": {
                   "enum": [
@@ -2146,7 +2922,7 @@
               "null"
             ],
             "minimum": 0,
-            "description": "USD per input / reference image (editing, image-to-video) when billed per image; null = not billed per image"
+            "description": "model.currency per input / reference image (editing, image-to-video) when billed per image; null = not billed per image"
           },
           "input_image_price_batch": {
             "type": [
@@ -2154,7 +2930,40 @@
               "null"
             ],
             "minimum": 0,
-            "description": "USD per input image under Batch when it differs from input_image_price; null = same / not listed"
+            "description": "model.currency per input image under Batch when it differs from input_image_price; null = same / not listed"
+          },
+          "input_image_allowance": {
+            "type": "object",
+            "properties": {
+              "free_quantity": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "scope": {
+                "const": "per_task"
+              },
+              "sources": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https?://"
+                }
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "free_quantity",
+              "scope",
+              "sources",
+              "note"
+            ],
+            "additionalProperties": false
           },
           "batch_supported": {
             "type": [
@@ -2378,7 +3187,9 @@
                   "models",
                   "vendors",
                   "modalities",
-                  "openapi"
+                  "openapi",
+                  "price-facts",
+                  "price-models"
                 ],
                 "additionalProperties": false,
                 "properties": {
@@ -2393,6 +3204,12 @@
                   },
                   "openapi": {
                     "const": "openapi.json"
+                  },
+                  "price-facts": {
+                    "const": "price-facts.json"
+                  },
+                  "price-models": {
+                    "const": "price-models.json"
                   }
                 }
               },

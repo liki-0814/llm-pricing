@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622"
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9"
   },
   "data": {
     "id": "minimax-m3",
@@ -13,6 +17,9 @@
     "vendor": "minimax",
     "vendor_name": "MiniMax",
     "modality": "text",
+    "lifecycle": null,
+    "token_offer": null,
+    "estimation_limits": null,
     "currency": "USD",
     "unit": "per_1M_tokens",
     "pricing": {
@@ -54,6 +61,7 @@
       "https://platform.minimax.io/docs/api-reference/text-chat-openai"
     ],
     "last_updated": "2026-10-25",
+    "price_observations": [],
     "notes": "API 模型名 MiniMax-M3。表中为标准档、输入 ≤512K tokens 的当前价（官方页标注“Permanent 50% off”，原价 $0.60 / $2.40 / 缓存 $0.12）；输入 >512K tokens：输入 $0.60、输出 $2.40、缓存读取 $0.12。>512K 原价 $1.20 / $4.80 / $0.24。Priority 档为标准价 1.5 倍（≤512K：$0.45 / $1.80 / $0.09，原价 $0.90 / $3.60 / $0.18），同样标注 Permanent 50% off。官方页未列缓存写入价。最大输出建议 128K、上限 512K。",
     "reasoning_effort": {
       "supported": false,
@@ -142,6 +150,11 @@
     "links": {
       "self": "models/minimax-m3.json",
       "vendor": "vendors/minimax.json"
+    },
+    "availability": {
+      "status": "active",
+      "estimable": true,
+      "reason": null
     }
   }
 }

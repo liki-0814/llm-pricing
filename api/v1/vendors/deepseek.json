@@ -1,11 +1,15 @@
 {
   "api_version": "v1",
   "meta": {
-    "updated_at": "2026-11-06",
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
     "currency": "USD",
     "unit": "per_1M_tokens",
-    "unit_label": "USD per 1M tokens",
-    "data_version": "a7625f9fa9f92b61c62d3cc4fb9da9972effaa693738f4a652a4f39806085622",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
     "count": 2
   },
   "vendor": {
@@ -35,6 +39,9 @@
       "vendor": "deepseek",
       "vendor_name": "DeepSeek",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -101,6 +108,7 @@
       "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "表中价格为高峰价。最大输出 384K；旧名 deepseek-v4-flash 已并入此模型计费。官方页未列缓存写入价。",
       "reasoning_effort": {
         "supported": true,
@@ -149,6 +157,11 @@
       "links": {
         "self": "models/deepseek-flash.json",
         "vendor": "vendors/deepseek.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     },
     {
@@ -157,6 +170,9 @@
       "vendor": "deepseek",
       "vendor_name": "DeepSeek",
       "modality": "text",
+      "lifecycle": null,
+      "token_offer": null,
+      "estimation_limits": null,
       "currency": "USD",
       "unit": "per_1M_tokens",
       "pricing": {
@@ -223,6 +239,7 @@
       "source_url": "https://api-docs.deepseek.com/quick_start/pricing",
       "extra_sources": [],
       "last_updated": "2026-10-11",
+      "price_observations": [],
       "notes": "表中价格为高峰价。最大输出 384K；官方页未列缓存写入价。",
       "reasoning_effort": {
         "supported": true,
@@ -272,6 +289,11 @@
       "links": {
         "self": "models/deepseek-v4-pro.json",
         "vendor": "vendors/deepseek.json"
+      },
+      "availability": {
+        "status": "active",
+        "estimable": true,
+        "reason": null
       }
     }
   ]

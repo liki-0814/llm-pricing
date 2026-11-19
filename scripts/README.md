@@ -7,7 +7,7 @@
 | 字段 | 说明 |
 | --- | --- |
 | `id`, `vendor`, `model`, `model_id` | 标识；`vendor` 必须出现在顶层 `vendors` 数组中；`model_id` 必须唯一且只含小写字母、数字、`.`、`-`（它是接口文件名 `api/v1/models/<model_id>.json`） |
-| `currency` | 固定 `USD`（站点统一美元计价，validate 会拒绝其他币种） |
+| `currency` | `USD` / `CNY`；v1保持USD兼容，v2显式多币种；不可跨币种直接比价或相加 |
 | `input` / `output` | 每 100 万 token 价格（数字） |
 | `cached_input` | 缓存命中（读取）价 |
 | `cache_write` | 缓存写入 / 缓存输出价。`"n/a"` 仅限在 `vendor_billing` 中声明 `cache_write_billed: false`（该厂商不单独收缓存写入费）的厂商；收取写入费或不确定的厂商，官方未列时必须写 `null` 并把 `cache_write` 列入 `unverified_fields`（参照 `qwen3.8-omni-flash`、`gpt-6-astra-law`） |
@@ -28,12 +28,12 @@
 ## 更新流程
 
 1. 打开每个模型的 `source_url`，逐项对照价格；有变动就改数字，并把该条 `last_updated` 改为今天。
-2. 新增模型：复制一条已有记录，改 `id`（唯一）和各字段。下架旧模型：直接删除该条（本站只收录最新模型）。
+2. 新增模型：复制一条已有记录，改 `id`（唯一）和各字段。退役旧模型：先记录有官方来源的 lifecycle（原文/精度/时区/范围）；只有精确已确认时刻才自动下线，不机械删除仍可路由的ID，不把缺失当退役。
 3. 修改 `meta.last_updated`（页面顶部显示的“数据更新日期”）。
-4. 重新生成接口：`python3 scripts/build_api.py`（生成 `api/v1/`；新增厂商需先在该脚本 `VENDOR_SLUGS` 和 `assets/common.js` 中加 slug）。
+4. 重新生成接口：`python3 scripts/build_api.py`、`--v2`、`--page`（分别生成 `api/v1/`、`api/v2/` 与页面快照；新增厂商需先在该脚本 `VENDOR_SLUGS` 和 `assets/common.js` 中加 slug）。
 5. 按根目录 README 创建虚拟环境、安装开发依赖，运行 `.venv/bin/python scripts/validate.py` 和回归测试（会打印待核实字段，并检查接口是否同步）。
 6. 本地预览：`python3 -m http.server 8000`，打开 http://localhost:8000 。
-7. 提交并推送（包括 `api/` 目录），GitHub Pages 会自动更新。
+7. 提交并推送（包括两版 `api/` 与页面快照），完成审核后由发布工作流构建冻结as_of完整产物；不得把PR提交当上线。
 
 ## 推理强度的官方来源
 
@@ -96,3 +96,55 @@ xAI 官方价格查询接口见 https://docs.x.ai/developers/rest-api-reference/
 Moonshot Kimi 同时有收写入费的 K3 系列和官方页未列写入价的 K2.7 系列，无法整体声明为 `false`，因此声明为 `true`，K2.7 Code / Highspeed 和 kimi-for-coding（参照 K2.7 Code）的 `cache_write` 由 `"n/a"` 改为 `null` 并列入 `unverified_fields`。若官方确认 K2.x 不收缓存写入费，再改回 `"n/a"` 需先拆分厂商声明。
 
 回归测试 `tests/test_validation.py` 含反例：`gpt-6-astra-law` 的 `cache_write` 写 `"n/a"` 必须失败；`null` 价格字段不在 `unverified_fields` 中必须失败；缺失 / 非布尔 / 被改动的 `vendor_billing` 必须失败。
+
+## 生命周期、多币种与可复现发布
+
+新增字段/边界/兼容取舍见 `docs/adr-currency-lifecycle.md`。开发构建使用源meta.availability_as_of，不偷偷使用当前时间；发布用 `build_site.py --as-of ISO --output NEW_PATH`，默认as_of为当前时间，SHA取实际HEAD。`--fail-before-publish`可演练完整校验后的失败，输出新目录原子生成。同步提交所有生成文件；`.generated-files`只允许清理已记录的生成物，未知文件不自动删除。
+
+`scripts/catalog_diff.py --database SOURCE.json --inventory INVENTORY.json`返回明确覆盖状态；不完整时退出2是覆盖未通过，不是零新增。调用ID来源未知不自动补猜，别名映射必须附官方来源。此脚本不抓取网络、不自动改库或发布，也不代表例行任务已全量验收。
+
+
+## 固定目录发现入口
+
+执行契约、版本、sources格式、错误码、成功/失败账本及逐厂适配缺口见[discovery-run-contract](../docs/discovery-run-contract.md)。`run_discovery.py`提供真实抓取/快照/比较/账本入口；当前通用适配器明确partial，不是全目录验收，也没有自行修改或接通routine。旧Sage临时归一化脚本不能作为前置输入。
+
+
+### Finite native request claims and scoped projection
+
+`discovery_request_contracts.py` reads only native-server-bound request `model`
+string enums, all declared request media types and all union branches. Responses
+and examples are not invocation identity proof. Unknown composition, server
+overrides, local-ref cycles, new indexed generation units or unreviewed routes
+fail closed. Claims retain route, source hash and capture identity; scope
+projection never cross-multiplies directory subjects and unrelated model IDs.
+
+MiniMax consumes the full Model List and a bounded official documentation index
+plus its request schemas in the same attempt. Text/image/video inventories keep
+separate proof and unknown reasons. A finite enum does not certify a full model
+universe when IDs disagree with the claimed-full directory, or historical
+entities lack literal invocation bridges. Pricing, aliases, retirement instants
+and channel entitlements are not inferred. Original directory observations and
+all raw bodies remain auditable. Replay never falls back to HTTP. The saved H3
+constant-to-request chain is statically parsed, never executed or refetched for
+this integration replay. Anthropic and Google contracts are unchanged.
+
+
+### Source-qualified OpenAI/xAI observations
+
+`discovery_native_claims.py` supplies one per-literal-ID claim contract to the
+actual inventory **and** catalog diff consumer: raw source URL/hash/path/time,
+identity role, documented native channel, and explicit output declarations.
+Input modalities, cloud-provider IDs, price-label similarity and generic alias
+templates are never used to invent output/channel/alias membership. Closed
+Markdown ID enumerations may end at legal EOF; an unclosed fence is not EOF
+proof. Same-page and cross-page output conflicts remain sticky and retain all
+source declarations, irrespective of order. Explicit official alias maps retain
+the observed literal when projecting the existing canonical comparison key.
+
+OpenAI consumes only this attempt's captured detail bodies. Inline IDs without
+endpoint/output proof and open-weight native-PAYG applicability remain unknown.
+xAI consumes its native API usage pricing rows with typed output units; this
+never supplies subscription IDs or a complete unpriced/retired/alias universe.
+These are production observation consumers, **not** completeness certificates.
+Full official-universe verification remains a separate unfinished gate; no
+observation counts or successful unit tests change a partial scope to complete.

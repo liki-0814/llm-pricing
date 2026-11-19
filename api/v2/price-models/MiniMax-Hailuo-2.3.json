@@ -1,0 +1,276 @@
+{
+  "api_version": "v2",
+  "meta": {
+    "updated_at": "2026-11-18",
+    "as_of": "2026-11-18T08:27:00+08:00",
+    "source_commit": null,
+    "next_invalidation": "2026-11-29T10:00:00+00:00",
+    "availability_as_of": "2026-11-18T08:27:00+08:00",
+    "currency": "mixed",
+    "unit": "per_1M_tokens",
+    "unit_label": "per 1M tokens; use each model.currency (no currency conversion)",
+    "data_version": "4dc995e4713ad018dc69230f1c2d468c2a684a5992bf183225d527732247ebc9",
+    "count": 3
+  },
+  "data": {
+    "model_id": "MiniMax-Hailuo-2.3",
+    "prices": [
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-Hailuo-2.3",
+        "amount": 0.28,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_video",
+        "component": "output",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-Hailuo-2.3",
+          "price_header": "Price",
+          "dimensions": {
+            "output_resolution": "768P",
+            "duration_seconds": 6
+          },
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td style=\"text-align:left\">MiniMax-Hailuo-2.3</td><td style=\"text-align:left\">$0.28 per 768P, 6s video</td></tr>",
+        "quote_sha256": "36d9a5a7adf0c698e988f5347f07f771361adc79e5748b5dc5523ceb672e3e30",
+        "context_quotes": [
+          "<tr><th style=\"text-align:left\">Model</th><th style=\"text-align:left\">Price</th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "8d23f1e5bf59fe0586b2a5add6fd3ec4ccc7ca943aa42793352fa6f83108bcb2",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            121596,
+            123161
+          ],
+          "cell_span": [
+            122264,
+            122321
+          ],
+          "row_span": [
+            122209,
+            122326
+          ],
+          "column_spans": [
+            [
+              121783,
+              121821
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_video"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-Hailuo-2.3",
+        "amount": 0.56,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_video",
+        "component": "output",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-Hailuo-2.3",
+          "price_header": "Price",
+          "dimensions": {
+            "output_resolution": "768P",
+            "duration_seconds": 10
+          },
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td style=\"text-align:left\">MiniMax-Hailuo-2.3</td><td style=\"text-align:left\">$0.56 per 768P, 10s video</td></tr>",
+        "quote_sha256": "c81a3b5b70c14b309bf7acd289933b94b2cbde1934f84d92706581e0b6b8d8d6",
+        "context_quotes": [
+          "<tr><th style=\"text-align:left\">Model</th><th style=\"text-align:left\">Price</th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "eadad29a9d6690fe157bb9233e100469e7d37fee12eaf1ab2c3837f28e0200d0",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            121596,
+            123161
+          ],
+          "cell_span": [
+            122381,
+            122439
+          ],
+          "row_span": [
+            122326,
+            122444
+          ],
+          "column_spans": [
+            [
+              121783,
+              121821
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_video"
+        }
+      },
+      {
+        "vendor": "MiniMax",
+        "channel": "pay_as_you_go",
+        "model_id": "MiniMax-Hailuo-2.3",
+        "amount": 0.49,
+        "currency": "USD",
+        "currency_symbol": "$",
+        "unit": "per_video",
+        "component": "output",
+        "billing_modality": "video",
+        "conditions": {
+          "service_tier": null,
+          "section": "Video",
+          "model_qualifier": "MiniMax-Hailuo-2.3",
+          "price_header": "Price",
+          "dimensions": {
+            "output_resolution": "1080P",
+            "duration_seconds": 6
+          },
+          "rate_kind": "quoted_rate",
+          "tab_context": null
+        },
+        "region": null,
+        "region_scope": "not_stated_NOT_global",
+        "selector_completeness": {
+          "model_id": "literal_official_price_table_ID",
+          "amount": "explicit_scalar",
+          "currency": "explicit_USD_declaration",
+          "unit": "explicit_source_unit",
+          "component": "explicit_source_header",
+          "channel": "source_bound_pay_as_you_go",
+          "region": "not_stated",
+          "billing_modality": "explicit_price_header",
+          "conditions": "source_qualifiers_preserved_NOT_executable",
+          "effective_time": "not_inferred"
+        },
+        "selector_complete": false,
+        "price_verified": false,
+        "quote_verified": true,
+        "record_status": "normalized_source_statement_with_incomplete_selectors",
+        "eligible_for_estimation": false,
+        "scope_complete": false,
+        "history_complete": false,
+        "availability": "not_assessed",
+        "account_entitlement": "not_assessed",
+        "source_url": "https://platform.minimax.io/docs/pricing/overview",
+        "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+        "observed_at": "2026-11-19T06:31:26.496319+08:00",
+        "quote": "<tr><td style=\"text-align:left\">MiniMax-Hailuo-2.3</td><td style=\"text-align:left\">$0.49 per 1080P, 6s video</td></tr>",
+        "quote_sha256": "f4edad5d9b76ee0b39c5d6b6510ec416ff4df9c17a245c4c7fc6c33188213311",
+        "context_quotes": [
+          "<tr><th style=\"text-align:left\">Model</th><th style=\"text-align:left\">Price</th></tr>",
+          "All prices are in USD."
+        ],
+        "price_record_id": "e1753a9a9f0f5b504ca545f9cd37af3d38e25d8d07bef0ce3e2120a799d37c60",
+        "unit_evidence": {
+          "version": 2,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            121596,
+            123161
+          ],
+          "cell_span": [
+            122499,
+            122557
+          ],
+          "row_span": [
+            122444,
+            122562
+          ],
+          "column_spans": [
+            [
+              121783,
+              121821
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_video"
+        }
+      }
+    ],
+    "scope_complete": false,
+    "history_complete": false,
+    "eligible_for_estimation": false,
+    "selector_policy": "no_default_region_tier_or_date_selection"
+  }
+}
