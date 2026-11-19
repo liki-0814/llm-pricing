@@ -68,7 +68,35 @@
           "<tr><th style=\"text-align:left\"><strong>Model / API</strong></th><th style=\"text-align:left\"><strong>Spec</strong></th><th style=\"text-align:right\"><strong>Output Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Image</strong><br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "3750ce84e4247ea035f6fc22487ccda2daddfeb29b4f6002679134902440487a"
+        "price_record_id": "3750ce84e4247ea035f6fc22487ccda2daddfeb29b4f6002679134902440487a",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            116202,
+            117204
+          ],
+          "cell_span": [
+            117005,
+            117064
+          ],
+          "row_span": [
+            116892,
+            117188
+          ],
+          "column_spans": [
+            [
+              116466,
+              116595
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
       },
       {
         "vendor": "MiniMax",
@@ -123,7 +151,35 @@
           "<tr><th style=\"text-align:left\"><strong>Model / API</strong></th><th style=\"text-align:left\"><strong>Spec</strong></th><th style=\"text-align:right\"><strong>Output Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Image</strong><br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "88799773b029d63546d856692278067ac40db52f1cff3178e4ef51ff71ded00a"
+        "price_record_id": "88799773b029d63546d856692278067ac40db52f1cff3178e4ef51ff71ded00a",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            116202,
+            117204
+          ],
+          "cell_span": [
+            117005,
+            117064
+          ],
+          "row_span": [
+            116892,
+            117188
+          ],
+          "column_spans": [
+            [
+              116595,
+              116723
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        }
       },
       {
         "vendor": "MiniMax",
@@ -178,7 +234,35 @@
           "<tr><th style=\"text-align:left\"><strong>Model / API</strong></th><th style=\"text-align:left\"><strong>Spec</strong></th><th style=\"text-align:right\"><strong>Output Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Video</strong><br/><span class=\"mint-text-xs mint-font-normal\">per second</span></th><th style=\"text-align:right\"><strong>Input Image</strong><br/><span class=\"mint-text-xs mint-font-normal\">per image<br/>beyond free quota</span></th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "2aa19be29a13b811c0daa10bbaa429034ba1cd64179071f5a581672bf9bf1ca9"
+        "price_record_id": "2aa19be29a13b811c0daa10bbaa429034ba1cd64179071f5a581672bf9bf1ca9",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            116202,
+            117204
+          ],
+          "cell_span": [
+            117123,
+            117183
+          ],
+          "row_span": [
+            116892,
+            117188
+          ],
+          "column_spans": [
+            [
+              116723,
+              116872
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        }
       }
     ],
     "scope_complete": false,

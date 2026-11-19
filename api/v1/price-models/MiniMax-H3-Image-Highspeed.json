@@ -66,7 +66,35 @@
           "<tr><th style=\"text-align:left\"><strong>Model</strong></th><th style=\"text-align:center\"><strong>Input Text</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Input Image</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Output Image</strong><br/>$ / M tokens</th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "700ef15b44935b516550886d0c3708b7ec3170fbd9fc9a6e20711deb61e7b7e0"
+        "price_record_id": "700ef15b44935b516550886d0c3708b7ec3170fbd9fc9a6e20711deb61e7b7e0",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            125999,
+            127026
+          ],
+          "cell_span": [
+            126825,
+            126885
+          ],
+          "row_span": [
+            126731,
+            127010
+          ],
+          "column_spans": [
+            [
+              126203,
+              126282
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "MiniMax",
@@ -119,7 +147,35 @@
           "<tr><th style=\"text-align:left\"><strong>Model</strong></th><th style=\"text-align:center\"><strong>Input Text</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Input Image</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Output Image</strong><br/>$ / M tokens</th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "a54a333336b169804919727bd05b0dd4203c254abcb88ef6b5abf0554c49f5a8"
+        "price_record_id": "a54a333336b169804919727bd05b0dd4203c254abcb88ef6b5abf0554c49f5a8",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            125999,
+            127026
+          ],
+          "cell_span": [
+            126885,
+            126945
+          ],
+          "row_span": [
+            126731,
+            127010
+          ],
+          "column_spans": [
+            [
+              126282,
+              126362
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "MiniMax",
@@ -172,7 +228,35 @@
           "<tr><th style=\"text-align:left\"><strong>Model</strong></th><th style=\"text-align:center\"><strong>Input Text</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Input Image</strong><br/>$ / M tokens</th><th style=\"text-align:center\"><strong>Output Image</strong><br/>$ / M tokens</th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "17c8e7391284027e53fdb807002bff5d1c1a8a43695748f308062e70e2f7cc6d"
+        "price_record_id": "17c8e7391284027e53fdb807002bff5d1c1a8a43695748f308062e70e2f7cc6d",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            125999,
+            127026
+          ],
+          "cell_span": [
+            126945,
+            127005
+          ],
+          "row_span": [
+            126731,
+            127010
+          ],
+          "column_spans": [
+            [
+              126362,
+              126443
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       }
     ],
     "scope_complete": false,

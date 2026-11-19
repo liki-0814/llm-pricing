@@ -54,6 +54,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "9149fa794eb2535457fae699",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1118644,
+            1119685
+          ],
+          "cell_span": [
+            1119329,
+            1119418
+          ],
+          "row_span": [
+            1119264,
+            1119467
+          ],
+          "column_spans": [
+            [
+              1118923,
+              1118987
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "aa2fc245241eb4aafa59f18ab49c5054ddc4b0be975cfa4f06e2816626cc8e89",
         "quote_verified": true,
@@ -113,6 +141,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "78140ec212d6bc1dd94dcadd",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1119759,
+            1120412
+          ],
+          "cell_span": [
+            1120298,
+            1120391
+          ],
+          "row_span": [
+            1120188,
+            1120396
+          ],
+          "column_spans": [
+            [
+              1120104,
+              1120168
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "c0e3f66aa70d2953892849ea8dc13054622c47206a559cc9a8bf46a26bb800be",
         "quote_verified": true,

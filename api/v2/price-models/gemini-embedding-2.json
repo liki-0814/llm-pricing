@@ -65,7 +65,35 @@
           "[`gemini-embedding-2`](/docs/models/gemini-embedding-2)",
           "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "750207112a92f7cca611d61a3fb5108b6eba1d16443e89008d3a378c3fd6661a"
+        "price_record_id": "750207112a92f7cca611d61a3fb5108b6eba1d16443e89008d3a378c3fd6661a",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            102446,
+            102920
+          ],
+          "cell_span": [
+            102572,
+            102577
+          ],
+          "row_span": [
+            102527,
+            102578
+          ],
+          "column_spans": [
+            [
+              102488,
+              102519
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -117,7 +145,35 @@
           "[`gemini-embedding-2`](/docs/models/gemini-embedding-2)",
           "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "7ed9a91403c1bc19bf56710f0af2b6f00c3ef1b2590f168685a95e5229a78b9d"
+        "price_record_id": "7ed9a91403c1bc19bf56710f0af2b6f00c3ef1b2590f168685a95e5229a78b9d",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            102964,
+            103435
+          ],
+          "cell_span": [
+            103089,
+            103094
+          ],
+          "row_span": [
+            103045,
+            103095
+          ],
+          "column_spans": [
+            [
+              103006,
+              103037
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       }
     ],
     "scope_complete": false,

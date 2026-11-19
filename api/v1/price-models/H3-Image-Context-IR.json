@@ -66,7 +66,35 @@
           "<tr><th style=\"text-align:left\"><strong>Model / API</strong></th><th style=\"text-align:center\"><strong>Input</strong><br/>$ / M tokens</th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "2ced0a3bf2014095c3be00f5303c547968430ddeb4bee3112b22449d2c90258b"
+        "price_record_id": "2ced0a3bf2014095c3be00f5303c547968430ddeb4bee3112b22449d2c90258b",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            138164,
+            138605
+          ],
+          "cell_span": [
+            138524,
+            138584
+          ],
+          "row_span": [
+            138468,
+            138589
+          ],
+          "column_spans": [
+            [
+              138374,
+              138448
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       }
     ],
     "scope_complete": false,

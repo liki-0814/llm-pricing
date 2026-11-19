@@ -54,6 +54,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "b9ac7790cdced7ba499e32e0",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            837488,
+            847394
+          ],
+          "cell_span": [
+            838806,
+            838892
+          ],
+          "row_span": [
+            838551,
+            839113
+          ],
+          "column_spans": [
+            [
+              838019,
+              838125
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "5b050f7f567c32ae46e9449676d72112b0a49cd4fd7f9ee18cebea0d0d461f99",
         "quote_verified": true,
@@ -113,6 +141,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "3625863de45180db33c9274d",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            837488,
+            847394
+          ],
+          "cell_span": [
+            838892,
+            838978
+          ],
+          "row_span": [
+            838551,
+            839113
+          ],
+          "column_spans": [
+            [
+              838125,
+              838281
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "dae6fd360cd32ec8b29f9358ceadd4992a98dbc369ab80567e7ca3b73528e20e",
         "quote_verified": true,
@@ -172,6 +228,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "a5b1b2a69e618503438bfd11",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            847479,
+            859379
+          ],
+          "cell_span": [
+            848657,
+            848743
+          ],
+          "row_span": [
+            848357,
+            848834
+          ],
+          "column_spans": [
+            [
+              848075,
+              848181
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "fc6145b1d2b4b7a1b263f6e05f4560fdd4058118c8dbd3150844862e81e21fc4",
         "quote_verified": true,
@@ -231,6 +315,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "e5c3c4e54651bc6189d40199",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            847479,
+            859379
+          ],
+          "cell_span": [
+            848743,
+            848829
+          ],
+          "row_span": [
+            848357,
+            848834
+          ],
+          "column_spans": [
+            [
+              848181,
+              848337
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "631f776e41f47e693b82b7248de38be0d969b198041e267e9b829039d9530044",
         "quote_verified": true,
@@ -290,6 +402,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "84d1950edd9cc98903cd65c4",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            847479,
+            859379
+          ],
+          "cell_span": [
+            849134,
+            849222
+          ],
+          "row_span": [
+            848834,
+            849315
+          ],
+          "column_spans": [
+            [
+              848075,
+              848181
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "a3472892c15a53c9f2eefbdc3f11a8e58a0e0b6345e236e496e979e2606ee757",
         "quote_verified": true,
@@ -349,6 +489,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "3e990a6ece3c63925b404d2c",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            847479,
+            859379
+          ],
+          "cell_span": [
+            849222,
+            849310
+          ],
+          "row_span": [
+            848834,
+            849315
+          ],
+          "column_spans": [
+            [
+              848181,
+              848337
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "80e670a1934159348df1e1b5d0dbf06ff5d930de68c78763598a3ad8708c5299",
         "quote_verified": true,
@@ -408,6 +576,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "5ae07849e112396bdaf59d99",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            859451,
+            867275
+          ],
+          "cell_span": [
+            860629,
+            860717
+          ],
+          "row_span": [
+            860329,
+            860810
+          ],
+          "column_spans": [
+            [
+              860047,
+              860153
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "9bfa81605439e5af8c006ef75445b98d853b575c0358fa00b04a77d122fc0131",
         "quote_verified": true,
@@ -467,6 +663,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "b43dea538f5d2400427bd0d9",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            859451,
+            867275
+          ],
+          "cell_span": [
+            860717,
+            860805
+          ],
+          "row_span": [
+            860329,
+            860810
+          ],
+          "column_spans": [
+            [
+              860153,
+              860309
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "eb9c88cb255d77383a116243c4d3aa842217d39d8d894d257850bce9fc901a3b",
         "quote_verified": true,
@@ -526,6 +750,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "fca7cf07ad0704ca401ca074",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            867360,
+            877841
+          ],
+          "cell_span": [
+            868538,
+            868626
+          ],
+          "row_span": [
+            868238,
+            868719
+          ],
+          "column_spans": [
+            [
+              867956,
+              868062
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "4394aa14064f1fa2218631593b0f8573badae5f6c554a173ff13d83cf934bb0a",
         "quote_verified": true,
@@ -585,6 +837,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "fd7467ceff021bb6dfc5c1f8",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            867360,
+            877841
+          ],
+          "cell_span": [
+            868626,
+            868714
+          ],
+          "row_span": [
+            868238,
+            868719
+          ],
+          "column_spans": [
+            [
+              868062,
+              868218
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "8643a025ec2476f94243988f953ad56afe5cce6d36b065e095326c947fbb7bfb",
         "quote_verified": true,
@@ -644,6 +924,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "c58fa928bb60b75ec3acaf1c",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            867360,
+            877841
+          ],
+          "cell_span": [
+            869019,
+            869105
+          ],
+          "row_span": [
+            868719,
+            869196
+          ],
+          "column_spans": [
+            [
+              867956,
+              868062
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "a32714e32424b234150b12a32e94dcfc1368a4a0ff75066cd24e6fd41cde311d",
         "quote_verified": true,
@@ -703,6 +1011,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "2521b3b9c1dea577d8f47fe0",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            867360,
+            877841
+          ],
+          "cell_span": [
+            869105,
+            869191
+          ],
+          "row_span": [
+            868719,
+            869196
+          ],
+          "column_spans": [
+            [
+              868062,
+              868218
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "307f63533818ee00a46667a7914f68bcb82d2b59708b353eaa0ca0848df89d44",
         "quote_verified": true,
@@ -762,6 +1098,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "d93666d50d2584d2e3eac099",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            877920,
+            882847
+          ],
+          "cell_span": [
+            879098,
+            879184
+          ],
+          "row_span": [
+            878798,
+            879275
+          ],
+          "column_spans": [
+            [
+              878516,
+              878622
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "831146ca7eae6b9a757fee6d88ad7508482e916e00f75fd7f3a7ae8cbf04ac71",
         "quote_verified": true,
@@ -821,6 +1185,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "de803103092e39518f3f422b",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            877920,
+            882847
+          ],
+          "cell_span": [
+            879184,
+            879270
+          ],
+          "row_span": [
+            878798,
+            879275
+          ],
+          "column_spans": [
+            [
+              878622,
+              878778
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "b2752263a3f25b398a25d9aa1e48a42b99438f0c62dad50cab34285ab8b92c0a",
         "quote_verified": true,
@@ -880,6 +1272,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "f027e2961f2fda5a37beb34b",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            882922,
+            888646
+          ],
+          "cell_span": [
+            884102,
+            884190
+          ],
+          "row_span": [
+            883800,
+            884283
+          ],
+          "column_spans": [
+            [
+              883518,
+              883624
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "989c0feb3759c5034f12dbf1f0363bc7399f8a22dd2b497dbce9c9e0d603084c",
         "quote_verified": true,
@@ -939,6 +1359,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "5a525ec3779fd947d6542857",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            882922,
+            888646
+          ],
+          "cell_span": [
+            884190,
+            884278
+          ],
+          "row_span": [
+            883800,
+            884283
+          ],
+          "column_spans": [
+            [
+              883624,
+              883780
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "c93c7b5ef8ffc5d28ec3110b17bf779bf996b6f3b958be5d698009fa82160030",
         "quote_verified": true,
@@ -998,6 +1446,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "b3741303bce79cbed1ff2296",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            882922,
+            888646
+          ],
+          "cell_span": [
+            884583,
+            884669
+          ],
+          "row_span": [
+            884283,
+            884760
+          ],
+          "column_spans": [
+            [
+              883518,
+              883624
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "25a73cede0c4da4289629dafcc0cf1e50dbe7053c3b74acdd3a7ece086d7e9f1",
         "quote_verified": true,
@@ -1057,6 +1533,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "ebeafc0e1ce4163d5255aad8",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            882922,
+            888646
+          ],
+          "cell_span": [
+            884669,
+            884755
+          ],
+          "row_span": [
+            884283,
+            884760
+          ],
+          "column_spans": [
+            [
+              883624,
+              883780
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "e13fb79e81e3cfbe3b0f269f19b73f660795dcd16d06ace5b3fa5a42f80a4407",
         "quote_verified": true,

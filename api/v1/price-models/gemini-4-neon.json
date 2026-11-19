@@ -65,7 +65,35 @@
           "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
           "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "3e99e77a12f6bc43a426077193c798493e56dc6e119ee73883861dbb53cce0b4"
+        "price_record_id": "3e99e77a12f6bc43a426077193c798493e56dc6e119ee73883861dbb53cce0b4",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14695,
+            15582
+          ],
+          "cell_span": [
+            14815,
+            14820
+          ],
+          "row_span": [
+            14776,
+            14821
+          ],
+          "column_spans": [
+            [
+              14737,
+              14768
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -117,7 +145,35 @@
           "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
           "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "930af83064138e6868dab74619dd2c8a8efd61b603b12d06cc185c474cbd3ef7"
+        "price_record_id": "930af83064138e6868dab74619dd2c8a8efd61b603b12d06cc185c474cbd3ef7",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14695,
+            15582
+          ],
+          "cell_span": [
+            14896,
+            14902
+          ],
+          "row_span": [
+            14828,
+            14903
+          ],
+          "column_spans": [
+            [
+              14737,
+              14768
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -169,7 +225,35 @@
           "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
           "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "31c1c64155a90f5f4737c66e44e1479507ba727b8a93cf511abc30b21de93634"
+        "price_record_id": "31c1c64155a90f5f4737c66e44e1479507ba727b8a93cf511abc30b21de93634",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            15818,
+            16247
+          ],
+          "cell_span": [
+            15938,
+            15943
+          ],
+          "row_span": [
+            15899,
+            15944
+          ],
+          "column_spans": [
+            [
+              15860,
+              15891
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -221,7 +305,35 @@
           "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
           "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "e8b71fb115dcd87015612677308ad6bf67f738801378ea00b4fa002a85e408c8"
+        "price_record_id": "e8b71fb115dcd87015612677308ad6bf67f738801378ea00b4fa002a85e408c8",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            15818,
+            16247
+          ],
+          "cell_span": [
+            16019,
+            16024
+          ],
+          "row_span": [
+            15951,
+            16025
+          ],
+          "column_spans": [
+            [
+              15860,
+              15891
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -273,7 +385,35 @@
           "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
           "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "92912950bd509e039f284c075a36405ccde6726fd9f231909b64200c32954164"
+        "price_record_id": "92912950bd509e039f284c075a36405ccde6726fd9f231909b64200c32954164",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            16290,
+            16719
+          ],
+          "cell_span": [
+            16410,
+            16415
+          ],
+          "row_span": [
+            16371,
+            16416
+          ],
+          "column_spans": [
+            [
+              16332,
+              16363
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -325,7 +465,35 @@
           "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
           "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "f29a7856fc8527a301d9720735675a0b29538ff1630a09fabf1769ac1ae69200"
+        "price_record_id": "f29a7856fc8527a301d9720735675a0b29538ff1630a09fabf1769ac1ae69200",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            16290,
+            16719
+          ],
+          "cell_span": [
+            16491,
+            16496
+          ],
+          "row_span": [
+            16423,
+            16497
+          ],
+          "column_spans": [
+            [
+              16332,
+              16363
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -377,7 +545,35 @@
           "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
           "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "c2f911d3d03e872c2f8ab8d08facbc9215985cdb94bd7935490667fe6f953277"
+        "price_record_id": "c2f911d3d03e872c2f8ab8d08facbc9215985cdb94bd7935490667fe6f953277",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            16766,
+            17653
+          ],
+          "cell_span": [
+            16886,
+            16891
+          ],
+          "row_span": [
+            16847,
+            16892
+          ],
+          "column_spans": [
+            [
+              16808,
+              16839
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -429,7 +625,35 @@
           "[`gemini-4-neon`](/docs/models/gemini-4-neon)",
           "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "2492f29ccbb8aad6d70cd7e61d68f97079e2d130f87cc0cddd2627c218375558"
+        "price_record_id": "2492f29ccbb8aad6d70cd7e61d68f97079e2d130f87cc0cddd2627c218375558",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            16766,
+            17653
+          ],
+          "cell_span": [
+            16967,
+            16973
+          ],
+          "row_span": [
+            16899,
+            16974
+          ],
+          "column_spans": [
+            [
+              16808,
+              16839
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       }
     ],
     "scope_complete": false,

@@ -69,7 +69,35 @@
           "<tr><th style=\"text-align:left\">Model</th><th style=\"text-align:left\">Price</th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "db65d1ce5a22345cb0aa1d4e6a0532e55088b53aa2c46263172003bbdd3ad4ae"
+        "price_record_id": "db65d1ce5a22345cb0aa1d4e6a0532e55088b53aa2c46263172003bbdd3ad4ae",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            121596,
+            123161
+          ],
+          "cell_span": [
+            121901,
+            121958
+          ],
+          "row_span": [
+            121841,
+            121963
+          ],
+          "column_spans": [
+            [
+              121783,
+              121821
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_video"
+        }
       },
       {
         "vendor": "MiniMax",
@@ -125,7 +153,35 @@
           "<tr><th style=\"text-align:left\">Model</th><th style=\"text-align:left\">Price</th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "c291374ef21414ab67027792da778066ecb3121b38e6a78ca0b6633fb135f75f"
+        "price_record_id": "c291374ef21414ab67027792da778066ecb3121b38e6a78ca0b6633fb135f75f",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            121596,
+            123161
+          ],
+          "cell_span": [
+            122023,
+            122081
+          ],
+          "row_span": [
+            121963,
+            122086
+          ],
+          "column_spans": [
+            [
+              121783,
+              121821
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_video"
+        }
       },
       {
         "vendor": "MiniMax",
@@ -181,7 +237,35 @@
           "<tr><th style=\"text-align:left\">Model</th><th style=\"text-align:left\">Price</th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "69434d421894de489123a3c85bc7647147e04c69c76c92fb2082c0c6bfb47095"
+        "price_record_id": "69434d421894de489123a3c85bc7647147e04c69c76c92fb2082c0c6bfb47095",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            121596,
+            123161
+          ],
+          "cell_span": [
+            122146,
+            122204
+          ],
+          "row_span": [
+            122086,
+            122209
+          ],
+          "column_spans": [
+            [
+              121783,
+              121821
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_video"
+        }
       }
     ],
     "scope_complete": false,

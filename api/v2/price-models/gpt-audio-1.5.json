@@ -65,7 +65,38 @@
           "| Model | Modality | Input | Output | Cached input |\n",
           "Prices per 1M tokens unless noted."
         ],
-        "price_record_id": "515d3892a4f00dce90ee0cd2f4a450689f952d35684bd47d58732853793d252b"
+        "price_record_id": "515d3892a4f00dce90ee0cd2f4a450689f952d35684bd47d58732853793d252b",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15854,
+            15860
+          ],
+          "row_span": [
+            15828,
+            15876
+          ],
+          "column_spans": [
+            [
+              14824,
+              14829
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -117,7 +148,38 @@
           "| Model | Modality | Input | Output | Cached input |\n",
           "Prices per 1M tokens unless noted."
         ],
-        "price_record_id": "29c7ad77322ee60eb4c09e4e259f892693fcd692f378a212fd8cca50ab583298"
+        "price_record_id": "29c7ad77322ee60eb4c09e4e259f892693fcd692f378a212fd8cca50ab583298",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15863,
+            15869
+          ],
+          "row_span": [
+            15828,
+            15876
+          ],
+          "column_spans": [
+            [
+              14832,
+              14838
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -169,7 +231,38 @@
           "| Model | Modality | Input | Output | Cached input |\n",
           "Prices per 1M tokens unless noted."
         ],
-        "price_record_id": "11ba09a1361b0a068c050adb0ce38a7da5dab411dc4a4ee499524c60fe7a7cfd"
+        "price_record_id": "11ba09a1361b0a068c050adb0ce38a7da5dab411dc4a4ee499524c60fe7a7cfd",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15901,
+            15906
+          ],
+          "row_span": [
+            15876,
+            15922
+          ],
+          "column_spans": [
+            [
+              14824,
+              14829
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -221,7 +314,38 @@
           "| Model | Modality | Input | Output | Cached input |\n",
           "Prices per 1M tokens unless noted."
         ],
-        "price_record_id": "0eef5ddd7ba9dae29ca098ad64644918abde5c960821c67953749f784fd80c07"
+        "price_record_id": "0eef5ddd7ba9dae29ca098ad64644918abde5c960821c67953749f784fd80c07",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14803,
+            16294
+          ],
+          "cell_span": [
+            15909,
+            15915
+          ],
+          "row_span": [
+            15876,
+            15922
+          ],
+          "column_spans": [
+            [
+              14832,
+              14838
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
       }
     ],
     "scope_complete": false,

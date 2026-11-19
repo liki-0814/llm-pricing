@@ -66,7 +66,35 @@
           "All prices are in USD.",
           "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
         ],
-        "price_record_id": "e6fbe3220fe82ac1b3715434c61b31d288a978204b5f63eaf65ff4041a256be6"
+        "price_record_id": "e6fbe3220fe82ac1b3715434c61b31d288a978204b5f63eaf65ff4041a256be6",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            711,
+            716
+          ],
+          "row_span": [
+            670,
+            735
+          ],
+          "column_spans": [
+            [
+              165,
+              182
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "xAI",
@@ -119,7 +147,35 @@
           "All prices are in USD.",
           "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
         ],
-        "price_record_id": "b5565b732e7d7729f1e28bc2819d411c5a518665bdea3bc9048ff2696bb6aa73"
+        "price_record_id": "b5565b732e7d7729f1e28bc2819d411c5a518665bdea3bc9048ff2696bb6aa73",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            719,
+            724
+          ],
+          "row_span": [
+            670,
+            735
+          ],
+          "column_spans": [
+            [
+              185,
+              209
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "xAI",
@@ -172,7 +228,35 @@
           "All prices are in USD.",
           "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
         ],
-        "price_record_id": "98838b876eb849adaa73e044be2368996bda5778b0a27cf135fb512c6e11c5f1"
+        "price_record_id": "98838b876eb849adaa73e044be2368996bda5778b0a27cf135fb512c6e11c5f1",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            727,
+            732
+          ],
+          "row_span": [
+            670,
+            735
+          ],
+          "column_spans": [
+            [
+              212,
+              230
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "xAI",
@@ -225,7 +309,35 @@
           "All prices are in USD.",
           "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
         ],
-        "price_record_id": "c4671209ac3ecf1ea4b3ab58c48b75a87f239a07abb888ad70eb308d54bbb4a8"
+        "price_record_id": "c4671209ac3ecf1ea4b3ab58c48b75a87f239a07abb888ad70eb308d54bbb4a8",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            776,
+            781
+          ],
+          "row_span": [
+            735,
+            800
+          ],
+          "column_spans": [
+            [
+              165,
+              182
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "xAI",
@@ -278,7 +390,35 @@
           "All prices are in USD.",
           "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
         ],
-        "price_record_id": "271fbcec1d6f085bcc706d7236b4bbd1cb7f29f2b6b3d105dbe31fb3bb9568a2"
+        "price_record_id": "271fbcec1d6f085bcc706d7236b4bbd1cb7f29f2b6b3d105dbe31fb3bb9568a2",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            784,
+            789
+          ],
+          "row_span": [
+            735,
+            800
+          ],
+          "column_spans": [
+            [
+              185,
+              209
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "xAI",
@@ -331,7 +471,35 @@
           "All prices are in USD.",
           "*Prices shown per million tokens. Models listed with two rows use long context pricing: requests whose prompt reaches the listed token threshold are billed at the higher rate for all tokens in the request.*"
         ],
-        "price_record_id": "c803f79eef568457188741929ed5e00d2d0083956ae6da421280708a49569435"
+        "price_record_id": "c803f79eef568457188741929ed5e00d2d0083956ae6da421280708a49569435",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            145,
+            1444
+          ],
+          "cell_span": [
+            792,
+            797
+          ],
+          "row_span": [
+            735,
+            800
+          ],
+          "column_spans": [
+            [
+              212,
+              230
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       }
     ],
     "scope_complete": false,

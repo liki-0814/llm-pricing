@@ -65,7 +65,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "926101902dcde0e69cec20e831c5ef2f3e830b1b8731cd67f5537313bdc345d9"
+        "price_record_id": "926101902dcde0e69cec20e831c5ef2f3e830b1b8731cd67f5537313bdc345d9",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            1482,
+            1487
+          ],
+          "row_span": [
+            1464,
+            1565
+          ],
+          "column_spans": [
+            [
+              350,
+              369
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -117,7 +148,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "82ebb8a95d980251ff7a55c6eec7a4c7e74c83e3fadf3603ccdb022df55fe5f8"
+        "price_record_id": "82ebb8a95d980251ff7a55c6eec7a4c7e74c83e3fadf3603ccdb022df55fe5f8",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            1490,
+            1496
+          ],
+          "row_span": [
+            1464,
+            1565
+          ],
+          "column_spans": [
+            [
+              372,
+              392
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -169,7 +231,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "c87de8df059fa1f3395b5830869b558b445fc9769d020f234c281e4044ce4a24"
+        "price_record_id": "c87de8df059fa1f3395b5830869b558b445fc9769d020f234c281e4044ce4a24",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            1499,
+            1504
+          ],
+          "row_span": [
+            1464,
+            1565
+          ],
+          "column_spans": [
+            [
+              395,
+              421
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -221,7 +314,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "b1428c0e6a5193f6fdc904b422ff4f2204da9995ee9ce746828603c1a1032035"
+        "price_record_id": "b1428c0e6a5193f6fdc904b422ff4f2204da9995ee9ce746828603c1a1032035",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            1523,
+            1528
+          ],
+          "row_span": [
+            1464,
+            1565
+          ],
+          "column_spans": [
+            [
+              476,
+              494
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -273,7 +397,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "f5a2393bb15f129fdc2356dc0b7703cdf539eb9fb0a28b1001f7c52e4755fa38"
+        "price_record_id": "f5a2393bb15f129fdc2356dc0b7703cdf539eb9fb0a28b1001f7c52e4755fa38",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            1531,
+            1537
+          ],
+          "row_span": [
+            1464,
+            1565
+          ],
+          "column_spans": [
+            [
+              497,
+              516
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -325,7 +480,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "0ffe23fba9ffc035053062e47043009918c666a1f3e5a530158a0731430dfc1d"
+        "price_record_id": "0ffe23fba9ffc035053062e47043009918c666a1f3e5a530158a0731430dfc1d",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            340,
+            2067
+          ],
+          "cell_span": [
+            1540,
+            1545
+          ],
+          "row_span": [
+            1464,
+            1565
+          ],
+          "column_spans": [
+            [
+              519,
+              544
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -377,7 +563,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "c8170ff0dc6760b3042b1d685b99d4be5100006de7f7192be325763b9ea8abf0"
+        "price_record_id": "c8170ff0dc6760b3042b1d685b99d4be5100006de7f7192be325763b9ea8abf0",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3898,
+            3903
+          ],
+          "row_span": [
+            3880,
+            3978
+          ],
+          "column_spans": [
+            [
+              2774,
+              2793
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -429,7 +646,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "003e3ecf3485982be49944734670eb15682f26fa3cda46c756ac7b7c048f3178"
+        "price_record_id": "003e3ecf3485982be49944734670eb15682f26fa3cda46c756ac7b7c048f3178",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3906,
+            3911
+          ],
+          "row_span": [
+            3880,
+            3978
+          ],
+          "column_spans": [
+            [
+              2796,
+              2816
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -481,7 +729,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "b981176aebe2c2ab12b8009cec31a7adf33a61b3787ab4599869f98c6991218f"
+        "price_record_id": "b981176aebe2c2ab12b8009cec31a7adf33a61b3787ab4599869f98c6991218f",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3914,
+            3919
+          ],
+          "row_span": [
+            3880,
+            3978
+          ],
+          "column_spans": [
+            [
+              2819,
+              2845
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -533,7 +812,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "ff416f4e2ca7c49ac519a1969abc1c62f110626acf01646af3626d717f4d25d5"
+        "price_record_id": "ff416f4e2ca7c49ac519a1969abc1c62f110626acf01646af3626d717f4d25d5",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3938,
+            3943
+          ],
+          "row_span": [
+            3880,
+            3978
+          ],
+          "column_spans": [
+            [
+              2900,
+              2918
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -585,7 +895,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "9629732d5462414fd960ca58a4e7ed5625ebbec8ba0a109f7d0b3346e8e8dff2"
+        "price_record_id": "9629732d5462414fd960ca58a4e7ed5625ebbec8ba0a109f7d0b3346e8e8dff2",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3946,
+            3951
+          ],
+          "row_span": [
+            3880,
+            3978
+          ],
+          "column_spans": [
+            [
+              2921,
+              2940
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -637,7 +978,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "cab32d4f993ca9c0cc3faf75ee828f4edb92a74547dc9ee3d1083b611ea3c9c6"
+        "price_record_id": "cab32d4f993ca9c0cc3faf75ee828f4edb92a74547dc9ee3d1083b611ea3c9c6",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            2764,
+            4466
+          ],
+          "cell_span": [
+            3954,
+            3959
+          ],
+          "row_span": [
+            3880,
+            3978
+          ],
+          "column_spans": [
+            [
+              2943,
+              2968
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -689,7 +1061,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "e3f21fadbbbbf8f5659d2ced65c1d85e4f4793a8105900bfb7c692d6afc88559"
+        "price_record_id": "e3f21fadbbbbf8f5659d2ced65c1d85e4f4793a8105900bfb7c692d6afc88559",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5147,
+            6650
+          ],
+          "cell_span": [
+            6082,
+            6087
+          ],
+          "row_span": [
+            6064,
+            6162
+          ],
+          "column_spans": [
+            [
+              5157,
+              5176
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -741,7 +1144,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "01a1d0d2e0cdba256d9eddecad779480585aceeda68261a5abe9ea5ecd46c563"
+        "price_record_id": "01a1d0d2e0cdba256d9eddecad779480585aceeda68261a5abe9ea5ecd46c563",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5147,
+            6650
+          ],
+          "cell_span": [
+            6090,
+            6095
+          ],
+          "row_span": [
+            6064,
+            6162
+          ],
+          "column_spans": [
+            [
+              5179,
+              5199
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -793,7 +1227,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "2801a8e76ecacbc3191ae4a7cd29a5bf957ebcc7d2ddac6feaa9fc8ef6f21207"
+        "price_record_id": "2801a8e76ecacbc3191ae4a7cd29a5bf957ebcc7d2ddac6feaa9fc8ef6f21207",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5147,
+            6650
+          ],
+          "cell_span": [
+            6098,
+            6103
+          ],
+          "row_span": [
+            6064,
+            6162
+          ],
+          "column_spans": [
+            [
+              5202,
+              5228
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -845,7 +1310,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "1c1cef31f55e09fd8b37e07cf8bb1fa9dec358d94855e5151a3776cdc27447ff"
+        "price_record_id": "1c1cef31f55e09fd8b37e07cf8bb1fa9dec358d94855e5151a3776cdc27447ff",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5147,
+            6650
+          ],
+          "cell_span": [
+            6122,
+            6127
+          ],
+          "row_span": [
+            6064,
+            6162
+          ],
+          "column_spans": [
+            [
+              5283,
+              5301
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -897,7 +1393,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "92245be28f1510bc6224556121b6edfe0e6a3a2ec45321706e5f0e49028c62fb"
+        "price_record_id": "92245be28f1510bc6224556121b6edfe0e6a3a2ec45321706e5f0e49028c62fb",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5147,
+            6650
+          ],
+          "cell_span": [
+            6130,
+            6135
+          ],
+          "row_span": [
+            6064,
+            6162
+          ],
+          "column_spans": [
+            [
+              5304,
+              5323
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -949,7 +1476,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "50d125c5714172536277153f55bbfa35b631dd2e0aa09d4afe348eed881db4f4"
+        "price_record_id": "50d125c5714172536277153f55bbfa35b631dd2e0aa09d4afe348eed881db4f4",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            5147,
+            6650
+          ],
+          "cell_span": [
+            6138,
+            6143
+          ],
+          "row_span": [
+            6064,
+            6162
+          ],
+          "column_spans": [
+            [
+              5326,
+              5351
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -1001,7 +1559,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "7befa238213f2579ccf5d5555820b3f7f64fcd142ac2fe4869136f60a2cb86f7"
+        "price_record_id": "7befa238213f2579ccf5d5555820b3f7f64fcd142ac2fe4869136f60a2cb86f7",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            8249,
+            8254
+          ],
+          "row_span": [
+            8231,
+            8334
+          ],
+          "column_spans": [
+            [
+              7102,
+              7121
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -1053,7 +1642,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "a231d2df273cea20ee1737e4a97ccaa5f3571306c3078fd818f0c51d2247cff0"
+        "price_record_id": "a231d2df273cea20ee1737e4a97ccaa5f3571306c3078fd818f0c51d2247cff0",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            8257,
+            8263
+          ],
+          "row_span": [
+            8231,
+            8334
+          ],
+          "column_spans": [
+            [
+              7124,
+              7144
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -1105,7 +1725,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "d95640a99931d3f130792b2aece1f7db832ac2f2852ec384a4fc40220b2296db"
+        "price_record_id": "d95640a99931d3f130792b2aece1f7db832ac2f2852ec384a4fc40220b2296db",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            8266,
+            8271
+          ],
+          "row_span": [
+            8231,
+            8334
+          ],
+          "column_spans": [
+            [
+              7147,
+              7173
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -1157,7 +1808,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "100326e1e9c6b606f1531aa1bcb006b94413a445a2d95f76bf7b28dec2351c89"
+        "price_record_id": "100326e1e9c6b606f1531aa1bcb006b94413a445a2d95f76bf7b28dec2351c89",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            8291,
+            8296
+          ],
+          "row_span": [
+            8231,
+            8334
+          ],
+          "column_spans": [
+            [
+              7228,
+              7246
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -1209,7 +1891,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "43d026f8d7ad30b83b8f281fe8a224c951c673774cbf9c72673500466fcb95b1"
+        "price_record_id": "43d026f8d7ad30b83b8f281fe8a224c951c673774cbf9c72673500466fcb95b1",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            8299,
+            8305
+          ],
+          "row_span": [
+            8231,
+            8334
+          ],
+          "column_spans": [
+            [
+              7249,
+              7268
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -1261,7 +1974,38 @@
           "| Model | Short context input | Short context output | Short context cached input | Short context 30m write | Short context 12h write | Long context input | Long context output | Long context cached input | Long context 30m write | Long context 12h write |\n",
           "Prices per 1M tokens."
         ],
-        "price_record_id": "79e7c3f0b1649521b3bc766a349ee294334a8704427f616429e26afdd587a17f"
+        "price_record_id": "79e7c3f0b1649521b3bc766a349ee294334a8704427f616429e26afdd587a17f",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            7092,
+            8608
+          ],
+          "cell_span": [
+            8308,
+            8313
+          ],
+          "row_span": [
+            8231,
+            8334
+          ],
+          "column_spans": [
+            [
+              7271,
+              7296
+            ]
+          ],
+          "default_span": [
+            268,
+            289
+          ],
+          "unit": "per_1M_tokens"
+        }
       }
     ],
     "scope_complete": false,

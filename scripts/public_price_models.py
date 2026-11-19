@@ -9,7 +9,7 @@ import json
 import math
 import re
 from html import unescape
-from public_price_context import explicit_unit, markdoc_tables
+from public_price_context import explicit_unit, markdoc_tables, prove_unit, consume_unit
 
 ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.-]*-[A-Za-z0-9_.-]+')
 
@@ -30,7 +30,7 @@ def pipes(text):
             while i<len(lines) and lines[i].lstrip().startswith('|'):
                 raw=lines[i];rows.append((raw,[x.strip() for x in raw.strip().strip('|').split('|')]))
                 pos+=len(raw);i+=1
-            yield dict(start=start,headers=header,header_quote=line,rows=rows,prefix=text[:start])
+            yield dict(start=start,end=pos,headers=header,header_quote=line,rows=rows,prefix=text[:start])
         else:pos+=len(line);i+=1
 
 def scalar(s):
@@ -61,6 +61,8 @@ def component(header):
 def emit(out, doc, mid, amount, currency, unit, charge, billing, quote, context, conditions, identity=None, region=None):
     """One shared constructor; source context and quote must be actual substrings."""
     meta,text=doc['meta'],doc['text']
+    if unit is None:return
+    proof=consume_unit(unit,meta,text,quote);unit=proof.unit
     if not ID.fullmatch(mid) or isinstance(amount,bool) or amount is None or not math.isfinite(amount) or amount<0 or not unit or not charge:return
     if quote not in text or any(q not in text for q in context):raise ValueError('model price quote/context not literal')
     if identity is not None and identity['quote'] not in identity['document']['text']:raise ValueError('nonliteral identity bridge')
@@ -73,7 +75,7 @@ def emit(out, doc, mid, amount, currency, unit, charge, billing, quote, context,
         source_url=meta['source_url'],source_sha256=meta['source_sha256'],observed_at=meta['observed_at'],quote=quote,quote_sha256=sha(quote),context_quotes=list(dict.fromkeys(context)))
     if identity:
         m=identity['document']['meta'];record['identity_evidence']=dict(source_url=m['source_url'],source_sha256=m['source_sha256'],quote=identity['quote'],quote_sha256=sha(identity['quote']),role='price_label_to_literal_ID_NOT_universe_certificate')
-    record['price_record_id']=sha(json.dumps(record,sort_keys=True,ensure_ascii=False));out.append(record)
+    record['price_record_id']=sha(json.dumps(record,sort_keys=True,ensure_ascii=False));record['unit_evidence']=proof.to_dict();out.append(record)
 
 def anthropic(out,doc,docs):
     text=doc['text'];catalog=next((d for d in docs if d['meta']['vendor']=='Anthropic' and '/models/overview.md' in d['meta']['source_url']),None)
@@ -94,7 +96,8 @@ def anthropic(out,doc,docs):
                 if not (cells[0]==label or cells[0].startswith(label+' (')):continue
                 for header,value in zip(table['headers'][1:],cells[1:]):
                     if 'MTok' not in value:continue
-                    emit(out,doc,mid,scalar(value),'USD' if usd else None,'per_1M_tokens',component(header),'token_modality_not_separately_priced',raw,[table['header_quote']]+([usd[0]] if usd else [])+([global_default[0]] if global_default else []),dict(service_tier='base_model_pricing',model_qualifier=cells[0],price_header=header,footnotes_preserved=value),identity,region='global_default' if global_default else None)
+                    unit=prove_unit(doc['meta'],text,cell=value,columns=(header,),scope=text[table['start']:table['end']],row=raw,scope_start=table['start'])
+                    emit(out,doc,mid,scalar(value),'USD' if usd else None,unit,component(header),'token_modality_not_separately_priced',raw,[table['header_quote']]+([usd[0]] if usd else [])+([global_default[0]] if global_default else []),dict(service_tier='base_model_pricing',model_qualifier=cells[0],price_header=header,footnotes_preserved=value),identity,region='global_default' if global_default else None)
 
 def google(out,doc,docs):
     text=doc['text']
@@ -116,14 +119,15 @@ def google(out,doc,docs):
             modes=[x for x in ('text','image','audio','video') if x in label.lower()];billing=modes[0] if len(modes)==1 else 'token_modality_not_separately_priced'
             if charge is None or 'storage' in label.lower():continue
             amounts=list(re.finditer(r'\$(\d+(?:\.\d+)?)',paid))
+            unit=prove_unit(doc['meta'],text,cell=paid,columns=(headers[2],),scope=match['quote'],row=block,scope_start=match['start'])
             if len(amounts)==1 and scalar(paid) is not None:
-                emit(out,doc,mid,float(amounts[0][1]),'USD',explicit_unit(paid,context=headers[2]),charge,billing,block,[blocks[0],identity,match['tab_quote']],dict(service_tier=match['tab'],source_table_start=match['start'],price_header=label,paid_tier=headers[2],qualifier=paid))
+                emit(out,doc,mid,float(amounts[0][1]),'USD',unit,charge,billing,block,[blocks[0],identity,match['tab_quote']],dict(service_tier=match['tab'],source_table_start=match['start'],price_header=label,paid_tier=headers[2],qualifier=paid))
             elif amounts:
                 # Only the complete, explicit through/starting date-pair grammar.
                 schedule=re.fullmatch(r'\$(\d+(?:\.\d+)?)\s+through\s+([A-Za-z]+ \d{1,2}, \d{4})\.\s*\$(\d+(?:\.\d+)?)\s+starting\s+([A-Za-z]+ \d{1,2}, \d{4})\.',paid)
                 if not schedule:continue
                 for amount,op,date in ((schedule[1],'through_inclusive',schedule[2]),(schedule[3],'starting_inclusive',schedule[4])):
-                    emit(out,doc,mid,float(amount),'USD','per_1M_tokens',charge,billing,block,[blocks[0],identity,match['tab_quote']],dict(service_tier=match['tab'],source_table_start=match['start'],price_header=label,paid_tier=headers[2],date_condition=dict(operator=op,date=dt.datetime.strptime(date,'%B %d, %Y').date().isoformat(),timezone=None,precision='date_only'),qualifier=paid))
+                    emit(out,doc,mid,float(amount),'USD',unit,charge,billing,block,[blocks[0],identity,match['tab_quote']],dict(service_tier=match['tab'],source_table_start=match['start'],price_header=label,paid_tier=headers[2],date_condition=dict(operator=op,date=dt.datetime.strptime(date,'%B %d, %Y').date().isoformat(),timezone=None,precision='date_only'),qualifier=paid))
 
 def markdown_prices(out,doc):
     text=doc['text'];vendor=doc['meta']['vendor'];usd=re.search(r'All prices are in USD\.',text)
@@ -144,10 +148,9 @@ def markdown_prices(out,doc):
             if not m:continue
             mid=m[1];billing=cells[headers.index('Modality')].lower() if 'Modality' in headers else 'token_modality_not_separately_priced'
             for h,value in zip(headers[1:],cells[1:]):
-                charge=component(h);unit=explicit_unit(value,h,units[-1] if units else '')
+                charge=component(h);unit=prove_unit(doc['meta'],text,cell=value,columns=(h,),scope=text[table['start']:table['end']],row=raw,scope_start=table['start'],default=units[-1] if units else '')
                 if vendor=='xAI' and heading=='### Image & Video Pricing' and h=='Cost':
-                    unit='per_image' if re.fullmatch(r'\$[\d.]+ / image',value) else 'per_second' if re.fullmatch(r'\$[\d.]+ / sec',value) else None
-                    billing='image' if unit=='per_image' else 'video';charge='output'
+                    billing='image' if unit and unit.unit=='per_image' else 'video';charge='output'
                 if h=='Price per minute':charge='session';billing='audio'
                 if not unit or charge is None:continue
                 context=[table['header_quote']]+([usd[0]] if usd else [])+([units[-1]] if units else [])
@@ -177,14 +180,11 @@ def minimax(out,doc,table_reader,expand_rows):
             for h,cell in zip(headers[1:],cells[1:]):
                 charge=component(h);billing='token_modality_not_separately_priced';unit=None
                 bundled=re.fullmatch(r'(\$[0-9]+(?:\.[0-9]+)?) per ([0-9]+P), ([0-9]+)s video',cell['text']) if h=='Price' else None
-                if bundled:unit='per_video';charge='output';billing='video'
-                if re.search(r'(?:/\s*M tokens|per M tokens)',h):unit='per_1M_tokens'
+                if bundled:charge='output';billing='video'
                 if 'Image' in h:billing='image'
                 if 'Video' in h:billing='video'
-                if 'per second' in h:unit='per_second'
-                if 'per image' in h:unit='per_image'
-                if h=='Price' and re.fullmatch(r'\$[\d.]+ per image',cell['text']):unit='per_image';charge='output';billing='image'
-                if not bundled:unit=explicit_unit(cell['text'],h)
+                if h=='Price' and re.fullmatch(r'\$[\d.]+ per image',cell['text']):charge='output';billing='image'
+                unit=prove_unit(doc['meta'],text,cell=cell.get('raw',cell['text']),columns=(rows[0][1][headers.index(h)].get('raw',h),),scope=table['quote'],row=row['quote'],scope_start=table['start'])
                 if not unit or charge is None:continue
                 dims={hh:cc['text'] for hh,cc in zip(headers,cells) if hh not in ('Model','Model / API') and component(hh) is None and hh!='Price'}
                 if bundled:dims.update(output_resolution=bundled[2],duration_seconds=int(bundled[3]))
@@ -215,10 +215,12 @@ def normalize(documents,table_reader,expand_rows,qwen_facts,qwen_candidates=()):
         doc=next((d for d in documents if d['meta']['vendor']=='阿里云 Qwen' and d['meta']['source_url']==candidate['source_url']),None)
         if doc is None:continue
         for r in candidate.get('unbound_billing_components',[]):
-            emit(out,doc,r['model_id'],r['amount'],'CNY',r['unit'],r['component'],r['billing_modality'],r['quote'],r['context'],dict(price_header=r['price_header'],dimensions=r['dimensions'],model_qualifier=r['model_qualifier'],rate_kind=r['rate_kind'],unresolved='per_ID_output_modality_NOT_certified'),region=r['region'])
+            emit(out,doc,r['model_id'],r['amount'],'CNY',r['unit_evidence'],r['component'],r['billing_modality'],r['quote'],r['context'],dict(price_header=r['price_header'],dimensions=r['dimensions'],model_qualifier=r['model_qualifier'],rate_kind=r['rate_kind'],unresolved='per_ID_output_modality_NOT_certified'),region=r['region'])
     # Existing strict CNY facts retain their exact reviewed semantics and IDs.
     for f in qwen_facts:
         if not f.get('model_id'):continue
+        doc=next(d for d in documents if d['meta']['source_url']==f['source_url'])
+        consume_unit(f.get('unit_evidence'),doc['meta'],doc['text'],f['quote'],expected=f['unit'])
         r=dict(f);r.update(price_record_id=sha(f['fact_id']),quote_verified=True,record_status='existing_strict_source_fact_NOT_executable_quote',billing_modality=f['modality'],selector_complete=True,
             selector_completeness=dict(model_id='literal_official_price_table_ID',region='explicit_source_region',currency='explicit_CNY',unit='explicit_source_header',component='explicit_source_header',conditions='existing_source_tier_literal',channel='source_bound_pay_as_you_go'),conditions=dict(source_tier=f['tier'],rate_kind=f.get('rate_kind')))
         out.append(r)

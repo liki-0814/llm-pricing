@@ -65,7 +65,38 @@
           "| Model | Use case | Input | Output | Estimated cost |\n",
           "Prices per 1M tokens unless noted."
         ],
-        "price_record_id": "cbdfe5ab70d9137ae344b469d76988578c70e6581b40e872fd6cf07e49c9cfd8"
+        "price_record_id": "cbdfe5ab70d9137ae344b469d76988578c70e6581b40e872fd6cf07e49c9cfd8",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            16352,
+            17015
+          ],
+          "cell_span": [
+            16926,
+            16931
+          ],
+          "row_span": [
+            16866,
+            16961
+          ],
+          "column_spans": [
+            [
+              16373,
+              16378
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "OpenAI",
@@ -117,7 +148,38 @@
           "| Model | Use case | Input | Output | Estimated cost |\n",
           "Prices per 1M tokens unless noted."
         ],
-        "price_record_id": "65387aa22335f195f88f1d2cf7a66ac925f90dd28086bcbc895a4542574c4753"
+        "price_record_id": "65387aa22335f195f88f1d2cf7a66ac925f90dd28086bcbc895a4542574c4753",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            16352,
+            17015
+          ],
+          "cell_span": [
+            16934,
+            16940
+          ],
+          "row_span": [
+            16866,
+            16961
+          ],
+          "column_spans": [
+            [
+              16381,
+              16387
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_1M_tokens"
+        }
       }
     ],
     "scope_complete": false,

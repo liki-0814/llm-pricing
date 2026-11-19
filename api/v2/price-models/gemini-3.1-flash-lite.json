@@ -65,7 +65,35 @@
           "[`gemini-3.1-flash-lite`](/docs/models/gemini-3.1-flash-lite)",
           "{% tab title=\"Standard\" %}"
         ],
-        "price_record_id": "78c2e4ca8b9a6f63a926b812b308a6e6ed4c9564262e179b60640166b7b57d49"
+        "price_record_id": "78c2e4ca8b9a6f63a926b812b308a6e6ed4c9564262e179b60640166b7b57d49",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            48549,
+            49563
+          ],
+          "cell_span": [
+            48795,
+            48800
+          ],
+          "row_span": [
+            48726,
+            48801
+          ],
+          "column_spans": [
+            [
+              48591,
+              48622
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -117,7 +145,35 @@
           "[`gemini-3.1-flash-lite`](/docs/models/gemini-3.1-flash-lite)",
           "{% tab title=\"Batch\" %}"
         ],
-        "price_record_id": "3756a37eefea024c3cdba23789ad98b970fb80057997a516ff926ea1fcdf327d"
+        "price_record_id": "3756a37eefea024c3cdba23789ad98b970fb80057997a516ff926ea1fcdf327d",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            49607,
+            50624
+          ],
+          "cell_span": [
+            49854,
+            49859
+          ],
+          "row_span": [
+            49785,
+            49860
+          ],
+          "column_spans": [
+            [
+              49649,
+              49680
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -169,7 +225,35 @@
           "[`gemini-3.1-flash-lite`](/docs/models/gemini-3.1-flash-lite)",
           "{% tab title=\"Flex\" %}"
         ],
-        "price_record_id": "ac38e045ef5d0268fc420340e5d898015b76b70e28cdfdd4701926802ec91e5f"
+        "price_record_id": "ac38e045ef5d0268fc420340e5d898015b76b70e28cdfdd4701926802ec91e5f",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            50667,
+            51684
+          ],
+          "cell_span": [
+            50914,
+            50919
+          ],
+          "row_span": [
+            50845,
+            50920
+          ],
+          "column_spans": [
+            [
+              50709,
+              50740
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       },
       {
         "vendor": "Google Gemini",
@@ -221,7 +305,35 @@
           "[`gemini-3.1-flash-lite`](/docs/models/gemini-3.1-flash-lite)",
           "{% tab title=\"Priority\" %}"
         ],
-        "price_record_id": "998e3a433f556b08075b760a682ceee38415f1bd8a43ab33904aa13e6b27c65a"
+        "price_record_id": "998e3a433f556b08075b760a682ceee38415f1bd8a43ab33904aa13e6b27c65a",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://aistudio.google.com/docs/pricing",
+          "source_sha256": "9c7ea643955f30d793c3b18d0b49ee85d5eb946c7d5cda3dcef3170f4b8ef92d",
+          "observed_at": "2026-11-19T06:31:26.390049+08:00",
+          "vendor": "Google Gemini",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            51731,
+            52745
+          ],
+          "cell_span": [
+            51977,
+            51982
+          ],
+          "row_span": [
+            51908,
+            51983
+          ],
+          "column_spans": [
+            [
+              51773,
+              51804
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        }
       }
     ],
     "scope_complete": false,

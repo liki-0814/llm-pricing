@@ -54,6 +54,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "56800f045f0c2467f846d2bf",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            970172,
+            971918
+          ],
+          "cell_span": [
+            971129,
+            971215
+          ],
+          "row_span": [
+            970968,
+            971436
+          ],
+          "column_spans": [
+            [
+              970465,
+              970578
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "ff9e8514e786a0742b9af047474453c24d5cd08a157527bdcd3002a4f52ca63c",
         "quote_verified": true,
@@ -113,6 +141,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "9a88fee89442155e0696022a",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            970172,
+            971918
+          ],
+          "cell_span": [
+            971215,
+            971301
+          ],
+          "row_span": [
+            970968,
+            971436
+          ],
+          "column_spans": [
+            [
+              970578,
+              970691
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_1M_tokens"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "2dbf2046156f8ee0775c76486fe590ca67b81d2c9b95fbb6a9d086a911dea804",
         "quote_verified": true,

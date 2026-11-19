@@ -246,3 +246,12 @@ observations, live/closed/nested tab controls; Atlas's53 token→character heade
 variant and unknown/contradictory units through real assemblers/API/page/inventory;
 independently deleted Fast propositions and original Markdown positive control.
 The latter synthetic inputs are NOT claims of errors in official original rates.
+
+
+## 2026-11-19: replay units at every materialization exit (R2), bind entitlement clauses (R3)
+
+- `UnitEvidence` is produced only from literal source cell, complete strong price-column headers, table scope, materialized row and an optional preceding weak default. It carries source/vendor/channel/hash/time and exact character spans. A cell may belong to another HTML row only when its literal `rowspan` still explicitly covers the materialized row; expired/cross-row borrowing is rejected.
+- Both `fact` and `emit` replay the derivation; strict-fact copying replays again, and Fast candidates consume the same proof. A caller-supplied unit string, decorative dictionary, altered source/row/unit, or conflicting strong cell/header cannot be normalized. Google date expansion changes only amount/time and reuses the validated unit proof. Rejected source rows/amount candidates remain archival evidence, not incorrect records hidden by `price_verified=false`.
+- Six emit call sites plus Qwen strict fact/direct copy and Fast candidate exits share this contract. MTok, explicit cell overrides of genuinely weak paragraph defaults, per-image/second/minute, MiniMax fixed-resolution single-video prices, Qwen token facts and valid date pairs remain supported. Source proof metadata is appended after existing economic/fact ID derivation.
+- Offering claims each require their own literal finite-clause witness and an unambiguous named/unique-pronoun/shared-predicate subject relation. A new subject or non-unique coordination terminates the old referent, independently of punctuation. Absence of an own-offering free-tier exclusion remains unknown, without erasing independently proven billing/API/availability claims.
+- This batch does not change scope completeness, global/history coverage, currency bridges, refresh/deploy workflows, authorization, effective-time inference or existing estimator eligibility. Offline replay of the same archived originals is not fresh capture or independent review.

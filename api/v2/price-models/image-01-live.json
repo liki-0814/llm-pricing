@@ -66,7 +66,35 @@
           "<tr><th style=\"text-align:left\">Model</th><th style=\"text-align:left\">Price</th></tr>",
           "All prices are in USD."
         ],
-        "price_record_id": "a0eb23eb5e684e96a1007263fcc11c154801408dc29627eff1cb4b25bf8f92a1"
+        "price_record_id": "a0eb23eb5e684e96a1007263fcc11c154801408dc29627eff1cb4b25bf8f92a1",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://platform.minimax.io/docs/pricing/overview",
+          "source_sha256": "8b8902aef277802c87edcc278722e91b013313f022969fc7307a608a1a66e686",
+          "observed_at": "2026-11-19T06:31:26.496319+08:00",
+          "vendor": "MiniMax",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            140833,
+            141212
+          ],
+          "cell_span": [
+            141141,
+            141191
+          ],
+          "row_span": [
+            141078,
+            141196
+          ],
+          "column_spans": [
+            [
+              141020,
+              141058
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        }
       }
     ],
     "scope_complete": false,

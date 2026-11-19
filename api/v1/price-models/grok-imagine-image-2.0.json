@@ -65,7 +65,35 @@
           "| Model | Cost |\n",
           "All prices are in USD."
         ],
-        "price_record_id": "0b212783f60d4114b950f4c4a81d566efd251b76f5e8399b9503717795986e4f"
+        "price_record_id": "0b212783f60d4114b950f4c4a81d566efd251b76f5e8399b9503717795986e4f",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://docs.x.ai/developers/pricing",
+          "source_sha256": "a9d1cf8fc92f3594e4410e96e767d4af3dd624d3889c3c9693c583aa82a6c6ce",
+          "observed_at": "2026-11-19T06:31:26.194068+08:00",
+          "vendor": "xAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1680,
+            1920
+          ],
+          "cell_span": [
+            1777,
+            1790
+          ],
+          "row_span": [
+            1750,
+            1793
+          ],
+          "column_spans": [
+            [
+              1690,
+              1694
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_image"
+        }
       }
     ],
     "scope_complete": false,

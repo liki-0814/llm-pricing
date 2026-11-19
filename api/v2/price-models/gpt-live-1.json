@@ -65,7 +65,38 @@
           "| Model | Price per minute |\n",
           "Prices per 1M tokens unless noted."
         ],
-        "price_record_id": "5412ae036940b21d0475c085fb9599df9dde3adefad0e9fddf5e9bf626adc237"
+        "price_record_id": "5412ae036940b21d0475c085fb9599df9dde3adefad0e9fddf5e9bf626adc237",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://developers.openai.com/api/docs/pricing",
+          "source_sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+          "observed_at": "2026-11-19T06:31:26.591543+08:00",
+          "vendor": "OpenAI",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            14470,
+            14536
+          ],
+          "cell_span": [
+            14528,
+            14533
+          ],
+          "row_span": [
+            14513,
+            14536
+          ],
+          "column_spans": [
+            [
+              14480,
+              14496
+            ]
+          ],
+          "default_span": [
+            11739,
+            11773
+          ],
+          "unit": "per_minute"
+        }
       }
     ],
     "scope_complete": false,

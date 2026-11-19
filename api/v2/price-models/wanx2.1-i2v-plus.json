@@ -54,6 +54,34 @@
         "history_complete": false,
         "account_entitlement": "not_assessed",
         "fact_id": "70dc254790c5b3c9ddcece6a",
+        "unit_evidence": {
+          "version": 1,
+          "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
+          "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
+          "observed_at": "2026-11-19T06:31:29.796776+08:00",
+          "vendor": "阿里云 Qwen",
+          "channel": "pay_as_you_go",
+          "scope_span": [
+            1272016,
+            1276655
+          ],
+          "cell_span": [
+            1276501,
+            1276590
+          ],
+          "row_span": [
+            1276344,
+            1276639
+          ],
+          "column_spans": [
+            [
+              1272456,
+              1272520
+            ]
+          ],
+          "default_span": null,
+          "unit": "per_second"
+        },
         "rate_kind": "quoted_table_rate",
         "price_record_id": "0f0800e01bb22685dbb0ea9f71c71425630159f33902d9d31c2858ee3f80f610",
         "quote_verified": true,
