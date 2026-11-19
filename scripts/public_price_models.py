@@ -9,6 +9,7 @@ import json
 import math
 import re
 from html import unescape
+from price_table_structure import pipes
 from public_price_context import explicit_unit, markdoc_tables, prove_unit, consume_unit
 
 ID = re.compile(r'[A-Za-z0-9][A-Za-z0-9_.-]*-[A-Za-z0-9_.-]+')
@@ -19,19 +20,6 @@ def sha(s):
 def plain(s):
     return ' '.join(unescape(re.sub(r'<[^>]+>', ' ', s)).split())
 
-def pipes(text):
-    """Literal pipe tables; no cross-table header or ID inheritance."""
-    lines=text.splitlines(keepends=True); pos=0; i=0
-    while i<len(lines):
-        line=lines[i]
-        if line.lstrip().startswith('|') and i+1<len(lines) and re.fullmatch(r'[\s|:\-]+',lines[i+1]):
-            start=pos; header=[x.strip() for x in line.strip().strip('|').split('|')]; rows=[]
-            pos+=len(line)+len(lines[i+1]);i+=2
-            while i<len(lines) and lines[i].lstrip().startswith('|'):
-                raw=lines[i];rows.append((raw,[x.strip() for x in raw.strip().strip('|').split('|')]))
-                pos+=len(raw);i+=1
-            yield dict(start=start,end=pos,headers=header,header_quote=line,rows=rows,prefix=text[:start])
-        else:pos+=len(line);i+=1
 
 def scalar(s):
     s=plain(re.sub(r'<sup>.*?</sup>','',s,flags=re.S))
@@ -94,9 +82,9 @@ def anthropic(out,doc,docs):
         for raw,cells in table['rows']:
             for label,(mid,identity) in bridges.items():
                 if not (cells[0]==label or cells[0].startswith(label+' (')):continue
-                for header,value in zip(table['headers'][1:],cells[1:]):
+                for col,(header,value) in enumerate(zip(table['headers'][1:],cells[1:]),1):
                     if 'MTok' not in value:continue
-                    unit=prove_unit(doc['meta'],text,cell=value,columns=(header,),scope=text[table['start']:table['end']],row=raw,scope_start=table['start'])
+                    unit=prove_unit(doc['meta'],text,cell=value,cell_index=col,scope=text[table['start']:table['end']],row=raw,scope_start=table['start'])
                     emit(out,doc,mid,scalar(value),'USD' if usd else None,unit,component(header),'token_modality_not_separately_priced',raw,[table['header_quote']]+([usd[0]] if usd else [])+([global_default[0]] if global_default else []),dict(service_tier='base_model_pricing',model_qualifier=cells[0],price_header=header,footnotes_preserved=value),identity,region='global_default' if global_default else None)
 
 def google(out,doc,docs):
@@ -119,7 +107,7 @@ def google(out,doc,docs):
             modes=[x for x in ('text','image','audio','video') if x in label.lower()];billing=modes[0] if len(modes)==1 else 'token_modality_not_separately_priced'
             if charge is None or 'storage' in label.lower():continue
             amounts=list(re.finditer(r'\$(\d+(?:\.\d+)?)',paid))
-            unit=prove_unit(doc['meta'],text,cell=paid,columns=(headers[2],),scope=match['quote'],row=block,scope_start=match['start'])
+            unit=prove_unit(doc['meta'],text,cell=paid,cell_index=2,scope=match['quote'],row=block,scope_start=match['start'])
             if len(amounts)==1 and scalar(paid) is not None:
                 emit(out,doc,mid,float(amounts[0][1]),'USD',unit,charge,billing,block,[blocks[0],identity,match['tab_quote']],dict(service_tier=match['tab'],source_table_start=match['start'],price_header=label,paid_tier=headers[2],qualifier=paid))
             elif amounts:
@@ -147,8 +135,8 @@ def markdown_prices(out,doc):
             m=re.match(r'([A-Za-z0-9][A-Za-z0-9_.-]*-[A-Za-z0-9_.-]+)(?=\s|$)',cells[0])
             if not m:continue
             mid=m[1];billing=cells[headers.index('Modality')].lower() if 'Modality' in headers else 'token_modality_not_separately_priced'
-            for h,value in zip(headers[1:],cells[1:]):
-                charge=component(h);unit=prove_unit(doc['meta'],text,cell=value,columns=(h,),scope=text[table['start']:table['end']],row=raw,scope_start=table['start'],default=units[-1] if units else '')
+            for col,(h,value) in enumerate(zip(headers[1:],cells[1:]),1):
+                charge=component(h);unit=prove_unit(doc['meta'],text,cell=value,cell_index=col,scope=text[table['start']:table['end']],row=raw,scope_start=table['start'],default=units[-1] if units else '')
                 if vendor=='xAI' and heading=='### Image & Video Pricing' and h=='Cost':
                     billing='image' if unit and unit.unit=='per_image' else 'video';charge='output'
                 if h=='Price per minute':charge='session';billing='audio'
@@ -177,14 +165,14 @@ def minimax(out,doc,table_reader,expand_rows):
             # Multiple IDs only if the entire cell consists of literal IDs;
             # descriptive hyphenated words never become extra model identifiers.
             ids=list(dict.fromkeys(tokens)) if all(ID.fullmatch(t) for t in tokens) else [tokens[0]]
-            for h,cell in zip(headers[1:],cells[1:]):
+            for col,(h,cell) in enumerate(zip(headers[1:],cells[1:]),1):
                 charge=component(h);billing='token_modality_not_separately_priced';unit=None
                 bundled=re.fullmatch(r'(\$[0-9]+(?:\.[0-9]+)?) per ([0-9]+P), ([0-9]+)s video',cell['text']) if h=='Price' else None
                 if bundled:charge='output';billing='video'
                 if 'Image' in h:billing='image'
                 if 'Video' in h:billing='video'
                 if h=='Price' and re.fullmatch(r'\$[\d.]+ per image',cell['text']):charge='output';billing='image'
-                unit=prove_unit(doc['meta'],text,cell=cell.get('raw',cell['text']),columns=(rows[0][1][headers.index(h)].get('raw',h),),scope=table['quote'],row=row['quote'],scope_start=table['start'])
+                unit=prove_unit(doc['meta'],text,cell=cell.get('raw',cell['text']),cell_index=col,scope=table['quote'],row=row['quote'],scope_start=table['start'])
                 if not unit or charge is None:continue
                 dims={hh:cc['text'] for hh,cc in zip(headers,cells) if hh not in ('Model','Model / API') and component(hh) is None and hh!='Price'}
                 if bundled:dims.update(output_resolution=bundled[2],duration_seconds=int(bundled[3]))

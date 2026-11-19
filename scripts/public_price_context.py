@@ -76,44 +76,100 @@ class UnitEvidence:
 def source_digest(text):return hashlib.sha256(text.encode()).hexdigest()
 
 
-def prove_unit(meta, text, *, cell, columns, scope, row, scope_start=None, default=''):
-    """One literal-source factory for every scalar/date/media/fact exit.
+@lru_cache(maxsize=256)
+def unit_table_layout(scope):
+    """Derive complete header chains and physical source cells, never caller columns.
 
-    No API accepts a purported unit. The unit is computed from the bound column,
-    cell and optional paragraph default. A column cannot be passed as a default.
+    All offsets are relative to the one literal table. A spanning cell retains
+    its actual origin; its header chain covers every logical column it owns.
     """
-    if not cell or not columns or not scope or any(not q for q in columns):return None
+    from price_table_structure import Tables, expanded, pipes
+    def html_cell(c):return (c['start'],c['start']+len(c.get('raw','')),c.get('raw',''))
+    if re.match(r'\s*<table\b',scope,re.I):
+        reader=Tables(scope);reader.feed(scope)
+        if len(reader.tables)!=1:return None
+        table=reader.tables[0];rows=expanded(table)
+        if not rows:return None
+        first=rows[0][1];label=readable(first[0].get('raw','')) if first else ''
+        count=1
+        while count<len(rows):
+            cells=rows[count][1]
+            if not cells or len(cells)!=len(first):break
+            blank_label_header=not readable(cells[0].get('raw','')) and all(not re.search(r'[$元]',readable(c.get('raw',''))) for c in cells)
+            if not (all(c.get('header') for c in cells) or label and readable(cells[0].get('raw',''))==label or blank_label_header):break
+            count+=1
+        headers=tuple(tuple(dict.fromkeys(html_cell(cells[i]) for _,cells in rows[:count])) for i in range(len(first)))
+        layout=[]
+        for row,cells in rows[count:]:
+            if len(cells)!=len(headers) or any('start' not in c for c in cells):continue
+            layout.append((row['start'],row['start']+len(row['quote']),tuple(html_cell(c) for c in cells)))
+        return headers,tuple(layout)
+    def pipe_cells(line,offset):
+        bars=[m.start() for m in re.finditer(r'\|',line)];cells=[]
+        for a,b in zip(bars,bars[1:]):
+            raw=line[a+1:b];start=offset+a+1+len(raw)-len(raw.lstrip());value=raw.strip()
+            cells.append((start,start+len(value),value))
+        return tuple(cells)
+    tables=list(pipes(scope))
+    if len(tables)==1 and not scope[:tables[0]['start']].strip():
+        table=tables[0];head=pipe_cells(table['header_quote'],table['start']);headers=tuple((c,) for c in head);rows=[];cursor=table['start']+len(table['header_quote'])
+        for raw,_ in table['rows']:
+            start=scope.find(raw,cursor);cursor=start+len(raw)
+            cells=pipe_cells(raw,start)
+            if len(cells)==len(headers):rows.append((start,cursor,cells))
+        return headers,tuple(rows)
+    tables=list(markdoc_tables(scope))
+    if len(tables)==1 and not scope[:tables[0]['start']].strip():
+        table=tables[0];body=table['body'];offset=scope.find(body,table['start']);blocks=re.split(r'^\s*---\s*$',body,flags=re.M);cursor=offset;groups=[]
+        for block in blocks:
+            start=scope.find(block,cursor);cursor=start+len(block);marks=list(re.finditer(r'^\s*\*\s+',block,re.M));cells=[]
+            for i,m in enumerate(marks):
+                stop=marks[i+1].start() if i+1<len(marks) else len(block);raw=block[m.end():stop];value=raw.strip();a=start+m.end()+len(raw)-len(raw.lstrip());cells.append((a,a+len(value),value))
+            groups.append((start,start+len(block),tuple(cells)))
+        if not groups or len(groups[0][2])!=3:return None
+        return tuple((c,) for c in groups[0][2]),tuple(r for r in groups[1:] if len(r[2])==3)
+    return None
+
+
+def prove_unit(meta, text, *, cell, scope, row, scope_start=None, default='', cell_index=None, cell_start=None, columns=None):
+    """Bind the physical cell to its actual full source header chain.
+
+    cell_index/cell_start identify a source cell, never an authoritative header.
+    Legacy columns is only a consistency assertion; it cannot select a column.
+    Constructors rebuild solely from source cell position, not column_spans.
+    """
+    if not cell or not scope or not row:return None
     start=text.find(scope) if scope_start is None else scope_start
     if type(start) is not int or start<0 or text[start:start+len(scope)]!=scope:raise ValueError('unit scope is not literal')
-    stop=start+len(scope)
-    def locate(q):
-        at=text.find(q,start,stop)
-        if at<0:raise ValueError('unit cell/column outside bound table')
-        return (at,at+len(q))
-    row_span=locate(row);cell_at=row.find(cell)
-    if cell_at>=0:cell_span=(row_span[0]+cell_at,row_span[0]+cell_at+len(cell))
-    else:
-        # HTML rowspan is an explicit structural relation, not permission to
-        # borrow an arbitrary cell from another price row. Replay the literal
-        # originating cell's bounded lifetime within this exact table.
-        cell_tag=re.fullmatch(r'<t[dh]\b(?P<attrs>[^>]*)>.*</t[dh]>',cell,re.I|re.S)
-        span=re.search(r'\browspan=[\"\']?([0-9]+)',cell_tag['attrs'],re.I) if cell_tag else None
-        source_rows=list(re.finditer(r'<tr\b[^>]*>.*?</tr>',scope,re.I|re.S))
-        target=next((i for i,r in enumerate(source_rows) if start+r.start()==row_span[0] and r.group()==row),None)
-        origins=[r for i,r in enumerate(source_rows) if target is not None and i<target<i+int(span[1]) and cell in r.group()] if span else []
-        if not origins:raise ValueError('unit cell outside materialized source row or explicit rowspan')
-        at=start+origins[-1].start()+origins[-1].group().index(cell);cell_span=(at,at+len(cell))
-    column_spans=tuple(locate(q) for q in columns)
-    default_span=None
+    stop=start+len(scope);at=text.find(row,start,stop)
+    if at<0:raise ValueError('unit row outside table')
+    row_span=(at,at+len(row));default_span=None
     if default:
-        at=text.rfind(default,0,start)
-        if at<0:raise ValueError('unit default must be a preceding paragraph, not a price column')
-        default_span=(at,at+len(default))
-    unit=explicit_unit(cell,' / '.join(columns),default)
+        pos=text.rfind(default,0,start)
+        if pos<0:raise ValueError('unit default must be a preceding paragraph, not a price column')
+        default_span=(pos,pos+len(default))
+    layout=unit_table_layout(scope)
+    if layout is None:return None
+    headers,rows=layout
+    matches=[r for r in rows if (start+r[0],start+r[1])==row_span]
+    if len(matches)!=1:raise ValueError('unit row is not a complete structural data row')
+    cells=matches[0][2]
+    indices=[i for i,c in enumerate(cells) if c[2]==cell and (cell_start is None or start+c[0]==cell_start)]
+    if cell_index is not None:
+        if type(cell_index) is not int or cell_index not in indices:raise ValueError('unit cell index/value not bound to source row')
+        indices=[cell_index]
+    if not indices:raise ValueError('unit cell outside materialized source row or explicit rowspan')
+    physical={cells[i][:2] for i in indices}
+    if len(physical)!=1:return None # equal text in different source cells is not an identity
+    a,b=next(iter(physical));owned=[i for i,c in enumerate(cells) if c[:2]==(a,b)]
+    chain=tuple(dict.fromkeys(c for i in owned for c in headers[i]))
+    if any(c[1]<=c[0] for c in chain):return None
+    if columns is not None and tuple(map(readable,columns))!=tuple(readable(c[2]) for c in chain):return None
+    unit=explicit_unit(cell,' / '.join(c[2] for c in chain),default)
     if unit is None:return None
     actual=source_digest(text)
     if meta.get('source_sha256')!=actual:raise ValueError('unit original hash mismatch')
-    return UnitEvidence(1,meta['source_url'],actual,meta['observed_at'],meta['vendor'],meta['channel'],(start,stop),cell_span,row_span,column_spans,default_span,unit)
+    return UnitEvidence(2,meta['source_url'],actual,meta['observed_at'],meta['vendor'],meta['channel'],(start,stop),(start+a,start+b),row_span,tuple((start+c[0],start+c[1]) for c in chain),default_span,unit)
 
 
 def consume_unit(evidence, meta, text, quote, expected=None):
@@ -130,7 +186,7 @@ def consume_unit(evidence, meta, text, quote, expected=None):
             value['default_span']=tuple(value['default_span']) if value['default_span'] is not None else None
             evidence=UnitEvidence(**value)
         except (KeyError,TypeError,ValueError):raise ValueError('malformed unit evidence') from None
-    if type(evidence) is not UnitEvidence or type(evidence.version) is not int or evidence.version!=1:raise ValueError('typed unit evidence required')
+    if type(evidence) is not UnitEvidence or type(evidence.version) is not int or evidence.version!=2:raise ValueError('typed unit evidence required')
     for key in ('source_url','source_sha256','observed_at','vendor','channel'):
         if getattr(evidence,key)!=meta.get(key):raise ValueError('unit evidence context mismatch')
     def literal(span):
@@ -138,7 +194,7 @@ def consume_unit(evidence, meta, text, quote, expected=None):
         return text[span[0]:span[1]]
     scope=literal(evidence.scope_span)
     if not quote or quote!=literal(evidence.row_span) or quote not in scope:raise ValueError('unit evidence not bound to materialized row')
-    rebuilt=prove_unit(meta,text,cell=literal(evidence.cell_span),columns=tuple(literal(x) for x in evidence.column_spans),scope=scope,row=literal(evidence.row_span),scope_start=evidence.scope_span[0],default=literal(evidence.default_span) if evidence.default_span else '')
+    rebuilt=prove_unit(meta,text,cell=literal(evidence.cell_span),cell_start=evidence.cell_span[0],scope=scope,row=literal(evidence.row_span),scope_start=evidence.scope_span[0],default=literal(evidence.default_span) if evidence.default_span else '')
     if rebuilt!=evidence or expected is not None and evidence.unit!=expected:raise ValueError('unit derivation rejected or changed')
     return evidence
 

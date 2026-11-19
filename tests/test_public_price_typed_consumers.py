@@ -62,10 +62,10 @@ class TypedConsumerTests(unittest.TestCase):
             with self.subTest(bad=bad),self.assertRaises(ValueError):
                 models.emit([],dict(meta=m,text=text),'probe-model',2,'USD',bad,'input','text',row,['Input / 1M tokens'],{})
         with self.assertRaises(ValueError):consume_unit(evidence,m,text,'| other-model | $3.00 |\n')
-        inherited='<table><tr><th>Input / 1M tokens</th></tr><tr><td rowspan="2">$2.00</td></tr><tr><td>other</td></tr><tr><td>expired</td></tr></table>'
+        inherited='<table><tr><th>Model</th><th>Input / 1M tokens</th></tr><tr><td>a</td><td rowspan="2">$2.00</td></tr><tr><td>other</td></tr><tr><td>expired</td><td>$3.00</td></tr></table>'
         im=dict(m,source_sha256=p.digest(inherited.encode()))
         self.assertIsNotNone(prove_unit(im,inherited,cell='<td rowspan="2">$2.00</td>',columns=('Input / 1M tokens',),scope=inherited,row='<tr><td>other</td></tr>'))
-        with self.assertRaises(ValueError):prove_unit(im,inherited,cell='<td rowspan="2">$2.00</td>',columns=('Input / 1M tokens',),scope=inherited,row='<tr><td>expired</td></tr>')
+        with self.assertRaises(ValueError):prove_unit(im,inherited,cell='<td rowspan="2">$2.00</td>',columns=('Input / 1M tokens',),scope=inherited,row='<tr><td>expired</td><td>$3.00</td></tr>')
         other='| other-model | $3.00 |\n';at=text.index(other)
         with self.assertRaises(ValueError):consume_unit(dataclasses.replace(evidence,row_span=(at,at+len(other))),m,text,other)
         for key,val in [('channel','subscription'),('vendor','OpenAI'),('source_sha256','0'*64)]:
@@ -88,6 +88,26 @@ class TypedConsumerTests(unittest.TestCase):
         self.assertTrue(any(r['unit']=='per_video' and r['conditions']['dimensions'].get('duration_seconds')==6 for r in self.ledger['model_prices']))
         fast=[r for r in self.ledger['pending'] if r.get('offering_channel_observation')]
         self.assertEqual(len(fast),6);self.assertTrue(all(r['unit']=='per_1M_tokens' and r['unit_evidence'] and not r['price_verified'] for r in fast))
+
+    def test_structural_header_ownership_cannot_be_selected_or_forged(self):
+        text='| Model | Input / 1M tokens | Notes |\n|---|---|---|\n| probe-model | $2.00 / image | unrelated |\n'
+        row='| probe-model | $2.00 / image | unrelated |\n';m=dict(self.meta['xAI'],source_sha256=p.digest(text.encode()))
+        for columns in (None,('Notes',),('Input',),('Input / 1M tokens',)):
+            self.assertIsNone(prove_unit(m,text,cell='$2.00 / image',columns=columns,scope=text,row=row))
+        with self.assertRaises(ValueError):prove_unit(m,text,cell='$2.00 / image',cell_index=2,scope=text,row=row)
+        with self.assertRaises(ValueError):prove_unit(m,text,cell='$2.00',scope=text,row=row)
+        good=text.replace('$2.00 / image','$2.00');grow=row.replace('$2.00 / image','$2.00');gm=dict(m,source_sha256=p.digest(good.encode()))
+        proof=prove_unit(gm,good,cell='$2.00',cell_index=1,scope=good,row=grow)
+        at=good.index('Notes')
+        with self.assertRaises(ValueError):consume_unit(dataclasses.replace(proof,column_spans=((at,at+5),)),gm,good,grow)
+        # Full multirow/colspan header ownership is derived from the expanded grid.
+        html='<table><tr><th rowspan="2">Model</th><th colspan="2">per 1M tokens</th></tr><tr><th>Input</th><th>Output</th></tr><tr><td>probe-model</td><td>$2.00 / image</td><td>$3.00</td></tr></table>'
+        hm=dict(m,source_sha256=p.digest(html.encode()));hr='<tr><td>probe-model</td><td>$2.00 / image</td><td>$3.00</td></tr>'
+        self.assertIsNone(prove_unit(hm,html,cell='<td>$2.00 / image</td>',cell_index=1,scope=html,row=hr))
+        self.assertEqual(prove_unit(hm,html,cell='<td>$3.00</td>',cell_index=2,scope=html,row=hr).unit,'per_1M_tokens')
+        td='<table><tr><td>Model</td><td colspan="2">Prices</td></tr><tr><td></td><td>Input per 1M tokens</td><td>Output per 1M tokens</td></tr>'+hr+'</table>'
+        tm=dict(m,source_sha256=p.digest(td.encode()))
+        self.assertIsNone(prove_unit(tm,td,cell='<td>$2.00 / image</td>',cell_index=1,scope=td,row=hr))
 
     def test_real_consumer_entrypoints_reject_forged_typed_derivations(self):
         docs=[dict(meta=m,text=self.bodies[m['source_url']]) for m in self.ledger['sources']]

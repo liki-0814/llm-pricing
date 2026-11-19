@@ -55,7 +55,7 @@
         "account_entitlement": "not_assessed",
         "fact_id": "42f44633b11fabad3954eeb4",
         "unit_evidence": {
-          "version": 1,
+          "version": 2,
           "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
           "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
           "observed_at": "2026-11-19T06:31:29.796776+08:00",
@@ -142,7 +142,7 @@
         "account_entitlement": "not_assessed",
         "fact_id": "6091d84a61aae94a1e66f06a",
         "unit_evidence": {
-          "version": 1,
+          "version": 2,
           "source_url": "https://help.aliyun.com/zh/model-studio/model-pricing",
           "source_sha256": "de6bf7578a397991b75617f92e30f5259f50eeb400fc0ee22ceae41595f13274",
           "observed_at": "2026-11-19T06:31:29.796776+08:00",
@@ -153,8 +153,8 @@
             936020
           ],
           "cell_span": [
-            935701,
-            935785
+            935785,
+            935869
           ],
           "row_span": [
             935632,
