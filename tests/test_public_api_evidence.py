@@ -48,6 +48,17 @@ class APIModelColumnLeafUnits(unittest.TestCase):
         self.assertEqual(a.model_column_observations(meta,text.replace('pay-as-you-go','subscription')),[])
         self.assertEqual(a.model_column_observations(meta,text.replace('/docs/models/','https://other.example/')),[])
 
+    def test_unclassified_google_output_artifact_remains_qualified_unknown(self):
+        from discovery_scope_projection import qualified_producer_claims
+        from discovery_claim_contract import valid_claim,project
+        doc=dict(vendor='Google Gemini',channel='pay_as_you_go',source_url='https://aistudio.google.com/docs/models/probe',catalog_source_url='https://aistudio.google.com/docs/models',source_sha256='a'*64,capture_path='/literal-unit-source',observed_at='2026-11-19T06:31:26+08:00')
+        snap=dict(vendor='Google Gemini',channel='pay_as_you_go',source_url=doc['catalog_source_url'])
+        entry=dict(identity_quote='probe-ID',output_quote='Output Text, Word annotations',output=['text','word_annotations'])
+        row=dict(model_id='probe-ID',api_id_explicit=True,identity_evidence={'declarations':[entry]})
+        with patch('discovery_scope_projection.source',return_value=doc):claims=qualified_producer_claims(snap,row,{})
+        self.assertTrue(all(valid_claim(c) for c in claims));out=next(c for c in claims if c['kind']=='output')
+        self.assertIsNone(out['values']);self.assertEqual(out['unclassified_output_values'],entry['output']);self.assertEqual(project(claims)['output_modalities'],[])
+
 class APIModelCaptureComponents(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name)

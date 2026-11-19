@@ -6,7 +6,7 @@ unchanged. Missing proof is explicit; a certificate does not certify itself.
 import hashlib,json,re
 from pathlib import Path
 from urllib.parse import urlsplit
-from discovery_claim_contract import claim,canonical_id,valid_claim
+from discovery_claim_contract import claim,canonical_id,valid_claim,MODALITIES
 from discovery_universe_contracts import scope_certificate,unknown
 from discovery_request_contracts import request_models
 
@@ -77,7 +77,10 @@ def qualified_producer_claims(snapshot,row,manifest):
             claims.append(claim(scoped,mid,'identity',role='existing_bounded_Google_invocation_or_Versions_literal',quote=quote))
             oq=entry.get('output_quote');os=source(snapshot,entry,oq,manifest)
             # The original producer leaves historical/ambiguous versions unknown.
-            if os and entry.get('output'):claims.append(claim(os,mid,'output',values=entry['output'],quote=oq))
+            if os and entry.get('output'):
+                values=entry['output']
+                if set(values)<=MODALITIES:claims.append(claim(os,mid,'output',values=values,quote=oq))
+                else:claims.append(claim(os,mid,'output',values=None,quote=oq,unclassified_output_values=values,reason='output artifacts outside the closed modality contract retained; not silently coerced or dropped'))
     elif vendor=='MiniMax' and isinstance(evidence,list):
         for entry in evidence:
             if entry.get('identity_role')!='request_model_enum' or entry.get('model_id')!=mid:continue
