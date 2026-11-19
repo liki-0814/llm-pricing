@@ -274,37 +274,78 @@ def entity_clauses(text, anchor):
             if decoded==m[0]:mapping.extend((m.start()+i,m.start()+i+1) for i in range(len(decoded)))
             else:mapping.extend([(m.start(),m.end())]*len(decoded))
         clean=''.join(visible)
-        separator=re.compile(r'[;:!?—]+|\.(?=\s|$)|,\s*(?=[A-Z][^,;.!?]{0,100}?\b(?:is|are|was|were|does|has|offers|includes)\b)|,?\s+\b(?:and|but|or|while|whereas|nor)\s+(?=[^,;.!?]{1,100}?\b(?:is|are|was|were|does|do|has|have|offers|includes|excludes|supports|provides)\b)',re.I)
-        spans=[];begin=0
-        for boundary in separator.finditer(clean):
-            # Decimal points (Grok 4.7) are not boundaries; conjunctions are
-            # boundaries only before a predicate-bearing clause, not object lists.
-            spans.append((begin,boundary.start(),boundary.end() if boundary[0].strip() in ('.',';',':','!','?','—') else boundary.start()))
-            begin=boundary.end()
-        spans.append((begin,len(clean),len(clean)))
-        clauses=[];focus=False;subject=None;safe_end=0
-        for begin,end,quoted_end in spans:
-            body=clean[begin:end].strip()
-            coordinated=bool(re.match(r'^(?:and|but|or|while|whereas|nor)\s+',body,re.I))
-            body=re.sub(r'^(?:and|but|or|while|whereas|nor)\s+','',body,flags=re.I)
-            if not body:continue
-            named=body.startswith(anchor.rstrip('.'))
-            pronoun=bool(re.match(r"(?:It(?:'s|’s)\s+|It\s+(?:is|was|costs|has|does|supports|provides|offers|includes|excludes|remains|uses|can|will|may)\b)",body))
-            rates=bool(re.match(r'(?:the )?token rates(?: below)? are billed\b',body,re.I))
-            object_it=bool(re.fullmatch(r"Grok Build(?:'s|’s) free tier does not include it",body))
-            # Multiple explicit subjects inside an otherwise pronominal clause
-            # make the referent non-unique even without a recognized separator.
-            if pronoun and re.search(r'(?<!^)(?<![A-Za-z])(?:[A-Z][A-Za-z0-9_-]*\s+){1,4}(?:is|are|was|were|does|has)\b',body[2:]):pronoun=False
-            implicit=coordinated and bool(re.match(r'(?:is|was|has|does|costs)\b',body))
-            if named:focus=True
-            elif not focus or not (pronoun or rates or object_it or implicit):focus=False
-            if not focus:continue
-            start=mapping[begin][0];stop=mapping[max(begin,quoted_end-1)][1]
-            quote=paragraph[start:stop]
-            relation='named_entity' if named else 'unique_it' if pronoun else 'entity_rates' if rates else 'coordinated_same_subject' if implicit else 'unique_object_it'
-            if subject is None:subject=quote
-            clauses.append(dict(quote=quote,subject_quote=subject,relation=relation))
-            safe_end=stop
+        # Accept complete finite atoms, not a prefix followed by arbitrary prose.
+        # Coordinators inside a consumed noun-list/cost expression are objects;
+        # every other coordinator is a boundary even for an unseen next verb.
+        reserved=r'(?:and|but|or|nor|while|whereas|because|although|when|if|unless|since|until|that|which|who|though)'
+        lower=r'(?!(?:'+reserved+r')\b)[a-z][a-z-]*'
+        noun=r'(?:Cursor|Grok Build|the public xAI API|(?:a|the|your|our|its|their) (?:'+lower+r' ){0,8}(?:API|plan|subscription|tier))'
+        noun+=r"(?![A-Za-z0-9_'’])"
+        objects=noun+r'(?:\s*(?:,? and|,? or|,)\s+'+noun+r')*'
+        available=r'(?:not )?available (?:only |somewhere )?(?:in|on) '+objects
+        billed=r'(?:not )?billed '+lower+r'(?: '+lower+r'){0,10}'
+        cost=r'costs [0-9]+(?:\.[0-9]+)?x the standard token rates(?:, or [0-9]+(?:\.[0-9]+)?x for long-context requests)?'
+        predicate=re.compile(r'(?:(?:is|was|remains) (?:'+available+'|'+billed+')|'+cost+')')
+        contracted=re.compile(r'(?:'+available+'|'+billed+')')
+        boundary=re.compile(r',|[;:!?—]|\.(?=\s|$)|\b'+reserved+r'\b')
+        entity=anchor.split(' is ',1)[0]
+        clauses=[];focus=False;subject=None;first_subject=None;safe_end=0;prefix_open=True;cursor=0;coordinated=False
+        def emit(begin,end,relation,unique,reason=None):
+            nonlocal safe_end,prefix_open
+            while begin<end and clean[begin].isspace():begin+=1
+            while end>begin and clean[end-1].isspace():end-=1
+            if begin>=end:return None
+            start=mapping[begin][0];stop=mapping[end-1][1];quote=paragraph[start:stop]
+            node=dict(quote=quote,quote_span=[start,stop],span_basis='paragraph',paragraph_sha256=hashlib.sha256(paragraph.encode()).hexdigest(),subject_quote=subject if unique else None,relation=relation,complete_consumption=unique,unique_subject=unique)
+            if reason:node['unknown_reason']=reason
+            clauses.append(node)
+            if unique and prefix_open:safe_end=stop
+            elif not unique:prefix_open=False
+            return quote
+        while cursor<len(clean):
+            while cursor<len(clean) and clean[cursor].isspace():cursor+=1
+            if cursor>=len(clean):break
+            punct=re.match(r'[;:!?—]|\.(?=\s|$)|,',clean[cursor:])
+            if punct:cursor+=punct.end();coordinated=False;continue
+            conjunction=re.match(r'('+reserved+r')\b\s*',clean[cursor:])
+            if conjunction:
+                word=conjunction[1];cursor+=conjunction.end();coordinated=word in ('and','but','or','nor')
+                if not coordinated:focus=False
+                continue
+            begin=cursor;relation=None;end=None;named=False
+            if clean.startswith(anchor,cursor):
+                end=cursor+len(anchor);named=True;relation='named_entity'
+            else:
+                at=cursor;short=False
+                if clean.startswith(entity+' ',cursor):at+=len(entity)+1;named=True;relation='named_entity'
+                elif clean.startswith("It's ",cursor) or clean.startswith('It’s ',cursor):at+=5;short=True;relation='unique_it'
+                elif clean.startswith('It ',cursor):at+=3;relation='unique_it'
+                elif clean.startswith("Grok Build's free tier does not include it",cursor) or clean.startswith('Grok Build’s free tier does not include it',cursor):
+                    m=re.match(r"Grok Build(?:'s|’s) free tier does not include it",clean[cursor:]);end=cursor+m.end();relation='unique_object_it'
+                elif re.match(r'(?:The |the )?[Tt]oken rates(?: below)? are ',clean[cursor:]):
+                    m=re.match(r'(?:The |the )?[Tt]oken rates(?: below)? are ',clean[cursor:]);at+=m.end();short=True;relation='entity_rates'
+                elif coordinated:relation='coordinated_same_subject'
+                if end is None and relation:
+                    m=(contracted if short else predicate).match(clean,at)
+                    if m:end=m.end()
+            # A match must end at a real boundary, not midway through an unknown
+            # complement. Failure invalidates the chain; absence of detection is
+            # never positive proof that the subject is still the same.
+            if end is not None and end<len(clean) and clean[end-1] not in '.!?' and not (clean[end:].lstrip()=='' or boundary.match(clean,end) or re.match(r'\s+(?:'+reserved+r')\b',clean[end:])):end=None
+            if end is None:
+                match=boundary.search(clean,cursor+1);end=match.start() if match else len(clean)
+                emit(begin,end,'unresolved',False,'unconsumed syntax or unproved subject; explicit entity naming required to restore')
+                focus=False;cursor=max(end,cursor+1);coordinated=False;continue
+            unique=named or focus
+            if named:
+                focus=True
+                subject=paragraph[mapping[begin][0]:mapping[end-1][1]]
+                if first_subject is None:first_subject=subject
+            quote_end=end
+            if end<len(clean) and re.match(r'[.!?;:](?=\s|$)',clean[end:]):quote_end+=1
+            emit(begin,quote_end,relation,unique,None if unique else 'pronoun/object continuation after unresolved subject')
+            cursor=quote_end;coordinated=False
+        subject=first_subject
         found.append((clauses,subject,paragraph[:safe_end] if safe_end else ''))
     return found[0] if len(found)==1 else ([],None,'')
 
@@ -315,8 +356,8 @@ def entity_prose(text, anchor):
 
 
 def entity_claim(text, clauses, value, predicate):
-    witnesses=[c for c in clauses if predicate(c['quote'])]
-    if not witnesses:return dict(state='unknown',value=None,quote=None,quote_sha256=None)
+    witnesses=[c for c in clauses if c.get('complete_consumption') is True and c.get('unique_subject') is True and predicate(c['quote'])]
+    if not witnesses:return dict(state='unknown',value=None,quote=None,quote_sha256=None,unknown_reason='no completely consumed unique-subject witness',unresolved_witnesses=[c for c in clauses if not c.get('unique_subject') and predicate(c['quote'])])
     witness=witnesses[0]
     result=atomic_claim(text,witness['quote'],value,predicate)
     result.update(subject_quote=witness['subject_quote'],subject_relation=witness['relation'])

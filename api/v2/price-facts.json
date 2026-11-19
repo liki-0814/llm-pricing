@@ -42,32 +42,32 @@
               "Cursor",
               "Grok Build"
             ],
-            "quote": " It's available only in [Cursor](https://cursor.com) and [Grok Build](/build/overview)",
-            "quote_sha256": "c082708430bb5b13c013f6e1fa61c3893a99ba0c4b20243af5dacb4539c294c4",
+            "quote": "It's available only in [Cursor](https://cursor.com) and [Grok Build](/build/overview)",
+            "quote_sha256": "5dd93f25fe31b30014c199ff937b5c8884b5040d81a7d2b669809a3540841d9c",
             "subject_quote": "Grok 4.7 Fast is the same Grok 4.7 model served on faster infrastructure.",
             "subject_relation": "unique_it"
           },
           "billing_channel": {
             "state": "verified",
             "value": "subscription",
-            "quote": "and is billed through your plan there.",
-            "quote_sha256": "463596d868a816d65045ca9fe14406d5eec5584bf0b2bf2fc5f8043b23ba12f5",
+            "quote": "is billed through your plan there.",
+            "quote_sha256": "79374e835355aa69b97658a0a5dae31aef2433e23c29fda6a064445c1dac5745",
             "subject_quote": "Grok 4.7 Fast is the same Grok 4.7 model served on faster infrastructure.",
             "subject_relation": "coordinated_same_subject"
           },
           "public_xai_API": {
             "state": "verified",
             "value": false,
-            "quote": " It is not available on the public xAI API",
-            "quote_sha256": "c1f566ec0a829de61de443b816b14cab43833ff0911c13d2a52be78f0266a0fd",
+            "quote": "It is not available on the public xAI API",
+            "quote_sha256": "974e80512a0518ac164b101c562f6c38500a9c21e38345516de96d81da100afa",
             "subject_quote": "Grok 4.7 Fast is the same Grok 4.7 model served on faster infrastructure.",
             "subject_relation": "unique_it"
           },
           "free_build_tier_included": {
             "state": "verified",
             "value": false,
-            "quote": "and Grok Build's free tier does not include it.",
-            "quote_sha256": "eecd71fe9d92c66e735426bc821be4779e10dfe8aa930fb49d8c7941308b2ae2",
+            "quote": "Grok Build's free tier does not include it.",
+            "quote_sha256": "ff2037621f7fe25944e4cc815fc8e32d30563fce582d22e6911bef0101e4158c",
             "subject_quote": "Grok 4.7 Fast is the same Grok 4.7 model served on faster infrastructure.",
             "subject_relation": "unique_object_it"
           }
@@ -322915,6 +322915,6 @@
         "source_role": "catalog"
       }
     ],
-    "evidence_version": "9e2547b95d574f8ee7b601e5f4875aee61e12cb24d32fd3b444774c1b493e053"
+    "evidence_version": "00cd68801e20e493e2426a556eab067b33bae9b2b1178dbf5daa339757faa168"
   }
 }
