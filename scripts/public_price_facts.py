@@ -149,7 +149,7 @@ def xai_fast(meta,text,tables):
             'public_xai_API':(False,lambda q:'not available on the public xAI API' in readable(q)),
             'free_build_tier_included':(False,lambda q:bool(re.search(r"Grok Build(?:'s|’s) free tier does not include it\b",readable(q)))),
         }
-        claims={key:entity_claim(text,clauses,value,predicate) for key,(value,predicate) in predicates.items()}
+        claims={key:entity_claim(text,clauses,value,predicate,property_name=key) for key,(value,predicate) in predicates.items()}
         channel=claims['billing_channel']['value']
         offering=dict(offering_name='Grok 4.7 Fast',model_id=None,channel=channel,channel_verified=claims['billing_channel']['state']=='verified',
             available_in=claims['available_in']['value'],public_xai_API=claims['public_xai_API']['value'],free_build_tier_included=claims['free_build_tier_included']['value'],

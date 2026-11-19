@@ -254,6 +254,23 @@ def atomic_claim(text, quote, value, predicate):
                 quote_sha256=hashlib.sha256(quote.encode()).hexdigest() if verified else None)
 
 
+def entity_proposition_claims(proposition):
+    """Typed exact propositions; grammar recognition alone confers no property.
+
+    Negation, extra list objects and neutral controls cannot satisfy a positive
+    substring predicate. Unknown syntax is never passed here as a proved atom.
+    """
+    proposition=re.sub(r'^(?:is|was|remains) ', '', proposition)
+    literals={
+        'available only in Cursor and Grok Build':{'available_in':['Cursor','Grok Build']},
+        'billed through your plan there':{'billing_channel':'subscription'},
+        'not available on the public xAI API':{'public_xai_API':False},
+        "Grok Build's free tier does not include it":{'free_build_tier_included':False},
+        'Grok Build’s free tier does not include it':{'free_build_tier_included':False},
+    }
+    return literals.get(proposition,{})
+
+
 def entity_clauses(text, anchor):
     """Finite clause/coreference grammar; an unknown/new subject ends the chain.
 
@@ -278,30 +295,34 @@ def entity_clauses(text, anchor):
         # Coordinators inside a consumed noun-list/cost expression are objects;
         # every other coordinator is a boundary even for an unseen next verb.
         reserved=r'(?:and|but|or|nor|while|whereas|because|although|when|if|unless|since|until|that|which|who|though)'
-        lower=r'(?!(?:'+reserved+r')\b)[a-z][a-z-]*'
-        noun=r'(?:Cursor|Grok Build|the public xAI API|(?:a|the|your|our|its|their) (?:'+lower+r' ){0,8}(?:API|plan|subscription|tier))'
+        # Closed, reviewed complements, not arbitrary tokens that happen to be
+        # lower-case. The neutral API noun/billing manner keep independent facts
+        # testable without making a positive channel/availability claim.
+        noun=r'(?:Cursor|Grok Build|the public xAI API|a separately described API)'
         noun+=r"(?![A-Za-z0-9_'’])"
         objects=noun+r'(?:\s*(?:,? and|,? or|,)\s+'+noun+r')*'
         available=r'(?:not )?available (?:only |somewhere )?(?:in|on) '+objects
-        billed=r'(?:not )?billed '+lower+r'(?: '+lower+r'){0,10}'
+        billed=r'(?:not )?billed (?:through your plan there|another way there)'
         cost=r'costs [0-9]+(?:\.[0-9]+)?x the standard token rates(?:, or [0-9]+(?:\.[0-9]+)?x for long-context requests)?'
         predicate=re.compile(r'(?:(?:is|was|remains) (?:'+available+'|'+billed+')|'+cost+')')
         contracted=re.compile(r'(?:'+available+'|'+billed+')')
         boundary=re.compile(r',|[;:!?—]|\.(?=\s|$)|\b'+reserved+r'\b')
         entity=anchor.split(' is ',1)[0]
-        clauses=[];focus=False;subject=None;first_subject=None;safe_end=0;prefix_open=True;cursor=0;coordinated=False
-        def emit(begin,end,relation,unique,reason=None):
+        clauses=[];focus=False;subject=None;first_subject=None;safe_end=0;prefix_open=True;cursor=0;coordinated=False;blocked_by=None
+        def emit(begin,end,relation,unique,reason=None,understood=True,proposition=None):
             nonlocal safe_end,prefix_open
             while begin<end and clean[begin].isspace():begin+=1
             while end>begin and clean[end-1].isspace():end-=1
             if begin>=end:return None
             start=mapping[begin][0];stop=mapping[end-1][1];quote=paragraph[start:stop]
-            node=dict(quote=quote,quote_span=[start,stop],span_basis='paragraph',paragraph_sha256=hashlib.sha256(paragraph.encode()).hexdigest(),subject_quote=subject if unique else None,relation=relation,complete_consumption=unique,unique_subject=unique)
+            node=dict(quote=quote,quote_span=[start,stop],span_basis='paragraph',paragraph_sha256=hashlib.sha256(paragraph.encode()).hexdigest(),subject_quote=subject if unique else None,relation=relation,complete_consumption=understood,unique_subject=unique)
+            node['proved_properties']=entity_proposition_claims(proposition) if understood and proposition else {}
             if reason:node['unknown_reason']=reason
+            if not unique and blocked_by:node['unresolved_antecedent']=dict(blocked_by)
             clauses.append(node)
             if unique and prefix_open:safe_end=stop
             elif not unique:prefix_open=False
-            return quote
+            return node
         while cursor<len(clean):
             while cursor<len(clean) and clean[cursor].isspace():cursor+=1
             if cursor>=len(clean):break
@@ -312,7 +333,7 @@ def entity_clauses(text, anchor):
                 word=conjunction[1];cursor+=conjunction.end();coordinated=word in ('and','but','or','nor')
                 if not coordinated:focus=False
                 continue
-            begin=cursor;relation=None;end=None;named=False
+            begin=cursor;relation=None;end=None;named=False;proposition=None
             if clean.startswith(anchor,cursor):
                 end=cursor+len(anchor);named=True;relation='named_entity'
             else:
@@ -321,29 +342,39 @@ def entity_clauses(text, anchor):
                 elif clean.startswith("It's ",cursor) or clean.startswith('It’s ',cursor):at+=5;short=True;relation='unique_it'
                 elif clean.startswith('It ',cursor):at+=3;relation='unique_it'
                 elif clean.startswith("Grok Build's free tier does not include it",cursor) or clean.startswith('Grok Build’s free tier does not include it',cursor):
-                    m=re.match(r"Grok Build(?:'s|’s) free tier does not include it",clean[cursor:]);end=cursor+m.end();relation='unique_object_it'
+                    m=re.match(r"Grok Build(?:'s|’s) free tier does not include it",clean[cursor:]);end=cursor+m.end();relation='unique_object_it';proposition=m[0]
                 elif re.match(r'(?:The |the )?[Tt]oken rates(?: below)? are ',clean[cursor:]):
                     m=re.match(r'(?:The |the )?[Tt]oken rates(?: below)? are ',clean[cursor:]);at+=m.end();short=True;relation='entity_rates'
                 elif coordinated:relation='coordinated_same_subject'
                 if end is None and relation:
                     m=(contracted if short else predicate).match(clean,at)
-                    if m:end=m.end()
+                    if m:end=m.end();proposition=m[0]
             # A match must end at a real boundary, not midway through an unknown
             # complement. Failure invalidates the chain; absence of detection is
             # never positive proof that the subject is still the same.
+            candidate_end=end
             if end is not None and end<len(clean) and clean[end-1] not in '.!?' and not (clean[end:].lstrip()=='' or boundary.match(clean,end) or re.match(r'\s+(?:'+reserved+r')\b',clean[end:])):end=None
             if end is None:
                 match=boundary.search(clean,cursor+1);end=match.start() if match else len(clean)
-                emit(begin,end,'unresolved',False,'unconsumed syntax or unproved subject; explicit entity naming required to restore')
+                node=emit(begin,end,'unresolved',False,'unconsumed complement or unproved subject; explicit entity naming required to restore',understood=False)
+                tail=candidate_end if candidate_end is not None else begin
+                while tail<end and clean[tail].isspace():tail+=1
+                if node and tail<end:
+                    lo,hi=mapping[tail][0],mapping[end-1][1]
+                    node.update(unconsumed_quote=paragraph[lo:hi],unconsumed_span=[lo,hi])
+                    if candidate_end is not None:
+                        lo,hi=mapping[begin][0],mapping[candidate_end-1][1]
+                        node.update(candidate_prefix_quote=paragraph[lo:hi],candidate_prefix_span=[lo,hi])
+                    blocked_by={k:node[k] for k in ('quote','quote_span','unknown_reason','unconsumed_quote','unconsumed_span') if k in node}
                 focus=False;cursor=max(end,cursor+1);coordinated=False;continue
             unique=named or focus
             if named:
-                focus=True
+                focus=True;blocked_by=None
                 subject=paragraph[mapping[begin][0]:mapping[end-1][1]]
                 if first_subject is None:first_subject=subject
             quote_end=end
             if end<len(clean) and re.match(r'[.!?;:](?=\s|$)',clean[end:]):quote_end+=1
-            emit(begin,quote_end,relation,unique,None if unique else 'pronoun/object continuation after unresolved subject')
+            emit(begin,quote_end,relation,unique,None if unique else 'pronoun/object continuation after unresolved subject',proposition=proposition)
             cursor=quote_end;coordinated=False
         subject=first_subject
         found.append((clauses,subject,paragraph[:safe_end] if safe_end else ''))
@@ -355,8 +386,8 @@ def entity_prose(text, anchor):
     return prefix,subject
 
 
-def entity_claim(text, clauses, value, predicate):
-    witnesses=[c for c in clauses if c.get('complete_consumption') is True and c.get('unique_subject') is True and predicate(c['quote'])]
+def entity_claim(text, clauses, value, predicate, *, property_name=None):
+    witnesses=[c for c in clauses if c.get('complete_consumption') is True and c.get('unique_subject') is True and predicate(c['quote']) and (property_name is None or c.get('proved_properties',{}).get(property_name,object())==value)]
     if not witnesses:return dict(state='unknown',value=None,quote=None,quote_sha256=None,unknown_reason='no completely consumed unique-subject witness',unresolved_witnesses=[c for c in clauses if not c.get('unique_subject') and predicate(c['quote'])])
     witness=witnesses[0]
     result=atomic_claim(text,witness['quote'],value,predicate)
